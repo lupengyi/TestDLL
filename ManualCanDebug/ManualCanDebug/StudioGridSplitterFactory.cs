@@ -30,4 +30,21 @@ namespace ManualCanDebug
             return splitter;
         }
     }
+
+    internal static class StudioDragDropGuard
+    {
+        private const double IntentionalDistance = 10d;
+
+        public static bool HasMovedEnough(Point start, Point current)
+        {
+            double horizontal = System.Math.Max(SystemParameters.MinimumHorizontalDragDistance, IntentionalDistance);
+            double vertical = System.Math.Max(SystemParameters.MinimumVerticalDragDistance, IntentionalDistance);
+            return System.Math.Abs(current.X - start.X) >= horizontal || System.Math.Abs(current.Y - start.Y) >= vertical;
+        }
+
+        public static bool IsMultiSelectGesture
+        {
+            get { return (Keyboard.Modifiers & (ModifierKeys.Control | ModifierKeys.Shift)) != ModifierKeys.None; }
+        }
+    }
 }

@@ -1407,7 +1407,7 @@ namespace ManualCanDebug
         private void RestoreStudioSnapshot(string json, string message)
         {
             _restoringStudioHistory = true;
-            try { _studioProject = FctStudioProjectService.Deserialize(json); _lastStudioSnapshot = json; _studioProjectDirty = true; _functionBlockStudioPanel.RefreshProject(); _studioFlowEditorPanel.RefreshProject(); Service_Log(message); }
+            try { _studioProject = FctStudioProjectService.Deserialize(json); _lastStudioSnapshot = json; _studioProjectDirty = true; _functionBlockStudioPanel.RefreshProject(); _studioFlowEditorPanel.RefreshProject(); try { FctStudioProjectService.Save(StudioAutosavePath(), _studioProject); } catch (Exception ex) { Service_Log("撤回后自动保存失败：" + ex.Message); } Service_Log(message); }
             finally { _restoringStudioHistory = false; }
         }
 

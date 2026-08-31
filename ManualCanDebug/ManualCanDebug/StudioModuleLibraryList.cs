@@ -33,13 +33,6 @@ namespace ManualCanDebug
             root.SetValue(StackPanel.MinWidthProperty, 245d);
             FrameworkElementFactory line = new FrameworkElementFactory(typeof(StackPanel));
             line.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal);
-            if (allowMultipleSelection)
-            {
-                FrameworkElementFactory check = new FrameworkElementFactory(typeof(CheckBox));
-                check.SetBinding(CheckBox.IsCheckedProperty, new Binding("IsBatchSelected") { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
-                check.SetValue(CheckBox.WidthProperty, 22d); check.SetValue(CheckBox.HeightProperty, 22d); check.SetValue(CheckBox.MarginProperty, new Thickness(0, 0, 7, 0)); check.SetValue(CheckBox.VerticalAlignmentProperty, VerticalAlignment.Center); check.SetValue(CheckBox.ToolTipProperty, "选择模块用于批量删除");
-                line.AppendChild(check);
-            }
             FrameworkElementFactory expand = new FrameworkElementFactory(typeof(ToggleButton));
             expand.SetBinding(ToggleButton.IsCheckedProperty, new Binding("IsExpanded") { Mode = BindingMode.TwoWay });
             expand.SetBinding(ToggleButton.ContentProperty, new Binding("IsExpanded") { Converter = new ExpandGlyphConverter() });
