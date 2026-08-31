@@ -66,13 +66,21 @@ namespace ManualCanDebug
             FrameworkElementFactory childLine = new FrameworkElementFactory(typeof(StackPanel)); childLine.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal); FrameworkElementFactory branch = new FrameworkElementFactory(typeof(TextBlock)); branch.SetValue(TextBlock.TextProperty, "└"); branch.SetValue(TextBlock.ForegroundProperty, new SolidColorBrush(Color.FromRgb(164, 176, 193))); branch.SetValue(TextBlock.MarginProperty, new Thickness(0, 0, 7, 0)); childLine.AppendChild(branch); FrameworkElementFactory childIcon = new FrameworkElementFactory(typeof(TextBlock)); childIcon.SetBinding(TextBlock.TextProperty, new Binding("IconGlyph")); childIcon.SetBinding(TextBlock.ForegroundProperty, new Binding("IconBrush")); childIcon.SetValue(TextBlock.FontFamilyProperty, new FontFamily("Segoe UI Symbol")); childIcon.SetValue(TextBlock.MarginProperty, new Thickness(0, 0, 7, 0)); childLine.AppendChild(childIcon); FrameworkElementFactory childText = new FrameworkElementFactory(typeof(TextBlock)); childText.SetBinding(TextBlock.TextProperty, new Binding("Name")); childText.SetBinding(TextBlock.ToolTipProperty, new Binding("Name")); childText.SetValue(TextBlock.FontSizeProperty, 11.5d); childText.SetValue(TextBlock.FontWeightProperty, FontWeights.SemiBold); childText.SetValue(TextBlock.ForegroundProperty, new SolidColorBrush(Color.FromRgb(55, 75, 105))); childText.SetValue(TextBlock.TextTrimmingProperty, TextTrimming.CharacterEllipsis); childLine.AppendChild(childText); childButton.AppendChild(childLine); children.SetValue(ItemsControl.ItemTemplateProperty, new DataTemplate { VisualTree = childButton }); root.AppendChild(children);
             list.ItemTemplate = new DataTemplate { VisualTree = root };
 
+            FrameworkElementFactory groupHeader = new FrameworkElementFactory(typeof(DockPanel));
+            groupHeader.SetValue(DockPanel.LastChildFillProperty, true);
+            FrameworkElementFactory groupIcon = new FrameworkElementFactory(typeof(TextBlock));
+            groupIcon.SetValue(TextBlock.TextProperty, "▰"); groupIcon.SetValue(TextBlock.FontSizeProperty, 12d); groupIcon.SetValue(TextBlock.ForegroundProperty, new SolidColorBrush(Color.FromRgb(24, 112, 224))); groupIcon.SetValue(TextBlock.MarginProperty, new Thickness(0, 0, 7, 0));
+            groupHeader.AppendChild(groupIcon);
             FrameworkElementFactory groupText = new FrameworkElementFactory(typeof(TextBlock));
-            groupText.SetBinding(TextBlock.TextProperty, new Binding("Name"));
-            groupText.SetValue(TextBlock.FontWeightProperty, FontWeights.SemiBold);
-            groupText.SetValue(TextBlock.FontSizeProperty, 13d);
-            groupText.SetValue(TextBlock.ForegroundProperty, new SolidColorBrush(Color.FromRgb(37, 49, 67)));
-            groupText.SetValue(TextBlock.MarginProperty, new Thickness(12, 9, 5, 4));
-            list.GroupStyle.Add(new GroupStyle { HeaderTemplate = new DataTemplate { VisualTree = groupText } });
+            groupText.SetBinding(TextBlock.TextProperty, new Binding("Name")); groupText.SetValue(TextBlock.FontWeightProperty, FontWeights.SemiBold); groupText.SetValue(TextBlock.FontSizeProperty, 13d); groupText.SetValue(TextBlock.ForegroundProperty, new SolidColorBrush(Color.FromRgb(37, 49, 67)));
+            groupHeader.AppendChild(groupText);
+            DataTemplate groupHeaderTemplate = new DataTemplate { VisualTree = groupHeader };
+            FrameworkElementFactory groupExpander = new FrameworkElementFactory(typeof(Expander));
+            groupExpander.SetValue(Expander.IsExpandedProperty, true); groupExpander.SetValue(Expander.HorizontalContentAlignmentProperty, HorizontalAlignment.Stretch); groupExpander.SetValue(Expander.MarginProperty, new Thickness(2, 2, 2, 3)); groupExpander.SetBinding(Expander.HeaderProperty, new Binding()); groupExpander.SetValue(Expander.HeaderTemplateProperty, groupHeaderTemplate); groupExpander.SetValue(Expander.ToolTipProperty, "点击展开或收起该模块分组");
+            FrameworkElementFactory groupItems = new FrameworkElementFactory(typeof(ItemsPresenter)); groupItems.SetValue(ItemsPresenter.MarginProperty, new Thickness(0, 2, 0, 0)); groupExpander.AppendChild(groupItems);
+            ControlTemplate groupTemplate = new ControlTemplate(typeof(GroupItem)) { VisualTree = groupExpander };
+            Style groupContainerStyle = new Style(typeof(GroupItem)); groupContainerStyle.Setters.Add(new Setter(GroupItem.TemplateProperty, groupTemplate));
+            list.GroupStyle.Add(new GroupStyle { ContainerStyle = groupContainerStyle });
 
             Style itemStyle = new Style(typeof(ListBoxItem));
             itemStyle.Setters.Add(new Setter(ListBoxItem.PaddingProperty, new Thickness(18, 8, 8, 8)));

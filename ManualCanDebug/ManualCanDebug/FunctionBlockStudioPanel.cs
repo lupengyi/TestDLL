@@ -208,8 +208,29 @@ namespace ManualCanDebug
         }
         private static void AddMenu(ContextMenu menu, string text, RoutedEventHandler handler) { MenuItem item = new MenuItem { Header = text }; item.Click += handler; menu.Items.Add(item); }
         private ContextMenu BuildBlockContextMenu() { ContextMenu menu = new ContextMenu(); AddMenu(menu, "新建模块", NewBlock_Click); menu.Items.Add(new Separator()); AddMenu(menu, "复制模块", CopyBlockToClipboard_Click); AddMenu(menu, "粘贴模块", PasteBlock_Click); menu.Items.Add(new Separator()); AddMenu(menu, "属性 / 重命名", BlockProperties_Click); AddMenu(menu, "删除选中模块", BatchDeleteBlocks_Click); menu.Items.Add(new Separator()); AddMenu(menu, "全部勾选（用于批量删除）", (s, e) => SetAllBlocksForBatch(true)); AddMenu(menu, "清空批量选择", (s, e) => SetAllBlocksForBatch(false)); AddMenu(menu, "批量删除已勾选模块", BatchDeleteBlocks_Click); return menu; }
-        private ContextMenu BuildStepContextMenu() { ContextMenu menu = new ContextMenu(); menu.Items.Add(BuildHierarchicalAddMenu("插入动作到上面", 0)); menu.Items.Add(BuildHierarchicalAddMenu("插入动作到下面", 1)); menu.Items.Add(BuildModuleReferenceMenu("插入标准模块到上面", 0)); menu.Items.Add(BuildModuleReferenceMenu("插入标准模块到下面", 1)); menu.Items.Add(new Separator()); AddMenu(menu, "复制动作", CopyStepToClipboard_Click); AddMenu(menu, "粘贴动作", PasteStep_Click); AddMenu(menu, "删除动作/模块引用", DeleteStep_Click); AddMenu(menu, "启用 / 停用", ToggleStep_Click); menu.Items.Add(new Separator()); AddMenu(menu, "上移", MoveStepUp_Click); AddMenu(menu, "下移", MoveStepDown_Click); menu.Items.Add(new Separator()); AddMenu(menu, "立即执行", ExecuteCurrentAction_Click); return menu; }
-        private MenuItem BuildModuleReferenceMenu(string title, int relativeOffset) { MenuItem root = new MenuItem { Header = title }; root.SubmenuOpened += (s, e) => { root.Items.Clear(); List<BlockListItem> candidates = _blocks.Where(value => value.Block != _selectedBlock && string.Equals(value.Block.ModuleKind, "Standard", StringComparison.OrdinalIgnoreCase)).OrderBy(value => value.Block.Name).ToList(); if (candidates.Count == 0) { root.Items.Add(new MenuItem { Header = "没有可用标准模块", IsEnabled = false }); return; } foreach (BlockListItem candidate in candidates) { FunctionBlockDefinition source = candidate.Block; MenuItem item = new MenuItem { Header = source.Name, ToolTip = "插入标准模块引用，不复制或合并模块" }; item.Click += (sender, args) => AddModuleReference(_selectedBlock, source, RelativeInsertIndex(relativeOffset)); root.Items.Add(item); } }; return root; }
+        private ContextMenu BuildStepContextMenu() { ContextMenu menu = new ContextMenu(); menu.Items.Add(BuildHierarchicalAddMenu("插入动作到上面", 0)); menu.Items.Add(BuildHierarchicalAddMenu("插入动作到下面", 1)); menu.Items.Add(BuildModuleReferenceMenu("插入模块到上面", 0)); menu.Items.Add(BuildModuleReferenceMenu("插入模块到下面", 1)); menu.Items.Add(new Separator()); AddMenu(menu, "复制动作", CopyStepToClipboard_Click); AddMenu(menu, "粘贴动作", PasteStep_Click); AddMenu(menu, "删除动作/模块引用", DeleteStep_Click); AddMenu(menu, "启用 / 停用", ToggleStep_Click); menu.Items.Add(new Separator()); AddMenu(menu, "上移", MoveStepUp_Click); AddMenu(menu, "下移", MoveStepDown_Click); menu.Items.Add(new Separator()); AddMenu(menu, "立即执行", ExecuteCurrentAction_Click); return menu; }
+        private MenuItem BuildModuleReferenceMenu(string title, int relativeOffset)
+        {
+            MenuItem root = new MenuItem { Header = title };
+            root.SubmenuOpened += (s, e) =>
+            {
+                root.Items.Clear();
+                List<FunctionBlockDefinition> candidates = _blocks.Select(value => value.Block).Where(value => value != null && value != _selectedBlock && !WouldCreateModuleCycle(value, _selectedBlock == null ? string.Empty : _selectedBlock.Id, new HashSet<string>(StringComparer.Ordinal))).OrderBy(ModuleKindOrder).ThenBy(value => value.Name).ToList();
+                if (candidates.Count == 0) { root.Items.Add(new MenuItem { Header = "没有可插入的模块", IsEnabled = false }); return; }
+                foreach (IGrouping<string, FunctionBlockDefinition> group in candidates.GroupBy(ModuleKindText))
+                {
+                    MenuItem branch = new MenuItem { Header = group.Key };
+                    foreach (FunctionBlockDefinition source in group)
+                    {
+                        MenuItem item = new MenuItem { Header = source.Name, ToolTip = "插入模块引用；原模块保持独立，参数可在当前引用中覆盖" };
+                        item.Click += (sender, args) => AddModuleReference(_selectedBlock, source, RelativeInsertIndex(relativeOffset)); branch.Items.Add(item);
+                    }
+                    root.Items.Add(branch);
+                }
+            };
+            return root;
+        }
+        private static int ModuleKindOrder(FunctionBlockDefinition block) { return string.Equals(block.ModuleKind, "Standard", StringComparison.OrdinalIgnoreCase) ? 0 : string.Equals(block.ModuleKind, "Product", StringComparison.OrdinalIgnoreCase) ? 1 : 2; }
         private int RelativeInsertIndex(int offset) { return _selectedStep == null || _selectedBlock == null ? (_selectedBlock == null ? 0 : _selectedBlock.Steps.Count) : Math.Max(0, Math.Min(_selectedBlock.Steps.Count, _selectedBlock.Steps.IndexOf(_selectedStep) + offset)); }
         private MenuItem BuildHierarchicalAddMenu(string header, int? relativeOffset)
         {
@@ -345,7 +366,7 @@ namespace ManualCanDebug
         private void AddLogic(string operation, IDictionary<string, object> parameters) { Dictionary<string, object> values = new Dictionary<string, object> { { "StepName", operation }, { "RunMode", "Normal" }, { "FunctionName", "FCT_ExecuteLogic" }, { "RecordingLog", true }, { "Operation", operation } }; foreach (KeyValuePair<string, object> pair in parameters) values[pair.Key] = pair.Value; AddStep(new SequenceStepDefinition(values)); }
         private void AddModuleReference(FunctionBlockDefinition target, FunctionBlockDefinition source, int index)
         {
-            if (target == null || source == null) return; if (!string.Equals(source.ModuleKind, "Standard", StringComparison.OrdinalIgnoreCase)) { MessageBox.Show("只能把标准模块拖入STEP列表。", "插入标准模块", MessageBoxButton.OK, MessageBoxImage.Information); return; } if (target.Id == source.Id || WouldCreateModuleCycle(source, target.Id, new HashSet<string>(StringComparer.Ordinal))) { MessageBox.Show("不能引用自己，也不能形成模块循环引用。", "插入标准模块", MessageBoxButton.OK, MessageBoxImage.Warning); return; }
+            if (target == null || source == null) return; if (target.Id == source.Id || WouldCreateModuleCycle(source, target.Id, new HashSet<string>(StringComparer.Ordinal))) { MessageBox.Show("不能引用自己，也不能形成模块循环引用。", "插入模块", MessageBoxButton.OK, MessageBoxImage.Warning); return; }
             index = Math.Max(0, Math.Min(target.Steps.Count, index)); BlockStepDefinition reference = new BlockStepDefinition { ReferencedBlockId = source.Id, ReferencedBlockName = source.Name, Enabled = true }; foreach (BlockParameterDefinition parameter in source.Parameters ?? new List<BlockParameterDefinition>()) reference.ReferencedParameterOverrides[parameter.Name] = parameter.DefaultValue; target.Steps.Insert(index, reference); BlockListItem treeItem = _blocks.FirstOrDefault(value => value.Block == target); if (treeItem != null) treeItem.RefreshChildren(_getProject().Blocks);
             BlockStepListItem item; if (_selectedBlock != target) { SelectBlock(target.Id); item = _steps.FirstOrDefault(value => value.Step == reference); } else { item = CreateStepItem(reference, index + 1); _steps.Insert(index, item); RefreshStepOrders(); } if (item != null) { _stepList.SelectedItem = item; _stepList.ScrollIntoView(item); } _changed();
         }
