@@ -1,0 +1,22 @@
+{
+  "SerialNumberLen": 0,
+  "ProjectName": "C96_FCT_调试",
+  "StationName": "OP3020",
+  "SequenceVersion": "FT1-FCT01-01-A0",
+  "UIDisplayType": "All",
+  "LogFilePath": "D:\\LogfilePath",
+  "StepList": [
+    {
+      "StepName": "读取TM2_UVW相电流",
+      "RunMode": "Normal",
+      "FunctionName": "FCT_CANTable",
+      "RecordingLog": true,
+      "Operation": "Read",
+      "ResultMode": "Information",
+      "AddrOffset": 124,
+      "TableLength": 40,
+      "SignalChecksJson": "[{\"Name\":\"PhaseA_Current\",\"Offset\":0,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"PhaseB_Current\",\"Offset\":4,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"PhaseC_Current\",\"Offset\":8,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"PhaseA_Min_Current\",\"Offset\":12,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"PhaseB_Min_Current\",\"Offset\":16,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"PhaseC_Min_Current\",\"Offset\":20,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"PhaseA_Max_Current\",\"Offset\":24,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"PhaseB_Max_Current\",\"Offset\":28,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"PhaseC_Max_Current\",\"Offset\":32,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"Motctrl_phaseI_RMS\",\"Offset\":36,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"}]",
+      "Product": "C96"
+    }
+  ]
+}

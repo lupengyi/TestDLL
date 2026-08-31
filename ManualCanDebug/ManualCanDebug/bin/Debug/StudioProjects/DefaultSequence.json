@@ -1,0 +1,30 @@
+{
+  "SerialNumberLen": 0,
+  "ProjectName": "DefaultSequence",
+  "StationName": "OP3020",
+  "SequenceVersion": "FT1-FCT01-01-A0",
+  "UIDisplayType": "All",
+  "LogFilePath": "D:\\LogfilePath",
+  "StepList": [
+    {
+      "StepName": "001_0-初始化产品进入FT模式 / 产品基础命令 进入FT模式",
+      "RunMode": "Normal",
+      "FunctionName": "FCT_ExecuteAction",
+      "RecordingLog": true,
+      "ResultMode": "Action",
+      "Operation": "EnterFT",
+      "Device": "PRODUCTCAN"
+    },
+    {
+      "StepName": "001_0-初始化产品进入FT模式 / 产品基础命令 通信初始化",
+      "RunMode": "Normal",
+      "FunctionName": "FCT_ExecuteAction",
+      "RecordingLog": true,
+      "ResultMode": "Action",
+      "Operation": "CommunicationInit",
+      "Device": "PRODUCTCAN",
+      "TxID": "2030",
+      "RxID": "2031"
+    }
+  ]
+}

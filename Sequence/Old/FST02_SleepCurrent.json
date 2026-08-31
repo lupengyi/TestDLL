@@ -1,0 +1,76 @@
+{
+	"SerialNumberLen": 0,
+	"ProjectName": "",
+	"StationName": "OP3020",
+	"SequenceVersion": "1.0.0.2",
+	"UIDisplayType": "All",
+	"LogFilePath": "D:\\LogfilePath",
+
+	"StepList":
+	[
+		{
+			"StepName": "Set LVDC Voltage 24V",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "LVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 24
+		},
+		{
+			"StepName": "Set LVDC Current 5A",
+			"RunMode": "Normal",
+			"FunctionName": "LVDC_SetSourceCurrent",
+			"RecordingLog": true,
+			"Current": 5
+		},
+		{
+			"StepName": "Config DMM To DC Current",
+			"RunMode": "Normal",
+			"FunctionName": "DMM_ConfigDMMforDCCur",
+			"RecordingLog": true,
+			"Range": 3,
+			"Solution": 0.00001
+		},
+		{
+			"StepName": "Connect DMM To DC Current",
+			"RunMode": "Normal",
+			"FunctionName": "MOXA_SetDO",
+			"RecordingLog": true,
+			"MoxaIndex": 1,
+			"Channels": "0,6,8",
+			"Values": "1,1,1"
+		},
+		{
+			"StepName": "Set LVDC Output ON",
+			"RunMode": "Normal",
+			"FunctionName": "LVDC_SetOutput",
+			"RecordingLog": true,
+			"Output": true
+		},
+		{
+			"StepName": "Delay",
+			"RunMode": "Normal",
+			"FunctionName": "Test_DelayMs",
+			"RecordingLog": true,
+			"TimeMs": 16000
+		},
+		{
+			"StepName": "010101 Sleep Current",
+			"RunMode": "Normal",
+			"FunctionName": "DMM_GetMeasureValue",
+			"RecordingLog": true,
+			"LowLimit": 0,
+			"HighLimit": 0.00041,
+			"Comtype": "GELE",
+			"Unit": "A"
+		},
+		{
+			"StepName": "Connect KL15",
+			"RunMode": "Break",
+			"FunctionName": "MOXA_SetDO",
+			"RecordingLog": true,
+			"MoxaIndex": 1,
+			"Channels": "1",
+			"Values": "1"
+		}
+	]
+}

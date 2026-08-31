@@ -1,0 +1,15 @@
+2025-05-04 19:20:06
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at Instruments.PLCS7.S7Net.DBRead(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[]& readBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 48
+   --- End of inner exception stack trace ---
+   at Instruments.PLCS7.S7Net.DBRead(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[]& readBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 52
+   at CSP.TestDllMain.PLC_ReadInt(Int32 addr) in D:\TestDLL\TestDLL\TestDllMain.cs:line 1268
+   at CSP.TestDllMain.AutomationLoop() in D:\TestDLL\TestDLL\TestDllMain.cs:line 144
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.<AutomationThread>b__41_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 786
+====================================================================================================
+

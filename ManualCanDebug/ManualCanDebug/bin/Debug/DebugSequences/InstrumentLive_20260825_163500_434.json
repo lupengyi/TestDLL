@@ -1,0 +1,20 @@
+{
+  "SerialNumberLen": 0,
+  "ProjectName": "FCT Function Block Project",
+  "StationName": "OP3020",
+  "SequenceVersion": "FT1-FCT01-01-A0",
+  "UIDisplayType": "All",
+  "LogFilePath": "D:\\LogfilePath",
+  "StepList": [
+    {
+      "StepName": "Stop PDU",
+      "RunMode": "Normal",
+      "FunctionName": "FCT_ExecuteAction",
+      "RecordingLog": true,
+      "Device": "AUXCAN",
+      "Operation": "StopPeriodicDbc",
+      "PeriodicKey": "PDU",
+      "ResultMode": "Action"
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "Id": "c96-chapter-01",
+  "Name": "01 测前校验",
+  "Category": "章节",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "6e85fce9593a43689fa867acf6b8ddf8",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-low-power",
+      "ReferencedBlockName": "低压供电与KL30-KL15切换",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "a92fdc3799a04b82901a7dd4cf07d24b",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-product-init",
+      "ReferencedBlockName": "产品进入FT与通信初始化",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "1c51ab0f46284ecb9dc68e9489a870f8",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-clear-faults",
+      "ReferencedBlockName": "主驱故障清除",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {},
+      "ParameterBindings": {}
+    }
+  ]
+}

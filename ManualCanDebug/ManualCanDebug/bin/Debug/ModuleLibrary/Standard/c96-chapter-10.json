@@ -1,0 +1,27 @@
+{
+  "Id": "c96-chapter-10",
+  "Name": "10 被动放电（预留）",
+  "Category": "章节",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "c21417cd76fc449a8f52b52cd880d2de",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-reserved",
+      "ReferencedBlockName": "未确认功能占位",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Description": "C96放电DBC接口存在两套定义，确认后启用"
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    }
+  ]
+}

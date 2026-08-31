@@ -1,0 +1,27 @@
+{
+  "SerialNumberLen": 0,
+  "ProjectName": "C96_FCT_调试",
+  "StationName": "OP3020",
+  "SequenceVersion": "FT1-FCT01-01-A0",
+  "UIDisplayType": "All",
+  "LogFilePath": "D:\\LogfilePath",
+  "StepList": [
+    {
+      "StepName": "停止周期",
+      "RunMode": "Normal",
+      "FunctionName": "FCT_ExecuteAction",
+      "RecordingLog": true,
+      "Device": "AUXCAN",
+      "Operation": "StopPeriodicDbc",
+      "ResultMode": "Action",
+      "DbcPath": "Config\\C95C96Auxiliary.dbc",
+      "DeviceType": 52,
+      "Channel": 0,
+      "BaudRate": 500000,
+      "IP": "192.166.6.10",
+      "MessageName": "VCU_PDU",
+      "CanId": "CF2503B",
+      "PeriodicKey": "VCU_PDU"
+    }
+  ]
+}

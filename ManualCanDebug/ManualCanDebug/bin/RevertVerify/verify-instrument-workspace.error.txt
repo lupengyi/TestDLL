@@ -1,0 +1,2 @@
+System.InvalidOperationException: Default station binding has conflicts: 工位01 / DCDC_LOAD：独立仪器没有填写连接资源，该工位无法初始化这台仪器。; 工位01 / LVDC_KL15：独立仪器没有填写连接资源，该工位无法初始化这台仪器。
+   在 ManualCanDebug.Program.Main(String[] args) 位置 E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\Program.cs:行号 164

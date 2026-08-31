@@ -1,0 +1,315 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: 
+
+
+BO_ 2349308583 VCU1_DCDC_OilPump_Cmd: 8 VCU
+ SG_ DCAC_Steer_VF_Voltage : 48|16@1+ (0.1,0.0) [0.0|6553.5] "%" Vector__XXX
+ SG_ DCAC_Steer_FreqCmd : 32|16@1+ (0.1,-1000.0) [-1000.0|5553.5] "Hz" Vector__XXX
+ SG_ DCAC_Steer_RatedCurr : 24|8@1+ (1,0) [0.0|255.0] "A" Vector__XXX
+ SG_ DCAC_Steer_Start_Cmd : 16|8@1+ (1,0) [0.0|255.0] "" Vector__XXX
+ SG_ DCAC_Steer_Reserved : 10|6@1+ (1,0) [0.0|63.0] "" Vector__XXX
+ SG_ DCAC_Steer_CtrlMode : 9|1@1+ (1,0) [0.0|1.0] "" Vector__XXX
+ SG_ DCAC_Steer_Reset : 8|1@1+ (1,0) [0.0|1.0] "" Vector__XXX
+ SG_ DCDC_Start_Cmd : 0|8@1+ (1,0) [0.0|255.0] "" Vector__XXX
+
+BO_ 2349374119 VCU2_AirPump_Cmd: 8 VCU
+ SG_ DCAC_Air_VF_Voltage : 48|16@1+ (0.1,0.0) [0.0|6553.5] "%" Vector__XXX
+ SG_ DCAC_Air_FreqCmd : 32|16@1+ (0.1,-1000.0) [-1000.0|5553.5] "Hz" Vector__XXX
+ SG_ DCAC_Air_RatedCurr : 24|8@1+ (1,0) [0.0|255.0] "A" Vector__XXX
+ SG_ DCAC_Air_Start_Cmd : 16|8@1+ (1,0) [0.0|255.0] "" Vector__XXX
+ SG_ DCAC_Air_Reserved : 10|6@1+ (1,0) [0.0|63.0] "" Vector__XXX
+ SG_ DCAC_Air_CtrlMode : 9|1@1+ (1,0) [0.0|1.0] "" Vector__XXX
+ SG_ DCAC_Air_Reset : 8|1@1+ (1,0) [0.0|1.0] "" Vector__XXX
+ SG_ AirPump_Reserved_B1 : 0|8@1+ (1,0) [0.0|255.0] "" Vector__XXX
+
+BO_ 2349377434 ACU1_DCDC_Feedback1: 8 DCDC
+ SG_ DCDC_FaultCode : 56|8@1+ (1,0) [0.0|255.0] "" Vector__XXX
+ SG_ DCDC_HeatSinkTemp : 48|8@1+ (1.0,-40.0) [-40.0|215.0] "degC" Vector__XXX
+ SG_ DCDC_InVoltage : 32|16@1+ (0.1,-1000.0) [-1000.0|5553.5] "V" Vector__XXX
+ SG_ DCDC_OutCurrent : 16|16@1+ (0.1,-1000.0) [-1000.0|5553.5] "A" Vector__XXX
+ SG_ DCDC_OutVoltage : 0|16@1+ (0.1,-1000.0) [-1000.0|5553.5] "V" Vector__XXX
+
+BO_ 2349377435 ACU2_DCDC_Feedback2: 8 DCDC
+ SG_ DCDC_DebugVer : 48|8@1+ (1,0) [0.0|255.0] "" Vector__XXX
+ SG_ DCDC_DebugDay : 40|8@1+ (1,0) [1.0|31.0] "" Vector__XXX
+ SG_ DCDC_DebugMonth : 32|8@1+ (1,0) [1.0|12.0] "" Vector__XXX
+ SG_ DCDC_DebugYear : 24|8@1+ (1,0) [0.0|99.0] "" Vector__XXX
+ SG_ DCDC_SwVer3 : 16|8@1+ (1,0) [0.0|255.0] "" Vector__XXX
+ SG_ DCDC_SwVer2 : 8|8@1+ (1,0) [0.0|255.0] "" Vector__XXX
+ SG_ DCDC_SwVer1 : 0|8@1+ (1,0) [0.0|255.0] "" Vector__XXX
+
+BO_ 2349442971 ACU3_OilPump_Feedback1: 8 DCAC_OilPump
+ SG_ OilPump_FaultCode : 56|8@1+ (1,0) [0.0|255.0] "" Vector__XXX
+ SG_ OilPump_ModuleTemp : 48|8@1+ (1.0,-40.0) [-40.0|215.0] "degC" Vector__XXX
+ SG_ OilPump_OutVoltage : 32|16@1+ (1,0) [0.0|65535.0] "V" Vector__XXX
+ SG_ OilPump_InVoltage : 16|16@1+ (1,0) [0.0|65535.0] "V" Vector__XXX
+ SG_ OilPump_OutCurrent : 0|16@1+ (0.1,-1000.0) [-1000.0|5553.5] "A" Vector__XXX
+
+BO_ 2349442972 ACU4_OilPump_Feedback2: 8 DCAC_OilPump
+ SG_ OilPump_InternalFault : 40|8@1+ (1,0) [0.0|255.0] "" Vector__XXX
+ SG_ OilPump_CtrlMode : 32|8@1+ (1,0) [0.0|1.0] "" Vector__XXX
+ SG_ OilPump_RatedCurr : 24|8@1+ (1,0) [0.0|255.0] "A" Vector__XXX
+ SG_ OilPump_RatedPower : 16|8@1+ (0.1,0.0) [0.0|25.5] "kW" Vector__XXX
+ SG_ OilPump_OutFreq : 0|16@1+ (0.1,-1000.0) [-1000.0|5553.5] "Hz" Vector__XXX
+
+BO_ 2349442973 ACU5_OilPump_Feedback3: 8 DCAC_OilPump
+ SG_ OilPump_DebugVer : 48|8@1+ (1,0) [0.0|255.0] "" Vector__XXX
+ SG_ OilPump_DebugDay : 40|8@1+ (1,0) [1.0|31.0] "" Vector__XXX
+ SG_ OilPump_DebugMonth : 32|8@1+ (1,0) [1.0|12.0] "" Vector__XXX
+ SG_ OilPump_DebugYear : 24|8@1+ (1,0) [0.0|99.0] "" Vector__XXX
+ SG_ OilPump_SwVer : 16|8@1+ (1,0) [0.0|255.0] "" Vector__XXX
+ SG_ OilPump_SwModelH : 8|8@1+ (1,0) [0.0|255.0] "" Vector__XXX
+ SG_ OilPump_SwModelL : 0|8@1+ (1,0) [0.0|255.0] "" Vector__XXX
+
+BO_ 2349508509 ACU6_AirPump_Feedback1: 8 DCAC_AirPump
+ SG_ AirPump_FaultCode : 56|8@1+ (1,0) [0.0|255.0] "" Vector__XXX
+ SG_ AirPump_ModuleTemp : 48|8@1+ (1.0,-40.0) [-40.0|215.0] "degC" Vector__XXX
+ SG_ AirPump_OutVoltage : 32|16@1+ (1,0) [0.0|65535.0] "V" Vector__XXX
+ SG_ AirPump_InVoltage : 16|16@1+ (1,0) [0.0|65535.0] "V" Vector__XXX
+ SG_ AirPump_OutCurrent : 0|16@1+ (0.1,-1000.0) [-1000.0|5553.5] "A" Vector__XXX
+
+BO_ 2349508510 ACU7_AirPump_Feedback2: 8 DCAC_AirPump
+ SG_ AirPump_InternalFault : 40|8@1+ (1,0) [0.0|255.0] "" Vector__XXX
+ SG_ AirPump_CtrlMode : 32|8@1+ (1,0) [0.0|1.0] "" Vector__XXX
+ SG_ AirPump_RatedCurr : 24|8@1+ (1,0) [0.0|255.0] "A" Vector__XXX
+ SG_ AirPump_RatedPower : 16|8@1+ (0.1,0.0) [0.0|25.5] "kW" Vector__XXX
+ SG_ AirPump_OutFreq : 0|16@1+ (1,0) [0.0|65535.0] "Hz" Vector__XXX
+
+BO_ 2349508511 ACU8_AirPump_Feedback3: 8 DCAC_AirPump
+ SG_ AirPump_DebugVer : 48|8@1+ (1,0) [0.0|255.0] "" Vector__XXX
+ SG_ AirPump_DebugDay : 40|8@1+ (1,0) [1.0|31.0] "" Vector__XXX
+ SG_ AirPump_DebugMonth : 32|8@1+ (1,0) [1.0|12.0] "" Vector__XXX
+ SG_ AirPump_DebugYear : 24|8@1+ (1,0) [0.0|99.0] "" Vector__XXX
+ SG_ AirPump_SwVer : 16|8@1+ (1,0) [0.0|255.0] "" Vector__XXX
+ SG_ AirPump_SwModelH : 8|8@1+ (1,0) [0.0|255.0] "" Vector__XXX
+ SG_ AirPump_SwModelL : 0|8@1+ (1,0) [0.0|255.0] "" Vector__XXX
+
+
+
+
+BO_ 2364690491 VCU_PDU: 8 VCU
+ SG_ VCU_HrtBt : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ VCU_Reserve_B6 : 48|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ VCU_Reserve_B5_H : 42|6@1+ (1,0) [0|63] "" Vector__XXX
+ SG_ VCU_DCCpstRlyCtl : 40|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ VCU_Reserve_B3_B4 : 24|16@1+ (1,0) [0|65535] "" Vector__XXX
+ SG_ VCU_Reserve_B2_H : 20|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ VCU_Bodywork : 18|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ VCU_HghVtgCnt : 16|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ VCU_Reserve_B1_H : 14|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ VCU_G4_RlyCtl : 12|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ VCU_G3_RlyCtl : 10|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ VCU_G2_RlyCtl : 8|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ VCU_Reserve_B0_H : 2|6@1+ (1,0) [0|63] "" Vector__XXX
+ SG_ VCU_ShrRlyCtl : 0|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 2566859720 PDU_RelaySts: 8 PDU
+ SG_ PDU_HrtBt : 56|8@1+ (1,0) [0|255] "" Vector__XXX
+ SG_ PDU_Reserve_B3_B6 : 24|32@1+ (1,0) [0|4294967295] "" Vector__XXX
+ SG_ PDU_BodyworkRlyPcgRlySts : 22|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PDU_BodyworkRlySts : 20|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PDU_PosRlyPcgRlySts : 18|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PDU_PosRlySts : 16|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PDU_Reserve_B1_H : 14|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PDU_G4RlySts : 12|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PDU_G3RlySts : 10|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PDU_G2RlySts : 8|2@1+ (1,0) [0|3] "" Vector__XXX
+ SG_ PDU_Reserve_B0_H : 2|6@1+ (1,0) [0|63] "" Vector__XXX
+ SG_ PDU_ShrRlySts : 0|2@1+ (1,0) [0|3] "" Vector__XXX
+
+BO_ 2365522211 PDU_MONITORID: 8 PDU
+ SG_ BUSVoltage : 56|8@1+ (10,0) [0|2550] "V" Vector__XXX
+ SG_ MotP_Volt : 48|8@1+ (10,0) [0|2550] "V" Vector__XXX
+ SG_ LotP_Volt : 40|8@1+ (10,0) [0|2550] "V" Vector__XXX
+ SG_ FotP_Volt : 32|8@1+ (10,0) [0|2550] "V" Vector__XXX
+ SG_ K3_Volt3 : 24|8@1+ (10,0) [0|2550] "V" Vector__XXX
+ SG_ K2_Volt2 : 16|8@1+ (10,0) [0|2550] "V" Vector__XXX
+ SG_ K1_Volt1 : 8|8@1+ (10,0) [0|2550] "V" Vector__XXX
+ SG_ Init_FlagX3Success : 7|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Init_FlagX2Success : 6|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Init_FlagX1Success : 5|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Init_FlagF0FPSuccess : 4|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Init_FlagL0LPSuccess : 3|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Init_FlagM0MPSuccess : 2|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ InitOver : 1|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ PowerIniDelay : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+
+CM_ BO_ 2349308583 "DC/DC、油泵DC/AC控制报文 period 100ms";
+CM_ SG_ 2349308583 DCAC_Steer_VF_Voltage "VF分离给定电压（BYTE7低字节+BYTE8高字节）";
+CM_ SG_ 2349308583 DCAC_Steer_FreqCmd "DC/AC助力转向给定频率（BYTE5低字节+BYTE6高字节）";
+CM_ SG_ 2349308583 DCAC_Steer_RatedCurr "DC/AC助力转向额定电流，单位1A";
+CM_ SG_ 2349308583 DCAC_Steer_Start_Cmd "DC/AC助力转向启动指令：0x55=启动，0xAA=关闭";
+CM_ SG_ 2349308583 DCAC_Steer_Reserved "BYTE2 Bit3~Bit8预留";
+CM_ SG_ 2349308583 DCAC_Steer_CtrlMode "DC/AC助力转向控制方式：0=V/F带电抗器，1=同步开环带同步电机";
+CM_ SG_ 2349308583 DCAC_Steer_Reset "DC/AC助力转向停机复位：0=不复位，1=复位";
+CM_ SG_ 2349308583 DCDC_Start_Cmd "DC/DC启动指令：0x55=启动，0xAA=关闭";
+CM_ BO_ 2349374119 "气泵DC/AC控制报文 period 100ms";
+CM_ SG_ 2349374119 DCAC_Air_VF_Voltage "VF分离给定电压（BYTE7低字节+BYTE8高字节）";
+CM_ SG_ 2349374119 DCAC_Air_FreqCmd "DC/AC空压机给定频率（BYTE5低字节+BYTE6高字节）";
+CM_ SG_ 2349374119 DCAC_Air_RatedCurr "DC/AC空压机额定电流，单位1A";
+CM_ SG_ 2349374119 DCAC_Air_Start_Cmd "DC/AC空压机启动指令：0x55=启动，0xAA=关闭";
+CM_ SG_ 2349374119 DCAC_Air_Reserved "BYTE2 Bit3~8预留";
+CM_ SG_ 2349374119 DCAC_Air_CtrlMode "DC/AC空压机控制方式：0=V/F带电抗器，1=同步开环带同步电机";
+CM_ SG_ 2349374119 DCAC_Air_Reset "DC/AC空压机停机复位：0=不复位，1=复位";
+CM_ SG_ 2349374119 AirPump_Reserved_B1 "BYTE1预留，默认0xFF";
+CM_ BO_ 2349377434 "DC/DC反馈报文1 period 100ms";
+CM_ SG_ 2349377434 DCDC_FaultCode "DC/DC故障代码：BIT0=输出过流，BIT1=输出过压，BIT2=整机过热，BIT3=输入欠压，BIT4=输入过压，BIT5=门极过流，BIT6=预留，BIT7=状态(1=运行";
+CM_ SG_ 2349377434 DCDC_HeatSinkTemp "DC/DC散热器温度";
+CM_ SG_ 2349377434 DCDC_InVoltage "DC/DC输入电压（BYTE5低字节+BYTE6高字节）";
+CM_ SG_ 2349377434 DCDC_OutCurrent "DC/DC输出电流（BYTE3低字节+BYTE4高字节）";
+CM_ SG_ 2349377434 DCDC_OutVoltage "DC/DC输出电压（BYTE1低字节+BYTE2高字节）";
+CM_ BO_ 2349377435 "DC/DC反馈报文2 period 1000ms";
+CM_ SG_ 2349377435 DCDC_DebugVer "DC/DC调试版本号，初版为0，临时调试每次加1";
+CM_ SG_ 2349377435 DCDC_DebugDay "DC/DC调试时间日期";
+CM_ SG_ 2349377435 DCDC_DebugMonth "DC/DC调试时间月份";
+CM_ SG_ 2349377435 DCDC_DebugYear "DC/DC调试时间年份（十位和个位，如2026年反馈26）";
+CM_ SG_ 2349377435 DCDC_SwVer3 "DC/DC软件版本号3";
+CM_ SG_ 2349377435 DCDC_SwVer2 "DC/DC软件版本号2";
+CM_ SG_ 2349377435 DCDC_SwVer1 "DC/DC软件版本号1";
+CM_ BO_ 2349442971 "油泵DC/AC反馈报文1 period 100ms";
+CM_ SG_ 2349442971 OilPump_FaultCode "油泵DC/AC故障代码：BIT0=输入过流，BIT1=整机过热，BIT2=输入欠压，BIT3=输入过压，BIT4=输出过流，BIT5=缺相保护，BIT6=门极过流，BIT7=状态(1=运行";
+CM_ SG_ 2349442971 OilPump_ModuleTemp "油泵DC/AC模块温度";
+CM_ SG_ 2349442971 OilPump_OutVoltage "油泵DC/AC输出电压（BYTE5低字节+BYTE6高字节）";
+CM_ SG_ 2349442971 OilPump_InVoltage "油泵DC/AC输入电压（BYTE3低字节+BYTE4高字节）";
+CM_ SG_ 2349442971 OilPump_OutCurrent "油泵DC/AC输出电流有效值（BYTE1低字节+BYTE2高字节）";
+CM_ BO_ 2349442972 "油泵DC/AC反馈报文2 period 100ms";
+CM_ SG_ 2349442972 OilPump_InternalFault "油泵DC/AC内部故障码";
+CM_ SG_ 2349442972 OilPump_CtrlMode "油泵DC/AC控制方式：0=VF控制，1=同步开环控制";
+CM_ SG_ 2349442972 OilPump_RatedCurr "油泵DC/AC额定电流";
+CM_ SG_ 2349442972 OilPump_RatedPower "油泵DC/AC额定功率";
+CM_ SG_ 2349442972 OilPump_OutFreq "油泵DC/AC输出频率（BYTE1低字节+BYTE2高字节）";
+CM_ BO_ 2349442973 "油泵DC/AC反馈报文3 period 1000ms";
+CM_ SG_ 2349442973 OilPump_DebugVer "油泵DC/AC调试版本号，初版为0，临时调试每次加1";
+CM_ SG_ 2349442973 OilPump_DebugDay "油泵DC/AC调试时间日期";
+CM_ SG_ 2349442973 OilPump_DebugMonth "油泵DC/AC调试时间月份";
+CM_ SG_ 2349442973 OilPump_DebugYear "油泵DC/AC调试时间年份（十位和个位，如2026年反馈26）";
+CM_ SG_ 2349442973 OilPump_SwVer "油泵DC/AC软件版本号，初版为0，后续每次升级加1";
+CM_ SG_ 2349442973 OilPump_SwModelH "油泵DC/AC软件型号高字节（U2.00值，如AE90）";
+CM_ SG_ 2349442973 OilPump_SwModelL "油泵DC/AC软件型号低字节（U2.00值，如AE90）";
+CM_ BO_ 2349508509 "气泵DC/AC反馈报文1 period 100ms";
+CM_ SG_ 2349508509 AirPump_FaultCode "气泵DC/AC故障代码：BIT0=输入过流，BIT1=整机过热，BIT2=输入欠压，BIT3=输入过压，BIT4=输出过流，BIT5=缺相保护，BIT6=门极过流，BIT7=状态(1=运行";
+CM_ SG_ 2349508509 AirPump_ModuleTemp "气泵DC/AC模块温度";
+CM_ SG_ 2349508509 AirPump_OutVoltage "气泵DC/AC输出电压（BYTE5低字节+BYTE6高字节）";
+CM_ SG_ 2349508509 AirPump_InVoltage "气泵DC/AC输入电压（BYTE3低字节+BYTE4高字节）";
+CM_ SG_ 2349508509 AirPump_OutCurrent "气泵DC/AC输出电流有效值（BYTE1低字节+BYTE2高字节）";
+CM_ BO_ 2349508510 "气泵DC/AC反馈报文2 period 100ms";
+CM_ SG_ 2349508510 AirPump_InternalFault "气泵DC/AC内部故障码";
+CM_ SG_ 2349508510 AirPump_CtrlMode "气泵DC/AC控制方式：0=VF控制，1=同步开环控制";
+CM_ SG_ 2349508510 AirPump_RatedCurr "气泵DC/AC额定电流";
+CM_ SG_ 2349508510 AirPump_RatedPower "气泵DC/AC额定功率";
+CM_ SG_ 2349508510 AirPump_OutFreq "气泵DC/AC输出频率（BYTE1低字节+BYTE2高字节）";
+CM_ BO_ 2349508511 "气泵DC/AC反馈报文3 period 1000ms";
+CM_ SG_ 2349508511 AirPump_DebugVer "气泵DC/AC调试版本号，初版为0，临时调试每次加1";
+CM_ SG_ 2349508511 AirPump_DebugDay "气泵DC/AC调试时间日期";
+CM_ SG_ 2349508511 AirPump_DebugMonth "气泵DC/AC调试时间月份";
+CM_ SG_ 2349508511 AirPump_DebugYear "气泵DC/AC调试时间年份（十位和个位，如2026年反馈26）";
+CM_ SG_ 2349508511 AirPump_SwVer "气泵DC/AC软件版本号，初版为0，后续每次升级加1";
+CM_ SG_ 2349508511 AirPump_SwModelH "气泵DC/AC软件型号高字节（U2.00值，如AE91）";
+CM_ SG_ 2349508511 AirPump_SwModelL "气泵DC/AC软件型号低字节（U2.00值，如AE91）";
+CM_ BO_ 2364690491 "VCU to PDU relay control command, period 100ms";
+CM_ SG_ 2364690491 VCU_ShrRlyCtl "Shared relay control for DCDC, oil pump DCAC, air pump DCAC and air conditioner";
+CM_ SG_ 2364690491 VCU_HghVtgCnt "Main drive high-voltage command; precharge is controlled by MultiOne";
+CM_ SG_ 2364690491 VCU_Bodywork "Bodywork high-voltage command";
+CM_ SG_ 2364690491 VCU_DCCpstRlyCtl "Charging relay control";
+CM_ SG_ 2364690491 VCU_HrtBt "VCU heartbeat";
+CM_ BO_ 2566859720 "PDU relay status, period 300ms";
+CM_ SG_ 2566859720 PDU_ShrRlySts "Shared relay status for DCDC, oil pump DCAC, air pump DCAC and air conditioner";
+CM_ SG_ 2566859720 PDU_PosRlySts "Main positive contactor status";
+CM_ SG_ 2566859720 PDU_PosRlyPcgRlySts "Main precharge contactor status";
+CM_ SG_ 2566859720 PDU_BodyworkRlySts "Bodywork main positive contactor status";
+CM_ SG_ 2566859720 PDU_BodyworkRlyPcgRlySts "Bodywork precharge contactor status";
+CM_ SG_ 2566859720 PDU_HrtBt "PDU heartbeat";
+VAL_ 2364690491 VCU_ShrRlyCtl 0 "Disconnected" 1 "Connected" 2 "Error" 3 "Invalid";
+VAL_ 2364690491 VCU_G2_RlyCtl 0 "Disconnected" 1 "Connected" 2 "Error" 3 "Invalid";
+VAL_ 2364690491 VCU_G3_RlyCtl 0 "Disconnected" 1 "Connected" 2 "Error" 3 "Invalid";
+VAL_ 2364690491 VCU_G4_RlyCtl 0 "Disconnected" 1 "Connected" 2 "Error" 3 "Invalid";
+VAL_ 2364690491 VCU_HghVtgCnt 0 "PowerOff" 1 "PowerOn" 2 "Error" 3 "Invalid";
+VAL_ 2364690491 VCU_Bodywork 0 "PowerOff" 1 "PowerOn" 2 "Error" 3 "Invalid";
+VAL_ 2364690491 VCU_DCCpstRlyCtl 0 "Disconnected" 1 "Connected" 2 "Error" 3 "Invalid";
+VAL_ 2566859720 PDU_ShrRlySts 0 "Disconnected" 1 "Connected" 2 "Error" 3 "Invalid";
+VAL_ 2566859720 PDU_G2RlySts 0 "Disconnected" 1 "Connected" 2 "Error" 3 "Invalid";
+VAL_ 2566859720 PDU_G3RlySts 0 "Disconnected" 1 "Connected" 2 "Error" 3 "Invalid";
+VAL_ 2566859720 PDU_G4RlySts 0 "Disconnected" 1 "Connected" 2 "Error" 3 "Invalid";
+VAL_ 2566859720 PDU_PosRlySts 0 "Disconnected" 1 "Connected" 2 "Error" 3 "Invalid";
+VAL_ 2566859720 PDU_PosRlyPcgRlySts 0 "Disconnected" 1 "Connected" 2 "Error" 3 "Invalid";
+VAL_ 2566859720 PDU_BodyworkRlySts 0 "Disconnected" 1 "Connected" 2 "Error" 3 "Invalid";
+VAL_ 2566859720 PDU_BodyworkRlyPcgRlySts 0 "Disconnected" 1 "Connected" 2 "Error" 3 "Invalid";
+CM_ BO_ 2365522211 "PDU initialization and circuit voltage monitor, period 500ms";
+CM_ SG_ 2365522211 PowerIniDelay "Low-voltage power-up complete flag";
+CM_ SG_ 2365522211 InitOver "All circuit self-checks complete flag";
+CM_ SG_ 2365522211 Init_FlagM0MPSuccess "Main-drive precharge self-check success flag";
+CM_ SG_ 2365522211 Init_FlagL0LPSuccess "Shared DCDC, oil pump, air pump and air-conditioner precharge self-check success flag";
+CM_ SG_ 2365522211 Init_FlagF0FPSuccess "Bodywork precharge self-check success flag";
+CM_ SG_ 2365522211 Init_FlagX1Success "G2 circuit self-check success flag";
+CM_ SG_ 2365522211 Init_FlagX2Success "G3 circuit self-check success flag";
+CM_ SG_ 2365522211 Init_FlagX3Success "G4 circuit self-check success flag";
+CM_ SG_ 2365522211 K1_Volt1 "G2 circuit downstream voltage";
+CM_ SG_ 2365522211 K2_Volt2 "G3 circuit downstream voltage";
+CM_ SG_ 2365522211 K3_Volt3 "G4 circuit downstream voltage";
+CM_ SG_ 2365522211 FotP_Volt "Bodywork circuit downstream voltage";
+CM_ SG_ 2365522211 LotP_Volt "Shared DCDC, oil pump, air pump and air-conditioner circuit downstream voltage";
+CM_ SG_ 2365522211 MotP_Volt "Main-drive circuit downstream voltage";
+CM_ SG_ 2365522211 BUSVoltage "Voltage upstream of main positive contactor (battery voltage)";
+VAL_ 2365522211 PowerIniDelay 0 "NotComplete" 1 "Complete";
+VAL_ 2365522211 InitOver 0 "SelfCheckFailed" 1 "SelfCheckSucceeded";
+VAL_ 2365522211 Init_FlagM0MPSuccess 0 "SelfCheckFailed" 1 "SelfCheckSucceeded";
+VAL_ 2365522211 Init_FlagL0LPSuccess 0 "SelfCheckFailed" 1 "SelfCheckSucceeded";
+VAL_ 2365522211 Init_FlagF0FPSuccess 0 "SelfCheckFailed" 1 "SelfCheckSucceeded";
+VAL_ 2365522211 Init_FlagX1Success 0 "SelfCheckFailed" 1 "SelfCheckSucceeded";
+VAL_ 2365522211 Init_FlagX2Success 0 "SelfCheckFailed" 1 "SelfCheckSucceeded";
+VAL_ 2365522211 Init_FlagX3Success 0 "SelfCheckFailed" 1 "SelfCheckSucceeded";
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 65535;
+BA_DEF_   "GeneratedBy" STRING ;
+BA_DEF_   "GeneratedAt" STRING ;
+BA_DEF_   "BaudRate" STRING ;
+BA_DEF_   "SourceFile" STRING ;
+BA_DEF_DEF_  "GenMsgCycleTime" 0;
+BA_DEF_DEF_  "GeneratedBy" "";
+BA_DEF_DEF_  "GeneratedAt" "";
+BA_DEF_DEF_  "BaudRate" "";
+BA_DEF_DEF_  "SourceFile" "";
+BA_ "GenMsgCycleTime" BO_ 2365522211 500;
+BA_ "GenMsgCycleTime" BO_ 2364690491 100;
+BA_ "GenMsgCycleTime" BO_ 2566859720 300;
+BA_ "GeneratedBy" "Claude AI (claude-opus-4-6)";
+BA_ "GeneratedAt" "2026-03-30 14:30:25";
+BA_ "BaudRate" "250K";
+BA_ "SourceFile" "GTAKE电机控制器扩展帧CAN通讯协议V1.0（辅驱三合一）_法士特华纳20260330.docx";
+
+
+
+

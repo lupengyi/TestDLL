@@ -1,0 +1,164 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ManualCanDebug</RootNamespace>
+    <AssemblyName>ManualCanDebug</AssemblyName>
+    <Platforms>x86</Platforms>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <BaseOutputPath>bin\</BaseOutputPath>
+    <AppendPlatformToOutputPath>false</AppendPlatformToOutputPath>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <DefaultItemExcludes>$(DefaultItemExcludes);bin\**;obj\**</DefaultItemExcludes>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="CSP_Base">
+      <HintPath>..\..\DLLs\CSP_Base.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="CSP_Manage">
+      <HintPath>..\..\DLLs\CSP_Manage.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\DLLs\Newtonsoft.Json.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <ProjectReference Include="..\ManualCanDebug.Core\ManualCanDebug.Core.csproj">
+      <Project>{DBA7B77D-7C57-4C80-9DE7-7A4E8F1E7201}</Project>
+      <Name>ManualCanDebug.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\CSP.TestDLL.Extension\CSP.TestDLL.Extension.csproj" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="..\..\TestDLL\TestDllMain.cs">
+      <LogicalName>ManualCanDebug.TestDllMain.cs</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\TestDLL\TestDllMain.Generic.cs">
+      <LogicalName>ManualCanDebug.TestDllMain.Generic.cs</LogicalName>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\..\TestDLL\TestDllMain.Generated.Instruments.cs">
+      <LogicalName>ManualCanDebug.TestDllMain.Generated.Instruments.cs</LogicalName>
+    </EmbeddedResource>
+    <Content Include="..\..\DLLs\*.dll" Exclude="..\..\DLLs\CSP_Base.dll;..\..\DLLs\CSP_Manage.dll;..\..\DLLs\Newtonsoft.Json.dll;..\..\DLLs\LogFileEx.dll;..\..\DLLs\CSP.TestDLL.dll;..\..\DLLs\Instruments.CAN.CANWrapper.dll;..\..\DLLs\Instruments.CAN.ICAN.dll;..\..\DLLs\Instruments.CAN.ZLG_CAN.dll;..\..\DLLs\zlgcan.dll">
+      <Link>LegacyRuntime\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\DLLs\LogFileEx.dll">
+      <Link>LogFileEx.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <LegacyKernelFile Include="..\..\DLLs\kerneldlls\**\*" Exclude="..\..\DLLs\kerneldlls\CANFDNET.dll" />
+    <Content Include="..\..\Config\*.*" Exclude="..\..\Config\Flywheel_900A_Z405.dbc;..\..\Config\Resolver.dbc">
+      <Link>Config\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Config\InstrumentProfiles\*.json">
+      <Link>Config\InstrumentProfiles\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\RuntimeDlls\Instruments.CAN.CANWrapper.dll">
+      <Link>Instruments.CAN.CANWrapper.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\RuntimeDlls\Instruments.CAN.ICAN.dll">
+      <Link>Instruments.CAN.ICAN.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\RuntimeDlls\Instruments.CAN.DBCReader.dll">
+      <Link>Instruments.CAN.DBCReader.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\RuntimeDlls\Instruments.CAN.HexFileReader.dll">
+      <Link>Instruments.CAN.HexFileReader.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\RuntimeDlls\Instruments.CAN.ZLG_CAN.dll">
+      <Link>Instruments.CAN.ZLG_CAN.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\RuntimeDlls\zlgcan.dll">
+      <Link>zlgcan.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\RuntimeDlls\Instruments.CAN.A2lReader.dll">
+      <Link>Instruments.CAN.A2lReader.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\RuntimeDlls\Instruments.CAN.CSVReader.dll">
+      <Link>Instruments.CAN.CSVReader.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\DLLs\kerneldlls\**\*" Exclude="..\..\DLLs\kerneldlls\CANFDNET.dll">
+      <Link>kerneldlls\%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\RuntimeDlls\kerneldlls\CANFDNET.dll">
+      <Link>kerneldlls\CANFDNET.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Config\Flywheel_900A_Z405.dbc">
+      <Link>Config\Flywheel_900A_Z405.dbc</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Config\Resolver.dbc">
+      <Link>Config\Resolver.dbc</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\Sequence\FT1-FCT01-01-A0.json">
+      <Link>Config\DefaultSequence.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\测试资料_20260616(1)\附件六_《测试工序_FCT测试要求A0》\附件六_《测试工序_FCT测试要求A0》\C91\20002331 AS_Fast_PE INV_CV_800V_LOCATOR_C_sample_250120.xlsx">
+      <Link>Config\ProductLocators\C91_Locator.xlsx</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\测试资料_20260616(1)\附件六_《测试工序_FCT测试要求A0》\附件六_《测试工序_FCT测试要求A0》\C95\主驱资料\_Flywheel C95_LOCATOR V1.0_20250729.xlsx">
+      <Link>Config\ProductLocators\C95_Locator.xlsx</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\测试资料_20260616(1)\附件六_《测试工序_FCT测试要求A0》\附件六_《测试工序_FCT测试要求A0》\C96\主驱资料\_Flywheel C96_Locator_V1.1_250807.xlsx">
+      <Link>Config\ProductLocators\C96_Locator.xlsx</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\..\..\测试资料_20260616(1)\附件六_《测试工序_FCT测试要求A0》\附件六_《测试工序_FCT测试要求A0》\C96\辅驱资料（复用C95）\辅驱通讯协议&amp;Locator\GTAKE电机控制器扩展帧CAN通讯协议V1.0（辅驱三合一）_法士特华纳20260330.dbc">
+      <Link>Config\C95C96Auxiliary.dbc</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NodeNetwork" Version="6.0.0" />
+  </ItemGroup>
+  <Target Name="CopyLegacyKernelFiles" AfterTargets="Build">
+    <Copy SourceFiles="@(LegacyKernelFile)" DestinationFiles="@(LegacyKernelFile->'$(OutDir)LegacyRuntime\kerneldlls\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />
+  </Target>
+  <Target Name="CopyCanRuntimeToLegacy" AfterTargets="Build">
+    <ItemGroup>
+      <LegacyCanRuntime Include="..\RuntimeDlls\Instruments.CAN.CANWrapper.dll;..\RuntimeDlls\Instruments.CAN.ICAN.dll;..\RuntimeDlls\Instruments.CAN.ZLG_CAN.dll;..\RuntimeDlls\zlgcan.dll" />
+    </ItemGroup>
+    <Copy SourceFiles="@(LegacyCanRuntime)" DestinationFolder="$(OutDir)LegacyRuntime" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="..\RuntimeDlls\kerneldlls\CANFDNET.dll" DestinationFolder="$(OutDir)LegacyRuntime\kerneldlls" SkipUnchangedFiles="true" />
+  </Target>
+  <Target Name="CopyExtendedTestDll" AfterTargets="Build">
+    <PropertyGroup>
+      <_ExtendedTestDllPath Condition="Exists('$(OutDir)CSP.TestDLL.dll')">$(OutDir)CSP.TestDLL.dll</_ExtendedTestDllPath>
+      <_ExtendedTestDllPath Condition="'$(_ExtendedTestDllPath)' == ''">$(MSBuildProjectDirectory)\..\..\CSP.TestDLL.Extension\bin\$(Configuration)\CSP.TestDLL.dll</_ExtendedTestDllPath>
+      <_An23600ePath>$(MSBuildProjectDirectory)\..\..\DLLs\Instruments.Load.AN23600E.dll</_An23600ePath>
+    </PropertyGroup>
+    <Copy SourceFiles="$(_ExtendedTestDllPath)" DestinationFiles="$(OutDir)LegacyRuntime\CSP.TestDLL.dll" SkipUnchangedFiles="true" />
+    <Copy SourceFiles="$(_An23600ePath)" DestinationFiles="$(OutDir)LegacyRuntime\Instruments.Load.AN23600E.dll" SkipUnchangedFiles="true" Condition="Exists('$(_An23600ePath)')" />
+  </Target>
+</Project>

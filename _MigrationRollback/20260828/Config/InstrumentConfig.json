@@ -1,0 +1,132 @@
+[
+	{
+		"UniqueIndex": 0,
+		"Name": "RES",
+		"Type": "Other",
+		"Mode": "NGI",
+		"Resource": "TCPIP0::192.168.0.123::7000::SOCKET",
+		"Parameter": "",
+		"Comment": "ProgramResistance",
+		"Initialize": false
+	},
+	{
+		"UniqueIndex": 1,
+		"Name": "DUTCAN",
+		"Type": "CAN",
+		"Mode": "ZLG",
+		"Resource": "192.166.6.10",
+		"Parameter": "52,2,500000,8000",
+		"Comment": "400U channel 2 main drive/product CAN",
+		"Initialize": true
+	},
+	{
+		"UniqueIndex": 2,
+		"Name": "HVDC",
+		"Type": "PowerSupply",
+		"Mode": "Kewell",
+		"Resource": "TCPIP0::192.168.0.122::502::SOCKET",
+		"Parameter": "",
+		"Comment": "",
+		"Initialize": false
+	},
+	{
+		"UniqueIndex": 3,
+		"Name": "LVDC",
+		"Type": "PowerSupply",
+		"Mode": "IT",
+		"Resource": "USB0::0x2EC7::0x6700::802259073797370075::INSTR",
+		"Parameter": "",
+		"Comment": "",
+		"Initialize": false
+	},
+	{
+		"UniqueIndex": 4,
+		"Name": "DMM",
+		"Type": "DMM",
+		"Mode": "Kewell",
+		"Resource": "TCPIP0::A-34461A-00000.local::inst0::INSTR",
+		"Parameter": "",
+		"Comment": "",
+		"Initialize": false
+	},
+	{
+		"UniqueIndex": 5,
+		"Name": "MOXA0",
+		"Type": "MOXA",
+		"Mode": "Kewell",
+		"Resource": "192.168.0.124",
+		"Parameter": "",
+		"Comment": "",
+		"Initialize": false
+	},
+	{
+		"UniqueIndex": 6,
+		"Name": "MOXA1",
+		"Type": "MOXA",
+		"Mode": "Kewell",
+		"Resource": "192.168.0.125",
+		"Parameter": "",
+		"Comment": "",
+		"Initialize": false
+	},
+	{
+		"UniqueIndex": 7,
+		"Name": "RELAY",
+		"Type": "DIO",
+		"Mode": "Kewell",
+		"Resource": "192.168.0.126",
+		"Parameter": "",
+		"Comment": "",
+		"Initialize": false
+	},
+	{
+		"UniqueIndex": 8,
+		"Name": "AUXCAN",
+		"Type": "CAN",
+		"Mode": "ZLG",
+		"Resource": "192.166.6.10",
+		"Parameter": "52,0,500000,8000",
+		"Comment": "400U channel 0 auxiliary/DBC CAN",
+		"Initialize": true
+	},
+	{
+		"UniqueIndex": 9,
+		"Name": "RESOLVERCAN",
+		"Type": "CAN",
+		"Mode": "ZLG",
+		"Resource": "192.166.6.10",
+		"Parameter": "52,1,500000,8000",
+		"Comment": "400U channel 1 resolver CAN",
+		"Initialize": true
+	},
+	{
+		"UniqueIndex": 10,
+		"Name": "DAQ",
+		"Type": "DAQ",
+		"Mode": "NI",
+		"Resource": "PCI-6229",
+		"Parameter": "",
+		"Comment": "DAQ object requires no explicit connection",
+		"Initialize": false
+	},
+	{
+		"UniqueIndex": 11,
+		"Name": "PLC",
+		"Type": "PLC",
+		"Mode": "S7",
+		"Resource": "10.231.138.100",
+		"Parameter": "30",
+		"Comment": "S7 slot/address parameter",
+		"Initialize": false
+	},
+	{
+		"UniqueIndex": 12,
+		"Name": "LVDC_KL15",
+		"Type": "PowerSupply",
+		"Mode": "IT",
+		"Resource": "",
+		"Parameter": "",
+		"Comment": "KL15 independent IT6xxxC low-voltage supply; configure its USB resource",
+		"Initialize": false
+	}
+]

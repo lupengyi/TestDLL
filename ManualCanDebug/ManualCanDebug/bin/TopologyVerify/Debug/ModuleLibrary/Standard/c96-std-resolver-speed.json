@@ -1,0 +1,121 @@
+{
+  "Id": "c96-std-resolver-speed",
+  "Name": "双驱旋变转速验证",
+  "Category": "旋变",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [
+    {
+      "Name": "Speed",
+      "DisplayName": "目标转速",
+      "Type": "double",
+      "DefaultValue": 700.0,
+      "Unit": "rpm",
+      "Description": "",
+      "Required": true
+    },
+    {
+      "Name": "LowLimit",
+      "DisplayName": "转速下限",
+      "Type": "double",
+      "DefaultValue": 690.0,
+      "Unit": "rpm",
+      "Description": "",
+      "Required": true
+    },
+    {
+      "Name": "HighLimit",
+      "DisplayName": "转速上限",
+      "Type": "double",
+      "DefaultValue": 710.0,
+      "Unit": "rpm",
+      "Description": "",
+      "Required": true
+    }
+  ],
+  "Steps": [
+    {
+      "Id": "8dfe46355e2444f59ff103fd41fc4583",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "设置旋变转速",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": false,
+        "Device": "RESOLVER",
+        "Operation": "SetSpeed",
+        "ResultMode": "Action",
+        "Speed": 700.0,
+        "PolePairs": 6
+      },
+      "ParameterBindings": {
+        "Speed": "Speed"
+      }
+    },
+    {
+      "Id": "a9d60f9e2f4a43b69d89fc0e735d9a28",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取TM1转速",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANSignal",
+        "RecordingLog": true,
+        "Operation": "Read",
+        "ResultMode": "NumericLimit",
+        "AddrOffset": 68,
+        "TableIndex": 4,
+        "DataSize": 4,
+        "DataType": "float32",
+        "LowLimit": 690.0,
+        "HighLimit": 710.0,
+        "Comtype": "GELE",
+        "Unit": "rpm"
+      },
+      "ParameterBindings": {
+        "LowLimit": "LowLimit",
+        "HighLimit": "HighLimit"
+      }
+    },
+    {
+      "Id": "9b87589d4a664702932b9c21caf673c1",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取TM2转速",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANSignal",
+        "RecordingLog": true,
+        "Operation": "Read",
+        "ResultMode": "NumericLimit",
+        "AddrOffset": 72,
+        "TableIndex": 4,
+        "DataSize": 4,
+        "DataType": "float32",
+        "LowLimit": 690.0,
+        "HighLimit": 710.0,
+        "Comtype": "GELE",
+        "Unit": "rpm"
+      },
+      "ParameterBindings": {
+        "LowLimit": "LowLimit",
+        "HighLimit": "HighLimit"
+      }
+    }
+  ]
+}

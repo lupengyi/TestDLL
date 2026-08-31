@@ -1,0 +1,1291 @@
+{
+  "Version": 5,
+  "StationCount": 1,
+  "Instruments": [
+    {
+      "Id": "2d5d6b1d47d147b28242952c68fe4572",
+      "Device": "RES",
+      "DisplayName": "RES",
+      "DriverName": "Instruments.Other.NGI_ProgramResistance",
+      "Resource": "TCPIP0::192.168.0.123::7000::SOCKET",
+      "Parameter": "",
+      "Usage": "Independent",
+      "ChannelCount": 1,
+      "Category": "负载",
+      "DriverAssemblyPath": null,
+      "DriverTypeName": null,
+      "ExclusiveAccess": true,
+      "LockTimeoutMs": 30000,
+      "GeneratedMethods": [
+        {
+          "Device": "RES",
+          "Operation": "SetResistance",
+          "DriverMethod": "SetResistance",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "设置电阻",
+          "FunctionName": "UI_RES_SetResistance",
+          "Fields": [
+            {
+              "Name": "ResValue",
+              "Label": "电阻值",
+              "Type": "double",
+              "DefaultValue": "1000",
+              "Unit": "Ω",
+              "Options": ""
+            },
+            {
+              "Name": "Channel",
+              "Label": "通道",
+              "Type": "int",
+              "DefaultValue": "1",
+              "Unit": "",
+              "Options": ""
+            }
+          ],
+          "ResultText": "生成成功"
+        }
+      ],
+      "UsageText": "独立仪器（每工位1台）",
+      "IsShared": false
+    },
+    {
+      "Id": "46525343ebd040238584a01e92ff3513",
+      "Device": "DUTCAN",
+      "DisplayName": "DUTCAN",
+      "DriverName": "Instruments.CAN.CANWrapper",
+      "Resource": "192.166.6.10",
+      "Parameter": "52,2,500000,8000",
+      "Usage": "Independent",
+      "ChannelCount": 1,
+      "Category": "通信",
+      "DriverAssemblyPath": null,
+      "DriverTypeName": null,
+      "ExclusiveAccess": true,
+      "LockTimeoutMs": 30000,
+      "GeneratedMethods": [],
+      "UsageText": "独立仪器（每工位1台）",
+      "IsShared": false
+    },
+    {
+      "Id": "d71f6a7910184e4a8b0d0741f53432b2",
+      "Device": "HVDC",
+      "DisplayName": "HVDC",
+      "DriverName": "Instruments.PowerSupply.Kewell_C3000",
+      "Resource": "TCPIP0::192.168.0.122::502::SOCKET",
+      "Parameter": "",
+      "Usage": "Independent",
+      "ChannelCount": 1,
+      "Category": "电源",
+      "DriverAssemblyPath": null,
+      "DriverTypeName": null,
+      "ExclusiveAccess": true,
+      "LockTimeoutMs": 30000,
+      "GeneratedMethods": [
+        {
+          "Device": "HVDC",
+          "Operation": "SetVoltage",
+          "DriverMethod": "SetVoltage",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "设置电压",
+          "FunctionName": "UI_HVDC_SetVoltage",
+          "Fields": [
+            {
+              "Name": "Voltage",
+              "Label": "设定电压",
+              "Type": "double",
+              "DefaultValue": "600",
+              "Unit": "V",
+              "Options": ""
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "HVDC",
+          "Operation": "SetCurrent",
+          "DriverMethod": "SetCurrent",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "设置电流",
+          "FunctionName": "UI_HVDC_SetCurrent",
+          "Fields": [
+            {
+              "Name": "Current",
+              "Label": "电流限制",
+              "Type": "double",
+              "DefaultValue": "5",
+              "Unit": "A",
+              "Options": ""
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "HVDC",
+          "Operation": "SetOutput",
+          "DriverMethod": "SetOutput",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "输出开关",
+          "FunctionName": "UI_HVDC_SetOutput",
+          "Fields": [
+            {
+              "Name": "Output",
+              "Label": "输出状态",
+              "Type": "bool",
+              "DefaultValue": "True",
+              "Unit": "",
+              "Options": ""
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "HVDC",
+          "Operation": "ReadVoltage",
+          "DriverMethod": "ReadVoltage",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": true,
+          "Selected": true,
+          "DisplayName": "读取电压",
+          "FunctionName": "UI_HVDC_ReadVoltage",
+          "Fields": [],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "HVDC",
+          "Operation": "ReadCurrent",
+          "DriverMethod": "ReadCurrent",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": true,
+          "Selected": true,
+          "DisplayName": "读取电流",
+          "FunctionName": "UI_HVDC_ReadCurrent",
+          "Fields": [],
+          "ResultText": "生成成功"
+        }
+      ],
+      "UsageText": "独立仪器（每工位1台）",
+      "IsShared": false
+    },
+    {
+      "Id": "66ae631647da4606aa23750d997339d3",
+      "Device": "LVDC",
+      "DisplayName": "LVDC",
+      "DriverName": "Instruments.PowerSupply.ITECH_IT6XXXC",
+      "Resource": "USB0::0x2EC7::0x6700::802259073797370075::INSTR",
+      "Parameter": "",
+      "Usage": "Independent",
+      "ChannelCount": 1,
+      "Category": "电源",
+      "DriverAssemblyPath": null,
+      "DriverTypeName": null,
+      "ExclusiveAccess": true,
+      "LockTimeoutMs": 30000,
+      "GeneratedMethods": [
+        {
+          "Device": "LVDC",
+          "Operation": "SetVoltage",
+          "DriverMethod": "SetVoltage",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "设置电压",
+          "FunctionName": "UI_LVDC_SetVoltage",
+          "Fields": [
+            {
+              "Name": "Voltage",
+              "Label": "设定电压",
+              "Type": "double",
+              "DefaultValue": "24",
+              "Unit": "V",
+              "Options": ""
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "LVDC",
+          "Operation": "SetCurrent",
+          "DriverMethod": "SetCurrent",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "设置电流",
+          "FunctionName": "UI_LVDC_SetCurrent",
+          "Fields": [
+            {
+              "Name": "Current",
+              "Label": "电流限制",
+              "Type": "double",
+              "DefaultValue": "5",
+              "Unit": "A",
+              "Options": ""
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "LVDC",
+          "Operation": "SetOutput",
+          "DriverMethod": "SetOutput",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "输出开关",
+          "FunctionName": "UI_LVDC_SetOutput",
+          "Fields": [
+            {
+              "Name": "Output",
+              "Label": "输出状态",
+              "Type": "bool",
+              "DefaultValue": "True",
+              "Unit": "",
+              "Options": ""
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "LVDC",
+          "Operation": "ReadVoltage",
+          "DriverMethod": "ReadVoltage",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": true,
+          "Selected": true,
+          "DisplayName": "读取电压",
+          "FunctionName": "UI_LVDC_ReadVoltage",
+          "Fields": [],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "LVDC",
+          "Operation": "ReadCurrent",
+          "DriverMethod": "ReadCurrent",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": true,
+          "Selected": true,
+          "DisplayName": "读取电流",
+          "FunctionName": "UI_LVDC_ReadCurrent",
+          "Fields": [],
+          "ResultText": "生成成功"
+        }
+      ],
+      "UsageText": "独立仪器（每工位1台）",
+      "IsShared": false
+    },
+    {
+      "Id": "3a20e230a9974f02ba3134f2b8661c21",
+      "Device": "DMM",
+      "DisplayName": "DMM",
+      "DriverName": "Instruments.DMM.KeySight34461A",
+      "Resource": "TCPIP0::A-34461A-00000.local::inst0::INSTR",
+      "Parameter": "",
+      "Usage": "Independent",
+      "ChannelCount": 1,
+      "Category": "测量采集",
+      "DriverAssemblyPath": null,
+      "DriverTypeName": null,
+      "ExclusiveAccess": true,
+      "LockTimeoutMs": 30000,
+      "GeneratedMethods": [
+        {
+          "Device": "DMM",
+          "Operation": "ConfigDCVoltage",
+          "DriverMethod": "ConfigDCVoltage",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "配置直流电压",
+          "FunctionName": "UI_DMM_ConfigDCVoltage",
+          "Fields": [
+            {
+              "Name": "Range",
+              "Label": "量程",
+              "Type": "double",
+              "DefaultValue": "1000",
+              "Unit": "V",
+              "Options": ""
+            },
+            {
+              "Name": "Solution",
+              "Label": "分辨率",
+              "Type": "double",
+              "DefaultValue": "0.01",
+              "Unit": "V",
+              "Options": ""
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "DMM",
+          "Operation": "ConfigDCCurrent",
+          "DriverMethod": "ConfigDCCurrent",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "配置直流电流",
+          "FunctionName": "UI_DMM_ConfigDCCurrent",
+          "Fields": [
+            {
+              "Name": "Range",
+              "Label": "量程",
+              "Type": "double",
+              "DefaultValue": "3",
+              "Unit": "A",
+              "Options": ""
+            },
+            {
+              "Name": "Solution",
+              "Label": "分辨率",
+              "Type": "double",
+              "DefaultValue": "1E-05",
+              "Unit": "A",
+              "Options": ""
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "DMM",
+          "Operation": "ConfigACVoltage",
+          "DriverMethod": "ConfigACVoltage",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "配置交流电压",
+          "FunctionName": "UI_DMM_ConfigACVoltage",
+          "Fields": [
+            {
+              "Name": "Range",
+              "Label": "量程",
+              "Type": "double",
+              "DefaultValue": "1000",
+              "Unit": "V",
+              "Options": ""
+            },
+            {
+              "Name": "Solution",
+              "Label": "分辨率",
+              "Type": "double",
+              "DefaultValue": "0.01",
+              "Unit": "V",
+              "Options": ""
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "DMM",
+          "Operation": "ConfigACCurrent",
+          "DriverMethod": "ConfigACCurrent",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "配置交流电流",
+          "FunctionName": "UI_DMM_ConfigACCurrent",
+          "Fields": [
+            {
+              "Name": "Range",
+              "Label": "量程",
+              "Type": "double",
+              "DefaultValue": "3",
+              "Unit": "A",
+              "Options": ""
+            },
+            {
+              "Name": "Solution",
+              "Label": "分辨率",
+              "Type": "double",
+              "DefaultValue": "1E-05",
+              "Unit": "A",
+              "Options": ""
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "DMM",
+          "Operation": "Read",
+          "DriverMethod": "Read",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": true,
+          "Selected": true,
+          "DisplayName": "读取测量值",
+          "FunctionName": "UI_DMM_Read",
+          "Fields": [],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "DMM",
+          "Operation": "Close",
+          "DriverMethod": "Close",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "关闭会话",
+          "FunctionName": "UI_DMM_Close",
+          "Fields": [],
+          "ResultText": "生成成功"
+        }
+      ],
+      "UsageText": "独立仪器（每工位1台）",
+      "IsShared": false
+    },
+    {
+      "Id": "d59c0758b496447090822fa136a87f39",
+      "Device": "RELAY_FCT",
+      "DisplayName": "RELAY_FCT",
+      "DriverName": "SHT_48SEDO_A",
+      "Resource": "192.168.0.124",
+      "Parameter": "502,1",
+      "Usage": "Independent",
+      "ChannelCount": 1,
+      "Category": "开关切换",
+      "DriverAssemblyPath": null,
+      "DriverTypeName": null,
+      "ExclusiveAccess": true,
+      "LockTimeoutMs": 30000,
+      "GeneratedMethods": [
+        {
+          "Device": "RELAY_FCT",
+          "Operation": "SetDO",
+          "DriverMethod": "SetDO",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "设置直接输出（OUT6以后）",
+          "FunctionName": "UI_RELAY_FCT_SetDO",
+          "Fields": [
+            {
+              "Name": "Channels",
+              "Label": "输出端口",
+              "Type": "string",
+              "DefaultValue": "OUT6",
+              "Unit": "",
+              "Options": "OUT6|OUT7|OUT9|OUT10|OUT9,OUT10|OUT11|OUT12|OUT13|OUT14|OUT15|OUT16|OUT17|OUT18|OUT19|OUT20|OUT21|OUT22|OUT23|OUT24|OUT25|OUT26|OUT27|OUT28|OUT29|OUT30|OUT31|OUT32|OUT33|OUT34|OUT35|OUT36|OUT37|OUT38|OUT39|OUT40|OUT41|OUT42|OUT43|OUT45"
+            },
+            {
+              "Name": "Values",
+              "Label": "状态列表",
+              "Type": "string",
+              "DefaultValue": "1",
+              "Unit": "",
+              "Options": "0|1"
+            },
+            {
+              "Name": "Slave",
+              "Label": "从站地址",
+              "Type": "int",
+              "DefaultValue": "1",
+              "Unit": "",
+              "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16"
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "RELAY_FCT",
+          "Operation": "SelectFctMux",
+          "DriverMethod": "SelectFctMux",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "安全选择测试功能",
+          "FunctionName": "UI_RELAY_FCT_SelectFctMux",
+          "Fields": [
+            {
+              "Name": "Selection",
+              "Label": "测试功能",
+              "Type": "string",
+              "DefaultValue": "1 - HVDC测量备用（J1）",
+              "Unit": "",
+              "Options": "1 - HVDC测量备用（J1）|2 - 高压测量未用（J2）|3 - 高压测量未用（J3）|4 - 高压测量未用（J4）|5 - CAN0 H-L电阻（J19）|6 - CAN1 H-L电阻（J20）|7 - CAN2 H-L电阻（J21）|8 - CAN0 H-GND电压（J28）|9 - CAN0 L-GND电压（J29）|10 - CAN1 H-GND电压（J30）|11 - CAN1 L-GND电压（J31）|12 - KL30/KL31电压（J35）|13 - OBC KL30/KL31电压-未接（J36）"
+            },
+            {
+              "Name": "SwitchDelayMs",
+              "Label": "切换等待",
+              "Type": "int",
+              "DefaultValue": "50",
+              "Unit": "ms",
+              "Options": ""
+            },
+            {
+              "Name": "Slave",
+              "Label": "从站地址",
+              "Type": "int",
+              "DefaultValue": "1",
+              "Unit": "",
+              "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16"
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "RELAY_FCT",
+          "Operation": "DisableFctMux",
+          "DriverMethod": "DisableFctMux",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "安全关闭测试选择",
+          "FunctionName": "UI_RELAY_FCT_DisableFctMux",
+          "Fields": [
+            {
+              "Name": "SwitchDelayMs",
+              "Label": "关闭等待",
+              "Type": "int",
+              "DefaultValue": "50",
+              "Unit": "ms",
+              "Options": ""
+            },
+            {
+              "Name": "Slave",
+              "Label": "从站地址",
+              "Type": "int",
+              "DefaultValue": "1",
+              "Unit": "",
+              "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16"
+            }
+          ],
+          "ResultText": "生成成功"
+        }
+      ],
+      "UsageText": "独立仪器（每工位1台）",
+      "IsShared": false
+    },
+    {
+      "Id": "3e475de35fee48a198d0b4222958df4b",
+      "Device": "RELAY_HVMUX",
+      "DisplayName": "RELAY_HVMUX",
+      "DriverName": "SHT_48SEDO_A",
+      "Resource": "192.168.0.125",
+      "Parameter": "502,1",
+      "Usage": "Independent",
+      "ChannelCount": 1,
+      "Category": "开关切换",
+      "DriverAssemblyPath": null,
+      "DriverTypeName": null,
+      "ExclusiveAccess": true,
+      "LockTimeoutMs": 30000,
+      "GeneratedMethods": [
+        {
+          "Device": "RELAY_HVMUX",
+          "Operation": "Select15",
+          "DriverMethod": "Select15",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "安全选择测量通道",
+          "FunctionName": "UI_RELAY_HVMUX_Select15",
+          "Fields": [
+            {
+              "Name": "Selection",
+              "Label": "测量通道",
+              "Type": "int",
+              "DefaultValue": "1",
+              "Unit": "",
+              "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15"
+            },
+            {
+              "Name": "SwitchDelayMs",
+              "Label": "切换等待",
+              "Type": "int",
+              "DefaultValue": "50",
+              "Unit": "ms",
+              "Options": ""
+            },
+            {
+              "Name": "Slave",
+              "Label": "从站地址",
+              "Type": "int",
+              "DefaultValue": "1",
+              "Unit": "",
+              "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16"
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "RELAY_HVMUX",
+          "Operation": "Disable15",
+          "DriverMethod": "Disable15",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "安全关闭全部通道",
+          "FunctionName": "UI_RELAY_HVMUX_Disable15",
+          "Fields": [
+            {
+              "Name": "SwitchDelayMs",
+              "Label": "关闭等待",
+              "Type": "int",
+              "DefaultValue": "50",
+              "Unit": "ms",
+              "Options": ""
+            },
+            {
+              "Name": "Slave",
+              "Label": "从站地址",
+              "Type": "int",
+              "DefaultValue": "1",
+              "Unit": "",
+              "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16"
+            }
+          ],
+          "ResultText": "生成成功"
+        }
+      ],
+      "UsageText": "独立仪器（每工位1台）",
+      "IsShared": false
+    },
+    {
+      "Id": "6034905bbe3841d6b0686ffab339d38d",
+      "Device": "DCDC_LOAD",
+      "DisplayName": "DCDC_LOAD",
+      "DriverName": "Instruments.Load.AN23600E",
+      "Resource": "",
+      "Parameter": "2101",
+      "Usage": "Independent",
+      "ChannelCount": 1,
+      "Category": "负载",
+      "DriverAssemblyPath": null,
+      "DriverTypeName": null,
+      "ExclusiveAccess": true,
+      "LockTimeoutMs": 30000,
+      "GeneratedMethods": [
+        {
+          "Device": "DCDC_LOAD",
+          "Operation": "SetMode",
+          "DriverMethod": "SetMode",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "设置模式",
+          "FunctionName": "UI_DCDC_LOAD_SetMode",
+          "Fields": [
+            {
+              "Name": "Mode",
+              "Label": "负载模式",
+              "Type": "string",
+              "DefaultValue": "Ccm",
+              "Unit": "",
+              "Options": "Ccl|Ccm|Cch|Cvl|Cvm|Cvh|Crl|Crm|Crh|Cpl|Cpm|Cph"
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "DCDC_LOAD",
+          "Operation": "SetCurrent",
+          "DriverMethod": "SetCurrent",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "设置恒流值",
+          "FunctionName": "UI_DCDC_LOAD_SetCurrent",
+          "Fields": [
+            {
+              "Name": "Current",
+              "Label": "电流",
+              "Type": "double",
+              "DefaultValue": "0",
+              "Unit": "A",
+              "Options": ""
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "DCDC_LOAD",
+          "Operation": "SetVoltage",
+          "DriverMethod": "SetVoltage",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "设置恒压值",
+          "FunctionName": "UI_DCDC_LOAD_SetVoltage",
+          "Fields": [
+            {
+              "Name": "Voltage",
+              "Label": "电压",
+              "Type": "double",
+              "DefaultValue": "0",
+              "Unit": "V",
+              "Options": ""
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "DCDC_LOAD",
+          "Operation": "SetResistance",
+          "DriverMethod": "SetResistance",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "设置恒阻值",
+          "FunctionName": "UI_DCDC_LOAD_SetResistance",
+          "Fields": [
+            {
+              "Name": "Resistance",
+              "Label": "电阻",
+              "Type": "double",
+              "DefaultValue": "1",
+              "Unit": "Ω",
+              "Options": ""
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "DCDC_LOAD",
+          "Operation": "SetPower",
+          "DriverMethod": "SetPower",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "设置恒功率值",
+          "FunctionName": "UI_DCDC_LOAD_SetPower",
+          "Fields": [
+            {
+              "Name": "Power",
+              "Label": "功率",
+              "Type": "double",
+              "DefaultValue": "0",
+              "Unit": "W",
+              "Options": ""
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "DCDC_LOAD",
+          "Operation": "OutputOn",
+          "DriverMethod": "OutputOn",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "负载输入开",
+          "FunctionName": "UI_DCDC_LOAD_OutputOn",
+          "Fields": [],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "DCDC_LOAD",
+          "Operation": "OutputOff",
+          "DriverMethod": "OutputOff",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "负载输入关",
+          "FunctionName": "UI_DCDC_LOAD_OutputOff",
+          "Fields": [],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "DCDC_LOAD",
+          "Operation": "ReadVoltage",
+          "DriverMethod": "ReadVoltage",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": true,
+          "Selected": true,
+          "DisplayName": "读取电压",
+          "FunctionName": "UI_DCDC_LOAD_ReadVoltage",
+          "Fields": [],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "DCDC_LOAD",
+          "Operation": "ReadCurrent",
+          "DriverMethod": "ReadCurrent",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": true,
+          "Selected": true,
+          "DisplayName": "读取电流",
+          "FunctionName": "UI_DCDC_LOAD_ReadCurrent",
+          "Fields": [],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "DCDC_LOAD",
+          "Operation": "ReadPower",
+          "DriverMethod": "ReadPower",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": true,
+          "Selected": true,
+          "DisplayName": "读取功率",
+          "FunctionName": "UI_DCDC_LOAD_ReadPower",
+          "Fields": [],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "DCDC_LOAD",
+          "Operation": "ReadProtection",
+          "DriverMethod": "ReadProtection",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": true,
+          "Selected": true,
+          "DisplayName": "读取保护状态",
+          "FunctionName": "UI_DCDC_LOAD_ReadProtection",
+          "Fields": [],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "DCDC_LOAD",
+          "Operation": "ClearProtection",
+          "DriverMethod": "ClearProtection",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "清除保护",
+          "FunctionName": "UI_DCDC_LOAD_ClearProtection",
+          "Fields": [],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "DCDC_LOAD",
+          "Operation": "Reset",
+          "DriverMethod": "Reset",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "复位",
+          "FunctionName": "UI_DCDC_LOAD_Reset",
+          "Fields": [],
+          "ResultText": "生成成功"
+        }
+      ],
+      "UsageText": "独立仪器（每工位1台）",
+      "IsShared": false
+    },
+    {
+      "Id": "64f0f5a2daf84a349315a2d4ae7393ad",
+      "Device": "AUXCAN",
+      "DisplayName": "AUXCAN",
+      "DriverName": "Instruments.CAN.CANWrapper",
+      "Resource": "192.166.6.10",
+      "Parameter": "52,0,500000,8000",
+      "Usage": "Independent",
+      "ChannelCount": 1,
+      "Category": "通信",
+      "DriverAssemblyPath": null,
+      "DriverTypeName": null,
+      "ExclusiveAccess": true,
+      "LockTimeoutMs": 30000,
+      "GeneratedMethods": [],
+      "UsageText": "独立仪器（每工位1台）",
+      "IsShared": false
+    },
+    {
+      "Id": "3781dd4e86604ac1bf0f36346a535d72",
+      "Device": "RESOLVERCAN",
+      "DisplayName": "RESOLVERCAN",
+      "DriverName": "Instruments.CAN.CANWrapper",
+      "Resource": "192.166.6.10",
+      "Parameter": "52,1,500000,8000",
+      "Usage": "Independent",
+      "ChannelCount": 1,
+      "Category": "通信",
+      "DriverAssemblyPath": null,
+      "DriverTypeName": null,
+      "ExclusiveAccess": true,
+      "LockTimeoutMs": 30000,
+      "GeneratedMethods": [],
+      "UsageText": "独立仪器（每工位1台）",
+      "IsShared": false
+    },
+    {
+      "Id": "299deeace6a349d28d5aaa7038071590",
+      "Device": "DAQ",
+      "DisplayName": "DAQ",
+      "DriverName": "NI-9227",
+      "Resource": "NI-9227",
+      "Parameter": "cDAQ1Mod1/ai0,cDAQ1Mod1/ai1,cDAQ1Mod1/ai2;cDAQ1Mod2/ai0,cDAQ1Mod2/ai1,cDAQ1Mod2/ai2;cDAQ1Mod3/ai0,cDAQ1Mod3/ai1,cDAQ1Mod3/ai2;cDAQ1Mod4/ai0,cDAQ1Mod4/ai1,cDAQ1Mod4/ai2",
+      "Usage": "Independent",
+      "ChannelCount": 1,
+      "Category": "测量采集",
+      "DriverAssemblyPath": null,
+      "DriverTypeName": null,
+      "ExclusiveAccess": true,
+      "LockTimeoutMs": 30000,
+      "GeneratedMethods": [
+        {
+          "Device": "DAQ",
+          "Operation": "Read",
+          "DriverMethod": "Read",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": true,
+          "Selected": true,
+          "DisplayName": "读取通道",
+          "FunctionName": "UI_DAQ_Read",
+          "Fields": [
+            {
+              "Name": "Channel",
+              "Label": "通道",
+              "Type": "int",
+              "DefaultValue": "0",
+              "Unit": "",
+              "Options": ""
+            },
+            {
+              "Name": "Scale",
+              "Label": "比例",
+              "Type": "double",
+              "DefaultValue": "22.058823529",
+              "Unit": "",
+              "Options": ""
+            },
+            {
+              "Name": "Offset",
+              "Label": "偏移",
+              "Type": "double",
+              "DefaultValue": "0",
+              "Unit": "",
+              "Options": ""
+            }
+          ],
+          "ResultText": "生成成功"
+        }
+      ],
+      "UsageText": "独立仪器（每工位1台）",
+      "IsShared": false
+    },
+    {
+      "Id": "bc8e0cc0621c43b6b9650dd2590c53d2",
+      "Device": "PLC",
+      "DisplayName": "PLC",
+      "DriverName": "Instruments.PLCS7",
+      "Resource": "10.231.138.100",
+      "Parameter": "30",
+      "Usage": "Shared",
+      "ChannelCount": 1,
+      "Category": "控制器",
+      "DriverAssemblyPath": null,
+      "DriverTypeName": null,
+      "ExclusiveAccess": true,
+      "LockTimeoutMs": 30000,
+      "GeneratedMethods": [
+        {
+          "Device": "PLC",
+          "Operation": "LoadFinished",
+          "DriverMethod": "LoadFinished",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "写入完成信号",
+          "FunctionName": "UI_PLC_LoadFinished",
+          "Fields": [],
+          "ResultText": "生成成功"
+        }
+      ],
+      "UsageText": "共用仪器",
+      "IsShared": true
+    },
+    {
+      "Id": "d1dc7a2796b3427ba5c3fe9b6f415119",
+      "Device": "LVDC_KL15",
+      "DisplayName": "LVDC_KL15",
+      "DriverName": "Instruments.PowerSupply.ITECH_IT6XXXC",
+      "Resource": "",
+      "Parameter": "",
+      "Usage": "Independent",
+      "ChannelCount": 1,
+      "Category": "电源",
+      "DriverAssemblyPath": null,
+      "DriverTypeName": null,
+      "ExclusiveAccess": true,
+      "LockTimeoutMs": 30000,
+      "GeneratedMethods": [
+        {
+          "Device": "LVDC_KL15",
+          "Operation": "SetVoltage",
+          "DriverMethod": "SetVoltage",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "设置电压",
+          "FunctionName": "UI_LVDC_KL15_SetVoltage",
+          "Fields": [
+            {
+              "Name": "Voltage",
+              "Label": "设定电压",
+              "Type": "double",
+              "DefaultValue": "24",
+              "Unit": "V",
+              "Options": ""
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "LVDC_KL15",
+          "Operation": "SetCurrent",
+          "DriverMethod": "SetCurrent",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "设置电流",
+          "FunctionName": "UI_LVDC_KL15_SetCurrent",
+          "Fields": [
+            {
+              "Name": "Current",
+              "Label": "电流限制",
+              "Type": "double",
+              "DefaultValue": "5",
+              "Unit": "A",
+              "Options": ""
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "LVDC_KL15",
+          "Operation": "SetOutput",
+          "DriverMethod": "SetOutput",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "输出开关",
+          "FunctionName": "UI_LVDC_KL15_SetOutput",
+          "Fields": [
+            {
+              "Name": "Output",
+              "Label": "输出状态",
+              "Type": "bool",
+              "DefaultValue": "True",
+              "Unit": "",
+              "Options": ""
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "LVDC_KL15",
+          "Operation": "ReadVoltage",
+          "DriverMethod": "ReadVoltage",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": true,
+          "Selected": true,
+          "DisplayName": "读取电压",
+          "FunctionName": "UI_LVDC_KL15_ReadVoltage",
+          "Fields": [],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "LVDC_KL15",
+          "Operation": "ReadCurrent",
+          "DriverMethod": "ReadCurrent",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": true,
+          "Selected": true,
+          "DisplayName": "读取电流",
+          "FunctionName": "UI_LVDC_KL15_ReadCurrent",
+          "Fields": [],
+          "ResultText": "生成成功"
+        }
+      ],
+      "UsageText": "独立仪器（每工位1台）",
+      "IsShared": false
+    }
+  ],
+  "Stations": [
+    {
+      "StationNumber": 1,
+      "IndependentDevices": [
+        {
+          "TemplateDevice": "RES",
+          "InstanceName": "RES-01",
+          "Resource": "TCPIP0::192.168.0.123::7000::SOCKET",
+          "Parameter": null,
+          "Enabled": true
+        },
+        {
+          "TemplateDevice": "DUTCAN",
+          "InstanceName": "DUTCAN-01",
+          "Resource": "192.166.6.10",
+          "Parameter": null,
+          "Enabled": true
+        },
+        {
+          "TemplateDevice": "HVDC",
+          "InstanceName": "HVDC-01",
+          "Resource": "TCPIP0::192.168.0.122::502::SOCKET",
+          "Parameter": null,
+          "Enabled": true
+        },
+        {
+          "TemplateDevice": "LVDC",
+          "InstanceName": "LVDC-01",
+          "Resource": "USB0::0x2EC7::0x6700::802259073797370075::INSTR",
+          "Parameter": null,
+          "Enabled": true
+        },
+        {
+          "TemplateDevice": "DMM",
+          "InstanceName": "DMM-01",
+          "Resource": "TCPIP0::A-34461A-00000.local::inst0::INSTR",
+          "Parameter": null,
+          "Enabled": true
+        },
+        {
+          "TemplateDevice": "RELAY_FCT",
+          "InstanceName": "RELAY_FCT-01",
+          "Resource": "192.168.0.124",
+          "Parameter": null,
+          "Enabled": true
+        },
+        {
+          "TemplateDevice": "RELAY_HVMUX",
+          "InstanceName": "RELAY_HVMUX-01",
+          "Resource": "192.168.0.125",
+          "Parameter": null,
+          "Enabled": true
+        },
+        {
+          "TemplateDevice": "DCDC_LOAD",
+          "InstanceName": "DCDC_LOAD-01",
+          "Resource": "",
+          "Parameter": null,
+          "Enabled": true
+        },
+        {
+          "TemplateDevice": "AUXCAN",
+          "InstanceName": "AUXCAN-01",
+          "Resource": "192.166.6.10",
+          "Parameter": null,
+          "Enabled": true
+        },
+        {
+          "TemplateDevice": "RESOLVERCAN",
+          "InstanceName": "RESOLVERCAN-01",
+          "Resource": "192.166.6.10",
+          "Parameter": null,
+          "Enabled": true
+        },
+        {
+          "TemplateDevice": "DAQ",
+          "InstanceName": "DAQ-01",
+          "Resource": "NI-9227",
+          "Parameter": null,
+          "Enabled": true
+        },
+        {
+          "TemplateDevice": "LVDC_KL15",
+          "InstanceName": "LVDC_KL15-01",
+          "Resource": "",
+          "Parameter": null,
+          "Enabled": true
+        }
+      ],
+      "SharedBindings": [
+        {
+          "InstrumentId": "bc8e0cc0621c43b6b9650dd2590c53d2",
+          "Device": "PLC",
+          "Channel": "",
+          "ChannelOffset": 0,
+          "DbOffset": 0,
+          "PathIndex": "",
+          "Note": "",
+          "Summary": "无映射"
+        }
+      ],
+      "PowerInstrumentId": "",
+      "PowerChannelGroup": "",
+      "PlcInstrumentId": "bc8e0cc0621c43b6b9650dd2590c53d2",
+      "PlcDbOffset": 0,
+      "StationName": "工位01"
+    }
+  ]
+}

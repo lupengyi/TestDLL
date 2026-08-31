@@ -1,0 +1,21 @@
+{
+  "SerialNumberLen": 0,
+  "ProjectName": "C91-01-0001",
+  "StationName": "OP3020",
+  "SequenceVersion": "FT1-FCT01-01-A0",
+  "UIDisplayType": "All",
+  "LogFilePath": "D:\\LogfilePath",
+  "StepList": [
+    {
+      "StepName": "VCU_PDU",
+      "RunMode": "Normal",
+      "FunctionName": "FCT_ExecuteAction",
+      "RecordingLog": true,
+      "Device": "AUXCAN",
+      "Operation": "SendDbcSignals",
+      "MessageName": "VCU_PDU",
+      "SignalsJson": "{\"VCU_ShrRlyCtl\":1.0,\"VCU_G2_RlyCtl\":0.0,\"VCU_G3_RlyCtl\":0.0,\"VCU_G4_RlyCtl\":0.0,\"VCU_HghVtgCnt\":1.0,\"VCU_Bodywork\":0.0,\"VCU_DCCpstRlyCtl\":0.0,\"VCU_HrtBt\":12.0}",
+      "ResultMode": "Action"
+    }
+  ]
+}

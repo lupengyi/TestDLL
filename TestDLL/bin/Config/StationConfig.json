@@ -1,0 +1,145 @@
+{
+	"DefaultStationIndex": 0,
+	"StationConfigList":
+	[
+		{
+			"SocketNumber": 1,
+			"SocketColumns": 1,
+			"DefaultON_MES": true,
+			"StopIfFailed": false,
+			"ActionLoged": true,
+			"StationName": "EOL",
+			"UIDisplayType": 1,
+			"StepDisplayType": "All",
+			"LogoFilePath": "E:\\FST\\TestDLL\\TestDLL\\bin\\Config\\Logo3.png",
+			"DLLFilePath": "E:\\FST\\TestDLL\\TestDLL\\bin\\Debug\\CSP.TestDLL.dll",
+			"DefaultSequence": "E:\\FST\\TestDLL\\TestDLL\\bin\\Sequence\\C96_FCT_调试.json",
+			"DLLClassName": "CSP.TestDllMain",
+			"Title": "OP3020FCT 整机测试",
+			"SocketDisable":
+			[
+				{
+					"Disable": false
+				},
+				{
+					"Disable": false
+				},
+				{
+					"Disable": false
+				},
+				{
+					"Disable": false
+				},
+				{
+					"Disable": false
+				},
+				{
+					"Disable": false
+				},
+				{
+					"Disable": false
+				},
+				{
+					"Disable": false
+				},
+				{
+					"Disable": false
+				},
+				{
+					"Disable": false
+				},
+				{
+					"Disable": false
+				},
+				{
+					"Disable": false
+				}
+			]
+		},
+		{
+			"SocketNumber": 1,
+			"SocketColumns": 1,
+			"DefaultON_MES": true,
+			"StopIfFailed": false,
+			"StationName": "EOL",
+			"UIDisplayType": 3,
+			"StepDisplayType": "All",
+			"LogoFilePath": "D:\\CSharpTestPlatform\\Config\\Logo2.png",
+			"DLLFilePath": "D:\\CSharpTestPlatform\\CSP_Test\\DemoClass\\bin\\Debug\\DemoClass.dll",
+			"DefaultSequence": "D:\\CSharpTestPlatform\\CSP_Test\\CSP_Test\\bin\\Debug\\Sequence\\DemoSequence6.json",
+			"DLLClassName": "CSP.DemoClass",
+			"InstrumentList":
+			[
+				{
+					"UniqueIndex": 0,
+					"Name": "DebugCAN",
+					"Type": "CAN",
+					"Mode": "Peak",
+					"Resource": "CAN1",
+					"Parameter": "500,2000",
+					"Comment": "500,2000"
+				},
+				{
+					"UniqueIndex": 1,
+					"Name": "DebugCAN2",
+					"Type": "CAN",
+					"Mode": "Peak",
+					"Resource": "CAN2",
+					"Parameter": "500,2000",
+					"Comment": "500,2000"
+				},
+				{
+					"UniqueIndex": 2,
+					"Name": "Low Voltage PowerSupply",
+					"Type": "PowerSupply",
+					"Mode": "EA",
+					"Resource": "CAN1",
+					"Parameter": "500,2000",
+					"Comment": "500,2000"
+				}
+			]
+		},
+		{
+			"SocketNumber": 2,
+			"SocketColumns": 4,
+			"DefaultON_MES": true,
+			"StopIfFailed": true,
+			"StationName": "EOL",
+			"UIDisplayType": "All",
+			"LogoFilePath": "D:\\CSharpTestPlatform\\Config\\Logo2.png",
+			"DLLFilePath": "D:\\CSharpTestPlatform\\CSP_App\\DebugClass\\bin\\Debug\\DebugClass.dll",
+			"DefaultSequence": "D:\\CSharpTestPlatform\\CSP_Test\\CSP_Test\\bin\\Debug\\Sequence\\DemoSequence5.json",
+			"DLLClassName": "CSP.DebugClass",
+			"InstrumentList":
+			[
+				{
+					"UniqueIndex": 0,
+					"Name": "DebugCAN",
+					"Type": "CAN",
+					"Mode": "Peak",
+					"Resource": "CAN1",
+					"Parameter": "500,2000",
+					"Comment": "500,2000"
+				},
+				{
+					"UniqueIndex": 1,
+					"Name": "DebugCAN2",
+					"Type": "CAN",
+					"Mode": "Peak",
+					"Resource": "CAN2",
+					"Parameter": "500,2000",
+					"Comment": "500,2000"
+				},
+				{
+					"UniqueIndex": 2,
+					"Name": "Low Voltage PowerSupply",
+					"Type": "PowerSupply",
+					"Mode": "EA",
+					"Resource": "CAN1",
+					"Parameter": "500,2000",
+					"Comment": "500,2000"
+				}
+			]
+		}
+	]
+}

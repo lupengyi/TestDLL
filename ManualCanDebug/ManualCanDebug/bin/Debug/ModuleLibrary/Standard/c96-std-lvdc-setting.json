@@ -1,0 +1,95 @@
+{
+  "Id": "c96-std-lvdc-setting",
+  "Name": "低压电源工况设定",
+  "Category": "电源",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [
+    {
+      "Name": "Voltage",
+      "DisplayName": "低压电压",
+      "Type": "double",
+      "DefaultValue": 24.0,
+      "Unit": "V",
+      "Description": "",
+      "Required": true
+    },
+    {
+      "Name": "Current",
+      "DisplayName": "限流",
+      "Type": "double",
+      "DefaultValue": 5.0,
+      "Unit": "A",
+      "Description": "",
+      "Required": true
+    }
+  ],
+  "Steps": [
+    {
+      "Id": "a1eada11efbc493a8833090799453ace",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "设置低压电压",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "LVDC",
+        "Operation": "SetVoltage",
+        "ResultMode": "Action",
+        "Voltage": 24.0
+      },
+      "ParameterBindings": {
+        "Voltage": "Voltage"
+      }
+    },
+    {
+      "Id": "2bed7cc0aee945dfa362010bb9b66538",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "设置低压限流",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "LVDC",
+        "Operation": "SetCurrent",
+        "ResultMode": "Action",
+        "Current": 5.0
+      },
+      "ParameterBindings": {
+        "Current": "Current"
+      }
+    },
+    {
+      "Id": "89c60d5dcc584334bf2b93ae769dea05",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "打开低压输出",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "LVDC",
+        "Operation": "SetOutput",
+        "ResultMode": "Action",
+        "Output": true
+      },
+      "ParameterBindings": {}
+    }
+  ]
+}

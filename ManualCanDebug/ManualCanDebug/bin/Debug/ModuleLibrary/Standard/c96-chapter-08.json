@@ -1,0 +1,473 @@
+{
+  "Id": "c96-chapter-08",
+  "Name": "08 全工况拉载测温",
+  "Category": "章节",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "0b1031a26fec4fcc936dd4400fbf9905",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-thermal-snapshot",
+      "ReferencedBlockName": "产品温度快照读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "d23f669bc59949c5ac06ce428b2d33e9",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-lvdc-setting",
+      "ReferencedBlockName": "低压电源工况设定",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 18.0,
+        "Current": 5.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "002d14ec2f2d49b8b57d27653e1b4ce9",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-measure",
+      "ReferencedBlockName": "高压设定与双重读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 450.0,
+        "LowLimit": 436.5,
+        "HighLimit": 463.5
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "d96f090d3401417a8ce55a58f115dec2",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm1-current",
+      "ReferencedBlockName": "TM1三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 630.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 623.7,
+        "CurrentHigh": 636.3,
+        "ImbalanceHigh": 12.6
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "b97a552c62de4c5faf773269f0106b40",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm2-current",
+      "ReferencedBlockName": "TM2三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 630.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 623.7,
+        "CurrentHigh": 636.3,
+        "ImbalanceHigh": 12.6
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "0545e8b6101048ac86ef6e63440614b8",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-thermal-snapshot",
+      "ReferencedBlockName": "产品温度快照读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "4b3f8248a9b945fd9dedd07c73861fdb",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-lvdc-setting",
+      "ReferencedBlockName": "低压电源工况设定",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 16.0,
+        "Current": 5.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "3d1f0032a52e47dcbbe4a1940f2e5864",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-measure",
+      "ReferencedBlockName": "高压设定与双重读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 450.0,
+        "LowLimit": 436.5,
+        "HighLimit": 463.5
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "83e4ba6469194b5bba8f5af8f0ba0fec",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm1-current",
+      "ReferencedBlockName": "TM1三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 850.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 841.5,
+        "CurrentHigh": 858.5,
+        "ImbalanceHigh": 17.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "0d78afd4f9a24ff095211fe5f1a84fdd",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm2-current",
+      "ReferencedBlockName": "TM2三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 850.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 841.5,
+        "CurrentHigh": 858.5,
+        "ImbalanceHigh": 17.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "84e26bb2ac914dcf872014977a3efdbd",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-chapter-07",
+      "ReferencedBlockName": "07 额定电压电流精度",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "abf98d6edd104b5683a472088eaf5da8",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-thermal-snapshot",
+      "ReferencedBlockName": "产品温度快照读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "012befde2f4b4f9b84c525714c88ed30",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-lvdc-setting",
+      "ReferencedBlockName": "低压电源工况设定",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 18.0,
+        "Current": 5.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "7f1c8ef865104c2186155bd4727d0385",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-measure",
+      "ReferencedBlockName": "高压设定与双重读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 618.0,
+        "LowLimit": 599.46,
+        "HighLimit": 636.54
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "ef4dfc09172b4b73970287f23932ee7b",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm1-current",
+      "ReferencedBlockName": "TM1三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 630.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 623.7,
+        "CurrentHigh": 636.3,
+        "ImbalanceHigh": 12.6
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "18e175cbf6064cec855e72bd39a3bcab",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm2-current",
+      "ReferencedBlockName": "TM2三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 630.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 623.7,
+        "CurrentHigh": 636.3,
+        "ImbalanceHigh": 12.6
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "eca5d915bc244bc39738f3cc66b32f58",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-thermal-snapshot",
+      "ReferencedBlockName": "产品温度快照读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "9c16d7af38a442e298492ff1059eb4b7",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-lvdc-setting",
+      "ReferencedBlockName": "低压电源工况设定",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 16.0,
+        "Current": 5.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "b6cb6b613b704be28251b7aef27da98d",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-measure",
+      "ReferencedBlockName": "高压设定与双重读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 618.0,
+        "LowLimit": 599.46,
+        "HighLimit": 636.54
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "a20452964f8a412a8e8b875cc4034ff2",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm1-current",
+      "ReferencedBlockName": "TM1三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 850.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 841.5,
+        "CurrentHigh": 858.5,
+        "ImbalanceHigh": 17.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "0b09eccd196b40d0b87ff5ca4185cb97",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm2-current",
+      "ReferencedBlockName": "TM2三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 850.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 841.5,
+        "CurrentHigh": 858.5,
+        "ImbalanceHigh": 17.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "d921794774274c92bee9314dcb6e0620",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-thermal-snapshot",
+      "ReferencedBlockName": "产品温度快照读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "e7df73c956454f7f8acfe72b69a22e6c",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-lvdc-setting",
+      "ReferencedBlockName": "低压电源工况设定",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 18.0,
+        "Current": 5.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "6644b22fbef8460098df46e5236a953e",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-measure",
+      "ReferencedBlockName": "高压设定与双重读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 750.0,
+        "LowLimit": 727.5,
+        "HighLimit": 772.5
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "38a9af31c3b74503a4b0008de21fbc8c",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm1-current",
+      "ReferencedBlockName": "TM1三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 630.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 623.7,
+        "CurrentHigh": 636.3,
+        "ImbalanceHigh": 12.6
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "d44434c6edb2488995525a8fdc748efc",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm2-current",
+      "ReferencedBlockName": "TM2三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 630.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 623.7,
+        "CurrentHigh": 636.3,
+        "ImbalanceHigh": 12.6
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "e0385e40cfff4956ad98fbb6e493b601",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-thermal-snapshot",
+      "ReferencedBlockName": "产品温度快照读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "c2ceff711e2a45b19cbf1834421c5166",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-lvdc-setting",
+      "ReferencedBlockName": "低压电源工况设定",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 18.0,
+        "Current": 5.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "0899d7d2a1a34b8998e581154d1075d7",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-measure",
+      "ReferencedBlockName": "高压设定与双重读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 750.0,
+        "LowLimit": 727.5,
+        "HighLimit": 772.5
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "5b992768626f4de8a2a6c824fde39758",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm1-current",
+      "ReferencedBlockName": "TM1三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 850.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 841.5,
+        "CurrentHigh": 858.5,
+        "ImbalanceHigh": 17.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "aa24acd11a95475eb91c1c5be3d9c344",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm2-current",
+      "ReferencedBlockName": "TM2三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 850.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 841.5,
+        "CurrentHigh": 858.5,
+        "ImbalanceHigh": 17.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "967fbcefec544f269119a3a05257a8cf",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-thermal-snapshot",
+      "ReferencedBlockName": "产品温度快照读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {},
+      "ParameterBindings": {}
+    }
+  ]
+}

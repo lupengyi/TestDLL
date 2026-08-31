@@ -1,0 +1,210 @@
+{
+  "Id": "c96-std-low-power",
+  "Name": "低压供电与KL30-KL15切换",
+  "Category": "公共准备",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "bcc81b0bccea4900a22f151b621b3b59",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "功能板相关输出安全复位",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": false,
+        "Device": "RELAY_FCT",
+        "Operation": "SetDO",
+        "ResultMode": "Action",
+        "Channels": "OUT6,OUT7,OUT9,OUT10,OUT30,OUT35",
+        "Values": "0,0,0,0,0,0",
+        "Slave": 1
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "534965c9e9714fad84fb34e81b70ebfe",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "KL30电源设置24V",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": false,
+        "Device": "LVDC",
+        "Operation": "SetVoltage",
+        "ResultMode": "Action",
+        "Voltage": 24.0
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "4634f5bfead3482a936f5510eb68e024",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "KL30电源限流5A",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": false,
+        "Device": "LVDC",
+        "Operation": "SetCurrent",
+        "ResultMode": "Action",
+        "Current": 5.0
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "34ef4e9c6ab44f7bbc1edc74d91fb84a",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "KL30电源输出打开",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": false,
+        "Device": "LVDC",
+        "Operation": "SetOutput",
+        "ResultMode": "Action",
+        "Output": true
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "b61c1e8954b24f4d9e78523ccf0b7df0",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "功能板接通KL30电源与Sense",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": false,
+        "Device": "RELAY_FCT",
+        "Operation": "SetDO",
+        "ResultMode": "Action",
+        "Channels": "OUT6",
+        "Values": "1",
+        "Slave": 1
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "d325162b0d254092b97666085cafdd83",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "KL15电源设置24V",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": false,
+        "Device": "LVDC_KL15",
+        "Operation": "SetVoltage",
+        "ResultMode": "Action",
+        "Voltage": 24.0
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "7b206102fc6e4ed9af3e94e677bf829d",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "KL15电源限流5A",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": false,
+        "Device": "LVDC_KL15",
+        "Operation": "SetCurrent",
+        "ResultMode": "Action",
+        "Current": 5.0
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "1c0ae3c419e44526b7f392b5c12af908",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "KL15电源输出打开",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": false,
+        "Device": "LVDC_KL15",
+        "Operation": "SetOutput",
+        "ResultMode": "Action",
+        "Output": true
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "bcafbdd404f84870bf0aa902812204ed",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "功能板接通KL15A与KL15B",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": false,
+        "Device": "RELAY_FCT",
+        "Operation": "SetDO",
+        "ResultMode": "Action",
+        "Channels": "OUT30,OUT35",
+        "Values": "1,1",
+        "Slave": 1
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "351039d9a519479c90485e34e5095837",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "低压路径稳定等待",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteLogic",
+        "RecordingLog": false,
+        "Operation": "Delay",
+        "ResultMode": "Action",
+        "TimeMs": 1000
+      },
+      "ParameterBindings": {}
+    }
+  ]
+}

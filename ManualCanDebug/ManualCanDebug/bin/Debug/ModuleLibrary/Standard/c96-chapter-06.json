@@ -1,0 +1,40 @@
+{
+  "Id": "c96-chapter-06",
+  "Name": "06 冷却与测温初始值",
+  "Category": "章节",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "d0dc699b55404ff4bc46e522c844652f",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-water-flow",
+      "ReferencedBlockName": "冷却水流量读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "DbNumber": 101,
+        "ByteOffset": 578,
+        "LowLimit": 27.0,
+        "HighLimit": 33.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "5e2da08bcfc64af18aef8cfcca4f8994",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-thermal-snapshot",
+      "ReferencedBlockName": "产品温度快照读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {},
+      "ParameterBindings": {}
+    }
+  ]
+}

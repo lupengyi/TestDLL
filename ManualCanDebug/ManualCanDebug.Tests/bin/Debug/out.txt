@@ -1,0 +1,55 @@
+PASS: Parse mixed hex separators
+PASS: Reject malformed hex
+PASS: Reject more than eight bytes
+PASS: Parses multi-frame table buffers
+PASS: Catalog preserves sequence order
+PASS: Catalog contains resolver presets
+PASS: Parses and exports tolerant SEQ
+PASS: Clones STEP definitions independently
+PASS: Builds distinct instrument STEP templates
+PASS: Builds Locator product read and write STEP
+PASS: Evaluates direct write-value formulas
+PASS: Compiles function blocks to unchanged SEQ schema
+PASS: Calculated motor results follow current product profile
+PASS: Standard module references expand to platform STEP
+PASS: Exports only enabled flow instances
+PASS: Generic STEP catalog covers core instruments
+PASS: Studio validator rejects broken loop targets
+PASS: Compiles block parameter expressions
+PASS: Builds DUT communication init frame
+PASS: Builds product communication test frame
+PASS: Builds wakeup frame
+PASS: Uses actual CAN card connection settings
+PASS: C91 profile uses original SEQ addresses
+PASS: C95 profile uses locator addresses
+PASS: C91 profile contains FT entry sequence
+PASS: Pre-current read continues after one item fails
+PASS: Pre-current result formats parsed values
+PASS: Every current step opens pre-current guide
+PASS: Current steps include matching product-current reads
+PASS: Builds C91 effective-to-peak current command
+PASS: Builds C95 current command with locator flag
+PASS: Parses product phase current RMS
+PASS: Pads short classic CAN protocol frames
+PASS: Decodes active-low fault inputs
+PASS: Decodes C95 motor status and fault bytes
+PASS: Diagnoses C95 output blocking conditions
+PASS: C95 Input Tables catalog covers the complete sheet
+PASS: C95 Input Tables values decode by table type
+PASS: C91 Input Tables catalog covers locator inputs
+PASS: C95 all-table catalog covers every address entry
+PASS: Parses C95 product resolver data and frames
+PASS: Parses C91 product resolver data with fault byte
+PASS: Expands C95 all-table reads into parsed fields
+PASS: C96 profile exposes both independent drives
+PASS: C92 reuses C96 dual-drive locator
+PASS: C96 FT_Enables UV reset offsets match locator
+PASS: Builds C96 dual-drive motor control payload
+PASS: C96 input catalog covers locator current-value tables
+PASS: Parses C96 current resolver and motor status
+PASS: Validates resolver pole-pair setting
+PASS: Parses and decodes auxiliary DBC frames
+PASS: Packs auxiliary DBC control signals
+PASS: Packs PDU relay command frame
+PASS: C95 and C96 share auxiliary functions
+PASS: 366 assertions

@@ -1,0 +1,21 @@
+{
+  "SerialNumberLen": 0,
+  "ProjectName": "DefaultSequence",
+  "StationName": "OP3020",
+  "SequenceVersion": "FT1-FCT01-01-A0",
+  "UIDisplayType": "All",
+  "LogFilePath": "D:\\LogfilePath",
+  "StepList": [
+    {
+      "StepName": "产品基础命令 通信初始化",
+      "RunMode": "Normal",
+      "FunctionName": "FCT_ExecuteAction",
+      "RecordingLog": true,
+      "ResultMode": "Action",
+      "Operation": "CommunicationInit",
+      "Device": "PRODUCTCAN",
+      "TxID": "2030",
+      "RxID": "2031"
+    }
+  ]
+}

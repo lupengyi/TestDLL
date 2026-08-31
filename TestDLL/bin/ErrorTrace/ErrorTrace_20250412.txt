@@ -1,0 +1,19 @@
+2025-04-12 20:44:00
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception ---> Ivi.Visa.NativeVisaException: 给定会话的连接已丢失。
+   at NationalInstruments.Visa.Internal.ErrorChecker.CheckStatusAndThrow(Int32 status, SafeVisaHandle visaObject)
+   at NationalInstruments.Visa.Internal.MessageBasedSessionImpl.Write(Byte* buffer, Int64 index, Int64 count)
+   at NationalInstruments.Visa.Internal.MessageBasedSessionImpl.Write(Byte[] buffer, Int64 index, Int64 count)
+   at NationalInstruments.Visa.Internal.MessageBasedSessionImpl.Write(Byte[] buffer)
+   at Instruments.PowerSupply.Kewell_C3000.QueryCMD(Byte[] txByteData, Byte[]& rxByteData) in D:\InstrumentDriver\Kewell_C3000\Kewell_C3000\Kewell_C3000.cs:line 679
+   at Instruments.PowerSupply.Kewell_C3000.GetActVoltage(Double& actVoltage, Int32 channel) in D:\InstrumentDriver\Kewell_C3000\Kewell_C3000\Kewell_C3000.cs:line 196
+   --- End of inner exception stack trace ---
+   at Instruments.PowerSupply.Kewell_C3000.GetActVoltage(Double& actVoltage, Int32 channel) in D:\InstrumentDriver\Kewell_C3000\Kewell_C3000\Kewell_C3000.cs:line 204
+   at CSP.TestDllMain.AutomationLoop() in D:\TestDLL\TestDLL\TestDllMain.cs:line 149
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.<AutomationThread>b__41_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 786
+====================================================================================================
+

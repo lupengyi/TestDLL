@@ -1,0 +1,28 @@
+2025-05-27 16:34:56
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at Instruments.PLCS7.S7Net.DBWrite(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[] writeBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 60
+   --- End of inner exception stack trace ---
+   at Instruments.PLCS7.S7Net.DBWrite(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[] writeBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 64
+   at CSP.TestDllMain.AutomationLoop() in D:\TestDLL\TestDLL\TestDllMain.cs:line 132
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.<AutomationThread>b__41_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 786
+====================================================================================================
+
+2025-05-27 16:35:20
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at Instruments.PLCS7.S7Net.DBWrite(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[] writeBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 60
+   --- End of inner exception stack trace ---
+   at Instruments.PLCS7.S7Net.DBWrite(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[] writeBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 64
+   at CSP.TestDllMain.AutomationLoop() in D:\TestDLL\TestDLL\TestDllMain.cs:line 132
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.<AutomationThread>b__41_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 786
+====================================================================================================
+

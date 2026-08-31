@@ -1,0 +1,43 @@
+{
+  "Id": "94567f8cb1624a93a6d00c861b93ca40",
+  "Name": "3-初始化产品进入FT模式",
+  "Category": "自定义",
+  "ModuleKind": "Custom",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": false,
+  "SupportedProducts": [],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "ff7a1da645ea422c897a6697b4d94833",
+      "Enabled": true,
+      "StepProperties": {
+        "StepName": "产品基础命令 进入FT模式",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "ResultMode": "Action",
+        "Operation": "EnterFT",
+        "Device": "PRODUCTCAN"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "4e6602f269414aaab06be1f4943e45de",
+      "Enabled": true,
+      "StepProperties": {
+        "StepName": "产品基础命令 通信初始化",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "ResultMode": "Action",
+        "Operation": "CommunicationInit",
+        "Device": "PRODUCTCAN",
+        "TxID": "2030",
+        "RxID": "2031"
+      },
+      "ParameterBindings": {}
+    }
+  ]
+}

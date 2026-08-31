@@ -1,0 +1,9 @@
+E:\FST\TestDLL\ManualCanDebug\ManualCanDebug.Tests\bin\Debug\ManualCanDebug.Tests.exe
+E:\FST\TestDLL\ManualCanDebug\ManualCanDebug.Tests\bin\Debug\ManualCanDebug.Tests.pdb
+E:\FST\TestDLL\ManualCanDebug\ManualCanDebug.Tests\bin\Debug\ManualCanDebug.Core.dll
+E:\FST\TestDLL\ManualCanDebug\ManualCanDebug.Tests\bin\Debug\ManualCanDebug.Core.pdb
+E:\FST\TestDLL\ManualCanDebug\ManualCanDebug.Tests\obj\Debug\ManualCanDebug.Tests.csproj.AssemblyReference.cache
+E:\FST\TestDLL\ManualCanDebug\ManualCanDebug.Tests\obj\Debug\ManualCanDebug.Tests.csproj.CoreCompileInputs.cache
+E:\FST\TestDLL\ManualCanDebug\ManualCanDebug.Tests\obj\Debug\ManualCa.C1203183.Up2Date
+E:\FST\TestDLL\ManualCanDebug\ManualCanDebug.Tests\obj\Debug\ManualCanDebug.Tests.exe
+E:\FST\TestDLL\ManualCanDebug\ManualCanDebug.Tests\obj\Debug\ManualCanDebug.Tests.pdb

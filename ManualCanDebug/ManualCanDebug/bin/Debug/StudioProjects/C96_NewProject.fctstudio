@@ -1,0 +1,26 @@
+{
+  "FormatVersion": 1,
+  "ProjectName": "FCT Function Block Project",
+  "Product": "C96",
+  "ProductLocatorPath": "Config\\ProductLocators\\C96_Locator.xlsx",
+  "AuxiliaryDbcPath": "Config\\C95C96Auxiliary.dbc",
+  "DriveStructure": "DualMainDrive",
+  "Capabilities": [
+    "DualMainDrive",
+    "DCDC",
+    "OilPump",
+    "AirPump",
+    "PDU"
+  ],
+  "Blocks": [],
+  "Flow": [],
+  "Breakpoints": [],
+  "SequenceRoot": {
+    "SerialNumberLen": 0,
+    "ProjectName": "C91-01-0001",
+    "StationName": "OP3020",
+    "SequenceVersion": "FT1-FCT01-01-A0",
+    "UIDisplayType": "All",
+    "LogFilePath": "D:\\LogfilePath"
+  }
+}

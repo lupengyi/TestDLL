@@ -1,0 +1,16 @@
+{
+  "ProfileName": "Station_OP3020_Socket1",
+  "Description": "多工位示例：OP3020 工位1（单 DUT）",
+  "Station": {
+    "StationName": "OP3020",
+    "SocketIndex": 0,
+    "SocketNumber": 1
+  },
+  "Instruments": [
+    { "Name": "DUTCAN", "Type": "CAN", "Mode": "ZLG", "Resource": "192.166.6.10", "Parameter": "52,2,500000,8000", "Comment": "工位1 产品 CAN", "Initialize": true },
+    { "Name": "AUXCAN", "Type": "CAN", "Mode": "ZLG", "Resource": "192.166.6.10", "Parameter": "52,0,500000,8000", "Comment": "工位1 辅驱 CAN", "Initialize": true },
+    { "Name": "LVDC", "Type": "PowerSupply", "Mode": "IT", "Resource": "USB0::0x2EC7::0x6700::802259073797370075::INSTR", "Parameter": "", "Comment": "工位1 KL30", "Initialize": true },
+    { "Name": "LVDC_KL15", "Type": "PowerSupply", "Mode": "IT", "Resource": "", "Parameter": "", "Comment": "工位1 KL15", "Initialize": false },
+    { "Name": "RELAY_FCT", "Type": "DIO", "Mode": "SHT_48SEDO_A", "Resource": "192.168.0.201", "Parameter": "502,1", "Comment": "工位1 FCT 功能板", "Initialize": false }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "Id": "c96-std-water-flow",
+  "Name": "冷却水流量读取",
+  "Category": "冷却",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [
+    {
+      "Name": "DbNumber",
+      "DisplayName": "PLC DB号",
+      "Type": "int",
+      "DefaultValue": 101,
+      "Unit": "",
+      "Description": "",
+      "Required": true
+    },
+    {
+      "Name": "ByteOffset",
+      "DisplayName": "PLC字节偏移",
+      "Type": "int",
+      "DefaultValue": 578,
+      "Unit": "byte",
+      "Description": "",
+      "Required": true
+    },
+    {
+      "Name": "LowLimit",
+      "DisplayName": "流量下限",
+      "Type": "double",
+      "DefaultValue": 27.0,
+      "Unit": "L/min",
+      "Description": "",
+      "Required": true
+    },
+    {
+      "Name": "HighLimit",
+      "DisplayName": "流量上限",
+      "Type": "double",
+      "DefaultValue": 33.0,
+      "Unit": "L/min",
+      "Description": "",
+      "Required": true
+    }
+  ],
+  "Steps": [
+    {
+      "Id": "45e857db626b46778e104ccc48f50db6",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取冷却水流量",
+        "RunMode": "Normal",
+        "FunctionName": "Test_GetWaterFlow",
+        "RecordingLog": true,
+        "ResultMode": "NumericLimit",
+        "DbNumber": 101,
+        "ByteOffset": 578,
+        "LowLimit": 27.0,
+        "HighLimit": 33.0,
+        "Comtype": "GELE",
+        "Unit": "L/min"
+      },
+      "ParameterBindings": {
+        "DbNumber": "DbNumber",
+        "ByteOffset": "ByteOffset",
+        "LowLimit": "LowLimit",
+        "HighLimit": "HighLimit"
+      }
+    },
+    {
+      "Id": "ec7ea9e9ef544d55b979254d2c29779b",
+      "Enabled": false,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "水压读取地址待定",
+        "RunMode": "Skip",
+        "FunctionName": "FCT_ExecuteLogic",
+        "RecordingLog": true,
+        "Operation": "Delay",
+        "TimeMs": 0,
+        "Comment": "水压PLC地址未确定"
+      },
+      "ParameterBindings": {}
+    }
+  ]
+}

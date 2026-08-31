@@ -1,0 +1,70 @@
+2025-06-06 13:28:52
+System.Exception ---> System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception: 低压电源通讯错误
+   at CSP.TestDllMain.ProcessSetup() in D:\TestDLL\TestDLL\TestDllMain.cs:line 135
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.RunProcessSetup() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 742
+   --- End of inner exception stack trace ---
+   at CSP.MainClass.RunProcessSetup() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 749
+   at CSP.MainClass.<StartProcessSetup>b__30_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 449
+====================================================================================================
+
+2025-06-06 13:29:06
+System.Exception ---> System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception: 低压电源通讯错误
+   at CSP.TestDllMain.ProcessSetup() in D:\TestDLL\TestDLL\TestDllMain.cs:line 135
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.RunProcessSetup() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 742
+   --- End of inner exception stack trace ---
+   at CSP.MainClass.RunProcessSetup() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 749
+   at CSP.MainClass.<StartProcessSetup>b__30_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 449
+====================================================================================================
+
+2025-06-06 13:35:17
+System.Exception ---> System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception: 低压电源通讯错误
+   at CSP.TestDllMain.ProcessSetup() in D:\TestDLL\TestDLL\TestDllMain.cs:line 135
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.RunProcessSetup() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 742
+   --- End of inner exception stack trace ---
+   at CSP.MainClass.RunProcessSetup() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 749
+   at CSP.MainClass.<StartProcessSetup>b__30_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 449
+====================================================================================================
+
+2025-06-06 13:38:44
+System.Exception ---> System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception: 低压电源通讯错误
+   at CSP.TestDllMain.ProcessSetup() in D:\TestDLL\TestDLL\TestDllMain.cs:line 135
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.RunProcessSetup() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 742
+   --- End of inner exception stack trace ---
+   at CSP.MainClass.RunProcessSetup() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 749
+   at CSP.MainClass.<StartProcessSetup>b__30_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 449
+====================================================================================================
+
+2025-06-06 13:41:16
+System.Exception ---> System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception: 低压电源通讯错误
+   at CSP.TestDllMain.ProcessSetup() in D:\TestDLL\TestDLL\TestDllMain.cs:line 135
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.RunProcessSetup() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 742
+   --- End of inner exception stack trace ---
+   at CSP.MainClass.RunProcessSetup() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 749
+   at CSP.MainClass.<StartProcessSetup>b__30_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 449
+====================================================================================================
+

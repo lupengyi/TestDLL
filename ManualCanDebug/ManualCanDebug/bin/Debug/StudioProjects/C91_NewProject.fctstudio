@@ -1,0 +1,3371 @@
+{
+  "FormatVersion": 1,
+  "ProjectName": "FCT Function Block Project",
+  "Product": "C91",
+  "ProductLocatorPath": "Config\\ProductLocators\\C91_Locator.xlsx",
+  "AuxiliaryDbcPath": "",
+  "DriveStructure": "SingleMainDrive",
+  "Capabilities": [
+    "SingleMainDrive"
+  ],
+  "Blocks": [
+    {
+      "Id": "8d6839d3d85b4f26955682264d8debba",
+      "Name": "低压上电",
+      "Category": "电源",
+      "Version": "1.0",
+      "Description": "",
+      "IsStandard": true,
+      "SupportedProducts": [],
+      "Parameters": [],
+      "Steps": [
+        {
+          "Id": "41b4a6ff69db426ea07ef7b91cbfbe33",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "Set LVDC Voltage 24V",
+            "RunMode": "Normal",
+            "FunctionName": "LVDC_SetSourceVoltage",
+            "RecordingLog": true,
+            "Voltage": 24
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "29ef76639ff34cd59f38563ac95a4dad",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "Set LVDC Current 5A",
+            "RunMode": "Normal",
+            "FunctionName": "LVDC_SetSourceCurrent",
+            "RecordingLog": true,
+            "Current": 5
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "291867daa89a49d986ba7128c77271f8",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "Set LVDC Output ON",
+            "RunMode": "Normal",
+            "FunctionName": "LVDC_SetOutput",
+            "RecordingLog": true,
+            "Output": true
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "dde1ab694f014dd8958179c6528a5f97",
+      "Name": "高压上电",
+      "Category": "电源",
+      "Version": "1.0",
+      "Description": "",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C91"
+      ],
+      "Parameters": [
+        {
+          "Name": "HighVoltage",
+          "DisplayName": "目标高压",
+          "Type": "Number",
+          "DefaultValue": 600.0,
+          "Unit": "V",
+          "Description": null,
+          "Required": true
+        }
+      ],
+      "Steps": [
+        {
+          "Id": "8226e816b1da49a79c79f7b60770a0ef",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "Set HVDC Voltage 0V",
+            "RunMode": "Normal",
+            "FunctionName": "HVDC_SetSourceVoltage",
+            "RecordingLog": true,
+            "Voltage": 0
+          },
+          "ParameterBindings": {
+            "Voltage": "HighVoltage"
+          }
+        },
+        {
+          "Id": "4ffa47342b9e4878ab364c0f9341f5e8",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "Set HVDC Output ON",
+            "RunMode": "Normal",
+            "FunctionName": "HVDC_SetOutput",
+            "RecordingLog": true,
+            "Output": true
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "5a86dc4628eb4d7abe10eb23793f54c6",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "Set HVDC Voltage 50V",
+            "RunMode": "Normal",
+            "FunctionName": "HVDC_SetSourceVoltage",
+            "RecordingLog": true,
+            "Voltage": 50
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "87ff7c43a2254f73b3dfd2ad6e234703",
+      "Name": "电阻模拟器设置",
+      "Category": "RES",
+      "Version": "1.0",
+      "Description": "",
+      "IsStandard": true,
+      "SupportedProducts": [],
+      "Parameters": [
+        {
+          "Name": "Resistance",
+          "DisplayName": "目标电阻",
+          "Type": "Number",
+          "DefaultValue": 1000.0,
+          "Unit": "Ohm",
+          "Description": null,
+          "Required": true
+        }
+      ],
+      "Steps": [
+        {
+          "Id": "0b7c6f19bc0e4db59aae3928c31f4d38",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "Set Temp1 Resistance 842ohm",
+            "RunMode": "Normal",
+            "FunctionName": "RES_SetResistance",
+            "RecordingLog": true,
+            "ResValue": 842,
+            "Channel": 1
+          },
+          "ParameterBindings": {
+            "ResValue": "Resistance"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "07f62f766fb94354b9f43d33ad67fbb3",
+      "Name": "DMM测量",
+      "Category": "DMM",
+      "Version": "1.0",
+      "Description": "",
+      "IsStandard": true,
+      "SupportedProducts": [],
+      "Parameters": [],
+      "Steps": [
+        {
+          "Id": "6ba4a29ea776414191a35e44233cc2ce",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "Config DMM To DC Current",
+            "RunMode": "Normal",
+            "FunctionName": "DMM_ConfigDMMforDCCur",
+            "RecordingLog": true,
+            "Range": 3,
+            "Solution": 1E-05
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "1fb76010a3784648b0ebd8800ddec55f",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "010102 Wake Up Current",
+            "RunMode": "Normal",
+            "FunctionName": "DMM_GetMeasureValue",
+            "RecordingLog": true,
+            "LowLimit": 0.25,
+            "HighLimit": 0.35,
+            "Comtype": "GELE",
+            "Unit": "A"
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "9fc119bd2af144bcbf09ed030588da0d",
+      "Name": "DAQ电流读取",
+      "Category": "DAQ",
+      "Version": "1.0",
+      "Description": "",
+      "IsStandard": true,
+      "SupportedProducts": [],
+      "Parameters": [],
+      "Steps": [
+        {
+          "Id": "84e2dca474664b5f8c21af0a4c3b2423",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DAQ 读取",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "DAQ",
+            "Operation": "Read",
+            "ResultMode": "NumericLimit",
+            "Channel": 0,
+            "Scale": 22.058823529,
+            "Offset": 0.0,
+            "LowLimit": 0.0,
+            "HighLimit": 0.0,
+            "Comtype": "GELE",
+            "Unit": "A"
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "4d1e6e722f474c1ea412889d0704cbb5",
+      "Name": "MOXA输出控制",
+      "Category": "IO",
+      "Version": "1.0",
+      "Description": "",
+      "IsStandard": true,
+      "SupportedProducts": [],
+      "Parameters": [],
+      "Steps": [
+        {
+          "Id": "053644691b0e43008c62ea60d3c65313",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "Connect DMM To DC Current",
+            "RunMode": "Normal",
+            "FunctionName": "MOXA_SetDO",
+            "RecordingLog": true,
+            "MoxaIndex": 1,
+            "Channels": "0,6,8",
+            "Values": "1,1,1"
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "35ffa5e927b64bc9835ac9cbff7ec9c3",
+      "Name": "继电器控制",
+      "Category": "IO",
+      "Version": "1.0",
+      "Description": "",
+      "IsStandard": true,
+      "SupportedProducts": [],
+      "Parameters": [],
+      "Steps": [
+        {
+          "Id": "9fcd2ce555f947679bf53e89a500a299",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "Low Voltage Relay ON1",
+            "RunMode": "Normal",
+            "FunctionName": "Relay_SetDO",
+            "RecordingLog": true,
+            "Channel": 24,
+            "Value": 1
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "f41161f7ba444b8b9debe4dc0a4448f0",
+      "Name": "PLC完成信号",
+      "Category": "PLC",
+      "Version": "1.0",
+      "Description": "",
+      "IsStandard": true,
+      "SupportedProducts": [],
+      "Parameters": [],
+      "Steps": [
+        {
+          "Id": "43ba4415508847cb9e8c03f955152ba1",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "LoadFinished",
+            "RunMode": "Normal",
+            "FunctionName": "PLC_LoadFinished",
+            "RecordingLog": true
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "d2f4ad0f6d5146dea23199140109541a",
+      "Name": "产品通信初始化",
+      "Category": "产品",
+      "Version": "1.0",
+      "Description": "",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C91"
+      ],
+      "Parameters": [],
+      "Steps": [
+        {
+          "Id": "647a5871dd71496a918b8689d6c548f8",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "Enter FT Mode",
+            "RunMode": "Normal",
+            "FunctionName": "CAN_APP2FT",
+            "RecordingLog": true
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "9ae525abd93b4310b6ad9d424509dee9",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DUT Comucation Init",
+            "RunMode": "Normal",
+            "FunctionName": "DUT_ComucationInit",
+            "RecordingLog": true,
+            "TxID": 2030,
+            "RxID": 2031
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "44fd727addde46df83ffea5df6a8f9c6",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "020014 CAN Communication",
+            "RunMode": "Normal",
+            "FunctionName": "Test_CANCommunication",
+            "RecordingLog": true,
+            "Limit": "22 22 22 22 22 22 22 22"
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "dcb23f88168d4d35b7ce2938b41fc09f",
+      "Name": "C96产品通信初始化",
+      "Category": "产品",
+      "Version": "1.0",
+      "Description": "C96直接执行DUT通信初始化和CAN通信检查；不发送C91专用的APP转FT UDS序列。",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C96"
+      ],
+      "Parameters": [],
+      "Steps": [
+        {
+          "Id": "79b55063419c465687ba8179b734e6ff",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "C96 DUT Communication Init",
+            "RunMode": "Normal",
+            "FunctionName": "DUT_ComucationInit",
+            "RecordingLog": true,
+            "TxID": "0x7EE",
+            "RxID": "0x7EF"
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "e1227bf34d8143f0b3e5d6f7fb91d47b",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "C96 CAN Communication",
+            "RunMode": "Normal",
+            "FunctionName": "Test_CANCommunication",
+            "RecordingLog": true
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "34f42ed53f1e410596e16c27d99d7639",
+      "Name": "高压电源安全设置",
+      "Category": "电源",
+      "Version": "1.0",
+      "Description": "设置高压电源限流、电压和输出状态；默认0V且关闭输出。",
+      "IsStandard": true,
+      "SupportedProducts": [],
+      "Parameters": [
+        {
+          "Name": "HighVoltage",
+          "DisplayName": "目标高压",
+          "Type": "Number",
+          "DefaultValue": 0.0,
+          "Unit": "V",
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "CurrentLimit",
+          "DisplayName": "电流限制",
+          "Type": "Number",
+          "DefaultValue": 20.0,
+          "Unit": "A",
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "OutputEnabled",
+          "DisplayName": "输出使能",
+          "Type": "Boolean",
+          "DefaultValue": false,
+          "Unit": null,
+          "Description": null,
+          "Required": true
+        }
+      ],
+      "Steps": [
+        {
+          "Id": "f2c858b3a33d439081fe384caddbf732",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "Set HVDC Current Limit",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "HVDC",
+            "Operation": "SetCurrent",
+            "Current": 20.0,
+            "ResultMode": "Action"
+          },
+          "ParameterBindings": {
+            "Current": "CurrentLimit"
+          }
+        },
+        {
+          "Id": "10a822e7ec174f198c2f649a912319f1",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "Set HVDC Voltage",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "HVDC",
+            "Operation": "SetVoltage",
+            "Voltage": 0.0,
+            "ResultMode": "Action"
+          },
+          "ParameterBindings": {
+            "Voltage": "HighVoltage"
+          }
+        },
+        {
+          "Id": "01b63da036404e4a994ad9a4632e95fa",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "Set HVDC Output",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "HVDC",
+            "Operation": "SetOutput",
+            "Output": false,
+            "ResultMode": "Action"
+          },
+          "ParameterBindings": {
+            "Output": "OutputEnabled"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "7941a68e2cc244d08a8dbc0c3dd6917f",
+      "Name": "旋变转速设置",
+      "Category": "旋变",
+      "Version": "1.0",
+      "Description": "",
+      "IsStandard": true,
+      "SupportedProducts": [],
+      "Parameters": [
+        {
+          "Name": "Speed",
+          "DisplayName": "目标转速",
+          "Type": "Number",
+          "DefaultValue": 700.0,
+          "Unit": "rpm",
+          "Description": null,
+          "Required": true
+        }
+      ],
+      "Steps": [
+        {
+          "Id": "0cfa682283bc40acb3370eb2ac295ed8",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "Set Speed 700Rpm",
+            "RunMode": "Normal",
+            "FunctionName": "Resolver_SetSpeed",
+            "RecordingLog": true,
+            "Speed": 700
+          },
+          "ParameterBindings": {
+            "Speed": "Speed"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "aa95cf6c3a0a44efb22c5de2fbec0afb",
+      "Name": "C91三相出流",
+      "Category": "主驱",
+      "Version": "1.0",
+      "Description": "",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C91"
+      ],
+      "Parameters": [
+        {
+          "Name": "TargetCurrent",
+          "DisplayName": "目标电流",
+          "Type": "Number",
+          "DefaultValue": 100.0,
+          "Unit": "A RMS",
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "Frequency",
+          "DisplayName": "输出频率",
+          "Type": "Number",
+          "DefaultValue": 60.0,
+          "Unit": "Hz",
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "HoldTime",
+          "DisplayName": "保持时间",
+          "Type": "Number",
+          "DefaultValue": 10.0,
+          "Unit": "s",
+          "Description": null,
+          "Required": true
+        }
+      ],
+      "Steps": [
+        {
+          "Id": "3c2f25f58b244ef89dd98be0217a18ec",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "Set DUT Current 600Arms_10S_60Hz",
+            "RunMode": "Normal",
+            "FunctionName": "CAN_SetDUTCurrent",
+            "RecordingLog": true,
+            "MaxCurrent": 600,
+            "StepCurrent": 20,
+            "HoldTime": 10,
+            "Frequency": 60
+          },
+          "ParameterBindings": {
+            "MaxCurrent": "TargetCurrent",
+            "Frequency": "Frequency",
+            "HoldTime": "HoldTime"
+          }
+        },
+        {
+          "Id": "f88a4b9500b14bfcb3310bc3bda1d617",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "Read DUT and Device Current 600",
+            "RunMode": "Normal",
+            "FunctionName": "Test_UVW_Current_RMS",
+            "RecordingLog": false,
+            "BaseNum": 170110,
+            "LowLimit": 594,
+            "HighLimit": 606,
+            "Comtype": "GELE",
+            "Unit": "A"
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "5e6bbb9b67c6459a8c6dd6b1b09693bf",
+      "Name": "C95三相出流",
+      "Category": "主驱",
+      "Version": "1.0",
+      "Description": "按Locator Motor Control整表写入；RMS自动换算Peak，NewData Flag最后写入",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C95"
+      ],
+      "Parameters": [
+        {
+          "Name": "TargetCurrent",
+          "DisplayName": "目标电流",
+          "Type": "Number",
+          "DefaultValue": 100.0,
+          "Unit": "A RMS",
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "StepCurrent",
+          "DisplayName": "步进电流",
+          "Type": "Number",
+          "DefaultValue": 20.0,
+          "Unit": "A Peak",
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "HoldTime",
+          "DisplayName": "保持时间",
+          "Type": "Number",
+          "DefaultValue": 10.0,
+          "Unit": "s",
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "Frequency",
+          "DisplayName": "输出频率",
+          "Type": "Number",
+          "DefaultValue": 60.0,
+          "Unit": "Hz",
+          "Description": null,
+          "Required": true
+        }
+      ],
+      "Steps": [
+        {
+          "Id": "84a58d9da8d94aec80fed196e1a76996",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "C95三相出流 控制表写入",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_CANTable",
+            "RecordingLog": true,
+            "Operation": "Write",
+            "ResultMode": "Action",
+            "AddrOffset": 88,
+            "TableLength": 39,
+            "ChangesJson": "[{\"Offset\":0,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":4,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"${TargetCurrent*1.414}\",\"WriteLast\":false},{\"Offset\":8,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"${StepCurrent}\",\"WriteLast\":false},{\"Offset\":12,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"${HoldTime}\",\"WriteLast\":false},{\"Offset\":16,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"${Frequency}\",\"WriteLast\":false},{\"Offset\":20,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"4\",\"WriteLast\":false},{\"Offset\":22,\"DataSize\":2,\"DataType\":\"uint16\",\"Endian\":\"Little\",\"Value\":\"50\",\"WriteLast\":false},{\"Offset\":24,\"DataSize\":2,\"DataType\":\"uint16\",\"Endian\":\"Little\",\"Value\":\"10000\",\"WriteLast\":false},{\"Offset\":26,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"1\",\"WriteLast\":false},{\"Offset\":27,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"255\",\"WriteLast\":true}]",
+            "VerifyAfterWrite": true
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "9ea43663a3544dc28207c240701c6215",
+      "Name": "C92/C96 TM1三相出流",
+      "Category": "主驱",
+      "Version": "1.0",
+      "Description": "按Locator Motor Control整表写入；RMS自动换算Peak，NewData Flag最后写入",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C92",
+        "C96"
+      ],
+      "Parameters": [
+        {
+          "Name": "TargetCurrent",
+          "DisplayName": "目标电流",
+          "Type": "Number",
+          "DefaultValue": 100.0,
+          "Unit": "A RMS",
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "StepCurrent",
+          "DisplayName": "步进电流",
+          "Type": "Number",
+          "DefaultValue": 20.0,
+          "Unit": "A Peak",
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "HoldTime",
+          "DisplayName": "保持时间",
+          "Type": "Number",
+          "DefaultValue": 10.0,
+          "Unit": "s",
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "Frequency",
+          "DisplayName": "输出频率",
+          "Type": "Number",
+          "DefaultValue": 60.0,
+          "Unit": "Hz",
+          "Description": null,
+          "Required": true
+        }
+      ],
+      "Steps": [
+        {
+          "Id": "ed18c9d5a23e4d9e8bd561f8837d0f2a",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "C92/C96 TM1三相出流 控制表写入",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_CANTable",
+            "RecordingLog": true,
+            "Operation": "Write",
+            "ResultMode": "Action",
+            "AddrOffset": 104,
+            "TableLength": 39,
+            "ChangesJson": "[{\"Offset\":0,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":4,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"${TargetCurrent*1.414}\",\"WriteLast\":false},{\"Offset\":8,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"${StepCurrent}\",\"WriteLast\":false},{\"Offset\":12,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"${HoldTime}\",\"WriteLast\":false},{\"Offset\":16,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"${Frequency}\",\"WriteLast\":false},{\"Offset\":20,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"4\",\"WriteLast\":false},{\"Offset\":22,\"DataSize\":2,\"DataType\":\"uint16\",\"Endian\":\"Little\",\"Value\":\"50\",\"WriteLast\":false},{\"Offset\":24,\"DataSize\":2,\"DataType\":\"uint16\",\"Endian\":\"Little\",\"Value\":\"10000\",\"WriteLast\":false},{\"Offset\":26,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"1\",\"WriteLast\":false},{\"Offset\":27,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"255\",\"WriteLast\":true}]",
+            "VerifyAfterWrite": true
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "021b7b1bab3f41f7a9ddac0f676a2a7d",
+      "Name": "C92/C96 TM2三相出流",
+      "Category": "主驱",
+      "Version": "1.0",
+      "Description": "按Locator Motor Control整表写入；RMS自动换算Peak，NewData Flag最后写入",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C92",
+        "C96"
+      ],
+      "Parameters": [
+        {
+          "Name": "TargetCurrent",
+          "DisplayName": "目标电流",
+          "Type": "Number",
+          "DefaultValue": 100.0,
+          "Unit": "A RMS",
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "StepCurrent",
+          "DisplayName": "步进电流",
+          "Type": "Number",
+          "DefaultValue": 20.0,
+          "Unit": "A Peak",
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "HoldTime",
+          "DisplayName": "保持时间",
+          "Type": "Number",
+          "DefaultValue": 10.0,
+          "Unit": "s",
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "Frequency",
+          "DisplayName": "输出频率",
+          "Type": "Number",
+          "DefaultValue": 60.0,
+          "Unit": "Hz",
+          "Description": null,
+          "Required": true
+        }
+      ],
+      "Steps": [
+        {
+          "Id": "d9bfe92d73044c538a314f072070a26c",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "C92/C96 TM2三相出流 控制表写入",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_CANTable",
+            "RecordingLog": true,
+            "Operation": "Write",
+            "ResultMode": "Action",
+            "AddrOffset": 128,
+            "TableLength": 39,
+            "ChangesJson": "[{\"Offset\":0,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":4,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"${TargetCurrent*1.414}\",\"WriteLast\":false},{\"Offset\":8,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"${StepCurrent}\",\"WriteLast\":false},{\"Offset\":12,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"${HoldTime}\",\"WriteLast\":false},{\"Offset\":16,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"${Frequency}\",\"WriteLast\":false},{\"Offset\":20,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"4\",\"WriteLast\":false},{\"Offset\":22,\"DataSize\":2,\"DataType\":\"uint16\",\"Endian\":\"Little\",\"Value\":\"50\",\"WriteLast\":false},{\"Offset\":24,\"DataSize\":2,\"DataType\":\"uint16\",\"Endian\":\"Little\",\"Value\":\"10000\",\"WriteLast\":false},{\"Offset\":26,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"1\",\"WriteLast\":false},{\"Offset\":27,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"255\",\"WriteLast\":true}]",
+            "VerifyAfterWrite": true
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "961b81099b8b4a9094f74ee988b92ccb",
+      "Name": "C92/C96 TM1安全停机",
+      "Category": "主驱",
+      "Version": "1.0",
+      "Description": "目标电流归零，并关闭Gate、速度和电压使能；NewData最后写入。",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C92",
+        "C96"
+      ],
+      "Parameters": [],
+      "Steps": [
+        {
+          "Id": "3f3f57d1418c4e36b51b1d467ed458dd",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "C92/C96 TM1安全停机 控制表写入",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_CANTable",
+            "RecordingLog": true,
+            "Operation": "Write",
+            "ResultMode": "Action",
+            "AddrOffset": 104,
+            "TableLength": 39,
+            "ChangesJson": "[{\"Offset\":0,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":4,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":8,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":12,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":16,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":20,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":26,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":28,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":29,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":30,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":34,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":35,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":27,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"255\",\"WriteLast\":true}]",
+            "VerifyAfterWrite": true
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "2347813d44fa466aa374e4d722e1348f",
+      "Name": "C92/C96 TM2安全停机",
+      "Category": "主驱",
+      "Version": "1.0",
+      "Description": "目标电流归零，并关闭Gate、速度和电压使能；NewData最后写入。",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C92",
+        "C96"
+      ],
+      "Parameters": [],
+      "Steps": [
+        {
+          "Id": "5d10b04230764c6f870a5b5c418532cb",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "C92/C96 TM2安全停机 控制表写入",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_CANTable",
+            "RecordingLog": true,
+            "Operation": "Write",
+            "ResultMode": "Action",
+            "AddrOffset": 128,
+            "TableLength": 39,
+            "ChangesJson": "[{\"Offset\":0,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":4,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":8,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":12,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":16,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":20,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":26,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":28,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":29,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":30,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":34,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":35,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false},{\"Offset\":27,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"255\",\"WriteLast\":true}]",
+            "VerifyAfterWrite": true
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "a3fe08fbe8a74a568749c34f9d0e88b7",
+      "Name": "C92/C96 TM1状态读取",
+      "Category": "主驱",
+      "Version": "1.0",
+      "Description": "读取旋变、Motor Status、三相电流和RPM原始表；具体信号值可再从Locator选择加入。",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C92",
+        "C96"
+      ],
+      "Parameters": [],
+      "Steps": [
+        {
+          "Id": "b668cd260f604df4bc00d33df1a55a6b",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "C92/C96 TM1状态读取 / Resolver",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_CANTable",
+            "RecordingLog": true,
+            "Operation": "Read",
+            "ResultMode": "Information",
+            "AddrOffset": 68,
+            "TableLength": 9
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "b10e5ba70c5b4aa9bea31579e547d21c",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "C92/C96 TM1状态读取 / Motor Status",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_CANTable",
+            "RecordingLog": true,
+            "Operation": "Read",
+            "ResultMode": "Information",
+            "AddrOffset": 108,
+            "TableLength": 10
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "c79282ce3c8343159bada6c0ed47ab9e",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "C92/C96 TM1状态读取 / Current",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_CANTable",
+            "RecordingLog": true,
+            "Operation": "Read",
+            "ResultMode": "Information",
+            "AddrOffset": 124,
+            "TableLength": 40
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "09d64d31e909476b8bfd69b182b3250c",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "C92/C96 TM1状态读取 / RPM",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_CANTable",
+            "RecordingLog": true,
+            "Operation": "Read",
+            "ResultMode": "Information",
+            "AddrOffset": 152,
+            "TableLength": 16
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "8a5921fea0c542d3b974325bbee6503f",
+      "Name": "C92/C96 TM2状态读取",
+      "Category": "主驱",
+      "Version": "1.0",
+      "Description": "读取旋变、Motor Status、三相电流和RPM原始表；具体信号值可再从Locator选择加入。",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C92",
+        "C96"
+      ],
+      "Parameters": [],
+      "Steps": [
+        {
+          "Id": "e2b1414e8cfe434293e155803d6fd2a5",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "C92/C96 TM2状态读取 / Resolver",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_CANTable",
+            "RecordingLog": true,
+            "Operation": "Read",
+            "ResultMode": "Information",
+            "AddrOffset": 72,
+            "TableLength": 9
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "6dad7c2e6f1d4be7bd48e7a24c1eeda0",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "C92/C96 TM2状态读取 / Motor Status",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_CANTable",
+            "RecordingLog": true,
+            "Operation": "Read",
+            "ResultMode": "Information",
+            "AddrOffset": 132,
+            "TableLength": 10
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "5db97183aac546fb8d3369c16303c41e",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "C92/C96 TM2状态读取 / Current",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_CANTable",
+            "RecordingLog": true,
+            "Operation": "Read",
+            "ResultMode": "Information",
+            "AddrOffset": 148,
+            "TableLength": 40
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "c70d4163472a4f71bc77cf5ad3f406c9",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "C92/C96 TM2状态读取 / RPM",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_CANTable",
+            "RecordingLog": true,
+            "Operation": "Read",
+            "ResultMode": "Information",
+            "AddrOffset": 168,
+            "TableLength": 16
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "33856a0705b240ac87fd129c9264c9db",
+      "Name": "DCDC启动",
+      "Category": "DCDC/辅驱",
+      "Version": "1.0",
+      "Description": "通过辅助CAN DBC发送",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C95",
+        "C96"
+      ],
+      "Parameters": [
+        {
+          "Name": "SendCount",
+          "DisplayName": "发送次数",
+          "Type": "Integer",
+          "DefaultValue": 10,
+          "Unit": null,
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "PeriodMs",
+          "DisplayName": "发送周期",
+          "Type": "Integer",
+          "DefaultValue": 100,
+          "Unit": "ms",
+          "Description": null,
+          "Required": true
+        }
+      ],
+      "Steps": [
+        {
+          "Id": "6bc62d3e739a44e9aca01c21c29870c7",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DCDC启动 DBC发送",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "SendDbcSignals",
+            "MessageName": "VCU1_DCDC_OilPump_Cmd",
+            "SignalsJson": "{\"DCDC_Start_Cmd\":85}",
+            "ResultMode": "Action"
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "b1a192bee28941109d5465197fe0f6aa",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DCDC启动 周期延时",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteLogic",
+            "RecordingLog": true,
+            "Operation": "Delay",
+            "TimeMs": 100
+          },
+          "ParameterBindings": {
+            "TimeMs": "PeriodMs"
+          }
+        },
+        {
+          "Id": "ce5669c3dd24441191da2997d22d9532",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DCDC启动 周期循环",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteLogic",
+            "RecordingLog": true,
+            "Operation": "FixedLoop",
+            "LoopId": "DCDC启动Loop",
+            "Count": 10,
+            "TargetStepName": "DCDC启动 DBC发送"
+          },
+          "ParameterBindings": {
+            "Count": "SendCount"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "5bb715e31a634534a2e47802d837a5af",
+      "Name": "油泵运行",
+      "Category": "DCDC/辅驱",
+      "Version": "1.0",
+      "Description": "通过辅助CAN DBC发送",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C95",
+        "C96"
+      ],
+      "Parameters": [
+        {
+          "Name": "SendCount",
+          "DisplayName": "发送次数",
+          "Type": "Integer",
+          "DefaultValue": 10,
+          "Unit": null,
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "PeriodMs",
+          "DisplayName": "发送周期",
+          "Type": "Integer",
+          "DefaultValue": 100,
+          "Unit": "ms",
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "RatedCurrent",
+          "DisplayName": "额定电流",
+          "Type": "Number",
+          "DefaultValue": 17.0,
+          "Unit": "A",
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "Frequency",
+          "DisplayName": "输出频率",
+          "Type": "Number",
+          "DefaultValue": 50.0,
+          "Unit": "Hz",
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "VfVoltage",
+          "DisplayName": "VF电压百分比",
+          "Type": "Number",
+          "DefaultValue": 50.0,
+          "Unit": "%",
+          "Description": null,
+          "Required": true
+        }
+      ],
+      "Steps": [
+        {
+          "Id": "a0ad2ab332e9486eab4ad54e3952e701",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵运行 DBC发送",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "SendDbcSignals",
+            "MessageName": "VCU1_DCDC_OilPump_Cmd",
+            "SignalsJson": "{\"DCAC_Steer_Start_Cmd\":85,\"DCAC_Steer_RatedCurr\":${RatedCurrent},\"DCAC_Steer_FreqCmd\":${Frequency},\"DCAC_Steer_VF_Voltage\":${VfVoltage}}",
+            "ResultMode": "Action"
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "2c1eb78389444c48b1758036d689e5b2",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵运行 周期延时",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteLogic",
+            "RecordingLog": true,
+            "Operation": "Delay",
+            "TimeMs": 100
+          },
+          "ParameterBindings": {
+            "TimeMs": "PeriodMs"
+          }
+        },
+        {
+          "Id": "13ddc97d1ff2474f839bf750b8d3e468",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵运行 周期循环",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteLogic",
+            "RecordingLog": true,
+            "Operation": "FixedLoop",
+            "LoopId": "油泵运行Loop",
+            "Count": 10,
+            "TargetStepName": "油泵运行 DBC发送"
+          },
+          "ParameterBindings": {
+            "Count": "SendCount"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "166197c96142465194bef1a666c4e650",
+      "Name": "气泵运行",
+      "Category": "DCDC/辅驱",
+      "Version": "1.0",
+      "Description": "通过辅助CAN DBC发送",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C95",
+        "C96"
+      ],
+      "Parameters": [
+        {
+          "Name": "SendCount",
+          "DisplayName": "发送次数",
+          "Type": "Integer",
+          "DefaultValue": 10,
+          "Unit": null,
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "PeriodMs",
+          "DisplayName": "发送周期",
+          "Type": "Integer",
+          "DefaultValue": 100,
+          "Unit": "ms",
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "RatedCurrent",
+          "DisplayName": "额定电流",
+          "Type": "Number",
+          "DefaultValue": 17.0,
+          "Unit": "A",
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "Frequency",
+          "DisplayName": "输出频率",
+          "Type": "Number",
+          "DefaultValue": 50.0,
+          "Unit": "Hz",
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "VfVoltage",
+          "DisplayName": "VF电压百分比",
+          "Type": "Number",
+          "DefaultValue": 50.0,
+          "Unit": "%",
+          "Description": null,
+          "Required": true
+        }
+      ],
+      "Steps": [
+        {
+          "Id": "f578ed7c142c4ac386032a2e4d9ccffc",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵运行 DBC发送",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "SendDbcSignals",
+            "MessageName": "VCU2_AirPump_Cmd",
+            "SignalsJson": "{\"DCAC_Air_Start_Cmd\":85,\"DCAC_Air_RatedCurr\":${RatedCurrent},\"DCAC_Air_FreqCmd\":${Frequency},\"DCAC_Air_VF_Voltage\":${VfVoltage}}",
+            "ResultMode": "Action"
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "bccf04dcd49a46ccb37d30dc6a7b918f",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵运行 周期延时",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteLogic",
+            "RecordingLog": true,
+            "Operation": "Delay",
+            "TimeMs": 100
+          },
+          "ParameterBindings": {
+            "TimeMs": "PeriodMs"
+          }
+        },
+        {
+          "Id": "00bb07eeea8e44ea8a01ce594c5333ca",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵运行 周期循环",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteLogic",
+            "RecordingLog": true,
+            "Operation": "FixedLoop",
+            "LoopId": "气泵运行Loop",
+            "Count": 10,
+            "TargetStepName": "气泵运行 DBC发送"
+          },
+          "ParameterBindings": {
+            "Count": "SendCount"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "42c28e3eee8949fdb73af71546ffed82",
+      "Name": "DCDC反馈读取",
+      "Category": "DCDC/辅驱",
+      "Version": "1.0",
+      "Description": "按辅助DBC逐项读取反馈；规格未给Limit时只记录实际值。",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C95",
+        "C96"
+      ],
+      "Parameters": [],
+      "Steps": [
+        {
+          "Id": "acac7758b4eb4875bbd0a0cdcec1ea80",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DCDC反馈读取 / DCDC_OutVoltage",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "DCDC_OutVoltage",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "581c03762a5c4cf9870e8a9944c7e10f",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DCDC反馈读取 / DCDC_OutCurrent",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "DCDC_OutCurrent",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "6fc49a5e191143cab9eee4a4fda8e5d0",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DCDC反馈读取 / DCDC_InVoltage",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "DCDC_InVoltage",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "1222c31c7209421db891f586c4266fbf",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DCDC反馈读取 / DCDC_HeatSinkTemp",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "DCDC_HeatSinkTemp",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "5dad3421e8d4427c8833222e0c60a887",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DCDC反馈读取 / DCDC_FaultCode",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "DCDC_FaultCode",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "c6911277210147b4a046293f1abdc352",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DCDC反馈读取 / DCDC_SwVer1",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "DCDC_SwVer1",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "a0b6732fa8274685b6a8652f1385716d",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DCDC反馈读取 / DCDC_SwVer2",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "DCDC_SwVer2",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "8b1b6573ca2a47a4aa77b65b1c472e49",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DCDC反馈读取 / DCDC_SwVer3",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "DCDC_SwVer3",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "855a019fef5b476381aea98f47449797",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DCDC反馈读取 / DCDC_DebugYear",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "DCDC_DebugYear",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "e48a1d20c1ae47bfadc1a4c0f213f223",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DCDC反馈读取 / DCDC_DebugMonth",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "DCDC_DebugMonth",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "a891eb95ed2c41cdb46ba3247d97e08f",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DCDC反馈读取 / DCDC_DebugDay",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "DCDC_DebugDay",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "4c6ce9d61680465ebf4f2383ef8c7843",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DCDC反馈读取 / DCDC_DebugVer",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "DCDC_DebugVer",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "d76468cef8374e7ba18d706498d47251",
+      "Name": "油泵反馈读取",
+      "Category": "DCDC/辅驱",
+      "Version": "1.0",
+      "Description": "按辅助DBC逐项读取反馈；规格未给Limit时只记录实际值。",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C95",
+        "C96"
+      ],
+      "Parameters": [],
+      "Steps": [
+        {
+          "Id": "28107b7a461f4784a1163834447cfa0a",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵反馈读取 / OilPump_SwModelL",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "OilPump_SwModelL",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "2a6b3c1b3fda4685b7bdc456c1f71ef2",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵反馈读取 / OilPump_SwModelH",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "OilPump_SwModelH",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "868e66e499ca444caa004712bd5c9fc5",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵反馈读取 / OilPump_SwVer",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "OilPump_SwVer",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "75a8c535f70d45e2b11f0f3fd78e57fe",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵反馈读取 / OilPump_DebugYear",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "OilPump_DebugYear",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "48a0c3e414ef498c80cd0ce90a5702fd",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵反馈读取 / OilPump_DebugMonth",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "OilPump_DebugMonth",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "3ab73f278a364607a76d84d251e2723c",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵反馈读取 / OilPump_DebugDay",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "OilPump_DebugDay",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "8622a09d822b4158a44b597891a48404",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵反馈读取 / OilPump_DebugVer",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "OilPump_DebugVer",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "a6ea959a30eb496eb436d83d126a53c8",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵反馈读取 / OilPump_ModuleTemp",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "OilPump_ModuleTemp",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "72b1a072d6c34d28ab24461725eb22e9",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵反馈读取 / OilPump_RatedPower",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "OilPump_RatedPower",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "e54e914d2b6543cbaed6f955f8065ccc",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵反馈读取 / OilPump_RatedCurr",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "OilPump_RatedCurr",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "f8b98b3d4ed44ba782f37065e4f49524",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵反馈读取 / OilPump_OutFreq",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "OilPump_OutFreq",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "d67445a0cfdc442281d2dc4e4c1db1c5",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵反馈读取 / OilPump_InVoltage",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "OilPump_InVoltage",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "d9ad3f03f35341cc93bb81d82bda0e59",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵反馈读取 / OilPump_OutVoltage",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "OilPump_OutVoltage",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "6840b1ed5b844bc9a1b7435482d14a2c",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵反馈读取 / OilPump_OutCurrent",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "OilPump_OutCurrent",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "53291291ad6245fa9fe932134b49c237",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵反馈读取 / OilPump_CtrlMode",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "OilPump_CtrlMode",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "e36a1e806be54ca5844f957a8d5bf6d6",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵反馈读取 / OilPump_InternalFault",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "OilPump_InternalFault",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "7c9a6809e8d843f8a31a0308376d10b8",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵反馈读取 / OilPump_FaultCode",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "OilPump_FaultCode",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "8232f4c81c2f4d709dd7db701552055b",
+      "Name": "气泵反馈读取",
+      "Category": "DCDC/辅驱",
+      "Version": "1.0",
+      "Description": "按辅助DBC逐项读取反馈；规格未给Limit时只记录实际值。",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C95",
+        "C96"
+      ],
+      "Parameters": [],
+      "Steps": [
+        {
+          "Id": "883afce2c4d44dd3b513985e24a2dbb0",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵反馈读取 / AirPump_SwModelL",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "AirPump_SwModelL",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "8acc9c4f44224b66ac3af9483d9b9dee",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵反馈读取 / AirPump_SwModelH",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "AirPump_SwModelH",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "afe8a17f7dc5444bab4b15561e4f8c66",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵反馈读取 / AirPump_SwVer",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "AirPump_SwVer",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "579c9a84bee7440db46a8d7e00aaef6c",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵反馈读取 / AirPump_DebugYear",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "AirPump_DebugYear",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "65576111d97746aea3565a0064fec44d",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵反馈读取 / AirPump_DebugMonth",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "AirPump_DebugMonth",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "413a30716f634827b936e8c8ec374b2c",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵反馈读取 / AirPump_DebugDay",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "AirPump_DebugDay",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "299211326d5e458e8ef276e4dbf367f1",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵反馈读取 / AirPump_DebugVer",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "AirPump_DebugVer",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "011bc224c6dd46409e2c632fe5093801",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵反馈读取 / AirPump_ModuleTemp",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "AirPump_ModuleTemp",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "ae59c0af06f14b22bf2032ed702c5d2c",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵反馈读取 / AirPump_RatedPower",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "AirPump_RatedPower",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "4dd8ae48b05c4d05b1461c8a759d8dc2",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵反馈读取 / AirPump_RatedCurr",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "AirPump_RatedCurr",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "943c251cb6e749ffb96772221454bbe2",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵反馈读取 / AirPump_OutFreq",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "AirPump_OutFreq",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "07315cceb04143d9a5ec2947e8b6b3b9",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵反馈读取 / AirPump_InVoltage",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "AirPump_InVoltage",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "b7ccb0a940b14ecdbe78ec9604c1ed5d",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵反馈读取 / AirPump_OutVoltage",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "AirPump_OutVoltage",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "d853e63101a343dc948a77160cc46f90",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵反馈读取 / AirPump_OutCurrent",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "AirPump_OutCurrent",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "5d04756694ea489389d519a385d5084e",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵反馈读取 / AirPump_CtrlMode",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "AirPump_CtrlMode",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "6cbbfbf8958a4c1c84538bc612376df1",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵反馈读取 / AirPump_InternalFault",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "AirPump_InternalFault",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "a81b9732138e4c68889ae3fd744830dd",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵反馈读取 / AirPump_FaultCode",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "AirPump_FaultCode",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "40dba97692f64eb9a96663786bfa1288",
+      "Name": "PDU与接触器反馈读取",
+      "Category": "DCDC/辅驱",
+      "Version": "1.0",
+      "Description": "按辅助DBC逐项读取反馈；规格未给Limit时只记录实际值。",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C95",
+        "C96"
+      ],
+      "Parameters": [],
+      "Steps": [
+        {
+          "Id": "d290ac49bc224cadb4639c92e1b1a229",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / PowerIniDelay",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "PowerIniDelay",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "a99870d235aa4ab295d0c88e87596e50",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / InitOver",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "InitOver",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "f7a650ec289549349e659a2780faf22a",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / Init_FlagM0MPSuccess",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "Init_FlagM0MPSuccess",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "3bb82f5eda4046d29365a04f100c5e70",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / Init_FlagL0LPSuccess",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "Init_FlagL0LPSuccess",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "a0a60f4ea8d84c9f874575fa08f0b066",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / Init_FlagF0FPSuccess",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "Init_FlagF0FPSuccess",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "c0c7ff39e7af451bb5b55e46a67b59f5",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / Init_FlagX1Success",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "Init_FlagX1Success",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "15ccfb139d68424fba535ba7e123a731",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / Init_FlagX2Success",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "Init_FlagX2Success",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "6f612f5eb7154c5d9bb80a3b7b6d713c",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / Init_FlagX3Success",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "Init_FlagX3Success",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "6634aaa107fe45e6b2b2f07c10b5d2be",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / K1_Volt1",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "K1_Volt1",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "f63a592c29dc4a26888d644285d6ded6",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / K2_Volt2",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "K2_Volt2",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "f06696459e91413bb832479dee1167c2",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / K3_Volt3",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "K3_Volt3",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "1e3ecdd36f5e4a16853a8f9c2c0e11ce",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / FotP_Volt",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "FotP_Volt",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "ce194deece3045aeaf9a3962b2fda0ec",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / LotP_Volt",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "LotP_Volt",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "d812403aeefc4c16aad473f85e4a7a6f",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / MotP_Volt",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "MotP_Volt",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "4430173a8b9c443092f8ac2d6e368569",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / BUSVoltage",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "BUSVoltage",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "67d070cb56414c2a876e46c25a204d6f",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / PDU_ShrRlySts",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "PDU_ShrRlySts",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "8a7ea345e36f44b58db119d5c1b3a6f7",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / PDU_G2RlySts",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "PDU_G2RlySts",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "de427acc7c9146ebb8411c698c783b14",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / PDU_G3RlySts",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "PDU_G3RlySts",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "78da22da9f414de38cc7542b81b7b0b8",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / PDU_G4RlySts",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "PDU_G4RlySts",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "79c0bd96e8fc4f3d8c45dbe36559f729",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / PDU_PosRlySts",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "PDU_PosRlySts",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "73c8df14f6284597be2b1bd3d32fd806",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / PDU_PosRlyPcgRlySts",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "PDU_PosRlyPcgRlySts",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "6ffa8c92ba1f4f96968093f6c8428d0a",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / PDU_BodyworkRlySts",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "PDU_BodyworkRlySts",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "4a60685e8900488c9c12f266348d30da",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU与接触器反馈读取 / PDU_BodyworkRlyPcgRlySts",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "ReadDbcSignal",
+            "ResultMode": "Information",
+            "DbcPath": "Config\\C95C96Auxiliary.dbc",
+            "DeviceType": 52,
+            "Channel": 0,
+            "BaudRate": 500000,
+            "IP": "192.166.6.10",
+            "SignalName": "PDU_BodyworkRlyPcgRlySts",
+            "TimeoutMs": 1000
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "f0de20eacd5c4d93ad48a7a7dc575ac8",
+      "Name": "DCDC停止",
+      "Category": "DCDC/辅驱",
+      "Version": "1.0",
+      "Description": "通过辅助CAN DBC发送",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C95",
+        "C96"
+      ],
+      "Parameters": [
+        {
+          "Name": "SendCount",
+          "DisplayName": "发送次数",
+          "Type": "Integer",
+          "DefaultValue": 10,
+          "Unit": null,
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "PeriodMs",
+          "DisplayName": "发送周期",
+          "Type": "Integer",
+          "DefaultValue": 100,
+          "Unit": "ms",
+          "Description": null,
+          "Required": true
+        }
+      ],
+      "Steps": [
+        {
+          "Id": "937d65ccefc645a2a1bbb43ad1d879bf",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DCDC停止 DBC发送",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "SendDbcSignals",
+            "MessageName": "VCU1_DCDC_OilPump_Cmd",
+            "SignalsJson": "{\"DCDC_Start_Cmd\":170}",
+            "ResultMode": "Action"
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "badb1adc642f4ae086a77c8bb2ebdeb7",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DCDC停止 周期延时",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteLogic",
+            "RecordingLog": true,
+            "Operation": "Delay",
+            "TimeMs": 100
+          },
+          "ParameterBindings": {
+            "TimeMs": "PeriodMs"
+          }
+        },
+        {
+          "Id": "9349189b124c4c808752ce6d06c0be12",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DCDC停止 周期循环",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteLogic",
+            "RecordingLog": true,
+            "Operation": "FixedLoop",
+            "LoopId": "DCDC停止Loop",
+            "Count": 10,
+            "TargetStepName": "DCDC停止 DBC发送"
+          },
+          "ParameterBindings": {
+            "Count": "SendCount"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "7c0b187e268845c98f3b4344bd079490",
+      "Name": "油泵停止",
+      "Category": "DCDC/辅驱",
+      "Version": "1.0",
+      "Description": "通过辅助CAN DBC发送",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C95",
+        "C96"
+      ],
+      "Parameters": [
+        {
+          "Name": "SendCount",
+          "DisplayName": "发送次数",
+          "Type": "Integer",
+          "DefaultValue": 10,
+          "Unit": null,
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "PeriodMs",
+          "DisplayName": "发送周期",
+          "Type": "Integer",
+          "DefaultValue": 100,
+          "Unit": "ms",
+          "Description": null,
+          "Required": true
+        }
+      ],
+      "Steps": [
+        {
+          "Id": "eda4ff1c35ae4a6a9f71529a1e190182",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵停止 DBC发送",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "SendDbcSignals",
+            "MessageName": "VCU1_DCDC_OilPump_Cmd",
+            "SignalsJson": "{\"DCAC_Steer_Start_Cmd\":170}",
+            "ResultMode": "Action"
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "97bf180f5e734ecdb382e6c9aca3b9b1",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵停止 周期延时",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteLogic",
+            "RecordingLog": true,
+            "Operation": "Delay",
+            "TimeMs": 100
+          },
+          "ParameterBindings": {
+            "TimeMs": "PeriodMs"
+          }
+        },
+        {
+          "Id": "206e67b2976846da9795449a0606bab7",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "油泵停止 周期循环",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteLogic",
+            "RecordingLog": true,
+            "Operation": "FixedLoop",
+            "LoopId": "油泵停止Loop",
+            "Count": 10,
+            "TargetStepName": "油泵停止 DBC发送"
+          },
+          "ParameterBindings": {
+            "Count": "SendCount"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "a0e8a0c32896483699804db654cd57f8",
+      "Name": "气泵停止",
+      "Category": "DCDC/辅驱",
+      "Version": "1.0",
+      "Description": "通过辅助CAN DBC发送",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C95",
+        "C96"
+      ],
+      "Parameters": [
+        {
+          "Name": "SendCount",
+          "DisplayName": "发送次数",
+          "Type": "Integer",
+          "DefaultValue": 10,
+          "Unit": null,
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "PeriodMs",
+          "DisplayName": "发送周期",
+          "Type": "Integer",
+          "DefaultValue": 100,
+          "Unit": "ms",
+          "Description": null,
+          "Required": true
+        }
+      ],
+      "Steps": [
+        {
+          "Id": "d77bc33ab3964b4a9d6e79318ffbeef2",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵停止 DBC发送",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "SendDbcSignals",
+            "MessageName": "VCU2_AirPump_Cmd",
+            "SignalsJson": "{\"DCAC_Air_Start_Cmd\":170}",
+            "ResultMode": "Action"
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "1ef0e958d0b84159984b27d6bcb39238",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵停止 周期延时",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteLogic",
+            "RecordingLog": true,
+            "Operation": "Delay",
+            "TimeMs": 100
+          },
+          "ParameterBindings": {
+            "TimeMs": "PeriodMs"
+          }
+        },
+        {
+          "Id": "2f88bfca57784058bd5f3f8c0e130d9c",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "气泵停止 周期循环",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteLogic",
+            "RecordingLog": true,
+            "Operation": "FixedLoop",
+            "LoopId": "气泵停止Loop",
+            "Count": 10,
+            "TargetStepName": "气泵停止 DBC发送"
+          },
+          "ParameterBindings": {
+            "Count": "SendCount"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "fbf05c12ed58490c879010a28b9dc15f",
+      "Name": "PDU主驱高压闭合",
+      "Category": "DCDC/辅驱",
+      "Version": "1.0",
+      "Description": "通过辅助CAN DBC发送",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C95",
+        "C96"
+      ],
+      "Parameters": [
+        {
+          "Name": "SendCount",
+          "DisplayName": "发送次数",
+          "Type": "Integer",
+          "DefaultValue": 10,
+          "Unit": null,
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "PeriodMs",
+          "DisplayName": "发送周期",
+          "Type": "Integer",
+          "DefaultValue": 100,
+          "Unit": "ms",
+          "Description": null,
+          "Required": true
+        }
+      ],
+      "Steps": [
+        {
+          "Id": "59a873af6590408fa8e9aaea1a9b2764",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU主驱高压闭合 DBC发送",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "SendDbcSignals",
+            "MessageName": "VCU_PDU",
+            "SignalsJson": "{\"VCU_HghVtgCnt\":1}",
+            "ResultMode": "Action"
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "572a0d0b954249078c75246ddf0965d2",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU主驱高压闭合 周期延时",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteLogic",
+            "RecordingLog": true,
+            "Operation": "Delay",
+            "TimeMs": 100
+          },
+          "ParameterBindings": {
+            "TimeMs": "PeriodMs"
+          }
+        },
+        {
+          "Id": "898540fddfa04a598383bd45886bfb16",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU主驱高压闭合 周期循环",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteLogic",
+            "RecordingLog": true,
+            "Operation": "FixedLoop",
+            "LoopId": "PDU主驱高压闭合Loop",
+            "Count": 10,
+            "TargetStepName": "PDU主驱高压闭合 DBC发送"
+          },
+          "ParameterBindings": {
+            "Count": "SendCount"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "841ae8415bdf4a2d8662b9ea40762961",
+      "Name": "PDU主驱高压断开",
+      "Category": "DCDC/辅驱",
+      "Version": "1.0",
+      "Description": "通过辅助CAN DBC发送",
+      "IsStandard": true,
+      "SupportedProducts": [
+        "C95",
+        "C96"
+      ],
+      "Parameters": [
+        {
+          "Name": "SendCount",
+          "DisplayName": "发送次数",
+          "Type": "Integer",
+          "DefaultValue": 10,
+          "Unit": null,
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "PeriodMs",
+          "DisplayName": "发送周期",
+          "Type": "Integer",
+          "DefaultValue": 100,
+          "Unit": "ms",
+          "Description": null,
+          "Required": true
+        }
+      ],
+      "Steps": [
+        {
+          "Id": "1c709053b7be4713bcbbbcc12c07f7da",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU主驱高压断开 DBC发送",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "SendDbcSignals",
+            "MessageName": "VCU_PDU",
+            "SignalsJson": "{\"VCU_HghVtgCnt\":0}",
+            "ResultMode": "Action"
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "77761c8e8971441d89b11afd0bef5ef4",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU主驱高压断开 周期延时",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteLogic",
+            "RecordingLog": true,
+            "Operation": "Delay",
+            "TimeMs": 100
+          },
+          "ParameterBindings": {
+            "TimeMs": "PeriodMs"
+          }
+        },
+        {
+          "Id": "48a32bb8db3249f498e6ef8ba9a23ae6",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "PDU主驱高压断开 周期循环",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteLogic",
+            "RecordingLog": true,
+            "Operation": "FixedLoop",
+            "LoopId": "PDU主驱高压断开Loop",
+            "Count": 10,
+            "TargetStepName": "PDU主驱高压断开 DBC发送"
+          },
+          "ParameterBindings": {
+            "Count": "SendCount"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "b5e4c7ab9b0c4900a9b042ae74fa0ff8",
+      "Name": "延时",
+      "Category": "逻辑",
+      "Version": "1.0",
+      "Description": "固定延时",
+      "IsStandard": true,
+      "SupportedProducts": [],
+      "Parameters": [
+        {
+          "Name": "TimeMs",
+          "DisplayName": "延时时间",
+          "Type": "Integer",
+          "DefaultValue": 1000,
+          "Unit": "ms",
+          "Description": null,
+          "Required": true
+        }
+      ],
+      "Steps": [
+        {
+          "Id": "c5398cae4877478f9800e7d1b2852562",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "Delay",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteLogic",
+            "RecordingLog": true,
+            "Operation": "Delay",
+            "TimeMs": 1000
+          },
+          "ParameterBindings": {
+            "TimeMs": "TimeMs"
+          }
+        }
+      ]
+    },
+    {
+      "Id": "9e95d6b2c86c43a983a27fa8533de429",
+      "Name": "安全下电",
+      "Category": "安全",
+      "Version": "1.0",
+      "Description": "关闭高低压、旋变、MOXA和继电器",
+      "IsStandard": true,
+      "SupportedProducts": [],
+      "Parameters": [],
+      "Steps": [
+        {
+          "Id": "f1ca017445e4487db74ff25d1ea83fb1",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "Safe shutdown",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteLogic",
+            "RecordingLog": true,
+            "Operation": "SafeShutdown"
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    }
+  ],
+  "Flow": [
+    {
+      "Id": "5fc6db1ae007498781aa691fc0620e7f",
+      "BlockId": "8d6839d3d85b4f26955682264d8debba",
+      "DisplayName": "低压上电",
+      "Phase": "准备阶段",
+      "Enabled": true,
+      "PreserveStepNames": false,
+      "ParameterOverrides": {},
+      "Snapshot": {
+        "Id": "8d6839d3d85b4f26955682264d8debba",
+        "Name": "低压上电",
+        "Category": "电源",
+        "Version": "1.0",
+        "Description": "",
+        "IsStandard": true,
+        "SupportedProducts": [],
+        "Parameters": [],
+        "Steps": [
+          {
+            "Id": "41b4a6ff69db426ea07ef7b91cbfbe33",
+            "Enabled": true,
+            "StepProperties": {
+              "StepName": "Set LVDC Voltage 24V",
+              "RunMode": "Normal",
+              "FunctionName": "LVDC_SetSourceVoltage",
+              "RecordingLog": true,
+              "Voltage": 24
+            },
+            "ParameterBindings": {}
+          },
+          {
+            "Id": "29ef76639ff34cd59f38563ac95a4dad",
+            "Enabled": true,
+            "StepProperties": {
+              "StepName": "Set LVDC Current 5A",
+              "RunMode": "Normal",
+              "FunctionName": "LVDC_SetSourceCurrent",
+              "RecordingLog": true,
+              "Current": 5
+            },
+            "ParameterBindings": {}
+          },
+          {
+            "Id": "291867daa89a49d986ba7128c77271f8",
+            "Enabled": true,
+            "StepProperties": {
+              "StepName": "Set LVDC Output ON",
+              "RunMode": "Normal",
+              "FunctionName": "LVDC_SetOutput",
+              "RecordingLog": true,
+              "Output": true
+            },
+            "ParameterBindings": {}
+          }
+        ]
+      }
+    }
+  ],
+  "Breakpoints": [
+    "5fc6db1ae007498781aa691fc0620e7f:41b4a6ff69db426ea07ef7b91cbfbe33",
+    "5fc6db1ae007498781aa691fc0620e7f:29ef76639ff34cd59f38563ac95a4dad",
+    "5fc6db1ae007498781aa691fc0620e7f:291867daa89a49d986ba7128c77271f8"
+  ],
+  "SequenceRoot": {
+    "SerialNumberLen": 0,
+    "ProjectName": "C91-01-0001",
+    "StationName": "OP3020",
+    "SequenceVersion": "FT1-FCT01-01-A0",
+    "UIDisplayType": "All",
+    "LogFilePath": "D:\\LogfilePath"
+  }
+}

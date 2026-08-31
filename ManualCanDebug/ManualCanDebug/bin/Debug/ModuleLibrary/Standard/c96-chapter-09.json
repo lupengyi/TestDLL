@@ -1,0 +1,27 @@
+{
+  "Id": "c96-chapter-09",
+  "Name": "09 放电准备（预留）",
+  "Category": "章节",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "acabfda088134771baa8e97b345071ea",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-reserved",
+      "ReferencedBlockName": "未确认功能占位",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Description": "退出FT进入APP命令未确认"
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    }
+  ]
+}

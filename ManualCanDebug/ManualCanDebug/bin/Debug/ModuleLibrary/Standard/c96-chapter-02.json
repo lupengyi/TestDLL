@@ -1,0 +1,84 @@
+{
+  "Id": "c96-chapter-02",
+  "Name": "02 低压信号测量",
+  "Category": "章节",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "3bc0384fc7544d02b9393c33b2f4a7de",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-lvdc-setting",
+      "ReferencedBlockName": "低压电源工况设定",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 18.0,
+        "Current": 5.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "ee629391ed82440d8c4bd7df08b00fb9",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-analog-inputs",
+      "ReferencedBlockName": "产品低压与Analog Inputs读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "d1f56b5c486949a692e127e02192bbff",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-lvdc-setting",
+      "ReferencedBlockName": "低压电源工况设定",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 24.0,
+        "Current": 5.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "ce4525f640a2437ca108000b50d699da",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-analog-inputs",
+      "ReferencedBlockName": "产品低压与Analog Inputs读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "4d58c3a4c7e9495bb78576dac46344f6",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-lvdc-setting",
+      "ReferencedBlockName": "低压电源工况设定",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 32.0,
+        "Current": 5.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "1e58f2f8166a4bbc891d4b77e3edd377",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-analog-inputs",
+      "ReferencedBlockName": "产品低压与Analog Inputs读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {},
+      "ParameterBindings": {}
+    }
+  ]
+}

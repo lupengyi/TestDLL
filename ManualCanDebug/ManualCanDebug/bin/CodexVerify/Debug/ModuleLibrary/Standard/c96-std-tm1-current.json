@@ -1,0 +1,182 @@
+{
+  "Id": "c96-std-tm1-current",
+  "Name": "TM1三相出流与验证",
+  "Category": "主驱",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "参数化三相出流模块；流程实例只需修改目标电流和LIMIT，同一模块可重复复用。",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [
+    {
+      "Name": "TargetCurrent",
+      "DisplayName": "目标电流",
+      "Type": "double",
+      "DefaultValue": 100.0,
+      "Unit": "A RMS",
+      "Description": "目标有效值；写表时自动乘1.414",
+      "Required": true
+    },
+    {
+      "Name": "StepCurrent",
+      "DisplayName": "步进电流",
+      "Type": "double",
+      "DefaultValue": 20.0,
+      "Unit": "A Peak",
+      "Description": "每步上升/下降峰值",
+      "Required": true
+    },
+    {
+      "Name": "HoldTime",
+      "DisplayName": "保持时间",
+      "Type": "double",
+      "DefaultValue": 10.0,
+      "Unit": "s",
+      "Description": null,
+      "Required": true
+    },
+    {
+      "Name": "Frequency",
+      "DisplayName": "输出频率",
+      "Type": "double",
+      "DefaultValue": 60.0,
+      "Unit": "Hz",
+      "Description": null,
+      "Required": true
+    },
+    {
+      "Name": "CurrentLow",
+      "DisplayName": "电流下限",
+      "Type": "double",
+      "DefaultValue": 90.0,
+      "Unit": "A",
+      "Description": null,
+      "Required": false
+    },
+    {
+      "Name": "CurrentHigh",
+      "DisplayName": "电流上限",
+      "Type": "double",
+      "DefaultValue": 110.00000000000001,
+      "Unit": "A",
+      "Description": null,
+      "Required": false
+    },
+    {
+      "Name": "ImbalanceHigh",
+      "DisplayName": "不平衡度上限",
+      "Type": "double",
+      "DefaultValue": 10.0,
+      "Unit": "A",
+      "Description": null,
+      "Required": false
+    }
+  ],
+  "Steps": [
+    {
+      "Id": "044f64c18feb44a78972dc728b410feb",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "写入目标电流",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANTable",
+        "RecordingLog": true,
+        "Operation": "Write",
+        "ResultMode": "Action",
+        "AddrOffset": 104,
+        "TableLength": 39,
+        "ChangesJson": "[{\"Name\":\"Iqs_Start\",\"Offset\":0,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Iqs_End\",\"Offset\":4,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"${TargetCurrent*1.414}\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Iqs_Step\",\"Offset\":8,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"${StepCurrent}\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Hold_Time_S\",\"Offset\":12,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"${HoldTime}\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Output_Frequency\",\"Offset\":16,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"${Frequency}\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Mode\",\"Offset\":20,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"4\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Unused\",\"Offset\":21,\"DataSize\":1,\"DataType\":\"int8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Ramp_Time_MS\",\"Offset\":22,\"DataSize\":2,\"DataType\":\"uint16\",\"Endian\":\"Little\",\"Value\":\"50\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Base_Frequency\",\"Offset\":24,\"DataSize\":2,\"DataType\":\"uint16\",\"Endian\":\"Little\",\"Value\":\"10000\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Motor_Gate_Enable\",\"Offset\":26,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"1\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"New Data Flag\",\"Offset\":27,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"255\",\"WriteLast\":true,\"WriteFinal\":true},{\"Name\":\"Reset_Motor_Faults\",\"Offset\":28,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Speed_Control_Enable\",\"Offset\":29,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Speed_Setpoint\",\"Offset\":30,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Voltage_Control_Enable\",\"Offset\":34,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Voltage_Setpoint\",\"Offset\":35,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false}]",
+        "VerifyAfterWrite": true,
+        "AutoProductProfile": true,
+        "DriveTarget": "TM1"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "5a9c73af2bba4f27999246cd5020d305",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "等待电流稳定",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteLogic",
+        "RecordingLog": true,
+        "Operation": "Delay",
+        "ResultMode": "Action",
+        "TimeMs": 500,
+        "AutoProductProfile": true,
+        "DriveTarget": "TM1"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "22384e729f864f3c9abdbb80933c6fb5",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "电机故障",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANCalculatedResults",
+        "RecordingLog": true,
+        "AddrOffset": 108,
+        "TableLength": 10,
+        "CalculationType": "PackedFaultStatus",
+        "FaultMapJson": "[{\"Byte\":0,\"Bit\":0,\"Name\":\"A相过流\"},{\"Byte\":0,\"Bit\":1,\"Name\":\"B相过流\"},{\"Byte\":0,\"Bit\":2,\"Name\":\"C相过流\"},{\"Byte\":0,\"Bit\":3,\"Name\":\"A相硬件过流\"},{\"Byte\":0,\"Bit\":4,\"Name\":\"B相硬件过流\"},{\"Byte\":0,\"Bit\":5,\"Name\":\"C相硬件过流\"},{\"Byte\":0,\"Bit\":6,\"Name\":\"A相上桥温度故障\"},{\"Byte\":0,\"Bit\":7,\"Name\":\"A相下桥温度故障\"},{\"Byte\":1,\"Bit\":0,\"Name\":\"B相上桥温度故障\"},{\"Byte\":1,\"Bit\":1,\"Name\":\"B相下桥温度故障\"},{\"Byte\":1,\"Bit\":2,\"Name\":\"C相上桥温度故障\"},{\"Byte\":1,\"Bit\":3,\"Name\":\"C相下桥温度故障\"},{\"Byte\":1,\"Bit\":4,\"Name\":\"电机温度1故障\"},{\"Byte\":1,\"Bit\":5,\"Name\":\"电机温度2故障\"},{\"Byte\":1,\"Bit\":7,\"Name\":\"Desat Upper\"},{\"Byte\":2,\"Bit\":0,\"Name\":\"Desat Lower\"},{\"Byte\":2,\"Bit\":1,\"Name\":\"UV A Upper\"},{\"Byte\":2,\"Bit\":2,\"Name\":\"UV B Upper\"},{\"Byte\":2,\"Bit\":3,\"Name\":\"UV C Upper\"},{\"Byte\":2,\"Bit\":4,\"Name\":\"UV A Lower\"},{\"Byte\":2,\"Bit\":5,\"Name\":\"UV B Lower\"},{\"Byte\":2,\"Bit\":6,\"Name\":\"UV C Lower\"},{\"Byte\":2,\"Bit\":7,\"Name\":\"Master Fault\"},{\"Byte\":3,\"Bit\":0,\"Name\":\"母线欠压\"},{\"Byte\":3,\"Bit\":1,\"Name\":\"母线过压\"},{\"Byte\":3,\"Bit\":2,\"Name\":\"母线硬件过压\"},{\"Byte\":3,\"Bit\":3,\"Name\":\"母线硬件过压锁存\"},{\"Byte\":3,\"Bit\":4,\"Name\":\"Upper UV锁存\"},{\"Byte\":3,\"Bit\":5,\"Name\":\"Lower UV锁存\"},{\"Byte\":3,\"Bit\":6,\"Name\":\"零序过流\"},{\"Byte\":3,\"Bit\":7,\"Name\":\"UV Upper\"},{\"Byte\":4,\"Bit\":0,\"Name\":\"UV Lower\"},{\"Byte\":4,\"Bit\":1,\"Name\":\"板温故障\"}]",
+        "RampOffset": 8,
+        "StatusOffset": 9,
+        "NoFaultText": "No active fault bits",
+        "JudgeNoFault": true,
+        "AutoProductProfile": true,
+        "DriveTarget": "TM1",
+        "Product": "C96"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "e17424fa63004bdb9e65df69f6305fbc",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "三相实际RMS电流",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANCalculatedResults",
+        "RecordingLog": true,
+        "AddrOffset": 124,
+        "TableLength": 40,
+        "CalculationType": "ThreePhaseCurrentRms",
+        "InputsJson": "{\"PhaseA_Min\":{\"Offset\":12,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\"},\"PhaseA_Max\":{\"Offset\":24,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\"},\"PhaseB_Min\":{\"Offset\":16,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\"},\"PhaseB_Max\":{\"Offset\":28,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\"},\"PhaseC_Min\":{\"Offset\":20,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\"},\"PhaseC_Max\":{\"Offset\":32,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\"}}",
+        "PublishPhases": true,
+        "LowLimit": -10,
+        "HighLimit": 10,
+        "Comtype": "GELE",
+        "Unit": "A",
+        "ImbalanceLowLimit": 0,
+        "ImbalanceHighLimit": 10,
+        "Comment": "电流LIMIT暂按目标值±10%，须由客户/测试规范确认",
+        "AutoProductProfile": true,
+        "DriveTarget": "TM1",
+        "Product": "C96"
+      },
+      "ParameterBindings": {
+        "LowLimit": "CurrentLow",
+        "HighLimit": "CurrentHigh",
+        "ImbalanceHighLimit": "ImbalanceHigh"
+      }
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "SerialNumberLen": 0,
+  "ProjectName": "C96_FCT_调试",
+  "StationName": "OP3020",
+  "SequenceVersion": "FT1-FCT01-01-A0",
+  "UIDisplayType": "All",
+  "LogFilePath": "D:\\LogfilePath",
+  "StepList": [
+    {
+      "StepName": "关闭主驱辅驱继电器",
+      "RunMode": "Normal",
+      "FunctionName": "FCT_ExecuteAction",
+      "RecordingLog": true,
+      "Device": "AUXCAN",
+      "Operation": "SendDbcSignals",
+      "ResultMode": "Action",
+      "DbcPath": "Config\\C95C96Auxiliary.dbc",
+      "DeviceType": 52,
+      "Channel": 0,
+      "BaudRate": 500000,
+      "IP": "192.166.6.10",
+      "MessageName": "VCU_PDU",
+      "CanId": "CF2503B",
+      "SignalsJson": "{\"VCU_HrtBt\":0.0,\"VCU_Reserve_B6\":0.0,\"VCU_Reserve_B5_H\":0.0,\"VCU_DCCpstRlyCtl\":0.0,\"VCU_Reserve_B3_B4\":0.0,\"VCU_Reserve_B2_H\":0.0,\"VCU_Bodywork\":0.0,\"VCU_HghVtgCnt\":0.0,\"VCU_Reserve_B1_H\":0.0,\"VCU_G4_RlyCtl\":0.0,\"VCU_G3_RlyCtl\":0.0,\"VCU_G2_RlyCtl\":0.0,\"VCU_Reserve_B0_H\":0.0,\"VCU_ShrRlyCtl\":0.0}",
+      "PeriodicKey": "VCU_PDU",
+      "DataHex": "00 00 00 00 00 00 00 00"
+    }
+  ]
+}

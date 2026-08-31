@@ -1,0 +1,28 @@
+{
+  "SerialNumberLen": 0,
+  "ProjectName": "C91-01-0001",
+  "StationName": "OP3020",
+  "SequenceVersion": "FT1-FCT01-01-A0",
+  "UIDisplayType": "All",
+  "LogFilePath": "D:\\LogfilePath",
+  "StepList": [
+    {
+      "StepName": "15_AI",
+      "RunMode": "Normal",
+      "FunctionName": "FCT_CANSignal",
+      "RecordingLog": true,
+      "Operation": "Read",
+      "AddrOffset": 0,
+      "TableIndex": 0,
+      "DataSize": 4,
+      "DataType": "float",
+      "Endian": "Little",
+      "ResultMode": "NumericLimit",
+      "LowLimit": 0,
+      "HighLimit": 0,
+      "Comtype": "GELE",
+      "Unit": "",
+      "Product": "C96"
+    }
+  ]
+}

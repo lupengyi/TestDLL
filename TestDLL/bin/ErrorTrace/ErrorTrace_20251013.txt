@@ -1,0 +1,53 @@
+2025-10-13 15:29:43
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception ---> S7.Net.PlcException: Unable to read data from the transport connection: 你的主机中的软件中止了一个已建立的连接。. ---> System.IO.IOException: Unable to read data from the transport connection: 你的主机中的软件中止了一个已建立的连接。. ---> System.Net.Sockets.SocketException: 你的主机中的软件中止了一个已建立的连接。
+   at System.Net.Sockets.Socket.EndReceive(IAsyncResult asyncResult)
+   at System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   --- End of inner exception stack trace ---
+   at System.Net.Sockets.NetworkStream.EndRead(IAsyncResult asyncResult)
+   at System.IO.Stream.<>c.<BeginEndReadAsync>b__43_1(Stream stream, IAsyncResult asyncResult)
+   at System.Threading.Tasks.TaskFactory`1.FromAsyncTrimPromise`1.Complete(TInstance thisRef, Func`3 endMethod, IAsyncResult asyncResult, Boolean requiresSynchronization)
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at S7.Net.StreamExtensions.<ReadExactAsync>d__1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at S7.Net.TPKT.<ReadAsync>d__5.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at S7.Net.COTP.TPDU.<ReadAsync>d__9.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at S7.Net.COTP.TSDU.<ReadAsync>d__0.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at S7.Net.Plc.<NoLockRequestTsduAsync>d__84.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at S7.Net.Internal.TaskQueue.<Enqueue>d__2`1.MoveNext()
+--- End of stack trace from previous location where exception was thrown ---
+   at System.Runtime.CompilerServices.TaskAwaiter.ThrowForNonSuccess(Task task)
+   at System.Runtime.CompilerServices.TaskAwaiter.HandleNonSuccessAndDebuggerNotification(Task task)
+   at S7.Net.Plc.RequestTsdu(Byte[] requestData, Int32 offset, Int32 length)
+   at S7.Net.Plc.WriteBytesWithASingleRequest(DataType dataType, Int32 db, Int32 startByteAdr, ReadOnlySpan`1 value)
+   --- End of inner exception stack trace ---
+   at S7.Net.Plc.WriteBytesWithASingleRequest(DataType dataType, Int32 db, Int32 startByteAdr, ReadOnlySpan`1 value)
+   at S7.Net.Plc.WriteBytes(DataType dataType, Int32 db, Int32 startByteAdr, ReadOnlySpan`1 value)
+   at S7.Net.Plc.WriteBytes(DataType dataType, Int32 db, Int32 startByteAdr, Byte[] value)
+   at Instruments.PLCS7.S7Net.DBWrite(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[] writeBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 60
+   --- End of inner exception stack trace ---
+   at Instruments.PLCS7.S7Net.DBWrite(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[] writeBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 64
+   at CSP.TestDllMain.AutomationLoop() in D:\TestDLL\TestDLL\TestDllMain.cs:line 148
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.<AutomationThread>b__42_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 828
+====================================================================================================
+

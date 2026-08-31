@@ -1,0 +1,53 @@
+{
+  "Id": "c96-std-product-init",
+  "Name": "产品进入FT与通信初始化",
+  "Category": "公共准备",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "949d17d8eb5b4b2eb1623eb4098aed1b",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "产品基础命令 进入FT模式",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": false,
+        "ResultMode": "Action",
+        "Operation": "EnterFT",
+        "Device": "PRODUCTCAN"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "d255db682f40478aba5362fbdf9dc3e0",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "产品基础命令 通信初始化",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": false,
+        "ResultMode": "Action",
+        "Operation": "CommunicationInit",
+        "Device": "PRODUCTCAN",
+        "TxID": "2030",
+        "RxID": "2031"
+      },
+      "ParameterBindings": {}
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "SerialNumberLen": 0,
+  "ProjectName": "C96_FCT_调试",
+  "StationName": "OP3020",
+  "SequenceVersion": "C96-TM2-DEBUG-A0",
+  "UIDisplayType": "All",
+  "LogFilePath": "D:\\LogfilePath",
+  "StepList": [
+    {
+      "StepName": "主驱辅驱继电器吸合周期命令",
+      "RunMode": "Normal",
+      "FunctionName": "FCT_ExecuteAction",
+      "RecordingLog": true,
+      "Device": "AUXCAN",
+      "Operation": "StartPeriodicDbc",
+      "ResultMode": "Action",
+      "DbcPath": "Config\\C95C96Auxiliary.dbc",
+      "DeviceType": 52,
+      "Channel": 0,
+      "BaudRate": 500000,
+      "IP": "192.166.6.10",
+      "MessageName": "VCU_PDU",
+      "CanId": "CF2503B",
+      "PeriodMs": 100,
+      "SignalsJson": "{\"VCU_HrtBt\":0.0,\"VCU_Reserve_B6\":0.0,\"VCU_Reserve_B5_H\":0.0,\"VCU_DCCpstRlyCtl\":0.0,\"VCU_Reserve_B3_B4\":0.0,\"VCU_Reserve_B2_H\":0.0,\"VCU_Bodywork\":0.0,\"VCU_HghVtgCnt\":1.0,\"VCU_Reserve_B1_H\":0.0,\"VCU_G4_RlyCtl\":0.0,\"VCU_G3_RlyCtl\":0.0,\"VCU_G2_RlyCtl\":0.0,\"VCU_Reserve_B0_H\":0.0,\"VCU_ShrRlyCtl\":1.0}",
+      "PeriodicKey": "VCU_PDU",
+      "DataHex": "01 00 01 00 00 00 00 00"
+    }
+  ]
+}

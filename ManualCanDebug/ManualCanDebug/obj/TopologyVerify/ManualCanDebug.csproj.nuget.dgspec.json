@@ -1,0 +1,89 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\FST\\TestDLL\\ManualCanDebug\\ManualCanDebug\\ManualCanDebug.csproj": {}
+  },
+  "projects": {
+    "E:\\FST\\TestDLL\\ManualCanDebug\\ManualCanDebug.Core\\ManualCanDebug.Core.csproj": {
+      "restore": {
+        "projectUniqueName": "E:\\FST\\TestDLL\\ManualCanDebug\\ManualCanDebug.Core\\ManualCanDebug.Core.csproj",
+        "projectName": "ManualCanDebug.Core",
+        "projectPath": "E:\\FST\\TestDLL\\ManualCanDebug\\ManualCanDebug.Core\\ManualCanDebug.Core.csproj",
+        "UsingMicrosoftNETSdk": false,
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "E:\\FST\\TestDLL\\ManualCanDebug\\ManualCanDebug\\ManualCanDebug.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\FST\\TestDLL\\ManualCanDebug\\ManualCanDebug\\ManualCanDebug.csproj",
+        "projectName": "ManualCanDebug",
+        "projectPath": "E:\\FST\\TestDLL\\ManualCanDebug\\ManualCanDebug\\ManualCanDebug.csproj",
+        "packagesPath": "C:\\Users\\2501000857\\.nuget\\packages\\",
+        "outputPath": "E:\\FST\\TestDLL\\ManualCanDebug\\ManualCanDebug\\obj\\TopologyVerify\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "D:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\2501000857\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "targetAlias": "net48",
+            "projectReferences": {
+              "E:\\FST\\TestDLL\\ManualCanDebug\\ManualCanDebug.Core\\ManualCanDebug.Core.csproj": {
+                "projectPath": "E:\\FST\\TestDLL\\ManualCanDebug\\ManualCanDebug.Core\\ManualCanDebug.Core.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.200"
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "dependencies": {
+            "NodeNetwork": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203\\RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

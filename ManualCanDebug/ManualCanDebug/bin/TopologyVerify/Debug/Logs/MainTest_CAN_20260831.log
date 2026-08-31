@@ -1,0 +1,51 @@
+2026-08-31 09:26:45.228 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 09:26:46.390 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 09:26:48.361 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 09:26:49.921 [T6] Instrument selection received: [{"Name":"DAQ","Type":"DAQ","Mode":"NI","Resource":"PCI-6229","Parameter":""}]
+2026-08-31 09:26:49.926 [T8] Cleanup selected instruments: 
+2026-08-31 09:26:49.931 [T8] Initialize selected instruments start. BaseDirectory=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\TopologyVerify\Debug\; TestDLL=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\TopologyVerify\Debug\LegacyRuntime\CSP.TestDLL.dll
+2026-08-31 09:26:49.932 [T8] Initialize instrument DAQ: Resource=PCI-6229; Parameter=
+2026-08-31 09:26:49.967 [T10] Cleanup selected instruments: DAQ
+2026-08-31 09:34:45.923 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 09:38:30.910 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 09:38:31.757 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 09:38:33.762 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 09:38:35.236 [T4] Instrument selection received: [{"Name":"DAQ","Type":"DAQ","Mode":"NI","Resource":"PCI-6229","Parameter":""}]
+2026-08-31 09:38:35.240 [T7] Cleanup selected instruments: 
+2026-08-31 09:38:35.240 [T7] Initialize selected instruments start. BaseDirectory=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\TopologyVerify\Debug\; TestDLL=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\TopologyVerify\Debug\LegacyRuntime\CSP.TestDLL.dll
+2026-08-31 09:38:35.240 [T7] Initialize instrument DAQ: Resource=PCI-6229; Parameter=
+2026-08-31 09:38:35.260 [T6] Cleanup selected instruments: DAQ
+2026-08-31 09:43:13.103 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 09:43:13.962 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 09:43:15.932 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 09:43:17.401 [T8] Instrument selection received: [{"Name":"DAQ","Type":"DAQ","Mode":"NI","Resource":"PCI-6229","Parameter":""}]
+2026-08-31 09:43:17.405 [T7] Cleanup selected instruments: 
+2026-08-31 09:43:17.406 [T7] Initialize selected instruments start. BaseDirectory=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\TopologyVerify\Debug\; TestDLL=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\TopologyVerify\Debug\LegacyRuntime\CSP.TestDLL.dll
+2026-08-31 09:43:17.411 [T7] Initialize instrument DAQ: Resource=PCI-6229; Parameter=
+2026-08-31 09:43:17.453 [T8] Cleanup selected instruments: DAQ
+2026-08-31 09:46:26.884 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 09:51:19.873 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 09:51:20.744 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 09:51:22.786 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 09:51:24.237 [T7] Instrument selection received: [{"Name":"DAQ","Type":"DAQ","Mode":"NI","Resource":"PCI-6229","Parameter":""}]
+2026-08-31 09:51:24.241 [T6] Cleanup selected instruments: 
+2026-08-31 09:51:24.241 [T6] Initialize selected instruments start. BaseDirectory=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\TopologyVerify\Debug\; TestDLL=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\TopologyVerify\Debug\LegacyRuntime\CSP.TestDLL.dll
+2026-08-31 09:51:24.241 [T6] Initialize instrument DAQ: Resource=PCI-6229; Parameter=
+2026-08-31 09:51:24.271 [T5] Cleanup selected instruments: DAQ
+2026-08-31 09:52:27.809 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 10:12:21.118 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 10:12:21.989 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 10:12:24.188 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 15:04:58.901 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 16:09:22.343 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 16:09:23.732 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 16:09:26.380 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 16:10:38.544 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 16:20:08.523 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 16:20:09.934 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 16:20:12.291 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 16:20:15.039 [T5] Instrument selection received: [{"Name":"DAQ","Type":"DAQ","Mode":"NI","Resource":"PCI-6229","Parameter":""}]
+2026-08-31 16:20:15.047 [T6] Cleanup selected instruments: 
+2026-08-31 16:20:15.049 [T6] Initialize selected instruments start. BaseDirectory=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\TopologyVerify\Debug\; TestDLL=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\TopologyVerify\Debug\LegacyRuntime\CSP.TestDLL.dll
+2026-08-31 16:20:15.049 [T6] Initialize instrument DAQ: Resource=PCI-6229; Parameter=
+2026-08-31 16:20:15.096 [T5] Cleanup selected instruments: DAQ

@@ -1,0 +1,127 @@
+{
+	"SerialNumberLen": 10,
+	"ProjectName": "Mahindra",
+	"StationName": "EOL",
+	"SequenceVersion": "1.0.0.2",
+	"UIDisplayType": "All",
+	"LogFilePath": "D:\\CSharpTestPlatform\\LogfilePath",
+
+	"StepList":
+	[
+		{
+			"StepName": "我是序列一一一一一一一",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "NumberTest",
+			"RecordingLog": true,
+			"InputData": 66,
+			"InputData2": 77,
+			"LowLimit": 10,
+			"HighLimit": 99,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "OBC OBC Output voltage Skip",
+			"RunMode": "Skip",	//Normal/Skip/Break
+			"FunctionName": "NumberTest",
+			"RecordingLog": true,
+			"InputData": 66,
+			"InputData2": 88,
+			"LowLimit": 10,
+			"HighLimit": 99,
+			"Comtype": "GELE",
+			"Unit": "A",
+		},
+		{
+			"StepName": "XXXXXXXXXXXXXXXXX",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "StopFlagTest",
+			"RecordingLog": true,
+			"InputData": 66
+		},
+		{
+			"StepName": "Boot Test",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "BoolTest",
+			"RecordingLog": true,
+		},
+		{
+			"StepName": "OBC OBC Output voltage 333",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "StringTest",
+			"RecordingLog": true,
+			"InputData": "abc123456789",
+			"InputData2": "abc123",
+			"StringLimit": "abc123"
+		},
+		{
+			"StepName": "OBC OBC Output voltage 444",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "NumberTest",
+			"RecordingLog": true,
+			"InputData": 77,
+			"InputData2": 99,
+			"LowLimit": 10,
+			"HighLimit": 99,
+			"Comtype": "GELE",
+			"Unit": "V",
+		},
+		{
+			"StepName": "OBC OBC Output voltage 555",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "NumberTest",
+			"RecordingLog": true,
+			"InputData": 66,
+			"InputData2": 88,
+			"LowLimit": 10,
+			"HighLimit": 99,
+			"Comtype": "GELE",
+			"Unit": "V",
+		},
+		{
+			"StepName": "OBC OBC Output voltage 666",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "StringTest",
+			"RecordingLog": true,
+			"InputData": "abc123",
+			"InputData2": "abc123",
+			"StringLimit": "abc123"
+		},
+		{
+			"StepName": "OBC OBC Output voltage 777",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "BoolTest",
+			"RecordingLog": true,
+		},
+		{
+			"StepName": "OBC OBC Output voltage 888",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "BoolTest",
+			"RecordingLog": true,
+		},
+		{
+			"StepName": "OBC OBC Output voltage 999",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "BoolTest",
+			"RecordingLog": true,
+		},
+		{
+			"StepName": "OBC OBC Output voltage 10",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "BoolTest",
+			"RecordingLog": true,
+		},
+		{
+			"StepName": "OBC OBC Output voltage 11",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "BoolTest",
+			"RecordingLog": true,
+		},
+		{
+			"StepName": "OBC OBC Output voltage 12",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "BoolTest",
+			"RecordingLog": true,
+		}
+	]
+}

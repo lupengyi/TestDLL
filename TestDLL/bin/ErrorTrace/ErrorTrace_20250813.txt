@@ -1,0 +1,1485 @@
+2025-08-13 16:27:31
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:27:33
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:27:35
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:27:37
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:27:39
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:27:41
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:27:43
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:27:45
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:27:47
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:27:49
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:27:52
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:27:54
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:27:56
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:27:58
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:28:00
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:28:02
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:28:04
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:28:06
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:44:53
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:44:55
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:44:57
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:44:59
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:01
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:03
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:05
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:08
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:10
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:12
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:14
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:16
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:22
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:24
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:26
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:28
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:30
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:33
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:35
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:37
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:39
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:41
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:43
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:45
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:47
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:49
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:51
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:45:53
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:13
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:15
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:17
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:19
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:22
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:24
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:26
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:28
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:30
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:32
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:34
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:36
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:38
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:40
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:42
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:44
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:47
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:49
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:51
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:53
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:55
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:57
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:48:59
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:01
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:03
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:05
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:07
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:09
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:12
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:14
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:30
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:32
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:34
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:36
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:38
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:40
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:42
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:44
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:47
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:49
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:51
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:53
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:55
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:57
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:49:59
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:50:01
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:50:03
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 16:50:05
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 17:06:52
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 17:06:54
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 17:06:56
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 17:06:58
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 17:07:00
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 17:07:02
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 17:07:04
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 17:07:06
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 17:07:08
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 17:07:10
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 17:07:13
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 19:49:02
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 19:49:05
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 19:49:07
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 19:49:09
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 19:49:11
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 19:49:13
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 19:49:15
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 19:49:17
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 19:49:19
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 19:49:21
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 19:49:23
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 19:49:26
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 19:49:28
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 19:49:30
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 19:49:32
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 19:49:34
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 19:49:36
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 19:49:38
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 19:49:40
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 20:06:27
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 20:06:29
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 20:06:31
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 20:06:33
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 20:06:35
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 20:06:37
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 20:06:39
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 20:06:42
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 20:06:44
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 20:06:46
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+
+2025-08-13 20:06:48
+System.IO.FileNotFoundException: Could not find file 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'.
+File name: 'D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json'
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.File.InternalReadAllBytes(String path, Boolean checkHost)
+   at System.IO.File.ReadAllBytes(String path)
+   at CSP.MainClass.OpenSequence(Int32 socketIndex, String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 431
+====================================================================================================
+

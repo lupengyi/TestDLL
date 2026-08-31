@@ -1,0 +1,20 @@
+{
+  "DefaultStationIndex": 0,
+  "StationConfigList": [
+    {
+      "SocketNumber": 1,
+      "SocketColumns": 1,
+      "DefaultON_MES": false,
+      "StopIfFailed": true,
+      "ActionLoged": true,
+      "StationName": "DEBUG",
+      "UIDisplayType": "All",
+      "StepDisplayType": "All",
+      "LogoFilePath": "E:\\FST\\TestDLL\\ManualCanDebug\\ManualCanDebug\\bin\\CodexVerify\\Debug\\Config\\Logo1.png",
+      "DLLFilePath": "E:\\FST\\TestDLL\\ManualCanDebug\\ManualCanDebug\\bin\\CodexVerify\\Debug\\LegacyRuntime\\CSP.TestDLL.dll",
+      "DefaultSequence": "E:\\FST\\TestDLL\\ManualCanDebug\\ManualCanDebug\\bin\\CodexVerify\\Debug\\Config\\DefaultSequence.json",
+      "DLLClassName": "CSP.TestDllMain",
+      "Title": "FCT 完整流程调试"
+    }
+  ]
+}

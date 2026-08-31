@@ -1,0 +1,215 @@
+{
+  "Id": "c96-std-machine-hv-on",
+  "Name": "机台高压预充与主供电",
+  "Category": "高压",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [
+    {
+      "Name": "Voltage",
+      "DisplayName": "目标高压",
+      "Type": "double",
+      "DefaultValue": 618.0,
+      "Unit": "V",
+      "Description": "",
+      "Required": true
+    },
+    {
+      "Name": "PrechargeMs",
+      "DisplayName": "预充等待",
+      "Type": "int",
+      "DefaultValue": 1000,
+      "Unit": "ms",
+      "Description": "",
+      "Required": true
+    }
+  ],
+  "Steps": [
+    {
+      "Id": "13c7391ead5242ba9d54bb934982471d",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "高压源设为0V",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "HVDC",
+        "Operation": "SetVoltage",
+        "ResultMode": "Action",
+        "Voltage": 0.0
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "edb474048803424884a9646c383fcf3e",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "高压源输出打开",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "HVDC",
+        "Operation": "SetOutput",
+        "ResultMode": "Action",
+        "Output": true
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "327ca994715b415bb6119c28f51b7beb",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "机台KM1与KM2复位",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "RELAY_FCT",
+        "Operation": "SetDO",
+        "ResultMode": "Action",
+        "Channels": "OUT36,OUT37",
+        "Values": "0,0",
+        "Slave": 1
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "69ff8d20166540dd9b72e4d1b416e1d7",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "机台KM2预充接通",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "RELAY_FCT",
+        "Operation": "SetDO",
+        "ResultMode": "Action",
+        "Channels": "OUT37",
+        "Values": "1",
+        "Slave": 1
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "0008888aca6b4f91aa5e3b58e45cc971",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "等待预充",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteLogic",
+        "RecordingLog": true,
+        "Operation": "Delay",
+        "ResultMode": "Action",
+        "TimeMs": 1000
+      },
+      "ParameterBindings": {
+        "TimeMs": "PrechargeMs"
+      }
+    },
+    {
+      "Id": "065e074333a4465080307eb5aa2f9c03",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "机台KM1主供电接通",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "RELAY_FCT",
+        "Operation": "SetDO",
+        "ResultMode": "Action",
+        "Channels": "OUT36",
+        "Values": "1",
+        "Slave": 1
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "55761e1c4a324662bec0d016933c6117",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "释放机台KM2预充",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "RELAY_FCT",
+        "Operation": "SetDO",
+        "ResultMode": "Action",
+        "Channels": "OUT37",
+        "Values": "0",
+        "Slave": 1
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "44c26230b2bf46849e01b071cf7d67f9",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "设置目标高压",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "HVDC",
+        "Operation": "SetVoltage",
+        "ResultMode": "Action",
+        "Voltage": 618.0
+      },
+      "ParameterBindings": {
+        "Voltage": "Voltage"
+      }
+    },
+    {
+      "Id": "7cad5f5a338d467f8e14fc0fb6d61cd1",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "高压稳定等待",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteLogic",
+        "RecordingLog": true,
+        "Operation": "Delay",
+        "ResultMode": "Action",
+        "TimeMs": 1000
+      },
+      "ParameterBindings": {}
+    }
+  ]
+}

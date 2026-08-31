@@ -1,0 +1,20 @@
+2026-02-02 09:22:23
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception ---> System.Exception ---> System.IO.IOException: The process cannot access the file 'D:\CanTraceLog\20260202.asc' because it is being used by another process.
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access)
+   at Instruments.CAN.ZLG_CAN.StartTraceLog(String logFilePath) in D:\InstrumentDriver\ZLG_CAN_V2.1\ZLG_CAN\ZLG_CAN.cs:line 713
+   --- End of inner exception stack trace ---
+   at Instruments.CAN.ZLG_CAN.StartTraceLog(String logFilePath) in D:\InstrumentDriver\ZLG_CAN_V2.1\ZLG_CAN\ZLG_CAN.cs:line 723
+   at Instruments.CAN.CANWrapper.StartTraceLog(String logFilePath)
+   --- End of inner exception stack trace ---
+   at Instruments.CAN.CANWrapper.StartTraceLog(String logFilePath)
+   at CSP.TestDllMain.PreUUT(Int32 socketIndex) in D:\TestDLL\TestDLL\TestDllMain.cs:line 279
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.SocketUUT.<StartTesting>b__31_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\SocketUUT.cs:line 278
+====================================================================================================
+

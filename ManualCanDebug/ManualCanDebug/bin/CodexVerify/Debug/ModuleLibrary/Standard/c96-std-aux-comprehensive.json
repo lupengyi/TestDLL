@@ -1,0 +1,1646 @@
+{
+  "Id": "c96-std-aux-comprehensive",
+  "Name": "辅驱DCDC油泵气泵综合测试",
+  "Category": "DCDC/辅驱",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [
+    {
+      "Name": "DcdcLoadCurrent",
+      "DisplayName": "DCDC负载电流",
+      "Type": "double",
+      "DefaultValue": 100.0,
+      "Unit": "A",
+      "Description": "",
+      "Required": true
+    },
+    {
+      "Name": "OilCurrent",
+      "DisplayName": "油泵额定电流",
+      "Type": "double",
+      "DefaultValue": 17.0,
+      "Unit": "A",
+      "Description": "",
+      "Required": true
+    },
+    {
+      "Name": "AirCurrent",
+      "DisplayName": "气泵额定电流",
+      "Type": "double",
+      "DefaultValue": 17.0,
+      "Unit": "A",
+      "Description": "",
+      "Required": true
+    },
+    {
+      "Name": "Frequency",
+      "DisplayName": "辅驱频率",
+      "Type": "double",
+      "DefaultValue": 50.0,
+      "Unit": "Hz",
+      "Description": "",
+      "Required": true
+    },
+    {
+      "Name": "VfVoltage",
+      "DisplayName": "VF电压百分比",
+      "Type": "double",
+      "DefaultValue": 1.9,
+      "Unit": "%",
+      "Description": "",
+      "Required": true
+    },
+    {
+      "Name": "HoldTimeMs",
+      "DisplayName": "带载保持时间",
+      "Type": "int",
+      "DefaultValue": 10000,
+      "Unit": "ms",
+      "Description": "",
+      "Required": true
+    }
+  ],
+  "Steps": [
+    {
+      "Id": "4cdcb6f6eeba4e149e971aa52416bd13",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "PDU主驱与共用回路100ms周期控制",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "StartPeriodicDbc",
+        "ResultMode": "Action",
+        "PeriodicKey": "VCU_PDU",
+        "PeriodMs": 100,
+        "CanId": "0CF2503B",
+        "DataHex": "01 00 01 00 00 00 00 00"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "4880bb8accc34cdb8da750515a2a8bb9",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "PDU上电稳定等待",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteLogic",
+        "RecordingLog": true,
+        "Operation": "Delay",
+        "ResultMode": "Action",
+        "TimeMs": 2000
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "f9a31e4cdaab4ce78698bf5291c374d3",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取PowerIniDelay",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "PowerIniDelay",
+        "TimeoutMs": 1000,
+        "Unit": ""
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "42348c68ac97451ab1ab3aa26318b47b",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取InitOver",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "InitOver",
+        "TimeoutMs": 1000,
+        "Unit": ""
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "007a37a8b61b443f84f78be64dfe46b5",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取Init_FlagM0MPSuccess",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "Init_FlagM0MPSuccess",
+        "TimeoutMs": 1000,
+        "Unit": ""
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "d77b42cb838d4aa886150b09b54aa348",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取Init_FlagL0LPSuccess",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "Init_FlagL0LPSuccess",
+        "TimeoutMs": 1000,
+        "Unit": ""
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "5c6cd19e6b4a448a8045a504b2f4a12a",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取MotP_Volt",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "MotP_Volt",
+        "TimeoutMs": 1000,
+        "Unit": "V"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "350ad4961e724b37a629e8c37ca4c8ad",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取LotP_Volt",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "LotP_Volt",
+        "TimeoutMs": 1000,
+        "Unit": "V"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "b44e44da803a4641bd068f28779fabbe",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取BUSVoltage",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "BUSVoltage",
+        "TimeoutMs": 1000,
+        "Unit": "V"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "9786b38699da4dc18079aaaf42a62f5e",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取DCDC_SwVer1",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "DCDC_SwVer1",
+        "TimeoutMs": 1000,
+        "Unit": ""
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "5030914a22464cf68cfaa81bed538ef0",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取DCDC_SwVer2",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "DCDC_SwVer2",
+        "TimeoutMs": 1000,
+        "Unit": ""
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "085a49a10732489d801ea2197474e386",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取DCDC_SwVer3",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "DCDC_SwVer3",
+        "TimeoutMs": 1000,
+        "Unit": ""
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "dbc378e8aea14b60a9fb4f35332effef",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取DCDC_InVoltage",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "DCDC_InVoltage",
+        "TimeoutMs": 1000,
+        "Unit": "V"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "24557c1593434d3ab7c98bb8c6c0060d",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取DCDC_OutVoltage",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "DCDC_OutVoltage",
+        "TimeoutMs": 1000,
+        "Unit": "V"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "dfedd0a111684cdbaabe583b851ef354",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取DCDC_OutCurrent",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "DCDC_OutCurrent",
+        "TimeoutMs": 1000,
+        "Unit": "A"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "baea223778654610ae509b9a9655cbc5",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取DCDC_FaultCode",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "DCDC_FaultCode",
+        "TimeoutMs": 1000,
+        "Unit": ""
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "c86866664c2e4c048ef7fb74e24d800f",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取OilPump_SwModelL",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "OilPump_SwModelL",
+        "TimeoutMs": 1000,
+        "Unit": ""
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "7a12cb629c0a4014bdd0274e979ad5bf",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取OilPump_SwModelH",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "OilPump_SwModelH",
+        "TimeoutMs": 1000,
+        "Unit": ""
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "5f3ee933ec164224ac39ce9528825958",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取OilPump_SwVer",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "OilPump_SwVer",
+        "TimeoutMs": 1000,
+        "Unit": ""
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "487775e8571f4cb5b260a25b94e2f3ec",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取OilPump_RatedCurr",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "OilPump_RatedCurr",
+        "TimeoutMs": 1000,
+        "Unit": ""
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "c76fb2527c6d41a5b2eefc6cf60977cd",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取OilPump_RatedPower",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "OilPump_RatedPower",
+        "TimeoutMs": 1000,
+        "Unit": ""
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "857e77f870754e3aae2b8efe709c30f5",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取OilPump_ModuleTemp",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "OilPump_ModuleTemp",
+        "TimeoutMs": 1000,
+        "Unit": "degC"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "92ef83409f484defb5d1bca2b436acc4",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取AirPump_SwModelL",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "AirPump_SwModelL",
+        "TimeoutMs": 1000,
+        "Unit": ""
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "9c1c43e7dff141eaa1f1f68fa625481d",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取AirPump_SwModelH",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "AirPump_SwModelH",
+        "TimeoutMs": 1000,
+        "Unit": ""
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "baa547a2c41e4927bb74759e9befe37a",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取AirPump_SwVer",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "AirPump_SwVer",
+        "TimeoutMs": 1000,
+        "Unit": ""
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "6c4462ac22eb45b289604addf427fc2e",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取AirPump_RatedCurr",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "AirPump_RatedCurr",
+        "TimeoutMs": 1000,
+        "Unit": ""
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "430ea4ce6b294f589dbb44c528332e12",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取AirPump_RatedPower",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "AirPump_RatedPower",
+        "TimeoutMs": 1000,
+        "Unit": ""
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "edb1e21ab5be4b888b164976c15e520c",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取AirPump_ModuleTemp",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "AirPump_ModuleTemp",
+        "TimeoutMs": 1000,
+        "Unit": "degC"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "4fe095905cf74f208383420fd637ab68",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "油泵17A-50Hz-VF1.9%周期启动",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "StartPeriodicDbc",
+        "ResultMode": "Action",
+        "PeriodicKey": "OIL_PUMP",
+        "PeriodMs": 100,
+        "SignalsJson": "{\"DCDC_Start_Cmd\":170,\"DCAC_Steer_Start_Cmd\":85,\"DCAC_Steer_RatedCurr\":${OilCurrent},\"DCAC_Steer_FreqCmd\":${Frequency},\"DCAC_Steer_VF_Voltage\":${VfVoltage}}"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "65c4322858344c128325dfbc482651bc",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "油泵带载保持",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteLogic",
+        "RecordingLog": true,
+        "Operation": "Delay",
+        "ResultMode": "Action",
+        "TimeMs": 10000
+      },
+      "ParameterBindings": {
+        "TimeMs": "HoldTimeMs"
+      }
+    },
+    {
+      "Id": "6143f85f7b854dfea6713142ebd8223e",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "油泵U相DAQ电流",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "DAQ",
+        "Operation": "Read",
+        "ResultMode": "Information",
+        "Hardware": "NI9227",
+        "PhysicalChannel": "cDAQ1Mod4/ai0",
+        "Channel": 0,
+        "Ratio": 2000.0,
+        "Offset": 0.0,
+        "Unit": "A"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "eefb0628a67444dbb848be3ef6c3af9b",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "油泵V相DAQ电流",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "DAQ",
+        "Operation": "Read",
+        "ResultMode": "Information",
+        "Hardware": "NI9227",
+        "PhysicalChannel": "cDAQ1Mod4/ai1",
+        "Channel": 0,
+        "Ratio": 2000.0,
+        "Offset": 0.0,
+        "Unit": "A"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "bdbc39f14a5f42cb85b1cf824ea8b859",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "油泵W相DAQ电流",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "DAQ",
+        "Operation": "Read",
+        "ResultMode": "Information",
+        "Hardware": "NI9227",
+        "PhysicalChannel": "cDAQ1Mod4/ai2",
+        "Channel": 0,
+        "Ratio": 2000.0,
+        "Offset": 0.0,
+        "Unit": "A"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "595a47153a2c49ddb0ff3d9a60221eb3",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取OilPump_OutFreq",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "OilPump_OutFreq",
+        "TimeoutMs": 1000,
+        "Unit": "Hz"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "a1aaab24a88b4e93a528338df083c3fc",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取OilPump_InVoltage",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "OilPump_InVoltage",
+        "TimeoutMs": 1000,
+        "Unit": "V"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "1bead330f3254cfe9c608febe85b6ce0",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取OilPump_OutVoltage",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "OilPump_OutVoltage",
+        "TimeoutMs": 1000,
+        "Unit": "V"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "71ae360f61fd4ec4b8cbd3e63e9bc0dd",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取OilPump_OutCurrent",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "OilPump_OutCurrent",
+        "TimeoutMs": 1000,
+        "Unit": "A"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "0e8602314ccc49848d5fdbd5974258f7",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取OilPump_ModuleTemp",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "OilPump_ModuleTemp",
+        "TimeoutMs": 1000,
+        "Unit": "degC"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "8b0379e1c004413ba3878f1f3bfc58a6",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取OilPump_FaultCode",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "OilPump_FaultCode",
+        "TimeoutMs": 1000,
+        "Unit": ""
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "860a7edf168c41b2b13d57674f21b85a",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "停止周期发送OIL_PUMP",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "StopPeriodicDbc",
+        "ResultMode": "Action",
+        "PeriodicKey": "OIL_PUMP"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "e66f616fd2b448fe88aee9c770c3c3e6",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "油泵停止命令",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "SendDbcSignals",
+        "ResultMode": "Action",
+        "SignalsJson": "{\"DCDC_Start_Cmd\":170,\"DCAC_Steer_Start_Cmd\":170}"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "5e1efd2dc7b44e80b3ee479e23699fe0",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "气泵17A-50Hz-VF1.9%周期启动",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "StartPeriodicDbc",
+        "ResultMode": "Action",
+        "PeriodicKey": "AIR_PUMP",
+        "PeriodMs": 100,
+        "SignalsJson": "{\"DCAC_Air_Start_Cmd\":85,\"DCAC_Air_RatedCurr\":${AirCurrent},\"DCAC_Air_FreqCmd\":${Frequency},\"DCAC_Air_VF_Voltage\":${VfVoltage}}"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "77e06f93ca304d5788f8a9144ebf7718",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "气泵带载保持",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteLogic",
+        "RecordingLog": true,
+        "Operation": "Delay",
+        "ResultMode": "Action",
+        "TimeMs": 10000
+      },
+      "ParameterBindings": {
+        "TimeMs": "HoldTimeMs"
+      }
+    },
+    {
+      "Id": "831684da7776474bb33231b9c13f5175",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "气泵U相DAQ电流",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "DAQ",
+        "Operation": "Read",
+        "ResultMode": "Information",
+        "Hardware": "NI9227",
+        "PhysicalChannel": "cDAQ1Mod3/ai0",
+        "Channel": 0,
+        "Ratio": 2000.0,
+        "Offset": 0.0,
+        "Unit": "A"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "33075224b66d46e791ea7f3a8d5b0f76",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "气泵V相DAQ电流",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "DAQ",
+        "Operation": "Read",
+        "ResultMode": "Information",
+        "Hardware": "NI9227",
+        "PhysicalChannel": "cDAQ1Mod3/ai1",
+        "Channel": 0,
+        "Ratio": 2000.0,
+        "Offset": 0.0,
+        "Unit": "A"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "cea25690aff64854ac3226f2b70b7b9f",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "气泵W相DAQ电流",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "DAQ",
+        "Operation": "Read",
+        "ResultMode": "Information",
+        "Hardware": "NI9227",
+        "PhysicalChannel": "cDAQ1Mod3/ai2",
+        "Channel": 0,
+        "Ratio": 2000.0,
+        "Offset": 0.0,
+        "Unit": "A"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "004fa313ae274900ae615e4188b5c141",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取AirPump_OutFreq",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "AirPump_OutFreq",
+        "TimeoutMs": 1000,
+        "Unit": "Hz"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "8b8e4739e20d4fabba20cf01363a10ef",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取AirPump_InVoltage",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "AirPump_InVoltage",
+        "TimeoutMs": 1000,
+        "Unit": "V"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "eef320372c5f4294a996a9d66c28d3a4",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取AirPump_OutVoltage",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "AirPump_OutVoltage",
+        "TimeoutMs": 1000,
+        "Unit": "V"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "2a36a67504b94e77afa9be6c2efa6594",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取AirPump_OutCurrent",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "AirPump_OutCurrent",
+        "TimeoutMs": 1000,
+        "Unit": "A"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "25cc39bfef514162977ebcaac80fed32",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取AirPump_ModuleTemp",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "AirPump_ModuleTemp",
+        "TimeoutMs": 1000,
+        "Unit": "degC"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "98d4b378905846af953866e934f68a75",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取AirPump_FaultCode",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "AirPump_FaultCode",
+        "TimeoutMs": 1000,
+        "Unit": ""
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "c916c71cdff64342a90004829a3ed2c4",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "停止周期发送AIR_PUMP",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "StopPeriodicDbc",
+        "ResultMode": "Action",
+        "PeriodicKey": "AIR_PUMP"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "1c7443ff711f4705a421acca016f3d9e",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "气泵停止命令",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "SendDbcSignals",
+        "ResultMode": "Action",
+        "SignalsJson": "{\"DCAC_Air_Start_Cmd\":170}"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "c9c8d606c1464d41aa8ca2959247d593",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "DCDC 100ms周期启动",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "StartPeriodicDbc",
+        "ResultMode": "Action",
+        "PeriodicKey": "DCDC_COMMAND",
+        "PeriodMs": 100,
+        "SignalsJson": "{\"DCDC_Start_Cmd\":85,\"DCAC_Steer_Start_Cmd\":170}"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "ea40de135ab34824a4c7d0ebd4c84fad",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "高压表切到高压档",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "RELAY_FCT",
+        "Operation": "SetDO",
+        "ResultMode": "Action",
+        "Channels": "OUT45",
+        "Values": "1",
+        "Slave": 1
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "34106e6b7aac4c2184705b951957b31b",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "高压15选1选择DCDC输出HV2",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "RELAY_HVMUX",
+        "Operation": "Select15",
+        "ResultMode": "Action",
+        "Selection": 2,
+        "SwitchDelayMs": 50,
+        "Slave": 1
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "8050f2b2da0d44d383339438e1b0b336",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "电子负载CC模式",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "DCDC_LOAD",
+        "Operation": "SetMode",
+        "ResultMode": "Action",
+        "Mode": "Ccm"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "88d7a6dbc60947d68441acf6edc0967a",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "电子负载设置100A",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "DCDC_LOAD",
+        "Operation": "SetCurrent",
+        "ResultMode": "Action",
+        "Current": 100.0
+      },
+      "ParameterBindings": {
+        "Current": "DcdcLoadCurrent"
+      }
+    },
+    {
+      "Id": "27762a6bea5640108c5e54de611e60f5",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "电子负载输入打开",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "DCDC_LOAD",
+        "Operation": "OutputOn",
+        "ResultMode": "Action"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "f22fa8026e0a44c39fbabd7b01d35cac",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "DCDC带载稳定等待",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteLogic",
+        "RecordingLog": true,
+        "Operation": "Delay",
+        "ResultMode": "Action",
+        "TimeMs": 10000
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "bd05fb31dc1f4e5da698194e40d0b46f",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取DCDC_OutVoltage",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "DCDC_OutVoltage",
+        "TimeoutMs": 1000,
+        "Unit": "V"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "93309488490d410fb1edc02a0dcbbcb5",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取DCDC_OutCurrent",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "DCDC_OutCurrent",
+        "TimeoutMs": 1000,
+        "Unit": "A"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "780bf8569c2c4150a1f73748c9da0943",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取DCDC_InVoltage",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "DCDC_InVoltage",
+        "TimeoutMs": 1000,
+        "Unit": "V"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "79576421e8184d10a5d7da841870430d",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取DCDC_FaultCode",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "ReadDbcSignal",
+        "ResultMode": "Information",
+        "SignalName": "DCDC_FaultCode",
+        "TimeoutMs": 1000,
+        "Unit": ""
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "048e230021694e44bf6fc3657d58d94a",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "电子负载读取电压",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "DCDC_LOAD",
+        "Operation": "ReadVoltage",
+        "ResultMode": "Information",
+        "Unit": "V"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "5eded3000d0a43e48b3ca653cbc88ded",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "电子负载读取电流",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "DCDC_LOAD",
+        "Operation": "ReadCurrent",
+        "ResultMode": "Information",
+        "Unit": "A"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "49d4b3a06fb94079bf8dbab1811f9d47",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "电子负载读取功率",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "DCDC_LOAD",
+        "Operation": "ReadPower",
+        "ResultMode": "Information",
+        "Unit": "W"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "2dc63e331af4439da03493451868b4d2",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "电子负载输入关闭",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "DCDC_LOAD",
+        "Operation": "OutputOff",
+        "ResultMode": "Action"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "07e984c013ce4c4cb1b2ba6c7c73e1fb",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "停止周期发送DCDC_COMMAND",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "StopPeriodicDbc",
+        "ResultMode": "Action",
+        "PeriodicKey": "DCDC_COMMAND"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "c3a2721bca854329af9231915c9ca0b2",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "DCDC停止命令",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "SendDbcSignals",
+        "ResultMode": "Action",
+        "SignalsJson": "{\"DCDC_Start_Cmd\":170,\"DCAC_Steer_Start_Cmd\":170}"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "f5ec702fd05b4b63953b7d43f47a85a3",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "PDU断开命令短周期发送",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "StartPeriodicDbc",
+        "ResultMode": "Action",
+        "PeriodicKey": "VCU_PDU",
+        "PeriodMs": 100,
+        "CanId": "0CF2503B",
+        "DataHex": "00 00 00 00 00 00 00 00"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "4a1f4dd3c6a548acbb80d3a241af1987",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "PDU断开保持",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteLogic",
+        "RecordingLog": true,
+        "Operation": "Delay",
+        "ResultMode": "Action",
+        "TimeMs": 500
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "25d21883c936463982860914064aab18",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "停止周期发送VCU_PDU",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "AUXCAN",
+        "Operation": "StopPeriodicDbc",
+        "ResultMode": "Action",
+        "PeriodicKey": "VCU_PDU"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "a3f228ae21734e7db0e07ca069c0c10e",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "关闭高压测量选择",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "RELAY_HVMUX",
+        "Operation": "Disable15",
+        "ResultMode": "Action",
+        "SwitchDelayMs": 50,
+        "Slave": 1
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "dd5f82ae48b749449f5f251fe12886e3",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "万用表切回低压档",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "RELAY_FCT",
+        "Operation": "SetDO",
+        "ResultMode": "Action",
+        "Channels": "OUT45",
+        "Values": "0",
+        "Slave": 1
+      },
+      "ParameterBindings": {}
+    }
+  ]
+}

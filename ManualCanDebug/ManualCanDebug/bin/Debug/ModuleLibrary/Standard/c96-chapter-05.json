@@ -1,0 +1,229 @@
+{
+  "Id": "c96-chapter-05",
+  "Name": "05 高压精度与故障注入",
+  "Category": "章节",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "87751ea7ff2a455cb89840384eece6ac",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-fault",
+      "ReferencedBlockName": "过压故障状态读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "ExpectedFault": 0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "7b1d4414683949c89b075e954bf3f084",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-measure",
+      "ReferencedBlockName": "高压设定与双重读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 0.0,
+        "LowLimit": 0.0,
+        "HighLimit": 5.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "fc364619954642bbb07d2e4f54a534ce",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-measure",
+      "ReferencedBlockName": "高压设定与双重读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 100.0,
+        "LowLimit": 97.0,
+        "HighLimit": 103.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "370087d3e2de4fcaaa6c5fd68e34506b",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-measure",
+      "ReferencedBlockName": "高压设定与双重读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 200.0,
+        "LowLimit": 194.0,
+        "HighLimit": 206.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "6048feddad36422f9a9d3632f3bd016b",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-measure",
+      "ReferencedBlockName": "高压设定与双重读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 300.0,
+        "LowLimit": 291.0,
+        "HighLimit": 309.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "88632b094cf94553a26946a1c23f4993",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-measure",
+      "ReferencedBlockName": "高压设定与双重读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 400.0,
+        "LowLimit": 388.0,
+        "HighLimit": 412.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "f09ee94d63ab40eaa69e1c34bbc19fc9",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-fault",
+      "ReferencedBlockName": "过压故障状态读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "ExpectedFault": 1
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "92bda7194e8f45499c82aabd371837f5",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-measure",
+      "ReferencedBlockName": "高压设定与双重读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 500.0,
+        "LowLimit": 485.0,
+        "HighLimit": 515.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "b117f3f5bfdb4432918117763ade421d",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-measure",
+      "ReferencedBlockName": "高压设定与双重读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 600.0,
+        "LowLimit": 582.0,
+        "HighLimit": 618.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "441cf640e96145c68912aac8758bb913",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-measure",
+      "ReferencedBlockName": "高压设定与双重读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 700.0,
+        "LowLimit": 679.0,
+        "HighLimit": 721.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "ab3e9053b322474da9651921b3d97fa5",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-measure",
+      "ReferencedBlockName": "高压设定与双重读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 750.0,
+        "LowLimit": 727.5,
+        "HighLimit": 772.5
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "7da54bf7dbfa421499bfe7dda40fe983",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-fault",
+      "ReferencedBlockName": "过压故障状态读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "ExpectedFault": 0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "1ddc9fc32fb145e2b14b4ad0d7f15952",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-measure",
+      "ReferencedBlockName": "高压设定与双重读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 775.0,
+        "LowLimit": 751.75,
+        "HighLimit": 798.25
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "f2204654849745d48dd75334b1fc720d",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-fault",
+      "ReferencedBlockName": "过压故障状态读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "ExpectedFault": 1
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "383533f3cc2946fcbd8645338374d86e",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-measure",
+      "ReferencedBlockName": "高压设定与双重读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Voltage": 600.0,
+        "LowLimit": 582.0,
+        "HighLimit": 618.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "d18d539d6e7e4253a17e588ece06d5ce",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-hv-fault",
+      "ReferencedBlockName": "过压故障状态读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "ExpectedFault": 0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    }
+  ]
+}

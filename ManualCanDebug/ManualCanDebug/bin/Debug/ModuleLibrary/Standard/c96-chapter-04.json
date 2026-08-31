@@ -1,0 +1,207 @@
+{
+  "Id": "c96-chapter-04",
+  "Name": "04 双电机温度模拟",
+  "Category": "章节",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "163359ec4cde4a59b26619b9473dfa6b",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-motor-temp",
+      "ReferencedBlockName": "电机温度模拟与读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Channel": 1,
+        "Resistance": 842.71,
+        "TableIndex": 12,
+        "LowLimit": -45.0,
+        "HighLimit": -35.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "41f0bbd5be964511b5a82014ee9f2fe9",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-motor-temp",
+      "ReferencedBlockName": "电机温度模拟与读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Channel": 1,
+        "Resistance": 1097.335,
+        "TableIndex": 12,
+        "LowLimit": 20.0,
+        "HighLimit": 30.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "cf65ba80af9745999d5af2f3cfb0da12",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-motor-temp",
+      "ReferencedBlockName": "电机温度模拟与读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Channel": 1,
+        "Resistance": 1308.9,
+        "TableIndex": 12,
+        "LowLimit": 75.0,
+        "HighLimit": 85.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "bcbb433420154c00b7c1ddb2e0f8d91e",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-motor-temp",
+      "ReferencedBlockName": "电机温度模拟与读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Channel": 1,
+        "Resistance": 1479.5,
+        "TableIndex": 12,
+        "LowLimit": 120.0,
+        "HighLimit": 130.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "31a2594c20c34ab5aa82932fc7346a9e",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-motor-temp",
+      "ReferencedBlockName": "电机温度模拟与读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Channel": 1,
+        "Resistance": 1666.2,
+        "TableIndex": 12,
+        "LowLimit": 170.0,
+        "HighLimit": 180.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "97fd32456ed74d87ad1b5a70465b4a7b",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-motor-temp",
+      "ReferencedBlockName": "电机温度模拟与读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Channel": 1,
+        "Resistance": 1097.335,
+        "TableIndex": 12,
+        "LowLimit": 20.0,
+        "HighLimit": 30.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "bab88a676ffa4efebfcd484cf7f82983",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-motor-temp",
+      "ReferencedBlockName": "电机温度模拟与读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Channel": 2,
+        "Resistance": 842.71,
+        "TableIndex": 16,
+        "LowLimit": -45.0,
+        "HighLimit": -35.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "bce98514ef494a0a816e788caea9002d",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-motor-temp",
+      "ReferencedBlockName": "电机温度模拟与读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Channel": 2,
+        "Resistance": 1097.335,
+        "TableIndex": 16,
+        "LowLimit": 20.0,
+        "HighLimit": 30.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "258e4a515e9247eeaa8797a78e0231ef",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-motor-temp",
+      "ReferencedBlockName": "电机温度模拟与读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Channel": 2,
+        "Resistance": 1308.9,
+        "TableIndex": 16,
+        "LowLimit": 75.0,
+        "HighLimit": 85.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "544df9e7bd8e4c4a8bddd52ebd5071e3",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-motor-temp",
+      "ReferencedBlockName": "电机温度模拟与读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Channel": 2,
+        "Resistance": 1479.5,
+        "TableIndex": 16,
+        "LowLimit": 120.0,
+        "HighLimit": 130.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "368663a46e23424eb0a8468c494089f5",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-motor-temp",
+      "ReferencedBlockName": "电机温度模拟与读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Channel": 2,
+        "Resistance": 1666.2,
+        "TableIndex": 16,
+        "LowLimit": 170.0,
+        "HighLimit": 180.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "64722abe8a7340f284c1f80167c032e0",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-motor-temp",
+      "ReferencedBlockName": "电机温度模拟与读取",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Channel": 2,
+        "Resistance": 1097.335,
+        "TableIndex": 16,
+        "LowLimit": 20.0,
+        "HighLimit": 30.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    }
+  ]
+}

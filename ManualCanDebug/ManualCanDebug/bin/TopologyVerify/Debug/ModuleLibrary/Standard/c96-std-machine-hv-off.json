@@ -1,0 +1,133 @@
+{
+  "Id": "c96-std-machine-hv-off",
+  "Name": "机台高压安全下电",
+  "Category": "安全",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "fb34fc7a783243b89a7192d317250ea5",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "高压源降到0V",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": false,
+        "Device": "HVDC",
+        "Operation": "SetVoltage",
+        "ResultMode": "Action",
+        "Voltage": 0.0
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "d00ea5b91a8c47eea5e1dde3ab2fd6f7",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "降压等待",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteLogic",
+        "RecordingLog": false,
+        "Operation": "Delay",
+        "ResultMode": "Action",
+        "TimeMs": 1000
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "f54ded176e784c99b897a326ba4c0501",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "高压源输出关闭",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": false,
+        "Device": "HVDC",
+        "Operation": "SetOutput",
+        "ResultMode": "Action",
+        "Output": false
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "654e334321c6410898240cea24c624b9",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "断开机台KM1与KM2",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": false,
+        "Device": "RELAY_FCT",
+        "Operation": "SetDO",
+        "ResultMode": "Action",
+        "Channels": "OUT36,OUT37",
+        "Values": "0,0",
+        "Slave": 1
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "7b9f9d28f0dc43d0a2ee02a26aec7201",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "关闭高压15选1",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": false,
+        "Device": "RELAY_HVMUX",
+        "Operation": "Disable15",
+        "ResultMode": "Action",
+        "SwitchDelayMs": 50,
+        "Slave": 1
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "e0265b3e57c548d384abfb0015402d59",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "万用表切回低压档",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": false,
+        "Device": "RELAY_FCT",
+        "Operation": "SetDO",
+        "ResultMode": "Action",
+        "Channels": "OUT45",
+        "Values": "0",
+        "Slave": 1
+      },
+      "ParameterBindings": {}
+    }
+  ]
+}

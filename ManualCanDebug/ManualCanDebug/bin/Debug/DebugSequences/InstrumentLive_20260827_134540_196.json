@@ -1,0 +1,23 @@
+{
+  "SerialNumberLen": 0,
+  "ProjectName": "C96_TM2_标准出流调试",
+  "StationName": "OP3020",
+  "SequenceVersion": "C96-TM2-DEBUG-A0",
+  "UIDisplayType": "All",
+  "LogFilePath": "D:\\LogfilePath",
+  "StepList": [
+    {
+      "StepName": "007 TM2安全停机",
+      "RunMode": "Normal",
+      "FunctionName": "FCT_CANTable",
+      "RecordingLog": true,
+      "Operation": "Write",
+      "ResultMode": "Action",
+      "AddrOffset": 128,
+      "TableLength": 39,
+      "ChangesJson": "[{\"Name\":\"Iqs_Start\",\"Offset\":0,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Iqs_End\",\"Offset\":4,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Iqs_Step\",\"Offset\":8,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"20\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Hold_Time_S\",\"Offset\":12,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"10\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Output_Frequency\",\"Offset\":16,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"60\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Mode\",\"Offset\":20,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"4\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Unused\",\"Offset\":21,\"DataSize\":1,\"DataType\":\"int8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Ramp_Time_MS\",\"Offset\":22,\"DataSize\":2,\"DataType\":\"uint16\",\"Endian\":\"Little\",\"Value\":\"50\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Base_Frequency\",\"Offset\":24,\"DataSize\":2,\"DataType\":\"uint16\",\"Endian\":\"Little\",\"Value\":\"10000\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Motor_Gate_Enable\",\"Offset\":26,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"New Data Flag\",\"Offset\":27,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"255\",\"WriteLast\":true,\"WriteFinal\":true},{\"Name\":\"Reset_Motor_Faults\",\"Offset\":28,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Speed_Control_Enable\",\"Offset\":29,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Speed_Setpoint\",\"Offset\":30,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Voltage_Control_Enable\",\"Offset\":34,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Voltage_Setpoint\",\"Offset\":35,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false}]",
+      "VerifyAfterWrite": true,
+      "Product": "C96"
+    }
+  ]
+}

@@ -1,0 +1,194 @@
+2026-08-27 09:31:01
+System.Exception: Sequence File - D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A5.json isn't exists.
+====================================================================================================
+
+2026-08-27 14:12:57
+System.Exception: Sequence File - D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A5.json isn't exists.
+====================================================================================================
+
+2026-08-27 14:16:03
+System.Exception: Sequence File - D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A5.json isn't exists.
+====================================================================================================
+
+2026-08-27 14:17:50
+System.Exception: Sequence File - D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A5.json isn't exists.
+====================================================================================================
+
+2026-08-27 14:18:27
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at CSP.TestDllMain.PreUUT(Int32 socketIndex) in D:\TestDLL\TestDLL\TestDllMain.cs:line 173
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.SocketUUT.<StartTesting>b__31_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\SocketUUT.cs:line 278
+====================================================================================================
+
+2026-08-27 14:20:31
+System.Exception: Sequence File - D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A5.json isn't exists.
+====================================================================================================
+
+2026-08-27 14:22:34
+System.Exception: Sequence File - D:\TestDLL\TestDLL\bin\Sequence\C96_FCT_调试.json isn't exists.
+====================================================================================================
+
+2026-08-27 14:24:40
+Newtonsoft.Json.JsonReaderException: Bad JSON escape sequence: \F. Path 'StationConfigList[0].LogoFilePath', line 14, position 24.
+   在 Newtonsoft.Json.JsonTextReader.ReadStringIntoBuffer(Char quote)
+   在 Newtonsoft.Json.JsonTextReader.ParseValue()
+   在 Newtonsoft.Json.JsonTextReader.Read()
+   在 Newtonsoft.Json.JsonReader.Skip()
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetExtensionData(JsonObjectContract contract, JsonProperty member, JsonReader reader, String memberName, Object o)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   在 Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 583
+====================================================================================================
+
+2026-08-27 14:24:40
+System.Exception: Load Station Config File Error: ---> Newtonsoft.Json.JsonReaderException: Bad JSON escape sequence: \F. Path 'StationConfigList[0].LogoFilePath', line 14, position 24.
+   在 Newtonsoft.Json.JsonTextReader.ReadStringIntoBuffer(Char quote)
+   在 Newtonsoft.Json.JsonTextReader.ParseValue()
+   在 Newtonsoft.Json.JsonTextReader.Read()
+   在 Newtonsoft.Json.JsonReader.Skip()
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetExtensionData(JsonObjectContract contract, JsonProperty member, JsonReader reader, String memberName, Object o)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   在 Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 583
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 706
+   在 CSP.MainClass..ctor(String exeFolderPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 89
+====================================================================================================
+
+2026-08-27 14:26:49
+Newtonsoft.Json.JsonReaderException: Bad JSON escape sequence: \F. Path 'StationConfigList[0].LogoFilePath', line 14, position 24.
+   在 Newtonsoft.Json.JsonTextReader.ReadStringIntoBuffer(Char quote)
+   在 Newtonsoft.Json.JsonTextReader.ParseValue()
+   在 Newtonsoft.Json.JsonTextReader.Read()
+   在 Newtonsoft.Json.JsonReader.Skip()
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetExtensionData(JsonObjectContract contract, JsonProperty member, JsonReader reader, String memberName, Object o)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   在 Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 583
+====================================================================================================
+
+2026-08-27 14:26:49
+System.Exception: Load Station Config File Error: ---> Newtonsoft.Json.JsonReaderException: Bad JSON escape sequence: \F. Path 'StationConfigList[0].LogoFilePath', line 14, position 24.
+   在 Newtonsoft.Json.JsonTextReader.ReadStringIntoBuffer(Char quote)
+   在 Newtonsoft.Json.JsonTextReader.ParseValue()
+   在 Newtonsoft.Json.JsonTextReader.Read()
+   在 Newtonsoft.Json.JsonReader.Skip()
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetExtensionData(JsonObjectContract contract, JsonProperty member, JsonReader reader, String memberName, Object o)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   在 Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 583
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 706
+   在 CSP.MainClass..ctor(String exeFolderPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 89
+====================================================================================================
+
+2026-08-27 14:30:19
+Newtonsoft.Json.JsonReaderException: Bad JSON escape sequence: \F. Path 'StationConfigList[0].LogoFilePath', line 14, position 24.
+   在 Newtonsoft.Json.JsonTextReader.ReadStringIntoBuffer(Char quote)
+   在 Newtonsoft.Json.JsonTextReader.ParseValue()
+   在 Newtonsoft.Json.JsonTextReader.Read()
+   在 Newtonsoft.Json.JsonReader.Skip()
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetExtensionData(JsonObjectContract contract, JsonProperty member, JsonReader reader, String memberName, Object o)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   在 Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 583
+====================================================================================================
+
+2026-08-27 14:30:19
+System.Exception: Load Station Config File Error: ---> Newtonsoft.Json.JsonReaderException: Bad JSON escape sequence: \F. Path 'StationConfigList[0].LogoFilePath', line 14, position 24.
+   在 Newtonsoft.Json.JsonTextReader.ReadStringIntoBuffer(Char quote)
+   在 Newtonsoft.Json.JsonTextReader.ParseValue()
+   在 Newtonsoft.Json.JsonTextReader.Read()
+   在 Newtonsoft.Json.JsonReader.Skip()
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetExtensionData(JsonObjectContract contract, JsonProperty member, JsonReader reader, String memberName, Object o)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   在 Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 583
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 706
+   在 CSP.MainClass..ctor(String exeFolderPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 89
+====================================================================================================
+
+2026-08-27 14:33:05
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at Instruments.PLCS7.S7Net.DBWrite(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[] writeBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 60
+   --- End of inner exception stack trace ---
+   at Instruments.PLCS7.S7Net.DBWrite(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[] writeBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 64
+   at CSP.TestDllMain.AutomationLoop() in E:\FST\TestDLL\TestDLL\TestDllMain.cs:line 157
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.<AutomationThread>b__42_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 828
+====================================================================================================
+
+2026-08-27 14:34:01
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at Instruments.PLCS7.S7Net.DBWrite(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[] writeBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 60
+   --- End of inner exception stack trace ---
+   at Instruments.PLCS7.S7Net.DBWrite(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[] writeBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 64
+   at CSP.TestDllMain.AutomationLoop() in E:\FST\TestDLL\TestDLL\TestDllMain.cs:line 157
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.<AutomationThread>b__42_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 828
+====================================================================================================
+
+2026-08-27 14:34:25
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception ---> System.NullReferenceException: Object reference not set to an instance of an object.
+   at Instruments.PLCS7.S7Net.DBWrite(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[] writeBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 60
+   --- End of inner exception stack trace ---
+   at Instruments.PLCS7.S7Net.DBWrite(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[] writeBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 64
+   at CSP.TestDllMain.AutomationLoop() in E:\FST\TestDLL\TestDLL\TestDllMain.cs:line 157
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.<AutomationThread>b__42_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 828
+====================================================================================================
+

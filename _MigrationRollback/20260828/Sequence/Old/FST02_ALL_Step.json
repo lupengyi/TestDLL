@@ -1,0 +1,60 @@
+{
+	"SerialNumberLen": 0,
+	"ProjectName": "",
+	"StationName": "OP3020",
+	"SequenceVersion": "1.0.0.2",
+	"UIDisplayType": "All",
+	"LogFilePath": "D:\\LogfilePath",
+
+	"StepList":
+	[
+		{
+			"StepName": "Set LVDC Voltage 24V",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "LVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 24
+		},
+		{
+			"StepName": "Delay",
+			"RunMode": "Normal",
+			"FunctionName": "Test_DelayMs",
+			"RecordingLog": true,
+			"TimeMs": 60000
+		},
+		{
+			"StepName": "LoadFinished",
+			"RunMode": "Normal",
+			"FunctionName": "PLC_LoadFinished",
+			"RecordingLog": true
+		},
+		{
+			"StepName": "010202 Passive Discharge",
+			"RunMode": "Skip",
+			"FunctionName": "Test_PassiveDischarge",
+			"RecordingLog": true
+		},
+		{
+			"StepName": "Delay",
+			"RunMode": "Normal",
+			"FunctionName": "Test_DelayMs",
+			"RecordingLog": true,
+			"TimeMs": 10000
+		},
+		{
+			"StepName": "Set HVDC Voltage 0V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 1
+		},
+		
+		{
+			"StepName": "Set HVDC Output OFF",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetOutput",
+			"RecordingLog": true,
+			"Output": false
+		}
+	]
+}

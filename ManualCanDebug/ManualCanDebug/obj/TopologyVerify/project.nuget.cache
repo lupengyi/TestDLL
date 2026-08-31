@@ -1,0 +1,29 @@
+{
+  "version": 2,
+  "dgSpecHash": "mNpQkucJOp4=",
+  "success": true,
+  "projectFilePath": "E:\\FST\\TestDLL\\ManualCanDebug\\ManualCanDebug\\ManualCanDebug.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\2501000857\\.nuget\\packages\\dynamicdata\\7.1.1\\dynamicdata.7.1.1.nupkg.sha512",
+    "C:\\Users\\2501000857\\.nuget\\packages\\log4net\\2.0.12\\log4net.2.0.12.nupkg.sha512",
+    "C:\\Users\\2501000857\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
+    "C:\\Users\\2501000857\\.nuget\\packages\\nodenetwork\\6.0.0\\nodenetwork.6.0.0.nupkg.sha512",
+    "C:\\Users\\2501000857\\.nuget\\packages\\pharmacist.common\\2.0.8\\pharmacist.common.2.0.8.nupkg.sha512",
+    "C:\\Users\\2501000857\\.nuget\\packages\\reactiveui\\13.2.18\\reactiveui.13.2.18.nupkg.sha512",
+    "C:\\Users\\2501000857\\.nuget\\packages\\reactiveui.events.wpf\\13.2.18\\reactiveui.events.wpf.13.2.18.nupkg.sha512",
+    "C:\\Users\\2501000857\\.nuget\\packages\\reactiveui.wpf\\13.2.18\\reactiveui.wpf.13.2.18.nupkg.sha512",
+    "C:\\Users\\2501000857\\.nuget\\packages\\splat\\11.0.1\\splat.11.0.1.nupkg.sha512",
+    "C:\\Users\\2501000857\\.nuget\\packages\\splat.drawing\\11.0.1\\splat.drawing.11.0.1.nupkg.sha512",
+    "C:\\Users\\2501000857\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
+    "C:\\Users\\2501000857\\.nuget\\packages\\system.collections.immutable\\5.0.0\\system.collections.immutable.5.0.0.nupkg.sha512",
+    "C:\\Users\\2501000857\\.nuget\\packages\\system.data.datasetextensions\\4.5.0\\system.data.datasetextensions.4.5.0.nupkg.sha512",
+    "C:\\Users\\2501000857\\.nuget\\packages\\system.drawing.primitives\\4.3.0\\system.drawing.primitives.4.3.0.nupkg.sha512",
+    "C:\\Users\\2501000857\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
+    "C:\\Users\\2501000857\\.nuget\\packages\\system.numerics.vectors\\4.5.0\\system.numerics.vectors.4.5.0.nupkg.sha512",
+    "C:\\Users\\2501000857\\.nuget\\packages\\system.reactive\\5.0.0\\system.reactive.5.0.0.nupkg.sha512",
+    "C:\\Users\\2501000857\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\5.0.0\\system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512",
+    "C:\\Users\\2501000857\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
+    "C:\\Users\\2501000857\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512"
+  ],
+  "logs": []
+}

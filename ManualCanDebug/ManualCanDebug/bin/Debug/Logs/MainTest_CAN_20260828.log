@@ -1,0 +1,1119 @@
+2026-08-28 08:52:13.347 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-28 08:52:28.540 [T3] Instrument selection received: [{"Name":"DUTCAN","Type":"CAN","Mode":"ZLG","Resource":"192.166.6.10","Parameter":"52,2,500000,8000"},{"Name":"AUXCAN","Type":"CAN","Mode":"ZLG","Resource":"192.166.6.10","Parameter":"52,0,500000,8000"},{"Name":"RESOLVERCAN","Type":"CAN","Mode":"ZLG","Resource":"192.166.6.10","Parameter":"52,1,500000,8000"}]
+2026-08-28 08:52:28.547 [T3] Cleanup selected instruments: 
+2026-08-28 08:52:28.548 [T3] Initialize selected instruments start. BaseDirectory=E:\FST\20250607_FCT\2026819_FCT\20250607_FCT\ManualCanDebug\ManualCanDebug\bin\Debug\; TestDLL=E:\FST\20250607_FCT\2026819_FCT\20250607_FCT\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\CSP.TestDLL.dll
+2026-08-28 08:52:28.549 [T3] Initialize instrument DUTCAN: Resource=192.166.6.10; Parameter=52,2,500000,8000
+2026-08-28 08:52:28.551 [T3] CAN runtime: E:\FST\20250607_FCT\2026819_FCT\20250607_FCT\ManualCanDebug\ManualCanDebug\bin\Debug\Instruments.CAN.CANWrapper.dll [40960 bytes, fileVersion=2.2.10.0, modified=2025-11-25 15:52:04]
+2026-08-28 08:52:28.597 [T3] CAN provider: E:\FST\20250607_FCT\2026819_FCT\20250607_FCT\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\Instruments.CAN.ZLG_CAN.dll [27136 bytes, fileVersion=3.2.2.0, modified=2025-12-04 14:16:54]
+2026-08-28 08:52:28.643 [T3] CAN native: E:\FST\20250607_FCT\2026819_FCT\20250607_FCT\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\zlgcan.dll [231936 bytes, fileVersion=, modified=2025-06-16 14:58:48]
+2026-08-28 08:52:28.674 [T3] CAN kernel: E:\FST\20250607_FCT\2026819_FCT\20250607_FCT\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\kerneldlls\CANFDNET.dll [292352 bytes, fileVersion=1.3.0.6, modified=2025-06-16 14:58:48]
+2026-08-28 08:52:28.674 [T3] CAN open request: DeviceType=52; Channel=2; BaudRate=500000; IP=192.166.6.10; Port=8000; DBC=E:\FST\20250607_FCT\2026819_FCT\20250607_FCT\ManualCanDebug\ManualCanDebug\bin\Debug\Config\Flywheel_900A_Z405.dbc
+2026-08-28 08:52:29.088 [T3] CAN open succeeded: DeviceType=52; Channel=2
+2026-08-28 08:52:29.089 [T3] Initialize instrument AUXCAN: Resource=192.166.6.10; Parameter=52,0,500000,8000
+2026-08-28 08:52:29.089 [T3] CAN runtime: E:\FST\20250607_FCT\2026819_FCT\20250607_FCT\ManualCanDebug\ManualCanDebug\bin\Debug\Instruments.CAN.CANWrapper.dll [40960 bytes, fileVersion=2.2.10.0, modified=2025-11-25 15:52:04]
+2026-08-28 08:52:29.089 [T3] CAN provider: E:\FST\20250607_FCT\2026819_FCT\20250607_FCT\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\Instruments.CAN.ZLG_CAN.dll [27136 bytes, fileVersion=3.2.2.0, modified=2025-12-04 14:16:54]
+2026-08-28 08:52:29.089 [T3] CAN native: E:\FST\20250607_FCT\2026819_FCT\20250607_FCT\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\zlgcan.dll [231936 bytes, fileVersion=, modified=2025-06-16 14:58:48]
+2026-08-28 08:52:29.089 [T3] CAN kernel: E:\FST\20250607_FCT\2026819_FCT\20250607_FCT\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\kerneldlls\CANFDNET.dll [292352 bytes, fileVersion=1.3.0.6, modified=2025-06-16 14:58:48]
+2026-08-28 08:52:29.089 [T3] CAN open request: DeviceType=52; Channel=0; BaudRate=500000; IP=192.166.6.10; Port=8000; DBC=E:\FST\20250607_FCT\2026819_FCT\20250607_FCT\ManualCanDebug\ManualCanDebug\bin\Debug\Config\C95C96Auxiliary.dbc
+2026-08-28 08:52:29.098 [T3] CAN open succeeded: DeviceType=52; Channel=0
+2026-08-28 08:52:29.098 [T3] Initialize instrument RESOLVERCAN: Resource=192.166.6.10; Parameter=52,1,500000,8000
+2026-08-28 08:52:29.099 [T3] CAN runtime: E:\FST\20250607_FCT\2026819_FCT\20250607_FCT\ManualCanDebug\ManualCanDebug\bin\Debug\Instruments.CAN.CANWrapper.dll [40960 bytes, fileVersion=2.2.10.0, modified=2025-11-25 15:52:04]
+2026-08-28 08:52:29.099 [T3] CAN provider: E:\FST\20250607_FCT\2026819_FCT\20250607_FCT\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\Instruments.CAN.ZLG_CAN.dll [27136 bytes, fileVersion=3.2.2.0, modified=2025-12-04 14:16:54]
+2026-08-28 08:52:29.100 [T3] CAN native: E:\FST\20250607_FCT\2026819_FCT\20250607_FCT\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\zlgcan.dll [231936 bytes, fileVersion=, modified=2025-06-16 14:58:48]
+2026-08-28 08:52:29.100 [T3] CAN kernel: E:\FST\20250607_FCT\2026819_FCT\20250607_FCT\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\kerneldlls\CANFDNET.dll [292352 bytes, fileVersion=1.3.0.6, modified=2025-06-16 14:58:48]
+2026-08-28 08:52:29.100 [T3] CAN open request: DeviceType=52; Channel=1; BaudRate=500000; IP=192.166.6.10; Port=8000; DBC=E:\FST\20250607_FCT\2026819_FCT\20250607_FCT\ManualCanDebug\ManualCanDebug\bin\Debug\Config\Resolver.dbc
+2026-08-28 08:52:29.115 [T3] CAN open succeeded: DeviceType=52; Channel=1
+2026-08-28 08:52:47.136 [T3] DUT_ComucationInit START: socket=0; TX=0x7EE; RX=0x7EF; request=FF FA 55 A9 00 04 FF 00
+2026-08-28 08:52:47.137 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 08:52:47.137 [T3] ClearTxRxBuffer START
+2026-08-28 08:52:47.140 [T3] ClearTxRxBuffer END
+2026-08-28 08:52:47.140 [T3] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=FF FA 55 A9 00 04 FF 00
+2026-08-28 08:52:47.206 [T3] RX poll 1: queue count=1
+2026-08-28 08:52:47.207 [T3] RX frame: ID=0x7EF; DLC=8; DATA=F8 C7 18 80 10 27 45 00; expected=0x7EF; matched=True
+2026-08-28 08:52:47.211 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=F8 C7 18 80 10 27 45 00
+2026-08-28 08:52:47.215 [T3] DUT_ComucationInit SUCCESS: FirstAddress=0x8018C7F8; RX=F8 C7 18 80 10 27 45 00
+2026-08-28 08:52:50.300 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 08:52:50.300 [T3] ClearTxRxBuffer START
+2026-08-28 08:52:50.301 [T3] ClearTxRxBuffer END
+2026-08-28 08:52:50.301 [T3] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C7 F8 00 04 FF 00
+2026-08-28 08:52:50.364 [T3] RX poll 1: queue count=1
+2026-08-28 08:52:50.364 [T3] RX frame: ID=0x7EF; DLC=8; DATA=3C DE 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 08:52:50.365 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=3C DE 02 70 00 00 00 00
+2026-08-28 08:52:50.365 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 08:52:50.365 [T3] ClearTxRxBuffer START
+2026-08-28 08:52:50.365 [T3] ClearTxRxBuffer END
+2026-08-28 08:52:50.365 [T3] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 DE 3C 00 F0 FF 00
+2026-08-28 08:52:50.429 [T3] RX poll 1: queue count=29
+2026-08-28 08:52:50.430 [T3] RX frame: ID=0x7EF; DLC=8; DATA=57 0E 7C 41 10 F5 74 41; expected=0x7EF; matched=True
+2026-08-28 08:52:50.430 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 C2 9F 40 00 1A A0 40; expected=0x7EF; matched=True
+2026-08-28 08:52:50.431 [T3] RX frame: ID=0x7EF; DLC=8; DATA=FF D7 9F 40 46 2A 2C 42; expected=0x7EF; matched=True
+2026-08-28 08:52:50.431 [T3] RX frame: ID=0x7EF; DLC=8; DATA=76 DD E4 41 9C FF 15 43; expected=0x7EF; matched=True
+2026-08-28 08:52:50.431 [T3] RX frame: ID=0x7EF; DLC=8; DATA=AC E7 D0 41 00 60 01 3F; expected=0x7EF; matched=True
+2026-08-28 08:52:50.431 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 80 3F 0D 40; expected=0x7EF; matched=True
+2026-08-28 08:52:50.431 [T3] RX frame: ID=0x7EF; DLC=8; DATA=70 5F 5B 40 B6 37 81 40; expected=0x7EF; matched=True
+2026-08-28 08:52:50.431 [T3] RX frame: ID=0x7EF; DLC=8; DATA=70 66 47 42 00 00 18 42; expected=0x7EF; matched=True
+2026-08-28 08:52:50.431 [T3] RX frame: ID=0x7EF; DLC=8; DATA=38 3A 53 42 00 00 18 42; expected=0x7EF; matched=True
+2026-08-28 08:52:50.432 [T3] RX frame: ID=0x7EF; DLC=8; DATA=B2 BF 94 40 78 4F 34 40; expected=0x7EF; matched=True
+2026-08-28 08:52:50.432 [T3] RX frame: ID=0x7EF; DLC=8; DATA=80 3F 0D 40 E8 D4 49 42; expected=0x7EF; matched=True
+2026-08-28 08:52:50.432 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 00 18 42 50 5C 52 42; expected=0x7EF; matched=True
+2026-08-28 08:52:50.432 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 00 14 42 94 EE BC 41; expected=0x7EF; matched=True
+2026-08-28 08:52:50.432 [T3] RX frame: ID=0x7EF; DLC=8; DATA=08 5F CC 3F B6 37 81 40; expected=0x7EF; matched=True
+2026-08-28 08:52:50.432 [T3] RX frame: ID=0x7EF; DLC=8; DATA=78 4F 34 40 B6 37 81 40; expected=0x7EF; matched=True
+2026-08-28 08:52:50.432 [T3] RX frame: ID=0x7EF; DLC=8; DATA=78 4F 34 40 70 5F 5B 40; expected=0x7EF; matched=True
+2026-08-28 08:52:50.432 [T3] RX frame: ID=0x7EF; DLC=8; DATA=52 81 B6 3D 6D 5B 3E 3E; expected=0x7EF; matched=True
+2026-08-28 08:52:50.433 [T3] RX frame: ID=0x7EF; DLC=8; DATA=88 03 11 3E A8 56 14 3E; expected=0x7EF; matched=True
+2026-08-28 08:52:50.433 [T3] RX frame: ID=0x7EF; DLC=8; DATA=50 DF 10 3E 63 53 0E 3E; expected=0x7EF; matched=True
+2026-08-28 08:52:50.433 [T3] RX frame: ID=0x7EF; DLC=8; DATA=96 1A 0F 3E BC 02 0A 3E; expected=0x7EF; matched=True
+2026-08-28 08:52:50.433 [T3] RX frame: ID=0x7EF; DLC=8; DATA=9A F4 2C 3E FF C3 1F 40; expected=0x7EF; matched=True
+2026-08-28 08:52:50.433 [T3] RX frame: ID=0x7EF; DLC=8; DATA=2B CB F0 3D FF 4B 1F 40; expected=0x7EF; matched=True
+2026-08-28 08:52:50.433 [T3] RX frame: ID=0x7EF; DLC=8; DATA=FF EF 0C 40 FF 37 0B 40; expected=0x7EF; matched=True
+2026-08-28 08:52:50.433 [T3] RX frame: ID=0x7EF; DLC=8; DATA=B7 89 0E 3E FF 13 20 40; expected=0x7EF; matched=True
+2026-08-28 08:52:50.433 [T3] RX frame: ID=0x7EF; DLC=8; DATA=22 91 0B 3E FF 73 1F 40; expected=0x7EF; matched=True
+2026-08-28 08:52:50.434 [T3] RX frame: ID=0x7EF; DLC=8; DATA=AA AA 08 3E 00 C8 20 40; expected=0x7EF; matched=True
+2026-08-28 08:52:50.434 [T3] RX frame: ID=0x7EF; DLC=8; DATA=B4 64 07 3E 00 44 1D 40; expected=0x7EF; matched=True
+2026-08-28 08:52:50.434 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 F0 0C 40 00 FC 0A 40; expected=0x7EF; matched=True
+2026-08-28 08:52:50.434 [T3] RX frame: ID=0x7EF; DLC=8; DATA=F9 83 09 3E 00 90 21 40; expected=0x7EF; matched=True
+2026-08-28 08:52:50.435 [T3] RX poll 2: queue count=1
+2026-08-28 08:52:50.435 [T3] RX frame: ID=0x7EF; DLC=8; DATA=A5 4D 09 3E 00 04 21 40; expected=0x7EF; matched=True
+2026-08-28 08:52:50.435 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=240; data=57 0E 7C 41 10 F5 74 41 00 C2 9F 40 00 1A A0 40 FF D7 9F 40 46 2A 2C 42 76 DD E4 41 9C FF 15 43 AC E7 D0 41 00 60 01 3F 00 00 00 00 80 3F 0D 40 70 5F 5B 40 B6 37 81 40 70 66 47 42 00 00 18 42 38 3A 53 42 00 00 18 42 B2 BF 94 40 78 4F 34 40 80 3F 0D 40 E8 D4 49 42 00 00 18 42 50 5C 52 42 00 00 14 42 94 EE BC 41 08 5F CC 3F B6 37 81 40 78 4F 34 40 B6 37 81 40 78 4F 34 40 70 5F 5B 40 52 81 B6 3D 6D 5B 3E 3E 88 03 11 3E A8 56 14 3E 50 DF 10 3E 63 53 0E 3E 96 1A 0F 3E BC 02 0A 3E 9A F4 2C 3E FF C3 1F 40 2B CB F0 3D FF 4B 1F 40 FF EF 0C 40 FF 37 0B 40 B7 89 0E 3E FF 13 20 40 22 91 0B 3E FF 73 1F 40 AA AA 08 3E 00 C8 20 40 B4 64 07 3E 00 44 1D 40 00 F0 0C 40 00 FC 0A 40 F9 83 09 3E 00 90 21 40 A5 4D 09 3E 00 04 21 40
+2026-08-28 08:52:50.436 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 08:52:50.436 [T3] ClearTxRxBuffer START
+2026-08-28 08:52:50.436 [T3] ClearTxRxBuffer END
+2026-08-28 08:52:50.436 [T3] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 DF 2C 00 0C FF 00
+2026-08-28 08:52:50.499 [T3] RX poll 1: queue count=2
+2026-08-28 08:52:50.499 [T3] RX frame: ID=0x7EF; DLC=8; DATA=B2 18 CB 41 00 4C 1A 40; expected=0x7EF; matched=True
+2026-08-28 08:52:50.499 [T3] RX frame: ID=0x7EF; DLC=8; DATA=13 DF 9E 40 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 08:52:50.500 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=16; data=B2 18 CB 41 00 4C 1A 40 13 DF 9E 40 00 00 00 00
+2026-08-28 08:52:59.151 [T13] DUT_WriteRead attempt 1/3 START
+2026-08-28 08:52:59.151 [T13] ClearTxRxBuffer START
+2026-08-28 08:52:59.152 [T13] ClearTxRxBuffer END
+2026-08-28 08:52:59.152 [T13] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C7 F8 00 04 FF 00
+2026-08-28 08:52:59.215 [T13] RX poll 1: queue count=1
+2026-08-28 08:52:59.215 [T13] RX frame: ID=0x7EF; DLC=8; DATA=3C DE 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 08:52:59.215 [T13] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=3C DE 02 70 00 00 00 00
+2026-08-28 08:52:59.215 [T13] DUT_WriteRead attempt 1/3 START
+2026-08-28 08:52:59.215 [T13] ClearTxRxBuffer START
+2026-08-28 08:52:59.215 [T13] ClearTxRxBuffer END
+2026-08-28 08:52:59.215 [T13] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 DE 5C 00 04 FF 00
+2026-08-28 08:52:59.278 [T13] RX poll 1: queue count=1
+2026-08-28 08:52:59.278 [T13] RX frame: ID=0x7EF; DLC=8; DATA=AC E7 D0 41 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 08:52:59.278 [T13] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=AC E7 D0 41 00 00 00 00
+2026-08-28 09:40:01.040 [T1] Cleanup selected instruments: DUTCAN,AUXCAN,RESOLVERCAN
+2026-08-28 09:40:20.406 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-28 13:20:40.616 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-28 13:36:16.262 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-28 14:09:59.900 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-28 14:11:24.596 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-28 14:12:03.250 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-28 14:15:17.991 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-28 14:17:54.362 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-28 14:20:16.473 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-28 14:20:17.526 [T5] Instrument selection received: [{"Name":"DAQ","Type":"DAQ","Mode":"NI","Resource":"PCI-6229","Parameter":""}]
+2026-08-28 14:20:17.531 [T6] Cleanup selected instruments: 
+2026-08-28 14:20:17.533 [T6] Initialize selected instruments start. BaseDirectory=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\; TestDLL=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\CSP.TestDLL.dll
+2026-08-28 14:20:17.534 [T6] Initialize instrument DAQ: Resource=PCI-6229; Parameter=
+2026-08-28 14:20:17.565 [T6] Cleanup selected instruments: DAQ
+2026-08-28 14:24:06.849 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-28 14:24:07.750 [T5] Instrument selection received: [{"Name":"DAQ","Type":"DAQ","Mode":"NI","Resource":"PCI-6229","Parameter":""}]
+2026-08-28 14:24:07.754 [T6] Cleanup selected instruments: 
+2026-08-28 14:24:07.755 [T6] Initialize selected instruments start. BaseDirectory=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\; TestDLL=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\CSP.TestDLL.dll
+2026-08-28 14:24:07.755 [T6] Initialize instrument DAQ: Resource=PCI-6229; Parameter=
+2026-08-28 14:24:07.774 [T5] Cleanup selected instruments: DAQ
+2026-08-28 14:24:48.683 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-28 15:38:35.375 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-28 16:23:00.391 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-28 16:23:28.507 [T4] Instrument selection received: [{"Name":"DUTCAN","Type":"CAN","Mode":"ZLG","Resource":"192.166.6.10","Parameter":"52,2,500000,8000"},{"Name":"AUXCAN","Type":"CAN","Mode":"ZLG","Resource":"192.166.6.10","Parameter":"52,0,500000,8000"},{"Name":"RESOLVERCAN","Type":"CAN","Mode":"ZLG","Resource":"192.166.6.10","Parameter":"52,1,500000,8000"}]
+2026-08-28 16:23:28.512 [T3] Cleanup selected instruments: 
+2026-08-28 16:23:28.514 [T3] Initialize selected instruments start. BaseDirectory=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\; TestDLL=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\CSP.TestDLL.dll
+2026-08-28 16:23:28.515 [T3] Initialize instrument DUTCAN: Resource=192.166.6.10; Parameter=52,2,500000,8000
+2026-08-28 16:23:28.517 [T3] CAN runtime: E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\Instruments.CAN.CANWrapper.dll [40960 bytes, fileVersion=2.2.10.0, modified=2025-11-25 15:52:04]
+2026-08-28 16:23:28.567 [T3] CAN provider: E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\Instruments.CAN.ZLG_CAN.dll [27136 bytes, fileVersion=3.2.2.0, modified=2025-12-04 14:16:54]
+2026-08-28 16:23:28.664 [T3] CAN native: E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\zlgcan.dll [231936 bytes, fileVersion=, modified=2025-06-16 14:58:48]
+2026-08-28 16:23:28.699 [T3] CAN kernel: E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\kerneldlls\CANFDNET.dll [292352 bytes, fileVersion=1.3.0.6, modified=2025-06-16 14:58:48]
+2026-08-28 16:23:28.699 [T3] CAN open request: DeviceType=52; Channel=2; BaudRate=500000; IP=192.166.6.10; Port=8000; DBC=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\Config\Flywheel_900A_Z405.dbc
+2026-08-28 16:23:28.991 [T3] CAN open succeeded: DeviceType=52; Channel=2
+2026-08-28 16:23:28.991 [T3] Initialize instrument AUXCAN: Resource=192.166.6.10; Parameter=52,0,500000,8000
+2026-08-28 16:23:28.991 [T3] CAN runtime: E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\Instruments.CAN.CANWrapper.dll [40960 bytes, fileVersion=2.2.10.0, modified=2025-11-25 15:52:04]
+2026-08-28 16:23:28.991 [T3] CAN provider: E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\Instruments.CAN.ZLG_CAN.dll [27136 bytes, fileVersion=3.2.2.0, modified=2025-12-04 14:16:54]
+2026-08-28 16:23:28.992 [T3] CAN native: E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\zlgcan.dll [231936 bytes, fileVersion=, modified=2025-06-16 14:58:48]
+2026-08-28 16:23:28.993 [T3] CAN kernel: E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\kerneldlls\CANFDNET.dll [292352 bytes, fileVersion=1.3.0.6, modified=2025-06-16 14:58:48]
+2026-08-28 16:23:28.993 [T3] CAN open request: DeviceType=52; Channel=0; BaudRate=500000; IP=192.166.6.10; Port=8000; DBC=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\Config\C95C96Auxiliary.dbc
+2026-08-28 16:23:29.008 [T3] CAN open succeeded: DeviceType=52; Channel=0
+2026-08-28 16:23:29.008 [T3] Initialize instrument RESOLVERCAN: Resource=192.166.6.10; Parameter=52,1,500000,8000
+2026-08-28 16:23:29.009 [T3] CAN runtime: E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\Instruments.CAN.CANWrapper.dll [40960 bytes, fileVersion=2.2.10.0, modified=2025-11-25 15:52:04]
+2026-08-28 16:23:29.009 [T3] CAN provider: E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\Instruments.CAN.ZLG_CAN.dll [27136 bytes, fileVersion=3.2.2.0, modified=2025-12-04 14:16:54]
+2026-08-28 16:23:29.009 [T3] CAN native: E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\zlgcan.dll [231936 bytes, fileVersion=, modified=2025-06-16 14:58:48]
+2026-08-28 16:23:29.009 [T3] CAN kernel: E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\kerneldlls\CANFDNET.dll [292352 bytes, fileVersion=1.3.0.6, modified=2025-06-16 14:58:48]
+2026-08-28 16:23:29.009 [T3] CAN open request: DeviceType=52; Channel=1; BaudRate=500000; IP=192.166.6.10; Port=8000; DBC=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\Config\Resolver.dbc
+2026-08-28 16:23:29.032 [T3] CAN open succeeded: DeviceType=52; Channel=1
+2026-08-28 16:23:32.787 [T3] DUT_ComucationInit START: socket=0; TX=0x7EE; RX=0x7EF; request=FF FA 55 A9 00 04 FF 00
+2026-08-28 16:23:32.787 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:23:32.789 [T3] ClearTxRxBuffer START
+2026-08-28 16:23:32.789 [T3] ClearTxRxBuffer END
+2026-08-28 16:23:32.789 [T3] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=FF FA 55 A9 00 04 FF 00
+2026-08-28 16:23:32.857 [T3] RX poll 1: queue count=1
+2026-08-28 16:23:32.857 [T3] RX frame: ID=0x7EF; DLC=8; DATA=F8 C7 18 80 0B 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:32.859 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=F8 C7 18 80 0B 00 00 00
+2026-08-28 16:23:32.859 [T3] DUT_ComucationInit SUCCESS: FirstAddress=0x8018C7F8; RX=F8 C7 18 80 0B 00 00 00
+2026-08-28 16:23:32.892 [T12] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:23:32.892 [T12] ClearTxRxBuffer START
+2026-08-28 16:23:32.893 [T12] ClearTxRxBuffer END
+2026-08-28 16:23:32.893 [T12] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C7 F8 00 04 FF 00
+2026-08-28 16:23:32.955 [T12] RX poll 1: queue count=1
+2026-08-28 16:23:32.955 [T12] RX frame: ID=0x7EF; DLC=8; DATA=3C DE 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:32.956 [T12] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=3C DE 02 70 00 00 00 00
+2026-08-28 16:23:32.956 [T12] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:23:32.956 [T12] ClearTxRxBuffer START
+2026-08-28 16:23:32.957 [T12] ClearTxRxBuffer END
+2026-08-28 16:23:32.957 [T12] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 DE 3C 00 F0 FF 00
+2026-08-28 16:23:33.020 [T12] RX poll 1: queue count=29
+2026-08-28 16:23:33.021 [T12] RX frame: ID=0x7EF; DLC=8; DATA=BE F4 7B 41 41 28 75 41; expected=0x7EF; matched=True
+2026-08-28 16:23:33.021 [T12] RX frame: ID=0x7EF; DLC=8; DATA=00 CD 9F 40 00 1A A0 40; expected=0x7EF; matched=True
+2026-08-28 16:23:33.021 [T12] RX frame: ID=0x7EF; DLC=8; DATA=FF D7 9F 40 A2 CD 51 42; expected=0x7EF; matched=True
+2026-08-28 16:23:33.021 [T12] RX frame: ID=0x7EF; DLC=8; DATA=F8 16 15 42 9C FF 15 43; expected=0x7EF; matched=True
+2026-08-28 16:23:33.021 [T12] RX frame: ID=0x7EF; DLC=8; DATA=AC E7 D0 41 00 10 01 3F; expected=0x7EF; matched=True
+2026-08-28 16:23:33.022 [T12] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 78 4F 34 40; expected=0x7EF; matched=True
+2026-08-28 16:23:33.022 [T12] RX frame: ID=0x7EF; DLC=8; DATA=B6 37 81 40 AE 47 A8 40; expected=0x7EF; matched=True
+2026-08-28 16:23:33.022 [T12] RX frame: ID=0x7EF; DLC=8; DATA=20 71 48 42 00 00 18 42; expected=0x7EF; matched=True
+2026-08-28 16:23:33.022 [T12] RX frame: ID=0x7EF; DLC=8; DATA=70 93 53 42 00 00 18 42; expected=0x7EF; matched=True
+2026-08-28 16:23:33.022 [T12] RX frame: ID=0x7EF; DLC=8; DATA=B2 BF 94 40 78 4F 34 40; expected=0x7EF; matched=True
+2026-08-28 16:23:33.022 [T12] RX frame: ID=0x7EF; DLC=8; DATA=B6 37 81 40 D0 38 4B 42; expected=0x7EF; matched=True
+2026-08-28 16:23:33.022 [T12] RX frame: ID=0x7EF; DLC=8; DATA=00 00 18 42 98 2E 52 42; expected=0x7EF; matched=True
+2026-08-28 16:23:33.022 [T12] RX frame: ID=0x7EF; DLC=8; DATA=00 00 14 42 DC D8 BC 41; expected=0x7EF; matched=True
+2026-08-28 16:23:33.022 [T12] RX frame: ID=0x7EF; DLC=8; DATA=80 3F 0D 40 B2 BF 94 40; expected=0x7EF; matched=True
+2026-08-28 16:23:33.023 [T12] RX frame: ID=0x7EF; DLC=8; DATA=B6 37 81 40 B6 37 81 40; expected=0x7EF; matched=True
+2026-08-28 16:23:33.023 [T12] RX frame: ID=0x7EF; DLC=8; DATA=70 5F 5B 40 70 5F 5B 40; expected=0x7EF; matched=True
+2026-08-28 16:23:33.023 [T12] RX frame: ID=0x7EF; DLC=8; DATA=C6 55 23 3E 73 F3 FD 3D; expected=0x7EF; matched=True
+2026-08-28 16:23:33.023 [T12] RX frame: ID=0x7EF; DLC=8; DATA=A7 D3 32 3E 1E 37 D4 3D; expected=0x7EF; matched=True
+2026-08-28 16:23:33.023 [T12] RX frame: ID=0x7EF; DLC=8; DATA=AD CF 0F 3E 96 1A 0F 3E; expected=0x7EF; matched=True
+2026-08-28 16:23:33.023 [T12] RX frame: ID=0x7EF; DLC=8; DATA=B2 2C 0F 3E 02 3E 08 3E; expected=0x7EF; matched=True
+2026-08-28 16:23:33.023 [T12] RX frame: ID=0x7EF; DLC=8; DATA=71 EA F2 3D FF 5F 1F 40; expected=0x7EF; matched=True
+2026-08-28 16:23:33.023 [T12] RX frame: ID=0x7EF; DLC=8; DATA=3E A3 0B 3E FF AF 1F 40; expected=0x7EF; matched=True
+2026-08-28 16:23:33.023 [T12] RX frame: ID=0x7EF; DLC=8; DATA=FF A7 09 40 FF 33 0F 40; expected=0x7EF; matched=True
+2026-08-28 16:23:33.023 [T12] RX frame: ID=0x7EF; DLC=8; DATA=FA 9F 05 3E FF 8B 20 40; expected=0x7EF; matched=True
+2026-08-28 16:23:33.024 [T12] RX frame: ID=0x7EF; DLC=8; DATA=73 3B 1F 3E FF D7 1F 40; expected=0x7EF; matched=True
+2026-08-28 16:23:33.024 [T12] RX frame: ID=0x7EF; DLC=8; DATA=BC 02 0A 3E 00 C8 20 40; expected=0x7EF; matched=True
+2026-08-28 16:23:33.024 [T12] RX frame: ID=0x7EF; DLC=8; DATA=6D 29 09 3E 00 24 1F 40; expected=0x7EF; matched=True
+2026-08-28 16:23:33.024 [T12] RX frame: ID=0x7EF; DLC=8; DATA=00 BC 09 40 00 BC 0E 40; expected=0x7EF; matched=True
+2026-08-28 16:23:33.024 [T12] RX frame: ID=0x7EF; DLC=8; DATA=51 17 09 3E 00 18 21 40; expected=0x7EF; matched=True
+2026-08-28 16:23:33.025 [T12] RX poll 2: queue count=1
+2026-08-28 16:23:33.025 [T12] RX frame: ID=0x7EF; DLC=8; DATA=51 17 09 3E 00 8C 20 40; expected=0x7EF; matched=True
+2026-08-28 16:23:33.026 [T12] DUT_WriteRead attempt 1/3 END: matched=True; bytes=240; data=BE F4 7B 41 41 28 75 41 00 CD 9F 40 00 1A A0 40 FF D7 9F 40 A2 CD 51 42 F8 16 15 42 9C FF 15 43 AC E7 D0 41 00 10 01 3F 00 00 00 00 78 4F 34 40 B6 37 81 40 AE 47 A8 40 20 71 48 42 00 00 18 42 70 93 53 42 00 00 18 42 B2 BF 94 40 78 4F 34 40 B6 37 81 40 D0 38 4B 42 00 00 18 42 98 2E 52 42 00 00 14 42 DC D8 BC 41 80 3F 0D 40 B2 BF 94 40 B6 37 81 40 B6 37 81 40 70 5F 5B 40 70 5F 5B 40 C6 55 23 3E 73 F3 FD 3D A7 D3 32 3E 1E 37 D4 3D AD CF 0F 3E 96 1A 0F 3E B2 2C 0F 3E 02 3E 08 3E 71 EA F2 3D FF 5F 1F 40 3E A3 0B 3E FF AF 1F 40 FF A7 09 40 FF 33 0F 40 FA 9F 05 3E FF 8B 20 40 73 3B 1F 3E FF D7 1F 40 BC 02 0A 3E 00 C8 20 40 6D 29 09 3E 00 24 1F 40 00 BC 09 40 00 BC 0E 40 51 17 09 3E 00 18 21 40 51 17 09 3E 00 8C 20 40
+2026-08-28 16:23:33.026 [T12] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:23:33.026 [T12] ClearTxRxBuffer START
+2026-08-28 16:23:33.027 [T12] ClearTxRxBuffer END
+2026-08-28 16:23:33.027 [T12] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 DF 2C 00 0C FF 00
+2026-08-28 16:23:33.089 [T12] RX poll 1: queue count=2
+2026-08-28 16:23:33.089 [T12] RX frame: ID=0x7EF; DLC=8; DATA=B1 04 CB 41 00 4C 1A 40; expected=0x7EF; matched=True
+2026-08-28 16:23:33.089 [T12] RX frame: ID=0x7EF; DLC=8; DATA=13 D4 9E 40 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:33.089 [T12] DUT_WriteRead attempt 1/3 END: matched=True; bytes=16; data=B1 04 CB 41 00 4C 1A 40 13 D4 9E 40 00 00 00 00
+2026-08-28 16:23:33.160 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:23:33.160 [T3] ClearTxRxBuffer START
+2026-08-28 16:23:33.160 [T3] ClearTxRxBuffer END
+2026-08-28 16:23:33.160 [T3] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C7 F8 00 04 FF 00
+2026-08-28 16:23:33.222 [T3] RX poll 1: queue count=1
+2026-08-28 16:23:33.223 [T3] RX frame: ID=0x7EF; DLC=8; DATA=3C DE 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:33.223 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=3C DE 02 70 00 00 00 00
+2026-08-28 16:23:33.223 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:23:33.223 [T3] ClearTxRxBuffer START
+2026-08-28 16:23:33.223 [T3] ClearTxRxBuffer END
+2026-08-28 16:23:33.223 [T3] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 DE 5C 00 04 FF 00
+2026-08-28 16:23:33.285 [T3] RX poll 1: queue count=1
+2026-08-28 16:23:33.285 [T3] RX frame: ID=0x7EF; DLC=8; DATA=42 65 D3 41 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:33.286 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=42 65 D3 41 00 00 00 00
+2026-08-28 16:23:33.343 [T12] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:23:33.343 [T12] ClearTxRxBuffer START
+2026-08-28 16:23:33.343 [T12] ClearTxRxBuffer END
+2026-08-28 16:23:33.343 [T12] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 78 00 04 FF 00
+2026-08-28 16:23:33.406 [T12] RX poll 1: queue count=1
+2026-08-28 16:23:33.406 [T12] RX frame: ID=0x7EF; DLC=8; DATA=20 E4 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:33.406 [T12] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=20 E4 02 70 00 00 00 00
+2026-08-28 16:23:33.406 [T12] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:23:33.406 [T12] ClearTxRxBuffer START
+2026-08-28 16:23:33.407 [T12] ClearTxRxBuffer END
+2026-08-28 16:23:33.407 [T12] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 20 00 27 FF 00
+2026-08-28 16:23:33.470 [T12] RX poll 1: queue count=5
+2026-08-28 16:23:33.470 [T12] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:33.471 [T12] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:33.471 [T12] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:33.471 [T12] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:33.472 [T12] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:33.472 [T12] DUT_WriteRead attempt 1/3 END: matched=True; bytes=40; data=00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-08-28 16:23:33.474 [T12] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:23:33.474 [T12] ClearTxRxBuffer START
+2026-08-28 16:23:33.474 [T12] ClearTxRxBuffer END
+2026-08-28 16:23:33.474 [T12] TX frame 1/6: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 20 00 27 00 00
+2026-08-28 16:23:33.535 [T12] TX continuation 2/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 00 00 66 66 0D 43
+2026-08-28 16:23:33.596 [T12] TX continuation 3/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 A0 41 00 00 20 41
+2026-08-28 16:23:33.657 [T12] TX continuation 4/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 70 42 04 00 32 00
+2026-08-28 16:23:33.718 [T12] TX continuation 5/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=10 27 01 00 00 00 00 00
+2026-08-28 16:23:33.778 [T12] TX continuation 6/6: ID=0x7EF; DLC=8; PAYLOAD=7; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:23:33.839 [T12] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:23:33.840 [T12] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:23:33.841 [T12] ClearTxRxBuffer START
+2026-08-28 16:23:33.841 [T12] ClearTxRxBuffer END
+2026-08-28 16:23:33.841 [T12] TX frame 1/2: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 3B 00 01 00 00
+2026-08-28 16:23:33.901 [T12] TX continuation 2/2: ID=0x7EF; DLC=8; PAYLOAD=1; DATA=FF 00 00 00 00 00 00 00
+2026-08-28 16:23:33.962 [T12] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:23:33.964 [T12] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:23:33.964 [T12] ClearTxRxBuffer START
+2026-08-28 16:23:33.966 [T12] ClearTxRxBuffer END
+2026-08-28 16:23:33.966 [T12] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 20 00 27 FF 00
+2026-08-28 16:23:34.029 [T12] RX poll 1: queue count=5
+2026-08-28 16:23:34.029 [T12] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 66 66 0D 43; expected=0x7EF; matched=True
+2026-08-28 16:23:34.030 [T12] RX frame: ID=0x7EF; DLC=8; DATA=00 00 A0 41 00 00 20 41; expected=0x7EF; matched=True
+2026-08-28 16:23:34.030 [T12] RX frame: ID=0x7EF; DLC=8; DATA=00 00 70 42 04 00 32 00; expected=0x7EF; matched=True
+2026-08-28 16:23:34.030 [T12] RX frame: ID=0x7EF; DLC=8; DATA=10 27 01 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:34.030 [T12] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:34.030 [T12] DUT_WriteRead attempt 1/3 END: matched=True; bytes=40; data=00 00 00 00 66 66 0D 43 00 00 A0 41 00 00 20 41 00 00 70 42 04 00 32 00 10 27 01 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-08-28 16:23:34.078 [T4] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:23:34.079 [T4] ClearTxRxBuffer START
+2026-08-28 16:23:34.079 [T4] ClearTxRxBuffer END
+2026-08-28 16:23:34.079 [T4] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 7C 00 04 FF 00
+2026-08-28 16:23:34.141 [T4] RX poll 1: queue count=1
+2026-08-28 16:23:34.141 [T4] RX frame: ID=0x7EF; DLC=8; DATA=10 E5 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:34.141 [T4] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=10 E5 02 70 00 00 00 00
+2026-08-28 16:23:34.141 [T4] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:23:34.141 [T4] ClearTxRxBuffer START
+2026-08-28 16:23:34.141 [T4] ClearTxRxBuffer END
+2026-08-28 16:23:34.141 [T4] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E5 10 00 0A FF 00
+2026-08-28 16:23:34.204 [T4] RX poll 1: queue count=2
+2026-08-28 16:23:34.205 [T4] RX frame: ID=0x7EF; DLC=8; DATA=00 00 80 84 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:34.205 [T4] RX frame: ID=0x7EF; DLC=8; DATA=04 03 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:34.205 [T4] DUT_WriteRead attempt 1/3 END: matched=True; bytes=16; data=00 00 80 84 00 00 00 00 04 03 00 00 00 00 00 00
+2026-08-28 16:23:39.241 [T4] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:23:39.241 [T4] ClearTxRxBuffer START
+2026-08-28 16:23:39.242 [T4] ClearTxRxBuffer END
+2026-08-28 16:23:39.242 [T4] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 8C 00 04 FF 00
+2026-08-28 16:23:39.303 [T4] RX poll 1: queue count=1
+2026-08-28 16:23:39.303 [T4] RX frame: ID=0x7EF; DLC=8; DATA=14 E2 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:39.304 [T4] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=14 E2 02 70 00 00 00 00
+2026-08-28 16:23:39.304 [T4] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:23:39.304 [T4] ClearTxRxBuffer START
+2026-08-28 16:23:39.304 [T4] ClearTxRxBuffer END
+2026-08-28 16:23:39.304 [T4] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 14 00 28 FF 00
+2026-08-28 16:23:39.366 [T4] RX poll 1: queue count=5
+2026-08-28 16:23:39.366 [T4] RX frame: ID=0x7EF; DLC=8; DATA=AE 47 A8 40 B6 37 81 40; expected=0x7EF; matched=True
+2026-08-28 16:23:39.367 [T4] RX frame: ID=0x7EF; DLC=8; DATA=70 5F 5B 40 78 4F 34 40; expected=0x7EF; matched=True
+2026-08-28 16:23:39.367 [T4] RX frame: ID=0x7EF; DLC=8; DATA=08 5F CC 3F 08 5F CC 3F; expected=0x7EF; matched=True
+2026-08-28 16:23:39.368 [T4] RX frame: ID=0x7EF; DLC=8; DATA=A8 57 CF 40 AE 47 A8 40; expected=0x7EF; matched=True
+2026-08-28 16:23:39.368 [T4] RX frame: ID=0x7EF; DLC=8; DATA=AE 47 A8 40 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:39.368 [T4] DUT_WriteRead attempt 1/3 END: matched=True; bytes=40; data=AE 47 A8 40 B6 37 81 40 70 5F 5B 40 78 4F 34 40 08 5F CC 3F 08 5F CC 3F A8 57 CF 40 AE 47 A8 40 AE 47 A8 40 00 00 00 00
+2026-08-28 16:23:39.391 [T15] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:23:39.392 [T15] ClearTxRxBuffer START
+2026-08-28 16:23:39.392 [T15] ClearTxRxBuffer END
+2026-08-28 16:23:39.392 [T15] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 78 00 04 FF 00
+2026-08-28 16:23:39.455 [T15] RX poll 1: queue count=1
+2026-08-28 16:23:39.456 [T15] RX frame: ID=0x7EF; DLC=8; DATA=20 E4 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:39.456 [T15] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=20 E4 02 70 00 00 00 00
+2026-08-28 16:23:39.456 [T15] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:23:39.456 [T15] ClearTxRxBuffer START
+2026-08-28 16:23:39.456 [T15] ClearTxRxBuffer END
+2026-08-28 16:23:39.456 [T15] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 20 00 27 FF 00
+2026-08-28 16:23:39.526 [T15] RX poll 1: queue count=5
+2026-08-28 16:23:39.526 [T15] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 66 66 0D 43; expected=0x7EF; matched=True
+2026-08-28 16:23:39.527 [T15] RX frame: ID=0x7EF; DLC=8; DATA=00 00 A0 41 00 00 20 41; expected=0x7EF; matched=True
+2026-08-28 16:23:39.528 [T15] RX frame: ID=0x7EF; DLC=8; DATA=00 00 70 42 04 00 32 00; expected=0x7EF; matched=True
+2026-08-28 16:23:39.528 [T15] RX frame: ID=0x7EF; DLC=8; DATA=10 27 01 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:39.528 [T15] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:39.528 [T15] DUT_WriteRead attempt 1/3 END: matched=True; bytes=40; data=00 00 00 00 66 66 0D 43 00 00 A0 41 00 00 20 41 00 00 70 42 04 00 32 00 10 27 01 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-08-28 16:23:39.528 [T15] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:23:39.528 [T15] ClearTxRxBuffer START
+2026-08-28 16:23:39.529 [T15] ClearTxRxBuffer END
+2026-08-28 16:23:39.529 [T15] TX frame 1/6: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 20 00 27 00 00
+2026-08-28 16:23:39.590 [T15] TX continuation 2/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:23:39.651 [T15] TX continuation 3/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 A0 41 00 00 20 41
+2026-08-28 16:23:39.712 [T15] TX continuation 4/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 70 42 04 00 32 00
+2026-08-28 16:23:39.774 [T15] TX continuation 5/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=10 27 00 00 00 00 00 00
+2026-08-28 16:23:39.834 [T15] TX continuation 6/6: ID=0x7EF; DLC=8; PAYLOAD=7; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:23:39.895 [T15] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:23:39.896 [T15] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:23:39.896 [T15] ClearTxRxBuffer START
+2026-08-28 16:23:39.896 [T15] ClearTxRxBuffer END
+2026-08-28 16:23:39.896 [T15] TX frame 1/2: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 3B 00 01 00 00
+2026-08-28 16:23:39.956 [T15] TX continuation 2/2: ID=0x7EF; DLC=8; PAYLOAD=1; DATA=FF 00 00 00 00 00 00 00
+2026-08-28 16:23:40.017 [T15] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:23:40.017 [T15] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:23:40.018 [T15] ClearTxRxBuffer START
+2026-08-28 16:23:40.019 [T15] ClearTxRxBuffer END
+2026-08-28 16:23:40.019 [T15] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 20 00 27 FF 00
+2026-08-28 16:23:40.083 [T15] RX poll 1: queue count=5
+2026-08-28 16:23:40.083 [T15] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:40.083 [T15] RX frame: ID=0x7EF; DLC=8; DATA=00 00 A0 41 00 00 20 41; expected=0x7EF; matched=True
+2026-08-28 16:23:40.083 [T15] RX frame: ID=0x7EF; DLC=8; DATA=00 00 70 42 04 00 32 00; expected=0x7EF; matched=True
+2026-08-28 16:23:40.084 [T15] RX frame: ID=0x7EF; DLC=8; DATA=10 27 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:40.084 [T15] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:23:40.084 [T15] DUT_WriteRead attempt 1/3 END: matched=True; bytes=40; data=00 00 00 00 00 00 00 00 00 00 A0 41 00 00 20 41 00 00 70 42 04 00 32 00 10 27 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-08-28 16:27:32.859 [T4] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:27:32.861 [T4] ClearTxRxBuffer START
+2026-08-28 16:27:32.861 [T4] ClearTxRxBuffer END
+2026-08-28 16:27:32.861 [T4] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C7 F8 00 04 FF 00
+2026-08-28 16:27:32.922 [T4] RX poll 1: queue count=1
+2026-08-28 16:27:32.923 [T4] RX frame: ID=0x7EF; DLC=8; DATA=3C DE 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:27:32.923 [T4] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=3C DE 02 70 00 00 00 00
+2026-08-28 16:27:32.923 [T4] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:27:32.923 [T4] ClearTxRxBuffer START
+2026-08-28 16:27:32.923 [T4] ClearTxRxBuffer END
+2026-08-28 16:27:32.923 [T4] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 DE 5C 00 04 FF 00
+2026-08-28 16:27:32.986 [T4] RX poll 1: queue count=1
+2026-08-28 16:27:32.986 [T4] RX frame: ID=0x7EF; DLC=8; DATA=09 35 1D 44 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:27:32.986 [T4] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=09 35 1D 44 00 00 00 00
+2026-08-28 16:27:47.917 [T10] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:27:47.917 [T10] ClearTxRxBuffer START
+2026-08-28 16:27:47.918 [T10] ClearTxRxBuffer END
+2026-08-28 16:27:47.918 [T10] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C7 F8 00 04 FF 00
+2026-08-28 16:27:47.981 [T10] RX poll 1: queue count=1
+2026-08-28 16:27:47.981 [T10] RX frame: ID=0x7EF; DLC=8; DATA=3C DE 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:27:47.981 [T10] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=3C DE 02 70 00 00 00 00
+2026-08-28 16:27:47.982 [T10] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:27:47.982 [T10] ClearTxRxBuffer START
+2026-08-28 16:27:47.982 [T10] ClearTxRxBuffer END
+2026-08-28 16:27:47.982 [T10] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 DE 5C 00 04 FF 00
+2026-08-28 16:27:48.045 [T10] RX poll 1: queue count=1
+2026-08-28 16:27:48.045 [T10] RX frame: ID=0x7EF; DLC=8; DATA=2F 0D 1D 44 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:27:48.045 [T10] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=2F 0D 1D 44 00 00 00 00
+2026-08-28 16:28:06.553 [T4] DUT_ComucationInit START: socket=0; TX=0x7EE; RX=0x7EF; request=FF FA 55 A9 00 04 FF 00
+2026-08-28 16:28:06.553 [T4] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:06.553 [T4] ClearTxRxBuffer START
+2026-08-28 16:28:06.554 [T4] ClearTxRxBuffer END
+2026-08-28 16:28:06.554 [T4] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=FF FA 55 A9 00 04 FF 00
+2026-08-28 16:28:06.616 [T4] RX poll 1: queue count=1
+2026-08-28 16:28:06.617 [T4] RX frame: ID=0x7EF; DLC=8; DATA=F8 C7 18 80 F9 3E 4D 00; expected=0x7EF; matched=True
+2026-08-28 16:28:06.617 [T4] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=F8 C7 18 80 F9 3E 4D 00
+2026-08-28 16:28:06.617 [T4] DUT_ComucationInit SUCCESS: FirstAddress=0x8018C7F8; RX=F8 C7 18 80 F9 3E 4D 00
+2026-08-28 16:28:06.651 [T13] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:06.651 [T13] ClearTxRxBuffer START
+2026-08-28 16:28:06.651 [T13] ClearTxRxBuffer END
+2026-08-28 16:28:06.652 [T13] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C7 F8 00 04 FF 00
+2026-08-28 16:28:06.715 [T13] RX poll 1: queue count=1
+2026-08-28 16:28:06.715 [T13] RX frame: ID=0x7EF; DLC=8; DATA=3C DE 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:06.716 [T13] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=3C DE 02 70 00 00 00 00
+2026-08-28 16:28:06.716 [T13] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:06.716 [T13] ClearTxRxBuffer START
+2026-08-28 16:28:06.716 [T13] ClearTxRxBuffer END
+2026-08-28 16:28:06.716 [T13] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 DE 3C 00 F0 FF 00
+2026-08-28 16:28:06.779 [T13] RX poll 1: queue count=29
+2026-08-28 16:28:06.793 [T13] RX frame: ID=0x7EF; DLC=8; DATA=BE F4 7B 41 A8 0E 75 41; expected=0x7EF; matched=True
+2026-08-28 16:28:06.793 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 C2 9F 40 00 0F A0 40; expected=0x7EF; matched=True
+2026-08-28 16:28:06.793 [T13] RX frame: ID=0x7EF; DLC=8; DATA=FF D7 9F 40 AB 05 52 42; expected=0x7EF; matched=True
+2026-08-28 16:28:06.793 [T13] RX frame: ID=0x7EF; DLC=8; DATA=15 2D 16 42 9C FF 15 43; expected=0x7EF; matched=True
+2026-08-28 16:28:06.794 [T13] RX frame: ID=0x7EF; DLC=8; DATA=2F 0D 1D 44 00 10 01 3F; expected=0x7EF; matched=True
+2026-08-28 16:28:06.794 [T13] RX frame: ID=0x7EF; DLC=8; DATA=63 86 8F 41 78 4F 34 40; expected=0x7EF; matched=True
+2026-08-28 16:28:06.794 [T13] RX frame: ID=0x7EF; DLC=8; DATA=B2 BF 94 40 B2 BF 94 40; expected=0x7EF; matched=True
+2026-08-28 16:28:06.794 [T13] RX frame: ID=0x7EF; DLC=8; DATA=50 6B 4B 42 00 00 0C 42; expected=0x7EF; matched=True
+2026-08-28 16:28:06.795 [T13] RX frame: ID=0x7EF; DLC=8; DATA=20 5A 52 42 00 00 1C 42; expected=0x7EF; matched=True
+2026-08-28 16:28:06.795 [T13] RX frame: ID=0x7EF; DLC=8; DATA=AE 47 A8 40 70 5F 5B 40; expected=0x7EF; matched=True
+2026-08-28 16:28:06.795 [T13] RX frame: ID=0x7EF; DLC=8; DATA=70 5F 5B 40 30 FF 49 42; expected=0x7EF; matched=True
+2026-08-28 16:28:06.795 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 00 1C 42 D0 67 53 42; expected=0x7EF; matched=True
+2026-08-28 16:28:06.795 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 00 14 42 86 BE BB 41; expected=0x7EF; matched=True
+2026-08-28 16:28:06.796 [T13] RX frame: ID=0x7EF; DLC=8; DATA=80 3F 0D 40 B6 37 81 40; expected=0x7EF; matched=True
+2026-08-28 16:28:06.796 [T13] RX frame: ID=0x7EF; DLC=8; DATA=70 5F 5B 40 B2 BF 94 40; expected=0x7EF; matched=True
+2026-08-28 16:28:06.796 [T13] RX frame: ID=0x7EF; DLC=8; DATA=B6 37 81 40 70 5F 5B 40; expected=0x7EF; matched=True
+2026-08-28 16:28:06.796 [T13] RX frame: ID=0x7EF; DLC=8; DATA=A8 56 14 3E C0 43 0D 3E; expected=0x7EF; matched=True
+2026-08-28 16:28:06.796 [T13] RX frame: ID=0x7EF; DLC=8; DATA=56 5B D4 3D D9 7E 37 3E; expected=0x7EF; matched=True
+2026-08-28 16:28:06.796 [T13] RX frame: ID=0x7EF; DLC=8; DATA=19 D7 0C 3E 26 D2 0E 3E; expected=0x7EF; matched=True
+2026-08-28 16:28:06.796 [T13] RX frame: ID=0x7EF; DLC=8; DATA=CE 3E 0F 3E 72 86 08 3E; expected=0x7EF; matched=True
+2026-08-28 16:28:06.796 [T13] RX frame: ID=0x7EF; DLC=8; DATA=8E 31 23 3E FF FB 1E 40; expected=0x7EF; matched=True
+2026-08-28 16:28:06.796 [T13] RX frame: ID=0x7EF; DLC=8; DATA=4F 43 FB 3D FF BF 1E 40; expected=0x7EF; matched=True
+2026-08-28 16:28:06.796 [T13] RX frame: ID=0x7EF; DLC=8; DATA=FF 4B 0B 40 FF A3 0D 40; expected=0x7EF; matched=True
+2026-08-28 16:28:06.796 [T13] RX frame: ID=0x7EF; DLC=8; DATA=D0 2E E6 3D FF 8B 20 40; expected=0x7EF; matched=True
+2026-08-28 16:28:06.797 [T13] RX frame: ID=0x7EF; DLC=8; DATA=25 4F 2D 3E FF 5F 1F 40; expected=0x7EF; matched=True
+2026-08-28 16:28:06.797 [T13] RX frame: ID=0x7EF; DLC=8; DATA=7B 24 0B 3E 00 18 21 40; expected=0x7EF; matched=True
+2026-08-28 16:28:06.797 [T13] RX frame: ID=0x7EF; DLC=8; DATA=15 96 09 3E 00 A8 1D 40; expected=0x7EF; matched=True
+2026-08-28 16:28:06.797 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 64 0C 40 00 D8 0B 40; expected=0x7EF; matched=True
+2026-08-28 16:28:06.797 [T13] RX frame: ID=0x7EF; DLC=8; DATA=65 8B 06 3E 00 8C 20 40; expected=0x7EF; matched=True
+2026-08-28 16:28:06.799 [T13] RX poll 2: queue count=1
+2026-08-28 16:28:06.799 [T13] RX frame: ID=0x7EF; DLC=8; DATA=2D 67 06 3E 00 14 20 40; expected=0x7EF; matched=True
+2026-08-28 16:28:06.799 [T13] DUT_WriteRead attempt 1/3 END: matched=True; bytes=240; data=BE F4 7B 41 A8 0E 75 41 00 C2 9F 40 00 0F A0 40 FF D7 9F 40 AB 05 52 42 15 2D 16 42 9C FF 15 43 2F 0D 1D 44 00 10 01 3F 63 86 8F 41 78 4F 34 40 B2 BF 94 40 B2 BF 94 40 50 6B 4B 42 00 00 0C 42 20 5A 52 42 00 00 1C 42 AE 47 A8 40 70 5F 5B 40 70 5F 5B 40 30 FF 49 42 00 00 1C 42 D0 67 53 42 00 00 14 42 86 BE BB 41 80 3F 0D 40 B6 37 81 40 70 5F 5B 40 B2 BF 94 40 B6 37 81 40 70 5F 5B 40 A8 56 14 3E C0 43 0D 3E 56 5B D4 3D D9 7E 37 3E 19 D7 0C 3E 26 D2 0E 3E CE 3E 0F 3E 72 86 08 3E 8E 31 23 3E FF FB 1E 40 4F 43 FB 3D FF BF 1E 40 FF 4B 0B 40 FF A3 0D 40 D0 2E E6 3D FF 8B 20 40 25 4F 2D 3E FF 5F 1F 40 7B 24 0B 3E 00 18 21 40 15 96 09 3E 00 A8 1D 40 00 64 0C 40 00 D8 0B 40 65 8B 06 3E 00 8C 20 40 2D 67 06 3E 00 14 20 40
+2026-08-28 16:28:06.799 [T13] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:06.799 [T13] ClearTxRxBuffer START
+2026-08-28 16:28:06.800 [T13] ClearTxRxBuffer END
+2026-08-28 16:28:06.800 [T13] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 DF 2C 00 0C FF 00
+2026-08-28 16:28:06.862 [T13] RX poll 1: queue count=2
+2026-08-28 16:28:06.862 [T13] RX frame: ID=0x7EF; DLC=8; DATA=8F E8 C8 41 00 4C 1A 40; expected=0x7EF; matched=True
+2026-08-28 16:28:06.863 [T13] RX frame: ID=0x7EF; DLC=8; DATA=13 DF 9E 40 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:06.863 [T13] DUT_WriteRead attempt 1/3 END: matched=True; bytes=16; data=8F E8 C8 41 00 4C 1A 40 13 DF 9E 40 00 00 00 00
+2026-08-28 16:28:06.913 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:06.914 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:06.914 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:06.914 [T20] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C7 F8 00 04 FF 00
+2026-08-28 16:28:06.976 [T20] RX poll 1: queue count=1
+2026-08-28 16:28:06.976 [T20] RX frame: ID=0x7EF; DLC=8; DATA=3C DE 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:06.976 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=3C DE 02 70 00 00 00 00
+2026-08-28 16:28:06.977 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:06.977 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:06.977 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:06.978 [T20] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 DE 5C 00 04 FF 00
+2026-08-28 16:28:07.041 [T20] RX poll 1: queue count=1
+2026-08-28 16:28:07.041 [T20] RX frame: ID=0x7EF; DLC=8; DATA=1C 21 1D 44 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:07.041 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=1C 21 1D 44 00 00 00 00
+2026-08-28 16:28:07.068 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:07.068 [T3] ClearTxRxBuffer START
+2026-08-28 16:28:07.068 [T3] ClearTxRxBuffer END
+2026-08-28 16:28:07.068 [T3] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 78 00 04 FF 00
+2026-08-28 16:28:07.131 [T3] RX poll 1: queue count=1
+2026-08-28 16:28:07.131 [T3] RX frame: ID=0x7EF; DLC=8; DATA=20 E4 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:07.131 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=20 E4 02 70 00 00 00 00
+2026-08-28 16:28:07.132 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:07.132 [T3] ClearTxRxBuffer START
+2026-08-28 16:28:07.132 [T3] ClearTxRxBuffer END
+2026-08-28 16:28:07.132 [T3] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 20 00 27 FF 00
+2026-08-28 16:28:07.194 [T3] RX poll 1: queue count=5
+2026-08-28 16:28:07.194 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:07.195 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 00 A0 41 00 00 20 41; expected=0x7EF; matched=True
+2026-08-28 16:28:07.195 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 00 70 42 04 00 32 00; expected=0x7EF; matched=True
+2026-08-28 16:28:07.195 [T3] RX frame: ID=0x7EF; DLC=8; DATA=10 27 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:07.195 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:07.195 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=40; data=00 00 00 00 00 00 00 00 00 00 A0 41 00 00 20 41 00 00 70 42 04 00 32 00 10 27 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-08-28 16:28:07.195 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:07.196 [T3] ClearTxRxBuffer START
+2026-08-28 16:28:07.196 [T3] ClearTxRxBuffer END
+2026-08-28 16:28:07.196 [T3] TX frame 1/6: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 20 00 27 00 00
+2026-08-28 16:28:07.257 [T3] TX continuation 2/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 00 00 66 66 0D 43
+2026-08-28 16:28:07.318 [T3] TX continuation 3/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 A0 41 00 00 20 41
+2026-08-28 16:28:07.380 [T3] TX continuation 4/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 70 42 04 00 32 00
+2026-08-28 16:28:07.441 [T3] TX continuation 5/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=10 27 01 00 00 00 00 00
+2026-08-28 16:28:07.502 [T3] TX continuation 6/6: ID=0x7EF; DLC=8; PAYLOAD=7; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:28:07.564 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:28:07.564 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:07.565 [T3] ClearTxRxBuffer START
+2026-08-28 16:28:07.565 [T3] ClearTxRxBuffer END
+2026-08-28 16:28:07.565 [T3] TX frame 1/2: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 3B 00 01 00 00
+2026-08-28 16:28:07.627 [T3] TX continuation 2/2: ID=0x7EF; DLC=8; PAYLOAD=1; DATA=FF 00 00 00 00 00 00 00
+2026-08-28 16:28:07.688 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:28:07.688 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:07.688 [T3] ClearTxRxBuffer START
+2026-08-28 16:28:07.688 [T3] ClearTxRxBuffer END
+2026-08-28 16:28:07.689 [T3] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 20 00 27 FF 00
+2026-08-28 16:28:07.752 [T3] RX poll 1: queue count=5
+2026-08-28 16:28:07.752 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 66 66 0D 43; expected=0x7EF; matched=True
+2026-08-28 16:28:07.753 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 00 A0 41 00 00 20 41; expected=0x7EF; matched=True
+2026-08-28 16:28:07.753 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 00 70 42 04 00 32 00; expected=0x7EF; matched=True
+2026-08-28 16:28:07.753 [T3] RX frame: ID=0x7EF; DLC=8; DATA=10 27 01 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:07.753 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:07.753 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=40; data=00 00 00 00 66 66 0D 43 00 00 A0 41 00 00 20 41 00 00 70 42 04 00 32 00 10 27 01 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-08-28 16:28:07.773 [T10] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:07.774 [T10] ClearTxRxBuffer START
+2026-08-28 16:28:07.774 [T10] ClearTxRxBuffer END
+2026-08-28 16:28:07.774 [T10] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 7C 00 04 FF 00
+2026-08-28 16:28:07.836 [T10] RX poll 1: queue count=1
+2026-08-28 16:28:07.836 [T10] RX frame: ID=0x7EF; DLC=8; DATA=10 E5 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:07.836 [T10] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=10 E5 02 70 00 00 00 00
+2026-08-28 16:28:07.837 [T10] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:07.837 [T10] ClearTxRxBuffer START
+2026-08-28 16:28:07.837 [T10] ClearTxRxBuffer END
+2026-08-28 16:28:07.837 [T10] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E5 10 00 0A FF 00
+2026-08-28 16:28:07.901 [T10] RX poll 1: queue count=2
+2026-08-28 16:28:07.901 [T10] RX frame: ID=0x7EF; DLC=8; DATA=00 00 80 04 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:07.901 [T10] RX frame: ID=0x7EF; DLC=8; DATA=04 03 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:07.901 [T10] DUT_WriteRead attempt 1/3 END: matched=True; bytes=16; data=00 00 80 04 00 00 00 00 04 03 00 00 00 00 00 00
+2026-08-28 16:28:12.930 [T13] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:12.930 [T13] ClearTxRxBuffer START
+2026-08-28 16:28:12.930 [T13] ClearTxRxBuffer END
+2026-08-28 16:28:12.930 [T13] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 8C 00 04 FF 00
+2026-08-28 16:28:12.993 [T13] RX poll 1: queue count=1
+2026-08-28 16:28:12.993 [T13] RX frame: ID=0x7EF; DLC=8; DATA=14 E2 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:12.993 [T13] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=14 E2 02 70 00 00 00 00
+2026-08-28 16:28:12.993 [T13] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:12.993 [T13] ClearTxRxBuffer START
+2026-08-28 16:28:12.994 [T13] ClearTxRxBuffer END
+2026-08-28 16:28:12.994 [T13] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 14 00 28 FF 00
+2026-08-28 16:28:13.055 [T13] RX poll 1: queue count=5
+2026-08-28 16:28:13.056 [T13] RX frame: ID=0x7EF; DLC=8; DATA=AC CF BB 40 B6 37 81 40; expected=0x7EF; matched=True
+2026-08-28 16:28:13.056 [T13] RX frame: ID=0x7EF; DLC=8; DATA=70 5F 5B 40 78 4F 34 40; expected=0x7EF; matched=True
+2026-08-28 16:28:13.056 [T13] RX frame: ID=0x7EF; DLC=8; DATA=08 5F CC 3F 08 5F CC 3F; expected=0x7EF; matched=True
+2026-08-28 16:28:13.056 [T13] RX frame: ID=0x7EF; DLC=8; DATA=A4 DF E2 40 AC CF BB 40; expected=0x7EF; matched=True
+2026-08-28 16:28:13.056 [T13] RX frame: ID=0x7EF; DLC=8; DATA=AE 47 A8 40 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:13.056 [T13] DUT_WriteRead attempt 1/3 END: matched=True; bytes=40; data=AC CF BB 40 B6 37 81 40 70 5F 5B 40 78 4F 34 40 08 5F CC 3F 08 5F CC 3F A4 DF E2 40 AC CF BB 40 AE 47 A8 40 00 00 00 00
+2026-08-28 16:28:13.108 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:13.109 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:13.109 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:13.109 [T20] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 78 00 04 FF 00
+2026-08-28 16:28:13.171 [T20] RX poll 1: queue count=1
+2026-08-28 16:28:13.171 [T20] RX frame: ID=0x7EF; DLC=8; DATA=20 E4 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:13.172 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=20 E4 02 70 00 00 00 00
+2026-08-28 16:28:13.172 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:13.172 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:13.172 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:13.172 [T20] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 20 00 27 FF 00
+2026-08-28 16:28:13.236 [T20] RX poll 1: queue count=5
+2026-08-28 16:28:13.236 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 66 66 0D 43; expected=0x7EF; matched=True
+2026-08-28 16:28:13.236 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 00 A0 41 00 00 20 41; expected=0x7EF; matched=True
+2026-08-28 16:28:13.236 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 00 70 42 04 00 32 00; expected=0x7EF; matched=True
+2026-08-28 16:28:13.236 [T20] RX frame: ID=0x7EF; DLC=8; DATA=10 27 01 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:13.236 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:13.236 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=40; data=00 00 00 00 66 66 0D 43 00 00 A0 41 00 00 20 41 00 00 70 42 04 00 32 00 10 27 01 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-08-28 16:28:13.236 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:13.236 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:13.236 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:13.237 [T20] TX frame 1/6: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 20 00 27 00 00
+2026-08-28 16:28:13.298 [T20] TX continuation 2/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:28:13.359 [T20] TX continuation 3/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 A0 41 00 00 20 41
+2026-08-28 16:28:13.421 [T20] TX continuation 4/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 70 42 04 00 32 00
+2026-08-28 16:28:13.482 [T20] TX continuation 5/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=10 27 00 00 00 00 00 00
+2026-08-28 16:28:13.543 [T20] TX continuation 6/6: ID=0x7EF; DLC=8; PAYLOAD=7; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:28:13.604 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:28:13.604 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:13.604 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:13.604 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:13.605 [T20] TX frame 1/2: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 3B 00 01 00 00
+2026-08-28 16:28:13.665 [T20] TX continuation 2/2: ID=0x7EF; DLC=8; PAYLOAD=1; DATA=FF 00 00 00 00 00 00 00
+2026-08-28 16:28:13.726 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:28:13.727 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:13.727 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:13.727 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:13.727 [T20] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 20 00 27 FF 00
+2026-08-28 16:28:13.790 [T20] RX poll 1: queue count=5
+2026-08-28 16:28:13.790 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:13.790 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 00 A0 41 00 00 20 41; expected=0x7EF; matched=True
+2026-08-28 16:28:13.790 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 00 70 42 04 00 32 00; expected=0x7EF; matched=True
+2026-08-28 16:28:13.791 [T20] RX frame: ID=0x7EF; DLC=8; DATA=10 27 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:13.791 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:13.791 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=40; data=00 00 00 00 00 00 00 00 00 00 A0 41 00 00 20 41 00 00 70 42 04 00 32 00 10 27 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-08-28 16:28:21.301 [T10] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:21.301 [T10] ClearTxRxBuffer START
+2026-08-28 16:28:21.302 [T10] ClearTxRxBuffer END
+2026-08-28 16:28:21.302 [T10] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 8C 00 04 FF 00
+2026-08-28 16:28:21.365 [T10] RX poll 1: queue count=1
+2026-08-28 16:28:21.366 [T10] RX frame: ID=0x7EF; DLC=8; DATA=14 E2 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:21.366 [T10] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=14 E2 02 70 00 00 00 00
+2026-08-28 16:28:21.366 [T10] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:21.366 [T10] ClearTxRxBuffer START
+2026-08-28 16:28:21.367 [T10] ClearTxRxBuffer END
+2026-08-28 16:28:21.367 [T10] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 14 00 28 FF 00
+2026-08-28 16:28:21.429 [T10] RX poll 1: queue count=5
+2026-08-28 16:28:21.429 [T10] RX frame: ID=0x7EF; DLC=8; DATA=AE 47 A8 40 70 5F 5B 40; expected=0x7EF; matched=True
+2026-08-28 16:28:21.430 [T10] RX frame: ID=0x7EF; DLC=8; DATA=70 5F 5B 40 78 4F 34 40; expected=0x7EF; matched=True
+2026-08-28 16:28:21.430 [T10] RX frame: ID=0x7EF; DLC=8; DATA=08 5F CC 3F 08 5F CC 3F; expected=0x7EF; matched=True
+2026-08-28 16:28:21.431 [T10] RX frame: ID=0x7EF; DLC=8; DATA=A4 DF E2 40 AC CF BB 40; expected=0x7EF; matched=True
+2026-08-28 16:28:21.431 [T10] RX frame: ID=0x7EF; DLC=8; DATA=AE 47 A8 40 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:21.432 [T10] DUT_WriteRead attempt 1/3 END: matched=True; bytes=40; data=AE 47 A8 40 70 5F 5B 40 70 5F 5B 40 78 4F 34 40 08 5F CC 3F 08 5F CC 3F A4 DF E2 40 AC CF BB 40 AE 47 A8 40 00 00 00 00
+2026-08-28 16:28:28.814 [T16] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:28.814 [T16] ClearTxRxBuffer START
+2026-08-28 16:28:28.814 [T16] ClearTxRxBuffer END
+2026-08-28 16:28:28.814 [T16] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 7C 00 04 FF 00
+2026-08-28 16:28:28.876 [T16] RX poll 1: queue count=1
+2026-08-28 16:28:28.876 [T16] RX frame: ID=0x7EF; DLC=8; DATA=10 E5 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:28.877 [T16] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=10 E5 02 70 00 00 00 00
+2026-08-28 16:28:28.877 [T16] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:28.877 [T16] ClearTxRxBuffer START
+2026-08-28 16:28:28.877 [T16] ClearTxRxBuffer END
+2026-08-28 16:28:28.878 [T16] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E5 10 00 0A FF 00
+2026-08-28 16:28:28.940 [T16] RX poll 1: queue count=2
+2026-08-28 16:28:28.940 [T16] RX frame: ID=0x7EF; DLC=8; DATA=00 00 80 04 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:28.940 [T16] RX frame: ID=0x7EF; DLC=8; DATA=04 03 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:28.940 [T16] DUT_WriteRead attempt 1/3 END: matched=True; bytes=16; data=00 00 80 04 00 00 00 00 04 03 00 00 00 00 00 00
+2026-08-28 16:28:34.360 [T19] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:34.360 [T19] ClearTxRxBuffer START
+2026-08-28 16:28:34.360 [T19] ClearTxRxBuffer END
+2026-08-28 16:28:34.361 [T19] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 34 00 04 FF 00
+2026-08-28 16:28:34.424 [T19] RX poll 1: queue count=1
+2026-08-28 16:28:34.424 [T19] RX frame: ID=0x7EF; DLC=8; DATA=EC E2 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:34.424 [T19] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=EC E2 02 70 00 00 00 00
+2026-08-28 16:28:34.424 [T19] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:34.424 [T19] ClearTxRxBuffer START
+2026-08-28 16:28:34.424 [T19] ClearTxRxBuffer END
+2026-08-28 16:28:34.424 [T19] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 05 FF 00
+2026-08-28 16:28:34.487 [T19] RX poll 1: queue count=1
+2026-08-28 16:28:34.487 [T19] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:34.487 [T19] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=00 00 00 00 00 00 00 00
+2026-08-28 16:28:34.487 [T19] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:34.487 [T19] ClearTxRxBuffer START
+2026-08-28 16:28:34.487 [T19] ClearTxRxBuffer END
+2026-08-28 16:28:34.487 [T19] TX frame 1/2: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 05 00 00
+2026-08-28 16:28:34.549 [T19] TX continuation 2/2: ID=0x7EF; DLC=8; PAYLOAD=5; DATA=00 00 00 00 01 00 00 00
+2026-08-28 16:28:34.610 [T19] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:28:34.610 [T19] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:34.611 [T19] ClearTxRxBuffer START
+2026-08-28 16:28:34.611 [T19] ClearTxRxBuffer END
+2026-08-28 16:28:34.611 [T19] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 05 FF 00
+2026-08-28 16:28:34.674 [T19] RX poll 1: queue count=1
+2026-08-28 16:28:34.674 [T19] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 01 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:34.674 [T19] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=00 00 00 00 01 00 00 00
+2026-08-28 16:28:34.857 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:34.857 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:34.858 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:34.858 [T20] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 34 00 04 FF 00
+2026-08-28 16:28:34.921 [T20] RX poll 1: queue count=1
+2026-08-28 16:28:34.921 [T20] RX frame: ID=0x7EF; DLC=8; DATA=EC E2 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:34.922 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=EC E2 02 70 00 00 00 00
+2026-08-28 16:28:34.922 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:34.922 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:34.922 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:34.922 [T20] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 05 FF 00
+2026-08-28 16:28:34.985 [T20] RX poll 1: queue count=1
+2026-08-28 16:28:34.986 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 01 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:34.986 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=00 00 00 00 01 00 00 00
+2026-08-28 16:28:34.986 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:34.987 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:34.987 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:34.987 [T20] TX frame 1/2: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 05 00 00
+2026-08-28 16:28:35.048 [T20] TX continuation 2/2: ID=0x7EF; DLC=8; PAYLOAD=5; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:28:35.109 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:28:35.109 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:35.109 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:35.110 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:35.110 [T20] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 05 FF 00
+2026-08-28 16:28:35.172 [T20] RX poll 1: queue count=1
+2026-08-28 16:28:35.172 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:35.172 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=00 00 00 00 00 00 00 00
+2026-08-28 16:28:35.205 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:35.206 [T3] ClearTxRxBuffer START
+2026-08-28 16:28:35.206 [T3] ClearTxRxBuffer END
+2026-08-28 16:28:35.206 [T3] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 34 00 04 FF 00
+2026-08-28 16:28:35.269 [T3] RX poll 1: queue count=1
+2026-08-28 16:28:35.269 [T3] RX frame: ID=0x7EF; DLC=8; DATA=EC E2 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:35.269 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=EC E2 02 70 00 00 00 00
+2026-08-28 16:28:35.269 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:35.269 [T3] ClearTxRxBuffer START
+2026-08-28 16:28:35.270 [T3] ClearTxRxBuffer END
+2026-08-28 16:28:35.270 [T3] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 15 FF 00
+2026-08-28 16:28:35.333 [T3] RX poll 1: queue count=3
+2026-08-28 16:28:35.333 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:35.333 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:35.333 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:35.334 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=24; data=00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-08-28 16:28:35.334 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:35.335 [T3] ClearTxRxBuffer START
+2026-08-28 16:28:35.335 [T3] ClearTxRxBuffer END
+2026-08-28 16:28:35.335 [T3] TX frame 1/4: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 15 00 00
+2026-08-28 16:28:35.396 [T3] TX continuation 2/4: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:28:35.457 [T3] TX continuation 3/4: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:28:35.518 [T3] TX continuation 4/4: ID=0x7EF; DLC=8; PAYLOAD=5; DATA=00 00 00 00 01 00 00 00
+2026-08-28 16:28:35.579 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:28:35.580 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:35.580 [T3] ClearTxRxBuffer START
+2026-08-28 16:28:35.580 [T3] ClearTxRxBuffer END
+2026-08-28 16:28:35.580 [T3] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 15 FF 00
+2026-08-28 16:28:35.643 [T3] RX poll 1: queue count=3
+2026-08-28 16:28:35.643 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:35.643 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:35.643 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 01 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:35.643 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=24; data=00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00
+2026-08-28 16:28:35.794 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:35.794 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:35.795 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:35.795 [T20] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 34 00 04 FF 00
+2026-08-28 16:28:35.858 [T20] RX poll 1: queue count=1
+2026-08-28 16:28:35.858 [T20] RX frame: ID=0x7EF; DLC=8; DATA=EC E2 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:35.858 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=EC E2 02 70 00 00 00 00
+2026-08-28 16:28:35.858 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:35.859 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:35.859 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:35.859 [T20] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 15 FF 00
+2026-08-28 16:28:35.921 [T20] RX poll 1: queue count=3
+2026-08-28 16:28:35.922 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:35.922 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:35.922 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 01 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:35.922 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=24; data=00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 00 00 00
+2026-08-28 16:28:35.923 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:35.923 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:35.923 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:35.923 [T20] TX frame 1/4: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 15 00 00
+2026-08-28 16:28:35.984 [T20] TX continuation 2/4: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:28:36.045 [T20] TX continuation 3/4: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:28:36.106 [T20] TX continuation 4/4: ID=0x7EF; DLC=8; PAYLOAD=5; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:28:36.167 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:28:36.167 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:36.167 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:36.168 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:36.168 [T20] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 15 FF 00
+2026-08-28 16:28:36.231 [T20] RX poll 1: queue count=3
+2026-08-28 16:28:36.231 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:36.231 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:36.231 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:36.231 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=24; data=00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-08-28 16:28:36.262 [T15] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:36.262 [T15] ClearTxRxBuffer START
+2026-08-28 16:28:36.262 [T15] ClearTxRxBuffer END
+2026-08-28 16:28:36.263 [T15] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 34 00 04 FF 00
+2026-08-28 16:28:36.325 [T15] RX poll 1: queue count=1
+2026-08-28 16:28:36.325 [T15] RX frame: ID=0x7EF; DLC=8; DATA=EC E2 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:36.326 [T15] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=EC E2 02 70 00 00 00 00
+2026-08-28 16:28:36.326 [T15] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:36.326 [T15] ClearTxRxBuffer START
+2026-08-28 16:28:36.326 [T15] ClearTxRxBuffer END
+2026-08-28 16:28:36.326 [T15] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 08 FF 00
+2026-08-28 16:28:36.389 [T15] RX poll 1: queue count=1
+2026-08-28 16:28:36.389 [T15] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:36.390 [T15] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=00 00 00 00 00 00 00 00
+2026-08-28 16:28:36.390 [T15] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:36.390 [T15] ClearTxRxBuffer START
+2026-08-28 16:28:36.390 [T15] ClearTxRxBuffer END
+2026-08-28 16:28:36.390 [T15] TX frame 1/2: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 08 00 00
+2026-08-28 16:28:36.451 [T15] TX continuation 2/2: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 00 00 00 00 00 01
+2026-08-28 16:28:36.512 [T15] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:28:36.512 [T15] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:36.513 [T15] ClearTxRxBuffer START
+2026-08-28 16:28:36.513 [T15] ClearTxRxBuffer END
+2026-08-28 16:28:36.513 [T15] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 08 FF 00
+2026-08-28 16:28:36.583 [T15] RX poll 1: queue count=1
+2026-08-28 16:28:36.583 [T15] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 01; expected=0x7EF; matched=True
+2026-08-28 16:28:36.583 [T15] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=00 00 00 00 00 00 00 01
+2026-08-28 16:28:36.731 [T13] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:36.732 [T13] ClearTxRxBuffer START
+2026-08-28 16:28:36.732 [T13] ClearTxRxBuffer END
+2026-08-28 16:28:36.732 [T13] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 34 00 04 FF 00
+2026-08-28 16:28:36.795 [T13] RX poll 1: queue count=1
+2026-08-28 16:28:36.795 [T13] RX frame: ID=0x7EF; DLC=8; DATA=EC E2 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:36.795 [T13] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=EC E2 02 70 00 00 00 00
+2026-08-28 16:28:36.795 [T13] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:36.795 [T13] ClearTxRxBuffer START
+2026-08-28 16:28:36.795 [T13] ClearTxRxBuffer END
+2026-08-28 16:28:36.795 [T13] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 08 FF 00
+2026-08-28 16:28:36.858 [T13] RX poll 1: queue count=1
+2026-08-28 16:28:36.858 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 01; expected=0x7EF; matched=True
+2026-08-28 16:28:36.858 [T13] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=00 00 00 00 00 00 00 01
+2026-08-28 16:28:36.858 [T13] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:36.859 [T13] ClearTxRxBuffer START
+2026-08-28 16:28:36.859 [T13] ClearTxRxBuffer END
+2026-08-28 16:28:36.859 [T13] TX frame 1/2: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 08 00 00
+2026-08-28 16:28:36.920 [T13] TX continuation 2/2: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:28:36.981 [T13] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:28:36.981 [T13] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:36.982 [T13] ClearTxRxBuffer START
+2026-08-28 16:28:36.982 [T13] ClearTxRxBuffer END
+2026-08-28 16:28:36.982 [T13] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 08 FF 00
+2026-08-28 16:28:37.045 [T13] RX poll 1: queue count=1
+2026-08-28 16:28:37.045 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:37.045 [T13] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=00 00 00 00 00 00 00 00
+2026-08-28 16:28:37.072 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:37.073 [T3] ClearTxRxBuffer START
+2026-08-28 16:28:37.073 [T3] ClearTxRxBuffer END
+2026-08-28 16:28:37.073 [T3] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 34 00 04 FF 00
+2026-08-28 16:28:37.136 [T3] RX poll 1: queue count=1
+2026-08-28 16:28:37.136 [T3] RX frame: ID=0x7EF; DLC=8; DATA=EC E2 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:37.136 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=EC E2 02 70 00 00 00 00
+2026-08-28 16:28:37.137 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:37.137 [T3] ClearTxRxBuffer START
+2026-08-28 16:28:37.137 [T3] ClearTxRxBuffer END
+2026-08-28 16:28:37.137 [T3] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 0A FF 00
+2026-08-28 16:28:37.200 [T3] RX poll 1: queue count=2
+2026-08-28 16:28:37.200 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:37.200 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:37.200 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=16; data=00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-08-28 16:28:37.201 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:37.201 [T3] ClearTxRxBuffer START
+2026-08-28 16:28:37.201 [T3] ClearTxRxBuffer END
+2026-08-28 16:28:37.201 [T3] TX frame 1/3: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 0A 00 00
+2026-08-28 16:28:37.262 [T3] TX continuation 2/3: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:28:37.323 [T3] TX continuation 3/3: ID=0x7EF; DLC=8; PAYLOAD=2; DATA=01 01 00 00 00 00 00 00
+2026-08-28 16:28:37.384 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:28:37.384 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:37.384 [T3] ClearTxRxBuffer START
+2026-08-28 16:28:37.384 [T3] ClearTxRxBuffer END
+2026-08-28 16:28:37.385 [T3] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 0A FF 00
+2026-08-28 16:28:37.447 [T3] RX poll 1: queue count=2
+2026-08-28 16:28:37.447 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:37.447 [T3] RX frame: ID=0x7EF; DLC=8; DATA=01 01 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:37.447 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=16; data=00 00 00 00 00 00 00 00 01 01 00 00 00 00 00 00
+2026-08-28 16:28:37.619 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:37.619 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:37.619 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:37.619 [T20] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 34 00 04 FF 00
+2026-08-28 16:28:37.682 [T20] RX poll 1: queue count=1
+2026-08-28 16:28:37.682 [T20] RX frame: ID=0x7EF; DLC=8; DATA=EC E2 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:37.682 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=EC E2 02 70 00 00 00 00
+2026-08-28 16:28:37.682 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:37.683 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:37.684 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:37.684 [T20] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 0A FF 00
+2026-08-28 16:28:37.747 [T20] RX poll 1: queue count=2
+2026-08-28 16:28:37.747 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:37.747 [T20] RX frame: ID=0x7EF; DLC=8; DATA=01 01 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:37.747 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=16; data=00 00 00 00 00 00 00 00 01 01 00 00 00 00 00 00
+2026-08-28 16:28:37.747 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:37.747 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:37.748 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:37.748 [T20] TX frame 1/3: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 0A 00 00
+2026-08-28 16:28:37.808 [T20] TX continuation 2/3: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:28:37.869 [T20] TX continuation 3/3: ID=0x7EF; DLC=8; PAYLOAD=2; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:28:37.930 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:28:37.930 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:37.931 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:37.931 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:37.931 [T20] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 0A FF 00
+2026-08-28 16:28:37.994 [T20] RX poll 1: queue count=2
+2026-08-28 16:28:37.994 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:37.994 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:37.994 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=16; data=00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-08-28 16:28:38.029 [T10] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:38.029 [T10] ClearTxRxBuffer START
+2026-08-28 16:28:38.030 [T10] ClearTxRxBuffer END
+2026-08-28 16:28:38.030 [T10] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 34 00 04 FF 00
+2026-08-28 16:28:38.092 [T10] RX poll 1: queue count=1
+2026-08-28 16:28:38.092 [T10] RX frame: ID=0x7EF; DLC=8; DATA=EC E2 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:38.092 [T10] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=EC E2 02 70 00 00 00 00
+2026-08-28 16:28:38.092 [T10] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:38.093 [T10] ClearTxRxBuffer START
+2026-08-28 16:28:38.093 [T10] ClearTxRxBuffer END
+2026-08-28 16:28:38.093 [T10] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 18 FF 00
+2026-08-28 16:28:38.156 [T10] RX poll 1: queue count=3
+2026-08-28 16:28:38.156 [T10] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:38.156 [T10] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:38.156 [T10] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:38.156 [T10] DUT_WriteRead attempt 1/3 END: matched=True; bytes=24; data=00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-08-28 16:28:38.156 [T10] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:38.156 [T10] ClearTxRxBuffer START
+2026-08-28 16:28:38.156 [T10] ClearTxRxBuffer END
+2026-08-28 16:28:38.157 [T10] TX frame 1/4: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 18 00 00
+2026-08-28 16:28:38.217 [T10] TX continuation 2/4: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:28:38.279 [T10] TX continuation 3/4: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:28:38.340 [T10] TX continuation 4/4: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 00 00 00 00 01 01
+2026-08-28 16:28:38.401 [T10] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:28:38.401 [T10] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:38.401 [T10] ClearTxRxBuffer START
+2026-08-28 16:28:38.401 [T10] ClearTxRxBuffer END
+2026-08-28 16:28:38.401 [T10] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 18 FF 00
+2026-08-28 16:28:38.465 [T10] RX poll 1: queue count=3
+2026-08-28 16:28:38.465 [T10] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:38.465 [T10] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:38.465 [T10] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 01 01; expected=0x7EF; matched=True
+2026-08-28 16:28:38.466 [T10] DUT_WriteRead attempt 1/3 END: matched=True; bytes=24; data=00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 01
+2026-08-28 16:28:38.635 [T19] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:38.636 [T19] ClearTxRxBuffer START
+2026-08-28 16:28:38.636 [T19] ClearTxRxBuffer END
+2026-08-28 16:28:38.636 [T19] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 34 00 04 FF 00
+2026-08-28 16:28:38.698 [T19] RX poll 1: queue count=1
+2026-08-28 16:28:38.698 [T19] RX frame: ID=0x7EF; DLC=8; DATA=EC E2 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:38.699 [T19] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=EC E2 02 70 00 00 00 00
+2026-08-28 16:28:38.699 [T19] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:38.699 [T19] ClearTxRxBuffer START
+2026-08-28 16:28:38.699 [T19] ClearTxRxBuffer END
+2026-08-28 16:28:38.699 [T19] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 18 FF 00
+2026-08-28 16:28:38.762 [T19] RX poll 1: queue count=3
+2026-08-28 16:28:38.762 [T19] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:38.763 [T19] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:38.763 [T19] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 01 01; expected=0x7EF; matched=True
+2026-08-28 16:28:38.763 [T19] DUT_WriteRead attempt 1/3 END: matched=True; bytes=24; data=00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 01 01
+2026-08-28 16:28:38.763 [T19] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:38.763 [T19] ClearTxRxBuffer START
+2026-08-28 16:28:38.764 [T19] ClearTxRxBuffer END
+2026-08-28 16:28:38.764 [T19] TX frame 1/4: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 18 00 00
+2026-08-28 16:28:38.825 [T19] TX continuation 2/4: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:28:38.886 [T19] TX continuation 3/4: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:28:38.948 [T19] TX continuation 4/4: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:28:39.008 [T19] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:28:39.008 [T19] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:39.008 [T19] ClearTxRxBuffer START
+2026-08-28 16:28:39.009 [T19] ClearTxRxBuffer END
+2026-08-28 16:28:39.009 [T19] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 EC 00 18 FF 00
+2026-08-28 16:28:39.071 [T19] RX poll 1: queue count=3
+2026-08-28 16:28:39.072 [T19] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:39.072 [T19] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:39.072 [T19] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:39.072 [T19] DUT_WriteRead attempt 1/3 END: matched=True; bytes=24; data=00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-08-28 16:28:47.552 [T19] DUT_ComucationInit START: socket=0; TX=0x7EE; RX=0x7EF; request=FF FA 55 A9 00 04 FF 00
+2026-08-28 16:28:47.553 [T19] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:47.553 [T19] ClearTxRxBuffer START
+2026-08-28 16:28:47.553 [T19] ClearTxRxBuffer END
+2026-08-28 16:28:47.553 [T19] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=FF FA 55 A9 00 04 FF 00
+2026-08-28 16:28:47.616 [T19] RX poll 1: queue count=1
+2026-08-28 16:28:47.616 [T19] RX frame: ID=0x7EF; DLC=8; DATA=F8 C7 18 80 FB 3E 4D 00; expected=0x7EF; matched=True
+2026-08-28 16:28:47.616 [T19] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=F8 C7 18 80 FB 3E 4D 00
+2026-08-28 16:28:47.616 [T19] DUT_ComucationInit SUCCESS: FirstAddress=0x8018C7F8; RX=F8 C7 18 80 FB 3E 4D 00
+2026-08-28 16:28:47.659 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:47.660 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:47.660 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:47.660 [T20] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C7 F8 00 04 FF 00
+2026-08-28 16:28:47.723 [T20] RX poll 1: queue count=1
+2026-08-28 16:28:47.723 [T20] RX frame: ID=0x7EF; DLC=8; DATA=3C DE 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:47.723 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=3C DE 02 70 00 00 00 00
+2026-08-28 16:28:47.723 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:47.723 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:47.723 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:47.723 [T20] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 DE 3C 00 F0 FF 00
+2026-08-28 16:28:47.785 [T20] RX poll 1: queue count=29
+2026-08-28 16:28:47.785 [T20] RX frame: ID=0x7EF; DLC=8; DATA=26 DB 7B 41 10 F5 74 41; expected=0x7EF; matched=True
+2026-08-28 16:28:47.785 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 CD 9F 40 00 04 A0 40; expected=0x7EF; matched=True
+2026-08-28 16:28:47.785 [T20] RX frame: ID=0x7EF; DLC=8; DATA=FF CD 9F 40 AB 05 52 42; expected=0x7EF; matched=True
+2026-08-28 16:28:47.785 [T20] RX frame: ID=0x7EF; DLC=8; DATA=93 3F 18 42 9C FF 15 43; expected=0x7EF; matched=True
+2026-08-28 16:28:47.785 [T20] RX frame: ID=0x7EF; DLC=8; DATA=2F 0D 1D 44 00 60 01 3F; expected=0x7EF; matched=True
+2026-08-28 16:28:47.785 [T20] RX frame: ID=0x7EF; DLC=8; DATA=30 93 8F 41 78 4F 34 40; expected=0x7EF; matched=True
+2026-08-28 16:28:47.786 [T20] RX frame: ID=0x7EF; DLC=8; DATA=B2 BF 94 40 AE 47 A8 40; expected=0x7EF; matched=True
+2026-08-28 16:28:47.786 [T20] RX frame: ID=0x7EF; DLC=8; DATA=40 18 48 42 00 00 18 42; expected=0x7EF; matched=True
+2026-08-28 16:28:47.786 [T20] RX frame: ID=0x7EF; DLC=8; DATA=20 5A 52 42 00 00 1C 42; expected=0x7EF; matched=True
+2026-08-28 16:28:47.786 [T20] RX frame: ID=0x7EF; DLC=8; DATA=AE 47 A8 40 78 4F 34 40; expected=0x7EF; matched=True
+2026-08-28 16:28:47.786 [T20] RX frame: ID=0x7EF; DLC=8; DATA=78 4F 34 40 38 58 4A 42; expected=0x7EF; matched=True
+2026-08-28 16:28:47.786 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 00 1C 42 98 2E 52 42; expected=0x7EF; matched=True
+2026-08-28 16:28:47.786 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 00 18 42 86 BE BB 41; expected=0x7EF; matched=True
+2026-08-28 16:28:47.787 [T20] RX frame: ID=0x7EF; DLC=8; DATA=80 3F 0D 40 B2 BF 94 40; expected=0x7EF; matched=True
+2026-08-28 16:28:47.787 [T20] RX frame: ID=0x7EF; DLC=8; DATA=70 5F 5B 40 AE 47 A8 40; expected=0x7EF; matched=True
+2026-08-28 16:28:47.787 [T20] RX frame: ID=0x7EF; DLC=8; DATA=B6 37 81 40 B6 37 81 40; expected=0x7EF; matched=True
+2026-08-28 16:28:47.787 [T20] RX frame: ID=0x7EF; DLC=8; DATA=C8 45 FA 3D B8 5A 21 3E; expected=0x7EF; matched=True
+2026-08-28 16:28:47.787 [T20] RX frame: ID=0x7EF; DLC=8; DATA=30 73 D9 3D 61 98 34 3E; expected=0x7EF; matched=True
+2026-08-28 16:28:47.787 [T20] RX frame: ID=0x7EF; DLC=8; DATA=C0 27 11 3E 55 3C 10 3E; expected=0x7EF; matched=True
+2026-08-28 16:28:47.788 [T20] RX frame: ID=0x7EF; DLC=8; DATA=D3 9B 0E 3E AF 07 08 3E; expected=0x7EF; matched=True
+2026-08-28 16:28:47.788 [T20] RX frame: ID=0x7EF; DLC=8; DATA=A0 F0 09 3E FF D7 1F 40; expected=0x7EF; matched=True
+2026-08-28 16:28:47.788 [T20] RX frame: ID=0x7EF; DLC=8; DATA=95 FE 12 3E FF 9B 1F 40; expected=0x7EF; matched=True
+2026-08-28 16:28:47.788 [T20] RX frame: ID=0x7EF; DLC=8; DATA=FF F7 09 40 FF 93 0E 40; expected=0x7EF; matched=True
+2026-08-28 16:28:47.788 [T20] RX frame: ID=0x7EF; DLC=8; DATA=D4 05 3C 3E FF C7 20 40; expected=0x7EF; matched=True
+2026-08-28 16:28:47.788 [T20] RX frame: ID=0x7EF; DLC=8; DATA=78 02 CC 3D FF AF 1F 40; expected=0x7EF; matched=True
+2026-08-28 16:28:47.789 [T20] RX frame: ID=0x7EF; DLC=8; DATA=22 91 0B 3E 00 94 22 40; expected=0x7EF; matched=True
+2026-08-28 16:28:47.789 [T20] RX frame: ID=0x7EF; DLC=8; DATA=9C 93 0A 3E 00 E8 1E 40; expected=0x7EF; matched=True
+2026-08-28 16:28:47.789 [T20] RX frame: ID=0x7EF; DLC=8; DATA=00 08 09 40 00 98 0F 40; expected=0x7EF; matched=True
+2026-08-28 16:28:47.789 [T20] RX frame: ID=0x7EF; DLC=8; DATA=56 74 08 3E 00 60 1F 40; expected=0x7EF; matched=True
+2026-08-28 16:28:47.790 [T20] RX poll 2: queue count=1
+2026-08-28 16:28:47.791 [T20] RX frame: ID=0x7EF; DLC=8; DATA=56 74 08 3E 00 C0 1E 40; expected=0x7EF; matched=True
+2026-08-28 16:28:47.791 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=240; data=26 DB 7B 41 10 F5 74 41 00 CD 9F 40 00 04 A0 40 FF CD 9F 40 AB 05 52 42 93 3F 18 42 9C FF 15 43 2F 0D 1D 44 00 60 01 3F 30 93 8F 41 78 4F 34 40 B2 BF 94 40 AE 47 A8 40 40 18 48 42 00 00 18 42 20 5A 52 42 00 00 1C 42 AE 47 A8 40 78 4F 34 40 78 4F 34 40 38 58 4A 42 00 00 1C 42 98 2E 52 42 00 00 18 42 86 BE BB 41 80 3F 0D 40 B2 BF 94 40 70 5F 5B 40 AE 47 A8 40 B6 37 81 40 B6 37 81 40 C8 45 FA 3D B8 5A 21 3E 30 73 D9 3D 61 98 34 3E C0 27 11 3E 55 3C 10 3E D3 9B 0E 3E AF 07 08 3E A0 F0 09 3E FF D7 1F 40 95 FE 12 3E FF 9B 1F 40 FF F7 09 40 FF 93 0E 40 D4 05 3C 3E FF C7 20 40 78 02 CC 3D FF AF 1F 40 22 91 0B 3E 00 94 22 40 9C 93 0A 3E 00 E8 1E 40 00 08 09 40 00 98 0F 40 56 74 08 3E 00 60 1F 40 56 74 08 3E 00 C0 1E 40
+2026-08-28 16:28:47.791 [T20] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:47.791 [T20] ClearTxRxBuffer START
+2026-08-28 16:28:47.791 [T20] ClearTxRxBuffer END
+2026-08-28 16:28:47.791 [T20] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 DF 2C 00 0C FF 00
+2026-08-28 16:28:47.854 [T20] RX poll 1: queue count=2
+2026-08-28 16:28:47.854 [T20] RX frame: ID=0x7EF; DLC=8; DATA=8F E8 C8 41 00 38 1A 40; expected=0x7EF; matched=True
+2026-08-28 16:28:47.855 [T20] RX frame: ID=0x7EF; DLC=8; DATA=13 D4 9E 40 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:47.855 [T20] DUT_WriteRead attempt 1/3 END: matched=True; bytes=16; data=8F E8 C8 41 00 38 1A 40 13 D4 9E 40 00 00 00 00
+2026-08-28 16:28:47.893 [T23] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:47.894 [T23] ClearTxRxBuffer START
+2026-08-28 16:28:47.894 [T23] ClearTxRxBuffer END
+2026-08-28 16:28:47.894 [T23] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C7 F8 00 04 FF 00
+2026-08-28 16:28:47.956 [T23] RX poll 1: queue count=1
+2026-08-28 16:28:47.956 [T23] RX frame: ID=0x7EF; DLC=8; DATA=3C DE 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:47.957 [T23] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=3C DE 02 70 00 00 00 00
+2026-08-28 16:28:47.957 [T23] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:47.957 [T23] ClearTxRxBuffer START
+2026-08-28 16:28:47.958 [T23] ClearTxRxBuffer END
+2026-08-28 16:28:47.958 [T23] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 DE 5C 00 04 FF 00
+2026-08-28 16:28:48.021 [T23] RX poll 1: queue count=1
+2026-08-28 16:28:48.021 [T23] RX frame: ID=0x7EF; DLC=8; DATA=1C 21 1D 44 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:48.022 [T23] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=1C 21 1D 44 00 00 00 00
+2026-08-28 16:28:48.059 [T13] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:48.059 [T13] ClearTxRxBuffer START
+2026-08-28 16:28:48.060 [T13] ClearTxRxBuffer END
+2026-08-28 16:28:48.060 [T13] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 78 00 04 FF 00
+2026-08-28 16:28:48.123 [T13] RX poll 1: queue count=1
+2026-08-28 16:28:48.123 [T13] RX frame: ID=0x7EF; DLC=8; DATA=20 E4 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:48.123 [T13] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=20 E4 02 70 00 00 00 00
+2026-08-28 16:28:48.123 [T13] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:48.123 [T13] ClearTxRxBuffer START
+2026-08-28 16:28:48.123 [T13] ClearTxRxBuffer END
+2026-08-28 16:28:48.123 [T13] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 20 00 27 FF 00
+2026-08-28 16:28:48.185 [T13] RX poll 1: queue count=5
+2026-08-28 16:28:48.185 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:48.185 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 00 A0 41 00 00 20 41; expected=0x7EF; matched=True
+2026-08-28 16:28:48.185 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 00 70 42 04 00 32 00; expected=0x7EF; matched=True
+2026-08-28 16:28:48.185 [T13] RX frame: ID=0x7EF; DLC=8; DATA=10 27 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:48.185 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:48.185 [T13] DUT_WriteRead attempt 1/3 END: matched=True; bytes=40; data=00 00 00 00 00 00 00 00 00 00 A0 41 00 00 20 41 00 00 70 42 04 00 32 00 10 27 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-08-28 16:28:48.185 [T13] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:48.186 [T13] ClearTxRxBuffer START
+2026-08-28 16:28:48.186 [T13] ClearTxRxBuffer END
+2026-08-28 16:28:48.186 [T13] TX frame 1/6: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 20 00 27 00 00
+2026-08-28 16:28:48.247 [T13] TX continuation 2/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 00 00 66 66 0D 43
+2026-08-28 16:28:48.308 [T13] TX continuation 3/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 A0 41 00 00 20 41
+2026-08-28 16:28:48.368 [T13] TX continuation 4/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 70 42 04 00 32 00
+2026-08-28 16:28:48.429 [T13] TX continuation 5/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=10 27 01 00 00 00 00 00
+2026-08-28 16:28:48.491 [T13] TX continuation 6/6: ID=0x7EF; DLC=8; PAYLOAD=7; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:28:48.552 [T13] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:28:48.553 [T13] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:48.553 [T13] ClearTxRxBuffer START
+2026-08-28 16:28:48.553 [T13] ClearTxRxBuffer END
+2026-08-28 16:28:48.553 [T13] TX frame 1/2: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 3B 00 01 00 00
+2026-08-28 16:28:48.614 [T13] TX continuation 2/2: ID=0x7EF; DLC=8; PAYLOAD=1; DATA=FF 00 00 00 00 00 00 00
+2026-08-28 16:28:48.675 [T13] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:28:48.675 [T13] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:48.676 [T13] ClearTxRxBuffer START
+2026-08-28 16:28:48.676 [T13] ClearTxRxBuffer END
+2026-08-28 16:28:48.676 [T13] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 20 00 27 FF 00
+2026-08-28 16:28:48.739 [T13] RX poll 1: queue count=5
+2026-08-28 16:28:48.739 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 66 66 0D 43; expected=0x7EF; matched=True
+2026-08-28 16:28:48.739 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 00 A0 41 00 00 20 41; expected=0x7EF; matched=True
+2026-08-28 16:28:48.739 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 00 70 42 04 00 32 00; expected=0x7EF; matched=True
+2026-08-28 16:28:48.739 [T13] RX frame: ID=0x7EF; DLC=8; DATA=10 27 01 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:48.739 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:48.739 [T13] DUT_WriteRead attempt 1/3 END: matched=True; bytes=40; data=00 00 00 00 66 66 0D 43 00 00 A0 41 00 00 20 41 00 00 70 42 04 00 32 00 10 27 01 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-08-28 16:28:48.758 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:48.769 [T3] ClearTxRxBuffer START
+2026-08-28 16:28:48.770 [T3] ClearTxRxBuffer END
+2026-08-28 16:28:48.770 [T3] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 7C 00 04 FF 00
+2026-08-28 16:28:48.833 [T3] RX poll 1: queue count=1
+2026-08-28 16:28:48.834 [T3] RX frame: ID=0x7EF; DLC=8; DATA=10 E5 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:48.834 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=10 E5 02 70 00 00 00 00
+2026-08-28 16:28:48.834 [T3] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:48.834 [T3] ClearTxRxBuffer START
+2026-08-28 16:28:48.834 [T3] ClearTxRxBuffer END
+2026-08-28 16:28:48.834 [T3] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E5 10 00 0A FF 00
+2026-08-28 16:28:48.897 [T3] RX poll 1: queue count=2
+2026-08-28 16:28:48.897 [T3] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:48.897 [T3] RX frame: ID=0x7EF; DLC=8; DATA=01 01 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:48.898 [T3] DUT_WriteRead attempt 1/3 END: matched=True; bytes=16; data=00 00 00 00 00 00 00 00 01 01 00 00 00 00 00 00
+2026-08-28 16:28:53.923 [T16] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:53.923 [T16] ClearTxRxBuffer START
+2026-08-28 16:28:53.924 [T16] ClearTxRxBuffer END
+2026-08-28 16:28:53.924 [T16] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 8C 00 04 FF 00
+2026-08-28 16:28:53.987 [T16] RX poll 1: queue count=1
+2026-08-28 16:28:53.987 [T16] RX frame: ID=0x7EF; DLC=8; DATA=14 E2 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:53.987 [T16] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=14 E2 02 70 00 00 00 00
+2026-08-28 16:28:53.987 [T16] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:53.987 [T16] ClearTxRxBuffer START
+2026-08-28 16:28:53.988 [T16] ClearTxRxBuffer END
+2026-08-28 16:28:53.988 [T16] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E2 14 00 28 FF 00
+2026-08-28 16:28:54.051 [T16] RX poll 1: queue count=5
+2026-08-28 16:28:54.051 [T16] RX frame: ID=0x7EF; DLC=8; DATA=5A 45 F8 C2 D4 3A F1 42; expected=0x7EF; matched=True
+2026-08-28 16:28:54.051 [T16] RX frame: ID=0x7EF; DLC=8; DATA=A8 6E 05 43 AC E6 05 C3; expected=0x7EF; matched=True
+2026-08-28 16:28:54.051 [T16] RX frame: ID=0x7EF; DLC=8; DATA=AB 57 08 C3 EC 82 06 C3; expected=0x7EF; matched=True
+2026-08-28 16:28:54.051 [T16] RX frame: ID=0x7EF; DLC=8; DATA=E6 CE 0F 43 A7 32 0F 43; expected=0x7EF; matched=True
+2026-08-28 16:28:54.052 [T16] RX frame: ID=0x7EF; DLC=8; DATA=E7 5D 0D 43 75 E6 C9 42; expected=0x7EF; matched=True
+2026-08-28 16:28:54.052 [T16] DUT_WriteRead attempt 1/3 END: matched=True; bytes=40; data=5A 45 F8 C2 D4 3A F1 42 A8 6E 05 43 AC E6 05 C3 AB 57 08 C3 EC 82 06 C3 E6 CE 0F 43 A7 32 0F 43 E7 5D 0D 43 75 E6 C9 42
+2026-08-28 16:28:54.066 [T13] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:54.067 [T13] ClearTxRxBuffer START
+2026-08-28 16:28:54.067 [T13] ClearTxRxBuffer END
+2026-08-28 16:28:54.067 [T13] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=80 18 C8 78 00 04 FF 00
+2026-08-28 16:28:54.129 [T13] RX poll 1: queue count=1
+2026-08-28 16:28:54.129 [T13] RX frame: ID=0x7EF; DLC=8; DATA=20 E4 02 70 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:54.129 [T13] DUT_WriteRead attempt 1/3 END: matched=True; bytes=8; data=20 E4 02 70 00 00 00 00
+2026-08-28 16:28:54.129 [T13] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:54.129 [T13] ClearTxRxBuffer START
+2026-08-28 16:28:54.129 [T13] ClearTxRxBuffer END
+2026-08-28 16:28:54.129 [T13] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 20 00 27 FF 00
+2026-08-28 16:28:54.192 [T13] RX poll 1: queue count=5
+2026-08-28 16:28:54.192 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 66 66 0D 43; expected=0x7EF; matched=True
+2026-08-28 16:28:54.192 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 00 A0 41 00 00 20 41; expected=0x7EF; matched=True
+2026-08-28 16:28:54.192 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 00 70 42 04 00 32 00; expected=0x7EF; matched=True
+2026-08-28 16:28:54.193 [T13] RX frame: ID=0x7EF; DLC=8; DATA=10 27 01 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:54.193 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:54.193 [T13] DUT_WriteRead attempt 1/3 END: matched=True; bytes=40; data=00 00 00 00 66 66 0D 43 00 00 A0 41 00 00 20 41 00 00 70 42 04 00 32 00 10 27 01 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-08-28 16:28:54.193 [T13] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:54.193 [T13] ClearTxRxBuffer START
+2026-08-28 16:28:54.194 [T13] ClearTxRxBuffer END
+2026-08-28 16:28:54.194 [T13] TX frame 1/6: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 20 00 27 00 00
+2026-08-28 16:28:54.255 [T13] TX continuation 2/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:28:54.316 [T13] TX continuation 3/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 A0 41 00 00 20 41
+2026-08-28 16:28:54.377 [T13] TX continuation 4/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=00 00 70 42 04 00 32 00
+2026-08-28 16:28:54.438 [T13] TX continuation 5/6: ID=0x7EF; DLC=8; PAYLOAD=8; DATA=10 27 00 00 00 00 00 00
+2026-08-28 16:28:54.499 [T13] TX continuation 6/6: ID=0x7EF; DLC=8; PAYLOAD=7; DATA=00 00 00 00 00 00 00 00
+2026-08-28 16:28:54.560 [T13] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:28:54.561 [T13] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:54.561 [T13] ClearTxRxBuffer START
+2026-08-28 16:28:54.561 [T13] ClearTxRxBuffer END
+2026-08-28 16:28:54.562 [T13] TX frame 1/2: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 3B 00 01 00 00
+2026-08-28 16:28:54.623 [T13] TX continuation 2/2: ID=0x7EF; DLC=8; PAYLOAD=1; DATA=FF 00 00 00 00 00 00 00
+2026-08-28 16:28:54.684 [T13] DUT_WriteRead attempt 1/3 END: matched=True; bytes=0; data=
+2026-08-28 16:28:54.684 [T13] DUT_WriteRead attempt 1/3 START
+2026-08-28 16:28:54.684 [T13] ClearTxRxBuffer START
+2026-08-28 16:28:54.684 [T13] ClearTxRxBuffer END
+2026-08-28 16:28:54.685 [T13] TX frame 1/1: ID=0x7EE; DLC=8; PAYLOAD=8; DATA=70 02 E4 20 00 27 FF 00
+2026-08-28 16:28:54.746 [T13] RX poll 1: queue count=5
+2026-08-28 16:28:54.746 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:54.746 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 00 A0 41 00 00 20 41; expected=0x7EF; matched=True
+2026-08-28 16:28:54.747 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 00 70 42 04 00 32 00; expected=0x7EF; matched=True
+2026-08-28 16:28:54.747 [T13] RX frame: ID=0x7EF; DLC=8; DATA=10 27 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:54.747 [T13] RX frame: ID=0x7EF; DLC=8; DATA=00 00 00 00 00 00 00 00; expected=0x7EF; matched=True
+2026-08-28 16:28:54.747 [T13] DUT_WriteRead attempt 1/3 END: matched=True; bytes=40; data=00 00 00 00 00 00 00 00 00 00 A0 41 00 00 20 41 00 00 70 42 04 00 32 00 10 27 00 00 00 00 00 00 00 00 00 00 00 00 00 00
+2026-08-28 16:42:19.109 [T1] Cleanup selected instruments: DUTCAN,AUXCAN,RESOLVERCAN
+2026-08-28 17:01:36.092 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-28 21:18:47.418 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-28 21:18:48.339 [T5] Instrument selection received: [{"Name":"DAQ","Type":"DAQ","Mode":"NI","Resource":"PCI-6229","Parameter":""}]
+2026-08-28 21:18:48.342 [T6] Cleanup selected instruments: 
+2026-08-28 21:18:48.343 [T6] Initialize selected instruments start. BaseDirectory=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\; TestDLL=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\CSP.TestDLL.dll
+2026-08-28 21:18:48.343 [T6] Initialize instrument DAQ: Resource=PCI-6229; Parameter=
+2026-08-28 21:18:48.373 [T6] Cleanup selected instruments: DAQ
+2026-08-28 21:21:45.310 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-28 21:39:50.152 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-28 23:16:12.950 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-28 23:16:13.885 [T5] Instrument selection received: [{"Name":"DAQ","Type":"DAQ","Mode":"NI","Resource":"PCI-6229","Parameter":""}]
+2026-08-28 23:16:13.888 [T6] Cleanup selected instruments: 
+2026-08-28 23:16:13.889 [T6] Initialize selected instruments start. BaseDirectory=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\; TestDLL=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\CSP.TestDLL.dll
+2026-08-28 23:16:13.889 [T6] Initialize instrument DAQ: Resource=PCI-6229; Parameter=
+2026-08-28 23:16:13.915 [T6] Cleanup selected instruments: DAQ

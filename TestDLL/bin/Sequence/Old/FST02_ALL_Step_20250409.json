@@ -1,0 +1,1608 @@
+{
+	"SerialNumberLen": 0,
+	"ProjectName": "FST02",
+	"StationName": "FCT",
+	"SequenceVersion": "1.0.0.2",
+	"UIDisplayType": "All",
+	"LogFilePath": "D:\\LogfilePath",
+
+	"StepList":
+	[
+		{
+			"StepName": "Set LVDC Voltage 24V",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "LVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 24
+		},
+		{
+			"StepName": "Set LVDC Current 5A",
+			"RunMode": "Normal",
+			"FunctionName": "LVDC_SetSourceCurrent",
+			"RecordingLog": true,
+			"Current": 5
+		},
+		{
+			"StepName": "Config DMM To DC Current",
+			"RunMode": "Normal",
+			"FunctionName": "DMM_ConfigDMMforDCCur",
+			"RecordingLog": true,
+			"Range": 3,
+			"Solution": 0.00001
+		},
+		{
+			"StepName": "Connect DMM To DC Current",
+			"RunMode": "Normal",
+			"FunctionName": "MOXA_SetDO",
+			"RecordingLog": true,
+			"MoxaIndex": 1,
+			"Channels": "0,6,8",
+			"Values": "1,1,1"
+		},
+		{
+			"StepName": "Set LVDC Output ON",
+			"RunMode": "Normal",
+			"FunctionName": "LVDC_SetOutput",
+			"RecordingLog": true,
+			"Output": true
+		},
+		{
+			"StepName": "Delay",
+			"RunMode": "Normal",
+			"FunctionName": "Test_DelayMs",
+			"RecordingLog": true,
+			"TimeMs": 5000
+		},
+		{
+			"StepName": "010101 Sleep Current",
+			"RunMode": "Normal",
+			"FunctionName": "DMM_GetMeasureValue",
+			"RecordingLog": true,
+			"LowLimit": 0,
+			"HighLimit": 0.0004,
+			"Comtype": "GELE",
+			"Unit": "A"
+		},
+		{
+			"StepName": "Connect KL15",
+			"RunMode": "Normal",
+			"FunctionName": "MOXA_SetDO",
+			"RecordingLog": true,
+			"MoxaIndex": 1,
+			"Channels": "1",
+			"Values": "1"
+		},
+		{
+			"StepName": "Delay",
+			"RunMode": "Normal",
+			"FunctionName": "Test_DelayMs",
+			"RecordingLog": true,
+			"TimeMs": 100
+		},
+		{
+			"StepName": "010102 Wake Up Current",
+			"RunMode": "Normal",
+			"FunctionName": "DMM_GetMeasureValue",
+			"RecordingLog": true,
+			"LowLimit": 0.25,
+			"HighLimit": 0.35,
+			"Comtype": "GELE",
+			"Unit": "A"
+		},
+		{
+			"StepName": "Disconnect KL15",
+			"RunMode": "Normal",
+			"FunctionName": "MOXA_SetDO",
+			"RecordingLog": true,
+			"MoxaIndex": 1,
+			"Channels": "1",
+			"Values": "0"
+		},
+		{
+			"StepName": "Delay",
+			"RunMode": "Normal",
+			"FunctionName": "Test_DelayMs",
+			"RecordingLog": true,
+			"TimeMs": 16000
+		},
+		{
+			"StepName": "010103 Sleep Current",
+			"RunMode": "Normal",
+			"FunctionName": "DMM_GetMeasureValue",
+			"RecordingLog": true,
+			"LowLimit": 0,
+			"HighLimit": 0.0004,
+			"Comtype": "GELE",
+			"Unit": "A"
+		},
+		{
+			"StepName": "Send Wake Up Message",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_SendWakeUpMessage",
+			"RecordingLog": true,
+		},
+		{
+			"StepName": "Delay",
+			"RunMode": "Normal",
+			"FunctionName": "Test_DelayMs",
+			"RecordingLog": true,
+			"TimeMs": 1
+		},
+		{
+			"StepName": "010104 Wake Up Current",
+			"RunMode": "Normal",
+			"FunctionName": "Test_WakeupCurrentByCAN",
+			"RecordingLog": true,
+			"LowLimit": 0.25,
+			"HighLimit": 0.35,
+			"Comtype": "GELE",
+			"Unit": "A"
+		},
+		{
+			"StepName": "Delay",
+			"RunMode": "Normal",
+			"FunctionName": "Test_DelayMs",
+			"RecordingLog": true,
+			"TimeMs": 16000
+		},
+		{
+			"StepName": "010105 Sleep Current",
+			"RunMode": "Normal",
+			"FunctionName": "DMM_GetMeasureValue",
+			"RecordingLog": true,
+			"LowLimit": 0,
+			"HighLimit": 0.0004,
+			"Comtype": "GELE",
+			"Unit": "A"
+		},
+		{
+			"StepName": "Set LVDC Output OFF",
+			"RunMode": "Normal",
+			"FunctionName": "LVDC_SetOutput",
+			"RecordingLog": true,
+			"Output": false
+		},
+		{
+			"StepName": "Delay",
+			"RunMode": "Normal",
+			"FunctionName": "Test_DelayMs",
+			"RecordingLog": true,
+			"TimeMs": 1000
+		},
+		{
+			"StepName": "Disconnect DMM From DC Current",
+			"RunMode": "Normal",
+			"FunctionName": "MOXA_SetDO",
+			"RecordingLog": true,
+			"MoxaIndex": 1,
+			"Channels": "0,6,8",
+			"Values": "0,0,0"
+		},
+		{
+			"StepName": "Connect KL15",
+			"RunMode": "Normal",
+			"FunctionName": "MOXA_SetDO",
+			"RecordingLog": true,
+			"MoxaIndex": 1,
+			"Channels": "1",
+			"Values": "1"
+		},
+		{
+			"StepName": "Set LVDC Output ON",
+			"RunMode": "Normal",
+			"FunctionName": "LVDC_SetOutput",
+			"RecordingLog": true,
+			"Output": true
+		},
+		{
+			"StepName": "Enter FT Mode",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_APP2FT",
+			"RecordingLog": true
+		},
+		{
+			"StepName": "DUT Comucation Init",
+			"RunMode": "Normal",
+			"FunctionName": "DUT_ComucationInit",
+			"RecordingLog": true,
+			"TxID": 2030,
+			"RxID": 2031
+		},
+		{
+			"StepName": "Set LVDC Voltage 16V",
+			"RunMode": "Normal",
+			"FunctionName": "LVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 16
+		},
+		{
+			"StepName": "020001 Battery voltage monitoring 16V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 128,
+			"DataSize": 4,
+			"LowLimit": 15.16,
+			"HighLimit": 16.83,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "020004 PSR voltage monitoring 16V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 84,
+			"DataSize": 4,
+			"LowLimit": 15.16,
+			"HighLimit": 16.83,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "Set LVDC Voltage 32V",
+			"RunMode": "Normal",
+			"FunctionName": "LVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 32
+		},
+		{
+			"StepName": "020003 Battery voltage monitoring 32V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 128,
+			"DataSize": 4,
+			"LowLimit": 30.34,
+			"HighLimit": 33.65,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "020006 PSR voltage monitoring 32V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 84,
+			"DataSize": 4,
+			"LowLimit": 30.34,
+			"HighLimit": 33.65,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "Set LVDC Voltage 24V",
+			"RunMode": "Normal",
+			"FunctionName": "LVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 24
+		},
+		{
+			"StepName": "020002 Battery voltage monitoring 24V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 128,
+			"DataSize": 4,
+			"LowLimit": 22.75,
+			"HighLimit": 25.25,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "020005 PSR voltage monitoring 24V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 84,
+			"DataSize": 4,
+			"LowLimit": 22.75,
+			"HighLimit": 25.25,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "020011 Hardware Version",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 148,
+			"TableIndex": 0,
+			"DataSize": 1,
+			"LowLimit": 0,
+			"HighLimit": 0,
+			"Comtype": "GELE",
+			"Unit": ""
+		},
+		{
+			"StepName": "020012 Variable ID",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 152,
+			"TableIndex": 0,
+			"DataSize": 1,
+			"LowLimit": 0,
+			"HighLimit": 0,
+			"Comtype": "GELE",
+			"Unit": ""
+		},
+		{
+			"StepName": "020013 Software Version",
+			"RunMode": "Normal",
+			"FunctionName": "Test_SoftwareVersion",
+			"RecordingLog": true,
+			"Limit": "09 0B 01 16"
+		},
+		{
+			"StepName": "020014 Software Version",
+			"RunMode": "Normal",
+			"FunctionName": "Test_CANCommunication",
+			"RecordingLog": true,
+			"Limit": "22 22 22 22 22 22 22 22"
+		},
+		{
+			"StepName": "Set Speed 700Rpm",
+			"RunMode": "Normal",
+			"FunctionName": "Resolver_SetSpeed",
+			"RecordingLog": true,
+			"Speed": 700
+		},
+		{
+			"StepName": "Read Speed 700Rpm",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 72,
+			"TableIndex": 4,
+			"DataSize": 4,
+			"StepName": "03001 Inverter Resolver Accuracy 700Rpm",
+			"LowLimit": 690,
+			"HighLimit": 710,
+			"Comtype": "GELE",
+			"Unit": "Rpm"
+		},
+		{
+			"StepName": "Set Speed 3500Rpm",
+			"RunMode": "Normal",
+			"FunctionName": "Resolver_SetSpeed",
+			"RecordingLog": true,
+			"Speed": 3500
+		},
+		{
+			"StepName": "Read Speed 3500Rpm",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 72,
+			"TableIndex": 4,
+			"DataSize": 4,
+			"StepName": "03002 Inverter Resolver Accuracy 3500Rpm",
+			"LowLimit": 3470,
+			"HighLimit": 3530,
+			"Comtype": "GELE",
+			"Unit": "Rpm"
+		},
+		{
+			"StepName": "Set Speed 7000Rpm",
+			"RunMode": "Normal",
+			"FunctionName": "Resolver_SetSpeed",
+			"RecordingLog": true,
+			"Speed": 7000
+		},
+		{
+			"StepName": "Read Speed 7000Rpm",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 72,
+			"TableIndex": 4,
+			"DataSize": 4,
+			"StepName": "03003 Inverter Resolver Accuracy 7000Rpm",
+			"LowLimit": 6970,
+			"HighLimit": 7030,
+			"Comtype": "GELE",
+			"Unit": "Rpm"
+		},
+		{
+			"StepName": "Set Temp1 Resistance 842ohm",
+			"RunMode": "Normal",
+			"FunctionName": "RES_SetResistance",
+			"RecordingLog": true,
+			"ResValue": 842,
+			"Channel": 1
+		},
+		{
+			"StepName": "020501 Measured MTR_TEMP1 -40Deg",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 80,
+			"DataSize": 4,
+			"LowLimit": -48,
+			"HighLimit": -32,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set Temp1 Resistance 1097ohm",
+			"RunMode": "Normal",
+			"FunctionName": "RES_SetResistance",
+			"RecordingLog": true,
+			"ResValue": 1097,
+			"Channel": 1
+		},
+		{
+			"StepName": "020502 Measured MTR_TEMP1 25Deg",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 80,
+			"DataSize": 4,
+			"LowLimit": 20,
+			"HighLimit": 30,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set Temp1 Resistance 1308ohm",
+			"RunMode": "Normal",
+			"FunctionName": "RES_SetResistance",
+			"RecordingLog": true,
+			"ResValue": 1308,
+			"Channel": 1
+		},
+		{
+			"StepName": "020503 Measured MTR_TEMP1 80Deg",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 80,
+			"DataSize": 4,
+			"LowLimit": 75,
+			"HighLimit": 85,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set Temp1 Resistance 1308ohm",
+			"RunMode": "Normal",
+			"FunctionName": "RES_SetResistance",
+			"RecordingLog": true,
+			"ResValue": 1479,
+			"Channel": 1
+		},
+		{
+			"StepName": "020504 Measured MTR_TEMP1 125Deg",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 80,
+			"DataSize": 4,
+			"LowLimit": 120,
+			"HighLimit": 130,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set Temp1 Resistance 1666ohm",
+			"RunMode": "Normal",
+			"FunctionName": "RES_SetResistance",
+			"RecordingLog": true,
+			"ResValue": 1666,
+			"Channel": 1
+		},
+		{
+			"StepName": "020505 Measured MTR_TEMP1 175Deg",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 80,
+			"DataSize": 4,
+			"LowLimit": 170,
+			"HighLimit": 180,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set Temp1 Resistance 1097ohm",
+			"RunMode": "Normal",
+			"FunctionName": "RES_SetResistance",
+			"RecordingLog": true,
+			"ResValue": 1097,
+			"Channel": 1
+		},
+		{
+			"StepName": "Set Temp2 Resistance 842ohm",
+			"RunMode": "Normal",
+			"FunctionName": "RES_SetResistance",
+			"RecordingLog": true,
+			"ResValue": 842,
+			"Channel": 2
+		},
+		{
+			"StepName": "020511 Measured MTR_TEMP2 -40Deg",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 40,
+			"DataSize": 4,
+			"LowLimit": -48,
+			"HighLimit": -32,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set Temp2 Resistance 1097ohm",
+			"RunMode": "Normal",
+			"FunctionName": "RES_SetResistance",
+			"RecordingLog": true,
+			"ResValue": 1097,
+			"Channel": 2
+		},
+		{
+			"StepName": "020512 Measured MTR_TEMP2 25Deg",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 40,
+			"DataSize": 4,
+			"LowLimit": 20,
+			"HighLimit": 30,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set Temp2 Resistance 1308ohm",
+			"RunMode": "Normal",
+			"FunctionName": "RES_SetResistance",
+			"RecordingLog": true,
+			"ResValue": 1308,
+			"Channel": 2
+		},
+		{
+			"StepName": "020513 Measured MTR_TEMP2 80Deg",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 40,
+			"DataSize": 4,
+			"LowLimit": 75,
+			"HighLimit": 85,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set Temp2 Resistance 1479ohm",
+			"RunMode": "Normal",
+			"FunctionName": "RES_SetResistance",
+			"RecordingLog": true,
+			"ResValue": 1479,
+			"Channel": 2
+		},
+		{
+			"StepName": "020514 Measured MTR_TEMP2 125Deg",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 40,
+			"DataSize": 4,
+			"LowLimit": 120,
+			"HighLimit": 130,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set Temp2 Resistance 1666ohm",
+			"RunMode": "Normal",
+			"FunctionName": "RES_SetResistance",
+			"RecordingLog": true,
+			"ResValue": 1666,
+			"Channel": 2
+		},
+		{
+			"StepName": "020515 Measured MTR_TEMP2 175Deg",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 40,
+			"DataSize": 4,
+			"LowLimit": 170,
+			"HighLimit": 180,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set Temp2 Resistance 1097ohm",
+			"RunMode": "Normal",
+			"FunctionName": "RES_SetResistance",
+			"RecordingLog": true,
+			"ResValue": 1097,
+			"Channel": 2
+		},
+		{
+			"StepName": "020801 VCC_AI ADC Voltage_Nominal",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 88,
+			"DataSize": 4,
+			"LowLimit": 4.82,
+			"HighLimit": 5.18,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "020802 VREF1 ADC Voltage_Nominal",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 200,
+			"DataSize": 4,
+			"LowLimit": 4.82,
+			"HighLimit": 5.18,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "020803 VREF2 ADC Voltage_Nominal",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 28,
+			"DataSize": 4,
+			"LowLimit": 4.82,
+			"HighLimit": 5.18,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "020804 VREF3 ADC Voltage_Nominal",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 108,
+			"DataSize": 4,
+			"LowLimit": 4.82,
+			"HighLimit": 5.18,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "020805 VREF4 ADC Voltage_Nominal",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 120,
+			"DataSize": 4,
+			"LowLimit": 4.8,
+			"HighLimit": 5.2,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Config DMM To DC Voltage",
+			"RunMode": "Normal",
+			"FunctionName": "DMM_ConfigDMMforDCVol",
+			"RecordingLog": true,
+			"Range": 1000,
+			"Solution": 0.01
+		},
+		{
+			"StepName": "Set HVDC Voltage 0V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 0
+		},
+		{
+			"StepName": "Set HVDC Output ON",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetOutput",
+			"RecordingLog": true,
+			"Output": true
+		},
+		{
+			"StepName": "Connect DMM To HVDC",
+			"RunMode": "Normal",
+			"FunctionName": "MOXA_SetDO",
+			"RecordingLog": true,
+			"MoxaIndex": 0,
+			"Channels": "10,11",
+			"Values": "1,1"
+		},
+		{
+			"StepName": "021001 HV DC voltage Sensor 0V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 184,
+			"DataSize": 4,
+			"LowLimit": -5,
+			"HighLimit": 5,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "021021 HV DC voltage Sensor ADC 0V",
+			"RunMode": "Normal",
+			"FunctionName": "DMM_GetMeasureValue",
+			"RecordingLog": true,
+			"LowLimit": -5,
+			"HighLimit": 5,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "Set HVDC Voltage 50V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 50
+		},
+		{
+			"StepName": "021002 HV DC voltage Sensor 50V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 184,
+			"DataSize": 4,
+			"LowLimit": 45,
+			"HighLimit": 55,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "021022 HV DC voltage Sensor ADC 50V",
+			"RunMode": "Normal",
+			"FunctionName": "DMM_GetMeasureValue",
+			"RecordingLog": true,
+			"LowLimit": 45,
+			"HighLimit": 55,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "Set HVDC Voltage 100V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 100
+		},
+		{
+			"StepName": "021003 HV DC voltage Sensor 100V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 184,
+			"DataSize": 4,
+			"LowLimit": 95,
+			"HighLimit": 105,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "060103 HV DC voltage Sensor ADC 100V",
+			"RunMode": "Normal",
+			"FunctionName": "DMM_GetMeasureValue",
+			"RecordingLog": true,
+			"LowLimit": 95,
+			"HighLimit": 105,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "Set HVDC Voltage 200V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 200
+		},
+		{
+			"StepName": "011004 HV DC voltage Sensor 200V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 184,
+			"DataSize": 4,
+			"LowLimit": 196,
+			"HighLimit": 204,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "060104 HV DC voltage Sensor ADC 200V",
+			"RunMode": "Normal",
+			"FunctionName": "DMM_GetMeasureValue",
+			"RecordingLog": true,
+			"LowLimit": 196,
+			"HighLimit": 204,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "Set HVDC Voltage 300V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 300
+		},
+		{
+			"StepName": "021005 HV DC voltage Sensor 300V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 184,
+			"DataSize": 4,
+			"LowLimit": 294,
+			"HighLimit": 306,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "060105 HV DC voltage Sensor ADC 300V",
+			"RunMode": "Normal",
+			"FunctionName": "DMM_GetMeasureValue",
+			"RecordingLog": true,
+			"LowLimit": 294,
+			"HighLimit": 306,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "Set HVDC Voltage 400V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 400
+		},
+		{
+			"StepName": "021006 HV DC voltage Sensor 400V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 184,
+			"DataSize": 4,
+			"LowLimit": 392,
+			"HighLimit": 408,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "060106 HV DC voltage Sensor ADC 400V",
+			"RunMode": "Normal",
+			"FunctionName": "DMM_GetMeasureValue",
+			"RecordingLog": true,
+			"LowLimit": 392,
+			"HighLimit": 408,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "Set HVDC Voltage 500V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 500
+		},
+		{
+			"StepName": "021007 HV DC voltage Sensor 500V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 184,
+			"DataSize": 4,
+			"LowLimit": 490,
+			"HighLimit": 510,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "060107 HV DC voltage Sensor ADC 500V",
+			"RunMode": "Normal",
+			"FunctionName": "DMM_GetMeasureValue",
+			"RecordingLog": true,
+			"LowLimit": 490,
+			"HighLimit": 510,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "Set HVDC Voltage 600V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 600
+		},
+		{
+			"StepName": "021008 HV DC voltage Sensor 600V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 184,
+			"DataSize": 4,
+			"LowLimit": 588,
+			"HighLimit": 612,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "060108 HV DC voltage Sensor ADC 600V",
+			"RunMode": "Normal",
+			"FunctionName": "DMM_GetMeasureValue",
+			"RecordingLog": true,
+			"LowLimit": 588,
+			"HighLimit": 612,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "Set HVDC Voltage 700V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 700
+		},
+		{
+			"StepName": "021009 HV DC voltage Sensor 700V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 184,
+			"DataSize": 4,
+			"LowLimit": 686,
+			"HighLimit": 714,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "060109 HV DC voltage Sensor ADC 700V",
+			"RunMode": "Normal",
+			"FunctionName": "DMM_GetMeasureValue",
+			"RecordingLog": true,
+			"LowLimit": 686,
+			"HighLimit": 714,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "Set HVDC Voltage 750V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 750
+		},
+		{
+			"StepName": "021010 HV DC voltage Sensor 750V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 184,
+			"DataSize": 4,
+			"LowLimit": 735,
+			"HighLimit": 765,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "060110 HV DC voltage Sensor ADC 750V",
+			"RunMode": "Normal",
+			"FunctionName": "DMM_GetMeasureValue",
+			"RecordingLog": true,
+			"LowLimit": 735,
+			"HighLimit": 765,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "Set HVDC Voltage 800V",
+			"RunMode": "Skip",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 800
+		},
+		{
+			"StepName": "021011 HV DC voltage Sensor 800V",
+			"RunMode": "Skip",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 184,
+			"DataSize": 4,
+			"LowLimit": 784,
+			"HighLimit": 816,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "060111 HV DC voltage Sensor ADC 800V",
+			"RunMode": "Skip",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 184,
+			"DataSize": 4,
+			"LowLimit": 0,
+			"HighLimit": 0.02,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "Set HVDC Voltage 850V",
+			"RunMode": "Skip",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 850
+		},
+		{
+			"StepName": "021012 HV DC voltage Sensor 850V",
+			"RunMode": "Skip",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 184,
+			"DataSize": 4,
+			"LowLimit": 833,
+			"HighLimit": 867,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "060112 HV DC voltage Sensor ADC 850V",
+			"RunMode": "Skip",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 184,
+			"DataSize": 4,
+			"LowLimit": 0,
+			"HighLimit": 0.02,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "Set HVDC Voltage 900V",
+			"RunMode": "Skip",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 0
+		},
+		{
+			"StepName": "021012 Read HVDC_OV_FLT 1",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 24,
+			"TableIndex": 1,
+			"DataSize": 1,
+			"LowLimit": 1,
+			"HighLimit": 1,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "06006 Read OV_FLT 1",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 24,
+			"TableIndex": 19,
+			"DataSize": 1,
+			"LowLimit": 1,
+			"HighLimit": 1,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "Set HVDC Voltage 750V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 750
+		},
+		{
+			"StepName": "06005 Read HVDC_OV_FLT 0",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 24,
+			"TableIndex": 1,
+			"DataSize": 1,
+			"LowLimit": 0,
+			"HighLimit": 0,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "06006 Read OV_FLT 0",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 24,
+			"TableIndex": 19,
+			"DataSize": 1,
+			"LowLimit": 0,
+			"HighLimit": 0,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "VIPER Temp Test",
+			"RunMode": "Normal",
+			"FunctionName": "Test_VIPER_TempTest",
+			"RecordingLog": true,
+			"StepName0": "11001 INVTRA_PH_AU_TEMP_PI Temp 25Deg",
+			"StepName1": "11002 INVTRA_PH_BU_TEMP_PI Temp 25Deg",
+			"StepName2": "11003 INVTRA_PH_CU_TEMP_PI Temp 25Deg",
+			"StepName3": "11004 INVTRA_PH_AL_TEMP_PI Temp 25Deg",
+			"StepName4": "11005 INVTRA_PH_BL_TEMP_PI Temp 25Deg",
+			"StepName5": "11006 INVTRA_PH_CL_TEMP_PI Temp 25Deg",
+			"StepName6": "11007 INVTRA_PH_CL_TEMP_PI Temp 25Deg",
+			"AddrOffset": 44,
+			"DataLen": 6,
+			"LowLimit": 22,
+			"HighLimit": 28,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "020901 Coolant_In Temp 25Deg",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 100,
+			"DataSize": 4,
+			"LowLimit": 22,
+			"HighLimit": 28,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "020902 Coolant_Out Temp 25Deg",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 104,
+			"DataSize": 4,
+			"LowLimit": 22,
+			"HighLimit": 28,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "020903 Board Temp 25Deg",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 68,
+			"DataSize": 4,
+			"LowLimit": 22,
+			"HighLimit": 28,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Test_ZeroRotation_ZeroTorque",
+			"RunMode": "Skip",
+			"FunctionName": "Test_ZeroRotation_ZeroTorque",
+			"RecordingLog": true,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		
+		{
+			"StepName": "Set HVDC Voltage 450V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 450
+		},
+		{
+			"StepName": "Set LVDC Voltage 16V",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "LVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 16
+		},
+		{
+			"StepName": "VIPER Initial Temp",
+			"RunMode": "Normal",
+			"FunctionName": "Test_VIPER_Initial_Temp",
+			"RecordingLog": true,
+			"BaseStepNameNum": 170100,
+			"LowLimit": 18,
+			"HighLimit": 32,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set DUT Current 430A_10S_60Hz",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_SetDUTCurrent",
+			"RecordingLog": true,
+			"MaxCurrent": 430,
+			"StepCurrent": 20,
+			"HoldTime": 10,
+			"Frequency": 60
+		},
+		{
+			"StepName": "Read DUT and Device Current 430",
+			"RunMode": "Normal",
+			"FunctionName": "Test_UVW_Current_RMS",
+			"RecordingLog": false,
+			"BaseNum": 170110,
+			"LowLimit": 425.7,
+			"HighLimit": 434.3,
+			"Comtype": "GELE",
+			"Unit": "A"
+		},
+		{
+			"StepName": "VIPER Delta Temp",
+			"RunMode": "Normal",
+			"FunctionName": "Test_VIPER_Delta_Temp",
+			"RecordingLog": true,
+			"BaseStepNameNum": 170120,
+			"LowLimit": 0,
+			"HighLimit": 35,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set LVDC Voltage 24V",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "LVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 24
+		},
+		{
+			"StepName": "VIPER Initial Temp",
+			"RunMode": "Normal",
+			"FunctionName": "Test_VIPER_Initial_Temp",
+			"RecordingLog": true,
+			"BaseStepNameNum": 170130,
+			"LowLimit": 18,
+			"HighLimit": 32,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set DUT Current 430A_10S_60Hz",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_SetDUTCurrent",
+			"RecordingLog": true,
+			"MaxCurrent": 430,
+			"StepCurrent": 20,
+			"HoldTime": 10,
+			"Frequency": 60
+		},
+		{
+			"StepName": "Read DUT and Device Current 430",
+			"RunMode": "Normal",
+			"FunctionName": "Test_UVW_Current_RMS",
+			"RecordingLog": false,
+			"BaseNum": 170140,
+			"LowLimit": 425.7,
+			"HighLimit": 434.3,
+			"Comtype": "GELE",
+			"Unit": "A"
+		},
+		{
+			"StepName": "VIPER Delta Temp",
+			"RunMode": "Normal",
+			"FunctionName": "Test_VIPER_Delta_Temp",
+			"RecordingLog": true,
+			"BaseStepNameNum": 170150,
+			"LowLimit": 0,
+			"HighLimit": 35,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		
+
+		{
+			"StepName": "Set LVDC Voltage 32V",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "LVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 32
+		},
+		{
+			"StepName": "VIPER Initial Temp",
+			"RunMode": "Normal",
+			"FunctionName": "Test_VIPER_Initial_Temp",
+			"RecordingLog": true,
+			"BaseStepNameNum": 170160,
+			"LowLimit": 18,
+			"HighLimit": 32,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set DUT Current 430A_10S_60Hz",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_SetDUTCurrent",
+			"RecordingLog": true,
+			"MaxCurrent": 430,
+			"StepCurrent": 20,
+			"HoldTime": 10,
+			"Frequency": 60
+		},
+		{
+			"StepName": "Read DUT and Device Current 430",
+			"RunMode": "Normal",
+			"FunctionName": "Test_UVW_Current_RMS",
+			"RecordingLog": false,
+			"BaseNum": 170170,
+			"LowLimit": 425.7,
+			"HighLimit": 434.3,
+			"Comtype": "GELE",
+			"Unit": "A"
+		},
+		{
+			"StepName": "VIPER Delta Temp",
+			"RunMode": "Normal",
+			"FunctionName": "Test_VIPER_Delta_Temp",
+			"RecordingLog": true,
+			"BaseStepNameNum": 170180,
+			"LowLimit": 0,
+			"HighLimit": 35,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		
+
+		{
+			"StepName": "Set HVDC Voltage 750V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 750
+		},
+		{
+			"StepName": "Set LVDC Voltage 16V",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "LVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 16
+		},
+		{
+			"StepName": "VIPER Initial Temp",
+			"RunMode": "Normal",
+			"FunctionName": "Test_VIPER_Initial_Temp",
+			"RecordingLog": true,
+			"BaseStepNameNum": 170400,
+			"LowLimit": 18,
+			"HighLimit": 150,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set DUT Current 762A_10S_60Hz",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_SetDUTCurrent",
+			"RecordingLog": true,
+			"MaxCurrent": 762,
+			"StepCurrent": 20,
+			"HoldTime": 10,
+			"Frequency": 60
+		},
+		{
+			"StepName": "Read DUT and Device Current 762",
+			"RunMode": "Normal",
+			"FunctionName": "Test_UVW_Current_RMS",
+			"RecordingLog": false,
+			"BaseNum": 170410,
+			"LowLimit": 754.38,
+			"HighLimit": 769.62,
+			"Comtype": "GELE",
+			"Unit": "A"
+		},
+		{
+			"StepName": "VIPER Delta Temp",
+			"RunMode": "Normal",
+			"FunctionName": "Test_VIPER_Delta_Temp",
+			"RecordingLog": true,
+			"BaseStepNameNum": 170420,
+			"LowLimit": 10,
+			"HighLimit": 130,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set LVDC Voltage 24V",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "LVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 24
+		},
+		{
+			"StepName": "VIPER Initial Temp",
+			"RunMode": "Normal",
+			"FunctionName": "Test_VIPER_Initial_Temp",
+			"RecordingLog": true,
+			"BaseStepNameNum": 170430,
+			"LowLimit": 18,
+			"HighLimit": 150,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set DUT Current 762A_10S_60Hz",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_SetDUTCurrent",
+			"RecordingLog": true,
+			"MaxCurrent": 762,
+			"StepCurrent": 20,
+			"HoldTime": 10,
+			"Frequency": 60
+		},
+		{
+			"StepName": "Read DUT and Device Current 762",
+			"RunMode": "Normal",
+			"FunctionName": "Test_UVW_Current_RMS",
+			"RecordingLog": false,
+			"BaseNum": 170440,
+			"LowLimit": 754.38,
+			"HighLimit": 769.62,
+			"Comtype": "GELE",
+			"Unit": "A"
+		},
+		{
+			"StepName": "VIPER Delta Temp",
+			"RunMode": "Normal",
+			"FunctionName": "Test_VIPER_Delta_Temp",
+			"RecordingLog": true,
+			"BaseStepNameNum": 170450,
+			"LowLimit": 10,
+			"HighLimit": 130,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set LVDC Voltage 32V",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "LVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 32
+		},
+		{
+			"StepName": "VIPER Initial Temp",
+			"RunMode": "Normal",
+			"FunctionName": "Test_VIPER_Initial_Temp",
+			"RecordingLog": true,
+			"BaseStepNameNum": 170460,
+			"LowLimit": 18,
+			"HighLimit": 150,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set DUT Current 762A_10S_60Hz",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_SetDUTCurrent",
+			"RecordingLog": true,
+			"MaxCurrent": 762,
+			"StepCurrent": 20,
+			"HoldTime": 10,
+			"Frequency": 60
+		},
+		{
+			"StepName": "Read DUT and Device Current 762",
+			"RunMode": "Normal",
+			"FunctionName": "Test_UVW_Current_RMS",
+			"RecordingLog": false,
+			"BaseNum": 170470,
+			"LowLimit": 754.38,
+			"HighLimit": 769.62,
+			"Comtype": "GELE",
+			"Unit": "A"
+		},
+		{
+			"StepName": "VIPER Delta Temp",
+			"RunMode": "Normal",
+			"FunctionName": "Test_VIPER_Delta_Temp",
+			"RecordingLog": true,
+			"BaseStepNameNum": 170480,
+			"LowLimit": 10,
+			"HighLimit": 130,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set LVDC Output OFF",
+			"RunMode": "Normal",
+			"FunctionName": "LVDC_SetOutput",
+			"RecordingLog": true,
+			"Output": false
+		},
+		{
+			"StepName": "Delay",
+			"RunMode": "Normal",
+			"FunctionName": "Test_DelayMs",
+			"RecordingLog": true,
+			"TimeMs": 2000
+		},
+		{
+			"StepName": "Set LVDC Output ON",
+			"RunMode": "Normal",
+			"FunctionName": "LVDC_SetOutput",
+			"RecordingLog": true,
+			"Output": true
+		},
+		{
+			"StepName": "Delay",
+			"RunMode": "Normal",
+			"FunctionName": "Test_DelayMs",
+			"RecordingLog": true,
+			"TimeMs": 1000
+		},
+		{
+			"StepName": "Set HVDC Voltage 775V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 720
+		},
+		{
+			"StepName": "010202 Passive Discharge",
+			"RunMode": "Normal",
+			"FunctionName": "Test_PassiveDischarge",
+			"RecordingLog": true
+		},
+		{
+			"StepName": "Set HVDC Voltage 0V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 0.1
+		},
+		{
+			"StepName": "Set HVDC Voltage 0V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 1
+		},
+		{
+			"StepName": "Set HVDC Output OFF",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetOutput",
+			"RecordingLog": true,
+			"Output": false
+		}
+	]
+}

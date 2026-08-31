@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyName>CSP.TestDLL</AssemblyName>
+    <RootNamespace>CSP</RootNamespace>
+    <PlatformTarget>x86</PlatformTarget>
+    <Platforms>x86</Platforms>
+    <LangVersion>latest</LangVersion>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <AppendPlatformToOutputPath>false</AppendPlatformToOutputPath>
+    <NoWarn>$(NoWarn);0168;0414</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\..\TestDLL\TestDLL\TestDllMain.cs" Link="TestDllMain.cs" />
+    <Compile Include="..\..\..\..\TestDLL\TestDLL\TestDllMain.Generic.cs" Link="TestDllMain.Generic.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="CSP_Base"><HintPath>..\DLLs\CSP_Base.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="CSP_Manage"><HintPath>..\DLLs\CSP_Manage.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Newtonsoft.Json"><HintPath>..\DLLs\Newtonsoft.Json.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Instruments.CAN.CANWrapper"><HintPath>..\ManualCanDebug\RuntimeDlls\Instruments.CAN.CANWrapper.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Instruments.CAN.ICAN"><HintPath>..\ManualCanDebug\RuntimeDlls\Instruments.CAN.ICAN.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Instruments.DAQ.PCI-6229"><HintPath>..\DLLs\Instruments.DAQ.PCI-6229.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Instruments.DMM.KeySight34461A"><HintPath>..\DLLs\Instruments.DMM.KeySight34461A.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Instruments.IPowerSupply"><HintPath>..\DLLs\Instruments.IPowerSupply.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Instruments.MOXA_1XXX"><HintPath>..\DLLs\Instruments.MOXA_1XXX.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Instruments.Ni_VISA"><HintPath>..\DLLs\Instruments.Ni_VISA.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Instruments.Other.NGI_ProgramResistance"><HintPath>..\DLLs\Instruments.Other.NGI_ProgramResistance.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Instruments.PLCS7"><HintPath>..\DLLs\Instruments.PLCS7.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Instruments.PowerSupply.EA_PS9000"><HintPath>..\DLLs\Instruments.PowerSupply.EA_PS9000.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Instruments.PowerSupply.ITECH_IT6XXXC"><HintPath>..\DLLs\Instruments.PowerSupply.ITECH_IT6XXXC.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Instruments.PowerSupply.Kewell_C3000"><HintPath>..\DLLs\Instruments.PowerSupply.Kewell_C3000.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Instruments.PowerSupplyWrapper"><HintPath>..\DLLs\Instruments.PowerSupplyWrapper.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="SHT_48SEDO_A"><HintPath>..\DLLs\SHT_48SEDO_A.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="SoketS7"><HintPath>..\DLLs\SoketS7.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>

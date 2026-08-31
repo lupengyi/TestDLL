@@ -1,0 +1,339 @@
+{
+  "Id": "c96-chapter-07",
+  "Name": "07 额定电压电流精度",
+  "Category": "章节",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "4b6dc82b2acf4c01bbffdf1342ae1dc6",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm1-current",
+      "ReferencedBlockName": "TM1三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 0.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": -10.0,
+        "CurrentHigh": 10.0,
+        "ImbalanceHigh": 10.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "53bb4c6350774e4e8e8c2753d9a26e9a",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm2-current",
+      "ReferencedBlockName": "TM2三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 0.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": -10.0,
+        "CurrentHigh": 10.0,
+        "ImbalanceHigh": 10.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "924ced8bb4e24de0806ef6a64a54b608",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm1-current",
+      "ReferencedBlockName": "TM1三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 100.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 99.0,
+        "CurrentHigh": 101.0,
+        "ImbalanceHigh": 10.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "75db37638d20483794e681d8a248910e",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm2-current",
+      "ReferencedBlockName": "TM2三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 100.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 99.0,
+        "CurrentHigh": 101.0,
+        "ImbalanceHigh": 10.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "2af7bb531f1e4b0ba4372429119eb5a7",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm1-current",
+      "ReferencedBlockName": "TM1三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 200.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 198.0,
+        "CurrentHigh": 202.0,
+        "ImbalanceHigh": 10.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "ab275700c75042de81227168adc32a4d",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm2-current",
+      "ReferencedBlockName": "TM2三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 200.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 198.0,
+        "CurrentHigh": 202.0,
+        "ImbalanceHigh": 10.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "01a37cf9f8ba45f796111a04c5c84d93",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm1-current",
+      "ReferencedBlockName": "TM1三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 300.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 297.0,
+        "CurrentHigh": 303.0,
+        "ImbalanceHigh": 10.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "4f48c25f996b4d07b1ed6320ed36939f",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm2-current",
+      "ReferencedBlockName": "TM2三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 300.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 297.0,
+        "CurrentHigh": 303.0,
+        "ImbalanceHigh": 10.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "d28094dfa6f34defac5d8440a9215a5e",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm1-current",
+      "ReferencedBlockName": "TM1三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 400.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 396.0,
+        "CurrentHigh": 404.0,
+        "ImbalanceHigh": 10.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "27b41fd0430b47d2a077ec13da671e6b",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm2-current",
+      "ReferencedBlockName": "TM2三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 400.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 396.0,
+        "CurrentHigh": 404.0,
+        "ImbalanceHigh": 10.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "f6996cc577dd4cb5940b1f28d823b57d",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm1-current",
+      "ReferencedBlockName": "TM1三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 500.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 495.0,
+        "CurrentHigh": 505.0,
+        "ImbalanceHigh": 10.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "9a69739a47404dfdb59896074cecb127",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm2-current",
+      "ReferencedBlockName": "TM2三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 500.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 495.0,
+        "CurrentHigh": 505.0,
+        "ImbalanceHigh": 10.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "008a35d49e444a7c94c6ab21a1b36b6f",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm1-current",
+      "ReferencedBlockName": "TM1三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 600.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 594.0,
+        "CurrentHigh": 606.0,
+        "ImbalanceHigh": 12.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "33d491bf73cb4066919c1157e517c2d0",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm2-current",
+      "ReferencedBlockName": "TM2三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 600.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 594.0,
+        "CurrentHigh": 606.0,
+        "ImbalanceHigh": 12.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "e5b30db0b1ee455a827b28793ad8a435",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm1-current",
+      "ReferencedBlockName": "TM1三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 700.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 693.0,
+        "CurrentHigh": 707.0,
+        "ImbalanceHigh": 14.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "1174180a1aef4e99b0028fe9b61c2cb7",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm2-current",
+      "ReferencedBlockName": "TM2三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 700.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 693.0,
+        "CurrentHigh": 707.0,
+        "ImbalanceHigh": 14.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "8c12b5211edb41cba74cd32d081b5532",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm1-current",
+      "ReferencedBlockName": "TM1三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 850.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 841.5,
+        "CurrentHigh": 858.5,
+        "ImbalanceHigh": 17.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "964abb0cd8094250ab3a3f278349a927",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-tm2-current",
+      "ReferencedBlockName": "TM2三相出流与验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "TargetCurrent": 850.0,
+        "StepCurrent": 20.0,
+        "HoldTime": 10.0,
+        "Frequency": 60.0,
+        "CurrentLow": 841.5,
+        "CurrentHigh": 858.5,
+        "ImbalanceHigh": 17.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    }
+  ]
+}

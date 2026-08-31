@@ -1,0 +1,42 @@
+{
+  "Id": "standard-tm1-motor-fault-read",
+  "Name": "TM1读取电机故障",
+  "Category": "主驱",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "读取10字节Motor Status，解析所有故障位并判断是否无活动故障；同时显示Ramp和Status。故障存在时平台结果为FAIL并显示具体故障名称。",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C92",
+    "C96"
+  ],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "ab43bc4ce5764f2a9719d298fa3cfbba",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "TM1读取电机故障",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANCalculatedResults",
+        "RecordingLog": true,
+        "CalculationType": "PackedFaultStatus",
+        "AddrOffset": 108,
+        "TableLength": 10,
+        "PointerDepth": 1,
+        "FaultMapJson": "[{\"Byte\":0,\"Bit\":0,\"Name\":\"Phase A over-current\",\"ActiveLow\":false},{\"Byte\":0,\"Bit\":1,\"Name\":\"Phase B over-current\",\"ActiveLow\":false},{\"Byte\":0,\"Bit\":2,\"Name\":\"Phase C over-current\",\"ActiveLow\":false},{\"Byte\":0,\"Bit\":3,\"Name\":\"Phase A HW over-current\",\"ActiveLow\":false},{\"Byte\":0,\"Bit\":4,\"Name\":\"Phase B HW over-current\",\"ActiveLow\":false},{\"Byte\":0,\"Bit\":5,\"Name\":\"Phase C HW over-current\",\"ActiveLow\":false},{\"Byte\":0,\"Bit\":6,\"Name\":\"Phase A upper temperature\",\"ActiveLow\":false},{\"Byte\":0,\"Bit\":7,\"Name\":\"Phase A lower temperature\",\"ActiveLow\":false},{\"Byte\":1,\"Bit\":0,\"Name\":\"Phase B upper temperature\",\"ActiveLow\":false},{\"Byte\":1,\"Bit\":1,\"Name\":\"Phase B lower temperature\",\"ActiveLow\":false},{\"Byte\":1,\"Bit\":2,\"Name\":\"Phase C upper temperature\",\"ActiveLow\":false},{\"Byte\":1,\"Bit\":3,\"Name\":\"Phase C lower temperature\",\"ActiveLow\":false},{\"Byte\":1,\"Bit\":4,\"Name\":\"Motor temp 1\",\"ActiveLow\":false},{\"Byte\":1,\"Bit\":5,\"Name\":\"Motor temp 2\",\"ActiveLow\":false},{\"Byte\":1,\"Bit\":6,\"Name\":\"Motor temp 3 reserved\",\"ActiveLow\":false},{\"Byte\":1,\"Bit\":7,\"Name\":\"Desat upper\",\"ActiveLow\":false},{\"Byte\":2,\"Bit\":0,\"Name\":\"Desat lower\",\"ActiveLow\":false},{\"Byte\":2,\"Bit\":1,\"Name\":\"UV A upper\",\"ActiveLow\":false},{\"Byte\":2,\"Bit\":2,\"Name\":\"UV B upper\",\"ActiveLow\":false},{\"Byte\":2,\"Bit\":3,\"Name\":\"UV C upper\",\"ActiveLow\":false},{\"Byte\":2,\"Bit\":4,\"Name\":\"UV A lower\",\"ActiveLow\":false},{\"Byte\":2,\"Bit\":5,\"Name\":\"UV B lower\",\"ActiveLow\":false},{\"Byte\":2,\"Bit\":6,\"Name\":\"UV C lower\",\"ActiveLow\":false},{\"Byte\":2,\"Bit\":7,\"Name\":\"Master fault\",\"ActiveLow\":false},{\"Byte\":3,\"Bit\":0,\"Name\":\"Bus under-voltage\",\"ActiveLow\":false},{\"Byte\":3,\"Bit\":1,\"Name\":\"Bus over-voltage\",\"ActiveLow\":false},{\"Byte\":3,\"Bit\":2,\"Name\":\"Bus HW over-voltage\",\"ActiveLow\":false},{\"Byte\":3,\"Bit\":3,\"Name\":\"Bus HW over-voltage latched\",\"ActiveLow\":false},{\"Byte\":3,\"Bit\":4,\"Name\":\"All upper UV latched\",\"ActiveLow\":false},{\"Byte\":3,\"Bit\":5,\"Name\":\"All lower UV latched\",\"ActiveLow\":false},{\"Byte\":3,\"Bit\":6,\"Name\":\"Zero-sequence over-current\",\"ActiveLow\":false},{\"Byte\":3,\"Bit\":7,\"Name\":\"UV upper\",\"ActiveLow\":false},{\"Byte\":4,\"Bit\":0,\"Name\":\"UV lower\",\"ActiveLow\":false},{\"Byte\":4,\"Bit\":1,\"Name\":\"Board temperature\",\"ActiveLow\":false},{\"Byte\":4,\"Bit\":2,\"Name\":\"Reserved byte4 bit2\",\"ActiveLow\":false},{\"Byte\":4,\"Bit\":3,\"Name\":\"Reserved byte4 bit3\",\"ActiveLow\":false},{\"Byte\":4,\"Bit\":4,\"Name\":\"Reserved byte4 bit4\",\"ActiveLow\":false},{\"Byte\":4,\"Bit\":5,\"Name\":\"Reserved byte4 bit5\",\"ActiveLow\":false},{\"Byte\":4,\"Bit\":6,\"Name\":\"Reserved byte4 bit6\",\"ActiveLow\":false},{\"Byte\":4,\"Bit\":7,\"Name\":\"Reserved byte4 bit7\",\"ActiveLow\":false}]",
+        "RampOffset": 8,
+        "StatusOffset": 9,
+        "JudgeNoFault": true,
+        "NoFaultText": "No active fault bits",
+        "ResultMode": "StringLimit",
+        "Product": "C96"
+      },
+      "ParameterBindings": {}
+    }
+  ]
+}

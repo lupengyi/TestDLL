@@ -1,0 +1,25 @@
+{
+  "SerialNumberLen": 0,
+  "ProjectName": "C91-01-0001",
+  "StationName": "OP3020",
+  "SequenceVersion": "FT1-FCT01-01-A0",
+  "UIDisplayType": "All",
+  "LogFilePath": "D:\\LogfilePath",
+  "StepList": [
+    {
+      "StepName": "读取AI_Input",
+      "RunMode": "Normal",
+      "FunctionName": "FCT_CANTable",
+      "RecordingLog": true,
+      "Operation": "Read",
+      "ResultMode": "NumericLimit",
+      "AddrOffset": 0,
+      "TableLength": 252,
+      "Product": "C96",
+      "LowLimit": 0,
+      "HighLimit": 0,
+      "Comtype": "GELE",
+      "Unit": ""
+    }
+  ]
+}

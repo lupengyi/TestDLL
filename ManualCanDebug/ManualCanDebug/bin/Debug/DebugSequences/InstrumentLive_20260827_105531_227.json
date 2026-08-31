@@ -1,0 +1,22 @@
+{
+  "SerialNumberLen": 0,
+  "ProjectName": "C96_FCT_调试",
+  "StationName": "OP3020",
+  "SequenceVersion": "FT1-FCT01-01-A0",
+  "UIDisplayType": "All",
+  "LogFilePath": "D:\\LogfilePath",
+  "StepList": [
+    {
+      "StepName": "Discrete Inputs",
+      "RunMode": "Normal",
+      "FunctionName": "FCT_CANTable",
+      "RecordingLog": true,
+      "Operation": "Read",
+      "AddrOffset": 24,
+      "TableLength": 101,
+      "PointerDepth": 1,
+      "SignalChecksJson": "[]",
+      "ResultMode": "Information"
+    }
+  ]
+}

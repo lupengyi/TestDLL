@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\FST\\TestDLL\\ManualCanDebug\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B6E6C9C4-8DFE-4A04-BB4F-F1A8D4E26F41}|ManualCanDebug\\ManualCanDebug.csproj|e:\\fst\\testdll\\manualcandebug\\manualcandebug\\manualcandebug.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
+      "RelativeMoniker": "D:0:0:{B6E6C9C4-8DFE-4A04-BB4F-F1A8D4E26F41}|ManualCanDebug\\ManualCanDebug.csproj|solutionrelative:manualcandebug\\manualcandebug.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E1B5B3E1-5C9B-4F1A-9DF4-2D9AFD4F1A01}|ManualCanDebug.Tests\\ManualCanDebug.Tests.csproj|E:\\FST\\TestDLL\\ManualCanDebug\\manualcandebug.tests\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E1B5B3E1-5C9B-4F1A-9DF4-2D9AFD4F1A01}|ManualCanDebug.Tests\\ManualCanDebug.Tests.csproj|solutionrelative:manualcandebug.tests\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0C39CD58-6661-4AA2-B818-C6D5292ABCE3}|..\\CSP.TestDLL.Extension\\CSP.TestDLL.Extension.csproj|e:\\fst\\testdll\\csp.testdll.extension\\csp.testdll.extension.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DBA7B77D-7C57-4C80-9DE7-7A4E8F1E7201}|ManualCanDebug.Core\\ManualCanDebug.Core.csproj|E:\\FST\\TestDLL\\ManualCanDebug\\manualcandebug.core\\canbus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DBA7B77D-7C57-4C80-9DE7-7A4E8F1E7201}|ManualCanDebug.Core\\ManualCanDebug.Core.csproj|solutionrelative:manualcandebug.core\\canbus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "ManualCanDebug",
+              "DocumentMoniker": "E:\\FST\\TestDLL\\ManualCanDebug\\ManualCanDebug\\ManualCanDebug.csproj",
+              "RelativeDocumentMoniker": "ManualCanDebug\\ManualCanDebug.csproj",
+              "ToolTip": "E:\\FST\\TestDLL\\ManualCanDebug\\ManualCanDebug\\ManualCanDebug.csproj",
+              "RelativeToolTip": "ManualCanDebug\\ManualCanDebug.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-08-30T15:13:01.288Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "E:\\FST\\TestDLL\\ManualCanDebug\\ManualCanDebug.Tests\\Program.cs",
+              "RelativeDocumentMoniker": "ManualCanDebug.Tests\\Program.cs",
+              "ToolTip": "E:\\FST\\TestDLL\\ManualCanDebug\\ManualCanDebug.Tests\\Program.cs",
+              "RelativeToolTip": "ManualCanDebug.Tests\\Program.cs",
+              "ViewState": "AgIAANAAAAAAAAAAAAAcwA8BAAAcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-28T08:15:07.831Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CSP.TestDLL.Extension.csproj",
+              "DocumentMoniker": "E:\\FST\\TestDLL\\CSP.TestDLL.Extension\\CSP.TestDLL.Extension.csproj",
+              "RelativeDocumentMoniker": "..\\CSP.TestDLL.Extension\\CSP.TestDLL.Extension.csproj",
+              "ToolTip": "E:\\FST\\TestDLL\\CSP.TestDLL.Extension\\CSP.TestDLL.Extension.csproj",
+              "RelativeToolTip": "..\\CSP.TestDLL.Extension\\CSP.TestDLL.Extension.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-08-28T05:05:21.397Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CanBus.cs",
+              "DocumentMoniker": "E:\\FST\\TestDLL\\ManualCanDebug\\ManualCanDebug.Core\\CanBus.cs",
+              "RelativeDocumentMoniker": "ManualCanDebug.Core\\CanBus.cs",
+              "ToolTip": "E:\\FST\\TestDLL\\ManualCanDebug\\ManualCanDebug.Core\\CanBus.cs",
+              "RelativeToolTip": "ManualCanDebug.Core\\CanBus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-07T06:57:08.075Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

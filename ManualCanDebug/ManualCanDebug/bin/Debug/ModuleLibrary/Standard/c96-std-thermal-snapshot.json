@@ -1,0 +1,55 @@
+{
+  "Id": "c96-std-thermal-snapshot",
+  "Name": "产品温度快照读取",
+  "Category": "温度",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "30283ce67a3846f5bfae889e5f2e9ace",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取相桥温度",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANTable",
+        "RecordingLog": true,
+        "Operation": "Read",
+        "ResultMode": "Information",
+        "AddrOffset": 44,
+        "TableLength": 24,
+        "PointerDepth": 1
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "43a583e9cd5048e69796ba709079b4f7",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取Analog Inputs温度",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANTable",
+        "RecordingLog": true,
+        "Operation": "Read",
+        "ResultMode": "Information",
+        "AddrOffset": 0,
+        "TableLength": 252,
+        "PointerDepth": 1
+      },
+      "ParameterBindings": {}
+    }
+  ]
+}

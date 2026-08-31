@@ -1,0 +1,61 @@
+2025-07-01 14:49:02
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception ---> Ivi.Visa.NativeVisaException: 给定会话的连接已丢失。
+   at NationalInstruments.Visa.Internal.ErrorChecker.CheckStatusAndThrow(Int32 status, SafeVisaHandle visaObject)
+   at NationalInstruments.Visa.Internal.MessageBasedSessionImpl.Write(Byte* buffer, Int64 index, Int64 count)
+   at NationalInstruments.Visa.Internal.MessageBasedSessionImpl.Write(Byte[] buffer, Int64 index, Int64 count)
+   at NationalInstruments.Visa.Internal.MessageBasedSessionImpl.Write(Byte[] buffer)
+   at Instruments.PLC.SoketS7.WriteCMD(Byte[] txByteData) in D:\_Projects\FST002\SourceCode\SoketS7\SoketS7\SoketS7.cs:line 425
+   at Instruments.PLC.SoketS7.DBWrite(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[] writeBuffer) in D:\_Projects\FST002\SourceCode\SoketS7\SoketS7\SoketS7.cs:line 355
+   --- End of inner exception stack trace ---
+   at Instruments.PLC.SoketS7.DBWrite(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[] writeBuffer) in D:\_Projects\FST002\SourceCode\SoketS7\SoketS7\SoketS7.cs:line 360
+   at CSP.TestDllMain.AutomationLoop() in D:\TestDLL\TestDLL\TestDllMain.cs:line 148
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.<AutomationThread>b__42_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 828
+====================================================================================================
+
+2025-07-01 14:50:23
+System.Exception ---> System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception: 万用表通讯错误
+   at CSP.TestDllMain.ProcessSetup() in D:\TestDLL\TestDLL\TestDllMain.cs:line 138
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.RunProcessSetup() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 767
+   --- End of inner exception stack trace ---
+   at CSP.MainClass.RunProcessSetup() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 774
+   at CSP.MainClass.<StartProcessSetup>b__31_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 474
+====================================================================================================
+
+2025-07-01 14:50:56
+System.Exception ---> System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception: 万用表通讯错误
+   at CSP.TestDllMain.ProcessSetup() in D:\TestDLL\TestDLL\TestDllMain.cs:line 138
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.RunProcessSetup() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 767
+   --- End of inner exception stack trace ---
+   at CSP.MainClass.RunProcessSetup() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 774
+   at CSP.MainClass.<StartProcessSetup>b__31_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 474
+====================================================================================================
+
+2025-07-01 14:52:18
+System.Exception ---> System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception: 万用表通讯错误
+   at CSP.TestDllMain.ProcessSetup() in D:\TestDLL\TestDLL\TestDllMain.cs:line 138
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.RunProcessSetup() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 767
+   --- End of inner exception stack trace ---
+   at CSP.MainClass.RunProcessSetup() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 774
+   at CSP.MainClass.<StartProcessSetup>b__31_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 474
+====================================================================================================
+

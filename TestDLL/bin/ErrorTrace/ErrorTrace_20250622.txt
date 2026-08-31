@@ -1,0 +1,42 @@
+2025-06-22 09:57:50
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception ---> Ivi.Visa.IOTimeoutException: Exception of type 'Ivi.Visa.IOTimeoutException' was thrown.
+   at NationalInstruments.Visa.Internal.MessageBasedSessionImpl.CheckTimeoutAndThrow(Int32 visaStatus, Byte* buffer, Int32 count)
+   at NationalInstruments.Visa.Internal.MessageBasedSessionImpl.Read(Byte* buffer, Int64 index, Int64 count, Int64& actualCount, ReadStatus& readStatus)
+   at NationalInstruments.Visa.Internal.MessageBasedSessionImpl.Read(Byte[] buffer, Int64 index, Int64 count, Int64& actualCount, ReadStatus& readStatus)
+   at NationalInstruments.Visa.Internal.MessageBasedSessionImpl.Read(Int64 count, ReadStatus& readStatus)
+   at NationalInstruments.Visa.Internal.MessageBasedSessionImpl.Read(Int64 count)
+   at Instruments.PLC.SoketS7.QueryCMD(Byte[] txByteData, Byte[]& rxByteData) in D:\_Projects\FST002\SourceCode\SoketS7\SoketS7\SoketS7.cs:line 450
+   at Instruments.PLC.SoketS7.DBRead(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[]& readBuffer) in D:\_Projects\FST002\SourceCode\SoketS7\SoketS7\SoketS7.cs:line 192
+   --- End of inner exception stack trace ---
+   at Instruments.PLC.SoketS7.DBRead(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[]& readBuffer) in D:\_Projects\FST002\SourceCode\SoketS7\SoketS7\SoketS7.cs:line 198
+   at CSP.TestDllMain.PLC_ReadInt(Int32 addr) in D:\TestDLL\TestDLL\TestDllMain.cs:line 1380
+   at CSP.TestDllMain.AutomationLoop() in D:\TestDLL\TestDLL\TestDllMain.cs:line 198
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.<AutomationThread>b__42_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 828
+====================================================================================================
+
+2025-06-22 12:07:36
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception ---> Ivi.Visa.IOTimeoutException: Exception of type 'Ivi.Visa.IOTimeoutException' was thrown.
+   at NationalInstruments.Visa.Internal.MessageBasedSessionImpl.CheckTimeoutAndThrow(Int32 visaStatus, Byte* buffer, Int32 count)
+   at NationalInstruments.Visa.Internal.MessageBasedSessionImpl.Read(Byte* buffer, Int64 index, Int64 count, Int64& actualCount, ReadStatus& readStatus)
+   at NationalInstruments.Visa.Internal.MessageBasedSessionImpl.Read(Byte[] buffer, Int64 index, Int64 count, Int64& actualCount, ReadStatus& readStatus)
+   at NationalInstruments.Visa.Internal.MessageBasedSessionImpl.Read(Int64 count, ReadStatus& readStatus)
+   at NationalInstruments.Visa.Internal.MessageBasedSessionImpl.Read(Int64 count)
+   at Instruments.PLC.SoketS7.QueryCMD(Byte[] txByteData, Byte[]& rxByteData) in D:\_Projects\FST002\SourceCode\SoketS7\SoketS7\SoketS7.cs:line 450
+   at Instruments.PLC.SoketS7.DBRead(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[]& readBuffer) in D:\_Projects\FST002\SourceCode\SoketS7\SoketS7\SoketS7.cs:line 192
+   --- End of inner exception stack trace ---
+   at Instruments.PLC.SoketS7.DBRead(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[]& readBuffer) in D:\_Projects\FST002\SourceCode\SoketS7\SoketS7\SoketS7.cs:line 198
+   at CSP.TestDllMain.PLC_ReadString(Int32 addr, Int32 len) in D:\TestDLL\TestDLL\TestDllMain.cs:line 1391
+   at CSP.TestDllMain.AutomationLoop() in D:\TestDLL\TestDLL\TestDllMain.cs:line 170
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.<AutomationThread>b__42_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 828
+====================================================================================================
+

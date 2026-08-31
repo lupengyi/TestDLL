@@ -1,0 +1,157 @@
+{
+  "Id": "ece3c4c5aac945e5b11f3b8fb6c10544",
+  "Name": "导入SEQ",
+  "Category": "自定义",
+  "ModuleKind": "Custom",
+  "Version": "1.0",
+  "Description": "从平台JSON重建，共7步。",
+  "IsStandard": false,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "69339be192d64603bdd7b3f44aca8e72",
+      "Enabled": true,
+      "StepProperties": {
+        "StepName": "001 TM2产品通信初始化",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "PRODUCTCAN",
+        "Operation": "CommunicationInit",
+        "ResultMode": "Action"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "08c064607c1241f3b2d31b68b87ff8d2",
+      "Enabled": true,
+      "StepProperties": {
+        "StepName": "读取Analog_Inputs0x00",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANTable",
+        "RecordingLog": true,
+        "Operation": "Read",
+        "ResultMode": "Information",
+        "AddrOffset": 0,
+        "TableLength": 252,
+        "SignalChecksJson": "[{\"Name\":\"15V_AI\",\"Offset\":0,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"15V_SAFETY_AI\",\"Offset\":4,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"5V_LV_UP_AI\",\"Offset\":8,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"5V_SAFETY_AI\",\"Offset\":12,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"ADC_TEST_AI\",\"Offset\":16,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"BOARD_TEMP_AI\",\"Offset\":20,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"COOLANT_IN_TEMP_AI\",\"Offset\":24,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"COOLANT_OUT_TEMP_AI\",\"Offset\":28,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"HVDC_SENSE_AI\",\"Offset\":32,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"HWID_AI\",\"Offset\":36,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"INVTRA_18V_HV_AI\",\"Offset\":40,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"INVTRA_IOUTA_CURRENT_AI\",\"Offset\":44,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\",\"Unit\":\"A\"},{\"Name\":\"INVTRA_IOUTB_CURRENT_AI\",\"Offset\":48,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\",\"Unit\":\"A\"},{\"Name\":\"INVTRA_IOUTC_CURRENT_AI\",\"Offset\":52,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\",\"Unit\":\"A\"},{\"Name\":\"INVTRA_MTRATEMP1_AI\",\"Offset\":56,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"INVTRA_MTRATEMP1_RTN_AI\",\"Offset\":60,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"INVTRA_MTRATEMP2_AI\",\"Offset\":64,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"INVTRA_MTRATEMP2_RTN_AI\",\"Offset\":68,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RED_INVTRB_IOUTA_CURRENT_AI\",\"Offset\":72,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\",\"Unit\":\"A\"},{\"Name\":\"RED_INVTRB_IOUTB_CURRENT_AI\",\"Offset\":76,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\",\"Unit\":\"A\"},{\"Name\":\"RED_INVTRB_IOUTC_CURRENT_AI\",\"Offset\":80,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\",\"Unit\":\"A\"},{\"Name\":\"INVTRB_MTRATEMP1_AI\",\"Offset\":84,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"INVTRB_MTRATEMP1_RTN_AI\",\"Offset\":88,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"INVTRB_MTRATEMP2_AI\",\"Offset\":92,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"INVTRB_MTRATEMP2_RTN_AI\",\"Offset\":96,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"KL15_AI\",\"Offset\":100,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RED_INVTRA_IOUTA_CURRENT_AI\",\"Offset\":104,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\",\"Unit\":\"A\"},{\"Name\":\"RED_INVTRA_IOUTB_CURRENT_AI\",\"Offset\":108,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\",\"Unit\":\"A\"},{\"Name\":\"RED_INVTRA_IOUTC_CURRENT_AI\",\"Offset\":112,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\",\"Unit\":\"A\"},{\"Name\":\"INVTRB_IOUTA_CURRENT_AI\",\"Offset\":116,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\",\"Unit\":\"A\"},{\"Name\":\"INVTRB_IOUTB_CURRENT_AI\",\"Offset\":120,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\",\"Unit\":\"A\"},{\"Name\":\"INVTRB_IOUTC_CURRENT_AI\",\"Offset\":124,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\",\"Unit\":\"A\"},{\"Name\":\"RED_RESA_COSHI_DS\",\"Offset\":128,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RED_RESA_COSLO_DS\",\"Offset\":132,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RED_RESA_SINHI_DS\",\"Offset\":136,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RED_RESA_SINLO_DS\",\"Offset\":140,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RED_RESB_COSHI_DS\",\"Offset\":144,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RED_RESB_COSLO_DS\",\"Offset\":148,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RED_RESB_SINHI_DS\",\"Offset\":152,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RED_RESB_SINLO_DS\",\"Offset\":156,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RESA_COSHI_DS\",\"Offset\":160,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RESA_COSHI_OC_VI\",\"Offset\":164,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RESA_COSLO_DS\",\"Offset\":168,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RESA_COSLO_OC_VI\",\"Offset\":172,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RESA_EXC-_DIAG_AI\",\"Offset\":176,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RESA_EXC+_DIAG_AI\",\"Offset\":180,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RESA_SINHI_DS\",\"Offset\":184,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RESA_SINHI_OC_VI\",\"Offset\":188,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RESA_SINLO_DS\",\"Offset\":192,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RESA_SINLO_OC_VI\",\"Offset\":196,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RESB_COSHI_DS\",\"Offset\":200,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RESB_COSHI_OC_VI\",\"Offset\":204,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RESB_COSLO_DS\",\"Offset\":208,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RESB_COSLO_OC_VI\",\"Offset\":212,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RESB_EXC-_DIAG_AI\",\"Offset\":216,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RESB_EXC+_DIAG_AI\",\"Offset\":220,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RESB_SINHI_DS\",\"Offset\":224,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RESB_SINHI_OC_VI\",\"Offset\":228,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RESB_SINLO_DS\",\"Offset\":232,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"RESB_SINLO_OC_VI\",\"Offset\":236,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"SCALED_VBATT_AI\",\"Offset\":240,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"VID_AI\",\"Offset\":244,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"},{\"Name\":\"VMUX_OUT_AI\",\"Offset\":248,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"Information\"}]",
+        "Product": "C96"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "defc321b326b4cddb0a4817f77875cd1",
+      "Enabled": true,
+      "StepProperties": {
+        "StepName": "002 TM2输出100A RMS",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANTable",
+        "RecordingLog": true,
+        "Operation": "Write",
+        "ResultMode": "Action",
+        "AddrOffset": 128,
+        "TableLength": 39,
+        "ChangesJson": "[{\"Name\":\"Iqs_Start\",\"Offset\":0,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Iqs_End\",\"Offset\":4,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"141.4\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Iqs_Step\",\"Offset\":8,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"20\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Hold_Time_S\",\"Offset\":12,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"10\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Output_Frequency\",\"Offset\":16,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"60\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Mode\",\"Offset\":20,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"4\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Unused\",\"Offset\":21,\"DataSize\":1,\"DataType\":\"int8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Ramp_Time_MS\",\"Offset\":22,\"DataSize\":2,\"DataType\":\"uint16\",\"Endian\":\"Little\",\"Value\":\"50\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Base_Frequency\",\"Offset\":24,\"DataSize\":2,\"DataType\":\"uint16\",\"Endian\":\"Little\",\"Value\":\"10000\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Motor_Gate_Enable\",\"Offset\":26,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"1\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"New Data Flag\",\"Offset\":27,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"255\",\"WriteLast\":true,\"WriteFinal\":true},{\"Name\":\"Reset_Motor_Faults\",\"Offset\":28,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Speed_Control_Enable\",\"Offset\":29,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Speed_Setpoint\",\"Offset\":30,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Voltage_Control_Enable\",\"Offset\":34,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Voltage_Setpoint\",\"Offset\":35,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false}]",
+        "VerifyAfterWrite": true
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "1ade749d8737418581cf543761cc2407",
+      "Enabled": true,
+      "StepProperties": {
+        "StepName": "003 等待TM2电流稳定",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteLogic",
+        "RecordingLog": true,
+        "ResultMode": "Action",
+        "Operation": "Delay",
+        "TimeMs": 5000
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "b17a876d42664be4a113febe25d8de96",
+      "Enabled": true,
+      "StepProperties": {
+        "StepName": "004 TM2电机故障状态",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANCalculatedResults",
+        "RecordingLog": true,
+        "AddrOffset": 132,
+        "TableLength": 10,
+        "CalculationType": "PackedFaultStatus",
+        "FaultMapJson": "[{\"Byte\":0,\"Bit\":0,\"Name\":\"A相过流\"},{\"Byte\":0,\"Bit\":1,\"Name\":\"B相过流\"},{\"Byte\":0,\"Bit\":2,\"Name\":\"C相过流\"},{\"Byte\":0,\"Bit\":3,\"Name\":\"A相硬件过流\"},{\"Byte\":0,\"Bit\":4,\"Name\":\"B相硬件过流\"},{\"Byte\":0,\"Bit\":5,\"Name\":\"C相硬件过流\"},{\"Byte\":0,\"Bit\":6,\"Name\":\"A相上桥温度故障\"},{\"Byte\":0,\"Bit\":7,\"Name\":\"A相下桥温度故障\"},{\"Byte\":1,\"Bit\":0,\"Name\":\"B相上桥温度故障\"},{\"Byte\":1,\"Bit\":1,\"Name\":\"B相下桥温度故障\"},{\"Byte\":1,\"Bit\":2,\"Name\":\"C相上桥温度故障\"},{\"Byte\":1,\"Bit\":3,\"Name\":\"C相下桥温度故障\"},{\"Byte\":1,\"Bit\":4,\"Name\":\"电机温度1故障\"},{\"Byte\":1,\"Bit\":5,\"Name\":\"电机温度2故障\"},{\"Byte\":1,\"Bit\":7,\"Name\":\"Desat Upper\"},{\"Byte\":2,\"Bit\":0,\"Name\":\"Desat Lower\"},{\"Byte\":2,\"Bit\":1,\"Name\":\"UV A Upper\"},{\"Byte\":2,\"Bit\":2,\"Name\":\"UV B Upper\"},{\"Byte\":2,\"Bit\":3,\"Name\":\"UV C Upper\"},{\"Byte\":2,\"Bit\":4,\"Name\":\"UV A Lower\"},{\"Byte\":2,\"Bit\":5,\"Name\":\"UV B Lower\"},{\"Byte\":2,\"Bit\":6,\"Name\":\"UV C Lower\"},{\"Byte\":2,\"Bit\":7,\"Name\":\"Master Fault\"},{\"Byte\":3,\"Bit\":0,\"Name\":\"母线欠压\"},{\"Byte\":3,\"Bit\":1,\"Name\":\"母线过压\"},{\"Byte\":3,\"Bit\":2,\"Name\":\"母线硬件过压\"},{\"Byte\":3,\"Bit\":3,\"Name\":\"母线硬件过压锁存\"},{\"Byte\":3,\"Bit\":4,\"Name\":\"Upper UV锁存\"},{\"Byte\":3,\"Bit\":5,\"Name\":\"Lower UV锁存\"},{\"Byte\":3,\"Bit\":6,\"Name\":\"零序过流\"},{\"Byte\":3,\"Bit\":7,\"Name\":\"UV Upper\"},{\"Byte\":4,\"Bit\":0,\"Name\":\"UV Lower\"},{\"Byte\":4,\"Bit\":1,\"Name\":\"板温故障\"}]",
+        "RampOffset": 8,
+        "StatusOffset": 9,
+        "NoFaultText": "No active fault bits",
+        "JudgeNoFault": true
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "275c52259bf849e18b33c7d710ba8da7",
+      "Enabled": true,
+      "StepProperties": {
+        "StepName": "005 TM2三相实际RMS电流",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANCalculatedResults",
+        "RecordingLog": true,
+        "AddrOffset": 148,
+        "TableLength": 40,
+        "CalculationType": "ThreePhaseCurrentRms",
+        "InputsJson": "{\"PhaseA_Min\":{\"Offset\":12,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\"},\"PhaseA_Max\":{\"Offset\":24,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\"},\"PhaseB_Min\":{\"Offset\":16,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\"},\"PhaseB_Max\":{\"Offset\":28,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\"},\"PhaseC_Min\":{\"Offset\":20,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\"},\"PhaseC_Max\":{\"Offset\":32,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\"}}",
+        "PublishPhases": true,
+        "LowLimit": 90,
+        "HighLimit": 110,
+        "Comtype": "GELE",
+        "Unit": "A",
+        "ImbalanceLowLimit": 0,
+        "ImbalanceHighLimit": 10
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "65c67f07124d434b9d5fce50f60516cf",
+      "Enabled": true,
+      "StepProperties": {
+        "StepName": "006 产品母线电压",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANSignal",
+        "RecordingLog": true,
+        "Operation": "Read",
+        "AddrOffset": 0,
+        "TableIndex": 32,
+        "DataSize": 4,
+        "DataType": "float32",
+        "Endian": "Little",
+        "ResultMode": "NumericLimit",
+        "LowLimit": 0,
+        "HighLimit": 1000,
+        "Comtype": "GELE",
+        "Unit": "V"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "fcfa841e3b5b407da984de504be1aa67",
+      "Enabled": true,
+      "StepProperties": {
+        "StepName": "007 TM2安全停机",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANTable",
+        "RecordingLog": true,
+        "Operation": "Write",
+        "ResultMode": "Action",
+        "AddrOffset": 128,
+        "TableLength": 39,
+        "ChangesJson": "[{\"Name\":\"Iqs_Start\",\"Offset\":0,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Iqs_End\",\"Offset\":4,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Iqs_Step\",\"Offset\":8,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"20\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Hold_Time_S\",\"Offset\":12,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"10\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Output_Frequency\",\"Offset\":16,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"60\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Mode\",\"Offset\":20,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"4\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Unused\",\"Offset\":21,\"DataSize\":1,\"DataType\":\"int8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Ramp_Time_MS\",\"Offset\":22,\"DataSize\":2,\"DataType\":\"uint16\",\"Endian\":\"Little\",\"Value\":\"50\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Base_Frequency\",\"Offset\":24,\"DataSize\":2,\"DataType\":\"uint16\",\"Endian\":\"Little\",\"Value\":\"10000\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Motor_Gate_Enable\",\"Offset\":26,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"New Data Flag\",\"Offset\":27,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"255\",\"WriteLast\":true,\"WriteFinal\":true},{\"Name\":\"Reset_Motor_Faults\",\"Offset\":28,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Speed_Control_Enable\",\"Offset\":29,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Speed_Setpoint\",\"Offset\":30,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Voltage_Control_Enable\",\"Offset\":34,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"Voltage_Setpoint\",\"Offset\":35,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\",\"Value\":\"0\",\"WriteLast\":false,\"WriteFinal\":false}]",
+        "VerifyAfterWrite": true
+      },
+      "ParameterBindings": {}
+    }
+  ]
+}

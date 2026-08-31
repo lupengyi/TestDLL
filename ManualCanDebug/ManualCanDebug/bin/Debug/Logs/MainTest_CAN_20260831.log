@@ -1,0 +1,35 @@
+2026-08-31 08:53:07.637 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 08:58:18.704 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 10:00:18.574 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 11:34:07.936 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 11:40:17.149 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 11:40:18.005 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 11:41:04.818 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 11:43:37.143 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 11:44:55.729 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 11:45:52.169 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 11:45:53.845 [T5] Instrument selection received: [{"Name":"DAQ","Type":"DAQ","Mode":"NI","Resource":"PCI-6229","Parameter":""}]
+2026-08-31 11:45:53.850 [T6] Cleanup selected instruments: 
+2026-08-31 11:45:53.851 [T6] Initialize selected instruments start. BaseDirectory=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\; TestDLL=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\CSP.TestDLL.dll
+2026-08-31 11:45:53.851 [T6] Initialize instrument DAQ: Resource=PCI-6229; Parameter=
+2026-08-31 11:45:53.881 [T5] Cleanup selected instruments: DAQ
+2026-08-31 11:52:34.140 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 11:52:35.742 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 11:52:39.994 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 11:52:40.002 [T4] Instrument selection received: [{"Name":"DAQ","Type":"DAQ","Mode":"NI","Resource":"PCI-6229","Parameter":""}]
+2026-08-31 11:52:40.007 [T5] Cleanup selected instruments: 
+2026-08-31 11:52:40.011 [T5] Initialize selected instruments start. BaseDirectory=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\; TestDLL=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\CSP.TestDLL.dll
+2026-08-31 11:52:40.014 [T5] Initialize instrument DAQ: Resource=PCI-6229; Parameter=
+2026-08-31 11:52:40.022 [T5] Cleanup selected instruments: DAQ
+2026-08-31 11:52:42.050 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 11:52:43.891 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 11:52:45.755 [T5] Instrument selection received: [{"Name":"DAQ","Type":"DAQ","Mode":"NI","Resource":"PCI-6229","Parameter":""}]
+2026-08-31 11:52:45.758 [T6] Cleanup selected instruments: 
+2026-08-31 11:52:45.759 [T6] Initialize selected instruments start. BaseDirectory=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\; TestDLL=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\CSP.TestDLL.dll
+2026-08-31 11:52:45.759 [T6] Initialize instrument DAQ: Resource=PCI-6229; Parameter=
+2026-08-31 11:52:45.781 [T6] Cleanup selected instruments: DAQ
+2026-08-31 11:53:23.721 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 11:53:48.227 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 12:43:19.921 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 13:00:27.202 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-31 16:22:01.990 [T1] Detailed CAN diagnostics enabled by debug host.

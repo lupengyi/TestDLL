@@ -1,0 +1,27 @@
+2026-08-30 00:00:56.623 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-30 06:39:54.374 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-30 15:23:14.066 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-30 17:36:01.872 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-30 17:58:12.564 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-30 17:58:13.977 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-30 17:58:15.667 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-30 17:58:17.427 [T5] Instrument selection received: [{"Name":"DAQ","Type":"DAQ","Mode":"NI","Resource":"PCI-6229","Parameter":""}]
+2026-08-30 17:58:17.433 [T6] Cleanup selected instruments: 
+2026-08-30 17:58:17.434 [T6] Initialize selected instruments start. BaseDirectory=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\; TestDLL=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\CSP.TestDLL.dll
+2026-08-30 17:58:17.435 [T6] Initialize instrument DAQ: Resource=PCI-6229; Parameter=
+2026-08-30 17:58:17.473 [T5] Cleanup selected instruments: DAQ
+2026-08-30 18:14:19.167 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-30 18:14:20.074 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-30 18:14:21.777 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-30 18:14:23.463 [T5] Instrument selection received: [{"Name":"DAQ","Type":"DAQ","Mode":"NI","Resource":"PCI-6229","Parameter":""}]
+2026-08-30 18:14:23.467 [T6] Cleanup selected instruments: 
+2026-08-30 18:14:23.468 [T6] Initialize selected instruments start. BaseDirectory=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\; TestDLL=E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\bin\Debug\LegacyRuntime\CSP.TestDLL.dll
+2026-08-30 18:14:23.468 [T6] Initialize instrument DAQ: Resource=PCI-6229; Parameter=
+2026-08-30 18:14:23.491 [T7] Cleanup selected instruments: DAQ
+2026-08-30 18:17:49.529 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-30 18:23:02.644 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-30 19:34:14.932 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-30 20:26:13.541 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-30 21:26:59.601 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-30 22:20:39.816 [T1] Detailed CAN diagnostics enabled by debug host.
+2026-08-30 22:48:55.443 [T1] Detailed CAN diagnostics enabled by debug host.

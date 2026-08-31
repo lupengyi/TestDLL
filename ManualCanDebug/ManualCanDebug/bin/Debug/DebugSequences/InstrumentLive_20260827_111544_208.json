@@ -1,0 +1,23 @@
+{
+  "SerialNumberLen": 0,
+  "ProjectName": "C96_FCT_调试",
+  "StationName": "OP3020",
+  "SequenceVersion": "FT1-FCT01-01-A0",
+  "UIDisplayType": "All",
+  "LogFilePath": "D:\\LogfilePath",
+  "StepList": [
+    {
+      "StepName": "C92/C96 TM2三相出流100A",
+      "RunMode": "Normal",
+      "FunctionName": "FCT_CANTable",
+      "RecordingLog": true,
+      "Operation": "Write",
+      "ResultMode": "Action",
+      "AddrOffset": 128,
+      "TableLength": 31,
+      "ChangesJson": "[\r\n  {\r\n    \"Name\": \"Iqs_Start  (peak Amps)\",\r\n    \"Offset\": 0,\r\n    \"DataSize\": 4,\r\n    \"DataType\": \"float\",\r\n    \"Endian\": \"Little\",\r\n    \"Value\": \"0\",\r\n    \"WriteLast\": false,\r\n    \"WriteFinal\": false\r\n  },\r\n  {\r\n    \"Name\": \"Iqs_End  (peak Amps)\",\r\n    \"Offset\": 4,\r\n    \"DataSize\": 4,\r\n    \"DataType\": \"float\",\r\n    \"Endian\": \"Little\",\r\n    \"Value\": \"141.4\",\r\n    \"WriteLast\": false,\r\n    \"WriteFinal\": false\r\n  },\r\n  {\r\n    \"Name\": \"Iqs_Step  (peak Amps)\",\r\n    \"Offset\": 8,\r\n    \"DataSize\": 4,\r\n    \"DataType\": \"float\",\r\n    \"Endian\": \"Little\",\r\n    \"Value\": \"20\",\r\n    \"WriteLast\": false,\r\n    \"WriteFinal\": false\r\n  },\r\n  {\r\n    \"Name\": \"Ramp_Time_MS  (ms)\",\r\n    \"Offset\": 12,\r\n    \"DataSize\": 2,\r\n    \"DataType\": \"uint16\",\r\n    \"Endian\": \"Little\",\r\n    \"Value\": \"50\",\r\n    \"WriteLast\": false,\r\n    \"WriteFinal\": false\r\n  },\r\n  {\r\n    \"Name\": \"Output_Frequency(Hz)\",\r\n    \"Offset\": 16,\r\n    \"DataSize\": 4,\r\n    \"DataType\": \"float\",\r\n    \"Endian\": \"Little\",\r\n    \"Value\": \"60\",\r\n    \"WriteLast\": false,\r\n    \"WriteFinal\": false\r\n  },\r\n  {\r\n    \"Name\": \"Mode\",\r\n    \"Offset\": 20,\r\n    \"DataSize\": 2,\r\n    \"DataType\": \"int16\",\r\n    \"Endian\": \"Little\",\r\n    \"Value\": \"4\",\r\n    \"WriteLast\": false,\r\n    \"WriteFinal\": false\r\n  },\r\n  {\r\n    \"Name\": \"Base_Freq(Hz)\",\r\n    \"Offset\": 22,\r\n    \"DataSize\": 2,\r\n    \"DataType\": \"uint16\",\r\n    \"Endian\": \"Little\",\r\n    \"Value\": \"10000\",\r\n    \"WriteLast\": false,\r\n    \"WriteFinal\": false\r\n  },\r\n  {\r\n    \"Name\": \"Motor Gate Enable\",\r\n    \"Offset\": 24,\r\n    \"DataSize\": 1,\r\n    \"DataType\": \"uint8\",\r\n    \"Endian\": \"Little\",\r\n    \"Value\": \"1\",\r\n    \"WriteLast\": false,\r\n    \"WriteFinal\": false\r\n  },\r\n  {\r\n    \"Name\": \"Speed_Setpt\",\r\n    \"Offset\": 26,\r\n    \"DataSize\": 4,\r\n    \"DataType\": \"float\",\r\n    \"Endian\": \"Little\",\r\n    \"Value\": \"0\",\r\n    \"WriteLast\": false,\r\n    \"WriteFinal\": false\r\n  },\r\n  {\r\n    \"Name\": \"Speed_Control_Enable\",\r\n    \"Offset\": 30,\r\n    \"DataSize\": 1,\r\n    \"DataType\": \"uint8\",\r\n    \"Endian\": \"Little\",\r\n    \"Value\": \"0\",\r\n    \"WriteLast\": false,\r\n    \"WriteFinal\": false\r\n  }\r\n]",
+      "VerifyAfterWrite": true,
+      "Product": "C96"
+    }
+  ]
+}

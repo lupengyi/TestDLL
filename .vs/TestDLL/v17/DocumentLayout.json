@@ -1,0 +1,58 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\FST\\TestDLL\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{6D5DA35B-467A-4EE5-9B01-8C8BEC3A5396}|TestDLL\\TestDLL.csproj|e:\\fst\\testdll\\testdll\\testdllmain.generic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D5DA35B-467A-4EE5-9B01-8C8BEC3A5396}|TestDLL\\TestDLL.csproj|solutionrelative:testdll\\testdllmain.generic.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6D5DA35B-467A-4EE5-9B01-8C8BEC3A5396}|TestDLL\\TestDLL.csproj|E:\\FST\\TestDLL\\testdll\\testdllmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6D5DA35B-467A-4EE5-9B01-8C8BEC3A5396}|TestDLL\\TestDLL.csproj|solutionrelative:testdll\\testdllmain.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{e5c86464-96be-4d7c-9a8b-abcb3bbf5f92}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TestDllMain.Generic.cs",
+              "DocumentMoniker": "E:\\FST\\TestDLL\\TestDLL\\TestDllMain.Generic.cs",
+              "RelativeDocumentMoniker": "TestDLL\\TestDllMain.Generic.cs",
+              "ToolTip": "E:\\FST\\TestDLL\\TestDLL\\TestDllMain.Generic.cs",
+              "RelativeToolTip": "TestDLL\\TestDllMain.Generic.cs",
+              "ViewState": "AgIAAOUDAAAAAAAAAAAswE0AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-27T06:19:06.187Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TestDllMain.cs",
+              "DocumentMoniker": "E:\\FST\\TestDLL\\TestDLL\\TestDllMain.cs",
+              "RelativeDocumentMoniker": "TestDLL\\TestDllMain.cs",
+              "ToolTip": "E:\\FST\\TestDLL\\TestDLL\\TestDllMain.cs",
+              "RelativeToolTip": "TestDLL\\TestDllMain.cs",
+              "ViewState": "AgIAADcAAAAAAAAAAAAAADcAAABxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-27T01:59:00.741Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,353 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: MCU VCU TCU
+VAL_TABLE_ s00_VehicleSpeedEffective 1 "Valid" 0 "InValid " ;
+VAL_TABLE_ s00_currentGear_1 15 "换挡动作中（包括脱档 调速 进档）" 14 "R档（预留）" 8 "8档（预留）" 7 "7档（预留）" 6 "6档（预留）" 5 "5档（预留）" 4 "4档" 3 "3档" 2 "2档" 1 "1档" 0 "空档" ;
+VAL_TABLE_ TS1_Gearshift_State_1 7 "换挡失败" 6 "无效" 5 "还扭" 4 "挂挡" 3 "调速" 2 "摘挡" 1 "清扭" 0 "换挡完成" ;
+VAL_TABLE_ s08_MCUWakeupSig 1 "唤醒" 0 "无效" ;
+VAL_TABLE_ s00_DormCom 1 "休眠" 0 "不休眠" ;
+VAL_TABLE_ s00_mcuEnable_1 1 "使能" 0 "不使能" ;
+VAL_TABLE_ s07_rapidDischg_1 1 "允许快速放电" 0 "不允许快速放电" ;
+VAL_TABLE_ s08_ctrlMode_1 3 "预留" 2 "扭矩控制" 1 "转速控制" 0 "不控制" ;
+VAL_TABLE_ s16_gearCmd_1 2 "R 档" 1 "D 档" 0 "N 档" ;
+VAL_TABLE_ s20_parkSig 1 "手刹拉起" 0 "手刹未拉" ;
+VAL_TABLE_ s22_brkPdl 1 "有脚刹" 0 "无脚刹" ;
+VAL_TABLE_ s24_motorSeverity_1 6 "严重故障" 5 "故障软关断" 1 "警告" 0 "无故障" ;
+VAL_TABLE_ s28_mcuFltLvl_1 3 "很严重故障需要关断电机" 2 "严重故障需要限制功率" 1 "警报故障" 0 "无故障" ;
+VAL_TABLE_ s56_mcuWorkSts_1 9 "转速控制" 8 "扭矩控制" 7 "快速下电中" 6 "扭矩模式转速受限" 5 "转速模式扭矩受限" 4 "防溜坡控制状态" 3 "Error(错误)" 2 "Power Up(低压上电)" 1 "Enable(上电完成，MCU 未开管)" 0 "Ready(上电完成 MCU 已开管不控制)" ;
+VAL_TABLE_ s60_mcuCtrlMode1_1 1 "转矩控制" 0 "速度控制" ;
+VAL_TABLE_ s62_mcuHillholding_1 1 "非驻坡状态" 0 "驻坡状态" ;
+VAL_TABLE_ s63_IGBTEnable_1 1 "使能" 0 "不使能" ;
+VAL_TABLE_ s00_MCUDormReq_1 1 "请求休眠" 0 "不请求休眠" ;
+VAL_TABLE_ s06_mcuDischgStatus_1 3 "放电失败" 2 "放电完成" 1 "放电中" 0 "初始化" ;
+VAL_TABLE_ s07_mcuSelfCheSts_1 1 "自检成功" 0 "自检失败" ;
+
+
+BO_ 2564554746 UDS_FuncDiagReq: 8 VCU
+
+BO_ 2564487920 UDS_DiagResp_MCU: 8 MCU
+
+BO_ 2564485370 UDS_PhyDiagReq_MCU: 8 VCU
+
+BO_ 2566879066 V2T_VehicleSts: 8 VCU
+ SG_ s24_MainReductionRatio : 24|16@1+ (0.001,0) [0|65.535] ""  TCU
+ SG_ s08_TireRadius : 8|16@1+ (1,0) [0|3200] "mm"  TCU
+ SG_ s00_VehicleSpeedEffective : 40|1@1+ (1,0) [0|1] ""  MCU
+ SG_ s00_VehicleSpeed : 0|8@1+ (1,0) [0|255] "km/h"  MCU,TCU
+
+BO_ 2566856963 TransSts1_CAN3: 8 TCU
+ SG_ s00_currentGear_1 : 0|4@1+ (1,0) [0|15] ""  MCU,VCU
+
+BO_ 2566660355 TransSts0_CAN3: 8 TCU
+ SG_ TS1_Gearshift_State_1 : 56|3@1+ (1,0) [0|7] ""  MCU,VCU
+
+BO_ 2550395856 DormCom: 8 VCU
+ SG_ s08_MCUWakeupSig : 1|1@1+ (1,0) [0|1] ""  MCU
+ SG_ s00_DormCom : 0|1@1+ (1,0) [0|1] ""  MCU
+
+BO_ 2566861296 T2M1Cmd: 8 TCU
+ SG_ s01_accPdl : 1|1@1+ (1,0) [0|1] ""  MCU,VCU
+ SG_ s48_targetSpd_1 : 48|16@1+ (1,-12000) [-12000|24000] "rpm"  MCU,VCU
+ SG_ s32_targetTrq_1 : 32|16@1+ (1,-3200) [-3200|3200] "Nm"  MCU,VCU
+ SG_ s24_pwrLmt_1 : 24|8@1+ (2,0) [0|500] "kW"  MCU,VCU
+ SG_ s22_brkPdl : 22|2@1+ (1,0) [0|3] ""  MCU,VCU
+ SG_ s20_parkSig : 20|2@1+ (1,0) [0|3] ""  MCU,VCU
+ SG_ s16_gearCmd_1 : 16|4@1+ (1,0) [0|15] ""  MCU,VCU
+ SG_ s08_ctrlMode_1 : 8|2@1+ (1,0) [0|3] ""  MCU,VCU
+ SG_ s07_rapidDischg_1 : 7|1@1+ (1,0) [0|1] ""  MCU,VCU
+ SG_ s00_mcuEnable_1 : 0|1@1+ (1,0) [0|1] ""  MCU,VCU
+
+BO_ 2566772464 Motor1_Sts5: 8 MCU
+ SG_ s48_OutCurr_TM1 : 48|16@1+ (0.1,-1000) [-1000|1000] "A"  VCU
+ SG_ s32_ACCurr_U1 : 32|16@1+ (0.1,-1000) [-1000|1000] "A"  VCU
+ SG_ s16_ACCurr_V1 : 16|16@1+ (0.1,-1000) [-1000|1000] "A"  VCU
+ SG_ s0_ACCurr_W1 : 0|16@1+ (0.1,-1000) [-1000|1000] "A"  VCU
+
+BO_ 2566772208 Motor1_Sts4: 8 MCU
+ SG_ s56_MCUInCoolantTemp_1 : 56|8@1+ (1,-40) [-40|150] "℃"  VCU
+ SG_ s48_MCUOutCoolantTemp_1 : 48|8@1+ (1,-40) [-40|150] "℃"  VCU
+ SG_ s32_motorAngularAcceleration_1 : 32|16@1+ (1,-30000) [-30000|35535] "rpm/s"  VCU
+ SG_ s00_ExpectOverloadDuration_1 : 0|16@1+ (1,0) [0|65535] "s"  VCU
+
+BO_ 2566771952 Motor1_Sts3: 8 MCU
+ SG_ s28_mcuFltLvl_1 : 28|4@1+ (1,0) [0|15] ""  VCU
+ SG_ s24_motorSeverity_1 : 24|4@1+ (1,0) [0|15] ""  VCU
+ SG_ s16_conunter_1 : 16|8@1+ (1,0) [0|255] ""  VCU
+ SG_ s00_motorFltCode_1 : 0|16@1+ (1,0) [0|65535] ""  VCU
+
+BO_ 2566771696 Motor1_Sts2: 8 MCU
+ SG_ s63_IGBTEnable_1 : 63|1@1+ (1,0) [0|1] ""  VCU
+ SG_ s62_mcuHillholding_1 : 62|1@1+ (1,0) [0|1] ""  VCU
+ SG_ s60_mcuCtrlMode1_1 : 60|2@1+ (1,0) [0|3] ""  VCU
+ SG_ s56_mcuWorkSts_1 : 56|4@1+ (1,0) [0|15] ""  VCU
+ SG_ s44_brkTrqLmt_1 : 44|12@1+ (1,0) [0|3200] "Nm"  VCU
+ SG_ s32_drvTrqLmt_1 : 32|12@1+ (1,0) [0|3200] "Nm"  VCU
+ SG_ s16_motorTrq_1 : 16|16@1+ (1,-3200) [-3200|3200] "Nm"  VCU
+ SG_ s00_motorSpd_1 : 0|16@1+ (1,-12000) [-12000|24000] "rpm"  VCU
+
+BO_ 2566771440 Motor1_Sts1: 8 MCU
+ SG_ s48_DCVolt_1 : 48|16@1+ (0.1,0) [0|2000] "V"  VCU
+ SG_ s32_DCCurr_1 : 32|16@1+ (0.1,-1000) [-1000|1000] "A"  VCU
+ SG_ s24_IGBTTemp_1 : 24|8@1+ (1,-40) [-40|215] "℃"  VCU
+ SG_ s16_mcuTjTemp_1 : 16|8@1+ (1,-40) [-40|215] "℃"  VCU
+ SG_ s08_motorTemp_1 : 8|8@1+ (1,-40) [-40|215] "℃"  VCU
+ SG_ s07_mcuSelfCheSts_1 : 7|1@1+ (1,0) [0|1] ""  VCU
+ SG_ s06_mcuDischgStatus_1 : 5|2@1+ (1,0) [0|3] ""  VCU
+ SG_ s01_mcuLifeCnt_1 : 1|4@1+ (1,0) [0|15] ""  VCU
+ SG_ s00_MCUDormReq_1 : 0|1@1+ (1,0) [0|1] ""  VCU
+
+BO_ 2633880048 Motor1_Ver: 8 MCU
+ SG_ s16_mcuSoftVer_1 : 0|24@1+ (1,0) [0|16777215] ""  VCU
+
+
+
+CM_ BO_ 2564554746 "功能寻址请求默认";
+CM_ BO_ 2564487920 "MCU物理寻址响应";
+CM_ BO_ 2564485370 "MCU物理寻址请求";
+CM_ SG_ 2566879066 s24_MainReductionRatio "主减速比";
+CM_ SG_ 2566879066 s08_TireRadius "轮胎半径";
+CM_ SG_ 2566879066 s00_VehicleSpeedEffective "车速有效位";
+CM_ SG_ 2566879066 s00_VehicleSpeed "车速";
+CM_ SG_ 2566856963 s00_currentGear_1 "变速箱1当前档位";
+CM_ SG_ 2566660355 TS1_Gearshift_State_1 "变速箱1换档步骤";
+CM_ SG_ 2550395856 s08_MCUWakeupSig "MCU唤醒信号（预留）";
+CM_ SG_ 2550395856 s00_DormCom "休眠指令";
+CM_ SG_ 2566861296 s01_accPdl "油门信号";
+CM_ SG_ 2566861296 s48_targetSpd_1 "需求转速/限制转速1";
+CM_ SG_ 2566861296 s32_targetTrq_1 "需求扭矩/限制扭矩1";
+CM_ SG_ 2566861296 s24_pwrLmt_1 "扭矩模式回充功率上限1";
+CM_ SG_ 2566861296 s22_brkPdl "脚刹";
+CM_ SG_ 2566861296 s20_parkSig "手刹";
+CM_ SG_ 2566861296 s16_gearCmd_1 "变速箱1档位";
+CM_ SG_ 2566861296 s08_ctrlMode_1 "控制模式1";
+CM_ SG_ 2566861296 s07_rapidDischg_1 "快速放电使能1";
+CM_ SG_ 2566861296 s00_mcuEnable_1 "电机控制器使能1";
+CM_ SG_ 2566772464 s48_OutCurr_TM1 "TM1输出电流";
+CM_ SG_ 2566772464 s32_ACCurr_U1 "电机1U相电流";
+CM_ SG_ 2566772464 s16_ACCurr_V1 "电机1V相电流";
+CM_ SG_ 2566772464 s0_ACCurr_W1 "电机1W相电流";
+CM_ SG_ 2566772208 s56_MCUInCoolantTemp_1 "电机控制器入水口温度";
+CM_ SG_ 2566772208 s48_MCUOutCoolantTemp_1 "电机控制器出水口温度";
+CM_ SG_ 2566772208 s32_motorAngularAcceleration_1 "电机1角加速度";
+CM_ SG_ 2566772208 s00_ExpectOverloadDuration_1 "电机1预估过载工况持续时间";
+CM_ SG_ 2566771952 s28_mcuFltLvl_1 "电机控制器故障等级1";
+CM_ SG_ 2566771952 s24_motorSeverity_1 "故障严重等级1";
+CM_ SG_ 2566771952 s16_conunter_1 "DTC 1计数器";
+CM_ SG_ 2566771952 s00_motorFltCode_1 "故障码1";
+CM_ SG_ 2566771696 s63_IGBTEnable_1 "IGBT1使能状态";
+CM_ SG_ 2566771696 s62_mcuHillholding_1 "驻坡模式1";
+CM_ SG_ 2566771696 s60_mcuCtrlMode1_1 "电机控制器1控制模式";
+CM_ SG_ 2566771696 s56_mcuWorkSts_1 "电机控制器1工作模式";
+CM_ SG_ 2566771696 s44_brkTrqLmt_1 "电机1发电扭矩限制";
+CM_ SG_ 2566771696 s32_drvTrqLmt_1 "电机1驱动扭矩限制";
+CM_ SG_ 2566771696 s16_motorTrq_1 "电机1扭矩";
+CM_ SG_ 2566771696 s00_motorSpd_1 "电机1转速";
+CM_ SG_ 2566771440 s48_DCVolt_1 "电机控制器直流输入电压1";
+CM_ SG_ 2566771440 s32_DCCurr_1 "直流母线输入电流1";
+CM_ SG_ 2566771440 s24_IGBTTemp_1 "电机控制器功率板NTC温度1";
+CM_ SG_ 2566771440 s16_mcuTjTemp_1 "IGBT结温1";
+CM_ SG_ 2566771440 s08_motorTemp_1 "电机1温度";
+CM_ SG_ 2566771440 s07_mcuSelfCheSts_1 "自检状态（预留）";
+CM_ SG_ 2566771440 s06_mcuDischgStatus_1 "主动放电状态1";
+CM_ SG_ 2566771440 s01_mcuLifeCnt_1 "生命信号1";
+CM_ SG_ 2566771440 s00_MCUDormReq_1 "休眠请求1";
+CM_ SG_ 2633880048 s16_mcuSoftVer_1 "电机控制器内部程序版本信息1";
+BA_DEF_ EV_  "GenEnvAutoGenCtrl" ENUM  "No","Yes";
+BA_DEF_ EV_  "GenEnvIsGeneratedDsp" ENUM  "No","Yes";
+BA_DEF_ EV_  "GenEnvIsGeneratedSnd" ENUM  "No","Yes";
+BA_DEF_ EV_  "GenEnvMsgName" STRING ;
+BA_DEF_ EV_  "GenEnvMsgOffset" INT 0 2147483647;
+BA_DEF_ SG_  "GenSigEnvVarType" ENUM  "undef","int","float";
+BA_DEF_ BO_  "VFrameFormat" ENUM  "StandardCAN","ExtendedCAN","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","StandardCAN_FD","ExtendedCAN_FD";
+BA_DEF_ BO_  "TpApplType" STRING ;
+BA_DEF_ BO_  "DiagState" ENUM  "No","Yes";
+BA_DEF_ BO_  "DiagResponse" ENUM  "No","Yes";
+BA_DEF_ BO_  "DiagRequest" ENUM  "No","Yes";
+BA_DEF_ BO_  "NmMessage" ENUM  "no","yes";
+BA_DEF_ BO_  "GenMsgILSupport" ENUM  "No","Yes";
+BA_DEF_ BO_  "GenMsgMinAcceptLength" INT 0 8;
+BA_DEF_ BO_  "GenMsgDelayTime" INT 0 1000;
+BA_DEF_ BO_  "GenMsgStartDelayTime" INT 0 65535;
+BA_DEF_ BO_  "TpTxIndex" INT 0 255;
+BA_DEF_ BU_  "CANoeStartDelay" INT 0 0;
+BA_DEF_ BU_  "CANoeDrift" INT 0 0;
+BA_DEF_ BU_  "CANoeJitterMin" INT 0 0;
+BA_DEF_ BU_  "CANoeJitterMax" INT 0 0;
+BA_DEF_ BU_  "ECU" STRING ;
+BA_DEF_ BU_  "NodeLayerModules" STRING ;
+BA_DEF_ BU_  "NmMode" ENUM  "no","yes";
+BA_DEF_ BU_  "NmStationAddress" INT 0 127;
+BA_DEF_ BU_  "GenNodSleepTime" INT 0 1000000;
+BA_DEF_ BU_  "NmCAN" INT 0 2;
+BA_DEF_  "DBName" STRING ;
+BA_DEF_  "MultiplexExtEnabled" ENUM  "No","Yes";
+BA_DEF_  "Manufacturer" STRING ;
+BA_DEF_  "GenEnvVarEndingDsp" STRING ;
+BA_DEF_  "GenEnvVarEndingSnd" STRING ;
+BA_DEF_  "GenEnvVarPrefix" STRING ;
+BA_DEF_  "GenNWMApBusSleep" STRING ;
+BA_DEF_  "GenNWMApCanNormal" STRING ;
+BA_DEF_  "GenNWMApCanOff" STRING ;
+BA_DEF_  "GenNWMApCanOn" STRING ;
+BA_DEF_  "GenNWMApCanSleep" STRING ;
+BA_DEF_  "GenNWMApCanWakeUp" STRING ;
+BA_DEF_  "GenNWMGotoMode_Awake" STRING ;
+BA_DEF_  "GenNWMGotoMode_BusSleep" STRING ;
+BA_DEF_  "GenNWMSleepTime" INT 0 65535;
+BA_DEF_  "GenNWMTalkNM" STRING ;
+BA_DEF_ SG_  "GenSigSendType" ENUM  "Cyclic","OnWrite","OnWriteWithRepetition","OnChange","OnChangeWithRepetition","IfActive","IfActiveWithRepetition","NoSigSendType";
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "Cyclic","Event","NotUsed","NotUsed","NotUsed","Cyclic","NotUsed","IfActive","NoMsgSendType","NotUsed";
+BA_DEF_ SG_  "GenSigStartValue" FLOAT 0 10000000;
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 50000;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_DEF_  "GenEnvAutoGenCtrl" "";
+BA_DEF_DEF_  "GenEnvIsGeneratedDsp" "";
+BA_DEF_DEF_  "GenEnvIsGeneratedSnd" "";
+BA_DEF_DEF_  "GenEnvMsgName" "";
+BA_DEF_DEF_  "GenEnvMsgOffset" 0;
+BA_DEF_DEF_  "GenSigEnvVarType" "undef";
+BA_DEF_DEF_  "VFrameFormat" "StandardCAN";
+BA_DEF_DEF_  "TpApplType" "";
+BA_DEF_DEF_  "DiagState" "No";
+BA_DEF_DEF_  "DiagResponse" "No";
+BA_DEF_DEF_  "DiagRequest" "No";
+BA_DEF_DEF_  "NmMessage" "no";
+BA_DEF_DEF_  "GenMsgILSupport" "Yes";
+BA_DEF_DEF_  "GenMsgMinAcceptLength" 8;
+BA_DEF_DEF_  "GenMsgDelayTime" 0;
+BA_DEF_DEF_  "GenMsgStartDelayTime" 0;
+BA_DEF_DEF_  "TpTxIndex" 0;
+BA_DEF_DEF_  "CANoeStartDelay" 0;
+BA_DEF_DEF_  "CANoeDrift" 0;
+BA_DEF_DEF_  "CANoeJitterMin" 0;
+BA_DEF_DEF_  "CANoeJitterMax" 0;
+BA_DEF_DEF_  "ECU" "";
+BA_DEF_DEF_  "NodeLayerModules" "";
+BA_DEF_DEF_  "NmMode" "no";
+BA_DEF_DEF_  "NmStationAddress" 0;
+BA_DEF_DEF_  "GenNodSleepTime" 0;
+BA_DEF_DEF_  "NmCAN" 1;
+BA_DEF_DEF_  "DBName" "";
+BA_DEF_DEF_  "MultiplexExtEnabled" "No";
+BA_DEF_DEF_  "Manufacturer" "Z405";
+BA_DEF_DEF_  "GenEnvVarEndingDsp" "_d";
+BA_DEF_DEF_  "GenEnvVarEndingSnd" "_s";
+BA_DEF_DEF_  "GenEnvVarPrefix" "c";
+BA_DEF_DEF_  "GenNWMApBusSleep" "apBusSleep()";
+BA_DEF_DEF_  "GenNWMApCanNormal" "apCanNormal()";
+BA_DEF_DEF_  "GenNWMApCanOff" "apCanOff()";
+BA_DEF_DEF_  "GenNWMApCanOn" "apCanOn()";
+BA_DEF_DEF_  "GenNWMApCanSleep" "apCanSleep()";
+BA_DEF_DEF_  "GenNWMApCanWakeUp" "apCanWakeUp()";
+BA_DEF_DEF_  "GenNWMGotoMode_Awake" "GotoMode_Awake()";
+BA_DEF_DEF_  "GenNWMGotoMode_BusSleep" "GotoMode_BusSleep()";
+BA_DEF_DEF_  "GenNWMSleepTime" 0;
+BA_DEF_DEF_  "GenNWMTalkNM" "TalkNM()";
+BA_DEF_DEF_  "GenSigSendType" "Cyclic";
+BA_DEF_DEF_  "GenMsgSendType" "Cyclic";
+BA_DEF_DEF_  "GenSigStartValue" 0;
+BA_DEF_DEF_  "GenMsgCycleTime" 100;
+BA_DEF_DEF_  "BusType" "CAN";
+BA_ "DBName" "Z405";
+BA_ "VFrameFormat" BO_ 2564554746 1;
+BA_ "DiagState" BO_ 2564554746 1;
+BA_ "GenMsgCycleTime" BO_ 2564554746 0;
+BA_ "GenMsgSendType" BO_ 2564554746 1;
+BA_ "VFrameFormat" BO_ 2564487920 1;
+BA_ "DiagResponse" BO_ 2564487920 1;
+BA_ "GenMsgCycleTime" BO_ 2564487920 0;
+BA_ "GenMsgSendType" BO_ 2564487920 1;
+BA_ "VFrameFormat" BO_ 2564485370 1;
+BA_ "DiagRequest" BO_ 2564485370 1;
+BA_ "GenMsgCycleTime" BO_ 2564485370 0;
+BA_ "GenMsgSendType" BO_ 2564485370 1;
+BA_ "GenMsgCycleTime" BO_ 2566879066 500;
+BA_ "VFrameFormat" BO_ 2566879066 1;
+BA_ "GenMsgCycleTime" BO_ 2566856963 20;
+BA_ "VFrameFormat" BO_ 2566856963 1;
+BA_ "GenMsgCycleTime" BO_ 2566660355 20;
+BA_ "VFrameFormat" BO_ 2566660355 1;
+BA_ "GenMsgCycleTime" BO_ 2550395856 200;
+BA_ "VFrameFormat" BO_ 2550395856 1;
+BA_ "GenMsgCycleTime" BO_ 2566861296 10;
+BA_ "VFrameFormat" BO_ 2566861296 1;
+BA_ "GenMsgCycleTime" BO_ 2566772464 20;
+BA_ "VFrameFormat" BO_ 2566772464 1;
+BA_ "GenMsgCycleTime" BO_ 2566772208 10;
+BA_ "VFrameFormat" BO_ 2566772208 1;
+BA_ "VFrameFormat" BO_ 2566771952 1;
+BA_ "GenMsgCycleTime" BO_ 2566771696 10;
+BA_ "VFrameFormat" BO_ 2566771696 1;
+BA_ "VFrameFormat" BO_ 2566771440 1;
+BA_ "GenMsgCycleTime" BO_ 2633880048 5000;
+BA_ "VFrameFormat" BO_ 2633880048 1;
+BA_ "GenSigStartValue" SG_ 2566861296 s48_targetSpd_1 12000;
+BA_ "GenSigStartValue" SG_ 2566861296 s32_targetTrq_1 3200;
+BA_ "GenSigStartValue" SG_ 2566772464 s48_OutCurr_TM1 10000;
+BA_ "GenSigStartValue" SG_ 2566772464 s32_ACCurr_U1 10000;
+BA_ "GenSigStartValue" SG_ 2566772464 s16_ACCurr_V1 10000;
+BA_ "GenSigStartValue" SG_ 2566772464 s0_ACCurr_W1 10000;
+BA_ "GenSigStartValue" SG_ 2566772208 s56_MCUInCoolantTemp_1 40;
+BA_ "GenSigStartValue" SG_ 2566772208 s48_MCUOutCoolantTemp_1 40;
+BA_ "GenSigStartValue" SG_ 2566772208 s32_motorAngularAcceleration_1 30000;
+BA_ "GenSigStartValue" SG_ 2566771696 s16_motorTrq_1 3200;
+BA_ "GenSigStartValue" SG_ 2566771696 s00_motorSpd_1 12000;
+BA_ "GenSigStartValue" SG_ 2566771440 s32_DCCurr_1 10000;
+BA_ "GenSigStartValue" SG_ 2566771440 s24_IGBTTemp_1 40;
+BA_ "GenSigStartValue" SG_ 2566771440 s16_mcuTjTemp_1 40;
+BA_ "GenSigStartValue" SG_ 2566771440 s08_motorTemp_1 40;
+VAL_ 2566879066 s00_VehicleSpeedEffective 1 "Valid" 0 "InValid " ;
+VAL_ 2566856963 s00_currentGear_1 15 "Shift action in progress" 14 " R gear (reserved)" 8 "8th gear (reserved)" 7 "7th gear (reserved)" 6 "6th gear (reserved)" 5 "5th gear (reserved)" 4 "4-gear" 3 "3-gear" 2 "2-gear" 1 "1st gear" 0 "N gear" ;
+VAL_ 2566660355 TS1_Gearshift_State_1 7 "Shift failure" 6 "Invalid" 5 "Return " 4 "Hanging gear " 3 "Speed control   " 2 "Shift off" 1 "Clear twist" 0 "Shift complete" ;
+VAL_ 2550395856 s08_MCUWakeupSig 1 "Wake up" 0 "Invalid" ;
+VAL_ 2550395856 s00_DormCom 1 "Allow sleep" 0 "not allow sleep" ;
+VAL_ 2566861296 s01_accPdl 1 "vaild" 0 "No vaild" ;
+VAL_ 2566861296 s22_brkPdl 1 "Footbrake" 0 "No footbrake" ;
+VAL_ 2566861296 s20_parkSig 1 "Handbrake on" 0 "No Handbrake " ;
+VAL_ 2566861296 s16_gearCmd_1 2 "R gear" 1 "D gear" 0 "N gear" ;
+VAL_ 2566861296 s08_ctrlMode_1 3 "Reserved_3" 2 "Torque control" 1 "Speed control" 0 "Reserved_0" ;
+VAL_ 2566861296 s07_rapidDischg_1 1 "Allow fast discharge" 0 " Fast discharge not allowed" ;
+VAL_ 2566861296 s00_mcuEnable_1 0 "not enable" 1 "Enable" ;
+VAL_ 2566771952 s28_mcuFltLvl_1 3 "Serious fault(shutdown)" 2 "Dreating" 1 "Warning" 0 "No fault" ;
+VAL_ 2566771952 s24_motorSeverity_1 6 "Severe fault" 5 "Fault soft shutdown" 1 "Warning" 0 "No fault" ;
+VAL_ 2566771696 s63_IGBTEnable_1 1 "Enable" 0 "Not enabled" ;
+VAL_ 2566771696 s62_mcuHillholding_1 1 "Non-slope-resident state" 0 "Hill station state" ;
+VAL_ 2566771696 s60_mcuCtrlMode1_1 3 "reserve" 1 "Torque control" 0 "Speed control" ;
+VAL_ 2566771696 s56_mcuWorkSts_1 9 "Spdctrl" 8 "TqCtrl" 7 "Discharge" 6 "TqCtrl&SpdLimit" 5 "Spdctrl&Tqlimit" 4 "Autohold" 3 "Error" 2 "Power Up" 1 "Enable" 0 "Ready" ;
+VAL_ 2566771440 s07_mcuSelfCheSts_1 1 "Self-test success" 0 "Self-test failed" ;
+VAL_ 2566771440 s06_mcuDischgStatus_1 3 "Discharge failed" 2 "Discharge complete" 1 "Discharging" 0 "Initialization" ;
+VAL_ 2566771440 s00_MCUDormReq_1 1 "Request sleep" 0 "Do not request sleep" ;
+

@@ -1,0 +1,45 @@
+{
+  "Id": "c96-std-reserved",
+  "Name": "未确认功能占位",
+  "Category": "预留",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [
+    {
+      "Name": "Description",
+      "DisplayName": "预留说明",
+      "Type": "string",
+      "DefaultValue": "待客户确认",
+      "Unit": "",
+      "Description": "",
+      "Required": true
+    }
+  ],
+  "Steps": [
+    {
+      "Id": "d7f02042b0db40279678a43736156b8a",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "预留STEP",
+        "RunMode": "Skip",
+        "FunctionName": "FCT_ExecuteLogic",
+        "RecordingLog": true,
+        "Operation": "Delay",
+        "TimeMs": 0,
+        "Comment": "待客户确认"
+      },
+      "ParameterBindings": {
+        "Comment": "Description"
+      }
+    }
+  ]
+}

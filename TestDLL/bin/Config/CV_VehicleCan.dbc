@@ -1,0 +1,350 @@
+VERSION ""
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: VCU MCU
+VAL_TABLE_ StayAwake_Reason_KL15 1 "Terminal 15 on" 0 "Default value" ;
+VAL_TABLE_ StayAwake_Reason_Local 1 "Local wake-up reason" 0 "Default value" ;
+VAL_TABLE_ Wakeup_Reason_Local 1 "Local wake-up reason" 0 "Default value" ;
+VAL_TABLE_ Wakeup_Reason_Can 1 "CAN wake-up" 0 "Default value" ;
+VAL_TABLE_ Wakeup_Reason_KL15 1 "Terminal 15 on" 0 "Default value" ;
+VAL_TABLE_ RMS_Flag 1 "Not in Repeat Message State" 0 "In Repeat Message State" ;
+VAL_TABLE_ GearNum_effective 15 "In vain" 14 "breakdown" 2 "R" 1 "D" 0 "N" ;
+VAL_TABLE_ SlopeState 2 "Failure" 1 "In progress" 0 "In inactive
+" ;
+VAL_TABLE_ shift_gears_status 3 "not available" 2 "error" 1 "shifting" 0 "in geer" ;
+VAL_TABLE_ footbreak_status 1 "effective" 0 "in vain" ;
+VAL_TABLE_ PKB_handbreak_status 1 "effective" 0 "In vain" ;
+VAL_TABLE_ Control_Mode 3 "Active Discharge" 2 "Torque Control
+" 1 "Speed Control" 0 "Reserved" ;
+VAL_TABLE_ Fault_Reset 1 "enable" 0 "disable" ;
+VAL_TABLE_ MCU_Enable 1 "enable" 0 "disable" ;
+VAL_TABLE_ Fail_Grade 3 "reserve" 2 "reverse" 1 "stationary state" 0 "Non-stationary state" ;
+VAL_TABLE_ Work_Mode 8 "FAULT" 7 "LV_PWR_DWN" 6 "SHUTDWN" 5 "Torque Control" 4 "Speed Control" 3 "Idle" 2 "Reserved" 1 "LV_PWR_UP" 0 "INIT" ;
+VAL_TABLE_ IGBT_Enable_Feedback 1 "enable" 0 "disable" ;
+VAL_TABLE_ Active_Discharge_Enable_Feedback 1 "enable" 0 "disable" ;
+VAL_TABLE_ Precharge_Allow 1 "enable" 0 "disable" ;
+
+
+BO_ 1888 MCU_FunDiag_Req: 1 VCU
+ SG_ MCU_FunDiag_Req : 0|8@1- (1,0) [0|255] ""  MCU
+
+BO_ 1865 MCU_PhyDiag_Resp: 1 MCU
+ SG_ MCU_PhyDiag_Resp : 0|8@1- (1,0) [0|255] "" Vector__XXX
+
+BO_ 1337 MCU_NM: 5 MCU
+ SG_ ControlBit_MCU_NM : 15|8@0+ (1,0) [0|63] "" Vector__XXX
+ SG_ NodeID_MCU_NM : 7|8@0+ (1,0) [0|63] "" Vector__XXX
+ SG_ StayAwake_Reason_KL15 : 33|1@1+ (1,0) [0|1] ""  VCU
+ SG_ Wakeup_Reason_Local : 26|1@1+ (1,0) [0|1] ""  VCU
+ SG_ Wakeup_Reason_Can : 25|1@1+ (1,0) [0|1] ""  VCU
+ SG_ StayAwake_Reason_Local : 32|1@1+ (1,0) [0|1] ""  VCU
+ SG_ Wakeup_Reason_KL15 : 24|1@1+ (1,0) [0|1] ""  VCU
+ SG_ RMS_Flag : 16|1@1+ (1,0) [0|1] ""  VCU
+
+BO_ 1295 VCU_NM: 8 VCU
+ SG_ ControlBit_VCU_NM : 15|8@0+ (1,0) [0|63] ""  MCU
+ SG_ NodeID_VCU_NM : 7|8@0+ (1,0) [0|63] ""  MCU
+
+BO_ 1857 MCU_PhyDiag_Req: 1 VCU
+ SG_ MCU_FunDiag_Req : 0|8@1- (1,0) [0|255] ""  MCU
+
+BO_ 537 VCU_0x219: 8 VCU
+ SG_ ACC_Throttle_opening : 8|8@1+ (0.4,0) [0|255] "%"  MCU
+ SG_ shift_gears_status : 6|2@1+ (1,0) [0|3] ""  MCU
+ SG_ Foot_break_status : 5|1@1+ (1,0) [0|1] ""  MCU
+ SG_ PKB_handbreak_status : 4|1@1+ (1,0) [0|1] ""  MCU
+ SG_ GearNum : 0|4@1+ (1,0) [0|15] ""  MCU
+
+BO_ 181 VCU_0xB5: 8 VCU
+ SG_ Demand_Speed : 48|16@1+ (1,-15000) [-15000|50535] "rpm"  MCU
+ SG_ Demand_Torque : 32|16@1+ (1,-5000) [-5000|5000] "Nm"  MCU
+ SG_ Demand_Limit_Low_Negative_Value : 20|12@1+ (1,0) [0|4095] "Nm/rpm"  MCU
+ SG_ Demand_Limit_High_Positive_Value : 8|12@1+ (1,0) [0|4095] "Nm/rpm"  MCU
+ SG_ Live_Counter : 4|4@1+ (1,0) [0|15] ""  MCU
+ SG_ Control_Mode : 2|2@1+ (1,0) [0|3] ""  MCU
+ SG_ Fault_Reset : 1|1@1+ (1,0) [0|1] ""  MCU
+ SG_ MCU_Enable : 0|1@1+ (1,0) [0|1] ""  MCU
+
+BO_ 911 MCU_0x38F: 8 MCU
+ SG_ DTC_Code4 : 16|18@1+ (1,0) [0|65535] ""  VCU
+ SG_ Live_counter4 : 60|4@1+ (1,0) [0|15] ""  VCU
+ SG_ MCU_sorftware_version_number : 52|8@1+ (1,0) [0|100] ""  VCU
+ SG_ DC_Voltage_V : 34|16@1+ (0.1,0) [0|1000] "V"  VCU
+ SG_ DC_Current_A : 0|16@1+ (1,-1000) [-1000|1000] "A"  VCU
+
+BO_ 739 MCU_0x2E3: 8 MCU
+ SG_ Live_counter2 : 60|4@1+ (1,0) [0|15] ""  VCU
+ SG_ SlopeState : 52|2@1+ (1,0) [0|3] ""  VCU
+ SG_ Fail_Grade : 48|4@1+ (1,0) [0|4] ""  VCU
+ SG_ Torque_Limit_Low : 32|16@1+ (1,-5000) [-5000|0] "Nm"  VCU
+ SG_ Torque_Limit_High : 16|16@1+ (1,0) [0|5000] "Nm"  VCU
+ SG_ MCU_temperature : 8|8@1+ (1,-40) [-40|215] "?"  VCU
+ SG_ Motor_Temperature : 0|8@1+ (1,-40) [-40|215] "?"  VCU
+
+BO_ 250 MCU_0xFA: 8 MCU
+ SG_ Precharge_Allow : 52|1@1+ (1,0) [0|1] ""  VCU
+ SG_ Live_counter1 : 60|4@1+ (1,0) [0|15] ""  VCU
+ SG_ Work_Mode : 56|4@1+ (1,0) [0|8] ""  VCU
+ SG_ IGBT_Enable_Feedback : 54|1@1+ (1,0) [0|0] ""  VCU
+ SG_ Active_Discharge_Enable_Feedback : 53|1@1+ (1,0) [0|1] ""  VCU
+ SG_ Motor_AC_Current : 32|16@1+ (0.1,0) [0|1000] "A"  VCU
+ SG_ Motor_Torque : 16|16@1- (1,-5000) [-5000|5000] "Nm"  VCU
+ SG_ Motor_Speed : 0|16@1- (1,-15000) [-15000|15000] "rpm"  VCU
+
+
+
+CM_ SG_ 537 ACC_Throttle_opening "ACC Throttle opening
+0-100%";
+CM_ SG_ 537 shift_gears_status "shift gears status
+0;In gear 
+1:shifting
+2:error
+3:not available";
+CM_ SG_ 537 Foot_break_status "foot break status
+0:In Vain
+1;effective";
+CM_ SG_ 537 PKB_handbreak_status "PKB handbreak status
+0:In Vain
+1:effective";
+CM_ SG_ 537 GearNum "GearNum Actual effective gear information
+0000:N;
+0001:D; 
+0010:R; 
+1110:breakdown
+1111:IN Vain";
+CM_ SG_ 181 Demand_Speed "The positive or negative of the speed indicates the direction of the motor rotation (positive in the same direction as the normal rotation direction of the engine)";
+CM_ SG_ 181 Demand_Torque "The positive and negative torque indicates the direction of the force, and specifies that the direction of engine rotation is positive.";
+CM_ SG_ 181 Demand_Limit_Low_Negative_Value "Torque/Speed demand limit 
+In torque control mode, speed limit works; in speed control mode,Torque limit works
+";
+CM_ SG_ 181 Demand_Limit_High_Positive_Value "Torque/Speed demand limit
+In torque control mode, speed limit works; in speed control mode,torque limit works";
+CM_ SG_ 181 Live_Counter "Alive Rolling Counter";
+CM_ SG_ 181 Control_Mode "Control_Mode
+0 = Reserved
+1 = Speed Control 
+2 = Torque Control
+3 = Active Discharge";
+CM_ SG_ 181 Fault_Reset "Reset MCU fault 
+0 = disable
+1 = enable";
+CM_ SG_ 181 MCU_Enable "MCU Enable,indicating PWM enable.
+0 = disable
+1 = enable";
+CM_ SG_ 911 DTC_Code4 "Diagnostic Trouble Code";
+CM_ SG_ 911 Live_counter4 "Alive Rolling Counter";
+CM_ SG_ 911 MCU_sorftware_version_number "MCU sorftware version number";
+CM_ SG_ 911 DC_Voltage_V "DC Voltage";
+CM_ SG_ 911 DC_Current_A "DC Current";
+CM_ SG_ 739 Live_counter2 "Alive Rolling Counter";
+CM_ SG_ 739 SlopeState "SlopeState
+";
+CM_ SG_ 739 Fail_Grade "0 = No Fault
+1 = Warning (continue)
+2 = Fault (limit torque output)
+3 = Fault (shut down MCU)
+4 = Serious Fault (need to stop the vehicle)";
+CM_ SG_ 739 Torque_Limit_Low "Low Torque Limit";
+CM_ SG_ 739 Torque_Limit_High "High Torque Limit";
+CM_ SG_ 739 MCU_temperature "Motor MCU temperature";
+CM_ SG_ 739 Motor_Temperature "motor body temperature";
+CM_ SG_ 250 Precharge_Allow "allow precharge";
+CM_ SG_ 250 Live_counter1 "Alive Rolling Counter";
+CM_ SG_ 250 Work_Mode "0 = INIT
+1 = LV_PWR_UP
+2 = (Reserved)
+3 = Idle
+4 = Speed Control 
+5 = Torque Control
+6 = SHUTDWN (active capacitor discharge)
+7 = LV_PWR_DWN(high voltage under 36V)
+8 = FAULT";
+CM_ SG_ 250 IGBT_Enable_Feedback "IGBT Enable Feedback";
+CM_ SG_ 250 Active_Discharge_Enable_Feedback "Active discharge feedback";
+CM_ SG_ 250 Motor_AC_Current "AC Current RMS value feedback";
+CM_ SG_ 250 Motor_Torque "Torque greater than 0 indicates torque in the same direction as engine steering";
+CM_ SG_ 250 Motor_Speed "The positive or negative speed of the motor indicates that the motor turns, and the positive speed is consistent with the normal rotation direction of the engine.";
+BA_DEF_ EV_  "GenEnvMsgOffset" INT 0 2147483647;
+BA_DEF_ EV_  "GenEnvMsgName" STRING ;
+BA_DEF_ EV_  "GenEnvIsGeneratedSnd" ENUM  "No","Yes";
+BA_DEF_ EV_  "GenEnvIsGeneratedDsp" ENUM  "No","Yes";
+BA_DEF_ EV_  "GenEnvAutoGenCtrl" ENUM  "No","Yes";
+BA_DEF_ SG_  "NVM-WakeupAllowed" ENUM  "No","Yes";
+BA_DEF_ SG_  "GenSigStartValue" FLOAT 0 1215752192;
+BA_DEF_ SG_  "GenSigSendType" ENUM  "Cyclic","OnWrite","OnWriteWithRepetition","OnChange","OnChangeWithRepetition","IfActive","IfActiveWithRepetition","NoSigSendType","NotUsed","NotUsed","NotUsed","NotUsed","NotUsed";
+BA_DEF_ SG_  "GenSigEnvVarType" ENUM  "undef","int","float";
+BA_DEF_ BO_  "TpTxIndex" INT 0 255;
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "Cyclic","CyclicAndSpontanX","Event";
+BA_DEF_ BO_  "GenMsgStartDelayTime" INT 0 65535;
+BA_DEF_ BO_  "GenMsgDelayTime" INT 0 1000;
+BA_DEF_ BO_  "GenMsgMinAcceptLength" INT 0 8;
+BA_DEF_ BO_  "GenMsgCycleTime" INT 0 65535;
+BA_DEF_ BO_  "GenMsgILSupport" ENUM  "No","Yes";
+BA_DEF_ BO_  "NmMessage" ENUM  "no","yes";
+BA_DEF_ BO_  "DiagRequest" ENUM  "No","Yes";
+BA_DEF_ BO_  "DiagResponse" ENUM  "No","Yes";
+BA_DEF_ BO_  "DiagState" ENUM  "No","Yes";
+BA_DEF_ BO_  "TpApplType" STRING ;
+BA_DEF_ BU_  "ILUsed" ENUM  "No","Yes";
+BA_DEF_ BU_  "NmCAN" INT 0 2;
+BA_DEF_ BU_  "GenNodSleepTime" INT 0 1000000;
+BA_DEF_ BU_  "NmStationAddress" INT 0 127;
+BA_DEF_ BU_  "NmMode" ENUM  "no","yes";
+BA_DEF_  "NmBaseAddress" HEX 1152 1279;
+BA_DEF_  "GenNWMTalkNM" STRING ;
+BA_DEF_  "GenNWMSleepTime" INT 0 65535;
+BA_DEF_  "GenNWMGotoMode_BusSleep" STRING ;
+BA_DEF_  "GenNWMGotoMode_Awake" STRING ;
+BA_DEF_  "GenNWMApCanWakeUp" STRING ;
+BA_DEF_  "GenNWMApCanSleep" STRING ;
+BA_DEF_  "GenNWMApCanOn" STRING ;
+BA_DEF_  "GenNWMApCanOff" STRING ;
+BA_DEF_  "GenNWMApCanNormal" STRING ;
+BA_DEF_  "GenNWMApBusSleep" STRING ;
+BA_DEF_  "GenEnvVarPrefix" STRING ;
+BA_DEF_  "GenEnvVarEndingSnd" STRING ;
+BA_DEF_  "GenEnvVarEndingDsp" STRING ;
+BA_DEF_  "Manufacturer" STRING ;
+BA_DEF_  "MultiplexExtEnabled" ENUM  "No","Yes";
+BA_DEF_ BO_  "CANFD_BRS" ENUM  "0","1";
+BA_DEF_  "DBName" STRING ;
+BA_DEF_  "BusType" STRING ;
+BA_DEF_ BU_  "NodeLayerModules" STRING ;
+BA_DEF_ BU_  "ECU" STRING ;
+BA_DEF_ BU_  "CANoeJitterMax" INT 0 0;
+BA_DEF_ BU_  "CANoeJitterMin" INT 0 0;
+BA_DEF_ BU_  "CANoeDrift" INT 0 0;
+BA_DEF_ BU_  "CANoeStartDelay" INT 0 0;
+BA_DEF_ BO_  "VFrameFormat" ENUM  "StandardCAN","ExtendedCAN","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","reserved","StandardCAN_FD","ExtendedCAN_FD";
+BA_DEF_DEF_  "GenEnvMsgOffset" 0;
+BA_DEF_DEF_  "GenEnvMsgName" "";
+BA_DEF_DEF_  "GenEnvIsGeneratedSnd" "";
+BA_DEF_DEF_  "GenEnvIsGeneratedDsp" "";
+BA_DEF_DEF_  "GenEnvAutoGenCtrl" "";
+BA_DEF_DEF_  "NVM-WakeupAllowed" "";
+BA_DEF_DEF_  "GenSigStartValue" 0;
+BA_DEF_DEF_  "GenSigSendType" "Cyclic";
+BA_DEF_DEF_  "GenSigEnvVarType" "undef";
+BA_DEF_DEF_  "TpTxIndex" 0;
+BA_DEF_DEF_  "GenMsgSendType" "Cyclic";
+BA_DEF_DEF_  "GenMsgStartDelayTime" 0;
+BA_DEF_DEF_  "GenMsgDelayTime" 0;
+BA_DEF_DEF_  "GenMsgMinAcceptLength" 8;
+BA_DEF_DEF_  "GenMsgCycleTime" 10;
+BA_DEF_DEF_  "GenMsgILSupport" "Yes";
+BA_DEF_DEF_  "NmMessage" "no";
+BA_DEF_DEF_  "DiagRequest" "No";
+BA_DEF_DEF_  "DiagResponse" "No";
+BA_DEF_DEF_  "DiagState" "No";
+BA_DEF_DEF_  "TpApplType" "";
+BA_DEF_DEF_  "ILUsed" "Yes";
+BA_DEF_DEF_  "NmCAN" 1;
+BA_DEF_DEF_  "GenNodSleepTime" 0;
+BA_DEF_DEF_  "NmStationAddress" 0;
+BA_DEF_DEF_  "NmMode" "no";
+BA_DEF_DEF_  "NmBaseAddress" 1152;
+BA_DEF_DEF_  "GenNWMTalkNM" "TalkNM()";
+BA_DEF_DEF_  "GenNWMSleepTime" 0;
+BA_DEF_DEF_  "GenNWMGotoMode_BusSleep" "GotoMode_BusSleep()";
+BA_DEF_DEF_  "GenNWMGotoMode_Awake" "GotoMode_Awake()";
+BA_DEF_DEF_  "GenNWMApCanWakeUp" "apCanWakeUp()";
+BA_DEF_DEF_  "GenNWMApCanSleep" "apCanSleep()";
+BA_DEF_DEF_  "GenNWMApCanOn" "apCanOn()";
+BA_DEF_DEF_  "GenNWMApCanOff" "apCanOff()";
+BA_DEF_DEF_  "GenNWMApCanNormal" "apCanNormal()";
+BA_DEF_DEF_  "GenNWMApBusSleep" "apBusSleep()";
+BA_DEF_DEF_  "GenEnvVarPrefix" "c";
+BA_DEF_DEF_  "GenEnvVarEndingSnd" "_s";
+BA_DEF_DEF_  "GenEnvVarEndingDsp" "_d";
+BA_DEF_DEF_  "Manufacturer" "GWM";
+BA_DEF_DEF_  "MultiplexExtEnabled" "No";
+BA_DEF_DEF_  "CANFD_BRS" "1";
+BA_DEF_DEF_  "DBName" "";
+BA_DEF_DEF_  "BusType" "";
+BA_DEF_DEF_  "NodeLayerModules" "";
+BA_DEF_DEF_  "ECU" "";
+BA_DEF_DEF_  "CANoeJitterMax" 0;
+BA_DEF_DEF_  "CANoeJitterMin" 0;
+BA_DEF_DEF_  "CANoeDrift" 0;
+BA_DEF_DEF_  "CANoeStartDelay" 0;
+BA_DEF_DEF_  "VFrameFormat" "StandardCAN";
+BA_ "BusType" "CAN";
+BA_ "DBName" "CV_VehicleCan";
+BA_ "GenMsgSendType" BO_ 1888 2;
+BA_ "GenMsgCycleTime" BO_ 1888 0;
+BA_ "GenMsgSendType" BO_ 1865 2;
+BA_ "GenMsgCycleTime" BO_ 1865 0;
+BA_ "GenMsgCycleTime" BO_ 1337 500;
+BA_ "NmMessage" BO_ 1295 1;
+BA_ "GenMsgCycleTime" BO_ 1857 0;
+BA_ "GenMsgSendType" BO_ 1857 2;
+BA_ "VFrameFormat" BO_ 537 0;
+BA_ "VFrameFormat" BO_ 181 0;
+BA_ "VFrameFormat" BO_ 911 0;
+BA_ "VFrameFormat" BO_ 739 0;
+BA_ "VFrameFormat" BO_ 250 0;
+BA_ "GenSigStartValue" SG_ 181 Demand_Speed 15000;
+BA_ "GenSigStartValue" SG_ 181 Demand_Torque 5000;
+BA_ "GenSigStartValue" SG_ 911 DC_Current_A 1000;
+BA_ "GenSigStartValue" SG_ 739 Torque_Limit_Low 5000;
+BA_ "GenSigStartValue" SG_ 739 MCU_temperature 40;
+BA_ "GenSigStartValue" SG_ 739 Motor_Temperature 40;
+BA_ "GenSigStartValue" SG_ 250 Motor_Torque 5000;
+BA_ "GenSigStartValue" SG_ 250 Motor_Speed 15000;
+VAL_ 1337 StayAwake_Reason_KL15 1 "Terminal 15 on" 0 "Default value" ;
+VAL_ 1337 Wakeup_Reason_Local 1 "Local wake-up reason" 0 "Default value" ;
+VAL_ 1337 Wakeup_Reason_Can 1 "CAN wake-up" 0 "Default value" ;
+VAL_ 1337 StayAwake_Reason_Local 1 "Local wake-up reason" 0 "Default value" ;
+VAL_ 1337 Wakeup_Reason_KL15 1 "Terminal 15 on" 0 "Default value" ;
+VAL_ 1337 RMS_Flag 1 "Not in Repeat Message State" 0 "In Repeat Message State" ;
+VAL_ 1295 ControlBit_VCU_NM 50 "ring_sleep_ack" 20 "limphome_sleep_ind" 18 "ring_sleep_ind" 4 "limphome" 2 "ring" 1 "Alive" ;
+VAL_ 1295 NodeID_VCU_NM 37 "BSG" 36 "MCU" 35 "BMS" 34 "OBC" 33 "HCU" 32 "ACU" 18 "TPMS" 17 "AC_RCP" 16 "HCM" 15 "HUT" 14 "PDCM" 13 "DDCM" 12 "DSM" 11 "SCM" 10 "AC" 9 "CMS" 8 "T-Box" 7 "Trailer" 6 "BCM" 5 "RRSDS" 4 "LRSDS" 3 "ESCL" 2 "PEPS" 1 "GW" ;
+VAL_ 537 shift_gears_status 3 "not available" 2 "error" 1 "shifting" 0 "in geer" ;
+VAL_ 537 Foot_break_status 1 "effective" 0 "in vain" ;
+VAL_ 537 PKB_handbreak_status 1 "effective" 0 "In vain" ;
+VAL_ 537 GearNum 15 "In vain" 14 "breakdown" 2 "R" 1 "D" 0 "N" ;
+VAL_ 181 Control_Mode 3 "Active Discharge" 2 "Torque Control
+" 1 "Speed Control" 0 "Reserved" ;
+VAL_ 181 Fault_Reset 1 "enable" 0 "disable" ;
+VAL_ 181 MCU_Enable 1 "enable" 0 "disable" ;
+VAL_ 739 SlopeState 3 "preserve" 2 "Failure" 1 "In progress
+" 0 "In inactive
+" ;
+VAL_ 739 Fail_Grade 3 "reserve" 2 "reverse" 1 "stationary state" 0 "Non-stationary state" ;
+VAL_ 250 Precharge_Allow 1 "enable" 0 "disable" ;
+VAL_ 250 Work_Mode 8 "FAULT" 7 "LV_PWR_DWN" 6 "SHUTDWN" 5 "Torque Control" 4 "Speed Control" 3 "Idle" 2 "Reserved" 1 "LV_PWR_UP" 0 "INIT" ;
+VAL_ 250 IGBT_Enable_Feedback 1 "enable" 0 "disable" ;
+VAL_ 250 Active_Discharge_Enable_Feedback 1 "enable" 0 "disable" ;
+

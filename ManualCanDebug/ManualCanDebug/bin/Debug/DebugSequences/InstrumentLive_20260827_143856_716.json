@@ -1,0 +1,22 @@
+{
+  "SerialNumberLen": 0,
+  "ProjectName": "C96_FCT_调试",
+  "StationName": "OP3020",
+  "SequenceVersion": "C96-TM2-DEBUG-A0",
+  "UIDisplayType": "All",
+  "LogFilePath": "D:\\LogfilePath",
+  "StepList": [
+    {
+      "StepName": "TM1 RPM",
+      "RunMode": "Normal",
+      "FunctionName": "FCT_CANTable",
+      "RecordingLog": true,
+      "Operation": "Read",
+      "AddrOffset": 152,
+      "TableLength": 16,
+      "PointerDepth": 1,
+      "SignalChecksJson": "[]",
+      "ResultMode": "Information"
+    }
+  ]
+}

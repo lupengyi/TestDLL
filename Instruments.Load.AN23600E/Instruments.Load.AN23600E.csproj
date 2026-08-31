@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <AssemblyName>Instruments.Load.AN23600E</AssemblyName>
+    <RootNamespace>AN23600E.Driver</RootNamespace>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\AN23600E\AN23600E\AN23600E\Driver\**\*.cs" />
+  </ItemGroup>
+</Project>

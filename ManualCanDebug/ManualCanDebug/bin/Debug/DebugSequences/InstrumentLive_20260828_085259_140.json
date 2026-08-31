@@ -1,0 +1,28 @@
+{
+  "SerialNumberLen": 0,
+  "ProjectName": "C96_FCT_调试",
+  "StationName": "OP3020",
+  "SequenceVersion": "C96-TM2-DEBUG-A0",
+  "UIDisplayType": "All",
+  "LogFilePath": "D:\\LogfilePath",
+  "StepList": [
+    {
+      "StepName": "006 产品母线电压",
+      "RunMode": "Normal",
+      "FunctionName": "FCT_CANSignal",
+      "RecordingLog": true,
+      "Operation": "Read",
+      "AddrOffset": 0,
+      "TableIndex": 32,
+      "DataSize": 4,
+      "DataType": "float",
+      "Endian": "Little",
+      "ResultMode": "NumericLimit",
+      "LowLimit": 0,
+      "HighLimit": 1000,
+      "Comtype": "GELE",
+      "Unit": "",
+      "Product": "C96"
+    }
+  ]
+}

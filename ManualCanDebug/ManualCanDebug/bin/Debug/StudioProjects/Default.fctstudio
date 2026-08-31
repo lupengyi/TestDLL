@@ -1,0 +1,153 @@
+{
+  "FormatVersion": 1,
+  "ProjectName": "FCT Function Block Project",
+  "Product": "C96",
+  "ProductLocatorPath": "",
+  "AuxiliaryDbcPath": "",
+  "DriveStructure": "SingleMainDrive",
+  "Capabilities": [],
+  "Blocks": [
+    {
+      "Id": "153addf297574fa78c9e03bae24f0dc0",
+      "Name": "Test",
+      "Category": "",
+      "ModuleKind": "Custom",
+      "Version": "1.0",
+      "Description": "",
+      "IsStandard": false,
+      "SupportedProducts": [],
+      "Parameters": [],
+      "Steps": [
+        {
+          "Id": "d1d506cd27224513ac13ae81e11d1d6f",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "Read C91 HVDC_SELECT_AI",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_CANSignal",
+            "RecordingLog": true,
+            "Operation": "Read",
+            "AddrOffset": 0,
+            "TableIndex": 0,
+            "DataSize": 4,
+            "DataType": "byte",
+            "Endian": "Little",
+            "ResultMode": "NumericLimit",
+            "LowLimit": 0.0,
+            "HighLimit": 1000.0,
+            "Comtype": "GELE",
+            "Unit": ""
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "740861ea17634b8bb88e195ac1cfa167",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "Delay",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteLogic",
+            "RecordingLog": true,
+            "Operation": "Delay",
+            "TimeMs": 1000,
+            "ResultMode": "Action"
+          },
+          "ParameterBindings": {}
+        }
+      ]
+    },
+    {
+      "Id": "921b293c7157454d8896678b7cf9fb22",
+      "Name": "DCDC启动 - 副本",
+      "Category": "我的模块",
+      "ModuleKind": "Custom",
+      "Version": "1.0",
+      "Description": "通过辅助CAN DBC发送",
+      "IsStandard": false,
+      "SupportedProducts": [
+        "C95",
+        "C96"
+      ],
+      "Parameters": [
+        {
+          "Name": "SendCount",
+          "DisplayName": "发送次数",
+          "Type": "Integer",
+          "DefaultValue": 10,
+          "Unit": null,
+          "Description": null,
+          "Required": true
+        },
+        {
+          "Name": "PeriodMs",
+          "DisplayName": "发送周期",
+          "Type": "Integer",
+          "DefaultValue": 100,
+          "Unit": "ms",
+          "Description": null,
+          "Required": true
+        }
+      ],
+      "Steps": [
+        {
+          "Id": "e58c78c0cf4b433ab0c9121107185517",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DCDC启动 DBC发送",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteAction",
+            "RecordingLog": true,
+            "Device": "AUXCAN",
+            "Operation": "SendDbcSignals",
+            "MessageName": "VCU1_DCDC_OilPump_Cmd",
+            "SignalsJson": "{\"DCDC_Start_Cmd\":85}",
+            "ResultMode": "Action"
+          },
+          "ParameterBindings": {}
+        },
+        {
+          "Id": "7a025510f4174befb1cf8c693f22e362",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DCDC启动 周期延时",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteLogic",
+            "RecordingLog": true,
+            "Operation": "Delay",
+            "TimeMs": 100
+          },
+          "ParameterBindings": {
+            "TimeMs": "PeriodMs"
+          }
+        },
+        {
+          "Id": "b3fbd4ecd7d94b31a03ce1e7c0b60f05",
+          "Enabled": true,
+          "StepProperties": {
+            "StepName": "DCDC启动 周期循环",
+            "RunMode": "Normal",
+            "FunctionName": "FCT_ExecuteLogic",
+            "RecordingLog": true,
+            "Operation": "FixedLoop",
+            "LoopId": "DCDC启动Loop",
+            "Count": 10,
+            "TargetStepName": "DCDC启动 DBC发送"
+          },
+          "ParameterBindings": {
+            "Count": "SendCount"
+          }
+        }
+      ]
+    }
+  ],
+  "Flow": [],
+  "Breakpoints": [],
+  "SequenceRoot": {
+    "SerialNumberLen": 0,
+    "ProjectName": "C91-01-0001",
+    "StationName": "OP3020",
+    "SequenceVersion": "FT1-FCT01-01-A0",
+    "UIDisplayType": "All",
+    "LogFilePath": "D:\\LogfilePath"
+  }
+}

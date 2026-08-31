@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition="'$(Configuration)' == ''">Debug</Configuration>
+    <Platform Condition="'$(Platform)' == ''">x86</Platform>
+    <ProjectGuid>{DBA7B77D-7C57-4C80-9DE7-7A4E8F1E7201}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>ManualCanDebug.Core</RootNamespace>
+    <AssemblyName>ManualCanDebug.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+    <BaseOutputPath>bin\</BaseOutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Instruments.CAN.CANWrapper">
+      <HintPath>..\RuntimeDlls\Instruments.CAN.CANWrapper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Instruments.CAN.ICAN">
+      <HintPath>..\RuntimeDlls\Instruments.CAN.ICAN.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Instruments.CAN.DBCReader">
+      <HintPath>..\RuntimeDlls\Instruments.CAN.DBCReader.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="HexDataParser.cs" />
+    <Compile Include="CanSequenceStep.cs" />
+    <Compile Include="CanSequenceCatalog.cs" />
+    <Compile Include="CanSequenceRules.cs" />
+    <Compile Include="SequenceDocument.cs" />
+    <Compile Include="SequenceEditing.cs" />
+    <Compile Include="ProductLocatorParser.cs" />
+    <Compile Include="ProductSignalStepFactory.cs" />
+    <Compile Include="FctStudioModels.cs" />
+    <Compile Include="FctStudioValidation.cs" />
+    <Compile Include="GenericStepCatalog.cs" />
+    <Compile Include="PreCurrentReadItem.cs" />
+    <Compile Include="PreCurrentReadResult.cs" />
+    <Compile Include="PreCurrentStatusReader.cs" />
+    <Compile Include="PreCurrentDiagnosticAnalyzer.cs" />
+    <Compile Include="C95InputCatalog.cs" />
+    <Compile Include="C91InputCatalog.cs" />
+    <Compile Include="C95AllTableCatalog.cs" />
+    <Compile Include="C95TableFieldDecoder.cs" />
+    <Compile Include="C96DriveModels.cs" />
+    <Compile Include="C96InputCatalog.cs" />
+    <Compile Include="ProductResolverData.cs" />
+    <Compile Include="ProductModel.cs" />
+    <Compile Include="FtUdsRequest.cs" />
+    <Compile Include="ProductCanProfile.cs" />
+    <Compile Include="DutPhaseCurrent.cs" />
+    <Compile Include="DutCurrentResult.cs" />
+    <Compile Include="MotorStatusInfo.cs" />
+    <Compile Include="CanProtocol.cs" />
+    <Compile Include="NumericFormula.cs" />
+    <Compile Include="CanBus.cs" />
+    <Compile Include="CanChannelConfig.cs" />
+    <Compile Include="CanFrame.cs" />
+    <Compile Include="DbcDatabase.cs" />
+    <Compile Include="CanChannel.cs" />
+    <Compile Include="CanDebugService.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

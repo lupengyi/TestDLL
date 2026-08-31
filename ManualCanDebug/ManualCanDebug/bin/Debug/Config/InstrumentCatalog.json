@@ -1,0 +1,132 @@
+{
+  "SchemaVersion": 1,
+  "Description": "MainTest 已支持的仪器目录。调试工具从此目录添加仪器；Name 必须与 TestDllMain.FCT_InitializeSelectedInstrument 中的 case 一致。",
+  "Instruments": [
+    {
+      "Name": "DUTCAN",
+      "Type": "CAN",
+      "Mode": "ZLG",
+      "Resource": "192.166.6.10",
+      "Parameter": "52,2,500000,8000",
+      "Comment": "产品/主驱 CAN；通道2；DBC=Flywheel_900A_Z405.dbc",
+      "SeqDevice": "PRODUCTCAN"
+    },
+    {
+      "Name": "AUXCAN",
+      "Type": "CAN",
+      "Mode": "ZLG",
+      "Resource": "192.166.6.10",
+      "Parameter": "52,0,500000,8000",
+      "Comment": "辅驱 CAN；通道0；DBC=C95C96Auxiliary.dbc",
+      "SeqDevice": "AUXCAN"
+    },
+    {
+      "Name": "RESOLVERCAN",
+      "Type": "CAN",
+      "Mode": "ZLG",
+      "Resource": "192.166.6.10",
+      "Parameter": "52,1,500000,8000",
+      "Comment": "旋变 CAN；通道1；DBC=Resolver.dbc",
+      "SeqDevice": "RESOLVER"
+    },
+    {
+      "Name": "LVDC",
+      "Type": "PowerSupply",
+      "Mode": "IT",
+      "Resource": "",
+      "Parameter": "",
+      "Comment": "KL30 低压源；USB Resource 示例：USB0::0x2EC7::0x6700::...::INSTR",
+      "SeqDevice": "LVDC"
+    },
+    {
+      "Name": "LVDC_KL15",
+      "Type": "PowerSupply",
+      "Mode": "IT",
+      "Resource": "",
+      "Parameter": "",
+      "Comment": "KL15 独立低压源；与 LVDC(KL30) 分开控制",
+      "SeqDevice": "LVDC_KL15"
+    },
+    {
+      "Name": "HVDC",
+      "Type": "PowerSupply",
+      "Mode": "Kewell",
+      "Resource": "",
+      "Parameter": "",
+      "Comment": "高压源；LAN 示例：TCPIP0::192.168.0.122::502::SOCKET",
+      "SeqDevice": "HVDC"
+    },
+    {
+      "Name": "DMM",
+      "Type": "DMM",
+      "Mode": "Keysight",
+      "Resource": "",
+      "Parameter": "",
+      "Comment": "34461A 万用表；VISA 地址",
+      "SeqDevice": "DMM"
+    },
+    {
+      "Name": "RES",
+      "Type": "Other",
+      "Mode": "NGI",
+      "Resource": "",
+      "Parameter": "",
+      "Comment": "电阻模拟器；TCPIP 示例：TCPIP0::192.168.0.123::7000::SOCKET",
+      "SeqDevice": "RES"
+    },
+    {
+      "Name": "DAQ",
+      "Type": "DAQ",
+      "Mode": "NI",
+      "Resource": "NI-9227",
+      "Parameter": "cDAQ1Mod1/ai0,cDAQ1Mod1/ai1,cDAQ1Mod1/ai2;cDAQ1Mod2/ai0,cDAQ1Mod2/ai1,cDAQ1Mod2/ai2",
+      "Comment": "NI-9227 电流采集；分号分隔各模块通道",
+      "SeqDevice": "DAQ"
+    },
+    {
+      "Name": "RELAY_FCT",
+      "Type": "DIO",
+      "Mode": "SHT_48SEDO_A",
+      "Resource": "",
+      "Parameter": "502,1",
+      "Comment": "FCT 功能继电器板；Parameter=端口,从站地址",
+      "SeqDevice": "RELAY_FCT"
+    },
+    {
+      "Name": "RELAY_HVMUX",
+      "Type": "DIO",
+      "Mode": "SHT_48SEDO_A",
+      "Resource": "",
+      "Parameter": "502,1",
+      "Comment": "15选1 高压测量板；Parameter=端口,从站地址",
+      "SeqDevice": "RELAY_HVMUX"
+    },
+    {
+      "Name": "DCDC_LOAD",
+      "Type": "ElectronicLoad",
+      "Mode": "AN23600E",
+      "Resource": "",
+      "Parameter": "2101",
+      "Comment": "DCDC 电子负载；Resource=LAN IP；Parameter=端口",
+      "SeqDevice": "DCDC_LOAD"
+    },
+    {
+      "Name": "PLC",
+      "Type": "PLC",
+      "Mode": "S7",
+      "Resource": "",
+      "Parameter": "30",
+      "Comment": "西门子 S7；Resource=IP；Parameter=Rack/Slot",
+      "SeqDevice": "PLC"
+    },
+    {
+      "Name": "RELAY",
+      "Type": "DIO",
+      "Mode": "SHT_48SEDO_A",
+      "Resource": "",
+      "Parameter": "502,1",
+      "Comment": "旧版单继电器板别名；建议改用 RELAY_FCT",
+      "SeqDevice": "RELAY"
+    }
+  ]
+}

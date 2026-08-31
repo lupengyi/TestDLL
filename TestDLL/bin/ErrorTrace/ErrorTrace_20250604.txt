@@ -1,0 +1,101 @@
+2025-06-04 18:59:41
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception ---> S7.Net.PlcException: Received error from PLC: Address out of range. ---> System.Exception: Received error from PLC: Address out of range.
+   at S7.Net.Plc.ValidateResponseCode(ReadWriteErrorCode statusCode)
+   at S7.Net.Plc.AssertReadResponse(Byte[] s7Data, Int32 dataLength)
+   at S7.Net.Plc.ReadBytesWithSingleRequest(DataType dataType, Int32 db, Int32 startByteAdr, Span`1 buffer)
+   --- End of inner exception stack trace ---
+   at S7.Net.Plc.ReadBytesWithSingleRequest(DataType dataType, Int32 db, Int32 startByteAdr, Span`1 buffer)
+   at S7.Net.Plc.ReadBytes(Span`1 buffer, DataType dataType, Int32 db, Int32 startByteAdr)
+   at S7.Net.Plc.ReadBytes(DataType dataType, Int32 db, Int32 startByteAdr, Int32 count)
+   at Instruments.PLCS7.S7Net.DBRead(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[]& readBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 48
+   --- End of inner exception stack trace ---
+   at Instruments.PLCS7.S7Net.DBRead(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[]& readBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 52
+   at CSP.TestDllMain.PLC_ReadInt(Int32 addr) in D:\TestDLL\TestDLL\TestDllMain.cs:line 1338
+   at CSP.TestDllMain.AutomationLoop() in D:\TestDLL\TestDLL\TestDllMain.cs:line 204
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.<AutomationThread>b__41_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 803
+====================================================================================================
+
+2025-06-04 19:04:18
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception ---> S7.Net.PlcException: Received error from PLC: Address out of range. ---> System.Exception: Received error from PLC: Address out of range.
+   at S7.Net.Plc.ValidateResponseCode(ReadWriteErrorCode statusCode)
+   at S7.Net.Plc.AssertReadResponse(Byte[] s7Data, Int32 dataLength)
+   at S7.Net.Plc.ReadBytesWithSingleRequest(DataType dataType, Int32 db, Int32 startByteAdr, Span`1 buffer)
+   --- End of inner exception stack trace ---
+   at S7.Net.Plc.ReadBytesWithSingleRequest(DataType dataType, Int32 db, Int32 startByteAdr, Span`1 buffer)
+   at S7.Net.Plc.ReadBytes(Span`1 buffer, DataType dataType, Int32 db, Int32 startByteAdr)
+   at S7.Net.Plc.ReadBytes(DataType dataType, Int32 db, Int32 startByteAdr, Int32 count)
+   at Instruments.PLCS7.S7Net.DBRead(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[]& readBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 48
+   --- End of inner exception stack trace ---
+   at Instruments.PLCS7.S7Net.DBRead(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[]& readBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 52
+   at CSP.TestDllMain.PLC_ReadInt(Int32 addr) in D:\TestDLL\TestDLL\TestDllMain.cs:line 1340
+   at CSP.TestDllMain.AutomationLoop() in D:\TestDLL\TestDLL\TestDllMain.cs:line 206
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.<AutomationThread>b__41_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 803
+====================================================================================================
+
+2025-06-04 19:05:01
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception ---> S7.Net.PlcException: Received error from PLC: Address out of range. ---> System.Exception: Received error from PLC: Address out of range.
+   at S7.Net.Plc.ValidateResponseCode(ReadWriteErrorCode statusCode)
+   at S7.Net.Plc.AssertReadResponse(Byte[] s7Data, Int32 dataLength)
+   at S7.Net.Plc.ReadBytesWithSingleRequest(DataType dataType, Int32 db, Int32 startByteAdr, Span`1 buffer)
+   --- End of inner exception stack trace ---
+   at S7.Net.Plc.ReadBytesWithSingleRequest(DataType dataType, Int32 db, Int32 startByteAdr, Span`1 buffer)
+   at S7.Net.Plc.ReadBytes(Span`1 buffer, DataType dataType, Int32 db, Int32 startByteAdr)
+   at S7.Net.Plc.ReadBytes(DataType dataType, Int32 db, Int32 startByteAdr, Int32 count)
+   at Instruments.PLCS7.S7Net.DBRead(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[]& readBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 48
+   --- End of inner exception stack trace ---
+   at Instruments.PLCS7.S7Net.DBRead(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[]& readBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 52
+   at CSP.TestDllMain.PLC_ReadInt(Int32 addr) in D:\TestDLL\TestDLL\TestDllMain.cs:line 1340
+   at CSP.TestDllMain.AutomationLoop() in D:\TestDLL\TestDLL\TestDllMain.cs:line 206
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.<AutomationThread>b__41_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 803
+====================================================================================================
+
+2025-06-04 19:06:00
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.Exception ---> S7.Net.PlcException: Received error from PLC: Address out of range. ---> System.Exception: Received error from PLC: Address out of range.
+   at S7.Net.Plc.ValidateResponseCode(ReadWriteErrorCode statusCode)
+   at S7.Net.Plc.AssertReadResponse(Byte[] s7Data, Int32 dataLength)
+   at S7.Net.Plc.ReadBytesWithSingleRequest(DataType dataType, Int32 db, Int32 startByteAdr, Span`1 buffer)
+   --- End of inner exception stack trace ---
+   at S7.Net.Plc.ReadBytesWithSingleRequest(DataType dataType, Int32 db, Int32 startByteAdr, Span`1 buffer)
+   at S7.Net.Plc.ReadBytes(Span`1 buffer, DataType dataType, Int32 db, Int32 startByteAdr)
+   at S7.Net.Plc.ReadBytes(DataType dataType, Int32 db, Int32 startByteAdr, Int32 count)
+   at Instruments.PLCS7.S7Net.DBRead(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[]& readBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 48
+   --- End of inner exception stack trace ---
+   at Instruments.PLCS7.S7Net.DBRead(Int32 dbNumber, Int32 startAddr, Int32 len, Byte[]& readBuffer) in D:\Instruments\Instruments Driver\PLC\PLCS7\PLCS7\S7Net.cs:line 52
+   at CSP.TestDllMain.PLC_ReadInt(Int32 addr) in D:\TestDLL\TestDLL\TestDllMain.cs:line 1340
+   at CSP.TestDllMain.AutomationLoop() in D:\TestDLL\TestDLL\TestDllMain.cs:line 206
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.MainClass.<AutomationThread>b__41_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 803
+====================================================================================================
+
+2025-06-04 21:13:17
+System.Exception ---> System.ArgumentException: Illegal characters in path.
+   at System.IO.Path.CheckInvalidPathChars(String path, Boolean checkAdditional)
+   at System.IO.Path.GetFileName(String path)
+   at System.IO.StreamWriter.CreateFile(String path, Boolean append, Boolean checkHost)
+   at System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize, Boolean checkHost)
+   at System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding)
+   at CSP.LogFileEx.SaveResultListToFile(SequenceResult sr, String& logfileFullPath) in D:\_Projects\FST002\SourceCode\LogFileEx\LogFileEx.cs:line 68
+   --- End of inner exception stack trace ---
+   at CSP.LogFileEx.SaveResultListToFile(SequenceResult sr, String& logfileFullPath) in D:\_Projects\FST002\SourceCode\LogFileEx\LogFileEx.cs:line 185
+   at CSP.SocketUUT.<TestingEnd>b__32_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\SocketUUT.cs:line 604
+====================================================================================================
+

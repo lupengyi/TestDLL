@@ -1,0 +1,45 @@
+{
+  "Id": "standard-tm2-three-phase-current-read",
+  "Name": "TM2读取三相电流",
+  "Category": "主驱",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "读取三相电流Min/Max并计算A/B/C相RMS、三相平均实际电流及不平衡度。默认电流范围0~1000A、不平衡度0~1000A，可在流程页快速修改LIMIT。",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C92",
+    "C96"
+  ],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "a35301f5077d4fb69fe07bd9beeb89ad",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "TM2读取三相电流",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANCalculatedResults",
+        "RecordingLog": true,
+        "CalculationType": "ThreePhaseCurrentRms",
+        "AddrOffset": 148,
+        "TableLength": 40,
+        "PointerDepth": 1,
+        "InputsJson": "{\"PhaseA_Min\":{\"Offset\":12,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\"},\"PhaseB_Min\":{\"Offset\":16,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\"},\"PhaseC_Min\":{\"Offset\":20,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\"},\"PhaseA_Max\":{\"Offset\":24,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\"},\"PhaseB_Max\":{\"Offset\":28,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\"},\"PhaseC_Max\":{\"Offset\":32,\"DataSize\":4,\"DataType\":\"float32\",\"Endian\":\"Little\"}}",
+        "PublishPhases": true,
+        "ResultMode": "NumericLimit",
+        "LowLimit": 0.0,
+        "HighLimit": 1000.0,
+        "Comtype": "GELE",
+        "Unit": "A",
+        "ImbalanceLowLimit": 0.0,
+        "ImbalanceHighLimit": 1000.0,
+        "Product": "C96"
+      },
+      "ParameterBindings": {}
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+2026-08-24 16:25:57
+System.Exception: MainClass.OpenSequence =>  ---> System.ArgumentException: An item with the same key has already been added.
+   at System.ThrowHelper.ThrowArgumentException(ExceptionResource resource)
+   at System.Collections.Generic.Dictionary`2.Insert(TKey key, TValue value, Boolean add)
+   at System.Collections.Generic.Dictionary`2.Add(TKey key, TValue value)
+   at CSP.InstrumentManage.LoadInstrumentList(String exeFolder)
+   --- End of inner exception stack trace ---
+   at CSP.InstrumentManage.LoadInstrumentList(String exeFolder)
+   at CSP.MainClass..ctor(String exeFolderPath, Int32 selectIndex)
+====================================================================================================
+

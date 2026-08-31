@@ -1,0 +1,14 @@
+System.InvalidOperationException: FCT Studio工程检查失败：
+模块引用参数不存在：06 高压精度与故障注入 -> 高压设定与双重读取.MeasurementChannel
+模块引用参数不存在：06 高压精度与故障注入 -> 高压设定与双重读取.MeasurementChannel
+模块引用参数不存在：06 高压精度与故障注入 -> 高压设定与双重读取.MeasurementChannel
+模块引用参数不存在：06 高压精度与故障注入 -> 高压设定与双重读取.MeasurementChannel
+模块引用参数不存在：06 高压精度与故障注入 -> 高压设定与双重读取.MeasurementChannel
+模块引用参数不存在：06 高压精度与故障注入 -> 高压设定与双重读取.MeasurementChannel
+模块引用参数不存在：06 高压精度与故障注入 -> 高压设定与双重读取.MeasurementChannel
+模块引用参数不存在：06 高压精度与故障注入 -> 高压设定与双重读取.MeasurementChannel
+模块引用参数不存在：06 高压精度与故障注入 -> 高压设定与双重读取.MeasurementChannel
+模块引用参数不存在：06 高压精度与故障注入 -> 高压设定与双重读取.MeasurementChannel
+模块引用参数不存在：06 高压精度与故障注入 -> 高压设定与双重读取.MeasurementChannel
+   在 ManualCanDebug.Core.FctStudioCompiler.Compile(FctStudioProject project) 位置 E:\FST\TestDLL\ManualCanDebug\ManualCanDebug.Core\FctStudioModels.cs:行号 156
+   在 ManualCanDebug.Program.Main(String[] args) 位置 E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\Program.cs:行号 22

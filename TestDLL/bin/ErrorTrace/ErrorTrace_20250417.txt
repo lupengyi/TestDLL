@@ -1,0 +1,242 @@
+2025-04-17 08:47:22
+System.Reflection.TargetInvocationException: 调用的目标发生了异常。 ---> System.IO.FileNotFoundException: 未能加载文件或程序集“Ni_VISA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。系统找不到指定的文件。
+   在 Instruments.DMM.KeySight34461A..ctor()
+   在 CSP.TestDllMain..ctor() 位置 D:\TestDLL\TestDLL\TestDllMain.cs:行号 21
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes)
+   在 System.Activator.CreateInstance(Type type, Object[] args)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 565
+====================================================================================================
+
+2025-04-17 08:47:22
+System.Exception: Load Station Config File Error: ---> System.Reflection.TargetInvocationException: 调用的目标发生了异常。 ---> System.IO.FileNotFoundException: 未能加载文件或程序集“Ni_VISA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。系统找不到指定的文件。
+   在 Instruments.DMM.KeySight34461A..ctor()
+   在 CSP.TestDllMain..ctor() 位置 D:\TestDLL\TestDLL\TestDllMain.cs:行号 21
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes)
+   在 System.Activator.CreateInstance(Type type, Object[] args)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 565
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 665
+   在 CSP.MainClass..ctor(String exeFolderPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 83
+====================================================================================================
+
+2025-04-17 08:52:55
+System.Reflection.TargetInvocationException: 调用的目标发生了异常。 ---> System.IO.FileNotFoundException: 未能加载文件或程序集“Ni_VISA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。系统找不到指定的文件。
+   在 Instruments.DMM.KeySight34461A..ctor()
+   在 CSP.TestDllMain..ctor() 位置 D:\TestDLL\TestDLL\TestDllMain.cs:行号 21
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes)
+   在 System.Activator.CreateInstance(Type type, Object[] args)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 565
+====================================================================================================
+
+2025-04-17 08:52:55
+System.Exception: Load Station Config File Error: ---> System.Reflection.TargetInvocationException: 调用的目标发生了异常。 ---> System.IO.FileNotFoundException: 未能加载文件或程序集“Ni_VISA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。系统找不到指定的文件。
+   在 Instruments.DMM.KeySight34461A..ctor()
+   在 CSP.TestDllMain..ctor() 位置 D:\TestDLL\TestDLL\TestDllMain.cs:行号 21
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes)
+   在 System.Activator.CreateInstance(Type type, Object[] args)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 565
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 665
+   在 CSP.MainClass..ctor(String exeFolderPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 83
+====================================================================================================
+
+2025-04-17 09:06:44
+System.Reflection.TargetInvocationException: 调用的目标发生了异常。 ---> System.IO.FileNotFoundException: 未能加载文件或程序集“Ni_VISA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。系统找不到指定的文件。
+   在 Instruments.DMM.KeySight34461A..ctor()
+   在 CSP.TestDllMain..ctor() 位置 D:\TestDLL\TestDLL\TestDllMain.cs:行号 21
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes)
+   在 System.Activator.CreateInstance(Type type, Object[] args)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 565
+====================================================================================================
+
+2025-04-17 09:06:44
+System.Exception: Load Station Config File Error: ---> System.Reflection.TargetInvocationException: 调用的目标发生了异常。 ---> System.IO.FileNotFoundException: 未能加载文件或程序集“Ni_VISA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。系统找不到指定的文件。
+   在 Instruments.DMM.KeySight34461A..ctor()
+   在 CSP.TestDllMain..ctor() 位置 D:\TestDLL\TestDLL\TestDllMain.cs:行号 21
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes)
+   在 System.Activator.CreateInstance(Type type, Object[] args)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 565
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 665
+   在 CSP.MainClass..ctor(String exeFolderPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 83
+====================================================================================================
+
+2025-04-17 10:21:35
+System.Reflection.TargetInvocationException: Exception has been thrown by the target of an invocation. ---> System.MissingMethodException: Method not found: 'Void Instruments.CAN.ICAN.StartTraceLog(System.String)'.
+   at Instruments.CAN.CANWrapper.StartTraceLog(String logFilePath)
+   at CSP.TestDllMain.PreUUT(Int32 socketIndex) in D:\TestDLL\TestDLL\TestDllMain.cs:line 200
+   --- End of inner exception stack trace ---
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Object[] arguments, Signature sig, Boolean constructor)
+   at System.Reflection.RuntimeMethodInfo.UnsafeInvokeInternal(Object obj, Object[] parameters, Object[] arguments)
+   at System.Reflection.RuntimeMethodInfo.Invoke(Object obj, BindingFlags invokeAttr, Binder binder, Object[] parameters, CultureInfo culture)
+   at System.Reflection.MethodBase.Invoke(Object obj, Object[] parameters)
+   at CSP.SocketUUT.<StartTesting>b__31_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\SocketUUT.cs:line 273
+====================================================================================================
+
+2025-04-17 14:21:56
+Newtonsoft.Json.JsonReaderException: Unexpected character encountered while parsing number: V. Path 'StepList[3].Voltage', line 37, position 15.
+   at Newtonsoft.Json.JsonTextReader.ReadNumberCharIntoBuffer(Char currentChar, Int32 charPos)
+   at Newtonsoft.Json.JsonTextReader.ReadNumberIntoBuffer()
+   at Newtonsoft.Json.JsonTextReader.ParseNumber(ReadType readType)
+   at Newtonsoft.Json.JsonTextReader.ParseValue()
+   at Newtonsoft.Json.JsonTextReader.Read()
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateList(IList list, JsonReader reader, JsonArrayContract contract, JsonProperty containerProperty, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateList(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, Object existingValue, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.SetPropertyValue(JsonProperty property, JsonConverter propertyConverter, JsonContainerContract containerContract, JsonProperty containerProperty, JsonReader reader, Object target)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.PopulateObject(Object newObject, JsonReader reader, JsonObjectContract contract, JsonProperty member, String id)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateObject(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   at Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   at Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   at Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   at CSP.MainClass.OpenSequence(String sequenceFilePath) in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:line 355
+====================================================================================================
+
+2025-04-17 19:20:18
+System.IO.FileNotFoundException: 未能加载文件或程序集“file:///D:\CSharpTestPlatform\CSP_Test\DemoClass\bin\Debug\DemoClass.dll”或它的某一个依赖项。系统找不到指定的文件。
+文件名:“file:///D:\CSharpTestPlatform\CSP_Test\DemoClass\bin\Debug\DemoClass.dll”
+   在 System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   在 System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   在 System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   在 System.Reflection.RuntimeAssembly.InternalLoadFrom(String assemblyFile, Evidence securityEvidence, Byte[] hashValue, AssemblyHashAlgorithm hashAlgorithm, Boolean forIntrospection, Boolean suppressSecurityChecks, StackCrawlMark& stackMark)
+   在 System.Reflection.Assembly.LoadFrom(String assemblyFile)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 563
+
+警告: 程序集绑定日志记录被关闭。
+要启用程序集绑定失败日志记录，请将注册表值 [HKLM\Software\Microsoft\Fusion!EnableLog] (DWORD)设置为 1。
+注意: 会有一些与程序集绑定失败日志记录关联的性能损失。
+要关闭此功能，请移除注册表值 [HKLM\Software\Microsoft\Fusion!EnableLog]。
+
+====================================================================================================
+
+2025-04-17 19:20:18
+System.Exception: Load Station Config File Error: ---> System.IO.FileNotFoundException: 未能加载文件或程序集“file:///D:\CSharpTestPlatform\CSP_Test\DemoClass\bin\Debug\DemoClass.dll”或它的某一个依赖项。系统找不到指定的文件。
+   在 System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   在 System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   在 System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   在 System.Reflection.RuntimeAssembly.InternalLoadFrom(String assemblyFile, Evidence securityEvidence, Byte[] hashValue, AssemblyHashAlgorithm hashAlgorithm, Boolean forIntrospection, Boolean suppressSecurityChecks, StackCrawlMark& stackMark)
+   在 System.Reflection.Assembly.LoadFrom(String assemblyFile)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 563
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 665
+   在 CSP.MainClass..ctor(String exeFolderPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 83
+====================================================================================================
+
+2025-04-17 19:20:44
+System.IO.FileNotFoundException: 未能加载文件或程序集“file:///D:\CSharpTestPlatform\CSP_Test\DemoClass\bin\Debug\DemoClass.dll”或它的某一个依赖项。系统找不到指定的文件。
+文件名:“file:///D:\CSharpTestPlatform\CSP_Test\DemoClass\bin\Debug\DemoClass.dll”
+   在 System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   在 System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   在 System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   在 System.Reflection.RuntimeAssembly.InternalLoadFrom(String assemblyFile, Evidence securityEvidence, Byte[] hashValue, AssemblyHashAlgorithm hashAlgorithm, Boolean forIntrospection, Boolean suppressSecurityChecks, StackCrawlMark& stackMark)
+   在 System.Reflection.Assembly.LoadFrom(String assemblyFile)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 563
+
+=== 预绑定状态信息 ===
+日志: Where-ref 绑定。位置 = D:\CSharpTestPlatform\CSP_Test\DemoClass\bin\Debug\DemoClass.dll
+日志: Appbase = file:///D:/TestDLL/TestDLL/bin/
+日志: 初始 PrivatePath = NULL
+调用程序集: (Unknown)。
+===
+日志: 此绑定从 LoadFrom 加载上下文开始。
+警告: 将不在 LoadFrom 上下文中探测本机映像。仅在默认加载上下文中探测本机映像，例如，使用 Assembly.Load()。
+日志: 正在使用应用程序配置文件: D:\TestDLL\TestDLL\bin\CSP_Test.exe.Config
+日志: 使用主机配置文件: 
+日志: 使用 C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config 的计算机配置文件。
+日志: 尝试下载新的 URL file:///D:/CSharpTestPlatform/CSP_Test/DemoClass/bin/Debug/DemoClass.dll。
+
+====================================================================================================
+
+2025-04-17 19:20:44
+System.Exception: Load Station Config File Error: ---> System.IO.FileNotFoundException: 未能加载文件或程序集“file:///D:\CSharpTestPlatform\CSP_Test\DemoClass\bin\Debug\DemoClass.dll”或它的某一个依赖项。系统找不到指定的文件。
+   在 System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   在 System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   在 System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   在 System.Reflection.RuntimeAssembly.InternalLoadFrom(String assemblyFile, Evidence securityEvidence, Byte[] hashValue, AssemblyHashAlgorithm hashAlgorithm, Boolean forIntrospection, Boolean suppressSecurityChecks, StackCrawlMark& stackMark)
+   在 System.Reflection.Assembly.LoadFrom(String assemblyFile)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 563
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 665
+   在 CSP.MainClass..ctor(String exeFolderPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 83
+====================================================================================================
+
+2025-04-17 19:22:15
+System.IO.FileNotFoundException: 未能加载文件或程序集“file:///D:\CSharpTestPlatform\CSP_Test\DemoClass\bin\Debug\DemoClass.dll”或它的某一个依赖项。系统找不到指定的文件。
+文件名:“file:///D:\CSharpTestPlatform\CSP_Test\DemoClass\bin\Debug\DemoClass.dll”
+   在 System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   在 System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   在 System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   在 System.Reflection.RuntimeAssembly.InternalLoadFrom(String assemblyFile, Evidence securityEvidence, Byte[] hashValue, AssemblyHashAlgorithm hashAlgorithm, Boolean forIntrospection, Boolean suppressSecurityChecks, StackCrawlMark& stackMark)
+   在 System.Reflection.Assembly.LoadFrom(String assemblyFile)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 563
+
+=== 预绑定状态信息 ===
+日志: Where-ref 绑定。位置 = D:\CSharpTestPlatform\CSP_Test\DemoClass\bin\Debug\DemoClass.dll
+日志: Appbase = file:///D:/TestDLL/TestDLL/bin/
+日志: 初始 PrivatePath = NULL
+调用程序集: (Unknown)。
+===
+日志: 此绑定从 LoadFrom 加载上下文开始。
+警告: 将不在 LoadFrom 上下文中探测本机映像。仅在默认加载上下文中探测本机映像，例如，使用 Assembly.Load()。
+日志: 正在使用应用程序配置文件: D:\TestDLL\TestDLL\bin\CSP_Test.exe.Config
+日志: 使用主机配置文件: 
+日志: 使用 C:\Windows\Microsoft.NET\Framework\v4.0.30319\config\machine.config 的计算机配置文件。
+日志: 尝试下载新的 URL file:///D:/CSharpTestPlatform/CSP_Test/DemoClass/bin/Debug/DemoClass.dll。
+
+====================================================================================================
+
+2025-04-17 19:22:15
+System.Exception: Load Station Config File Error: ---> System.IO.FileNotFoundException: 未能加载文件或程序集“file:///D:\CSharpTestPlatform\CSP_Test\DemoClass\bin\Debug\DemoClass.dll”或它的某一个依赖项。系统找不到指定的文件。
+   在 System.Reflection.RuntimeAssembly._nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   在 System.Reflection.RuntimeAssembly.nLoad(AssemblyName fileName, String codeBase, Evidence assemblySecurity, RuntimeAssembly locationHint, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   在 System.Reflection.RuntimeAssembly.InternalLoadAssemblyName(AssemblyName assemblyRef, Evidence assemblySecurity, RuntimeAssembly reqAssembly, StackCrawlMark& stackMark, IntPtr pPrivHostBinder, Boolean throwOnFileNotFound, Boolean forIntrospection, Boolean suppressSecurityChecks)
+   在 System.Reflection.RuntimeAssembly.InternalLoadFrom(String assemblyFile, Evidence securityEvidence, Byte[] hashValue, AssemblyHashAlgorithm hashAlgorithm, Boolean forIntrospection, Boolean suppressSecurityChecks, StackCrawlMark& stackMark)
+   在 System.Reflection.Assembly.LoadFrom(String assemblyFile)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 563
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 665
+   在 CSP.MainClass..ctor(String exeFolderPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 83
+====================================================================================================
+

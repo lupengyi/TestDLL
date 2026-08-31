@@ -1,0 +1,29 @@
+{
+  "SerialNumberLen": 0,
+  "ProjectName": "C96_FCT_调试",
+  "StationName": "OP3020",
+  "SequenceVersion": "C96-TM2-DEBUG-A0",
+  "UIDisplayType": "All",
+  "LogFilePath": "D:\\LogfilePath",
+  "StepList": [
+    {
+      "StepName": "004 TM2电机故障状态",
+      "RunMode": "Normal",
+      "FunctionName": "FCT_CANCalculatedResults",
+      "RecordingLog": true,
+      "AddrOffset": 132,
+      "TableLength": 10,
+      "CalculationType": "PackedFaultStatus",
+      "FaultMapJson": "[{\"Byte\":0,\"Bit\":0,\"Name\":\"A相过流\"},{\"Byte\":0,\"Bit\":1,\"Name\":\"B相过流\"},{\"Byte\":0,\"Bit\":2,\"Name\":\"C相过流\"},{\"Byte\":0,\"Bit\":3,\"Name\":\"A相硬件过流\"},{\"Byte\":0,\"Bit\":4,\"Name\":\"B相硬件过流\"},{\"Byte\":0,\"Bit\":5,\"Name\":\"C相硬件过流\"},{\"Byte\":0,\"Bit\":6,\"Name\":\"A相上桥温度故障\"},{\"Byte\":0,\"Bit\":7,\"Name\":\"A相下桥温度故障\"},{\"Byte\":1,\"Bit\":0,\"Name\":\"B相上桥温度故障\"},{\"Byte\":1,\"Bit\":1,\"Name\":\"B相下桥温度故障\"},{\"Byte\":1,\"Bit\":2,\"Name\":\"C相上桥温度故障\"},{\"Byte\":1,\"Bit\":3,\"Name\":\"C相下桥温度故障\"},{\"Byte\":1,\"Bit\":4,\"Name\":\"电机温度1故障\"},{\"Byte\":1,\"Bit\":5,\"Name\":\"电机温度2故障\"},{\"Byte\":1,\"Bit\":7,\"Name\":\"Desat Upper\"},{\"Byte\":2,\"Bit\":0,\"Name\":\"Desat Lower\"},{\"Byte\":2,\"Bit\":1,\"Name\":\"UV A Upper\"},{\"Byte\":2,\"Bit\":2,\"Name\":\"UV B Upper\"},{\"Byte\":2,\"Bit\":3,\"Name\":\"UV C Upper\"},{\"Byte\":2,\"Bit\":4,\"Name\":\"UV A Lower\"},{\"Byte\":2,\"Bit\":5,\"Name\":\"UV B Lower\"},{\"Byte\":2,\"Bit\":6,\"Name\":\"UV C Lower\"},{\"Byte\":2,\"Bit\":7,\"Name\":\"Master Fault\"},{\"Byte\":3,\"Bit\":0,\"Name\":\"母线欠压\"},{\"Byte\":3,\"Bit\":1,\"Name\":\"母线过压\"},{\"Byte\":3,\"Bit\":2,\"Name\":\"母线硬件过压\"},{\"Byte\":3,\"Bit\":3,\"Name\":\"母线硬件过压锁存\"},{\"Byte\":3,\"Bit\":4,\"Name\":\"Upper UV锁存\"},{\"Byte\":3,\"Bit\":5,\"Name\":\"Lower UV锁存\"},{\"Byte\":3,\"Bit\":6,\"Name\":\"零序过流\"},{\"Byte\":3,\"Bit\":7,\"Name\":\"UV Upper\"},{\"Byte\":4,\"Bit\":0,\"Name\":\"UV Lower\"},{\"Byte\":4,\"Bit\":1,\"Name\":\"板温故障\"}]",
+      "RampOffset": 8,
+      "StatusOffset": 9,
+      "NoFaultText": "No active fault bits",
+      "JudgeNoFault": true,
+      "ResultMode": "NumericLimit",
+      "LowLimit": 0,
+      "HighLimit": 0,
+      "Comtype": "GELE",
+      "Unit": ""
+    }
+  ]
+}

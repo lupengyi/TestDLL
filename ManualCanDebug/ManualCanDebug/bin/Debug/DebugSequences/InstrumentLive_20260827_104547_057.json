@@ -1,0 +1,22 @@
+{
+  "SerialNumberLen": 0,
+  "ProjectName": "C96_FCT_调试",
+  "StationName": "OP3020",
+  "SequenceVersion": "FT1-FCT01-01-A0",
+  "UIDisplayType": "All",
+  "LogFilePath": "D:\\LogfilePath",
+  "StepList": [
+    {
+      "StepName": "TM1 UV reset Low",
+      "RunMode": "Normal",
+      "FunctionName": "FCT_CANTable",
+      "RecordingLog": true,
+      "Operation": "Write",
+      "AddrOffset": 60,
+      "TableLength": 9,
+      "ChangesJson": "[{\"Offset\":8,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":0}]",
+      "VerifyAfterWrite": true,
+      "ResultMode": "Action"
+    }
+  ]
+}

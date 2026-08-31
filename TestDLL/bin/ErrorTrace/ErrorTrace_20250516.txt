@@ -1,0 +1,65 @@
+2025-05-16 14:58:17
+System.Exception ---> System.ArgumentException: Illegal characters in path.
+   at System.IO.Path.CheckInvalidPathChars(String path, Boolean checkAdditional)
+   at System.IO.Path.GetFileName(String path)
+   at System.IO.StreamWriter.CreateFile(String path, Boolean append, Boolean checkHost)
+   at System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize, Boolean checkHost)
+   at System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding)
+   at CSP.LogFileEx.SaveResultListToFile(SequenceResult sr, String& logfileFullPath) in D:\CSharpTestPlatform\CSP_Test\LogFileEx\LogFileEx.cs:line 68
+   --- End of inner exception stack trace ---
+   at CSP.LogFileEx.SaveResultListToFile(SequenceResult sr, String& logfileFullPath) in D:\CSharpTestPlatform\CSP_Test\LogFileEx\LogFileEx.cs:line 185
+   at CSP.SocketUUT.<TestingEnd>b__33_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\SocketUUT.cs:line 604
+====================================================================================================
+
+2025-05-16 15:09:55
+System.Exception ---> System.ArgumentException: Illegal characters in path.
+   at System.IO.Path.CheckInvalidPathChars(String path, Boolean checkAdditional)
+   at System.IO.Path.GetFileName(String path)
+   at System.IO.StreamWriter.CreateFile(String path, Boolean append, Boolean checkHost)
+   at System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize, Boolean checkHost)
+   at System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding)
+   at CSP.LogFileEx.SaveResultListToFile(SequenceResult sr, String& logfileFullPath) in D:\CSharpTestPlatform\CSP_Test\LogFileEx\LogFileEx.cs:line 68
+   --- End of inner exception stack trace ---
+   at CSP.LogFileEx.SaveResultListToFile(SequenceResult sr, String& logfileFullPath) in D:\CSharpTestPlatform\CSP_Test\LogFileEx\LogFileEx.cs:line 185
+   at CSP.SocketUUT.<TestingEnd>b__33_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\SocketUUT.cs:line 604
+====================================================================================================
+
+2025-05-16 15:17:42
+System.Exception ---> System.ArgumentException: Illegal characters in path.
+   at System.IO.Path.CheckInvalidPathChars(String path, Boolean checkAdditional)
+   at System.IO.Path.GetFileName(String path)
+   at System.IO.StreamWriter.CreateFile(String path, Boolean append, Boolean checkHost)
+   at System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize, Boolean checkHost)
+   at System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding)
+   at CSP.LogFileEx.SaveResultListToFile(SequenceResult sr, String& logfileFullPath) in D:\CSharpTestPlatform\CSP_Test\LogFileEx\LogFileEx.cs:line 68
+   --- End of inner exception stack trace ---
+   at CSP.LogFileEx.SaveResultListToFile(SequenceResult sr, String& logfileFullPath) in D:\CSharpTestPlatform\CSP_Test\LogFileEx\LogFileEx.cs:line 185
+   at CSP.SocketUUT.<TestingEnd>b__33_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\SocketUUT.cs:line 604
+====================================================================================================
+
+2025-05-16 15:20:49
+System.Exception ---> System.ArgumentException: Illegal characters in path.
+   at System.IO.Path.CheckInvalidPathChars(String path, Boolean checkAdditional)
+   at System.IO.Path.GetFileName(String path)
+   at System.IO.StreamWriter.CreateFile(String path, Boolean append, Boolean checkHost)
+   at System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize, Boolean checkHost)
+   at System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding)
+   at CSP.LogFileEx.SaveResultListToFile(SequenceResult sr, String& logfileFullPath) in D:\CSharpTestPlatform\CSP_Test\LogFileEx\LogFileEx.cs:line 68
+   --- End of inner exception stack trace ---
+   at CSP.LogFileEx.SaveResultListToFile(SequenceResult sr, String& logfileFullPath) in D:\CSharpTestPlatform\CSP_Test\LogFileEx\LogFileEx.cs:line 185
+   at CSP.SocketUUT.<TestingEnd>b__33_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\SocketUUT.cs:line 604
+====================================================================================================
+
+2025-05-16 15:26:15
+System.Exception ---> System.ArgumentException: Illegal characters in path.
+   at System.IO.Path.CheckInvalidPathChars(String path, Boolean checkAdditional)
+   at System.IO.Path.GetFileName(String path)
+   at System.IO.StreamWriter.CreateFile(String path, Boolean append, Boolean checkHost)
+   at System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize, Boolean checkHost)
+   at System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding)
+   at CSP.LogFileEx.SaveResultListToFile(SequenceResult sr, String& logfileFullPath) in D:\CSharpTestPlatform\CSP_Test\LogFileEx\LogFileEx.cs:line 68
+   --- End of inner exception stack trace ---
+   at CSP.LogFileEx.SaveResultListToFile(SequenceResult sr, String& logfileFullPath) in D:\CSharpTestPlatform\CSP_Test\LogFileEx\LogFileEx.cs:line 185
+   at CSP.SocketUUT.<TestingEnd>b__33_0() in D:\CSharpTestPlatform\CSP_Test\CSP_Manage\SocketUUT.cs:line 604
+====================================================================================================
+

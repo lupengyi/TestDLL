@@ -1,0 +1,2 @@
+System.InvalidOperationException: Legacy LVDC output STEP was mapped to the wrong action panel.
+   at ManualCanDebug.Program.Main(String[] args) in E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\Program.cs:line 350

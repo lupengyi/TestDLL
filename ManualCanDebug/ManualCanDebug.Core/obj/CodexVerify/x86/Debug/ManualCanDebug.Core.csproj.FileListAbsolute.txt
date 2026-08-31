@@ -1,0 +1,6 @@
+E:\FST\TestDLL\ManualCanDebug\ManualCanDebug.Core\bin\Debug\ManualCanDebug.Core.dll
+E:\FST\TestDLL\ManualCanDebug\ManualCanDebug.Core\bin\Debug\ManualCanDebug.Core.pdb
+E:\FST\TestDLL\ManualCanDebug\ManualCanDebug.Core\obj\CodexVerify\x86\Debug\ManualCanDebug.Core.csproj.AssemblyReference.cache
+E:\FST\TestDLL\ManualCanDebug\ManualCanDebug.Core\obj\CodexVerify\x86\Debug\ManualCanDebug.Core.csproj.CoreCompileInputs.cache
+E:\FST\TestDLL\ManualCanDebug\ManualCanDebug.Core\obj\CodexVerify\x86\Debug\ManualCanDebug.Core.dll
+E:\FST\TestDLL\ManualCanDebug\ManualCanDebug.Core\obj\CodexVerify\x86\Debug\ManualCanDebug.Core.pdb

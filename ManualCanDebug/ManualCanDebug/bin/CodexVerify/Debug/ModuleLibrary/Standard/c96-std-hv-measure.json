@@ -1,0 +1,190 @@
+{
+  "Id": "c96-std-hv-measure",
+  "Name": "高压设定与双重读取",
+  "Category": "高压",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [
+    {
+      "Name": "Voltage",
+      "DisplayName": "目标高压",
+      "Type": "double",
+      "DefaultValue": 600.0,
+      "Unit": "V",
+      "Description": "",
+      "Required": true
+    },
+    {
+      "Name": "LowLimit",
+      "DisplayName": "电压下限",
+      "Type": "double",
+      "DefaultValue": 582.0,
+      "Unit": "V",
+      "Description": "",
+      "Required": true
+    },
+    {
+      "Name": "HighLimit",
+      "DisplayName": "电压上限",
+      "Type": "double",
+      "DefaultValue": 618.0,
+      "Unit": "V",
+      "Description": "",
+      "Required": true
+    },
+    {
+      "Name": "MeasurementChannel",
+      "DisplayName": "高压测量通道",
+      "Type": "int",
+      "DefaultValue": 1,
+      "Unit": "HV",
+      "Description": "",
+      "Required": true
+    }
+  ],
+  "Steps": [
+    {
+      "Id": "f32ae648c77448329bbad8dcd6a27fe0",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "设置高压",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "HVDC",
+        "Operation": "SetVoltage",
+        "ResultMode": "Action",
+        "Voltage": 600.0
+      },
+      "ParameterBindings": {
+        "Voltage": "Voltage"
+      }
+    },
+    {
+      "Id": "a2273a3b35914e5b8175dbdd9772a110",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "万用表切换高压测量档",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "RELAY_FCT",
+        "Operation": "SetDO",
+        "ResultMode": "Action",
+        "Channels": "OUT45",
+        "Values": "1",
+        "Slave": 1
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "148c8ae8f8d8483fb665ee837db839a9",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "高压15选1安全选择",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "RELAY_HVMUX",
+        "Operation": "Select15",
+        "ResultMode": "Action",
+        "Selection": 1,
+        "SwitchDelayMs": 50,
+        "Slave": 1
+      },
+      "ParameterBindings": {
+        "Selection": "MeasurementChannel"
+      }
+    },
+    {
+      "Id": "a1e7129d62e44884b1a5f9b0fe38ec2a",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "DMM配置直流高压",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "DMM",
+        "Operation": "ConfigDCVoltage",
+        "ResultMode": "Action",
+        "Range": 1000.0,
+        "Solution": 0.01
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "6cd988c8605846e3bf9488530aa4f8c2",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "DMM读取高压",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "DMM",
+        "Operation": "Read",
+        "ResultMode": "NumericLimit",
+        "LowLimit": 582.0,
+        "HighLimit": 618.0,
+        "Comtype": "GELE",
+        "Unit": "V"
+      },
+      "ParameterBindings": {
+        "LowLimit": "LowLimit",
+        "HighLimit": "HighLimit"
+      }
+    },
+    {
+      "Id": "00a6da2eaefc496aa76ba67506c6268f",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "产品读取母线高压",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANSignal",
+        "RecordingLog": true,
+        "Operation": "Read",
+        "ResultMode": "NumericLimit",
+        "AddrOffset": 0,
+        "TableIndex": 32,
+        "DataSize": 4,
+        "DataType": "float32",
+        "LowLimit": 582.0,
+        "HighLimit": 618.0,
+        "Comtype": "GELE",
+        "Unit": "V"
+      },
+      "ParameterBindings": {
+        "LowLimit": "LowLimit",
+        "HighLimit": "HighLimit"
+      }
+    }
+  ]
+}

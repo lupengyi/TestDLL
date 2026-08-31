@@ -1,0 +1,325 @@
+{
+  "Id": "c96-std-clear-faults",
+  "Name": "主驱故障清除",
+  "Category": "公共准备",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "C92/C96双主驱硬件故障复位：依次脉冲TM1/TM2硬件OC、共享Bus HW OV及TM1/TM2 UVLO+UVUP。每个复位端口拉高100ms后拉低，不使用FLTOVRD故障旁路。执行前必须关闭Gate、速度/电压使能并将目标电流设为0。",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "da0600faf4ab4feaa883cc93cd5a2e8b",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "TM1硬件OC清除 - 拉高",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANTable",
+        "RecordingLog": false,
+        "Operation": "Write",
+        "AddrOffset": 60,
+        "TableLength": 5,
+        "ChangesJson": "[{\"Name\":\"TM1硬件OC清除 - 拉高\",\"Offset\":4,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":1,\"WriteLast\":false,\"WriteFinal\":false}]",
+        "VerifyAfterWrite": true,
+        "ResultMode": "Action",
+        "Product": "C96"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "a74d1aeb4ac4463e8b15e46fee823f23",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "TM1硬件OC清除 - 保持100ms",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteLogic",
+        "RecordingLog": false,
+        "Operation": "Delay",
+        "TimeMs": 100,
+        "ResultMode": "Action"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "8996c5c39b6341bbbc6cbec8f3f4d65c",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "TM1硬件OC清除 - 拉低",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANTable",
+        "RecordingLog": false,
+        "Operation": "Write",
+        "AddrOffset": 60,
+        "TableLength": 5,
+        "ChangesJson": "[{\"Name\":\"TM1硬件OC清除 - 拉低\",\"Offset\":4,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":0,\"WriteLast\":false,\"WriteFinal\":false}]",
+        "VerifyAfterWrite": true,
+        "ResultMode": "Action",
+        "Product": "C96"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "a47eb79cd08f421fba589e0fa745a60d",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "TM2硬件OC清除 - 拉高",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANTable",
+        "RecordingLog": false,
+        "Operation": "Write",
+        "AddrOffset": 60,
+        "TableLength": 21,
+        "ChangesJson": "[{\"Name\":\"TM2硬件OC清除 - 拉高\",\"Offset\":20,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":1,\"WriteLast\":false,\"WriteFinal\":false}]",
+        "VerifyAfterWrite": true,
+        "ResultMode": "Action",
+        "Product": "C96"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "a20a077d054248438715d25bde2eede0",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "TM2硬件OC清除 - 保持100ms",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteLogic",
+        "RecordingLog": false,
+        "Operation": "Delay",
+        "TimeMs": 100,
+        "ResultMode": "Action"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "bc8fff55552e4f34b05726f7db8ea046",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "TM2硬件OC清除 - 拉低",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANTable",
+        "RecordingLog": false,
+        "Operation": "Write",
+        "AddrOffset": 60,
+        "TableLength": 21,
+        "ChangesJson": "[{\"Name\":\"TM2硬件OC清除 - 拉低\",\"Offset\":20,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":0,\"WriteLast\":false,\"WriteFinal\":false}]",
+        "VerifyAfterWrite": true,
+        "ResultMode": "Action",
+        "Product": "C96"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "cf9cfc1b05324b9db2b654f2e0224c47",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "共享Bus HW OV清除 - 拉高",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANTable",
+        "RecordingLog": false,
+        "Operation": "Write",
+        "AddrOffset": 60,
+        "TableLength": 8,
+        "ChangesJson": "[{\"Name\":\"共享Bus HW OV清除 - 拉高\",\"Offset\":7,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":1,\"WriteLast\":false,\"WriteFinal\":false}]",
+        "VerifyAfterWrite": true,
+        "ResultMode": "Action",
+        "Product": "C96"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "f9ac6eeffdc048f6abbbbc221f2eaa68",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "共享Bus HW OV清除 - 保持100ms",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteLogic",
+        "RecordingLog": false,
+        "Operation": "Delay",
+        "TimeMs": 100,
+        "ResultMode": "Action"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "e3291692bdae43c28c4407d1c5c46ff4",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "共享Bus HW OV清除 - 拉低",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANTable",
+        "RecordingLog": false,
+        "Operation": "Write",
+        "AddrOffset": 60,
+        "TableLength": 8,
+        "ChangesJson": "[{\"Name\":\"共享Bus HW OV清除 - 拉低\",\"Offset\":7,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":0,\"WriteLast\":false,\"WriteFinal\":false}]",
+        "VerifyAfterWrite": true,
+        "ResultMode": "Action",
+        "Product": "C96"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "ae10c8dbb6a847c4873a207148146598",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "TM1 UVLO+UVUP清除 - 拉高",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANTable",
+        "RecordingLog": false,
+        "Operation": "Write",
+        "AddrOffset": 60,
+        "TableLength": 10,
+        "ChangesJson": "[{\"Name\":\"TM1 UVLO+UVUP清除 - 拉高\",\"Offset\":8,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":1,\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"TM1 UVLO+UVUP清除 - 拉高\",\"Offset\":9,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":1,\"WriteLast\":false,\"WriteFinal\":false}]",
+        "VerifyAfterWrite": true,
+        "ResultMode": "Action",
+        "Product": "C96"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "ed45a71e405e4fbbb4156fafded8e866",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "TM1 UVLO+UVUP清除 - 保持100ms",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteLogic",
+        "RecordingLog": false,
+        "Operation": "Delay",
+        "TimeMs": 100,
+        "ResultMode": "Action"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "4767aba843c3451c8059e7d87d64ab49",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "TM1 UVLO+UVUP清除 - 拉低",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANTable",
+        "RecordingLog": false,
+        "Operation": "Write",
+        "AddrOffset": 60,
+        "TableLength": 10,
+        "ChangesJson": "[{\"Name\":\"TM1 UVLO+UVUP清除 - 拉低\",\"Offset\":8,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":0,\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"TM1 UVLO+UVUP清除 - 拉低\",\"Offset\":9,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":0,\"WriteLast\":false,\"WriteFinal\":false}]",
+        "VerifyAfterWrite": true,
+        "ResultMode": "Action",
+        "Product": "C96"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "5e53a0b99c354797b6d3782d0752c01d",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "TM2 UVLO+UVUP清除 - 拉高",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANTable",
+        "RecordingLog": false,
+        "Operation": "Write",
+        "AddrOffset": 60,
+        "TableLength": 24,
+        "ChangesJson": "[{\"Name\":\"TM2 UVLO+UVUP清除 - 拉高\",\"Offset\":22,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":1,\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"TM2 UVLO+UVUP清除 - 拉高\",\"Offset\":23,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":1,\"WriteLast\":false,\"WriteFinal\":false}]",
+        "VerifyAfterWrite": true,
+        "ResultMode": "Action",
+        "Product": "C96"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "3c408c89159a4399bde2201b46fc276b",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "TM2 UVLO+UVUP清除 - 保持100ms",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteLogic",
+        "RecordingLog": false,
+        "Operation": "Delay",
+        "TimeMs": 100,
+        "ResultMode": "Action"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "b46d3c38941a41509df4df36196e1844",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "TM2 UVLO+UVUP清除 - 拉低",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANTable",
+        "RecordingLog": false,
+        "Operation": "Write",
+        "AddrOffset": 60,
+        "TableLength": 24,
+        "ChangesJson": "[{\"Name\":\"TM2 UVLO+UVUP清除 - 拉低\",\"Offset\":22,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":0,\"WriteLast\":false,\"WriteFinal\":false},{\"Name\":\"TM2 UVLO+UVUP清除 - 拉低\",\"Offset\":23,\"DataSize\":1,\"DataType\":\"uint8\",\"Endian\":\"Little\",\"Value\":0,\"WriteLast\":false,\"WriteFinal\":false}]",
+        "VerifyAfterWrite": true,
+        "ResultMode": "Action",
+        "Product": "C96"
+      },
+      "ParameterBindings": {}
+    }
+  ]
+}

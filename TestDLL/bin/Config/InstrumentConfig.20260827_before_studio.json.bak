@@ -1,0 +1,74 @@
+[
+	{
+		"UniqueIndex": 0,
+		"Name": "RES",
+		"Type": "Other",
+		"Mode": "NGI",
+		"Resource": "TCPIP0::192.168.0.123::7000::SOCKET",
+		"Parameter": "",
+		"Comment": "ProgramResistance"
+	},
+	{
+		"UniqueIndex": 1,
+		"Name": "DUTCAN",
+		"Type": "CAN",
+		"Mode": "ZLG",
+		"Resource": "192.168.0.178",
+		"Parameter": "500000.200000",
+		"Comment": ""
+	},
+	{
+		"UniqueIndex": 2,
+		"Name": "HVDC",
+		"Type": "PowerSupply",
+		"Mode": "Kewell",
+		"Resource": "TCPIP0::192.168.0.122::502::SOCKET",
+		"Parameter": "",
+		"Comment": ""
+	},
+	{
+		"UniqueIndex": 3,
+		"Name": "LVDC",
+		"Type": "PowerSupply",
+		"Mode": "IT",
+		"Resource": "USB0::0x2EC7::0x6800::802035043807820002::INSTR",
+		"Parameter": "",
+		"Comment": ""
+	},
+	{
+		"UniqueIndex": 4,
+		"Name": "DMM",
+		"Type": "DMM",
+		"Mode": "Kewell",
+		"Resource": "TCPIP0::A-34461A-00000.local::inst0::INSTR",
+		"Parameter": "",
+		"Comment": ""
+	},
+	{
+		"UniqueIndex": 5,
+		"Name": "MOXA0",
+		"Type": "MOXA",
+		"Mode": "Kewell",
+		"Resource": "192.168.0.124",
+		"Parameter": "",
+		"Comment": ""
+	},
+	{
+		"UniqueIndex": 6,
+		"Name": "MOXA1",
+		"Type": "MOXA",
+		"Mode": "Kewell",
+		"Resource": "192.168.0.125",
+		"Parameter": "",
+		"Comment": ""
+	},
+	{
+		"UniqueIndex": 7,
+		"Name": "RELAY",
+		"Type": "DIO",
+		"Mode": "Kewell",
+		"Resource": "192.168.0.126",
+		"Parameter": "",
+		"Comment": ""
+	}
+]

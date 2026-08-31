@@ -1,0 +1,534 @@
+VERSION "HIPBNYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY/4/%%%/4/'%**4YYY///"
+
+
+NS_ : 
+	NS_DESC_
+	CM_
+	BA_DEF_
+	BA_
+	VAL_
+	CAT_DEF_
+	CAT_
+	FILTER
+	BA_DEF_DEF_
+	EV_DATA_
+	ENVVAR_DATA_
+	SGTYPE_
+	SGTYPE_VAL_
+	BA_DEF_SGTYPE_
+	BA_SGTYPE_
+	SIG_TYPE_REF_
+	VAL_TABLE_
+	SIG_GROUP_
+	SIG_VALTYPE_
+	SIGTYPE_VALTYPE_
+	BO_TX_BU_
+	BA_DEF_REL_
+	BA_REL_
+	BA_DEF_DEF_REL_
+	BU_SG_REL_
+	BU_EV_REL_
+	BU_BO_REL_
+	SG_MUL_VAL_
+
+BS_:
+
+BU_: PMSM_Emulator Resolver PC
+VAL_TABLE_ M_A 1 "自动模式_PMSM Emulator控制旋变" 0 "手动模式_PC直接控制旋变" ;
+VAL_TABLE_ mode_switch 1 "position mode" 0 "speed mode" ;
+VAL_TABLE_ Debug 11 "Normal" 10 "Debug" ;
+
+
+BO_ 3221225472 VECTOR__INDEPENDENT_SIG_MSG: 0 Vector__XXX
+ SG_ Version2 : 0|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ sin_temp_mep : 0|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Position : 0|12@0+ (0.36,0) [0|1050] "" Vector__XXX
+ SG_ Sin_Cos_phase : 0|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ mode_switch : 0|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Polarpair : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Sin_gain : 0|8@0+ (0.78125,0) [0|0] "" Vector__XXX
+ SG_ deltaCos : 0|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ _Sin_gain_delta_enable : 0|4@0+ (1,0) [0|15] "" Vector__XXX
+ SG_ deltaSin : 0|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ _phase_enable : 0|4@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ Speed_PMSM_FB : 0|24@0- (0.619947436,0) [0|0] "r/min" Vector__XXX
+ SG_ Speed_set : 0|15@1- (1,0) [0|0] "r/min" Vector__XXX
+ SG_ New_Signal_42 : 0|8@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Electrical_torque : 0|12@0- (1,0) [0|0] "N.m" Vector__XXX
+ SG_ Udc_volt_cmd : 0|13@1- (1,0) [0|0] "V" Vector__XXX
+ SG_ send_H : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ _gain_enable_Harmonic : 0|4@1+ (1,0) [0|14] "" Vector__XXX
+ SG_ Gain_value_Harmonic : 0|8@1+ (0.78125,0) [0|0] "" Vector__XXX
+ SG_ Func_H : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Harmonic_Fre : 0|24@0- (0.041385372,0) [0|0] "Hz" Vector__XXX
+
+BO_ 2433814836 Resolver_resp_EM6: 8 Vector__XXX
+ SG_ Version : 4|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Polarpair_FB : 0|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Speed_set_FB : 15|24@0- (0.619947436,0) [0|0] "r/min" Vector__XXX
+
+BO_ 2433814832 Resolver_resp_EM5: 8 Vector__XXX
+ SG_ Version : 4|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Polarpair_FB : 0|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Speed_set_FB : 15|24@0- (0.619947436,0) [0|0] "r/min" Vector__XXX
+
+BO_ 2433814828 Resolver_resp_EM4: 8 Vector__XXX
+ SG_ Version : 4|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Polarpair_FB : 0|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Speed_set_FB : 15|24@0- (0.619947436,0) [0|0] "r/min" Vector__XXX
+
+BO_ 2147483680 gain_m_EM6: 8 Vector__XXX
+ SG_ Speed_slope : 55|16@0+ (0.909876209,0) [0|0] "(r/min)/s" Vector__XXX
+ SG_ M_A : 14|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ mode_switch : 13|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Position : 39|12@0+ (0.36,0) [0|1050] "" Vector__XXX
+ SG_ send : 12|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Sin_Cos_phase : 31|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ cos_temp_mep : 23|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ _gain_enable : 8|4@1+ (1,0) [0|14] "" Vector__XXX
+ SG_ Gain_value : 0|8@1+ (0.78125,0) [0|0] "" Vector__XXX
+
+BO_ 2147483664 gain_m_EM5: 8 Vector__XXX
+ SG_ Speed_slope : 55|16@0+ (0.909876209,0) [0|0] "(r/min)/s" Vector__XXX
+ SG_ M_A : 14|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ mode_switch : 13|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Position : 39|12@0+ (0.36,0) [0|1050] "" Vector__XXX
+ SG_ send : 12|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Sin_Cos_phase : 31|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ cos_temp_mep : 23|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ _gain_enable : 8|4@1+ (1,0) [0|14] "" Vector__XXX
+ SG_ Gain_value : 0|8@1+ (0.78125,0) [0|0] "" Vector__XXX
+
+BO_ 2147483656 gain_m_EM4: 8 Vector__XXX
+ SG_ Speed_slope : 55|16@0+ (0.909876209,0) [0|0] "(r/min)/s" Vector__XXX
+ SG_ M_A : 14|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ mode_switch : 13|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Position : 39|12@0+ (0.36,0) [0|1050] "" Vector__XXX
+ SG_ send : 12|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Sin_Cos_phase : 31|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ cos_temp_mep : 23|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ _gain_enable : 8|4@1+ (1,0) [0|14] "" Vector__XXX
+ SG_ Gain_value : 0|8@1+ (0.78125,0) [0|0] "" Vector__XXX
+
+BO_ 2503160627 Res1_set_EM6: 8 Vector__XXX
+ SG_ Neg_speed_factor : 7|10@0+ (0.0009765625,0) [0|0] "" Vector__XXX
+
+BO_ 2505257779 Res1_set_EM5: 8 Vector__XXX
+ SG_ Neg_speed_factor : 7|10@0+ (0.0009765625,0) [0|0] "" Vector__XXX
+
+BO_ 2505388851 Res1_set_EM4: 8 Vector__XXX
+ SG_ Neg_speed_factor : 7|10@0+ (0.0009765625,0) [0|0] "" Vector__XXX
+
+BO_ 2505419294 Resolver_Set_EM6: 8 Vector__XXX
+ SG_ Func M : 4|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Speed : 15|24@0- (0.619947436,0) [0|0] "r/min" Vector__XXX
+ SG_ Polarpair : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Sin_gain m10 : 47|8@0+ (0.78125,0) [0|0] "" Vector__XXX
+ SG_ deltaCos m10 : 63|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ _Sin_gain_delta_enable m10 : 51|4@0+ (1,0) [0|15] "" Vector__XXX
+ SG_ deltaSin m10 : 39|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ _phase_enable m10 : 55|4@0+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2505419292 Resolver_Set_EM5: 8 Vector__XXX
+ SG_ Func M : 4|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Speed : 15|24@0- (0.619947436,0) [0|0] "r/min" Vector__XXX
+ SG_ Polarpair : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Sin_gain m10 : 47|8@0+ (0.78125,0) [0|0] "" Vector__XXX
+ SG_ deltaCos m10 : 63|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ _Sin_gain_delta_enable m10 : 51|4@0+ (1,0) [0|15] "" Vector__XXX
+ SG_ deltaSin m10 : 39|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ _phase_enable m10 : 55|4@0+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2505419290 Resolver_Set_EM4: 8 Vector__XXX
+ SG_ Func M : 4|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Speed : 15|24@0- (0.619947436,0) [0|0] "r/min" Vector__XXX
+ SG_ Polarpair : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Sin_gain m10 : 47|8@0+ (0.78125,0) [0|0] "" Vector__XXX
+ SG_ deltaCos m10 : 63|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ _Sin_gain_delta_enable m10 : 51|4@0+ (1,0) [0|15] "" Vector__XXX
+ SG_ deltaSin m10 : 39|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ _phase_enable m10 : 55|4@0+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2505375761 DA_Out_2: 8 Vector__XXX
+ SG_ AO2 : 23|16@0+ (0.001515,0) [0|5] "" Vector__XXX
+ SG_ AO1 : 55|16@0+ (0.001515,0) [0|5] "" Vector__XXX
+ SG_ DO12 : 11|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO11 : 10|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO10 : 9|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO9 : 8|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO8 : 7|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO7 : 6|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO6 : 5|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO5 : 4|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO4 : 3|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO3 : 2|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO2 : 1|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO1 : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2147483652 gain_m_EM3: 8 Vector__XXX
+ SG_ Speed_slope : 55|16@0+ (0.909876209,0) [0|0] "(r/min)/s" Vector__XXX
+ SG_ M_A : 14|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ mode_switch : 13|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Position : 39|12@0+ (0.36,0) [0|1050] "" Vector__XXX
+ SG_ send : 12|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Sin_Cos_phase : 31|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ cos_temp_mep : 23|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ _gain_enable : 8|4@1+ (1,0) [0|14] "" Vector__XXX
+ SG_ Gain_value : 0|8@1+ (0.78125,0) [0|0] "" Vector__XXX
+
+BO_ 2505417523 Res1_set_EM3: 8 Vector__XXX
+ SG_ Neg_speed_factor : 7|10@0+ (0.0009765625,0) [0|0] "" Vector__XXX
+
+BO_ 2433814824 Resolver_resp_EM3: 8 Vector__XXX
+ SG_ Version : 4|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Polarpair_FB : 0|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Speed_set_FB : 15|24@0- (0.619947436,0) [0|0] "r/min" Vector__XXX
+
+BO_ 2505419288 Resolver_Set_EM3: 8 Vector__XXX
+ SG_ Func M : 4|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Speed : 15|24@0- (0.619947436,0) [0|0] "r/min" Vector__XXX
+ SG_ Polarpair : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Sin_gain m10 : 47|8@0+ (0.78125,0) [0|0] "" Vector__XXX
+ SG_ deltaCos m10 : 63|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ _Sin_gain_delta_enable m10 : 51|4@0+ (1,0) [0|15] "" Vector__XXX
+ SG_ deltaSin m10 : 39|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ _phase_enable m10 : 55|4@0+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2505419315 Res1_set_EM2: 8 Vector__XXX
+ SG_ Neg_speed_factor : 7|10@0+ (0.0009765625,0) [0|0] "" Vector__XXX
+
+BO_ 2505375760 DA_Out_1: 8 Vector__XXX
+ SG_ AO2 : 23|16@0+ (0.001515,0) [0|5] "" Vector__XXX
+ SG_ AO1 : 55|16@0+ (0.001515,0) [0|5] "" Vector__XXX
+ SG_ DO12 : 11|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO11 : 10|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO10 : 9|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO9 : 8|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO8 : 7|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO7 : 6|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO6 : 5|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO5 : 4|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO4 : 3|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO3 : 2|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO2 : 1|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ DO1 : 0|1@1+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2147483650 gain_m_EM2: 8 Vector__XXX
+ SG_ Speed_slope : 55|16@0+ (0.909876209,0) [0|0] "(r/min)/s" Vector__XXX
+ SG_ M_A : 14|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ mode_switch : 13|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Position : 39|12@0+ (0.36,0) [0|1050] "" Vector__XXX
+ SG_ send : 12|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Sin_Cos_phase : 31|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ cos_temp_mep : 23|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ _gain_enable : 8|4@1+ (1,0) [0|14] "" Vector__XXX
+ SG_ Gain_value : 0|8@1+ (0.78125,0) [0|0] "" Vector__XXX
+
+BO_ 2433814820 Resolver_resp_EM2: 8 Vector__XXX
+ SG_ Version : 4|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Polarpair_FB : 0|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Speed_set_FB : 15|24@0- (0.619947436,0) [0|0] "r/min" Vector__XXX
+
+BO_ 2505419284 Resolver_Set_EM2: 8 Vector__XXX
+ SG_ Func M : 4|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Speed : 15|24@0- (0.619947436,0) [0|0] "r/min" Vector__XXX
+ SG_ Polarpair : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Sin_gain m10 : 47|8@0+ (0.78125,0) [0|0] "" Vector__XXX
+ SG_ deltaCos m10 : 63|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ _Sin_gain_delta_enable m10 : 51|4@0+ (1,0) [0|15] "" Vector__XXX
+ SG_ deltaSin m10 : 39|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ _phase_enable m10 : 55|4@0+ (1,0) [0|0] "" Vector__XXX
+
+BO_ 2505419427 Res1_set_EM1: 8 Vector__XXX
+ SG_ Neg_speed_factor : 7|10@0+ (0.0009765625,0) [0|0] "" Vector__XXX
+
+BO_ 168 IPU_TrqSpd: 8 Vector__XXX
+ SG_ IPU_IsgSpdsgn : 31|16@0+ (1,-20000) [0|0] "" Vector__XXX
+ SG_ IPU_ISGmodsts : 55|3@0+ (1,0) [0|7] "" Vector__XXX
+
+BO_ 2147483649 gain_m_EM1: 8 PC
+ SG_ Speed_slope : 55|16@0+ (0.909876209,0) [0|0] "(r/min)/s" Vector__XXX
+ SG_ M_A : 14|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ mode_switch : 13|1@1+ (1,0) [0|1] "" Vector__XXX
+ SG_ Position : 39|12@0+ (0.36,0) [0|1050] "" Vector__XXX
+ SG_ send : 12|1@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Sin_Cos_phase : 31|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ cos_temp_mep : 23|8@0+ (1,0) [0|0] "" Vector__XXX
+ SG_ _gain_enable : 8|4@1+ (1,0) [0|14] "" Vector__XXX
+ SG_ Gain_value : 0|8@1+ (0.78125,0) [0|0] "" Vector__XXX
+
+BO_ 2433814816 Resolver_resp_EM1: 8 Resolver
+ SG_ Version : 4|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Polarpair_FB : 0|4@1+ (1,0) [0|0] "" Vector__XXX
+ SG_ Speed_set_FB : 15|24@0- (0.619947436,0) [0|0] "r/min" Vector__XXX
+
+BO_ 2505419280 Resolver_Set_EM1: 8 PC
+ SG_ Func M : 4|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Speed : 15|24@0- (0.619947436,0) [0|0] "r/min" Vector__XXX
+ SG_ Polarpair : 0|4@1+ (1,0) [0|15] "" Vector__XXX
+ SG_ Sin_gain m10 : 47|8@0+ (0.78125,0) [0|0] "" Vector__XXX
+ SG_ deltaCos m10 : 63|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ _Sin_gain_delta_enable m10 : 51|4@0+ (1,0) [0|15] "" Vector__XXX
+ SG_ deltaSin m10 : 39|8@0- (1,0) [0|0] "" Vector__XXX
+ SG_ _phase_enable m10 : 55|4@0+ (1,0) [0|0] "" Vector__XXX
+
+
+
+CM_ BU_ Resolver "Resolver Emulator machine";
+CM_ BU_ PC "Resolver Emulator";
+CM_ BO_ 3221225472 "This is a message for not used signals, created by Vector CANdb++ DBC OLE DB Provider.";
+CM_ SG_ 3221225472 Position "motor rotor position
+0~360°";
+CM_ SG_ 3221225472 Sin_Cos_phase "sin cos phase err compensate";
+CM_ SG_ 3221225472 Polarpair "number of pole-pairs of resolver";
+CM_ SG_ 3221225472 Sin_gain "Sinusoidal gain
+";
+CM_ SG_ 3221225472 deltaCos "Cosine bias";
+CM_ SG_ 3221225472 _Sin_gain_delta_enable "tiaoshi=A，标定模式
+tiaoshi=B，原始参数模式";
+CM_ SG_ 3221225472 deltaSin "Sinusoidal bias";
+CM_ SG_ 3221225472 _phase_enable "tiaoshi_phase=A，标定模式
+tiaoshi_phase=B，原始参数模式";
+CM_ SG_ 3221225472 Speed_PMSM_FB "Speed command
+";
+CM_ SG_ 3221225472 Speed_set "PMSM转速设定值";
+CM_ SG_ 3221225472 Electrical_torque "电磁转矩";
+CM_ SG_ 3221225472 Udc_volt_cmd "母线电压设定值";
+CM_ SG_ 3221225472 _gain_enable_Harmonic "gain_m=0xA，enable";
+CM_ SG_ 3221225472 Func_H "if Func=H,调试界面出现";
+CM_ BO_ 2433814836 "旋变（轴角）模拟器回读报文";
+CM_ SG_ 2433814836 Version "Resolver Emulator Firmware version";
+CM_ SG_ 2433814836 Polarpair_FB "Polarpair set value feedback";
+CM_ SG_ 2433814836 Speed_set_FB "Speed set value feedback";
+CM_ BO_ 2433814832 "旋变（轴角）模拟器回读报文";
+CM_ SG_ 2433814832 Version "Resolver Emulator Firmware version";
+CM_ SG_ 2433814832 Polarpair_FB "Polarpair set value feedback";
+CM_ SG_ 2433814832 Speed_set_FB "Speed set value feedback";
+CM_ BO_ 2433814828 "旋变（轴角）模拟器回读报文";
+CM_ SG_ 2433814828 Version "Resolver Emulator Firmware version";
+CM_ SG_ 2433814828 Polarpair_FB "Polarpair set value feedback";
+CM_ SG_ 2433814828 Speed_set_FB "Speed set value feedback";
+CM_ SG_ 2147483680 M_A "M :   PC控制旋变模拟器（手动模式）
+A  :   PMSM_Emulator控制旋变模拟器（自动模式）";
+CM_ SG_ 2147483680 mode_switch "旋变模拟器转速/角度控制模式切换开关";
+CM_ SG_ 2147483680 Position "motor rotor position
+0~360°";
+CM_ SG_ 2147483680 Sin_Cos_phase "sin cos phase err compensate";
+CM_ SG_ 2147483680 _gain_enable "gain_m=0xA，enable";
+CM_ SG_ 2147483664 M_A "M :   PC控制旋变模拟器（手动模式）
+A  :   PMSM_Emulator控制旋变模拟器（自动模式）";
+CM_ SG_ 2147483664 mode_switch "旋变模拟器转速/角度控制模式切换开关";
+CM_ SG_ 2147483664 Position "motor rotor position
+0~360°";
+CM_ SG_ 2147483664 Sin_Cos_phase "sin cos phase err compensate";
+CM_ SG_ 2147483664 _gain_enable "gain_m=0xA，enable";
+CM_ SG_ 2147483656 M_A "M :   PC控制旋变模拟器（手动模式）
+A  :   PMSM_Emulator控制旋变模拟器（自动模式）";
+CM_ SG_ 2147483656 mode_switch "旋变模拟器转速/角度控制模式切换开关";
+CM_ SG_ 2147483656 Position "motor rotor position
+0~360°";
+CM_ SG_ 2147483656 Sin_Cos_phase "sin cos phase err compensate";
+CM_ SG_ 2147483656 _gain_enable "gain_m=0xA，enable";
+CM_ BO_ 2503160627 "ふかいてんそくどちょうせいけいすう";
+CM_ BO_ 2505257779 "ふかいてんそくどちょうせいけいすう";
+CM_ BO_ 2505388851 "ふかいてんそくどちょうせいけいすう";
+CM_ BO_ 2505419294 "旋变（轴角）模拟器设定命令报文
+Command message for setting the rotary transformer (axis angle) simulator
+スピンシミュレータ設定コマンドメッセージ
+Befehlsnachricht zur Einstellung des Drehtransformatorsimulators (Achswinkel)
+";
+CM_ SG_ 2505419294 Func "if Func=H,调试界面出现";
+CM_ SG_ 2505419294 Speed "Speed command
+";
+CM_ SG_ 2505419294 Polarpair "number of pole-pairs of resolver";
+CM_ SG_ 2505419294 Sin_gain "Sinusoidal gain
+";
+CM_ SG_ 2505419294 deltaCos "Cosine bias";
+CM_ SG_ 2505419294 _Sin_gain_delta_enable "tiaoshi=A，标定模式
+tiaoshi=B，原始参数模式";
+CM_ SG_ 2505419294 deltaSin "Sinusoidal bias";
+CM_ SG_ 2505419294 _phase_enable "tiaoshi_phase=A，标定模式
+tiaoshi_phase=B，原始参数模式";
+CM_ BO_ 2505419292 "旋变（轴角）模拟器设定命令报文
+Command message for setting the rotary transformer (axis angle) simulator
+スピンシミュレータ設定コマンドメッセージ
+Befehlsnachricht zur Einstellung des Drehtransformatorsimulators (Achswinkel)
+";
+CM_ SG_ 2505419292 Func "if Func=H,调试界面出现";
+CM_ SG_ 2505419292 Speed "Speed command
+";
+CM_ SG_ 2505419292 Polarpair "number of pole-pairs of resolver";
+CM_ SG_ 2505419292 Sin_gain "Sinusoidal gain
+";
+CM_ SG_ 2505419292 deltaCos "Cosine bias";
+CM_ SG_ 2505419292 _Sin_gain_delta_enable "tiaoshi=A，标定模式
+tiaoshi=B，原始参数模式";
+CM_ SG_ 2505419292 deltaSin "Sinusoidal bias";
+CM_ SG_ 2505419292 _phase_enable "tiaoshi_phase=A，标定模式
+tiaoshi_phase=B，原始参数模式";
+CM_ BO_ 2505419290 "旋变（轴角）模拟器设定命令报文
+Command message for setting the rotary transformer (axis angle) simulator
+スピンシミュレータ設定コマンドメッセージ
+Befehlsnachricht zur Einstellung des Drehtransformatorsimulators (Achswinkel)
+";
+CM_ SG_ 2505419290 Func "if Func=H,调试界面出现";
+CM_ SG_ 2505419290 Speed "Speed command
+";
+CM_ SG_ 2505419290 Polarpair "number of pole-pairs of resolver";
+CM_ SG_ 2505419290 Sin_gain "Sinusoidal gain
+";
+CM_ SG_ 2505419290 deltaCos "Cosine bias";
+CM_ SG_ 2505419290 _Sin_gain_delta_enable "tiaoshi=A，标定模式
+tiaoshi=B，原始参数模式";
+CM_ SG_ 2505419290 deltaSin "Sinusoidal bias";
+CM_ SG_ 2505419290 _phase_enable "tiaoshi_phase=A，标定模式
+tiaoshi_phase=B，原始参数模式";
+CM_ SG_ 2147483652 M_A "M :   PC控制旋变模拟器（手动模式）
+A  :   PMSM_Emulator控制旋变模拟器（自动模式）";
+CM_ SG_ 2147483652 mode_switch "旋变模拟器转速/角度控制模式切换开关";
+CM_ SG_ 2147483652 Position "motor rotor position
+0~360°";
+CM_ SG_ 2147483652 Sin_Cos_phase "sin cos phase err compensate";
+CM_ SG_ 2147483652 _gain_enable "gain_m=0xA，enable";
+CM_ BO_ 2505417523 "ふかいてんそくどちょうせいけいすう";
+CM_ BO_ 2433814824 "旋变（轴角）模拟器回读报文";
+CM_ SG_ 2433814824 Version "Resolver Emulator Firmware version";
+CM_ SG_ 2433814824 Polarpair_FB "Polarpair set value feedback";
+CM_ SG_ 2433814824 Speed_set_FB "Speed set value feedback";
+CM_ BO_ 2505419288 "旋变（轴角）模拟器设定命令报文
+Command message for setting the rotary transformer (axis angle) simulator
+スピンシミュレータ設定コマンドメッセージ
+Befehlsnachricht zur Einstellung des Drehtransformatorsimulators (Achswinkel)
+";
+CM_ SG_ 2505419288 Func "if Func=H,调试界面出现";
+CM_ SG_ 2505419288 Speed "Speed command
+";
+CM_ SG_ 2505419288 Polarpair "number of pole-pairs of resolver";
+CM_ SG_ 2505419288 Sin_gain "Sinusoidal gain
+";
+CM_ SG_ 2505419288 deltaCos "Cosine bias";
+CM_ SG_ 2505419288 _Sin_gain_delta_enable "tiaoshi=A，标定模式
+tiaoshi=B，原始参数模式";
+CM_ SG_ 2505419288 deltaSin "Sinusoidal bias";
+CM_ SG_ 2505419288 _phase_enable "tiaoshi_phase=A，标定模式
+tiaoshi_phase=B，原始参数模式";
+CM_ BO_ 2505419315 "ふかいてんそくどちょうせいけいすう";
+CM_ SG_ 2147483650 M_A "M :   PC控制旋变模拟器（手动模式）
+A  :   PMSM_Emulator控制旋变模拟器（自动模式）";
+CM_ SG_ 2147483650 mode_switch "旋变模拟器转速/角度控制模式切换开关";
+CM_ SG_ 2147483650 Position "motor rotor position
+0~360°";
+CM_ SG_ 2147483650 Sin_Cos_phase "sin cos phase err compensate";
+CM_ SG_ 2147483650 _gain_enable "gain_m=0xA，enable";
+CM_ BO_ 2433814820 "旋变（轴角）模拟器回读报文";
+CM_ SG_ 2433814820 Version "Resolver Emulator Firmware version";
+CM_ SG_ 2433814820 Polarpair_FB "Polarpair set value feedback";
+CM_ SG_ 2433814820 Speed_set_FB "Speed set value feedback";
+CM_ BO_ 2505419284 "旋变（轴角）模拟器设定命令报文
+Command message for setting the rotary transformer (axis angle) simulator
+スピンシミュレータ設定コマンドメッセージ
+Befehlsnachricht zur Einstellung des Drehtransformatorsimulators (Achswinkel)
+";
+CM_ SG_ 2505419284 Func "if Func=H,调试界面出现";
+CM_ SG_ 2505419284 Speed "Speed command
+";
+CM_ SG_ 2505419284 Polarpair "number of pole-pairs of resolver";
+CM_ SG_ 2505419284 Sin_gain "Sinusoidal gain
+";
+CM_ SG_ 2505419284 deltaCos "Cosine bias";
+CM_ SG_ 2505419284 _Sin_gain_delta_enable "tiaoshi=A，标定模式
+tiaoshi=B，原始参数模式";
+CM_ SG_ 2505419284 deltaSin "Sinusoidal bias";
+CM_ SG_ 2505419284 _phase_enable "tiaoshi_phase=A，标定模式
+tiaoshi_phase=B，原始参数模式";
+CM_ BO_ 2505419427 "ふかいてんそくどちょうせいけいすう";
+CM_ BO_ 168 "无效";
+CM_ SG_ 2147483649 M_A "M :   PC控制旋变模拟器（手动模式）
+A  :   PMSM_Emulator控制旋变模拟器（自动模式）";
+CM_ SG_ 2147483649 mode_switch "旋变模拟器转速/角度控制模式切换开关";
+CM_ SG_ 2147483649 Position "motor rotor position
+0~360°";
+CM_ SG_ 2147483649 Sin_Cos_phase "sin cos phase err compensate";
+CM_ SG_ 2147483649 _gain_enable "gain_m=0xA，enable";
+CM_ BO_ 2433814816 "旋变（轴角）模拟器回读报文";
+CM_ SG_ 2433814816 Version "Resolver Emulator Firmware version";
+CM_ SG_ 2433814816 Polarpair_FB "Polarpair set value feedback";
+CM_ SG_ 2433814816 Speed_set_FB "Speed set value feedback";
+CM_ BO_ 2505419280 "旋变（轴角）模拟器设定命令报文
+Command message for setting the rotary transformer (axis angle) simulator
+スピンシミュレータ設定コマンドメッセージ
+Befehlsnachricht zur Einstellung des Drehtransformatorsimulators (Achswinkel)
+";
+CM_ SG_ 2505419280 Func "if Func=H,调试界面出现";
+CM_ SG_ 2505419280 Speed "Speed command
+";
+CM_ SG_ 2505419280 Polarpair "number of pole-pairs of resolver";
+CM_ SG_ 2505419280 Sin_gain "Sinusoidal gain
+";
+CM_ SG_ 2505419280 deltaCos "Cosine bias";
+CM_ SG_ 2505419280 _Sin_gain_delta_enable "tiaoshi=A，标定模式
+tiaoshi=B，原始参数模式";
+CM_ SG_ 2505419280 deltaSin "Sinusoidal bias";
+CM_ SG_ 2505419280 _phase_enable "tiaoshi_phase=A，标定模式
+tiaoshi_phase=B，原始参数模式";
+BA_DEF_ BO_  "GenMsgSendType" ENUM  "Cycle","NoSendType","IfActive";
+BA_DEF_ BO_  "GenMsgCycleTimeActive" INT 0 0;
+BA_DEF_ BO_  "GenMsgCycleTime" INT 10 1000;
+BA_DEF_DEF_  "GenMsgSendType" "Cycle";
+BA_DEF_DEF_  "GenMsgCycleTimeActive" 0;
+BA_DEF_DEF_  "GenMsgCycleTime" 300;
+BA_ "GenMsgCycleTime" BO_ 2505419294 20;
+BA_ "GenMsgCycleTime" BO_ 2505419292 20;
+BA_ "GenMsgCycleTime" BO_ 2505419290 20;
+BA_ "GenMsgCycleTime" BO_ 2505419288 20;
+BA_ "GenMsgCycleTime" BO_ 2505419284 20;
+BA_ "GenMsgCycleTime" BO_ 2505419280 20;
+VAL_ 3221225472 mode_switch 1 "position mode" 0 "speed mode" ;
+VAL_ 3221225472 _Sin_gain_delta_enable 11 "Normal" 10 "Debug" ;
+VAL_ 3221225472 _phase_enable 11 "Normal" 10 "Debug" ;
+VAL_ 3221225472 Speed_PMSM_FB 11 "Normal" 10 "Debug" ;
+VAL_ 3221225472 _gain_enable_Harmonic 11 "Normal" 10 "Debug" ;
+VAL_ 3221225472 Func_H 11 "Normal" 10 "Debug" ;
+VAL_ 2147483680 M_A 1 "自动模式_PMSM Emulator控制旋变" 0 "手动模式_PC直接控制旋变" ;
+VAL_ 2147483680 mode_switch 1 "position mode" 0 "speed mode" ;
+VAL_ 2147483680 _gain_enable 11 "Normal" 10 "Debug" ;
+VAL_ 2147483664 M_A 1 "自动模式_PMSM Emulator控制旋变" 0 "手动模式_PC直接控制旋变" ;
+VAL_ 2147483664 mode_switch 1 "position mode" 0 "speed mode" ;
+VAL_ 2147483664 _gain_enable 11 "Normal" 10 "Debug" ;
+VAL_ 2147483656 M_A 1 "自动模式_PMSM Emulator控制旋变" 0 "手动模式_PC直接控制旋变" ;
+VAL_ 2147483656 mode_switch 1 "position mode" 0 "speed mode" ;
+VAL_ 2147483656 _gain_enable 11 "Normal" 10 "Debug" ;
+VAL_ 2505419294 Func 11 "Normal" 10 "Debug" ;
+VAL_ 2505419294 Speed 11 "Normal" 10 "Debug" ;
+VAL_ 2505419294 _Sin_gain_delta_enable 11 "Normal" 10 "Debug" ;
+VAL_ 2505419294 _phase_enable 11 "Normal" 10 "Debug" ;
+VAL_ 2505419292 Func 11 "Normal" 10 "Debug" ;
+VAL_ 2505419292 Speed 11 "Normal" 10 "Debug" ;
+VAL_ 2505419292 _Sin_gain_delta_enable 11 "Normal" 10 "Debug" ;
+VAL_ 2505419292 _phase_enable 11 "Normal" 10 "Debug" ;
+VAL_ 2505419290 Func 11 "Normal" 10 "Debug" ;
+VAL_ 2505419290 Speed 11 "Normal" 10 "Debug" ;
+VAL_ 2505419290 _Sin_gain_delta_enable 11 "Normal" 10 "Debug" ;
+VAL_ 2505419290 _phase_enable 11 "Normal" 10 "Debug" ;
+VAL_ 2147483652 M_A 1 "自动模式_PMSM Emulator控制旋变" 0 "手动模式_PC直接控制旋变" ;
+VAL_ 2147483652 mode_switch 1 "position mode" 0 "speed mode" ;
+VAL_ 2147483652 _gain_enable 11 "Normal" 10 "Debug" ;
+VAL_ 2505419288 Func 11 "Normal" 10 "Debug" ;
+VAL_ 2505419288 Speed 11 "Normal" 10 "Debug" ;
+VAL_ 2505419288 _Sin_gain_delta_enable 11 "Normal" 10 "Debug" ;
+VAL_ 2505419288 _phase_enable 11 "Normal" 10 "Debug" ;
+VAL_ 2147483650 M_A 1 "自动模式_PMSM Emulator控制旋变" 0 "手动模式_PC直接控制旋变" ;
+VAL_ 2147483650 mode_switch 1 "position mode" 0 "speed mode" ;
+VAL_ 2147483650 _gain_enable 11 "Normal" 10 "Debug" ;
+VAL_ 2505419284 Func 11 "Normal" 10 "Debug" ;
+VAL_ 2505419284 Speed 11 "Normal" 10 "Debug" ;
+VAL_ 2505419284 _Sin_gain_delta_enable 11 "Normal" 10 "Debug" ;
+VAL_ 2505419284 _phase_enable 11 "Normal" 10 "Debug" ;
+VAL_ 2147483649 M_A 1 "自动模式_PMSM Emulator控制旋变" 0 "手动模式_PC直接控制旋变" ;
+VAL_ 2147483649 mode_switch 1 "position mode" 0 "speed mode" ;
+VAL_ 2147483649 _gain_enable 11 "Normal" 10 "Debug" ;
+VAL_ 2505419280 Func 11 "Normal" 10 "Debug" ;
+VAL_ 2505419280 Speed 11 "Normal" 10 "Debug" ;
+VAL_ 2505419280 _Sin_gain_delta_enable 11 "Normal" 10 "Debug" ;
+VAL_ 2505419280 _phase_enable 11 "Normal" 10 "Debug" ;
+

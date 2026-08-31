@@ -1,0 +1,9 @@
+{
+  "ProfileName": "Debug_CAN_Only",
+  "Description": "仅调试 CAN：产品 + 辅驱 + 旋变",
+  "Instruments": [
+    { "Name": "DUTCAN", "Type": "CAN", "Mode": "ZLG", "Resource": "192.166.6.10", "Parameter": "52,2,500000,8000", "Comment": "产品 CAN", "Initialize": true },
+    { "Name": "AUXCAN", "Type": "CAN", "Mode": "ZLG", "Resource": "192.166.6.10", "Parameter": "52,0,500000,8000", "Comment": "辅驱 CAN", "Initialize": true },
+    { "Name": "RESOLVERCAN", "Type": "CAN", "Mode": "ZLG", "Resource": "192.166.6.10", "Parameter": "52,1,500000,8000", "Comment": "旋变 CAN", "Initialize": true }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "Id": "c96-std-motor-temp",
+  "Name": "电机温度模拟与读取",
+  "Category": "温度",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [
+    {
+      "Name": "Channel",
+      "DisplayName": "电阻通道",
+      "Type": "int",
+      "DefaultValue": 1,
+      "Unit": "",
+      "Description": "",
+      "Required": true
+    },
+    {
+      "Name": "Resistance",
+      "DisplayName": "模拟电阻",
+      "Type": "double",
+      "DefaultValue": 1097.335,
+      "Unit": "ohm",
+      "Description": "",
+      "Required": true
+    },
+    {
+      "Name": "TableIndex",
+      "DisplayName": "产品信号偏移",
+      "Type": "int",
+      "DefaultValue": 12,
+      "Unit": "byte",
+      "Description": "",
+      "Required": true
+    },
+    {
+      "Name": "LowLimit",
+      "DisplayName": "温度下限",
+      "Type": "double",
+      "DefaultValue": 20.0,
+      "Unit": "degC",
+      "Description": "",
+      "Required": true
+    },
+    {
+      "Name": "HighLimit",
+      "DisplayName": "温度上限",
+      "Type": "double",
+      "DefaultValue": 30.0,
+      "Unit": "degC",
+      "Description": "",
+      "Required": true
+    }
+  ],
+  "Steps": [
+    {
+      "Id": "962dfa92977e46b2bc22c886f7f564a1",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "设置温度模拟电阻",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": true,
+        "Device": "RES",
+        "Operation": "SetResistance",
+        "ResultMode": "Action",
+        "ResValue": 1097.335,
+        "Channel": 1
+      },
+      "ParameterBindings": {
+        "ResValue": "Resistance",
+        "Channel": "Channel"
+      }
+    },
+    {
+      "Id": "c0ed1b893b6344f4bd9471df9360d6b9",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取产品电机温度",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANSignal",
+        "RecordingLog": true,
+        "Operation": "Read",
+        "ResultMode": "NumericLimit",
+        "AddrOffset": 0,
+        "TableIndex": 12,
+        "DataSize": 4,
+        "DataType": "float32",
+        "LowLimit": 20.0,
+        "HighLimit": 30.0,
+        "Comtype": "GELE",
+        "Unit": "degC"
+      },
+      "ParameterBindings": {
+        "TableIndex": "TableIndex",
+        "LowLimit": "LowLimit",
+        "HighLimit": "HighLimit"
+      }
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "ProfileName": "FCT006_Full",
+  "Description": "FCT006 整机仪器清单（Resource 需按机台填写）",
+  "Instruments": [
+    { "Name": "DUTCAN", "Type": "CAN", "Mode": "ZLG", "Resource": "192.166.6.10", "Parameter": "52,2,500000,8000", "Comment": "产品 CAN", "Initialize": true },
+    { "Name": "AUXCAN", "Type": "CAN", "Mode": "ZLG", "Resource": "192.166.6.10", "Parameter": "52,0,500000,8000", "Comment": "辅驱 CAN", "Initialize": true },
+    { "Name": "RESOLVERCAN", "Type": "CAN", "Mode": "ZLG", "Resource": "192.166.6.10", "Parameter": "52,1,500000,8000", "Comment": "旋变 CAN", "Initialize": false },
+    { "Name": "LVDC", "Type": "PowerSupply", "Mode": "IT", "Resource": "", "Parameter": "", "Comment": "KL30", "Initialize": false },
+    { "Name": "LVDC_KL15", "Type": "PowerSupply", "Mode": "IT", "Resource": "", "Parameter": "", "Comment": "KL15", "Initialize": false },
+    { "Name": "HVDC", "Type": "PowerSupply", "Mode": "Kewell", "Resource": "", "Parameter": "", "Comment": "高压源", "Initialize": false },
+    { "Name": "DMM", "Type": "DMM", "Mode": "Keysight", "Resource": "", "Parameter": "", "Comment": "34461A", "Initialize": false },
+    { "Name": "RES", "Type": "Other", "Mode": "NGI", "Resource": "", "Parameter": "", "Comment": "电阻模拟器", "Initialize": false },
+    { "Name": "DAQ", "Type": "DAQ", "Mode": "NI", "Resource": "NI-9227", "Parameter": "", "Comment": "NI-9227", "Initialize": false },
+    { "Name": "RELAY_FCT", "Type": "DIO", "Mode": "SHT_48SEDO_A", "Resource": "", "Parameter": "502,1", "Comment": "FCT 功能板", "Initialize": false },
+    { "Name": "RELAY_HVMUX", "Type": "DIO", "Mode": "SHT_48SEDO_A", "Resource": "", "Parameter": "502,1", "Comment": "高压选择板", "Initialize": false },
+    { "Name": "DCDC_LOAD", "Type": "ElectronicLoad", "Mode": "AN23600E", "Resource": "", "Parameter": "2101", "Comment": "电子负载", "Initialize": false },
+    { "Name": "PLC", "Type": "PLC", "Mode": "S7", "Resource": "", "Parameter": "30", "Comment": "PLC", "Initialize": false }
+  ]
+}

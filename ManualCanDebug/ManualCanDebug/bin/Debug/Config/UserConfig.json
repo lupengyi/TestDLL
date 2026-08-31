@@ -1,0 +1,25 @@
+{
+  "UserList": [
+    {
+      "IsAdmin": true,
+      "UserName": "Administrator",
+      "Password": "C6yyhzVrUPc=",
+      "IsEditing": false,
+      "Comment": "Administrator"
+    },
+    {
+      "IsAdmin": false,
+      "UserName": "Operator",
+      "Password": "VIhahvKsP7wvF1NgQA6bFg==",
+      "IsEditing": true,
+      "Comment": "Operator"
+    },
+    {
+      "IsAdmin": false,
+      "UserName": "Operator3",
+      "Password": "C6yyhzVrUPc=",
+      "IsEditing": false,
+      "Comment": "Operator"
+    }
+  ]
+}

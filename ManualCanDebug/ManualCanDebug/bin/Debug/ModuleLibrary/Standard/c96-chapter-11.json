@@ -1,0 +1,27 @@
+{
+  "Id": "c96-chapter-11",
+  "Name": "11 主动放电（预留）",
+  "Category": "章节",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "dcae408996cf4e6b9700c6038b27c68d",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-reserved",
+      "ReferencedBlockName": "未确认功能占位",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Description": "主动放电故障注入与命令未定义"
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    }
+  ]
+}

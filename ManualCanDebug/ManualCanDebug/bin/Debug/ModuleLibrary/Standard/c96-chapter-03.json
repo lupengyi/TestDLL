@@ -1,0 +1,99 @@
+{
+  "Id": "c96-chapter-03",
+  "Name": "03 双旋变模拟",
+  "Category": "章节",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "bb69b25f2d144f60b86b6e5b549258fc",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-resolver-speed",
+      "ReferencedBlockName": "双驱旋变转速验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Speed": 700.0,
+        "LowLimit": 690.0,
+        "HighLimit": 710.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "9e8da617247d45799ca39193f65537f7",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-resolver-speed",
+      "ReferencedBlockName": "双驱旋变转速验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Speed": 3500.0,
+        "LowLimit": 3470.0,
+        "HighLimit": 3530.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "91cf70e1b2e541259d027a4f6a8f5c67",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-resolver-speed",
+      "ReferencedBlockName": "双驱旋变转速验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Speed": 7000.0,
+        "LowLimit": 6970.0,
+        "HighLimit": 7030.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "3ff0b2491692480b8470f9b77d37917c",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-resolver-position",
+      "ReferencedBlockName": "双驱旋变角度验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Position": 0.0,
+        "LowLimit": -2.0,
+        "HighLimit": 2.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "b2dd04db2f0a40ad9454bc134167f56e",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-resolver-position",
+      "ReferencedBlockName": "双驱旋变角度验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Position": 225.0,
+        "LowLimit": 223.0,
+        "HighLimit": 227.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "72cf8df1dbe34191bc0dbc1fe170901e",
+      "Enabled": true,
+      "ReferencedBlockId": "c96-std-resolver-position",
+      "ReferencedBlockName": "双驱旋变角度验证",
+      "IsModuleReference": true,
+      "ReferencedParameterOverrides": {
+        "Position": 315.0,
+        "LowLimit": 313.0,
+        "HighLimit": 317.0
+      },
+      "StepProperties": {},
+      "ParameterBindings": {}
+    }
+  ]
+}

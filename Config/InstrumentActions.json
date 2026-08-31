@@ -1,0 +1,2365 @@
+[
+  {
+    "Source": "仪器",
+    "Target": "低压电源",
+    "Device": "LVDC",
+    "Operation": "SetVoltage",
+    "DisplayName": "设置电压",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Voltage",
+        "Label": "设定电压",
+        "Type": "double",
+        "DefaultValue": "24",
+        "Unit": "V",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压电源",
+    "Device": "LVDC",
+    "Operation": "SetCurrent",
+    "DisplayName": "设置电流",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Current",
+        "Label": "电流限制",
+        "Type": "double",
+        "DefaultValue": "5",
+        "Unit": "A",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压电源",
+    "Device": "LVDC",
+    "Operation": "SetOutput",
+    "DisplayName": "输出开关",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Output",
+        "Label": "输出状态",
+        "Type": "bool",
+        "DefaultValue": "True",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压电源",
+    "Device": "LVDC",
+    "Operation": "ReadVoltage",
+    "DisplayName": "读取电压",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压电源",
+    "Device": "LVDC",
+    "Operation": "ReadCurrent",
+    "DisplayName": "读取电流",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压电源",
+    "Device": "HVDC",
+    "Operation": "SetVoltage",
+    "DisplayName": "设置电压",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Voltage",
+        "Label": "设定电压",
+        "Type": "double",
+        "DefaultValue": "600",
+        "Unit": "V",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压电源",
+    "Device": "HVDC",
+    "Operation": "SetCurrent",
+    "DisplayName": "设置电流",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Current",
+        "Label": "电流限制",
+        "Type": "double",
+        "DefaultValue": "5",
+        "Unit": "A",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压电源",
+    "Device": "HVDC",
+    "Operation": "SetOutput",
+    "DisplayName": "输出开关",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Output",
+        "Label": "输出状态",
+        "Type": "bool",
+        "DefaultValue": "True",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压电源",
+    "Device": "HVDC",
+    "Operation": "ReadVoltage",
+    "DisplayName": "读取电压",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压电源",
+    "Device": "HVDC",
+    "Operation": "ReadCurrent",
+    "DisplayName": "读取电流",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "ConfigDCVoltage",
+    "DisplayName": "配置直流电压",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "1000",
+        "Unit": "V",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "0.01",
+        "Unit": "V",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "ConfigDCCurrent",
+    "DisplayName": "配置直流电流",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "3",
+        "Unit": "A",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "1E-05",
+        "Unit": "A",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "ConfigACVoltage",
+    "DisplayName": "配置交流电压",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "1000",
+        "Unit": "V",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "0.01",
+        "Unit": "V",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "ConfigACCurrent",
+    "DisplayName": "配置交流电流",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "3",
+        "Unit": "A",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "1E-05",
+        "Unit": "A",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "Read",
+    "DisplayName": "读取测量值",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "Close",
+    "DisplayName": "关闭会话",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "电阻模拟器",
+    "Device": "RES",
+    "Operation": "SetResistance",
+    "DisplayName": "设置电阻",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "ResValue",
+        "Label": "电阻值",
+        "Type": "double",
+        "DefaultValue": "1000",
+        "Unit": "Ω",
+        "Options": ""
+      },
+      {
+        "Name": "Channel",
+        "Label": "通道",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DAQ",
+    "Device": "DAQ",
+    "Operation": "Read",
+    "DisplayName": "读取通道",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Channel",
+        "Label": "通道",
+        "Type": "int",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "Scale",
+        "Label": "比例",
+        "Type": "double",
+        "DefaultValue": "22.058823529",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "Offset",
+        "Label": "偏移",
+        "Type": "double",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "MOXA",
+    "Device": "MOXA",
+    "Operation": "SetDO",
+    "DisplayName": "设置数字输出",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "MoxaIndex",
+        "Label": "模块索引",
+        "Type": "int",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": "0|1"
+      },
+      {
+        "Name": "Channels",
+        "Label": "通道列表",
+        "Type": "string",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "Values",
+        "Label": "输出值列表",
+        "Type": "string",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "继电器板",
+    "Device": "RELAY",
+    "Operation": "SetDO",
+    "DisplayName": "设置继电器",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Channel",
+        "Label": "通道",
+        "Type": "int",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "Value",
+        "Label": "状态",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": "0|1"
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "PLC",
+    "Device": "PLC",
+    "Operation": "LoadFinished",
+    "DisplayName": "写入完成信号",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变模拟器",
+    "Device": "RESOLVER",
+    "Operation": "Init",
+    "DisplayName": "初始化",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变模拟器",
+    "Device": "RESOLVER",
+    "Operation": "SetSpeed",
+    "DisplayName": "设置转速",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Speed",
+        "Label": "转速",
+        "Type": "double",
+        "DefaultValue": "700",
+        "Unit": "rpm",
+        "Options": ""
+      },
+      {
+        "Name": "PolePairs",
+        "Label": "极对数",
+        "Type": "int",
+        "DefaultValue": "6",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变模拟器",
+    "Device": "RESOLVER",
+    "Operation": "SetPosition",
+    "DisplayName": "设置角度",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Position",
+        "Label": "位置",
+        "Type": "double",
+        "DefaultValue": "225",
+        "Unit": "deg",
+        "Options": ""
+      },
+      {
+        "Name": "PolePairs",
+        "Label": "极对数",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变模拟器",
+    "Device": "RESOLVER",
+    "Operation": "Stop",
+    "DisplayName": "停止",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "产品内部通信",
+    "Target": "产品基础命令",
+    "Device": "PRODUCTCAN",
+    "Operation": "EnterFT",
+    "DisplayName": "进入FT模式",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "产品内部通信",
+    "Target": "产品基础命令",
+    "Device": "PRODUCTCAN",
+    "Operation": "CommunicationInit",
+    "DisplayName": "通信初始化",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "TxID",
+        "Label": "发送ID",
+        "Type": "string",
+        "DefaultValue": "2030",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "RxID",
+        "Label": "接收ID",
+        "Type": "string",
+        "DefaultValue": "2031",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "产品内部通信",
+    "Target": "产品基础命令",
+    "Device": "PRODUCTCAN",
+    "Operation": "Wakeup",
+    "DisplayName": "发送唤醒",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "产品内部通信",
+    "Target": "产品基础命令",
+    "Device": "PRODUCTCAN",
+    "Operation": "CommunicationTest",
+    "DisplayName": "通信测试",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "流程逻辑",
+    "Target": "流程控制",
+    "Device": "FLOW",
+    "Operation": "Delay",
+    "DisplayName": "延时",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "TimeMs",
+        "Label": "延时时间",
+        "Type": "int",
+        "DefaultValue": "1000",
+        "Unit": "ms",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "流程逻辑",
+    "Target": "流程控制",
+    "Device": "FLOW",
+    "Operation": "SetVariable",
+    "DisplayName": "设置变量",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "VariableName",
+        "Label": "变量名",
+        "Type": "string",
+        "DefaultValue": "Value1",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "ValueText",
+        "Label": "变量值",
+        "Type": "string",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "流程逻辑",
+    "Target": "流程控制",
+    "Device": "FLOW",
+    "Operation": "Goto",
+    "DisplayName": "跳转",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "TargetStepName",
+        "Label": "目标步骤",
+        "Type": "string",
+        "DefaultValue": "",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "流程逻辑",
+    "Target": "流程控制",
+    "Device": "FLOW",
+    "Operation": "FixedLoop",
+    "DisplayName": "固定循环",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "LoopId",
+        "Label": "循环ID",
+        "Type": "string",
+        "DefaultValue": "Loop1",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "Count",
+        "Label": "次数",
+        "Type": "int",
+        "DefaultValue": "2",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "TargetStepName",
+        "Label": "返回步骤",
+        "Type": "string",
+        "DefaultValue": "",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "流程逻辑",
+    "Target": "流程控制",
+    "Device": "FLOW",
+    "Operation": "Condition",
+    "DisplayName": "条件判断",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "VariableName",
+        "Label": "变量名",
+        "Type": "string",
+        "DefaultValue": "Value1",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "DataType",
+        "Label": "数据类型",
+        "Type": "string",
+        "DefaultValue": "Number",
+        "Unit": "",
+        "Options": "Number|String|Boolean"
+      },
+      {
+        "Name": "Compare",
+        "Label": "比较方式",
+        "Type": "string",
+        "DefaultValue": "GE",
+        "Unit": "",
+        "Options": "GT|GE|LT|LE|EQ|NE|CONTAINS|STARTSWITH"
+      },
+      {
+        "Name": "RightValue",
+        "Label": "比较值",
+        "Type": "string",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "TrueGoto",
+        "Label": "成立跳转",
+        "Type": "string",
+        "DefaultValue": "",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "FalseGoto",
+        "Label": "不成立跳转",
+        "Type": "string",
+        "DefaultValue": "",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "RecordResult",
+        "Label": "记录结果",
+        "Type": "bool",
+        "DefaultValue": "True",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "流程逻辑",
+    "Target": "流程控制",
+    "Device": "FLOW",
+    "Operation": "SafeShutdown",
+    "DisplayName": "安全下电",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "流程逻辑",
+    "Target": "流程控制",
+    "Device": "FLOW",
+    "Operation": "Stop",
+    "DisplayName": "停止流程",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压电源（KL15）",
+    "Device": "LVDC_KL15",
+    "Operation": "SetVoltage",
+    "DisplayName": "设置电压",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Voltage",
+        "Label": "设定电压",
+        "Type": "double",
+        "DefaultValue": "24",
+        "Unit": "V",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压电源（KL15）",
+    "Device": "LVDC_KL15",
+    "Operation": "SetCurrent",
+    "DisplayName": "设置电流",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Current",
+        "Label": "电流限制",
+        "Type": "double",
+        "DefaultValue": "5",
+        "Unit": "A",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压电源（KL15）",
+    "Device": "LVDC_KL15",
+    "Operation": "SetOutput",
+    "DisplayName": "输出开关",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Output",
+        "Label": "输出状态",
+        "Type": "bool",
+        "DefaultValue": "True",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压电源（KL15）",
+    "Device": "LVDC_KL15",
+    "Operation": "ReadVoltage",
+    "DisplayName": "读取电压",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压电源（KL15）",
+    "Device": "LVDC_KL15",
+    "Operation": "ReadCurrent",
+    "DisplayName": "读取电流",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC电子负载（AN23600E）",
+    "Device": "DCDC_LOAD",
+    "Operation": "SetMode",
+    "DisplayName": "设置模式",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Mode",
+        "Label": "负载模式",
+        "Type": "string",
+        "DefaultValue": "Ccm",
+        "Unit": "",
+        "Options": "Ccl|Ccm|Cch|Cvl|Cvm|Cvh|Crl|Crm|Crh|Cpl|Cpm|Cph"
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC电子负载（AN23600E）",
+    "Device": "DCDC_LOAD",
+    "Operation": "SetCurrent",
+    "DisplayName": "设置恒流值",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Current",
+        "Label": "电流",
+        "Type": "double",
+        "DefaultValue": "0",
+        "Unit": "A",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC电子负载（AN23600E）",
+    "Device": "DCDC_LOAD",
+    "Operation": "SetVoltage",
+    "DisplayName": "设置恒压值",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Voltage",
+        "Label": "电压",
+        "Type": "double",
+        "DefaultValue": "0",
+        "Unit": "V",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC电子负载（AN23600E）",
+    "Device": "DCDC_LOAD",
+    "Operation": "SetResistance",
+    "DisplayName": "设置恒阻值",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Resistance",
+        "Label": "电阻",
+        "Type": "double",
+        "DefaultValue": "1",
+        "Unit": "Ω",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC电子负载（AN23600E）",
+    "Device": "DCDC_LOAD",
+    "Operation": "SetPower",
+    "DisplayName": "设置恒功率值",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Power",
+        "Label": "功率",
+        "Type": "double",
+        "DefaultValue": "0",
+        "Unit": "W",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC电子负载（AN23600E）",
+    "Device": "DCDC_LOAD",
+    "Operation": "OutputOn",
+    "DisplayName": "负载输入开",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC电子负载（AN23600E）",
+    "Device": "DCDC_LOAD",
+    "Operation": "OutputOff",
+    "DisplayName": "负载输入关",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC电子负载（AN23600E）",
+    "Device": "DCDC_LOAD",
+    "Operation": "ReadVoltage",
+    "DisplayName": "读取电压",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC电子负载（AN23600E）",
+    "Device": "DCDC_LOAD",
+    "Operation": "ReadCurrent",
+    "DisplayName": "读取电流",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC电子负载（AN23600E）",
+    "Device": "DCDC_LOAD",
+    "Operation": "ReadPower",
+    "DisplayName": "读取功率",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC电子负载（AN23600E）",
+    "Device": "DCDC_LOAD",
+    "Operation": "ReadProtection",
+    "DisplayName": "读取保护状态",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC电子负载（AN23600E）",
+    "Device": "DCDC_LOAD",
+    "Operation": "ClearProtection",
+    "DisplayName": "清除保护",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC电子负载（AN23600E）",
+    "Device": "DCDC_LOAD",
+    "Operation": "Reset",
+    "DisplayName": "复位",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "FCT功能继电器板（48路）",
+    "Device": "RELAY_FCT",
+    "Operation": "SetDO",
+    "DisplayName": "设置直接输出（OUT6以后）",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Channels",
+        "Label": "输出端口",
+        "Type": "string",
+        "DefaultValue": "OUT6",
+        "Unit": "",
+        "Options": "OUT6|OUT7|OUT9|OUT10|OUT9,OUT10|OUT11|OUT12|OUT13|OUT14|OUT15|OUT16|OUT17|OUT18|OUT19|OUT20|OUT21|OUT22|OUT23|OUT24|OUT25|OUT26|OUT27|OUT28|OUT29|OUT30|OUT31|OUT32|OUT33|OUT34|OUT35|OUT36|OUT37|OUT38|OUT39|OUT40|OUT41|OUT42|OUT43|OUT45"
+      },
+      {
+        "Name": "Values",
+        "Label": "状态列表",
+        "Type": "string",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": "0|1"
+      },
+      {
+        "Name": "Slave",
+        "Label": "从站地址",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16"
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压15选1锁存板（48路）",
+    "Device": "RELAY_HVMUX",
+    "Operation": "Select15",
+    "DisplayName": "安全选择测量通道",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Selection",
+        "Label": "测量通道",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15"
+      },
+      {
+        "Name": "SwitchDelayMs",
+        "Label": "切换等待",
+        "Type": "int",
+        "DefaultValue": "50",
+        "Unit": "ms",
+        "Options": ""
+      },
+      {
+        "Name": "Slave",
+        "Label": "从站地址",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16"
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "FCT功能继电器板（48路）",
+    "Device": "RELAY_FCT",
+    "Operation": "SelectFctMux",
+    "DisplayName": "安全选择测试功能",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Selection",
+        "Label": "测试功能",
+        "Type": "string",
+        "DefaultValue": "1 - HVDC测量备用（J1）",
+        "Unit": "",
+        "Options": "1 - HVDC测量备用（J1）|2 - 高压测量未用（J2）|3 - 高压测量未用（J3）|4 - 高压测量未用（J4）|5 - CAN0 H-L电阻（J19）|6 - CAN1 H-L电阻（J20）|7 - CAN2 H-L电阻（J21）|8 - CAN0 H-GND电压（J28）|9 - CAN0 L-GND电压（J29）|10 - CAN1 H-GND电压（J30）|11 - CAN1 L-GND电压（J31）|12 - KL30/KL31电压（J35）|13 - OBC KL30/KL31电压-未接（J36）"
+      },
+      {
+        "Name": "SwitchDelayMs",
+        "Label": "切换等待",
+        "Type": "int",
+        "DefaultValue": "50",
+        "Unit": "ms",
+        "Options": ""
+      },
+      {
+        "Name": "Slave",
+        "Label": "从站地址",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16"
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "FCT功能继电器板（48路）",
+    "Device": "RELAY_FCT",
+    "Operation": "DisableFctMux",
+    "DisplayName": "安全关闭测试选择",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "SwitchDelayMs",
+        "Label": "关闭等待",
+        "Type": "int",
+        "DefaultValue": "50",
+        "Unit": "ms",
+        "Options": ""
+      },
+      {
+        "Name": "Slave",
+        "Label": "从站地址",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16"
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压15选1锁存板（48路）",
+    "Device": "RELAY_HVMUX",
+    "Operation": "Disable15",
+    "DisplayName": "安全关闭全部通道",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "SwitchDelayMs",
+        "Label": "关闭等待",
+        "Type": "int",
+        "DefaultValue": "50",
+        "Unit": "ms",
+        "Options": ""
+      },
+      {
+        "Name": "Slave",
+        "Label": "从站地址",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16"
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变模拟器",
+    "Device": "RESOLVER",
+    "Operation": "SetPolePairs",
+    "DisplayName": "设置极对数",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "PolePairs",
+        "Label": "极对数",
+        "Type": "int",
+        "DefaultValue": "6",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变模拟器",
+    "Device": "RESOLVER",
+    "Operation": "SendDbcSignal",
+    "DisplayName": "发送DBC信号",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "SignalName",
+        "Label": "信号名",
+        "Type": "string",
+        "DefaultValue": "2505419280_Speed",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "Value",
+        "Label": "信号值",
+        "Type": "double",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "SendFlag",
+        "Label": "立即发送",
+        "Type": "bool",
+        "DefaultValue": "True",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "产品内部通信",
+    "Target": "产品基础命令",
+    "Device": "PRODUCTCAN",
+    "Operation": "SendDbcSignal",
+    "DisplayName": "发送产品DBC信号",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "SignalName",
+        "Label": "信号名",
+        "Type": "string",
+        "DefaultValue": "",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "Value",
+        "Label": "信号值",
+        "Type": "double",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "SendFlag",
+        "Label": "立即发送",
+        "Type": "bool",
+        "DefaultValue": "True",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "产品内部通信",
+    "Target": "产品基础命令",
+    "Device": "PRODUCTCAN",
+    "Operation": "SendRaw",
+    "DisplayName": "发送原始CAN帧",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "CanId",
+        "Label": "CAN ID",
+        "Type": "string",
+        "DefaultValue": "7EE",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "DataHex",
+        "Label": "数据",
+        "Type": "string",
+        "DefaultValue": "00 00 00 00 00 00 00 00",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "产品内部通信",
+    "Target": "产品基础命令",
+    "Device": "PRODUCTCAN",
+    "Operation": "ReceiveRaw",
+    "DisplayName": "读取原始CAN帧",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "FilterId",
+        "Label": "过滤ID",
+        "Type": "string",
+        "DefaultValue": "7EF",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "RES",
+    "Device": "RES",
+    "Operation": "SetResistance",
+    "DisplayName": "设置电阻",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RES_SetResistance",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "ResValue",
+        "Label": "电阻值",
+        "Type": "double",
+        "DefaultValue": "1000",
+        "Unit": "Ω",
+        "Options": ""
+      },
+      {
+        "Name": "Channel",
+        "Label": "通道",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "HVDC",
+    "Device": "HVDC",
+    "Operation": "SetVoltage",
+    "DisplayName": "设置电压",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_HVDC_SetVoltage",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Voltage",
+        "Label": "设定电压",
+        "Type": "double",
+        "DefaultValue": "600",
+        "Unit": "V",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "HVDC",
+    "Device": "HVDC",
+    "Operation": "SetCurrent",
+    "DisplayName": "设置电流",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_HVDC_SetCurrent",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Current",
+        "Label": "电流限制",
+        "Type": "double",
+        "DefaultValue": "5",
+        "Unit": "A",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "HVDC",
+    "Device": "HVDC",
+    "Operation": "SetOutput",
+    "DisplayName": "输出开关",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_HVDC_SetOutput",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Output",
+        "Label": "输出状态",
+        "Type": "bool",
+        "DefaultValue": "True",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "HVDC",
+    "Device": "HVDC",
+    "Operation": "ReadVoltage",
+    "DisplayName": "读取电压",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_HVDC_ReadVoltage",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "HVDC",
+    "Device": "HVDC",
+    "Operation": "ReadCurrent",
+    "DisplayName": "读取电流",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_HVDC_ReadCurrent",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "LVDC",
+    "Device": "LVDC",
+    "Operation": "SetVoltage",
+    "DisplayName": "设置电压",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_LVDC_SetVoltage",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Voltage",
+        "Label": "设定电压",
+        "Type": "double",
+        "DefaultValue": "24",
+        "Unit": "V",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "LVDC",
+    "Device": "LVDC",
+    "Operation": "SetCurrent",
+    "DisplayName": "设置电流",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_LVDC_SetCurrent",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Current",
+        "Label": "电流限制",
+        "Type": "double",
+        "DefaultValue": "5",
+        "Unit": "A",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "LVDC",
+    "Device": "LVDC",
+    "Operation": "SetOutput",
+    "DisplayName": "输出开关",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_LVDC_SetOutput",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Output",
+        "Label": "输出状态",
+        "Type": "bool",
+        "DefaultValue": "True",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "LVDC",
+    "Device": "LVDC",
+    "Operation": "ReadVoltage",
+    "DisplayName": "读取电压",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_LVDC_ReadVoltage",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "LVDC",
+    "Device": "LVDC",
+    "Operation": "ReadCurrent",
+    "DisplayName": "读取电流",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_LVDC_ReadCurrent",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "ConfigDCVoltage",
+    "DisplayName": "配置直流电压",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_ConfigDCVoltage",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "1000",
+        "Unit": "V",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "0.01",
+        "Unit": "V",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "ConfigDCCurrent",
+    "DisplayName": "配置直流电流",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_ConfigDCCurrent",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "3",
+        "Unit": "A",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "1E-05",
+        "Unit": "A",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "ConfigACVoltage",
+    "DisplayName": "配置交流电压",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_ConfigACVoltage",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "1000",
+        "Unit": "V",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "0.01",
+        "Unit": "V",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "ConfigACCurrent",
+    "DisplayName": "配置交流电流",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_ConfigACCurrent",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "3",
+        "Unit": "A",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "1E-05",
+        "Unit": "A",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "Read",
+    "DisplayName": "读取测量值",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_Read",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "Close",
+    "DisplayName": "关闭会话",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_Close",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "RELAY_FCT",
+    "Device": "RELAY_FCT",
+    "Operation": "SetDO",
+    "DisplayName": "设置直接输出（OUT6以后）",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RELAY_FCT_SetDO",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Channels",
+        "Label": "输出端口",
+        "Type": "string",
+        "DefaultValue": "OUT6",
+        "Unit": "",
+        "Options": "OUT6|OUT7|OUT9|OUT10|OUT9,OUT10|OUT11|OUT12|OUT13|OUT14|OUT15|OUT16|OUT17|OUT18|OUT19|OUT20|OUT21|OUT22|OUT23|OUT24|OUT25|OUT26|OUT27|OUT28|OUT29|OUT30|OUT31|OUT32|OUT33|OUT34|OUT35|OUT36|OUT37|OUT38|OUT39|OUT40|OUT41|OUT42|OUT43|OUT45"
+      },
+      {
+        "Name": "Values",
+        "Label": "状态列表",
+        "Type": "string",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": "0|1"
+      },
+      {
+        "Name": "Slave",
+        "Label": "从站地址",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16"
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "RELAY_FCT",
+    "Device": "RELAY_FCT",
+    "Operation": "SelectFctMux",
+    "DisplayName": "安全选择测试功能",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RELAY_FCT_SelectFctMux",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Selection",
+        "Label": "测试功能",
+        "Type": "string",
+        "DefaultValue": "1 - HVDC测量备用（J1）",
+        "Unit": "",
+        "Options": "1 - HVDC测量备用（J1）|2 - 高压测量未用（J2）|3 - 高压测量未用（J3）|4 - 高压测量未用（J4）|5 - CAN0 H-L电阻（J19）|6 - CAN1 H-L电阻（J20）|7 - CAN2 H-L电阻（J21）|8 - CAN0 H-GND电压（J28）|9 - CAN0 L-GND电压（J29）|10 - CAN1 H-GND电压（J30）|11 - CAN1 L-GND电压（J31）|12 - KL30/KL31电压（J35）|13 - OBC KL30/KL31电压-未接（J36）"
+      },
+      {
+        "Name": "SwitchDelayMs",
+        "Label": "切换等待",
+        "Type": "int",
+        "DefaultValue": "50",
+        "Unit": "ms",
+        "Options": ""
+      },
+      {
+        "Name": "Slave",
+        "Label": "从站地址",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16"
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "RELAY_FCT",
+    "Device": "RELAY_FCT",
+    "Operation": "DisableFctMux",
+    "DisplayName": "安全关闭测试选择",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RELAY_FCT_DisableFctMux",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "SwitchDelayMs",
+        "Label": "关闭等待",
+        "Type": "int",
+        "DefaultValue": "50",
+        "Unit": "ms",
+        "Options": ""
+      },
+      {
+        "Name": "Slave",
+        "Label": "从站地址",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16"
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "RELAY_HVMUX",
+    "Device": "RELAY_HVMUX",
+    "Operation": "Select15",
+    "DisplayName": "安全选择测量通道",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RELAY_HVMUX_Select15",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Selection",
+        "Label": "测量通道",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15"
+      },
+      {
+        "Name": "SwitchDelayMs",
+        "Label": "切换等待",
+        "Type": "int",
+        "DefaultValue": "50",
+        "Unit": "ms",
+        "Options": ""
+      },
+      {
+        "Name": "Slave",
+        "Label": "从站地址",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16"
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "RELAY_HVMUX",
+    "Device": "RELAY_HVMUX",
+    "Operation": "Disable15",
+    "DisplayName": "安全关闭全部通道",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RELAY_HVMUX_Disable15",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "SwitchDelayMs",
+        "Label": "关闭等待",
+        "Type": "int",
+        "DefaultValue": "50",
+        "Unit": "ms",
+        "Options": ""
+      },
+      {
+        "Name": "Slave",
+        "Label": "从站地址",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16"
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC_LOAD",
+    "Device": "DCDC_LOAD",
+    "Operation": "SetMode",
+    "DisplayName": "设置模式",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DCDC_LOAD_SetMode",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Mode",
+        "Label": "负载模式",
+        "Type": "string",
+        "DefaultValue": "Ccm",
+        "Unit": "",
+        "Options": "Ccl|Ccm|Cch|Cvl|Cvm|Cvh|Crl|Crm|Crh|Cpl|Cpm|Cph"
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC_LOAD",
+    "Device": "DCDC_LOAD",
+    "Operation": "SetCurrent",
+    "DisplayName": "设置恒流值",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DCDC_LOAD_SetCurrent",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Current",
+        "Label": "电流",
+        "Type": "double",
+        "DefaultValue": "0",
+        "Unit": "A",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC_LOAD",
+    "Device": "DCDC_LOAD",
+    "Operation": "SetVoltage",
+    "DisplayName": "设置恒压值",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DCDC_LOAD_SetVoltage",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Voltage",
+        "Label": "电压",
+        "Type": "double",
+        "DefaultValue": "0",
+        "Unit": "V",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC_LOAD",
+    "Device": "DCDC_LOAD",
+    "Operation": "SetResistance",
+    "DisplayName": "设置恒阻值",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DCDC_LOAD_SetResistance",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Resistance",
+        "Label": "电阻",
+        "Type": "double",
+        "DefaultValue": "1",
+        "Unit": "Ω",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC_LOAD",
+    "Device": "DCDC_LOAD",
+    "Operation": "SetPower",
+    "DisplayName": "设置恒功率值",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DCDC_LOAD_SetPower",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Power",
+        "Label": "功率",
+        "Type": "double",
+        "DefaultValue": "0",
+        "Unit": "W",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC_LOAD",
+    "Device": "DCDC_LOAD",
+    "Operation": "OutputOn",
+    "DisplayName": "负载输入开",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DCDC_LOAD_OutputOn",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC_LOAD",
+    "Device": "DCDC_LOAD",
+    "Operation": "OutputOff",
+    "DisplayName": "负载输入关",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DCDC_LOAD_OutputOff",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC_LOAD",
+    "Device": "DCDC_LOAD",
+    "Operation": "ReadVoltage",
+    "DisplayName": "读取电压",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DCDC_LOAD_ReadVoltage",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC_LOAD",
+    "Device": "DCDC_LOAD",
+    "Operation": "ReadCurrent",
+    "DisplayName": "读取电流",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DCDC_LOAD_ReadCurrent",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC_LOAD",
+    "Device": "DCDC_LOAD",
+    "Operation": "ReadPower",
+    "DisplayName": "读取功率",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DCDC_LOAD_ReadPower",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC_LOAD",
+    "Device": "DCDC_LOAD",
+    "Operation": "ReadProtection",
+    "DisplayName": "读取保护状态",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DCDC_LOAD_ReadProtection",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC_LOAD",
+    "Device": "DCDC_LOAD",
+    "Operation": "ClearProtection",
+    "DisplayName": "清除保护",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DCDC_LOAD_ClearProtection",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DCDC_LOAD",
+    "Device": "DCDC_LOAD",
+    "Operation": "Reset",
+    "DisplayName": "复位",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DCDC_LOAD_Reset",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DAQ",
+    "Device": "DAQ",
+    "Operation": "Read",
+    "DisplayName": "读取通道",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DAQ_Read",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Channel",
+        "Label": "通道",
+        "Type": "int",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "Scale",
+        "Label": "比例",
+        "Type": "double",
+        "DefaultValue": "22.058823529",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "Offset",
+        "Label": "偏移",
+        "Type": "double",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "PLC",
+    "Device": "PLC",
+    "Operation": "LoadFinished",
+    "DisplayName": "写入完成信号",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_PLC_LoadFinished",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "LVDC_KL15",
+    "Device": "LVDC_KL15",
+    "Operation": "SetVoltage",
+    "DisplayName": "设置电压",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_LVDC_KL15_SetVoltage",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Voltage",
+        "Label": "设定电压",
+        "Type": "double",
+        "DefaultValue": "24",
+        "Unit": "V",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "LVDC_KL15",
+    "Device": "LVDC_KL15",
+    "Operation": "SetCurrent",
+    "DisplayName": "设置电流",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_LVDC_KL15_SetCurrent",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Current",
+        "Label": "电流限制",
+        "Type": "double",
+        "DefaultValue": "5",
+        "Unit": "A",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "LVDC_KL15",
+    "Device": "LVDC_KL15",
+    "Operation": "SetOutput",
+    "DisplayName": "输出开关",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_LVDC_KL15_SetOutput",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Output",
+        "Label": "输出状态",
+        "Type": "bool",
+        "DefaultValue": "True",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "LVDC_KL15",
+    "Device": "LVDC_KL15",
+    "Operation": "ReadVoltage",
+    "DisplayName": "读取电压",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_LVDC_KL15_ReadVoltage",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "LVDC_KL15",
+    "Device": "LVDC_KL15",
+    "Operation": "ReadCurrent",
+    "DisplayName": "读取电流",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_LVDC_KL15_ReadCurrent",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  }
+]

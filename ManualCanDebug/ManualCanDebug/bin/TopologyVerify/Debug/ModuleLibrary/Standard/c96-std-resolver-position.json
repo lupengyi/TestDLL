@@ -1,0 +1,121 @@
+{
+  "Id": "c96-std-resolver-position",
+  "Name": "双驱旋变角度验证",
+  "Category": "旋变",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [
+    {
+      "Name": "Position",
+      "DisplayName": "目标角度",
+      "Type": "double",
+      "DefaultValue": 0.0,
+      "Unit": "deg",
+      "Description": "",
+      "Required": true
+    },
+    {
+      "Name": "LowLimit",
+      "DisplayName": "角度下限",
+      "Type": "double",
+      "DefaultValue": -2.0,
+      "Unit": "deg",
+      "Description": "",
+      "Required": true
+    },
+    {
+      "Name": "HighLimit",
+      "DisplayName": "角度上限",
+      "Type": "double",
+      "DefaultValue": 2.0,
+      "Unit": "deg",
+      "Description": "",
+      "Required": true
+    }
+  ],
+  "Steps": [
+    {
+      "Id": "a7c306bce32e4f8bad4480f728de44ea",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "设置旋变角度",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": false,
+        "Device": "RESOLVER",
+        "Operation": "SetPosition",
+        "ResultMode": "Action",
+        "Position": 0.0,
+        "PolePairs": 1
+      },
+      "ParameterBindings": {
+        "Position": "Position"
+      }
+    },
+    {
+      "Id": "b26d5b269b534ad688e05bd22f8de118",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取TM1角度",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANSignal",
+        "RecordingLog": true,
+        "Operation": "Read",
+        "ResultMode": "NumericLimit",
+        "AddrOffset": 68,
+        "TableIndex": 0,
+        "DataSize": 4,
+        "DataType": "float32",
+        "LowLimit": -2.0,
+        "HighLimit": 2.0,
+        "Comtype": "GELE",
+        "Unit": "deg"
+      },
+      "ParameterBindings": {
+        "LowLimit": "LowLimit",
+        "HighLimit": "HighLimit"
+      }
+    },
+    {
+      "Id": "f0b487325cb04ed4b10e6c7461d5e95a",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取TM2角度",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANSignal",
+        "RecordingLog": true,
+        "Operation": "Read",
+        "ResultMode": "NumericLimit",
+        "AddrOffset": 72,
+        "TableIndex": 0,
+        "DataSize": 4,
+        "DataType": "float32",
+        "LowLimit": -2.0,
+        "HighLimit": 2.0,
+        "Comtype": "GELE",
+        "Unit": "deg"
+      },
+      "ParameterBindings": {
+        "LowLimit": "LowLimit",
+        "HighLimit": "HighLimit"
+      }
+    }
+  ]
+}

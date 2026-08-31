@@ -1,0 +1,66 @@
+2026-08-28 16:13:37
+System.Reflection.TargetInvocationException: 调用的目标发生了异常。 ---> System.IO.FileNotFoundException: 未能加载文件或程序集“Ni_VISA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。系统找不到指定的文件。
+   在 Instruments.DMM.KeySight34461A..ctor()
+   在 CSP.TestDllMain..ctor() 位置 E:\FST\TestDLL\TestDLL\TestDllMain.cs:行号 25
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes)
+   在 System.Activator.CreateInstance(Type type, Object[] args)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 606
+====================================================================================================
+
+2026-08-28 16:13:37
+System.Exception: Load Station Config File Error: ---> System.Reflection.TargetInvocationException: 调用的目标发生了异常。 ---> System.IO.FileNotFoundException: 未能加载文件或程序集“Ni_VISA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。系统找不到指定的文件。
+   在 Instruments.DMM.KeySight34461A..ctor()
+   在 CSP.TestDllMain..ctor() 位置 E:\FST\TestDLL\TestDLL\TestDllMain.cs:行号 25
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes)
+   在 System.Activator.CreateInstance(Type type, Object[] args)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 606
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 706
+   在 CSP.MainClass..ctor(String exeFolderPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 89
+====================================================================================================
+
+2026-08-28 16:16:03
+System.Reflection.TargetInvocationException: 调用的目标发生了异常。 ---> System.IO.FileNotFoundException: 未能加载文件或程序集“Ni_VISA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。系统找不到指定的文件。
+   在 Instruments.DMM.KeySight34461A..ctor()
+   在 CSP.TestDllMain..ctor() 位置 E:\FST\TestDLL\TestDLL\TestDllMain.cs:行号 25
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes)
+   在 System.Activator.CreateInstance(Type type, Object[] args)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 606
+====================================================================================================
+
+2026-08-28 16:16:03
+System.Exception: Load Station Config File Error: ---> System.Reflection.TargetInvocationException: 调用的目标发生了异常。 ---> System.IO.FileNotFoundException: 未能加载文件或程序集“Ni_VISA, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null”或它的某一个依赖项。系统找不到指定的文件。
+   在 Instruments.DMM.KeySight34461A..ctor()
+   在 CSP.TestDllMain..ctor() 位置 E:\FST\TestDLL\TestDLL\TestDllMain.cs:行号 25
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean noCheck, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& bNeedSecurityCheck)
+   在 System.RuntimeType.CreateInstanceSlow(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, Boolean nonPublic)
+   在 System.RuntimeType.CreateInstanceImpl(BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes, StackCrawlMark& stackMark)
+   在 System.Activator.CreateInstance(Type type, BindingFlags bindingAttr, Binder binder, Object[] args, CultureInfo culture, Object[] activationAttributes)
+   在 System.Activator.CreateInstance(Type type, Object[] args)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 606
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 706
+   在 CSP.MainClass..ctor(String exeFolderPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 89
+====================================================================================================
+

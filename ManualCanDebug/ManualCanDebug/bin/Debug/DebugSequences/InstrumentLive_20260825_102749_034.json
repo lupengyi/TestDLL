@@ -1,0 +1,22 @@
+{
+  "SerialNumberLen": 0,
+  "ProjectName": "C91-01-0001",
+  "StationName": "OP3020",
+  "SequenceVersion": "FT1-FCT01-01-A0",
+  "UIDisplayType": "All",
+  "LogFilePath": "D:\\LogfilePath",
+  "StepList": [
+    {
+      "StepName": "读取全部输入信息",
+      "RunMode": "Normal",
+      "FunctionName": "FCT_CANTable",
+      "RecordingLog": true,
+      "Operation": "Read",
+      "ResultMode": "Action",
+      "AddrOffset": 0,
+      "TableLength": 252,
+      "SignalChecksJson": "[{\"Name\":\"15V_AI\",\"Offset\":0,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"NumericLimit\",\"LowLimit\":0.0,\"HighLimit\":0.0,\"Comtype\":\"GELE\",\"Unit\":\"\",\"Limit\":\"\"},{\"Name\":\"RED_RESA_COSLO_DS\",\"Offset\":132,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"NumericLimit\",\"LowLimit\":0.0,\"HighLimit\":0.0,\"Comtype\":\"GELE\",\"Unit\":\"\",\"Limit\":\"\"},{\"Name\":\"RED_RESA_SINLO_DS\",\"Offset\":140,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"NumericLimit\",\"LowLimit\":0.0,\"HighLimit\":0.0,\"Comtype\":\"GELE\",\"Unit\":\"\",\"Limit\":\"\"},{\"Name\":\"RED_RESB_COSLO_DS\",\"Offset\":148,\"DataSize\":4,\"DataType\":\"float\",\"Endian\":\"Little\",\"ResultMode\":\"NumericLimit\",\"LowLimit\":0.0,\"HighLimit\":0.0,\"Comtype\":\"GELE\",\"Unit\":\"\",\"Limit\":\"\"}]",
+      "Product": "C96"
+    }
+  ]
+}

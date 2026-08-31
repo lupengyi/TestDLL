@@ -1,0 +1,35 @@
+{
+  "Id": "c96-std-analog-inputs",
+  "Name": "产品低压与Analog Inputs读取",
+  "Category": "产品",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "7a2fa8ee6ef74312b19fb9fc7231725a",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取全部Analog Inputs",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANTable",
+        "RecordingLog": true,
+        "Operation": "Read",
+        "ResultMode": "Information",
+        "AddrOffset": 0,
+        "TableLength": 252,
+        "PointerDepth": 1
+      },
+      "ParameterBindings": {}
+    }
+  ]
+}

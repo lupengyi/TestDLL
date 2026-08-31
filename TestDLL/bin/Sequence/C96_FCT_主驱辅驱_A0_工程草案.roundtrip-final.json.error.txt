@@ -1,0 +1,10 @@
+System.InvalidOperationException: FCT Studio工程检查失败：
+流程功能块“02 低压信号测量-低压电源工况设定”内部StepName重复：设置低压电压, 设置低压限流, 打开低压输出, 读取全部Analog Inputs
+流程功能块“03 双旋变模拟-双驱旋变转速验证”内部StepName重复：设置旋变转速, 读取TM1转速, 读取TM2转速, 设置旋变角度, 读取TM1角度, 读取TM2角度
+流程功能块“04 双电机温度模拟-电机温度模拟与读取”内部StepName重复：设置温度模拟电阻, 读取产品电机温度
+流程功能块“05 辅驱与DCDC综合测试-低压电源工况设定”内部StepName重复：读取DCDC_InVoltage, 读取DCDC_OutVoltage, 读取DCDC_OutCurrent, 读取DCDC_FaultCode, 读取OilPump_ModuleTemp, 读取AirPump_ModuleTemp, 万用表切回低压档
+流程功能块“06 高压精度与故障注入-机台高压预充与主供电”内部StepName重复：读取HVDC_OV_FLT, 读取OV_FLT, 设置高压, 万用表切换高压测量档, 高压15选1安全选择, DMM配置直流高压, DMM读取高压, 产品读取母线高压
+流程功能块“08 额定电压电流精度-机台高压预充与主供电”内部StepName重复：写入目标电流, 等待电流稳定, 电机故障, 三相实际RMS电流
+流程功能块“09 全工况拉载测温-产品温度快照读取”内部StepName重复：读取相桥温度, 读取Analog Inputs温度, 设置低压电压, 设置低压限流, 打开低压输出, 高压源设为0V, 高压源输出打开, 机台KM1与KM2复位, 机台KM2预充接通, 等待预充, 机台KM1主供电接通, 释放机台KM2预充, 设置目标高压, 高压稳定等待, 写入目标电流, 等待电流稳定, 电机故障, 三相实际RMS电流, 高压源降到0V, 降压等待, 高压源输出关闭, 断开机台KM1与KM2, 关闭高压15选1, 万用表切回低压档
+   在 ManualCanDebug.Core.FctStudioCompiler.Compile(FctStudioProject project) 位置 E:\FST\TestDLL\ManualCanDebug\ManualCanDebug.Core\FctStudioModels.cs:行号 156
+   在 ManualCanDebug.Program.Main(String[] args) 位置 E:\FST\TestDLL\ManualCanDebug\ManualCanDebug\Program.cs:行号 22

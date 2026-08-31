@@ -1,0 +1,677 @@
+{
+	"SerialNumberLen": 0,
+	"ProjectName": "FST02",
+	"StationName": "FCT",
+	"SequenceVersion": "1.0.0.2",
+	"UIDisplayType": "All",
+	"LogFilePath": "D:\\LogfilePath",
+
+	"StepList":
+	[
+		{
+			"StepName": "Set LVDC Voltage 24V",
+			"RunMode": "Normal",	//Normal/Skip/Break
+			"FunctionName": "LVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 24
+		},
+		{
+			"StepName": "Set LVDC Current 5A",
+			"RunMode": "Normal",
+			"FunctionName": "LVDC_SetSourceCurrent",
+			"RecordingLog": true,
+			"Current": 3.5
+		},
+		{
+			"StepName": "Set LVDC Output ON",
+			"RunMode": "Normal",
+			"FunctionName": "LVDC_SetOutput",
+			"RecordingLog": true,
+			"Output": true
+		},
+		{
+			"StepName": "DUT Comucation Init",
+			"RunMode": "Normal",
+			"FunctionName": "DUT_ComucationInit",
+			"RecordingLog": true,
+			"TxID": 2030,
+			"RxID": 2031
+		},
+		{
+			"StepName": "02001 Hardware Version",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 148,
+			"TableIndex": 0,
+			"DataSize": 1,
+			"LowLimit": 0,
+			"HighLimit": 0,
+			"Comtype": "GELE",
+			"Unit": ""
+		},
+		{
+			"StepName": "02002 Variable ID",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 152,
+			"TableIndex": 0,
+			"DataSize": 1,
+			"LowLimit": 0,
+			"HighLimit": 0,
+			"Comtype": "GELE",
+			"Unit": ""
+		},
+		{
+			"StepName": "02003 Software Version",
+			"RunMode": "Normal",
+			"FunctionName": "Test_SoftwareVersion",
+			"RecordingLog": true,
+			"Limit": "09 0B 01 08"
+		},
+		{
+			"StepName": "Set Speed 700Rpm",
+			"RunMode": "Normal",
+			"FunctionName": "Resolver_SetSpeed",
+			"RecordingLog": true,
+			"Speed": 700
+		},
+		{
+			"StepName": "Read Speed 700Rpm",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 72,
+			"TableIndex": 4,
+			"DataSize": 4,
+			"StepName": "03001 Inverter Resolver Accuracy 700Rpm",
+			"LowLimit": 690,
+			"HighLimit": 710,
+			"Comtype": "GELE",
+			"Unit": "Rpm"
+		},
+		{
+			"StepName": "Set Speed 3500Rpm",
+			"RunMode": "Normal",
+			"FunctionName": "Resolver_SetSpeed",
+			"RecordingLog": true,
+			"Speed": 3500
+		},
+		{
+			"StepName": "Read Speed 3500Rpm",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 72,
+			"TableIndex": 4,
+			"DataSize": 4,
+			"StepName": "03002 Inverter Resolver Accuracy 3500Rpm",
+			"LowLimit": 3470,
+			"HighLimit": 3530,
+			"Comtype": "GELE",
+			"Unit": "Rpm"
+		},
+		{
+			"StepName": "Set Speed 7000Rpm",
+			"RunMode": "Normal",
+			"FunctionName": "Resolver_SetSpeed",
+			"RecordingLog": true,
+			"Speed": 7000
+		},
+		{
+			"StepName": "Read Speed 7000Rpm",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 72,
+			"TableIndex": 4,
+			"DataSize": 4,
+			"StepName": "03003 Inverter Resolver Accuracy 7000Rpm",
+			"LowLimit": 6970,
+			"HighLimit": 7030,
+			"Comtype": "GELE",
+			"Unit": "Rpm"
+		},
+		{
+			"StepName": "Set Temp1 Resistance 842.71ohm",
+			"RunMode": "Normal",
+			"FunctionName": "RES_SetResistance",
+			"RecordingLog": true,
+			"ResValue": 842.71,
+			"Channel": 1
+		},
+		{
+			"StepName": "Read Temp1 -40Deg",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 80,
+			"DataSize": 4,
+			"StepName": "04001 Motor Temp1 Analysis -40Deg",
+			"LowLimit": -48,
+			"HighLimit": -32,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set Temp1 Resistance 1097.33ohm",
+			"RunMode": "Normal",
+			"FunctionName": "RES_SetResistance",
+			"RecordingLog": true,
+			"ResValue": 1097.33,
+			"Channel": 1
+		},
+		{
+			"StepName": "Read Temp1 25Deg",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 80,
+			"DataSize": 4,
+			"StepName": "04002 Motor Temp1 Analysis 25Deg",
+			"LowLimit": 20,
+			"HighLimit": 30,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set Temp1 Resistance 1684.78ohm",
+			"RunMode": "Normal",
+			"FunctionName": "RES_SetResistance",
+			"RecordingLog": true,
+			"ResValue": 1684.78,
+			"Channel": 1
+		},
+		{
+			"StepName": "Read Temp1 180Deg",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 80,
+			"DataSize": 4,
+			"StepName": "04003 Motor Temp1 Analysis 180Deg",
+			"LowLimit": 175,
+			"HighLimit": 185,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set Temp1 Resistance 1097.33ohm",
+			"RunMode": "Normal",
+			"FunctionName": "RES_SetResistance",
+			"RecordingLog": true,
+			"ResValue": 1097.33,
+			"Channel": 1
+		},
+		{
+			"StepName": "Set Temp2 Resistance 842.71ohm",
+			"RunMode": "Normal",
+			"FunctionName": "RES_SetResistance",
+			"RecordingLog": true,
+			"ResValue": 842.71,
+			"Channel": 2
+		},
+		{
+			"StepName": "Read Temp2 -40Deg",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 40,
+			"DataSize": 4,
+			"StepName": "05001 Motor Temp2 Analysis -40Deg",
+			"LowLimit": -48,
+			"HighLimit": -32,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set Temp2 Resistance 1097.33ohm",
+			"RunMode": "Normal",
+			"FunctionName": "RES_SetResistance",
+			"RecordingLog": true,
+			"ResValue": 1097.33,
+			"Channel": 2
+		},
+		{
+			"StepName": "Read Temp2 25Deg",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 40,
+			"DataSize": 4,
+			"StepName": "05002 Motor Temp2 Analysis 25Deg",
+			"LowLimit": 20,
+			"HighLimit": 30,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set Temp2 Resistance 1684.78ohm",
+			"RunMode": "Normal",
+			"FunctionName": "RES_SetResistance",
+			"RecordingLog": true,
+			"ResValue": 1684.78,
+			"Channel": 2
+		},
+		{
+			"StepName": "Read Temp2 180Deg",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 40,
+			"DataSize": 4,
+			"StepName": "05003 Motor Temp2 Analysis 180Deg",
+			"LowLimit": 175,
+			"HighLimit": 185,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set Temp2 Resistance 1097.33ohm",
+			"RunMode": "Normal",
+			"FunctionName": "RES_SetResistance",
+			"RecordingLog": true,
+			"ResValue": 1097.33,
+			"Channel": 2
+		},
+		{
+			"StepName": "Set HVDC Voltage 60V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 60
+		},
+		{
+			"StepName": "Set HVDC Output ON",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetOutput",
+			"RecordingLog": true,
+			"Output": true
+		},
+		{
+			"StepName": "06001  HV Voltage Accuracy Verification 60V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 184,
+			"DataSize": 4,
+			"LowLimit": 55,
+			"HighLimit": 65,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "06011  HV Voltage Accuracy Verification 60V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 184,
+			"DataSize": 4,
+			"LowLimit": 55,
+			"HighLimit": 65,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "Set HVDC Voltage 450V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 450
+		},
+		{
+			"StepName": "06002  HV Voltage Accuracy Verification 450V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 184,
+			"DataSize": 4,
+			"LowLimit": 441,
+			"HighLimit": 459,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "Set HVDC Voltage 600V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 600
+		},
+		{
+			"StepName": "06003  HV Voltage Accuracy Verification 600V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 184,
+			"DataSize": 4,
+			"LowLimit": 588,
+			"HighLimit": 612,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "06013  HV Voltage Accuracy Verification 600V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 184,
+			"DataSize": 4,
+			"LowLimit": 588,
+			"HighLimit": 612,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "Set HVDC Voltage 850V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 850
+		},
+		{
+			"StepName": "06004  HV Voltage Accuracy Verification 850V",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 184,
+			"DataSize": 4,
+			"LowLimit": 833,
+			"HighLimit": 867,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "06005 Read HVDC_OV_FLT 1",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 24,
+			"TableIndex": 1,
+			"DataSize": 1,
+			"LowLimit": 1,
+			"HighLimit": 1,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "06006 Read OV_FLT 1",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 24,
+			"TableIndex": 19,
+			"DataSize": 1,
+			"LowLimit": 1,
+			"HighLimit": 1,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "Set HVDC Voltage 750V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 750
+		},
+		{
+			"StepName": "06005 Read HVDC_OV_FLT 0",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 24,
+			"TableIndex": 1,
+			"DataSize": 1,
+			"LowLimit": 0,
+			"HighLimit": 0,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "06006 Read OV_FLT 0",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 24,
+			"TableIndex": 19,
+			"DataSize": 1,
+			"LowLimit": 0,
+			"HighLimit": 0,
+			"Comtype": "GELE",
+			"Unit": "V"
+		},
+		{
+			"StepName": "VIPER Temp Test 55Deg",
+			"RunMode": "Normal",
+			"FunctionName": "Test_VIPER_TempTest",
+			"RecordingLog": true,
+			"StepName0": "11001 INVTRA_PH_AU_TEMP_PI Temp 55Deg",
+			"StepName1": "11002 INVTRA_PH_BU_TEMP_PI Temp 55Deg",
+			"StepName2": "11003 INVTRA_PH_CU_TEMP_PI Temp 55Deg",
+			"StepName3": "11004 INVTRA_PH_AL_TEMP_PI Temp 55Deg",
+			"StepName4": "11005 INVTRA_PH_BL_TEMP_PI Temp 55Deg",
+			"StepName5": "11006 INVTRA_PH_CL_TEMP_PI Temp 55Deg",
+			"AddrOffset": 44,
+			"DataLen": 6,
+			"LowLimit": 50,
+			"HighLimit": 60,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "11002 Coolant_In Temp 55Deg",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 100,
+			"DataSize": 4,
+			"LowLimit": 50,
+			"HighLimit": 60,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "11003 Coolant_Out Temp 55Deg",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_ReadSignalValue",
+			"RecordingLog": true,
+			"AddrOffset": 0,
+			"TableIndex": 104,
+			"DataSize": 4,
+			"LowLimit": 50,
+			"HighLimit": 60,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Test_ZeroRotation_ZeroTorque",
+			"RunMode": "Skip",
+			"FunctionName": "Test_ZeroRotation_ZeroTorque",
+			"RecordingLog": true,
+			"Comtype": "GELE",
+			"Unit": "Deg"
+		},
+		{
+			"StepName": "Set HVDC Voltage 600V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 600
+		},
+		{
+			"StepName": "Set DUT Current 50A_10S_100Hz",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_SetDUTCurrent",
+			"RecordingLog": true,
+			"MaxCurrent": 50,
+			"StepCurrent": 20,
+			"HoldTime": 10,
+			"Frequency": 100
+		},
+		{
+			"StepName": "Read DUT and Device Current 50A",
+			"RunMode": "Normal",
+			"FunctionName": "Test_UVW_Current",
+			"RecordingLog": true,
+			"BaseNum": 20000,
+			"LowLimit": 47,
+			"HighLimit": 53,
+			"Comtype": "GELE",
+			"Unit": "A"
+		},
+		{
+			"StepName": "Set DUT Current 100A_10S_500Hz",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_SetDUTCurrent",
+			"RecordingLog": true,
+			"MaxCurrent": 100,
+			"StepCurrent": 20,
+			"HoldTime": 10,
+			"Frequency": 100
+		},
+		{
+			"StepName": "Read DUT and Device Current 100A",
+			"RunMode": "Normal",
+			"FunctionName": "Test_UVW_Current",
+			"RecordingLog": true,
+			"BaseNum": 20100,
+			"LowLimit": 97,
+			"HighLimit": 103,
+			"Comtype": "GELE",
+			"Unit": "A"
+		},
+		{
+			"StepName": "Set DUT Current 200A_10S_100Hz",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_SetDUTCurrent",
+			"RecordingLog": true,
+			"MaxCurrent": 200,
+			"StepCurrent": 20,
+			"HoldTime": 10,
+			"Frequency": 100
+		},
+		{
+			"StepName": "Read DUT and Device Current 200A",
+			"RunMode": "Normal",
+			"FunctionName": "Test_UVW_Current",
+			"RecordingLog": true,
+			"BaseNum": 20200,
+			"LowLimit": 194,
+			"HighLimit": 206,
+			"Comtype": "GELE",
+			"Unit": "A"
+		},
+		{
+			"StepName": "Set DUT Current 300A_10S_100Hz",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_SetDUTCurrent",
+			"RecordingLog": true,
+			"MaxCurrent": 300,
+			"StepCurrent": 20,
+			"HoldTime": 10,
+			"Frequency": 100
+		},
+		{
+			"StepName": "Read DUT and Device Current 300A",
+			"RunMode": "Normal",
+			"FunctionName": "Test_UVW_Current",
+			"RecordingLog": true,
+			"BaseNum": 20300,
+			"LowLimit": 291,
+			"HighLimit": 309,
+			"Comtype": "GELE",
+			"Unit": "A"
+		},
+		{
+			"StepName": "Set DUT Current 400A_10S_100Hz",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_SetDUTCurrent",
+			"RecordingLog": true,
+			"MaxCurrent": 400,
+			"StepCurrent": 20,
+			"HoldTime": 10,
+			"Frequency": 100
+		},
+		{
+			"StepName": "Read DUT and Device Current 400A",
+			"RunMode": "Normal",
+			"FunctionName": "Test_UVW_Current",
+			"RecordingLog": false,
+			"BaseNum": 20400,
+			"LowLimit": 388,
+			"HighLimit": 412,
+			"Comtype": "GELE",
+			"Unit": "A"
+		},
+		{
+			"StepName": "Set DUT Current 500A_10S_100Hz",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_SetDUTCurrent",
+			"RecordingLog": true,
+			"MaxCurrent": 500,
+			"StepCurrent": 20,
+			"HoldTime": 10,
+			"Frequency": 100
+		},
+		{
+			"StepName": "Read DUT and Device Current 500A",
+			"RunMode": "Normal",
+			"FunctionName": "Test_UVW_Current",
+			"RecordingLog": false,
+			"BaseNum": 20500,
+			"LowLimit": 485,
+			"HighLimit": 515,
+			"Comtype": "GELE",
+			"Unit": "A"
+		},
+		{
+			"StepName": "Set DUT Current 600A_10S_100Hz",
+			"RunMode": "Normal",
+			"FunctionName": "CAN_SetDUTCurrent",
+			"RecordingLog": true,
+			"MaxCurrent": 600,
+			"StepCurrent": 20,
+			"HoldTime": 10,
+			"Frequency": 100
+		},
+		{
+			"StepName": "Read DUT and Device Current 600A",
+			"RunMode": "Normal",
+			"FunctionName": "Test_UVW_Current",
+			"RecordingLog": false,
+			"BaseNum": 20600,
+			"LowLimit": 582,
+			"HighLimit": 618,
+			"Comtype": "GELE",
+			"Unit": "A"
+		},
+		{
+			"StepName": "Set HVDC Voltage 0V",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetSourceVoltage",
+			"RecordingLog": true,
+			"Voltage": 1
+		},
+		{
+			"StepName": "Set HVDC Output OFF",
+			"RunMode": "Normal",
+			"FunctionName": "HVDC_SetOutput",
+			"RecordingLog": true,
+			"Output": false
+		}
+	]
+}

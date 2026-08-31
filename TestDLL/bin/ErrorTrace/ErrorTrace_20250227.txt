@@ -1,0 +1,78 @@
+2025-02-27 08:47:40
+Newtonsoft.Json.JsonReaderException: Bad JSON escape sequence: \D. Path 'StationConfigList[0].DLLFilePath', line 14, position 53.
+   在 Newtonsoft.Json.JsonTextReader.ReadStringIntoBuffer(Char quote)
+   在 Newtonsoft.Json.JsonTextReader.ParseValue()
+   在 Newtonsoft.Json.JsonTextReader.Read()
+   在 Newtonsoft.Json.JsonWriter.WriteToken(JsonReader reader, Boolean writeChildren, Boolean writeDateConstructorAsDate, Boolean writeComments)
+   在 Newtonsoft.Json.Linq.JTokenWriter.WriteToken(JsonReader reader, Boolean writeChildren, Boolean writeDateConstructorAsDate, Boolean writeComments)
+   在 Newtonsoft.Json.JsonWriter.WriteToken(JsonReader reader, Boolean writeChildren)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateJToken(JsonReader reader, JsonContract contract)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   在 Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 450
+====================================================================================================
+
+2025-02-27 08:47:44
+System.Exception: Load Station Config File Error: ---> Newtonsoft.Json.JsonReaderException: Bad JSON escape sequence: \D. Path 'StationConfigList[0].DLLFilePath', line 14, position 53.
+   在 Newtonsoft.Json.JsonTextReader.ReadStringIntoBuffer(Char quote)
+   在 Newtonsoft.Json.JsonTextReader.ParseValue()
+   在 Newtonsoft.Json.JsonTextReader.Read()
+   在 Newtonsoft.Json.JsonWriter.WriteToken(JsonReader reader, Boolean writeChildren, Boolean writeDateConstructorAsDate, Boolean writeComments)
+   在 Newtonsoft.Json.Linq.JTokenWriter.WriteToken(JsonReader reader, Boolean writeChildren, Boolean writeDateConstructorAsDate, Boolean writeComments)
+   在 Newtonsoft.Json.JsonWriter.WriteToken(JsonReader reader, Boolean writeChildren)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateJToken(JsonReader reader, JsonContract contract)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   在 Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 450
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 562
+   在 CSP.MainClass..ctor(String exeFolderPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 76
+====================================================================================================
+
+2025-02-27 08:57:48
+Newtonsoft.Json.JsonReaderException: Bad JSON escape sequence: \D. Path 'StationConfigList[0].DLLFilePath', line 14, position 53.
+   在 Newtonsoft.Json.JsonTextReader.ReadStringIntoBuffer(Char quote)
+   在 Newtonsoft.Json.JsonTextReader.ParseValue()
+   在 Newtonsoft.Json.JsonTextReader.Read()
+   在 Newtonsoft.Json.JsonWriter.WriteToken(JsonReader reader, Boolean writeChildren, Boolean writeDateConstructorAsDate, Boolean writeComments)
+   在 Newtonsoft.Json.Linq.JTokenWriter.WriteToken(JsonReader reader, Boolean writeChildren, Boolean writeDateConstructorAsDate, Boolean writeComments)
+   在 Newtonsoft.Json.JsonWriter.WriteToken(JsonReader reader, Boolean writeChildren)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateJToken(JsonReader reader, JsonContract contract)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   在 Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 450
+====================================================================================================
+
+2025-02-27 08:57:48
+System.Exception: Load Station Config File Error: ---> Newtonsoft.Json.JsonReaderException: Bad JSON escape sequence: \D. Path 'StationConfigList[0].DLLFilePath', line 14, position 53.
+   在 Newtonsoft.Json.JsonTextReader.ReadStringIntoBuffer(Char quote)
+   在 Newtonsoft.Json.JsonTextReader.ParseValue()
+   在 Newtonsoft.Json.JsonTextReader.Read()
+   在 Newtonsoft.Json.JsonWriter.WriteToken(JsonReader reader, Boolean writeChildren, Boolean writeDateConstructorAsDate, Boolean writeComments)
+   在 Newtonsoft.Json.Linq.JTokenWriter.WriteToken(JsonReader reader, Boolean writeChildren, Boolean writeDateConstructorAsDate, Boolean writeComments)
+   在 Newtonsoft.Json.JsonWriter.WriteToken(JsonReader reader, Boolean writeChildren)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateJToken(JsonReader reader, JsonContract contract)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.CreateValueInternal(JsonReader reader, Type objectType, JsonContract contract, JsonProperty member, JsonContainerContract containerContract, JsonProperty containerMember, Object existingValue)
+   在 Newtonsoft.Json.Serialization.JsonSerializerInternalReader.Deserialize(JsonReader reader, Type objectType, Boolean checkAdditionalContent)
+   在 Newtonsoft.Json.JsonSerializer.DeserializeInternal(JsonReader reader, Type objectType)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject(String value, Type type, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value, JsonSerializerSettings settings)
+   在 Newtonsoft.Json.JsonConvert.DeserializeObject[T](String value)
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 450
+   --- 内部异常堆栈跟踪的结尾 ---
+   在 CSP.MainClass.LoadStationConfig(String stationConfigPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 571
+   在 CSP.MainClass..ctor(String exeFolderPath, Int32 selectIndex) 位置 D:\CSharpTestPlatform\CSP_Test\CSP_Manage\MainClass.cs:行号 76
+====================================================================================================
+

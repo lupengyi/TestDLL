@@ -1,0 +1,81 @@
+{
+  "Id": "c96-std-hv-fault",
+  "Name": "过压故障状态读取",
+  "Category": "高压",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "",
+  "IsStandard": true,
+  "SupportedProducts": [
+    "C96"
+  ],
+  "Parameters": [
+    {
+      "Name": "ExpectedFault",
+      "DisplayName": "期望故障值",
+      "Type": "int",
+      "DefaultValue": 0,
+      "Unit": "",
+      "Description": "",
+      "Required": true
+    }
+  ],
+  "Steps": [
+    {
+      "Id": "395fbdf8e3c846a08d7a1cff3dcbc1f7",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取HVDC_OV_FLT",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANSignal",
+        "RecordingLog": true,
+        "Operation": "Read",
+        "ResultMode": "NumericLimit",
+        "AddrOffset": 24,
+        "TableIndex": 0,
+        "DataSize": 1,
+        "DataType": "uint8",
+        "LowLimit": 0.0,
+        "HighLimit": 0.0,
+        "Comtype": "GELE",
+        "Unit": ""
+      },
+      "ParameterBindings": {
+        "LowLimit": "ExpectedFault",
+        "HighLimit": "ExpectedFault"
+      }
+    },
+    {
+      "Id": "a429505400b94a0c836dc59bc40980ac",
+      "Enabled": true,
+      "ReferencedBlockId": null,
+      "ReferencedBlockName": null,
+      "IsModuleReference": false,
+      "ReferencedParameterOverrides": {},
+      "StepProperties": {
+        "StepName": "读取OV_FLT",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_CANSignal",
+        "RecordingLog": true,
+        "Operation": "Read",
+        "ResultMode": "NumericLimit",
+        "AddrOffset": 24,
+        "TableIndex": 100,
+        "DataSize": 1,
+        "DataType": "uint8",
+        "LowLimit": 0.0,
+        "HighLimit": 0.0,
+        "Comtype": "GELE",
+        "Unit": ""
+      },
+      "ParameterBindings": {
+        "LowLimit": "ExpectedFault",
+        "HighLimit": "ExpectedFault"
+      }
+    }
+  ]
+}
