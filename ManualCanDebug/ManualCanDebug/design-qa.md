@@ -1,16 +1,16 @@
 # Design QA
 
-- Reference: `C:\Users\2501000857\.codex\generated_images\019fd4c1-954e-7bb3-a420-907a94fbbbdb\exec-d8e38e92-6bc5-44c5-81b5-6464c1906e89.png`
-- Locator dialog capture: `C:\Users\2501000857\AppData\Local\Temp\locator-signal-dialog-implemented-v2.png`
-- DBC dialog capture: `C:\Users\2501000857\AppData\Local\Temp\dbc-signal-dialog-implemented.png`
+- Reference: `C:\Users\2501000857\AppData\Local\Temp\codex-clipboard-13cec40b-4722-4208-ab1c-6e2ef41d43ca.png`
+- Locator dialog capture: `C:\Users\2501000857\AppData\Local\Temp\locator-faithful-qa.png`
+- DBC dialog capture: `C:\Users\2501000857\AppData\Local\Temp\dbc-faithful-final.png`
 - Main summary capture: `C:\Users\2501000857\AppData\Local\Temp\locator-summary-implemented.png`
 
 ## Comparison
 
 - P0: none.
 - P1: none. The dense inline signal table is removed; signal selection and rule editing are functional modal workflows.
-- P2: none. The primary hierarchy, left signal list, right detail form, summary counts, selected-signal chips, search/filter controls, and apply/cancel actions match the selected direction.
-- P3: WPF uses native radio buttons instead of the mockup's fully segmented result-mode control. This preserves keyboard behavior and is acceptable polish for the current industrial desktop design system.
+- P2: none. The borderless rounded window, integrated close action, blue segmented filters, selected-row highlight, blue checkboxes, segmented result mode, judgment switch, fixed footer, and primary hierarchy match the supplied target.
+- P3: Numeric LIMIT fields use direct text entry rather than spinner arrow buttons; keyboard entry and validation are fully functional.
 
 ## Functional checks
 
