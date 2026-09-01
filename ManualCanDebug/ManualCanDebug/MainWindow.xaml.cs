@@ -37,6 +37,7 @@ namespace ManualCanDebug
         private ComboBox _productModelComboBox;
         private TextBlock _productSelectorLabel;
         private ComboBox _workModeComboBox;
+        private bool _advancedManualMode;
         private TabControl _mainTabs;
         private TabItem _c92ReadTab;
         private TabItem _c92ControlTab;
@@ -337,7 +338,7 @@ namespace ManualCanDebug
             {
                 Width = 165,
                 Margin = new Thickness(5, 0, 8, 0),
-                ItemsSource = new[] { "流程调试（普通）", "高级手动调试" },
+                ItemsSource = new[] { "编辑模式", "调试模式" },
                 SelectedIndex = 0
             };
             _workModeComboBox.SelectionChanged += WorkMode_SelectionChanged;
@@ -826,7 +827,7 @@ namespace ManualCanDebug
         {
             if (_mainTabs == null) return;
 
-            bool simpleMode = _workModeComboBox == null || _workModeComboBox.SelectedIndex == 0;
+            bool simpleMode = !_advancedManualMode;
             if (_productSelectorLabel != null) _productSelectorLabel.Visibility = Visibility.Collapsed; if (_productModelComboBox != null) _productModelComboBox.Visibility = Visibility.Collapsed;
 
             _functionBlockStudioTab.Visibility = Visibility.Collapsed;
@@ -862,27 +863,40 @@ namespace ManualCanDebug
         private void WorkMode_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (_service == null) return;
+            if ((_studioDebugActive || _workflowRunning) && _workModeComboBox.SelectedIndex != 1) { _workModeComboBox.SelectedIndex = 1; MessageBox.Show(this, "调试正在运行，请先停止并完成安全下电后再切换模式。", "切换运行模式", MessageBoxButton.OK, MessageBoxImage.Information); return; }
+            _advancedManualMode = false;
+            ApplyStudioRunMode();
             UpdateProductTabs(_service.ProductProfile.Model);
             if (_workModeComboBox.SelectedIndex == 0)
             {
-                bool ready = _legacyRuntime != null && _legacyRuntime.InstrumentsInitialized;
-                UpdateLegacyRuntimeStatus(ready ? "流程工作区已初始化" : "流程工作区：待初始化", ready ? Brushes.DarkGreen : Brushes.DarkOrange);
-                Service_Log("已切换到流程调试模式；顶部初始化将按仪器中心勾选调用MainTest选择性ProcessSetup。");
+                UpdateLegacyRuntimeStatus("编辑模式", new SolidColorBrush(Color.FromRgb(75, 83, 96)));
+                Service_Log("已切换到编辑模式；运行、单步、停止和立即试运行入口已隐藏。");
             }
-            else
+            else if (_workModeComboBox.SelectedIndex == 1)
             {
-                bool platformBusy = _legacyRuntime != null && _legacyRuntime.InstrumentsInitialized;
-                UpdateLegacyRuntimeStatus(platformBusy ? "MainTest已初始化" : "当前项目仪器：待初始化", platformBusy ? Brushes.DarkGreen : Brushes.DarkOrange);
-                Service_Log("已切换到高级手动调试模式；初始化与执行仍使用当前项目同一个MainTest实例和仪器中心选择。");
+                bool ready = _legacyRuntime != null && _legacyRuntime.InstrumentsInitialized;
+                UpdateLegacyRuntimeStatus(ready ? "调试工作区已初始化" : "调试工作区：待初始化", ready ? Brushes.DarkGreen : Brushes.DarkOrange);
+                Service_Log("已切换到调试模式；运行、单步、断点和立即试运行入口已显示。");
             }
         }
 
         private void OpenAdvancedTool(TabItem tab)
         {
-            _workModeComboBox.SelectedIndex = 1;
+            _workModeComboBox.SelectedIndex = 1; _advancedManualMode = true;
             UpdateProductTabs(_service.ProductProfile.Model);
             _mainTabs.SelectedItem = _advancedToolsTab;
             if (tab != null && tab.Visibility == Visibility.Visible) _advancedTabs.SelectedItem = tab;
+        }
+
+        private void ApplyStudioRunMode()
+        {
+            int mode = _workModeComboBox == null ? 0 : _workModeComboBox.SelectedIndex; bool debug = mode == 1, showRuntime = mode != 0;
+            if (_studioFlowEditorPanel != null) _studioFlowEditorPanel.SetDebugMode(debug);
+            if (_functionBlockStudioPanel != null) _functionBlockStudioPanel.SetDebugMode(debug);
+            if (_workspaceStatusIcon != null) _workspaceStatusIcon.Visibility = showRuntime ? Visibility.Visible : Visibility.Collapsed;
+            if (_legacyRuntimeStatusText != null) _legacyRuntimeStatusText.Visibility = showRuntime ? Visibility.Visible : Visibility.Collapsed;
+            if (_initializeAllInstrumentsButton != null) _initializeAllInstrumentsButton.Visibility = showRuntime ? Visibility.Visible : Visibility.Collapsed;
+            if (_safeShutdownButton != null) _safeShutdownButton.Visibility = showRuntime ? Visibility.Visible : Visibility.Collapsed;
         }
 
         private void SelectC96()
@@ -918,7 +932,7 @@ namespace ManualCanDebug
                 _auxiliaryStatusText.Foreground = Brushes.DarkRed;
                 if (_instrumentCenterPanel != null) _instrumentCenterPanel.SetInitializedInstruments(new string[0]);
                 if (_legacyRuntime == null || !_legacyRuntime.InstrumentsInitialized)
-                    UpdateLegacyRuntimeStatus(_workModeComboBox.SelectedIndex == 0 ? "流程工作区：待初始化" : "高级手动工作区：待初始化", Brushes.DarkOrange);
+                    UpdateLegacyRuntimeStatus(_advancedManualMode ? "高级手动工作区：待初始化" : "调试工作区：待初始化", Brushes.DarkOrange);
                 Service_Log("已通过MainTest执行安全下电并断开全部仪器。");
             }
             catch (Exception ex) { Service_Log("断开失败：" + ex.Message); }
@@ -1163,7 +1177,7 @@ namespace ManualCanDebug
             if (dialog.ShowDialog(this) != true) return; LoadSequenceFromFile(dialog.FileName, false); if (_sequenceDocument == null || !string.Equals(_loadedSequencePath, dialog.FileName, StringComparison.OrdinalIgnoreCase)) return;
             try
             {
-                string product = ResolveSequenceProduct(dialog.FileName); bool c91 = string.Equals(product, "C91", StringComparison.OrdinalIgnoreCase); _studioProject = c91 ? C91SequenceProjectFactory.Create(_sequenceDocument) : CreateImportedSequenceProject(_sequenceDocument, product, Path.GetFileNameWithoutExtension(dialog.FileName)); _studioProject.Product = product; _studioProjectPath = dialog.FileName; _loadedSequencePath = dialog.FileName; _studioProjectDirty = false; SelectProductContext(product); ResetStudioHistory(); _functionBlockStudioPanel.RefreshProject(); _studioFlowEditorPanel.RefreshProject(); ShowStudioFlowWorkspace(null); UpdateCurrentFileDisplay(); Service_Log("平台JSON SEQ已打开：" + dialog.FileName + "；识别产品=" + product); MessageBox.Show(this, "SEQ已打开并进入编辑。\n\n产品：" + product + "\nSTEP：" + _sequenceDocument.Steps.Count, "打开SEQ", MessageBoxButton.OK, MessageBoxImage.Information);
+                string product = ResolveSequenceProduct(dialog.FileName); bool restored = FctStudioProjectService.TryLoadEditorState(dialog.FileName, out _studioProject); if (!restored) { bool c91 = string.Equals(product, "C91", StringComparison.OrdinalIgnoreCase); _studioProject = c91 ? C91SequenceProjectFactory.Create(_sequenceDocument) : CreateImportedSequenceProject(_sequenceDocument, product, Path.GetFileNameWithoutExtension(dialog.FileName)); } _studioProject.Product = string.IsNullOrWhiteSpace(_studioProject.Product) ? product : _studioProject.Product; product = _studioProject.Product; GlobalModuleLibraryService.MergeInto(_studioProject); _studioProjectPath = dialog.FileName; _loadedSequencePath = dialog.FileName; _studioProjectDirty = false; SelectProductContext(product); ResetStudioHistory(); _functionBlockStudioPanel.RefreshProject(); _studioFlowEditorPanel.RefreshProject(); ShowStudioFlowWorkspace(null); UpdateCurrentFileDisplay(); Service_Log("平台JSON SEQ已打开：" + dialog.FileName + "；识别产品=" + product + (restored ? "；已恢复完整编辑状态" : string.Empty)); MessageBox.Show(this, "SEQ已打开并进入编辑。\n\n产品：" + product + "\nSTEP：" + _sequenceDocument.Steps.Count + (restored ? "\n模块停用状态和编辑配置已恢复。" : string.Empty), "打开SEQ", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex) { MessageBox.Show(this, "JSON SEQ打开失败：\n" + ex.Message, "打开SEQ", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
@@ -1329,7 +1343,7 @@ namespace ManualCanDebug
 
         private void SaveCompiledSequenceToPath(string path, bool allowEmpty)
         {
-            SynchronizeFlowStructuresForSave(); FctStudioCompileResult compiled = FctStudioCompiler.Compile(_studioProject); if (!allowEmpty && compiled.Document.Steps.Count == 0) throw new InvalidOperationException("当前流程为空，不能生成平台SEQ。"); string[] unsupported = _legacyRuntime == null ? new string[0] : compiled.Document.Steps.Select(step => step.FunctionName).Distinct().Where(name => !_legacyRuntime.SupportsFunction(name)).OrderBy(name => name).ToArray(); if (unsupported.Length > 0) throw new InvalidOperationException("当前CSP.TestDLL缺少以下FunctionName：\n" + string.Join("\n", unsupported)); string json = compiled.Document.ToJson(compiled.Document.Steps); SequenceDocument reparsed = SequenceDocument.Parse(json); if (reparsed.Steps.Count != compiled.Document.Steps.Count) throw new InvalidOperationException("SEQ回读STEP数量不一致。"); string directory = Path.GetDirectoryName(path); if (!string.IsNullOrWhiteSpace(directory)) Directory.CreateDirectory(directory); File.WriteAllText(path, json, new UTF8Encoding(false)); _studioProjectPath = path; _loadedSequencePath = path; ApplyCompiledStudioSequence(compiled); _studioProjectDirty = false; UpdateCurrentFileDisplay(); Service_Log("JSON SEQ已保存：" + path + "；" + reparsed.Steps.Count + " STEP");
+            SynchronizeFlowStructuresForSave(); FctStudioCompileResult compiled = FctStudioCompiler.Compile(_studioProject); if (!allowEmpty && compiled.Document.Steps.Count == 0) throw new InvalidOperationException("当前流程为空，不能生成平台SEQ。"); string[] unsupported = _legacyRuntime == null ? new string[0] : compiled.Document.Steps.Select(step => step.FunctionName).Distinct().Where(name => !_legacyRuntime.SupportsFunction(name)).OrderBy(name => name).ToArray(); if (unsupported.Length > 0) throw new InvalidOperationException("当前CSP.TestDLL缺少以下FunctionName：\n" + string.Join("\n", unsupported)); string json = compiled.Document.ToJson(compiled.Document.Steps); SequenceDocument reparsed = SequenceDocument.Parse(json); if (reparsed.Steps.Count != compiled.Document.Steps.Count) throw new InvalidOperationException("SEQ回读STEP数量不一致。"); string directory = Path.GetDirectoryName(path); if (!string.IsNullOrWhiteSpace(directory)) Directory.CreateDirectory(directory); File.WriteAllText(path, json, new UTF8Encoding(false)); FctStudioProjectService.SaveEditorState(path, _studioProject); _studioProjectPath = path; _loadedSequencePath = path; ApplyCompiledStudioSequence(compiled); _studioProjectDirty = false; UpdateCurrentFileDisplay(); Service_Log("JSON SEQ及完整编辑状态已保存：" + path + "；" + reparsed.Steps.Count + " STEP");
         }
 
         private void SynchronizeFlowStructuresForSave()
@@ -1595,7 +1609,7 @@ namespace ManualCanDebug
             _studioProjectPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "StudioProjects", "DefaultSequence.json");
             if (File.Exists(_studioProjectPath))
             {
-                try { LoadSequenceFromFile(_studioProjectPath, false); _studioProject = CreateImportedSequenceProject(_sequenceDocument, _service.ProductProfile.Model.ToString(), Path.GetFileNameWithoutExtension(_studioProjectPath)); GlobalModuleLibraryService.MergeInto(_studioProject); Service_Log("已自动加载JSON SEQ：" + _studioProjectPath); }
+                try { LoadSequenceFromFile(_studioProjectPath, false); bool restored = FctStudioProjectService.TryLoadEditorState(_studioProjectPath, out _studioProject); if (!restored) _studioProject = CreateImportedSequenceProject(_sequenceDocument, _service.ProductProfile.Model.ToString(), Path.GetFileNameWithoutExtension(_studioProjectPath)); GlobalModuleLibraryService.MergeInto(_studioProject); Service_Log("已自动加载JSON SEQ：" + _studioProjectPath + (restored ? "；已恢复完整编辑状态" : string.Empty)); }
                 catch (Exception ex) { _studioProject = FctStudioProjectService.CreateBlank(_sequenceDocument, _service.ProductProfile.Model.ToString()); GlobalModuleLibraryService.MergeInto(_studioProject); Service_Log("默认JSON加载失败，已创建空白SEQ：" + ex.Message); }
             }
             else
@@ -1606,6 +1620,7 @@ namespace ManualCanDebug
             _studioFlowEditorPanel = new StudioFlowEditorPanel(() => _studioProject, StudioFlowChanged, ApplyCompiledStudioSequence, StartStudioDebugAsync, ContinueStudioDebugAsync, StepStudioDebugAsync, StopStudioDebug, Service_Log, OpenFunctionBlockEditor);
             _functionBlockStudioPanel.RefreshProject();
             _studioFlowEditorPanel.RefreshProject();
+            ApplyStudioRunMode();
             ShowStudioFlowWorkspace(null);
             _studioProjectDirty = false;
             ResetStudioHistory();
@@ -2183,9 +2198,9 @@ namespace ManualCanDebug
             else if (Keyboard.Modifiers == ModifierKeys.Alt && e.Key == Key.Up) { MoveStepUp_Click(this, new RoutedEventArgs()); e.Handled = true; }
             else if (Keyboard.Modifiers == ModifierKeys.Alt && e.Key == Key.Down) { MoveStepDown_Click(this, new RoutedEventArgs()); e.Handled = true; }
             else if (e.Key == Key.Delete && !(Keyboard.FocusedElement is TextBoxBase)) { DeleteSelectedStep_Click(this, new RoutedEventArgs()); e.Handled = true; }
-            else if (e.Key == Key.F6) { if (_workModeComboBox.SelectedIndex == 1) ExecuteSequence_Click(this, new RoutedEventArgs()); else ShowStudioFlowWorkspace(null); e.Handled = true; }
+            else if (e.Key == Key.F6) { if (_advancedManualMode) ExecuteSequence_Click(this, new RoutedEventArgs()); else ShowStudioFlowWorkspace(null); e.Handled = true; }
             else if (e.Key == Key.F5 && Keyboard.Modifiers == ModifierKeys.Shift) { if (_studioDebugActive) StopStudioDebug(); else StopWorkflow_Click(this, new RoutedEventArgs()); e.Handled = true; }
-            else if (e.Key == Key.F5) { if (_workModeComboBox.SelectedIndex == 1) RunAllWorkflow_Click(this, new RoutedEventArgs()); else { ShowStudioFlowWorkspace(null); SetApplicationStatus("请使用底部调试栏运行功能块流程"); } e.Handled = true; }
+            else if (e.Key == Key.F5) { if (_advancedManualMode) RunAllWorkflow_Click(this, new RoutedEventArgs()); else { ShowStudioFlowWorkspace(null); SetApplicationStatus(_workModeComboBox.SelectedIndex == 1 ? "请使用流程调试栏运行功能块流程" : "当前为编辑模式，请先切换到调试模式"); } e.Handled = true; }
         }
 
         private void ShowShortcutHelp_Click(object sender, RoutedEventArgs e)

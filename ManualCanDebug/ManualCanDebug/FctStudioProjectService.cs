@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using ManualCanDebug.Core;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -32,6 +34,41 @@ namespace ManualCanDebug
             string directory = Path.GetDirectoryName(path);
             if (!string.IsNullOrWhiteSpace(directory)) Directory.CreateDirectory(directory);
             File.WriteAllText(path, Serialize(project));
+        }
+
+        public static string EditorStatePath(string sequencePath)
+        {
+            if (string.IsNullOrWhiteSpace(sequencePath)) throw new ArgumentException("SEQ path is required.", nameof(sequencePath));
+            return sequencePath + ".fctstudio.json";
+        }
+
+        public static void SaveEditorState(string sequencePath, FctStudioProject project)
+        {
+            if (project == null) throw new ArgumentNullException(nameof(project));
+            if (!File.Exists(sequencePath)) throw new FileNotFoundException("SEQ file does not exist.", sequencePath);
+            FctStudioEditorState state = new FctStudioEditorState { SequenceSha256 = ComputeSha256(sequencePath), Project = project };
+            string path = EditorStatePath(sequencePath), directory = Path.GetDirectoryName(path);
+            if (!string.IsNullOrWhiteSpace(directory)) Directory.CreateDirectory(directory);
+            File.WriteAllText(path, JsonConvert.SerializeObject(state, Formatting.Indented), new UTF8Encoding(false));
+        }
+
+        public static bool TryLoadEditorState(string sequencePath, out FctStudioProject project)
+        {
+            project = null; string path = EditorStatePath(sequencePath);
+            if (!File.Exists(sequencePath) || !File.Exists(path)) return false;
+            try
+            {
+                FctStudioEditorState state = JsonConvert.DeserializeObject<FctStudioEditorState>(File.ReadAllText(path));
+                if (state == null || state.Project == null || string.IsNullOrWhiteSpace(state.SequenceSha256) || !string.Equals(state.SequenceSha256, ComputeSha256(sequencePath), StringComparison.OrdinalIgnoreCase)) return false;
+                NormalizeProject(state.Project, false); project = state.Project; return true;
+            }
+            catch { return false; }
+        }
+
+        private static string ComputeSha256(string path)
+        {
+            using (SHA256 sha = SHA256.Create())
+            using (FileStream stream = File.OpenRead(path)) return BitConverter.ToString(sha.ComputeHash(stream)).Replace("-", string.Empty);
         }
 
         public static FctStudioProject CreateDefault(SequenceDocument sequence, string product)
@@ -267,7 +304,7 @@ namespace ManualCanDebug
             step.ParameterBindings[stepParameter] = blockParameter;
         }
 
-        private static void NormalizeProject(FctStudioProject project)
+        private static void NormalizeProject(FctStudioProject project, bool flattenParameters = true)
         {
             project.Blocks = project.Blocks ?? new List<FunctionBlockDefinition>(); project.Flow = project.Flow ?? new List<FlowBlockInstance>(); project.Breakpoints = project.Breakpoints ?? new List<string>();
             project.ProductLocatorPath = project.ProductLocatorPath ?? string.Empty; project.AuxiliaryDbcPath = project.AuxiliaryDbcPath ?? string.Empty; project.DriveStructure = string.IsNullOrWhiteSpace(project.DriveStructure) ? "SingleMainDrive" : project.DriveStructure; project.Capabilities = project.Capabilities ?? new List<string>();
@@ -282,7 +319,13 @@ namespace ManualCanDebug
                 MigrateCurrentTableToDirectValues(block);
             }
             foreach (FlowBlockInstance instance in project.Flow) { instance.ParameterOverrides = NormalizeDictionary(instance.ParameterOverrides); if (instance.Snapshot != null) MigrateCurrentTableToDirectValues(instance.Snapshot); }
-            FlattenParameters(project);
+            if (flattenParameters) FlattenParameters(project);
+        }
+
+        private sealed class FctStudioEditorState
+        {
+            public string SequenceSha256 { get; set; }
+            public FctStudioProject Project { get; set; }
         }
         internal static void MigrateCurrentTableToDirectValues(FunctionBlockDefinition block)
         {

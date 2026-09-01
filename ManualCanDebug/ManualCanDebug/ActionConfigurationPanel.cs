@@ -61,8 +61,14 @@ namespace ManualCanDebug
         private SequenceStepDefinition _loadedStep;
         private Dictionary<string, string> _loadedBindings = new Dictionary<string, string>(StringComparer.Ordinal);
         private bool _loading;
+        private Button _runButton;
 
         public event Action<ActionHistoryRow> ExecutionRecorded;
+
+        public void SetDebugMode(bool enabled)
+        {
+            if (_runButton != null) _runButton.Visibility = enabled ? Visibility.Visible : Visibility.Collapsed;
+        }
 
         public ActionConfigurationPanel(ProductLocatorRepository locatorRepository, Func<SequenceStepDefinition, Task<string>> execute, Action<SequenceStepDefinition, IDictionary<string, string>> save, Action<string> log, Func<string> getProduct, Func<string> getDbcPath = null, Func<LegacyStepExecutionResult> getLastPlatformResult = null)
         {
@@ -114,7 +120,7 @@ namespace ManualCanDebug
             RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto }); RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) }); RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             Border selector = Card(); selector.Padding = new Thickness(12, 8, 12, 8); WrapPanel top = new WrapPanel(); top.Children.Add(Label("动作来源")); top.Children.Add(_source); top.Children.Add(Label("目标设备/协议")); top.Children.Add(_target); top.Children.Add(Label("功能")); top.Children.Add(_operation); top.Children.Add(Label("动作名称")); top.Children.Add(_stepName); selector.Child = top; Children.Add(selector);
             ScrollViewer scroll = new ScrollViewer { Content = _body, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled, Margin = new Thickness(0, 8, 0, 8) }; Grid.SetRow(scroll, 1); Children.Add(scroll);
-            Border footer = Card(); footer.Padding = new Thickness(12, 8, 12, 8); DockPanel footerDock = new DockPanel(); StackPanel buttons = new StackPanel { Orientation = Orientation.Horizontal }; DockPanel.SetDock(buttons, Dock.Right); Button run = Button("立即试运行", Execute_Click); Button save = PrimaryButton("完成配置", Complete_Click); buttons.Children.Add(run); buttons.Children.Add(save); footerDock.Children.Add(buttons); WrapPanel common = new WrapPanel(); common.Children.Add(Label("运行模式")); _runMode.ItemsSource = new[] { "Normal", "Skip", "Break" }; _runMode.SelectedIndex = 0; common.Children.Add(_runMode); common.Children.Add(_recordLog); common.Children.Add(_status); footerDock.Children.Add(common); footer.Child = footerDock; Grid.SetRow(footer, 2); Children.Add(footer);
+            Border footer = Card(); footer.Padding = new Thickness(12, 8, 12, 8); DockPanel footerDock = new DockPanel(); StackPanel buttons = new StackPanel { Orientation = Orientation.Horizontal }; DockPanel.SetDock(buttons, Dock.Right); _runButton = Button("立即试运行", Execute_Click); Button save = PrimaryButton("完成配置", Complete_Click); buttons.Children.Add(_runButton); buttons.Children.Add(save); footerDock.Children.Add(buttons); WrapPanel common = new WrapPanel(); common.Children.Add(Label("运行模式")); _runMode.ItemsSource = new[] { "Normal", "Skip", "Break" }; _runMode.SelectedIndex = 0; common.Children.Add(_runMode); common.Children.Add(_recordLog); common.Children.Add(_status); footerDock.Children.Add(common); footer.Child = footerDock; Grid.SetRow(footer, 2); Children.Add(footer);
             _source.SelectionChanged += (s, e) => { if (_loading) return; RefreshTargets(); BuildEditor(); };
             _target.SelectionChanged += (s, e) => { if (_loading) return; RefreshOperations(); BuildEditor(); };
             _operation.SelectionChanged += (s, e) => { if (_loading) return; BuildEditor(); };
