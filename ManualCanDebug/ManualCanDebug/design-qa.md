@@ -22,4 +22,3 @@
 - Main screens show summaries instead of wide signal tables.
 
 final result: passed
-
