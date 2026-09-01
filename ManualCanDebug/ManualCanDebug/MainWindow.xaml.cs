@@ -43,6 +43,8 @@ namespace ManualCanDebug
         private MenuItem _initializeWorkspaceMenuItem;
         private MenuItem _safeShutdownMenuItem;
         private Separator _runDebugSeparator;
+        private MenuItem _moduleLibraryMenuItem;
+        private bool _moduleLibraryDrawerOpen;
         private TabControl _mainTabs;
         private Button _sequenceActivityButton;
         private Button _advancedActivityButton;
@@ -1674,11 +1676,12 @@ namespace ManualCanDebug
             {
                 SequenceDocument blank = new SequenceDocument(new Dictionary<string, object>(_sequenceDocument.RootProperties, StringComparer.Ordinal), new SequenceStepDefinition[0]); string directory = Path.GetDirectoryName(_studioProjectPath); Directory.CreateDirectory(directory); File.WriteAllText(_studioProjectPath, blank.ToJson(blank.Steps), new UTF8Encoding(false)); LoadSequenceFromFile(_studioProjectPath, false); _studioProject = FctStudioProjectService.CreateBlank(_sequenceDocument, _service.ProductProfile.Model.ToString()); GlobalModuleLibraryService.MergeInto(_studioProject); Service_Log("已建立默认空白JSON SEQ：" + _studioProjectPath);
             }
-            _functionBlockStudioPanel = new FunctionBlockStudioPanel(() => _studioProject, () => _atomicCatalogSteps, _productLocatorRepository, Service_Log, StudioBlockChanged, ExecuteInstrumentStepAsync, () => _legacyRuntime == null ? null : _legacyRuntime.LastStepExecution, OpenFunctionBlockEditor, ReturnToStudioFlowWorkspace);
-            _studioFlowEditorPanel = new StudioFlowEditorPanel(() => _studioProject, StudioFlowChanged, ApplyCompiledStudioSequence, StartStudioDebugAsync, ContinueStudioDebugAsync, StepStudioDebugAsync, StopStudioDebug, Service_Log, OpenFunctionBlockEditor);
+            _functionBlockStudioPanel = new FunctionBlockStudioPanel(() => _studioProject, () => _atomicCatalogSteps, _productLocatorRepository, Service_Log, StudioBlockChanged, ExecuteInstrumentStepAsync, () => _legacyRuntime == null ? null : _legacyRuntime.LastStepExecution, OpenFunctionBlockEditor, ReturnToStudioFlowWorkspace, SetModuleLibraryDrawerOpen);
+            _studioFlowEditorPanel = new StudioFlowEditorPanel(() => _studioProject, StudioFlowChanged, ApplyCompiledStudioSequence, StartStudioDebugAsync, ContinueStudioDebugAsync, StepStudioDebugAsync, StopStudioDebug, Service_Log, OpenFunctionBlockEditor, SetModuleLibraryDrawerOpen);
             _functionBlockStudioPanel.RefreshProject();
             _studioFlowEditorPanel.RefreshProject();
             ApplyStudioRunMode();
+            SetModuleLibraryDrawerOpen(false);
             ShowStudioFlowWorkspace(null);
             _studioProjectDirty = false;
             ResetStudioHistory();
@@ -2102,6 +2105,8 @@ namespace ManualCanDebug
             view.Items.Add(MakeMenuItem("显示 / 隐藏运行日志", "Ctrl+L", ToggleLog_Click));
 
             MenuItem tools = new MenuItem { Header = "工具(_T)" };
+            _moduleLibraryMenuItem = MakeMenuItem("模块库", string.Empty, OpenModuleLibrary_Click); _moduleLibraryMenuItem.IsCheckable = true; tools.Items.Add(_moduleLibraryMenuItem);
+            tools.Items.Add(new Separator());
             tools.Items.Add(MakeMenuItem("连接产品 CAN", string.Empty, ConnectProduct_Click));
             tools.Items.Add(MakeMenuItem("连接旋变 CAN", string.Empty, ConnectResolver_Click));
             tools.Items.Add(MakeMenuItem("连接 DCDC / 辅驱 CAN", string.Empty, ConnectAuxiliary_Click));
@@ -2128,6 +2133,9 @@ namespace ManualCanDebug
         }
 
         private void OpenInstrumentActionManager_Click(object sender, RoutedEventArgs e) { InstrumentActionManagerWindow dialog = new InstrumentActionManagerWindow { Owner = this }; if (dialog.ShowDialog() == true) { ActionCatalog.Reload(); if (_functionBlockStudioPanel != null) _functionBlockStudioPanel.ReloadActionCatalog(); Service_Log("仪器与动作目录已重新加载：" + ActionCatalog.ConfigurationPath); } }
+
+        private void OpenModuleLibrary_Click(object sender, RoutedEventArgs e) { if (_mainTabs != null && _mainTabs.SelectedItem == _advancedToolsTab) ShowStudioFlowWorkspace(null); SetModuleLibraryDrawerOpen(true); }
+        private void SetModuleLibraryDrawerOpen(bool open) { _moduleLibraryDrawerOpen = open; if (_functionBlockStudioPanel != null) _functionBlockStudioPanel.SetLibraryDrawerOpen(open); if (_studioFlowEditorPanel != null) _studioFlowEditorPanel.SetLibraryDrawerOpen(open); if (_moduleLibraryMenuItem != null) _moduleLibraryMenuItem.IsChecked = open; }
 
         private StatusBar BuildStatusBar()
         {

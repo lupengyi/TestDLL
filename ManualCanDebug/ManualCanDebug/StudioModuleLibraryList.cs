@@ -69,7 +69,7 @@ namespace ManualCanDebug
             groupHeader.AppendChild(groupText);
             DataTemplate groupHeaderTemplate = new DataTemplate { VisualTree = groupHeader };
             FrameworkElementFactory groupExpander = new FrameworkElementFactory(typeof(Expander));
-            groupExpander.SetValue(Expander.IsExpandedProperty, true); groupExpander.SetValue(Expander.HorizontalContentAlignmentProperty, HorizontalAlignment.Stretch); groupExpander.SetValue(Expander.MarginProperty, new Thickness(2, 2, 2, 3)); groupExpander.SetBinding(Expander.HeaderProperty, new Binding()); groupExpander.SetValue(Expander.HeaderTemplateProperty, groupHeaderTemplate); groupExpander.SetValue(Expander.ToolTipProperty, "点击展开或收起该模块分组");
+            groupExpander.SetValue(Expander.IsExpandedProperty, false); groupExpander.SetValue(Expander.HorizontalContentAlignmentProperty, HorizontalAlignment.Stretch); groupExpander.SetValue(Expander.MarginProperty, new Thickness(2, 2, 2, 3)); groupExpander.SetBinding(Expander.HeaderProperty, new Binding()); groupExpander.SetValue(Expander.HeaderTemplateProperty, groupHeaderTemplate); groupExpander.SetValue(Expander.ToolTipProperty, "点击展开或收起该模块分组");
             FrameworkElementFactory groupItems = new FrameworkElementFactory(typeof(ItemsPresenter)); groupItems.SetValue(ItemsPresenter.MarginProperty, new Thickness(0, 2, 0, 0)); groupExpander.AppendChild(groupItems);
             ControlTemplate groupTemplate = new ControlTemplate(typeof(GroupItem)) { VisualTree = groupExpander };
             Style groupContainerStyle = new Style(typeof(GroupItem)); groupContainerStyle.Setters.Add(new Setter(GroupItem.TemplateProperty, groupTemplate));

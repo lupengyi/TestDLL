@@ -43,6 +43,16 @@ The focused comparison confirms the rail width, selected indicator, two-item ver
 - Existing edit/debug mode, module navigation, bindings, commands, drag/drop, save format, and instrument pages remain intact.
 - The removed TabControl header is replaced by a content-only template; no invisible blank tab row remains.
 
+## Module Library Drawer Follow-up
+
+- Closed-state screenshot: `docs/design/module-library-drawer-closed.png`
+- Open-state screenshot: `docs/design/module-library-drawer-open.png`
+- The application starts in edit mode with both module-library columns at 0 px and the editor filling the available width.
+- `工具 → 模块库` opens the shared 280 px drawer for the current sequence/module workspace.
+- The drawer `×` closes it completely and clears the Tools-menu checked state.
+- Standard, product, and custom module groups use collapsed group templates whenever the drawer opens.
+- The flow editor and module editor share the same drawer state, so navigation does not create two independent module libraries.
+
 ## Final Result
 
 final result: passed

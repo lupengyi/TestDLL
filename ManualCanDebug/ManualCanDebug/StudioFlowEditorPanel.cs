@@ -59,11 +59,17 @@ namespace ManualCanDebug
         private string _activeFlowInstanceId;
         private StackPanel _debugToolbar;
         private bool _debugMode;
+        private readonly Action<bool> _libraryVisibilityChanged;
+        private Border _libraryShell;
+        private GridSplitter _librarySplitter;
+        private Button _closeLibraryButton;
+        private double _libraryDrawerWidth = 280d;
 
-        public StudioFlowEditorPanel(Func<FctStudioProject> getProject, Action changed, Action<FctStudioCompileResult> compiled, Func<FctStudioCompileResult, int, Task> startDebug, Func<Task> continueDebug, Func<Task> stepDebug, Action stopDebug, Action<string> log, Action<FunctionBlockDefinition> openBlockEditor)
+        public StudioFlowEditorPanel(Func<FctStudioProject> getProject, Action changed, Action<FctStudioCompileResult> compiled, Func<FctStudioCompileResult, int, Task> startDebug, Func<Task> continueDebug, Func<Task> stepDebug, Action stopDebug, Action<string> log, Action<FunctionBlockDefinition> openBlockEditor, Action<bool> libraryVisibilityChanged = null)
         {
-            _getProject = getProject; _changed = changed; _compiled = compiled; _startDebug = startDebug; _continueDebug = continueDebug; _stepDebug = stepDebug; _stopDebug = stopDebug; _log = log; _openBlockEditor = openBlockEditor;
+            _getProject = getProject; _changed = changed; _compiled = compiled; _startDebug = startDebug; _continueDebug = continueDebug; _stepDebug = stepDebug; _stopDebug = stopDebug; _log = log; _openBlockEditor = openBlockEditor; _libraryVisibilityChanged = libraryVisibilityChanged;
             Background = new SolidColorBrush(Color.FromRgb(242, 245, 249)); Margin = new Thickness(0); TextElement.SetFontFamily(this, new FontFamily("Segoe UI")); TextElement.SetFontSize(this, 13d); TextElement.SetFontWeight(this, FontWeights.Normal); StudioControlTheme.Apply(Resources); BuildUiV2(); ApplyUnifiedFlowAlignment(); SimplifyFlowDetails(); ApplyBreakpointVisuals();
+            SetLibraryDrawerOpen(false);
         }
         private void ApplyUnifiedFlowAlignment() { ApplyGridCentering(_flowList, true); ApplyGridCentering(_expandedGrid, false); }
         private void SimplifyFlowDetails() { if (_detailTabs == null) return; TabItem basic = _detailTabs.Items.Cast<TabItem>().FirstOrDefault(value => string.Equals(Convert.ToString(value.Header), "基本信息", StringComparison.Ordinal)); if (basic != null) _detailTabs.Items.Remove(basic); if (_detailTabs.Items.Count > 0) _detailTabs.SelectedIndex = 0; }
@@ -112,6 +118,11 @@ namespace ManualCanDebug
         internal string SelectedFlowInstanceId { get { return _selectedInstance == null ? string.Empty : _selectedInstance.Id; } }
         internal void RestoreNavigation(string instanceId) { if (string.IsNullOrWhiteSpace(instanceId) || _flowList == null) return; FlowInstanceRow row = _flow.FirstOrDefault(value => value.Instance.Id == instanceId); if (row != null) { _flowList.SelectedItem = row; _flowList.ScrollIntoView(row); } }
         public void SetDebugMode(bool enabled) { _debugMode = enabled; if (_debugToolbar != null) _debugToolbar.Visibility = enabled ? Visibility.Visible : Visibility.Collapsed; if (_flowList != null) { _flowContextMenu = BuildFlowContextMenu(); _flowList.ContextMenu = _flowContextMenu; } }
+        public bool IsLibraryDrawerOpen { get { return ColumnDefinitions.Count > 0 && ColumnDefinitions[0].Width.Value > 0; } }
+        public void SetLibraryDrawerOpen(bool open) { if (ColumnDefinitions.Count < 2) return; if (!open && ColumnDefinitions[0].ActualWidth > 0) _libraryDrawerWidth = Math.Max(220d, ColumnDefinitions[0].ActualWidth); ColumnDefinitions[0].MinWidth = open ? 220d : 0d; ColumnDefinitions[0].Width = open ? new GridLength(Math.Max(220d, _libraryDrawerWidth)) : new GridLength(0); ColumnDefinitions[1].Width = open ? new GridLength(8) : new GridLength(0); if (_libraryShell != null) _libraryShell.Visibility = open ? Visibility.Visible : Visibility.Collapsed; if (_librarySplitter != null) _librarySplitter.Visibility = open ? Visibility.Visible : Visibility.Collapsed; if (open) CollapseLibraryGroups(); }
+        private void CloseLibraryDrawer_Click(object sender, RoutedEventArgs e) { SetLibraryDrawerOpen(false); if (_libraryVisibilityChanged != null) _libraryVisibilityChanged(false); }
+        private void CollapseLibraryGroups() { foreach (FlowLibraryRow row in _library) row.IsExpanded = false; if (_libraryList == null) return; _libraryList.UpdateLayout(); CollapseExpanders(_libraryList); }
+        private static void CollapseExpanders(DependencyObject parent) { if (parent == null) return; int count = VisualTreeHelper.GetChildrenCount(parent); for (int index = 0; index < count; index++) { DependencyObject child = VisualTreeHelper.GetChild(parent, index); Expander expander = child as Expander; if (expander != null && expander.DataContext is CollectionViewGroup) expander.IsExpanded = false; CollapseExpanders(child); } }
 
         private void BuildUiV2()
         {
@@ -121,7 +132,7 @@ namespace ManualCanDebug
             ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(8) });
             ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star), MinWidth = 640 });
 
-            Border leftShell = Surface();
+            _libraryShell = Surface();
             Grid left = new Grid();
             left.RowDefinitions.Add(new RowDefinition { Height = new GridLength(60) });
             left.RowDefinitions.Add(new RowDefinition { Height = new GridLength(38) });
@@ -129,14 +140,14 @@ namespace ManualCanDebug
             left.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
             left.RowDefinitions.Add(new RowDefinition { Height = new GridLength(44) });
             DockPanel libraryHeader = new DockPanel { Margin = new Thickness(10, 7, 9, 3) };
-            StackPanel headerActions = new StackPanel { Orientation = Orientation.Horizontal }; DockPanel.SetDock(headerActions, Dock.Right); TextBlock menuIcon = Icon("\uE700", 11); menuIcon.Margin = new Thickness(6, 0, 0, 0); menuIcon.ToolTip = "模块菜单"; headerActions.Children.Add(menuIcon); TextBlock closeIcon = Icon("\uE711", 11); closeIcon.Margin = new Thickness(6, 0, 0, 0); closeIcon.ToolTip = "收起"; headerActions.Children.Add(closeIcon); libraryHeader.Children.Add(headerActions);
+            StackPanel headerActions = new StackPanel { Orientation = Orientation.Horizontal }; DockPanel.SetDock(headerActions, Dock.Right); TextBlock menuIcon = Icon("\uE700", 11); menuIcon.Margin = new Thickness(6, 0, 0, 0); menuIcon.ToolTip = "模块菜单"; headerActions.Children.Add(menuIcon); _closeLibraryButton = SquareToolbarButton("\uE711", "关闭模块库", CloseLibraryDrawer_Click); _closeLibraryButton.Width = 28; _closeLibraryButton.Height = 28; _closeLibraryButton.Margin = new Thickness(3, 0, 0, 0); _closeLibraryButton.Background = Brushes.Transparent; _closeLibraryButton.BorderThickness = new Thickness(0); headerActions.Children.Add(_closeLibraryButton); libraryHeader.Children.Add(headerActions);
             libraryHeader.Children.Add(new TextBlock { Text = "模块库", FontSize = 18, FontWeight = FontWeights.SemiBold, Foreground = TextPrimary(), VerticalAlignment = VerticalAlignment.Center });
             left.Children.Add(libraryHeader);
             _librarySearch = new TextBox { Text = "搜索模块名称", Foreground = TextSecondary(), Margin = new Thickness(10, 0, 10, 5), Height = 31, Padding = new Thickness(27, 5, 7, 5), ToolTip = "搜索模块名称" }; _showingSearchPlaceholder = true; _librarySearch.GotKeyboardFocus += delegate { if (_showingSearchPlaceholder) { _showingSearchPlaceholder = false; _librarySearch.Text = string.Empty; _librarySearch.Foreground = TextPrimary(); } }; _librarySearch.LostKeyboardFocus += delegate { if (string.IsNullOrWhiteSpace(_librarySearch.Text)) { _showingSearchPlaceholder = true; _librarySearch.Text = "搜索模块名称"; _librarySearch.Foreground = TextSecondary(); } }; _librarySearch.TextChanged += LibrarySearch_TextChanged; Grid.SetRow(_librarySearch, 1); left.Children.Add(_librarySearch); TextBlock searchIcon = Icon("\uE721", 11); searchIcon.Margin = new Thickness(19, 0, 0, 5); searchIcon.HorizontalAlignment = HorizontalAlignment.Left; searchIcon.IsHitTestVisible = false; Grid.SetRow(searchIcon, 1); Panel.SetZIndex(searchIcon, 2); left.Children.Add(searchIcon);
             _domainFilter = new ComboBox { Margin = new Thickness(10, 0, 10, 6), Height = 32, ToolTip = "按测试领域筛选" }; _domainFilter.SelectionChanged += LibrarySearch_TextChanged; Grid.SetRow(_domainFilter, 2); left.Children.Add(_domainFilter);
             ListCollectionView libraryView = new ListCollectionView(_library); libraryView.GroupDescriptions.Add(new PropertyGroupDescription("LibraryGroup")); _libraryList = StudioModuleLibraryList.Create(libraryView, false, SelectChildLibraryModule); _libraryList.SelectionChanged += LibrarySelectionChanged; _libraryList.MouseDoubleClick += LibraryDoubleClick; _libraryList.PreviewMouseLeftButtonDown += LibraryPreviewMouseLeftButtonDown; _libraryList.PreviewMouseLeftButtonUp += LibraryPreviewMouseLeftButtonUp; _libraryList.PreviewMouseMove += LibraryPreviewMouseMove; Grid.SetRow(_libraryList, 3); left.Children.Add(_libraryList);
-            Button add = Button("＋ 新建模块", CreateCustomModule_Click); add.HorizontalAlignment = HorizontalAlignment.Stretch; add.Background = Brushes.White; add.BorderBrush = BorderColor(); add.FontSize = 11; add.MinHeight = 28; add.Padding = new Thickness(9, 4, 9, 4); add.Margin = new Thickness(10, 4, 10, 7); Grid.SetRow(add, 4); left.Children.Add(add); leftShell.Child = left; Grid.SetRowSpan(leftShell, 2); Children.Add(leftShell);
-            GridSplitter librarySplitter = StudioGridSplitterFactory.Create(GridResizeDirection.Columns, "拖动调整模块库宽度；双击恢复默认宽度"); librarySplitter.MouseDoubleClick += (s, e) => { ColumnDefinitions[0].Width = new GridLength(280); e.Handled = true; }; Grid.SetColumn(librarySplitter, 1); Grid.SetRowSpan(librarySplitter, 2); Children.Add(librarySplitter);
+            Button add = Button("＋ 新建模块", CreateCustomModule_Click); add.HorizontalAlignment = HorizontalAlignment.Stretch; add.Background = Brushes.White; add.BorderBrush = BorderColor(); add.FontSize = 11; add.MinHeight = 28; add.Padding = new Thickness(9, 4, 9, 4); add.Margin = new Thickness(10, 4, 10, 7); Grid.SetRow(add, 4); left.Children.Add(add); _libraryShell.Child = left; Grid.SetRowSpan(_libraryShell, 2); Children.Add(_libraryShell);
+            _librarySplitter = StudioGridSplitterFactory.Create(GridResizeDirection.Columns, "拖动调整模块库宽度；双击恢复默认宽度"); _librarySplitter.MouseDoubleClick += (s, e) => { _libraryDrawerWidth = 280d; ColumnDefinitions[0].Width = new GridLength(280); e.Handled = true; }; Grid.SetColumn(_librarySplitter, 1); Grid.SetRowSpan(_librarySplitter, 2); Children.Add(_librarySplitter);
 
             Grid workspace = new Grid();
             _flowAreaRow = new RowDefinition { Height = new GridLength(1.3, GridUnitType.Star), MinHeight = 180 }; workspace.RowDefinitions.Add(_flowAreaRow);
