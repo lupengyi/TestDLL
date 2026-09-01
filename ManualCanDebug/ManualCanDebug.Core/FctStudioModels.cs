@@ -114,6 +114,9 @@ namespace ManualCanDebug.Core
             Id = Guid.NewGuid().ToString("N");
             Enabled = true;
             ParameterOverrides = new Dictionary<string, object>(StringComparer.Ordinal);
+            StepOverrides = new Dictionary<string, Dictionary<string, object>>(StringComparer.Ordinal);
+            ReferenceParameterOverrides = new Dictionary<string, Dictionary<string, object>>(StringComparer.Ordinal);
+            ModuleSnapshots = new Dictionary<string, FunctionBlockDefinition>(StringComparer.Ordinal);
         }
         public string Id { get; set; }
         public string BlockId { get; set; }
@@ -122,6 +125,9 @@ namespace ManualCanDebug.Core
         public bool Enabled { get; set; }
         public bool PreserveStepNames { get; set; }
         public Dictionary<string, object> ParameterOverrides { get; set; }
+        public Dictionary<string, Dictionary<string, object>> StepOverrides { get; set; }
+        public Dictionary<string, Dictionary<string, object>> ReferenceParameterOverrides { get; set; }
+        public Dictionary<string, FunctionBlockDefinition> ModuleSnapshots { get; set; }
         public FunctionBlockDefinition Snapshot { get; set; }
     }
 
@@ -143,6 +149,7 @@ namespace ManualCanDebug.Core
         public string FlowInstanceId { get; set; }
         public string BlockId { get; set; }
         public string BlockStepId { get; set; }
+        public string HierarchyPath { get; set; }
         public int SequenceIndex { get; set; }
         public string StepName { get; set; }
     }
@@ -162,12 +169,12 @@ namespace ManualCanDebug.Core
             foreach (FlowBlockInstance instance in project.Flow ?? new List<FlowBlockInstance>())
             {
                 flowNumber++;
-                if (!instance.Enabled) continue;
+                if (!instance.Enabled) continue; Dictionary<string, FunctionBlockDefinition> instanceLibrary = new Dictionary<string, FunctionBlockDefinition>(library, StringComparer.Ordinal); foreach (KeyValuePair<string, FunctionBlockDefinition> pair in instance.ModuleSnapshots ?? new Dictionary<string, FunctionBlockDefinition>()) if (pair.Value != null) instanceLibrary[pair.Key] = pair.Value;
                 FunctionBlockDefinition block = instance.Snapshot;
-                if (block == null && !string.IsNullOrWhiteSpace(instance.BlockId)) library.TryGetValue(instance.BlockId, out block);
+                if (block == null && !string.IsNullOrWhiteSpace(instance.BlockId)) instanceLibrary.TryGetValue(instance.BlockId, out block);
                 if (block == null) throw new InvalidOperationException("Flow references a missing block: " + instance.BlockId);
                 string prefix = string.Format(CultureInfo.InvariantCulture, "{0:000}_{1}", flowNumber, SanitizeName(string.IsNullOrWhiteSpace(instance.DisplayName) ? block.Name : instance.DisplayName));
-                CompileBlock(project, instance.Id, block, instance.ParameterOverrides, instance.PreserveStepNames, prefix, library, new HashSet<string>(StringComparer.Ordinal), output, trace);
+                CompileBlock(project, instance.Id, block, instance.ParameterOverrides, instance.StepOverrides, instance.ReferenceParameterOverrides, string.Empty, instance.PreserveStepNames, prefix, instanceLibrary, new HashSet<string>(StringComparer.Ordinal), output, trace);
             }
             Dictionary<string, object> root = new Dictionary<string, object>(project.SequenceRoot ?? new Dictionary<string, object>(), StringComparer.Ordinal);
             root["ProjectName"] = string.IsNullOrWhiteSpace(project.ProjectName) ? "FCT Studio Project" : project.ProjectName;
@@ -179,23 +186,24 @@ namespace ManualCanDebug.Core
             return new FctStudioCompileResult(new SequenceDocument(root, output), trace, warnings);
         }
 
-        private static void CompileBlock(FctStudioProject project, string flowInstanceId, FunctionBlockDefinition block, IDictionary<string, object> overrides, bool preserveStepNames, string prefix, IDictionary<string, FunctionBlockDefinition> library, ISet<string> stack, IList<SequenceStepDefinition> output, IList<CompiledStepTrace> trace)
+        private static void CompileBlock(FctStudioProject project, string flowInstanceId, FunctionBlockDefinition block, IDictionary<string, object> overrides, IDictionary<string, Dictionary<string, object>> stepOverrides, IDictionary<string, Dictionary<string, object>> referenceOverrides, string hierarchyPath, bool preserveStepNames, string prefix, IDictionary<string, FunctionBlockDefinition> library, ISet<string> stack, IList<SequenceStepDefinition> output, IList<CompiledStepTrace> trace)
         {
             if (!stack.Add(block.Id)) throw new InvalidOperationException("功能块循环引用：" + block.Name);
             Dictionary<string, object> values = ResolveBlockValues(block, overrides);
             List<BlockStepDefinition> directSteps = block.Steps.Where(step => step.Enabled && !step.IsModuleReference).ToList();
             Dictionary<string, string> localNames = directSteps.Select(step => step.ToStep()).GroupBy(step => step.StepName, StringComparer.Ordinal).ToDictionary(group => group.Key, group => preserveStepNames ? group.Key : string.Equals(project.Product, "C96", StringComparison.OrdinalIgnoreCase) && PlatformVisible(group.First()) ? ShortPlatformName(prefix, group.Key) : prefix + " / " + group.Key, StringComparer.Ordinal);
-            foreach (BlockStepDefinition blockStep in block.Steps.Where(step => step.Enabled))
+            foreach (BlockStepDefinition blockStep in block.Steps)
             {
+                string stepPath = string.IsNullOrWhiteSpace(hierarchyPath) ? blockStep.Id : hierarchyPath + "/" + blockStep.Id; Dictionary<string, object> instanceStepValues = null; if (stepOverrides != null) stepOverrides.TryGetValue(stepPath, out instanceStepValues); object enabledOverride; bool enabled = instanceStepValues != null && instanceStepValues.TryGetValue("__Enabled", out enabledOverride) ? Convert.ToBoolean(enabledOverride, CultureInfo.InvariantCulture) : blockStep.Enabled; if (!enabled) continue;
                 if (blockStep.IsModuleReference)
                 {
-                    FunctionBlockDefinition child; if (!library.TryGetValue(blockStep.ReferencedBlockId, out child)) throw new InvalidOperationException("引用的标准模块不存在：" + blockStep.ReferencedBlockName);
-                    CompileBlock(project, flowInstanceId, child, blockStep.ReferencedParameterOverrides, false, prefix + "-" + SanitizeName(child.Name), library, stack, output, trace); continue;
+                    object referencedIdOverride; string referencedId = instanceStepValues != null && instanceStepValues.TryGetValue("__ReferencedBlockId", out referencedIdOverride) ? Convert.ToString(referencedIdOverride, CultureInfo.InvariantCulture) : blockStep.ReferencedBlockId; FunctionBlockDefinition child; if (!library.TryGetValue(referencedId, out child)) throw new InvalidOperationException("引用的标准模块不存在：" + blockStep.ReferencedBlockName); Dictionary<string, object> childValues = new Dictionary<string, object>(blockStep.ReferencedParameterOverrides ?? new Dictionary<string, object>(), StringComparer.Ordinal); Dictionary<string, object> instanceReferenceValues; if (referenceOverrides != null && referenceOverrides.TryGetValue(stepPath, out instanceReferenceValues)) foreach (KeyValuePair<string, object> pair in instanceReferenceValues) childValues[pair.Key] = pair.Value;
+                    CompileBlock(project, flowInstanceId, child, childValues, stepOverrides, referenceOverrides, stepPath, false, prefix + "-" + SanitizeName(child.Name), library, stack, output, trace); continue;
                 }
                 SequenceStepDefinition step = SequenceEditing.Clone(blockStep.ToStep());
                 string calculation = Convert.ToString(step.Get("CalculationType"), CultureInfo.InvariantCulture); bool adaptiveCalculatedResult = step.FunctionName == "FCT_CANCalculatedResults" && (calculation == "PackedFaultStatus" || calculation == "ThreePhaseCurrentRms");
                 if (adaptiveCalculatedResult) { int originalOffset = step.GetInt("AddrOffset", -1); string drive = Convert.ToString(step.Get("DriveTarget"), CultureInfo.InvariantCulture); if (string.IsNullOrWhiteSpace(drive)) drive = originalOffset == 0x84 || originalOffset == 0x94 ? "TM2" : "TM1"; step.Properties["AutoProductProfile"] = true; step.Properties["Product"] = project.Product; step.Properties["DriveTarget"] = drive; } else step.Properties.Remove("Product");
-                ApplyBindings(step, blockStep.ParameterBindings, values); ApplyInterpolations(step, values); string originalName = step.StepName; step.StepName = localNames.ContainsKey(originalName) ? localNames[originalName] : prefix + " / " + originalName; RewriteLocalTargets(step, localNames); output.Add(step); trace.Add(new CompiledStepTrace { FlowInstanceId = flowInstanceId, BlockId = block.Id, BlockStepId = blockStep.Id, SequenceIndex = output.Count - 1, StepName = step.StepName });
+                ApplyBindings(step, blockStep.ParameterBindings, values); ApplyInterpolations(step, values); if (instanceStepValues != null) foreach (KeyValuePair<string, object> pair in instanceStepValues.Where(pair => !pair.Key.StartsWith("__", StringComparison.Ordinal))) step.Properties[pair.Key] = pair.Value; string originalName = step.StepName; step.StepName = localNames.ContainsKey(originalName) ? localNames[originalName] : prefix + " / " + originalName; RewriteLocalTargets(step, localNames); output.Add(step); trace.Add(new CompiledStepTrace { FlowInstanceId = flowInstanceId, BlockId = block.Id, BlockStepId = blockStep.Id, HierarchyPath = stepPath, SequenceIndex = output.Count - 1, StepName = step.StepName });
             }
             stack.Remove(block.Id);
         }

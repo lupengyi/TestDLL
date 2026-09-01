@@ -1,58 +1,78 @@
-# Activity Rail Design QA
+# Hierarchical Sequence Editor Design QA
 
-- Source visual truth: `docs/design/approved-activity-rail.png`
-- Implementation screenshot: `docs/design/activity-rail-implementation.png`
-- Full comparison: `docs/design/activity-rail-comparison.png`
-- Focused navigation comparison: `docs/design/activity-rail-nav-comparison.png`
-- Viewport: 1690 × 930 desktop, light theme, 96 DPI
-- Source pixels: 1690 × 930
-- Implementation pixels: 1690 × 930
-- Density normalization: none; both artifacts are equal-size 96 DPI captures
-- State: sequence/module editor workspace selected; first activity item selected
+- Source visual truth: `docs/design/approved-hierarchical-sequence-editor.png`
+- Implementation screenshot: `docs/design/hierarchical-sequence-implementation.png`
+- Full comparison: `docs/design/hierarchical-sequence-comparison.png`
+- Focused table comparison: `docs/design/hierarchical-sequence-focused-comparison.png`
+- Viewport: 1704 × 923 desktop, light theme, 96 DPI
+- Source pixels: 1704 × 923
+- Implementation pixels: 1704 × 923
+- Density normalization: none
+- State: edit mode; module library closed; one flow instance expanded through three hierarchy levels
 
 ## Findings
 
-No actionable P0, P1, or P2 differences remain in the approved navigation scope.
+No actionable P0, P1, or P2 visual or interaction mismatch remains.
 
-- Fonts and typography: Microsoft YaHei UI/Segoe UI hierarchy, compact labels, weights, and wrapping match the established application style. The generated reference contains slightly softened raster text; the implementation intentionally keeps native WPF text rendering.
-- Spacing and layout rhythm: the page-tab row is removed; the activity rail is 64 px, the content gap is 8 px, each activity item is 62 × 78 px, and the module library begins at the same horizontal position as the reference. The STEP/configuration split was corrected to approximately 55/45.
-- Colors and visual tokens: white rail, pale-blue selected fill, blue 3 px indicator, blue selected icon/text, gray inactive icon/text, and existing industrial light-gray surfaces match the reference.
-- Image and icon fidelity: no screenshot background or rasterized UI is used. Both navigation icons use the native Segoe MDL2 Assets icon library. The sequence icon uses the closest native list glyph to the reference's generated list/play composite.
-- Copy and content: the two destinations remain “序列编辑与调试” and “高级工具”. Existing workspace content and commands are unchanged.
+- Fonts and typography: native Microsoft YaHei UI / Segoe UI rendering preserves the compact 12–14 px engineering-tool hierarchy. Native WPF rasterization is sharper than the generated source but the weights, wrapping, and hierarchy match.
+- Spacing and layout rhythm: the old lower configuration region is absent. The hierarchy table owns the full content height. Row density is 34 px for STEP rows and 40 px for module rows.
+- Colors and visual tokens: white base, pale gray module rows, pale blue selection, blue hierarchy icons, green action icons, orange wait icons, red breakpoint state, and thin gray-blue separators match the approved direction.
+- Image and icon fidelity: the screen contains no photographic assets. Native Segoe MDL2 Assets glyphs are used; no screenshot background is used.
+- Copy and content: no visible rows named “参数设置”, “LIMIT判断”, “条件与断点”, “模块参数”, or “高级设置”. Every displayed child is a real STEP or module reference.
 
-## Focused Evidence
+## Hierarchy and Data Fidelity
 
-The focused comparison confirms the rail width, selected indicator, two-item vertical arrangement, 280 px module library, 8 px gutter, search control alignment, and bottom library actions. A focused crop was required because these details are too small to judge reliably in the full-window comparison.
+- Level 1 displays the current SEQ function-block instance with an editable display name and explicit binding source.
+- Level 2 displays every direct STEP and nested module in execution order.
+- Level 3 and deeper recursively display every STEP inside nested module references.
+- Standard module references show `标准模块 · 模板只读`; their library definitions and defaults remain immutable.
+- Current-SEQ values are stored by flow instance and hierarchy path, not in the standard-module definition.
+- Module-library definitions are recursively snapshotted when inserted into a SEQ. Later library edits do not silently alter existing SEQs.
+- `更新到模块库最新版本` is an explicit context-menu action.
+- Platform SEQ output remains the existing flat STEP JSON; editor-only snapshots and overrides never leak into it.
+
+## Interaction Coverage
+
+- Scalar parameters use inline editors and validate numeric types.
+- Invalid scalar input receives a red field state and is not committed.
+- LIMIT lower/upper/compare/unit values edit on the real STEP row.
+- Breakpoint, enabled/disabled, status, product, and current value are on the same row.
+- Complex DBC/Locator/table rows show a summary and `配置…`, opening the existing complete configuration workflow.
+- Module-reference rows show the SEQ display name and bound module separately; `绑定…` can rebind the current instance without changing the library definition.
+- Edit mode hides run actions. Debug mode adds row-level run actions while preserving whole-flow run, step, continue, and safe stop.
+- Top-level instances support drag/drop reorder, library drop insertion, copy, move, disable, delete, and explicit module-version update.
+- Module-library management retains new, import, export, copy, delete, right-click operations, and nested module insertion.
+- Standard modules are read-only and provide `复制为自定义`.
 
 ## Comparison History
 
 ### Iteration 1
 
-- P2: the lower configuration region was about 90 px taller than the approved image, reducing visible STEP-list space.
-- Fix: changed the default editor region from 470/420 px to a 360–420 px responsive target with a 340 px minimum while preserving the draggable splitter and internal scrolling.
+- P1: the first concept showed exposed parameters but could imply that non-parameter STEP rows were hidden.
+- Fix: recursively flatten every real STEP and module reference into one ordered hierarchy.
 
 ### Iteration 2
 
-- Post-fix evidence: `docs/design/activity-rail-comparison.png` and `docs/design/activity-rail-nav-comparison.png` show the corrected STEP/configuration balance and matching navigation geometry.
-- Remaining differences are content-state differences in test data, plus native WPF text/icon rendering versus the generated raster reference; neither changes the approved layout or interaction.
+- P1: current-SEQ edits could have mutated nested standard-module values through shared reference dictionaries.
+- Fix: added path-scoped STEP overrides and path-scoped reference-parameter overrides.
 
-## Interaction Checks
+### Iteration 3
 
-- Sequence activity item opens the unified sequence editor and shows the blue selected state.
-- Advanced Tools activity item opens the existing advanced workspace and transfers the selected state.
-- Existing edit/debug mode, module navigation, bindings, commands, drag/drop, save format, and instrument pages remain intact.
-- The removed TabControl header is replaced by a content-only template; no invisible blank tab row remains.
+- P1: editing a module-library definition previously synchronized existing flow snapshots automatically.
+- Fix: added recursive module snapshots and removed automatic synchronization. Existing SEQs update only through the explicit update command.
+- P2: inherited 46 px DataGrid rows displayed fewer hierarchy levels than the target.
+- Fix: set native auto row sizing with 34 px STEP minimum and 40 px module minimum.
 
-## Module Library Drawer Follow-up
+### Final Evidence
 
-- Closed-state screenshot: `docs/design/module-library-drawer-closed.png`
-- Open-state screenshot: `docs/design/module-library-drawer-open.png`
-- The application starts in edit mode with both module-library columns at 0 px and the editor filling the available width.
-- `工具 → 模块库` opens the shared 280 px drawer for the current sequence/module workspace.
-- The drawer `×` closes it completely and clears the Tools-menu checked state.
-- Standard, product, and custom module groups use collapsed group templates whenever the drawer opens.
-- The flow editor and module editor share the same drawer state, so navigation does not create two independent module libraries.
+- `docs/design/hierarchical-sequence-comparison.png` confirms the same full-window composition and table hierarchy.
+- `docs/design/hierarchical-sequence-focused-comparison.png` confirms indentation, inline values, LIMIT columns, breakpoint state, nested standard-module identity, and complex configuration affordance.
 
-## Final Result
+## Verification
+
+- Release x86 build: 0 warnings, 0 errors.
+- Debug x86 independent-output build: 0 warnings, 0 errors.
+- Core regression suite: 366 assertions passed.
+- Studio UI, studio project, full startup, old SEQ compile, save/reopen, and private editor-state persistence: passed.
 
 final result: passed

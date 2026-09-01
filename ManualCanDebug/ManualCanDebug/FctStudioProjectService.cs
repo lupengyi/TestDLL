@@ -304,7 +304,7 @@ namespace ManualCanDebug
             step.ParameterBindings[stepParameter] = blockParameter;
         }
 
-        private static void NormalizeProject(FctStudioProject project, bool flattenParameters = true)
+        private static void NormalizeProject(FctStudioProject project, bool flattenParameters = false)
         {
             project.Blocks = project.Blocks ?? new List<FunctionBlockDefinition>(); project.Flow = project.Flow ?? new List<FlowBlockInstance>(); project.Breakpoints = project.Breakpoints ?? new List<string>();
             project.ProductLocatorPath = project.ProductLocatorPath ?? string.Empty; project.AuxiliaryDbcPath = project.AuxiliaryDbcPath ?? string.Empty; project.DriveStructure = string.IsNullOrWhiteSpace(project.DriveStructure) ? "SingleMainDrive" : project.DriveStructure; project.Capabilities = project.Capabilities ?? new List<string>();
@@ -318,7 +318,7 @@ namespace ManualCanDebug
                 foreach (BlockStepDefinition step in block.Steps) { step.StepProperties = NormalizeDictionary(step.StepProperties); step.ParameterBindings = step.ParameterBindings ?? new Dictionary<string, string>(StringComparer.Ordinal); step.ReferencedParameterOverrides = NormalizeDictionary(step.ReferencedParameterOverrides); }
                 MigrateCurrentTableToDirectValues(block);
             }
-            foreach (FlowBlockInstance instance in project.Flow) { instance.ParameterOverrides = NormalizeDictionary(instance.ParameterOverrides); if (instance.Snapshot != null) MigrateCurrentTableToDirectValues(instance.Snapshot); }
+            foreach (FlowBlockInstance instance in project.Flow) { instance.ParameterOverrides = NormalizeDictionary(instance.ParameterOverrides); instance.StepOverrides = NormalizeStepOverrides(instance.StepOverrides); instance.ReferenceParameterOverrides = NormalizeStepOverrides(instance.ReferenceParameterOverrides); instance.ModuleSnapshots = instance.ModuleSnapshots ?? new Dictionary<string, FunctionBlockDefinition>(StringComparer.Ordinal); foreach (FunctionBlockDefinition snapshot in instance.ModuleSnapshots.Values.Where(value => value != null)) { snapshot.Parameters = snapshot.Parameters ?? new List<BlockParameterDefinition>(); snapshot.Steps = snapshot.Steps ?? new List<BlockStepDefinition>(); snapshot.SupportedProducts = snapshot.SupportedProducts ?? new List<string>(); foreach (BlockStepDefinition step in snapshot.Steps) { step.StepProperties = NormalizeDictionary(step.StepProperties); step.ParameterBindings = step.ParameterBindings ?? new Dictionary<string, string>(StringComparer.Ordinal); step.ReferencedParameterOverrides = NormalizeDictionary(step.ReferencedParameterOverrides); } MigrateCurrentTableToDirectValues(snapshot); } if (instance.Snapshot != null) MigrateCurrentTableToDirectValues(instance.Snapshot); }
             if (flattenParameters) FlattenParameters(project);
         }
 
@@ -359,6 +359,10 @@ namespace ManualCanDebug
             Dictionary<string, object> result = new Dictionary<string, object>(StringComparer.Ordinal);
             if (source != null) foreach (KeyValuePair<string, object> pair in source) result[pair.Key] = NormalizeValue(pair.Value);
             return result;
+        }
+        private static Dictionary<string, Dictionary<string, object>> NormalizeStepOverrides(IDictionary<string, Dictionary<string, object>> source)
+        {
+            Dictionary<string, Dictionary<string, object>> result = new Dictionary<string, Dictionary<string, object>>(StringComparer.Ordinal); if (source != null) foreach (KeyValuePair<string, Dictionary<string, object>> pair in source) result[pair.Key] = NormalizeDictionary(pair.Value); return result;
         }
         private static object NormalizeValue(object value)
         {
