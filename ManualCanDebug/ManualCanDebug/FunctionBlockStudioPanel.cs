@@ -104,7 +104,7 @@ namespace ManualCanDebug
             TextBlock instanceLabel = new TextBlock { Text = "引用实例名称", FontSize = 13, Foreground = TextPrimary(), VerticalAlignment = VerticalAlignment.Center, ToolTip = "当前父模块中这一条模块调用显示的名称" }; Grid.SetRow(instanceLabel, 1); panel.Children.Add(instanceLabel);
             _moduleReferenceInstanceNameBox = new TextBox { Height = 32, Padding = new Thickness(9, 5, 9, 5), VerticalContentAlignment = VerticalAlignment.Center, ToolTip = "可自由命名；同一模块的多次调用可以使用不同名称" }; _moduleReferenceInstanceNameBox.LostKeyboardFocus += (s, e) => CommitStep(); _moduleReferenceInstanceNameBox.KeyDown += (s, e) => { if (e.Key == Key.Enter) { CommitStep(); Keyboard.ClearFocus(); e.Handled = true; } }; Grid.SetRow(_moduleReferenceInstanceNameBox, 1); Grid.SetColumn(_moduleReferenceInstanceNameBox, 1); panel.Children.Add(_moduleReferenceInstanceNameBox);
             TextBlock bindingLabel = new TextBlock { Text = "绑定模块", FontSize = 13, Foreground = TextPrimary(), VerticalAlignment = VerticalAlignment.Center, ToolTip = "决定该调用实际执行哪个模块" }; Grid.SetRow(bindingLabel, 2); panel.Children.Add(bindingLabel);
-            _moduleReferenceBindingBox = new ComboBox { Height = 32, DisplayMemberPath = "Name", ToolTip = "可绑定标准模块、产品模块或自定义模块" }; _moduleReferenceBindingBox.SelectionChanged += ModuleReferenceBinding_SelectionChanged; Grid.SetRow(_moduleReferenceBindingBox, 2); Grid.SetColumn(_moduleReferenceBindingBox, 1); panel.Children.Add(_moduleReferenceBindingBox);
+            _moduleReferenceBindingBox = new ComboBox { Height = 32, ToolTip = "可绑定标准模块、产品模块或自定义模块" }; _moduleReferenceBindingBox.SelectionChanged += ModuleReferenceBinding_SelectionChanged; Grid.SetRow(_moduleReferenceBindingBox, 2); Grid.SetColumn(_moduleReferenceBindingBox, 1); panel.Children.Add(_moduleReferenceBindingBox);
             TextBlock hint = new TextBlock { Text = "引用实例名称只影响当前调用的显示；绑定模块决定实际执行内容。重新绑定后会自动刷新“模块参数”。", Foreground = TextSecondary(), FontSize = 12.5, TextWrapping = TextWrapping.Wrap, VerticalAlignment = VerticalAlignment.Center }; Grid.SetRow(hint, 3); Grid.SetColumnSpan(hint, 2); panel.Children.Add(hint);
             Button apply = PrimaryButton("应用引用配置", (s, e) => { CommitStep(); LoadStep(); }); apply.HorizontalAlignment = HorizontalAlignment.Left; apply.VerticalAlignment = VerticalAlignment.Center; Grid.SetRow(apply, 3); Grid.SetColumn(apply, 2); panel.Children.Add(apply);
             return panel;
@@ -119,7 +119,7 @@ namespace ManualCanDebug
                 _moduleReferenceInstanceNameBox.Text = _selectedStep == null ? string.Empty : _selectedStep.ReferencedBlockName ?? string.Empty;
                 List<FunctionBlockDefinition> candidates = (_getProject() == null ? Enumerable.Empty<FunctionBlockDefinition>() : _getProject().Blocks).Where(value => value != null && value != _selectedBlock && (_selectedBlock == null || !WouldCreateModuleCycle(value, _selectedBlock.Id, new HashSet<string>(StringComparer.Ordinal)))).OrderBy(ModuleKindOrder).ThenBy(value => value.Name).ToList();
                 if (referenced != null && candidates.All(value => value.Id != referenced.Id)) candidates.Insert(0, referenced);
-                _moduleReferenceBindingBox.ItemsSource = candidates; _moduleReferenceBindingBox.SelectedItem = candidates.FirstOrDefault(value => referenced != null && value.Id == referenced.Id);
+                List<ModuleBindingChoice> choices = candidates.Select(value => new ModuleBindingChoice(value)).ToList(); _moduleReferenceBindingBox.ItemsSource = choices; _moduleReferenceBindingBox.SelectedItem = choices.FirstOrDefault(value => referenced != null && value.Block.Id == referenced.Id);
             }
             finally { _loadingModuleReferenceConfiguration = false; }
         }
@@ -371,7 +371,7 @@ namespace ManualCanDebug
             {
                 if (_moduleReferenceParameterGrid != null) { _moduleReferenceParameterGrid.CommitEdit(DataGridEditingUnit.Cell, true); _moduleReferenceParameterGrid.CommitEdit(DataGridEditingUnit.Row, true); }
                 Dictionary<string, object> editedValues = _moduleReferenceParameters.ToDictionary(value => value.Name, value => value.ConvertValue(), StringComparer.Ordinal);
-                FunctionBlockDefinition binding = _moduleReferenceBindingBox == null ? null : _moduleReferenceBindingBox.SelectedItem as FunctionBlockDefinition;
+                ModuleBindingChoice bindingChoice = _moduleReferenceBindingBox == null ? null : _moduleReferenceBindingBox.SelectedItem as ModuleBindingChoice; FunctionBlockDefinition binding = bindingChoice == null ? null : bindingChoice.Block;
                 if (binding != null)
                 {
                     _selectedStep.ReferencedBlockId = binding.Id;
@@ -590,6 +590,14 @@ namespace ManualCanDebug
         private DataGridTemplateColumn PlatformDisplayTemplateColumn() { FrameworkElementFactory check = new FrameworkElementFactory(typeof(CheckBox)); check.SetBinding(CheckBox.IsCheckedProperty, new Binding("PlatformVisible") { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged }); check.SetBinding(CheckBox.VisibilityProperty, new Binding("DirectStepVisibility")); check.SetValue(CheckBox.HorizontalAlignmentProperty, HorizontalAlignment.Center); check.SetValue(CheckBox.VerticalAlignmentProperty, VerticalAlignment.Center); check.SetValue(CheckBox.WidthProperty, 28d); check.SetValue(CheckBox.HeightProperty, 28d); check.SetValue(CheckBox.ToolTipProperty, "是否在平台界面记录显示；对应RecordingLog"); check.AddHandler(ToggleButton.ClickEvent, new RoutedEventHandler(PlatformDisplay_Click)); return new DataGridTemplateColumn { Header = "平台显示", Width = 82, CellTemplate = new DataTemplate { VisualTree = check } }; }
         private void PlatformDisplay_Click(object sender, RoutedEventArgs e) { Dispatcher.BeginInvoke(new Action(_changed)); }
         private static DataGridTemplateColumn MoreTemplateColumn() { FrameworkElementFactory text = new FrameworkElementFactory(typeof(TextBlock)); text.SetValue(TextBlock.TextProperty, "\uE712"); text.SetValue(TextBlock.FontFamilyProperty, new FontFamily("Segoe MDL2 Assets")); text.SetValue(TextBlock.ForegroundProperty, Accent()); text.SetValue(TextBlock.HorizontalAlignmentProperty, HorizontalAlignment.Center); text.SetValue(TextBlock.VerticalAlignmentProperty, VerticalAlignment.Center); return new DataGridTemplateColumn { Header = "", Width = 30, CellTemplate = new DataTemplate { VisualTree = text }, IsReadOnly = true }; }
+    }
+
+    internal sealed class ModuleBindingChoice
+    {
+        public ModuleBindingChoice(FunctionBlockDefinition block) { Block = block; }
+        public FunctionBlockDefinition Block { get; private set; }
+        public string DisplayText { get { string kind = string.Equals(Block.ModuleKind, "Standard", StringComparison.OrdinalIgnoreCase) ? "标准模块" : string.Equals(Block.ModuleKind, "Product", StringComparison.OrdinalIgnoreCase) ? "产品模块" : "自定义模块"; return Block.Name + "（" + kind + "）"; } }
+        public override string ToString() { return DisplayText; }
     }
 
     internal sealed class BlockListItem : INotifyPropertyChanged
