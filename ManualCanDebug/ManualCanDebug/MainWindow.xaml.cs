@@ -56,6 +56,9 @@ namespace ManualCanDebug
         private TabControl _advancedTabs;
         private FunctionBlockStudioPanel _functionBlockStudioPanel;
         private StudioFlowEditorPanel _studioFlowEditorPanel;
+        private ContentControl _studioWorkspaceHost;
+        private bool _studioBlockMode;
+        private string _studioReturnFlowInstanceId;
         private FctStudioProject _studioProject;
         private string _studioProjectPath;
         private string _loadedSequencePath;
@@ -205,8 +208,9 @@ namespace ManualCanDebug
             _c96ReadPanel = new C96ReadPanel(_advancedCanService, SelectC96, ProductModel.C96); _c96ReadTab = new TabItem { Header = "C96 读取", Content = _c96ReadPanel };
             _c96ControlTab = new TabItem { Header = "C96 控制", Content = new C96ControlPanel(_advancedCanService, SelectC96, ProductModel.C96) };
             _auxiliaryPanel = new C96AuxiliaryPanel(_advancedCanService, EnsureAuxiliaryProduct); _auxiliaryTab = new TabItem { Header = "C95/C96 DCDC/辅驱", Content = _auxiliaryPanel };
-            _studioFlowTab = new TabItem { Header = BuildWorkspaceTabHeader("\uE768", "流程调试与编辑") };
-            _functionBlockStudioTab = new TabItem { Header = BuildWorkspaceTabHeader("\uE8F1", "自定义功能块") };
+            _studioWorkspaceHost = new ContentControl { HorizontalContentAlignment = HorizontalAlignment.Stretch, VerticalContentAlignment = VerticalAlignment.Stretch };
+            _studioFlowTab = new TabItem { Header = BuildWorkspaceTabHeader("\uE768", "序列调试与编辑"), Content = _studioWorkspaceHost };
+            _functionBlockStudioTab = new TabItem { Header = BuildWorkspaceTabHeader("\uE8F1", "自定义功能块"), Visibility = Visibility.Collapsed };
             _sequenceTab = new TabItem { Header = "原始SEQ明细", Content = BuildSequencePanel() };
             _productCanTab = new TabItem { Header = "产品 CAN", Content = BuildProductPanel() };
             _c91ReadTab = new TabItem { Header = "C91 读取", Content = BuildC91ReadPanel() };
@@ -217,7 +221,7 @@ namespace ManualCanDebug
             foreach (TabItem tab in new[] { _instrumentCenterTab, _sequenceTab, _productCanTab, _resolverTab, _c91ReadTab, _c92ReadTab, _c92ControlTab, _c96ReadTab, _c96ControlTab, _auxiliaryTab })
                 _advancedTabs.Items.Add(tab);
             _advancedToolsTab = new TabItem { Header = "高级工具", Content = _advancedTabs, Visibility = Visibility.Collapsed };
-            foreach (TabItem tab in new[] { _studioFlowTab, _functionBlockStudioTab, _advancedToolsTab })
+            foreach (TabItem tab in new[] { _studioFlowTab, _advancedToolsTab })
                 _mainTabs.Items.Add(tab);
             _mainTabs.SelectedItem = _studioFlowTab;
             UpdateProductTabs(_service.ProductProfile.Model);
@@ -825,7 +829,7 @@ namespace ManualCanDebug
             bool simpleMode = _workModeComboBox == null || _workModeComboBox.SelectedIndex == 0;
             if (_productSelectorLabel != null) _productSelectorLabel.Visibility = Visibility.Collapsed; if (_productModelComboBox != null) _productModelComboBox.Visibility = Visibility.Collapsed;
 
-            _functionBlockStudioTab.Visibility = Visibility.Visible;
+            _functionBlockStudioTab.Visibility = Visibility.Collapsed;
             _studioFlowTab.Visibility = Visibility.Visible;
             _advancedToolsTab.Visibility = simpleMode ? Visibility.Collapsed : Visibility.Visible;
             _sequenceTab.Visibility = simpleMode ? Visibility.Collapsed : Visibility.Visible;
@@ -845,7 +849,7 @@ namespace ManualCanDebug
             TabItem selected = _mainTabs.SelectedItem as TabItem;
             if (simpleMode)
             {
-                if (selected == _advancedToolsTab || selected == null) _mainTabs.SelectedItem = _studioFlowTab;
+                if (selected == _advancedToolsTab || selected == null) ShowStudioFlowWorkspace(null);
                 return;
             }
             _mainTabs.SelectedItem = _advancedToolsTab;
@@ -1159,7 +1163,7 @@ namespace ManualCanDebug
             if (dialog.ShowDialog(this) != true) return; LoadSequenceFromFile(dialog.FileName, false); if (_sequenceDocument == null || !string.Equals(_loadedSequencePath, dialog.FileName, StringComparison.OrdinalIgnoreCase)) return;
             try
             {
-                string product = ResolveSequenceProduct(dialog.FileName); bool c91 = string.Equals(product, "C91", StringComparison.OrdinalIgnoreCase); _studioProject = c91 ? C91SequenceProjectFactory.Create(_sequenceDocument) : CreateImportedSequenceProject(_sequenceDocument, product, Path.GetFileNameWithoutExtension(dialog.FileName)); _studioProject.Product = product; _studioProjectPath = dialog.FileName; _loadedSequencePath = dialog.FileName; _studioProjectDirty = false; SelectProductContext(product); ResetStudioHistory(); _functionBlockStudioPanel.RefreshProject(); _studioFlowEditorPanel.RefreshProject(); _mainTabs.SelectedItem = _studioFlowTab; UpdateCurrentFileDisplay(); Service_Log("平台JSON SEQ已打开：" + dialog.FileName + "；识别产品=" + product); MessageBox.Show(this, "SEQ已打开并进入编辑。\n\n产品：" + product + "\nSTEP：" + _sequenceDocument.Steps.Count, "打开SEQ", MessageBoxButton.OK, MessageBoxImage.Information);
+                string product = ResolveSequenceProduct(dialog.FileName); bool c91 = string.Equals(product, "C91", StringComparison.OrdinalIgnoreCase); _studioProject = c91 ? C91SequenceProjectFactory.Create(_sequenceDocument) : CreateImportedSequenceProject(_sequenceDocument, product, Path.GetFileNameWithoutExtension(dialog.FileName)); _studioProject.Product = product; _studioProjectPath = dialog.FileName; _loadedSequencePath = dialog.FileName; _studioProjectDirty = false; SelectProductContext(product); ResetStudioHistory(); _functionBlockStudioPanel.RefreshProject(); _studioFlowEditorPanel.RefreshProject(); ShowStudioFlowWorkspace(null); UpdateCurrentFileDisplay(); Service_Log("平台JSON SEQ已打开：" + dialog.FileName + "；识别产品=" + product); MessageBox.Show(this, "SEQ已打开并进入编辑。\n\n产品：" + product + "\nSTEP：" + _sequenceDocument.Steps.Count, "打开SEQ", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex) { MessageBox.Show(this, "JSON SEQ打开失败：\n" + ex.Message, "打开SEQ", MessageBoxButton.OK, MessageBoxImage.Error); }
         }
@@ -1177,7 +1181,7 @@ namespace ManualCanDebug
             _studioProjectDirty = true;
             UpdateCurrentFileDisplay();
             ResetStudioHistory();
-            _functionBlockStudioPanel.RefreshProject(); _studioFlowEditorPanel.RefreshProject(); _mainTabs.SelectedItem = _functionBlockStudioTab;
+            _functionBlockStudioPanel.RefreshProject(); _studioFlowEditorPanel.RefreshProject(); ShowStudioBlockWorkspace(_functionBlockStudioPanel.SelectedBlockId, null);
             SaveStudioProject_Click(this, new RoutedEventArgs()); Service_Log("已新建 " + product + " 空白JSON SEQ：" + _studioProjectPath);
         }
         private static FctStudioProject CreateImportedSequenceProject(SequenceDocument sequence, string product, string displayName)
@@ -1598,12 +1602,11 @@ namespace ManualCanDebug
             {
                 SequenceDocument blank = new SequenceDocument(new Dictionary<string, object>(_sequenceDocument.RootProperties, StringComparer.Ordinal), new SequenceStepDefinition[0]); string directory = Path.GetDirectoryName(_studioProjectPath); Directory.CreateDirectory(directory); File.WriteAllText(_studioProjectPath, blank.ToJson(blank.Steps), new UTF8Encoding(false)); LoadSequenceFromFile(_studioProjectPath, false); _studioProject = FctStudioProjectService.CreateBlank(_sequenceDocument, _service.ProductProfile.Model.ToString()); GlobalModuleLibraryService.MergeInto(_studioProject); Service_Log("已建立默认空白JSON SEQ：" + _studioProjectPath);
             }
-            _functionBlockStudioPanel = new FunctionBlockStudioPanel(() => _studioProject, () => _atomicCatalogSteps, _productLocatorRepository, Service_Log, StudioBlockChanged, ExecuteInstrumentStepAsync, () => _legacyRuntime == null ? null : _legacyRuntime.LastStepExecution, OpenFunctionBlockEditor);
+            _functionBlockStudioPanel = new FunctionBlockStudioPanel(() => _studioProject, () => _atomicCatalogSteps, _productLocatorRepository, Service_Log, StudioBlockChanged, ExecuteInstrumentStepAsync, () => _legacyRuntime == null ? null : _legacyRuntime.LastStepExecution, OpenFunctionBlockEditor, ReturnToStudioFlowWorkspace);
             _studioFlowEditorPanel = new StudioFlowEditorPanel(() => _studioProject, StudioFlowChanged, ApplyCompiledStudioSequence, StartStudioDebugAsync, ContinueStudioDebugAsync, StepStudioDebugAsync, StopStudioDebug, Service_Log, OpenFunctionBlockEditor);
-            _functionBlockStudioTab.Content = _functionBlockStudioPanel;
-            _studioFlowTab.Content = _studioFlowEditorPanel;
             _functionBlockStudioPanel.RefreshProject();
             _studioFlowEditorPanel.RefreshProject();
+            ShowStudioFlowWorkspace(null);
             _studioProjectDirty = false;
             ResetStudioHistory();
             Service_Log("FCT Studio工程已就绪：" + _studioProject.Blocks.Count + " 个功能块，" + _studioProject.Flow.Count + " 个流程实例。");
@@ -1620,11 +1623,23 @@ namespace ManualCanDebug
 
         private void OpenFunctionBlockEditor(FunctionBlockDefinition block)
         {
-            if (block == null || _functionBlockStudioPanel == null || _mainTabs == null) return; if (!_restoringStudioNavigation) PushStudioNavigation(); _mainTabs.SelectedItem = _functionBlockStudioTab; _functionBlockStudioPanel.SelectBlock(block.Id); SetApplicationStatus("正在编辑功能块：" + block.Name); UpdateNavigationBackButton();
+            if (block == null || _functionBlockStudioPanel == null || _mainTabs == null) return; if (!_restoringStudioNavigation) PushStudioNavigation(); if (!_studioBlockMode && _studioFlowEditorPanel != null) _studioReturnFlowInstanceId = _studioFlowEditorPanel.SelectedFlowInstanceId; ShowStudioBlockWorkspace(block.Id, null); SetApplicationStatus("正在编辑功能块：" + block.Name); UpdateNavigationBackButton();
+        }
+        private void ShowStudioFlowWorkspace(string instanceId)
+        {
+            if (_studioWorkspaceHost == null || _studioFlowEditorPanel == null) return; if (_studioBlockMode && _functionBlockStudioPanel != null) _functionBlockStudioPanel.CommitPendingChanges(); _studioBlockMode = false; _studioWorkspaceHost.Content = _studioFlowEditorPanel; _mainTabs.SelectedItem = _studioFlowTab; string restoreId = string.IsNullOrWhiteSpace(instanceId) ? _studioReturnFlowInstanceId : instanceId; if (!string.IsNullOrWhiteSpace(restoreId)) _studioFlowEditorPanel.RestoreNavigation(restoreId);
+        }
+        private void ShowStudioBlockWorkspace(string blockId, string stepId)
+        {
+            if (_studioWorkspaceHost == null || _functionBlockStudioPanel == null) return; _studioBlockMode = true; _studioWorkspaceHost.Content = _functionBlockStudioPanel; _mainTabs.SelectedItem = _studioFlowTab; if (!string.IsNullOrWhiteSpace(blockId)) _functionBlockStudioPanel.RestoreNavigation(blockId, stepId);
+        }
+        private void ReturnToStudioFlowWorkspace()
+        {
+            if (!_studioBlockMode) return; if (!_restoringStudioNavigation) PushStudioNavigation(); ShowStudioFlowWorkspace(_studioReturnFlowInstanceId); SetApplicationStatus("已返回序列模块排序"); UpdateNavigationBackButton();
         }
         private void PushStudioNavigation() { StudioNavigationState state = CaptureStudioNavigation(); if (state == null) return; StudioNavigationState previous = _studioNavigationBack.Count == 0 ? null : _studioNavigationBack.Peek(); if (previous == null || !previous.SamePosition(state)) _studioNavigationBack.Push(state); UpdateNavigationBackButton(); }
-        private StudioNavigationState CaptureStudioNavigation() { if (_mainTabs == null) return null; return new StudioNavigationState { MainTab = _mainTabs.SelectedItem as TabItem, AdvancedTab = _advancedTabs == null ? null : _advancedTabs.SelectedItem as TabItem, BlockId = _functionBlockStudioPanel == null ? string.Empty : _functionBlockStudioPanel.SelectedBlockId, BlockStepId = _functionBlockStudioPanel == null ? string.Empty : _functionBlockStudioPanel.SelectedStepId, FlowInstanceId = _studioFlowEditorPanel == null ? string.Empty : _studioFlowEditorPanel.SelectedFlowInstanceId }; }
-        private void NavigateBack_Click(object sender, RoutedEventArgs e) { if (_studioNavigationBack.Count == 0) return; StudioNavigationState state = _studioNavigationBack.Pop(); _restoringStudioNavigation = true; try { if (state.MainTab != null) _mainTabs.SelectedItem = state.MainTab; if (state.MainTab == _studioFlowTab && _studioFlowEditorPanel != null) _studioFlowEditorPanel.RestoreNavigation(state.FlowInstanceId); else if (state.MainTab == _functionBlockStudioTab && _functionBlockStudioPanel != null) _functionBlockStudioPanel.RestoreNavigation(state.BlockId, state.BlockStepId); else if (state.MainTab == _advancedToolsTab && _advancedTabs != null && state.AdvancedTab != null) _advancedTabs.SelectedItem = state.AdvancedTab; SetApplicationStatus("已返回上一个操作位置"); } finally { _restoringStudioNavigation = false; UpdateNavigationBackButton(); } }
+        private StudioNavigationState CaptureStudioNavigation() { if (_mainTabs == null) return null; return new StudioNavigationState { MainTab = _mainTabs.SelectedItem as TabItem, AdvancedTab = _advancedTabs == null ? null : _advancedTabs.SelectedItem as TabItem, BlockMode = _studioBlockMode, BlockId = _functionBlockStudioPanel == null ? string.Empty : _functionBlockStudioPanel.SelectedBlockId, BlockStepId = _functionBlockStudioPanel == null ? string.Empty : _functionBlockStudioPanel.SelectedStepId, FlowInstanceId = _studioFlowEditorPanel == null ? string.Empty : _studioFlowEditorPanel.SelectedFlowInstanceId }; }
+        private void NavigateBack_Click(object sender, RoutedEventArgs e) { if (_studioNavigationBack.Count == 0) return; StudioNavigationState state = _studioNavigationBack.Pop(); _restoringStudioNavigation = true; try { if (state.MainTab == _studioFlowTab) { if (state.BlockMode) ShowStudioBlockWorkspace(state.BlockId, state.BlockStepId); else ShowStudioFlowWorkspace(state.FlowInstanceId); } else { if (state.MainTab != null) _mainTabs.SelectedItem = state.MainTab; if (state.MainTab == _advancedToolsTab && _advancedTabs != null && state.AdvancedTab != null) _advancedTabs.SelectedItem = state.AdvancedTab; } SetApplicationStatus("已返回上一个操作位置"); } finally { _restoringStudioNavigation = false; UpdateNavigationBackButton(); } }
         private void ResetStudioNavigation() { _studioNavigationBack.Clear(); UpdateNavigationBackButton(); }
         private void UpdateNavigationBackButton() { if (_navigationBackButton != null) { _navigationBackButton.IsEnabled = _studioNavigationBack.Count > 0; _navigationBackButton.ToolTip = _studioNavigationBack.Count > 0 ? "返回上一个操作界面（Alt+←），当前可返回" + _studioNavigationBack.Count + "级" : "没有可返回的操作界面（Alt+←）"; } }
 
@@ -2005,7 +2020,7 @@ namespace ManualCanDebug
             MenuItem view = new MenuItem { Header = "视图(_V)" };
             view.Items.Add(MakeMenuItem("返回上一个操作界面", "Alt+Left", NavigateBack_Click));
             view.Items.Add(new Separator());
-            view.Items.Add(MakeMenuItem("简洁主工作区", string.Empty, (s, e) => { _workModeComboBox.SelectedIndex = 0; _mainTabs.SelectedItem = _studioFlowTab; }));
+            view.Items.Add(MakeMenuItem("简洁主工作区", string.Empty, (s, e) => { _workModeComboBox.SelectedIndex = 0; ShowStudioFlowWorkspace(null); }));
             view.Items.Add(MakeMenuItem("高级工具工作区", string.Empty, (s, e) => OpenAdvancedTool(_instrumentCenterTab)));
             view.Items.Add(new Separator());
             view.Items.Add(MakeMenuItem("显示 / 隐藏运行日志", "Ctrl+L", ToggleLog_Click));
@@ -2168,9 +2183,9 @@ namespace ManualCanDebug
             else if (Keyboard.Modifiers == ModifierKeys.Alt && e.Key == Key.Up) { MoveStepUp_Click(this, new RoutedEventArgs()); e.Handled = true; }
             else if (Keyboard.Modifiers == ModifierKeys.Alt && e.Key == Key.Down) { MoveStepDown_Click(this, new RoutedEventArgs()); e.Handled = true; }
             else if (e.Key == Key.Delete && !(Keyboard.FocusedElement is TextBoxBase)) { DeleteSelectedStep_Click(this, new RoutedEventArgs()); e.Handled = true; }
-            else if (e.Key == Key.F6) { if (_workModeComboBox.SelectedIndex == 1) ExecuteSequence_Click(this, new RoutedEventArgs()); else _mainTabs.SelectedItem = _studioFlowTab; e.Handled = true; }
+            else if (e.Key == Key.F6) { if (_workModeComboBox.SelectedIndex == 1) ExecuteSequence_Click(this, new RoutedEventArgs()); else ShowStudioFlowWorkspace(null); e.Handled = true; }
             else if (e.Key == Key.F5 && Keyboard.Modifiers == ModifierKeys.Shift) { if (_studioDebugActive) StopStudioDebug(); else StopWorkflow_Click(this, new RoutedEventArgs()); e.Handled = true; }
-            else if (e.Key == Key.F5) { if (_workModeComboBox.SelectedIndex == 1) RunAllWorkflow_Click(this, new RoutedEventArgs()); else { _mainTabs.SelectedItem = _studioFlowTab; SetApplicationStatus("请使用底部调试栏运行功能块流程"); } e.Handled = true; }
+            else if (e.Key == Key.F5) { if (_workModeComboBox.SelectedIndex == 1) RunAllWorkflow_Click(this, new RoutedEventArgs()); else { ShowStudioFlowWorkspace(null); SetApplicationStatus("请使用底部调试栏运行功能块流程"); } e.Handled = true; }
         }
 
         private void ShowShortcutHelp_Click(object sender, RoutedEventArgs e)
@@ -2388,10 +2403,11 @@ namespace ManualCanDebug
     {
         public TabItem MainTab { get; set; }
         public TabItem AdvancedTab { get; set; }
+        public bool BlockMode { get; set; }
         public string BlockId { get; set; }
         public string BlockStepId { get; set; }
         public string FlowInstanceId { get; set; }
-        public bool SamePosition(StudioNavigationState other) { return other != null && ReferenceEquals(MainTab, other.MainTab) && ReferenceEquals(AdvancedTab, other.AdvancedTab) && string.Equals(BlockId, other.BlockId, StringComparison.Ordinal) && string.Equals(BlockStepId, other.BlockStepId, StringComparison.Ordinal) && string.Equals(FlowInstanceId, other.FlowInstanceId, StringComparison.Ordinal); }
+        public bool SamePosition(StudioNavigationState other) { return other != null && ReferenceEquals(MainTab, other.MainTab) && ReferenceEquals(AdvancedTab, other.AdvancedTab) && BlockMode == other.BlockMode && string.Equals(BlockId, other.BlockId, StringComparison.Ordinal) && string.Equals(BlockStepId, other.BlockStepId, StringComparison.Ordinal) && string.Equals(FlowInstanceId, other.FlowInstanceId, StringComparison.Ordinal); }
     }
 
     internal sealed class WorkflowParameterRow : INotifyPropertyChanged

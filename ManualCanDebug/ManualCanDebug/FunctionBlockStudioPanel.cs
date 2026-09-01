@@ -26,6 +26,7 @@ namespace ManualCanDebug
         private readonly Func<SequenceStepDefinition, Task<string>> _executeStep;
         private readonly Func<LegacyStepExecutionResult> _getLastPlatformResult;
         private readonly Action<FunctionBlockDefinition> _openBlockEditor;
+        private readonly Action _returnToFlow;
         private readonly ObservableCollection<BlockListItem> _blocks = new ObservableCollection<BlockListItem>();
         private readonly ObservableCollection<BlockStepListItem> _steps = new ObservableCollection<BlockStepListItem>();
         private readonly ObservableCollection<StudioStepParameterRow> _parameters = new ObservableCollection<StudioStepParameterRow>();
@@ -74,6 +75,7 @@ namespace ManualCanDebug
         private ComboBox _moduleReferenceBindingBox;
         private bool _loadingModuleReferenceConfiguration;
         private Button _toggleEditorButton;
+        private Button _returnToFlowButton;
         private FunctionBlockDefinition _blockClipboard;
         private BlockStepDefinition _stepClipboard;
         private ActionConfigurationPanel _actionConfigurator;
@@ -88,9 +90,9 @@ namespace ManualCanDebug
         private Button _runModuleButton;
         private bool _moduleRunning;
 
-        public FunctionBlockStudioPanel(Func<FctStudioProject> getProject, Func<IEnumerable<SequenceStepDefinition>> getSteps, ProductLocatorRepository locatorRepository, Action<string> log, Action changed, Func<SequenceStepDefinition, Task<string>> executeStep, Func<LegacyStepExecutionResult> getLastPlatformResult, Action<FunctionBlockDefinition> openBlockEditor = null)
+        public FunctionBlockStudioPanel(Func<FctStudioProject> getProject, Func<IEnumerable<SequenceStepDefinition>> getSteps, ProductLocatorRepository locatorRepository, Action<string> log, Action changed, Func<SequenceStepDefinition, Task<string>> executeStep, Func<LegacyStepExecutionResult> getLastPlatformResult, Action<FunctionBlockDefinition> openBlockEditor = null, Action returnToFlow = null)
         {
-            _getProject = getProject; _getSteps = getSteps; _locatorRepository = locatorRepository; _log = log; _changed = delegate { if (GlobalModuleLibraryService.IsReusable(_selectedBlock)) GlobalModuleLibraryService.Save(_selectedBlock); SynchronizeSelectedBlockToFlow(); changed(); }; _executeStep = executeStep; _getLastPlatformResult = getLastPlatformResult; _openBlockEditor = openBlockEditor;
+            _getProject = getProject; _getSteps = getSteps; _locatorRepository = locatorRepository; _log = log; _changed = delegate { if (GlobalModuleLibraryService.IsReusable(_selectedBlock)) GlobalModuleLibraryService.Save(_selectedBlock); SynchronizeSelectedBlockToFlow(); changed(); }; _executeStep = executeStep; _getLastPlatformResult = getLastPlatformResult; _openBlockEditor = openBlockEditor; _returnToFlow = returnToFlow;
             Background = PageBackground(); TextElement.SetFontFamily(this, new FontFamily("Segoe UI")); TextElement.SetFontSize(this, 13); TextElement.SetFontWeight(this, FontWeights.Normal); StudioControlTheme.Apply(Resources);
             BuildUi(); ApplyUnifiedStepAlignment();
         }
@@ -152,6 +154,7 @@ namespace ManualCanDebug
         }
         internal string SelectedBlockId { get { return _selectedBlock == null ? string.Empty : _selectedBlock.Id; } }
         internal string SelectedStepId { get { return _selectedStep == null ? string.Empty : _selectedStep.Id; } }
+        internal void CommitPendingChanges() { CommitStep(); CommitBlock(); }
         internal void RestoreNavigation(string blockId, string stepId) { if (!SelectBlock(blockId) || string.IsNullOrWhiteSpace(stepId)) return; BlockStepListItem row = _steps.FirstOrDefault(value => value.Step.Id == stepId); if (row != null) { _stepList.SelectedItem = row; _stepList.ScrollIntoView(row); } }
         public void ReloadActionCatalog() { if (_stepList != null) _stepList.ContextMenu = BuildStepContextMenu(); if (_actionConfigurator != null) _actionConfigurator.LoadStep(_selectedStep == null ? null : _selectedStep.ToStep(), _selectedStep == null ? null : _selectedStep.ParameterBindings); }
 
@@ -163,7 +166,7 @@ namespace ManualCanDebug
             ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star), MinWidth = 640 });
 
             Border leftShell = Surface(); Grid left = new Grid(); left.RowDefinitions.Add(new RowDefinition { Height = new GridLength(60) }); left.RowDefinitions.Add(new RowDefinition { Height = new GridLength(38) }); left.RowDefinitions.Add(new RowDefinition { Height = new GridLength(40) }); left.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) }); left.RowDefinitions.Add(new RowDefinition { Height = new GridLength(44) });
-            DockPanel libraryHeader = new DockPanel { Margin = new Thickness(10, 7, 9, 3) }; StackPanel headerActions = new StackPanel { Orientation = Orientation.Horizontal }; DockPanel.SetDock(headerActions, Dock.Right); headerActions.Children.Add(IconText("\uE700", "模块菜单")); headerActions.Children.Add(IconText("\uE711", "收起")); libraryHeader.Children.Add(headerActions); libraryHeader.Children.Add(SectionTitle("模块库")); left.Children.Add(libraryHeader);
+            DockPanel libraryHeader = new DockPanel { Margin = new Thickness(8, 7, 7, 3) }; StackPanel headerActions = new StackPanel { Orientation = Orientation.Horizontal }; DockPanel.SetDock(headerActions, Dock.Right); headerActions.Children.Add(IconText("\uE700", "模块菜单")); headerActions.Children.Add(IconText("\uE711", "收起")); libraryHeader.Children.Add(headerActions); if (_returnToFlow != null) { _returnToFlowButton = GhostButton("← 返回序列排序", (s, e) => _returnToFlow()); _returnToFlowButton.Height = 29; _returnToFlowButton.MinWidth = 104; _returnToFlowButton.Padding = new Thickness(8, 3, 8, 3); _returnToFlowButton.Margin = new Thickness(0, 0, 7, 0); _returnToFlowButton.FontSize = 11.5; _returnToFlowButton.ToolTip = "返回刚才的序列模块排序位置"; DockPanel.SetDock(_returnToFlowButton, Dock.Left); libraryHeader.Children.Add(_returnToFlowButton); } libraryHeader.Children.Add(SectionTitle("模块库")); left.Children.Add(libraryHeader);
             _blockSearch = new TextBox { Text = "搜索模块名称", Foreground = TextSecondary(), Margin = new Thickness(10, 0, 10, 5), Height = 31, Padding = new Thickness(27, 5, 7, 5), ToolTip = "搜索模块名称" }; _showingSearchPlaceholder = true; _blockSearch.GotKeyboardFocus += delegate { if (_showingSearchPlaceholder) { _showingSearchPlaceholder = false; _blockSearch.Text = string.Empty; _blockSearch.Foreground = TextPrimary(); } }; _blockSearch.LostKeyboardFocus += delegate { if (string.IsNullOrWhiteSpace(_blockSearch.Text)) { _showingSearchPlaceholder = true; _blockSearch.Text = "搜索模块名称"; _blockSearch.Foreground = TextSecondary(); } }; _blockSearch.TextChanged += BlockSearch_TextChanged; Grid.SetRow(_blockSearch, 1); left.Children.Add(_blockSearch); TextBlock searchIcon = IconText("\uE721", "搜索"); searchIcon.Margin = new Thickness(19, 0, 0, 5); searchIcon.HorizontalAlignment = HorizontalAlignment.Left; searchIcon.IsHitTestVisible = false; Grid.SetRow(searchIcon, 1); Panel.SetZIndex(searchIcon, 2); left.Children.Add(searchIcon);
             _blockCategoryFilter = new ComboBox { Margin = new Thickness(10, 0, 10, 6), Height = 32, ToolTip = "按测试领域筛选" }; _blockCategoryFilter.SelectionChanged += BlockSearch_TextChanged; Grid.SetRow(_blockCategoryFilter, 2); left.Children.Add(_blockCategoryFilter);
             ListCollectionView blockView = new ListCollectionView(_blocks); blockView.GroupDescriptions.Add(new PropertyGroupDescription("LibraryGroup")); _blockList = StudioModuleLibraryList.Create(blockView, true, SelectChildModuleFromTree); _blockList.SelectionChanged += BlockList_SelectionChanged; _blockList.PreviewMouseRightButtonDown += BlockList_RightButtonDown; _blockList.PreviewMouseLeftButtonDown += BlockList_LeftButtonDown; _blockList.PreviewMouseLeftButtonUp += BlockList_LeftButtonUp; _blockList.PreviewMouseMove += BlockList_MouseMove; _blockList.ContextMenu = BuildBlockContextMenu(); Grid.SetRow(_blockList, 3); left.Children.Add(_blockList);
