@@ -38,6 +38,11 @@ namespace ManualCanDebug
         private TextBlock _productSelectorLabel;
         private ComboBox _workModeComboBox;
         private bool _advancedManualMode;
+        private MenuItem _editModeMenuItem;
+        private MenuItem _debugModeMenuItem;
+        private MenuItem _initializeWorkspaceMenuItem;
+        private MenuItem _safeShutdownMenuItem;
+        private Separator _runDebugSeparator;
         private TabControl _mainTabs;
         private TabItem _c92ReadTab;
         private TabItem _c92ControlTab;
@@ -342,7 +347,7 @@ namespace ManualCanDebug
                 SelectedIndex = 0
             };
             _workModeComboBox.SelectionChanged += WorkMode_SelectionChanged;
-            selectorPanel.Children.Add(_workModeComboBox);
+            UpdateRunModeMenuChecks();
             DockPanel.SetDock(selectorPanel, Dock.Left);
             panel.Children.Add(selectorPanel);
 
@@ -865,6 +870,7 @@ namespace ManualCanDebug
             if (_service == null) return;
             if ((_studioDebugActive || _workflowRunning) && _workModeComboBox.SelectedIndex != 1) { _workModeComboBox.SelectedIndex = 1; MessageBox.Show(this, "调试正在运行，请先停止并完成安全下电后再切换模式。", "切换运行模式", MessageBoxButton.OK, MessageBoxImage.Information); return; }
             _advancedManualMode = false;
+            UpdateRunModeMenuChecks();
             ApplyStudioRunMode();
             UpdateProductTabs(_service.ProductProfile.Model);
             if (_workModeComboBox.SelectedIndex == 0)
@@ -897,7 +903,13 @@ namespace ManualCanDebug
             if (_legacyRuntimeStatusText != null) _legacyRuntimeStatusText.Visibility = showRuntime ? Visibility.Visible : Visibility.Collapsed;
             if (_initializeAllInstrumentsButton != null) _initializeAllInstrumentsButton.Visibility = showRuntime ? Visibility.Visible : Visibility.Collapsed;
             if (_safeShutdownButton != null) _safeShutdownButton.Visibility = showRuntime ? Visibility.Visible : Visibility.Collapsed;
+            if (_runDebugSeparator != null) _runDebugSeparator.Visibility = debug ? Visibility.Visible : Visibility.Collapsed;
+            if (_initializeWorkspaceMenuItem != null) _initializeWorkspaceMenuItem.Visibility = debug ? Visibility.Visible : Visibility.Collapsed;
+            if (_safeShutdownMenuItem != null) _safeShutdownMenuItem.Visibility = debug ? Visibility.Visible : Visibility.Collapsed;
         }
+
+        private void SelectStudioRunMode(int index) { if (_workModeComboBox != null) _workModeComboBox.SelectedIndex = index; UpdateRunModeMenuChecks(); }
+        private void UpdateRunModeMenuChecks() { int index = _workModeComboBox == null ? 0 : _workModeComboBox.SelectedIndex; if (_editModeMenuItem != null) _editModeMenuItem.IsChecked = index == 0; if (_debugModeMenuItem != null) _debugModeMenuItem.IsChecked = index == 1; }
 
         private void SelectC96()
         {
@@ -2016,9 +2028,12 @@ namespace ManualCanDebug
             file.Items.Add(MakeMenuItem("退出", "Alt+F4", (s, e) => Close()));
 
             MenuItem run = new MenuItem { Header = "运行(_R)" };
-            run.Items.Add(MakeMenuItem("初始化当前工作区", string.Empty, InitializeCurrentWorkspace_Click));
-            run.Items.Add(new Separator());
-            run.Items.Add(MakeMenuItem("安全下电并断开", string.Empty, SafeShutdown_Click));
+            MenuItem runMode = new MenuItem { Header = "运行模式" };
+            _editModeMenuItem = MakeMenuItem("编辑模式", string.Empty, (s, e) => SelectStudioRunMode(0)); _editModeMenuItem.IsCheckable = true;
+            _debugModeMenuItem = MakeMenuItem("调试模式", string.Empty, (s, e) => SelectStudioRunMode(1)); _debugModeMenuItem.IsCheckable = true;
+            runMode.Items.Add(_editModeMenuItem); runMode.Items.Add(_debugModeMenuItem); run.Items.Add(runMode); _runDebugSeparator = new Separator { Visibility = Visibility.Collapsed }; run.Items.Add(_runDebugSeparator); UpdateRunModeMenuChecks();
+            _initializeWorkspaceMenuItem = MakeMenuItem("初始化当前工作区", string.Empty, InitializeCurrentWorkspace_Click); _initializeWorkspaceMenuItem.Visibility = Visibility.Collapsed; run.Items.Add(_initializeWorkspaceMenuItem);
+            _safeShutdownMenuItem = MakeMenuItem("安全下电并断开", string.Empty, SafeShutdown_Click); _safeShutdownMenuItem.Visibility = Visibility.Collapsed; run.Items.Add(_safeShutdownMenuItem);
 
             MenuItem history = new MenuItem { Header = "编辑(_E)" };
             history.Items.Add(MakeMenuItem("撤销", "Ctrl+Z", UndoStudio_Click));
