@@ -184,31 +184,12 @@ namespace CSP
                 string seqNameByPLC = PLC_ReadString(686, 32);
                 seqNameByPLC = seqNameByPLC.Replace("\0", "");
 
-                bool modeNameIsOK = false;
-                string tempSeqPath = @"D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-00-A0.json";
-                if (seqNameByPLC == "FT1-FCT01-00-A0")//demo,暂未实现
-                {
-                    modeNameIsOK = true;
-                    tempSeqPath = @"D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-00-A0.json";
-                }
-                else if (seqNameByPLC == "FT1-FCT01-01-A1")//正式
-                {
-                    modeNameIsOK = true;
-                    tempSeqPath = @"D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-01-A1.json";
-                }
-                else if (seqNameByPLC == "FT1-FCT01-02-A1")//虚拟
-                {
-                    modeNameIsOK = true;
-                    tempSeqPath = @"D:\TestDLL\TestDLL\bin\Sequence\FT1-FCT01-02-A1.json";
-                }
-                else
-                {
-                    //MyPLC.DBWrite(101, 8, 2, new byte[] { 0, 2 });
-                }
+                string tempSeqPath = ResolveRuntimeSequencePath(seqNameByPLC);
+                bool modeNameIsOK = !string.IsNullOrWhiteSpace(tempSeqPath) && File.Exists(tempSeqPath);
 
                 if (MySeqRunTimeState.SequenceRunning[0] == false)
                 {
-                    if ((seqNameByPLC == "FT1-FCT01-00-A0" || seqNameByPLC == "FT1-FCT01-01-A1" || seqNameByPLC == "FT1-FCT01-02-A1") && MySeqRunTimeState.SequencePath[0] != tempSeqPath)
+                    if (modeNameIsOK && !string.Equals(MySeqRunTimeState.SequencePath[0], tempSeqPath, StringComparison.OrdinalIgnoreCase))
                     {
                         MySequenceManage.ChangeSequence(0, tempSeqPath);
                         Thread.Sleep(1000);
@@ -247,6 +228,31 @@ namespace CSP
             }
 
             return 0;
+        }
+
+        private static string ResolveRuntimeSequencePath(string sequenceName)
+        {
+            string name = (sequenceName ?? string.Empty).Trim(); if (string.IsNullOrWhiteSpace(name)) return string.Empty;
+            if (!name.EndsWith(".json", StringComparison.OrdinalIgnoreCase)) name += ".json";
+            if (!string.Equals(Path.GetFileName(name), name, StringComparison.Ordinal) || name.IndexOfAny(Path.GetInvalidFileNameChars()) >= 0) return string.Empty;
+            string assemblyDirectory = Path.GetDirectoryName(typeof(TestDllMain).Assembly.Location) ?? AppDomain.CurrentDomain.BaseDirectory;
+            string[] candidates =
+            {
+                Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Sequence", name),
+                Path.Combine(assemblyDirectory, "Sequence", name),
+                Path.Combine(assemblyDirectory, "..", "Sequence", name)
+            };
+            return candidates.Select(Path.GetFullPath).FirstOrDefault(File.Exists) ?? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Sequence", name);
+        }
+
+        private static string ResolveWritableRuntimeDirectory(string relativePath)
+        {
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, relativePath);
+            try { Directory.CreateDirectory(path); return path; }
+            catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException || ex is NotSupportedException)
+            {
+                path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FCT Engineering Studio", relativePath); Directory.CreateDirectory(path); return path;
+            }
         }
 
         public double ProcessCleanup()
@@ -294,7 +300,8 @@ namespace CSP
             RelayFctBoard.WriteDO("0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15", "0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1");
             RelayHvMux.WriteDO("0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15", "0,0,0,0,1,0,0,1,0,0,0,0,0,0,0,0");
             
-            MyCAN.StartTraceLog($"D:\\CanTraceLog\\{DateTime.Now.ToString("yyyyMMdd")}.asc");
+            string traceDirectory = ResolveWritableRuntimeDirectory(Path.Combine("Logs", "CanTrace"));
+            MyCAN.StartTraceLog(Path.Combine(traceDirectory, DateTime.Now.ToString("yyyyMMdd") + ".asc"));
 
             Resolver.DBC_SendSignalValue("2505419280_Speed", 0, true);
 

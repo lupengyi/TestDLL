@@ -1310,7 +1310,15 @@ namespace ManualCanDebug
         }
         private static string ImportedPhase(string category) { return category == "安全" ? "安全收尾" : category == "油泵" || category == "气泵" || category == "DCDC" ? "辅驱测试" : category == "主驱" ? "主驱测试" : "准备阶段"; }
         private static string SafeFileName(string value) { foreach (char invalid in Path.GetInvalidFileNameChars()) value = (value ?? string.Empty).Replace(invalid, '_'); return string.IsNullOrWhiteSpace(value) ? "ImportedSEQ" : value; }
-        private static string PlatformSequenceDirectory() { string path = @"E:\FST\TestDLL\TestDLL\bin\Sequence"; Directory.CreateDirectory(path); return path; }
+        private static string PlatformSequenceDirectory()
+        {
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Sequence");
+            try { Directory.CreateDirectory(path); return path; }
+            catch (Exception ex) when (ex is IOException || ex is UnauthorizedAccessException || ex is NotSupportedException)
+            {
+                path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "FCT Engineering Studio", "Sequence"); Directory.CreateDirectory(path); return path;
+            }
+        }
 
         private string ResolveSequenceProduct(string path)
         {
@@ -1595,7 +1603,7 @@ namespace ManualCanDebug
             Dictionary<string, object> root = new Dictionary<string, object>
             {
                 { "SerialNumberLen", 0 }, { "ProjectName", "ManualCanDebug" }, { "StationName", "DEBUG" },
-                { "SequenceVersion", "DEBUG-FALLBACK" }, { "UIDisplayType", "All" }, { "LogFilePath", "D:\\LogfilePath" }
+                { "SequenceVersion", "DEBUG-FALLBACK" }, { "UIDisplayType", "All" }, { "LogFilePath", "Logs" }
             };
             List<SequenceStepDefinition> steps = CanSequenceCatalog.OrderedSteps.Select(step =>
             {

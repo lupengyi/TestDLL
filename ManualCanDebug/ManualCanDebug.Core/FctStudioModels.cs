@@ -175,7 +175,7 @@ namespace ManualCanDebug.Core
             if (!root.ContainsKey("SequenceVersion")) root["SequenceVersion"] = "FCT-STUDIO-1";
             if (!root.ContainsKey("UIDisplayType")) root["UIDisplayType"] = "All";
             if (!root.ContainsKey("SerialNumberLen")) root["SerialNumberLen"] = 0;
-            if (!root.ContainsKey("LogFilePath")) root["LogFilePath"] = "D:\\LogfilePath";
+            if (!root.ContainsKey("LogFilePath")) root["LogFilePath"] = "Logs";
             return new FctStudioCompileResult(new SequenceDocument(root, output), trace, warnings);
         }
 
