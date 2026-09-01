@@ -2,7 +2,7 @@
 
 - Reference: `C:\Users\2501000857\AppData\Local\Temp\codex-clipboard-13cec40b-4722-4208-ab1c-6e2ef41d43ca.png`
 - Locator dialog capture: `C:\Users\2501000857\AppData\Local\Temp\locator-faithful-qa.png`
-- DBC dialog capture: `C:\Users\2501000857\AppData\Local\Temp\dbc-faithful-final.png`
+- DBC dialog capture: `C:\Users\2501000857\AppData\Local\Temp\dbc-table-dialog-final.png`
 - Main summary capture: `C:\Users\2501000857\AppData\Local\Temp\locator-summary-implemented.png`
 
 ## Comparison
@@ -17,8 +17,8 @@
 - Existing `SignalChecksJson` restores into the Locator modal and rebuilds without schema changes.
 - Locator read-table defaults new selections to information-only and supports optional numeric/string judgment.
 - Locator write-table selections preserve write values and readback verification.
-- DBC send/periodic modes support multi-signal selection and value editing.
-- DBC read mode enforces one selected signal and keeps the existing result/LIMIT editor.
+- DBC send/periodic modes use a modal DataGrid with multi-signal selection, editable values, units, raw ranges, and enum descriptions.
+- DBC read mode uses the same modal table, enforces one selected signal, and keeps the existing result/LIMIT editor.
 - Main screens show summaries instead of wide signal tables.
 
 final result: passed
