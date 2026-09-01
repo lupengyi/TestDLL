@@ -44,6 +44,14 @@ namespace ManualCanDebug
         private MenuItem _safeShutdownMenuItem;
         private Separator _runDebugSeparator;
         private TabControl _mainTabs;
+        private Button _sequenceActivityButton;
+        private Button _advancedActivityButton;
+        private Border _sequenceActivityIndicator;
+        private Border _advancedActivityIndicator;
+        private TextBlock _sequenceActivityIcon;
+        private TextBlock _advancedActivityIcon;
+        private TextBlock _sequenceActivityLabel;
+        private TextBlock _advancedActivityLabel;
         private TabItem _c92ReadTab;
         private TabItem _c92ControlTab;
         private TabItem _c96ReadTab;
@@ -208,7 +216,7 @@ namespace ManualCanDebug
             Grid.SetRow(commandBar, 2);
             root.Children.Add(commandBar);
 
-            _mainTabs = new TabControl { Margin = new Thickness(5, 4, 5, 5), Background = NewBrush(242, 245, 249), BorderThickness = new Thickness(0), ItemContainerStyle = StudioTabStyleFactory.Create(12) };
+            _mainTabs = new TabControl { Margin = new Thickness(0), Background = NewBrush(242, 245, 249), BorderThickness = new Thickness(0), Style = ContentOnlyTabControlStyle() };
             _c92ReadPanel = new C96ReadPanel(_advancedCanService, SelectC92, ProductModel.C92); _c92ReadTab = new TabItem { Header = "C92 读取", Content = _c92ReadPanel };
             _c92ControlTab = new TabItem { Header = "C92 控制", Content = new C96ControlPanel(_advancedCanService, SelectC92, ProductModel.C92) };
             _c96ReadPanel = new C96ReadPanel(_advancedCanService, SelectC96, ProductModel.C96); _c96ReadTab = new TabItem { Header = "C96 读取", Content = _c96ReadPanel };
@@ -230,9 +238,9 @@ namespace ManualCanDebug
             foreach (TabItem tab in new[] { _studioFlowTab, _advancedToolsTab })
                 _mainTabs.Items.Add(tab);
             _mainTabs.SelectedItem = _studioFlowTab;
+            _mainTabs.SelectionChanged += (s, e) => UpdateActivityRailSelection();
             UpdateProductTabs(_service.ProductProfile.Model);
-            Grid.SetRow(_mainTabs, 3);
-            root.Children.Add(_mainTabs);
+            Grid workspaceShell = new Grid { Margin = new Thickness(7, 4, 7, 5), Background = NewBrush(242, 245, 249) }; workspaceShell.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(64) }); workspaceShell.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(8) }); workspaceShell.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }); UIElement activityRail = BuildActivityRail(); workspaceShell.Children.Add(activityRail); Grid.SetColumn(_mainTabs, 2); workspaceShell.Children.Add(_mainTabs); Grid.SetRow(workspaceShell, 3); root.Children.Add(workspaceShell); UpdateActivityRailSelection();
 
             _logPanel = new Border
             {
@@ -380,6 +388,36 @@ namespace ManualCanDebug
             panel.Children.Add(new TextBlock { Text = glyph, FontFamily = new FontFamily("Segoe MDL2 Assets"), FontSize = 11, Margin = new Thickness(0, 0, 6, 0), VerticalAlignment = VerticalAlignment.Center });
             panel.Children.Add(new TextBlock { Text = text, VerticalAlignment = VerticalAlignment.Center });
             return panel;
+        }
+
+        private UIElement BuildActivityRail()
+        {
+            Border shell = new Border { Width = 64, Background = Brushes.White, BorderBrush = NewBrush(214, 223, 235), BorderThickness = new Thickness(1), HorizontalAlignment = HorizontalAlignment.Stretch, VerticalAlignment = VerticalAlignment.Stretch };
+            StackPanel buttons = new StackPanel { Orientation = Orientation.Vertical };
+            _sequenceActivityButton = ActivityButton("\uE8FD", "序列编辑\n与调试", "序列编辑与调试", (s, e) => { _advancedManualMode = false; ShowStudioFlowWorkspace(null); UpdateProductTabs(_service.ProductProfile.Model); }, out _sequenceActivityIndicator, out _sequenceActivityIcon, out _sequenceActivityLabel);
+            _advancedActivityButton = ActivityButton("\uE90F", "高级工具", "高级工具", (s, e) => OpenAdvancedTool(_instrumentCenterTab), out _advancedActivityIndicator, out _advancedActivityIcon, out _advancedActivityLabel);
+            buttons.Children.Add(_sequenceActivityButton); buttons.Children.Add(_advancedActivityButton); shell.Child = buttons; return shell;
+        }
+
+        private static Button ActivityButton(string glyph, string label, string toolTip, RoutedEventHandler click, out Border indicator, out TextBlock icon, out TextBlock labelText)
+        {
+            Style style = new Style(typeof(Button)); style.Setters.Add(new Setter(Control.BackgroundProperty, Brushes.Transparent)); style.Setters.Add(new Setter(Control.BorderBrushProperty, Brushes.Transparent)); style.Setters.Add(new Setter(Control.BorderThicknessProperty, new Thickness(0))); style.Setters.Add(new Setter(Control.PaddingProperty, new Thickness(0))); style.Setters.Add(new Setter(Control.FocusVisualStyleProperty, null)); Trigger hover = new Trigger { Property = UIElement.IsMouseOverProperty, Value = true }; hover.Setters.Add(new Setter(Control.BackgroundProperty, NewBrush(244, 248, 253))); style.Triggers.Add(hover);
+            Grid content = new Grid(); content.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(3) }); content.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }); indicator = new Border { Width = 3, Background = NewBrush(24, 112, 224), Visibility = Visibility.Collapsed, HorizontalAlignment = HorizontalAlignment.Left, VerticalAlignment = VerticalAlignment.Stretch }; content.Children.Add(indicator); StackPanel stack = new StackPanel { HorizontalAlignment = HorizontalAlignment.Center, VerticalAlignment = VerticalAlignment.Center }; icon = new TextBlock { Text = glyph, FontFamily = new FontFamily("Segoe MDL2 Assets"), FontSize = 25, Foreground = NewBrush(104, 117, 135), HorizontalAlignment = HorizontalAlignment.Center, TextAlignment = TextAlignment.Center }; labelText = new TextBlock { Text = label, FontFamily = new FontFamily("Microsoft YaHei UI"), FontSize = 10.5, Foreground = NewBrush(85, 98, 117), HorizontalAlignment = HorizontalAlignment.Center, TextAlignment = TextAlignment.Center, Margin = new Thickness(0, 5, 0, 0), LineHeight = 15 }; stack.Children.Add(icon); stack.Children.Add(labelText); Grid.SetColumn(stack, 1); content.Children.Add(stack); Button button = new Button { Width = 62, Height = 78, Style = style, Content = content, ToolTip = toolTip, Cursor = Cursors.Hand, HorizontalContentAlignment = HorizontalAlignment.Stretch, VerticalContentAlignment = VerticalAlignment.Stretch }; button.Click += click; return button;
+        }
+
+        private void UpdateActivityRailSelection()
+        {
+            bool sequenceSelected = _mainTabs == null || _mainTabs.SelectedItem == _studioFlowTab || !_advancedManualMode; SetActivityState(_sequenceActivityButton, _sequenceActivityIndicator, _sequenceActivityIcon, _sequenceActivityLabel, sequenceSelected); SetActivityState(_advancedActivityButton, _advancedActivityIndicator, _advancedActivityIcon, _advancedActivityLabel, !sequenceSelected);
+        }
+
+        private static void SetActivityState(Button button, Border indicator, TextBlock icon, TextBlock label, bool selected)
+        {
+            if (button != null) button.Background = selected ? NewBrush(239, 246, 255) : Brushes.Transparent; if (indicator != null) indicator.Visibility = selected ? Visibility.Visible : Visibility.Collapsed; Brush foreground = selected ? NewBrush(24, 112, 224) : NewBrush(94, 107, 126); if (icon != null) icon.Foreground = foreground; if (label != null) { label.Foreground = foreground; label.FontWeight = selected ? FontWeights.SemiBold : FontWeights.Normal; }
+        }
+
+        private static Style ContentOnlyTabControlStyle()
+        {
+            Style style = new Style(typeof(TabControl)); FrameworkElementFactory border = new FrameworkElementFactory(typeof(Border)); border.SetValue(Border.BackgroundProperty, new TemplateBindingExtension(Control.BackgroundProperty)); border.SetValue(Border.BorderBrushProperty, Brushes.Transparent); border.SetValue(Border.BorderThicknessProperty, new Thickness(0)); FrameworkElementFactory presenter = new FrameworkElementFactory(typeof(ContentPresenter), "PART_SelectedContentHost"); presenter.SetBinding(ContentPresenter.ContentProperty, new Binding("SelectedContent") { RelativeSource = new RelativeSource(RelativeSourceMode.TemplatedParent) }); presenter.SetBinding(ContentPresenter.ContentTemplateProperty, new Binding("SelectedContentTemplate") { RelativeSource = new RelativeSource(RelativeSourceMode.TemplatedParent) }); presenter.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Stretch); presenter.SetValue(FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Stretch); border.AppendChild(presenter); style.Setters.Add(new Setter(Control.TemplateProperty, new ControlTemplate(typeof(TabControl)) { VisualTree = border })); return style;
         }
 
         private UIElement BuildSequencePanel()
