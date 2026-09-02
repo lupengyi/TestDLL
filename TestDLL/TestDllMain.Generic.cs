@@ -204,7 +204,6 @@ namespace CSP
                 case "RESOLVERCAN":
                     Resolver = FCT_OpenSelectedCan(assemblyFolder, executableFolder, resource, parameter, 1, "Resolver.dbc");
                     Resolver.SendMessage(0x80000001, new byte[8]);
-                    Resolver.DBC_SendSignalValue("2505419280_Polarpair", 6, false);
                     Resolver.DBC_SendSignalValue("2505419280_Speed", 0, true);
                     break;
                 case "AUXCAN":
