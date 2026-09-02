@@ -25,7 +25,7 @@ No actionable P0, P1, or P2 visual or interaction mismatch remains.
 - Level 1 displays the current SEQ function-block instance with an editable display name and explicit binding source.
 - Level 2 displays every direct STEP and nested module in execution order.
 - Level 3 and deeper recursively display every STEP inside nested module references.
-- Standard module references show `标准模块 · 模板只读`; their library definitions and defaults remain immutable.
+- SEQ module-reference rows show the editable display name and `绑定：模块名称` without a redundant read-only badge; standard-library definitions and defaults remain immutable underneath.
 - Current-SEQ values are stored by flow instance and hierarchy path, not in the standard-module definition.
 - Module-library definitions are recursively snapshotted when inserted into a SEQ. Later library edits do not silently alter existing SEQs.
 - `更新到模块库最新版本` is an explicit context-menu action.
@@ -62,6 +62,12 @@ No actionable P0, P1, or P2 visual or interaction mismatch remains.
 - Fix: added recursive module snapshots and removed automatic synchronization. Existing SEQs update only through the explicit update command.
 - P2: inherited 46 px DataGrid rows displayed fewer hierarchy levels than the target.
 - Fix: set native auto row sizing with 34 px STEP minimum and 40 px module minimum.
+
+### Iteration 4
+
+- P2: STEP rows with no scalar value looked unconfigurable even though they contained device methods, channels, Boolean outputs, or other settings.
+- Fix: every STEP without complete inline fields now exposes `配置…`, opening the existing full action configuration workflow for the current SEQ instance.
+- User-directed change: removed the visible `标准模块 · 模板只读` badge from SEQ rows. Binding remains explicit through the second-line `绑定：...` text, while immutability remains enforced only in module-library definition mode.
 
 ### Final Evidence
 
