@@ -49,6 +49,7 @@ namespace ManualCanDebug.Tests
             Run("Exports only enabled flow instances", ExportsOnlyEnabledFlowInstances);
             Run("Generic STEP catalog covers core instruments", GenericStepCatalogCoversCoreInstruments);
             Run("Studio validator rejects broken loop targets", StudioValidatorRejectsBrokenLoopTargets);
+            Run("Allows repeated non-jump STEP names", AllowsRepeatedNonJumpStepNames);
             Run("Compiles block parameter expressions", CompilesBlockParameterExpressions);
             Run("Builds DUT communication init frame", BuildsDutCommunicationInitFrame);
             Run("Builds product communication test frame", BuildsProductCommunicationTestFrame);
@@ -236,6 +237,38 @@ namespace ManualCanDebug.Tests
             FctStudioProject project = new FctStudioProject(); project.Blocks.Add(block); project.Flow.Add(new FlowBlockInstance { BlockId = block.Id, Snapshot = block.Clone(), DisplayName = block.Name });
             FctStudioValidationResult validation = FctStudioValidator.Validate(project);
             Assert(!validation.IsValid && validation.Errors.Any(error => error.IndexOf("跳转目标不存在", StringComparison.Ordinal) >= 0), "studio validator accepted a broken loop target");
+        }
+
+        private static void AllowsRepeatedNonJumpStepNames()
+        {
+            FunctionBlockDefinition block = new FunctionBlockDefinition { Name = "继电器/PDU" };
+            block.Steps.Add(RelayIoStep("设置IO（Y00-Y57）", "OUT5,OUT6", "1,1"));
+            block.Steps.Add(RelayIoStep("设置IO（Y00-Y57）", "OUT1", "1"));
+            block.Steps.Add(RelayIoStep("设置IO（Y00-Y57）", "OUT5", "0"));
+            FctStudioProject project = new FctStudioProject { Product = "C96" };
+            project.Blocks.Add(block);
+            project.Flow.Add(new FlowBlockInstance { BlockId = block.Id, DisplayName = block.Name, Snapshot = block.Clone() });
+
+            FctStudioValidationResult validation = FctStudioValidator.Validate(project);
+            Assert(validation.IsValid, "repeated ordinary IO actions were rejected");
+            Assert(validation.Warnings.Any(warning => warning.IndexOf("自动增加序号", StringComparison.Ordinal) >= 0), "repeated action-name warning was not emitted");
+
+            FctStudioCompileResult compiled = FctStudioCompiler.Compile(project);
+            Assert(compiled.Document.Steps.Select(step => step.StepName).Distinct(StringComparer.Ordinal).Count() == 3, "repeated IO actions did not receive unique exported names");
+            Assert(compiled.Document.Steps[0].StepName.EndsWith("(01)", StringComparison.Ordinal) && compiled.Document.Steps[1].StepName.EndsWith("(02)", StringComparison.Ordinal) && compiled.Document.Steps[2].StepName.EndsWith("(03)", StringComparison.Ordinal), "repeated IO action numbering is incorrect");
+            Assert(Convert.ToString(compiled.Document.Steps[0].Get("Channels"), CultureInfo.InvariantCulture) == "OUT5,OUT6" && Convert.ToString(compiled.Document.Steps[0].Get("Values"), CultureInfo.InvariantCulture) == "1,1", "first IO action changed unrelated channel state");
+            Assert(Convert.ToString(compiled.Document.Steps[1].Get("Channels"), CultureInfo.InvariantCulture) == "OUT1" && Convert.ToString(compiled.Document.Steps[1].Get("Values"), CultureInfo.InvariantCulture) == "1", "second IO action changed unrelated channel state");
+            Assert(Convert.ToString(compiled.Document.Steps[2].Get("Channels"), CultureInfo.InvariantCulture) == "OUT5" && Convert.ToString(compiled.Document.Steps[2].Get("Values"), CultureInfo.InvariantCulture) == "0", "third IO action changed unrelated channel state");
+
+            block.Steps.Add(new BlockStepDefinition { StepProperties = new Dictionary<string, object> { { "StepName", "跳转" }, { "FunctionName", "FCT_ExecuteLogic" }, { "RunMode", "Normal" }, { "RecordingLog", true }, { "Operation", "Goto" }, { "TargetStepName", "设置IO（Y00-Y57）" } } });
+            project.Flow[0].Snapshot = block.Clone();
+            FctStudioValidationResult ambiguous = FctStudioValidator.Validate(project);
+            Assert(!ambiguous.IsValid && ambiguous.Errors.Any(error => error.IndexOf("跳转目标StepName重复", StringComparison.Ordinal) >= 0), "ambiguous jump target with repeated STEP names was accepted");
+        }
+
+        private static BlockStepDefinition RelayIoStep(string name, string channels, string values)
+        {
+            return new BlockStepDefinition { StepProperties = new Dictionary<string, object> { { "StepName", name }, { "FunctionName", "FCT_ExecuteAction" }, { "RunMode", "Normal" }, { "RecordingLog", true }, { "Device", "RELAY_FCT" }, { "Operation", "SetDO" }, { "ResultMode", "Action" }, { "Channels", channels }, { "Values", values }, { "Slave", 1 } } };
         }
 
         private static void EvaluatesDirectWriteValueFormulas()
