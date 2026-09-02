@@ -40,6 +40,8 @@
     { "StepName": "27-电子负载读取保护状态", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "DCDC_LOAD", "Operation": "ReadProtection", "ResultMode": "Information" },
     { "StepName": "28-电子负载读取电压", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "DCDC_LOAD", "Operation": "ReadVoltage", "ResultMode": "Information", "Unit": "V" },
     { "StepName": "29-电子负载读取电流", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "DCDC_LOAD", "Operation": "ReadCurrent", "ResultMode": "Information", "Unit": "A" },
+    { "StepName": "29A-跳过-电子负载0A输入开测试", "RunMode": "Skip", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "DCDC_LOAD", "Operation": "OutputOn", "ResultMode": "Action", "Comment": "确认负载接线安全且设定值为0A后改为Normal" },
+    { "StepName": "29B-电子负载输入关闭", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "DCDC_LOAD", "Operation": "OutputOff", "ResultMode": "Action" },
 
     { "StepName": "30-产品CAN接收快照", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "PRODUCTCAN", "Operation": "ReceiveRaw", "FilterId": "0", "ResultMode": "Information" },
     { "StepName": "31-辅驱CAN接收快照", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "AUXCAN", "Operation": "ReceiveRaw", "ResultMode": "Information" },
@@ -54,6 +56,8 @@
     { "StepName": "95-48口OUT48关闭", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "RELAY_FCT", "Operation": "SetDO", "Channels": "OUT48", "Values": "0", "Slave": 1, "ResultMode": "Action" },
     { "StepName": "96-跳过-15口OUT15吸合测试", "RunMode": "Skip", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "RELAY_HVMUX", "Operation": "SetDO", "Channels": "OUT15", "Values": "1", "Slave": 1, "ResultMode": "Action", "Comment": "确认OUT15为空闲安全通道后改为Normal" },
     { "StepName": "97-15口OUT15关闭", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "RELAY_HVMUX", "Operation": "SetDO", "Channels": "OUT15", "Values": "0", "Slave": 1, "ResultMode": "Action" },
+    { "StepName": "97A-跳过-高压源0V输出开测试", "RunMode": "Skip", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "HVDC", "Operation": "SetOutput", "Output": true, "ResultMode": "Action", "Comment": "完成高压安全确认后改为Normal；电压设定保持0V" },
+    { "StepName": "97B-高压源输出关闭", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "HVDC", "Operation": "SetOutput", "Output": false, "ResultMode": "Action" },
     { "StepName": "98-高压源最终确认0V", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "HVDC", "Operation": "SetVoltage", "Voltage": 0, "ResultMode": "Action" },
     { "StepName": "99-高压源最终关闭", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "HVDC", "Operation": "SetOutput", "Output": false, "ResultMode": "Action" }
   ]
