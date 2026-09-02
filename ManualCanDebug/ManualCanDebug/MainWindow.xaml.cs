@@ -82,6 +82,7 @@ namespace ManualCanDebug
         private FctStudioCompileResult _studioDebugCompile;
         private HashSet<int> _studioBreakpointIndexes = new HashSet<int>();
         private int _studioDebugNextIndex;
+        private int _studioDebugEndIndex = -1;
         private bool _studioDebugActive;
         private IReadOnlyList<SequenceStepDefinition> _atomicCatalogSteps;
         private readonly Stack<string> _studioUndo = new Stack<string>();
@@ -1699,8 +1700,9 @@ namespace ManualCanDebug
         }
         private async Task RunHierarchyRowAsync(SequenceHierarchyRow row)
         {
-            if (row == null || row.Instance == null) return; FctStudioCompileResult compiled = FctStudioCompiler.Compile(_studioProject); CompiledStepTrace trace = row.Depth == 0 ? compiled.Trace.FirstOrDefault(value => value.FlowInstanceId == row.Instance.Id) : compiled.Trace.FirstOrDefault(value => value.FlowInstanceId == row.Instance.Id && (value.HierarchyPath == row.Path || value.BlockStepId == (row.Step == null ? string.Empty : row.Step.Id))); if (trace == null) throw new InvalidOperationException("当前行没有可执行的STEP，可能已被停用或配置不完整。"); await StartStudioDebugAsync(compiled, trace.SequenceIndex);
+            if (row == null || row.Instance == null) return; FctStudioCompileResult compiled = FctStudioCompiler.Compile(_studioProject); List<CompiledStepTrace> traces = HierarchyExecutionTraces(compiled, row); if (traces.Count == 0) throw new InvalidOperationException("当前行没有可执行的STEP，可能已被停用或配置不完整。"); if (_studioFlowEditorPanel != null) _studioFlowEditorPanel.PrepareHierarchyDebug(compiled); row.Status = "运行中"; row.Result = string.Empty; try { bool executed = await StartStudioDebugAsync(compiled, traces[0].SequenceIndex, traces[traces.Count - 1].SequenceIndex); if (!executed) { row.Status = "待运行"; return; } if (_studioDebugActive) { row.Status = "断点暂停"; row.Result = "等待继续执行"; return; } if (row.IsModule) { row.Status = "完成"; row.Result = "已执行 " + traces.Count.ToString(CultureInfo.InvariantCulture) + " 个STEP"; } } catch { row.Status = "失败"; if (row.IsModule) row.Result = "模块执行失败"; throw; }
         }
+        internal static List<CompiledStepTrace> HierarchyExecutionTraces(FctStudioCompileResult compiled, SequenceHierarchyRow row) { if (compiled == null || row == null || row.Instance == null) return new List<CompiledStepTrace>(); IEnumerable<CompiledStepTrace> instanceTraces = compiled.Trace.Where(value => value.FlowInstanceId == row.Instance.Id); if (row.Depth == 0) return instanceTraces.OrderBy(value => value.SequenceIndex).ToList(); if (row.IsModule) { string prefix = (row.Path ?? string.Empty) + "/"; return instanceTraces.Where(value => (value.HierarchyPath ?? string.Empty).StartsWith(prefix, StringComparison.Ordinal)).OrderBy(value => value.SequenceIndex).ToList(); } return instanceTraces.Where(value => value.HierarchyPath == row.Path || value.BlockStepId == (row.Step == null ? string.Empty : row.Step.Id)).OrderBy(value => value.SequenceIndex).Take(1).ToList(); }
         private void HandleHierarchyCommand(SequenceHierarchyCommand request)
         {
             if (request == null || request.Row == null || _studioProject == null) return; SequenceHierarchyRow row = request.Row;
@@ -1779,21 +1781,28 @@ namespace ManualCanDebug
 
         private async Task StartStudioDebugAsync(FctStudioCompileResult compiled, int startIndex)
         {
+            await StartStudioDebugAsync(compiled, startIndex, compiled == null ? -1 : compiled.Document.Steps.Count - 1);
+        }
+
+        private async Task<bool> StartStudioDebugAsync(FctStudioCompileResult compiled, int startIndex, int endIndex)
+        {
             if (_legacyRuntime == null || !_legacyRuntime.InstrumentsInitialized) throw new InvalidOperationException("请先在仪器中心勾选并初始化当前项目所需仪器。");
             if (_workflowRunning || _legacyRuntime.IsRunning) throw new InvalidOperationException("已有流程正在运行。");
-            bool highRisk = compiled.Document.Steps.Any(step => step.FunctionName.StartsWith("HVDC_", StringComparison.Ordinal) || (step.FunctionName == "FCT_ExecuteAction" && string.Equals(Convert.ToString(step.Get("Device")), "HVDC", StringComparison.OrdinalIgnoreCase)));
-            if (highRisk && MessageBox.Show(this, "该调试流程包含高压电源操作。\n\n请确认接线、负载、急停、水冷和人员安全条件已经满足。是否继续？", "高压调试确认", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return;
-            if (compiled.Warnings.Any(warning => warning.IndexOf("安全下电", StringComparison.Ordinal) >= 0) && MessageBox.Show(this, "流程检查提示没有显式安全下电功能块。\n\n虽然停止和结束时仍会调用PostUUT，但建议先补充安全下电。是否仍然继续调试？", "安全收尾提醒", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return;
+            int safeStart = Math.Max(0, Math.Min(startIndex, compiled.Document.Steps.Count)); int safeEnd = Math.Max(safeStart - 1, Math.Min(endIndex, compiled.Document.Steps.Count - 1)); bool highRisk = compiled.Document.Steps.Skip(safeStart).Take(Math.Max(0, safeEnd - safeStart + 1)).Any(step => step.FunctionName.StartsWith("HVDC_", StringComparison.Ordinal) || (step.FunctionName == "FCT_ExecuteAction" && string.Equals(Convert.ToString(step.Get("Device")), "HVDC", StringComparison.OrdinalIgnoreCase)));
+            if (highRisk && MessageBox.Show(this, "该调试流程包含高压电源操作。\n\n请确认接线、负载、急停、水冷和人员安全条件已经满足。是否继续？", "高压调试确认", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return false;
+            if (compiled.Warnings.Any(warning => warning.IndexOf("安全下电", StringComparison.Ordinal) >= 0) && MessageBox.Show(this, "流程检查提示没有显式安全下电功能块。\n\n虽然停止和结束时仍会调用PostUUT，但建议先补充安全下电。是否仍然继续调试？", "安全收尾提醒", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return false;
             if (_studioDebugActive) await EndStudioDebugSessionAsync();
             ApplyCompiledStudioSequence(compiled);
             string path = WriteRuntimeSequence(0, _workflowSteps.Count - 1);
             _studioDebugCompile = compiled;
             _studioBreakpointIndexes = new HashSet<int>(compiled.Trace.Where(trace => _studioProject.Breakpoints.Contains(trace.FlowInstanceId + ":" + (string.IsNullOrWhiteSpace(trace.HierarchyPath) ? trace.BlockStepId : trace.HierarchyPath)) || _studioProject.Breakpoints.Contains(trace.FlowInstanceId + ":" + trace.BlockStepId)).Select(trace => trace.SequenceIndex));
             _studioDebugNextIndex = Math.Max(0, Math.Min(startIndex, _workflowSteps.Count));
+            _studioDebugEndIndex = Math.Max(_studioDebugNextIndex - 1, Math.Min(endIndex, _workflowSteps.Count - 1));
             await _legacyRuntime.PrepareDebugSessionAsync(path);
             _studioDebugActive = true;
-            Service_Log("功能块调试已通过MainTest启动；起始STEP=" + (_studioDebugNextIndex + 1) + "，断点=" + _studioBreakpointIndexes.Count + "。可单步或继续到断点。");
+            Service_Log("功能块调试已通过MainTest启动；执行范围=" + (_studioDebugNextIndex + 1) + "-" + (_studioDebugEndIndex + 1) + "，断点=" + _studioBreakpointIndexes.Count + "。可单步或继续到断点。");
             await ContinueStudioDebugInternalAsync(true);
+            return true;
         }
 
         private Task ContinueStudioDebugAsync()
@@ -1805,7 +1814,7 @@ namespace ManualCanDebug
         private async Task ContinueStudioDebugInternalAsync(bool ignoreBreakpointAtCurrent)
         {
             bool first = true;
-            while (_studioDebugNextIndex < _workflowSteps.Count)
+            while (_studioDebugNextIndex < _workflowSteps.Count && _studioDebugNextIndex <= _studioDebugEndIndex)
             {
                 if (_studioBreakpointIndexes.Contains(_studioDebugNextIndex) && !(first && ignoreBreakpointAtCurrent))
                 {
@@ -1823,9 +1832,9 @@ namespace ManualCanDebug
         private async Task StepStudioDebugAsync()
         {
             if (!_studioDebugActive) throw new InvalidOperationException("当前没有功能块调试会话，请先点击“从选中处调试”。");
-            if (_studioDebugNextIndex >= _workflowSteps.Count) { await EndStudioDebugSessionAsync(); return; }
+            if (_studioDebugNextIndex >= _workflowSteps.Count || _studioDebugNextIndex > _studioDebugEndIndex) { await EndStudioDebugSessionAsync(); return; }
             await ExecuteStudioDebugStepAsync();
-            if (_studioDebugNextIndex >= _workflowSteps.Count) await EndStudioDebugSessionAsync();
+            if (_studioDebugNextIndex >= _workflowSteps.Count || _studioDebugNextIndex > _studioDebugEndIndex) await EndStudioDebugSessionAsync();
             else SetApplicationStatus("单步暂停：下一步 " + _workflowSteps[_studioDebugNextIndex].Name);
         }
 
@@ -1865,7 +1874,7 @@ namespace ManualCanDebug
         {
             if (!_studioDebugActive) return;
             try { await _legacyRuntime.EndDebugSessionAsync(); }
-            finally { _studioDebugActive = false; _studioDebugCompile = null; }
+            finally { _studioDebugActive = false; _studioDebugCompile = null; _studioDebugEndIndex = -1; }
         }
 
         private void GenerateDebugSequence_Click(object sender, RoutedEventArgs e)

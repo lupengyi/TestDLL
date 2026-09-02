@@ -118,6 +118,11 @@ namespace ManualCanDebug
             else if (status == "完成") { CompiledStepTrace last = _lastCompile.Trace.Where(item => item.FlowInstanceId == trace.FlowInstanceId).OrderBy(item => item.SequenceIndex).LastOrDefault(); if (last != null && last.BlockStepId == trace.BlockStepId) { instanceRow.SetRuntimeStatus("完成"); if (_activeFlowInstanceId == trace.FlowInstanceId) _activeFlowInstanceId = null; } }
         }
 
+        public void PrepareHierarchyDebug(FctStudioCompileResult compiled)
+        {
+            _lastCompile = compiled; ResetRuntimeHighlights();
+        }
+
         public void UpdateRuntimeVariables(string snapshot)
         {
             if (_runtimeVariables != null) _runtimeVariables.Text = "运行变量：" + (string.IsNullOrWhiteSpace(snapshot) ? "{}" : snapshot);
