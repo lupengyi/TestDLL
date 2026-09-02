@@ -158,8 +158,7 @@
   </Target>
   <Target Name="CopyExtendedTestDll" AfterTargets="Build">
     <PropertyGroup>
-      <_ExtendedTestDllPath Condition="Exists('$(OutDir)CSP.TestDLL.dll')">$(OutDir)CSP.TestDLL.dll</_ExtendedTestDllPath>
-      <_ExtendedTestDllPath Condition="'$(_ExtendedTestDllPath)' == ''">$(MSBuildProjectDirectory)\..\..\CSP.TestDLL.Extension\bin\$(Configuration)\CSP.TestDLL.dll</_ExtendedTestDllPath>
+      <_ExtendedTestDllPath>$(MSBuildProjectDirectory)\..\..\CSP.TestDLL.Extension\bin\$(Configuration)\CSP.TestDLL.dll</_ExtendedTestDllPath>
       <_An23600ePath>$(MSBuildProjectDirectory)\..\..\DLLs\Instruments.Load.AN23600E.dll</_An23600ePath>
     </PropertyGroup>
     <Copy SourceFiles="$(_ExtendedTestDllPath)" DestinationFiles="$(OutDir)LegacyRuntime\CSP.TestDLL.dll" SkipUnchangedFiles="true" />
