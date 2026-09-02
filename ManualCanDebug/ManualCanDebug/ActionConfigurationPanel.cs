@@ -115,6 +115,20 @@ namespace ManualCanDebug
             Dictionary<string, string> result = new Dictionary<string, string>(StringComparer.Ordinal); foreach (KeyValuePair<string, ActionFieldEditor> pair in _fieldEditors) if (pair.Value.IsExposed) result[pair.Key] = pair.Value.ParameterName; return result;
         }
 
+        public bool TryShowDirectBatchConfiguration(Window owner, out SequenceStepDefinition configured)
+        {
+            configured = null; string source = Convert.ToString(_source.SelectedItem, CultureInfo.InvariantCulture), target = Convert.ToString(_target.SelectedItem, CultureInfo.InvariantCulture), operation = Convert.ToString(_operation.SelectedItem, CultureInfo.InvariantCulture);
+            if (source == "产品内部通信" && target == "FT/Locator内存" && _locatorSignals.Count > 0)
+            {
+                ProductLocatorTable table = _tableBox == null ? null : _tableBox.SelectedItem as ProductLocatorTable; LocatorSignalConfigurationWindow dialog = new LocatorSignalConfigurationWindow(_locatorSignals, operation, table == null ? string.Empty : table.DisplayName) { Owner = owner }; if (dialog.ShowDialog() == true) configured = BuildStep(); return true;
+            }
+            if (source == "产品DBC通信" && _dbcSignals.Count > 0 && operation != "停止周期发送" && operation != "发送原始帧")
+            {
+                DbcMessageDefinition message = _dbcMessage == null ? null : _dbcMessage.SelectedItem as DbcMessageDefinition; DbcSignalConfigurationWindow dialog = new DbcSignalConfigurationWindow(_dbcSignals, operation, message == null ? string.Empty : message.Name) { Owner = owner }; if (dialog.ShowDialog() == true) configured = BuildStep(); return true;
+            }
+            return false;
+        }
+
         private void BuildUi()
         {
             RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto }); RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) }); RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });

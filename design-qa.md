@@ -36,11 +36,14 @@ No actionable P0, P1, or P2 visual or interaction mismatch remains.
 - Scalar parameters use inline editors and validate numeric types.
 - Invalid scalar input receives a red field state and is not committed.
 - LIMIT lower/upper/compare/unit values edit on the real STEP row.
-- Breakpoint, enabled/disabled, status, product, and current value are on the same row.
+- Breakpoint, enabled/disabled, test value, and debug result are shown on the same execution row.
 - Complex DBC/Locator/table rows show a summary and `配置…`, opening the existing complete configuration workflow.
+- Locator and DBC rows open their existing specialized signal window directly; no extra outer STEP window is introduced.
 - Module-reference rows show the SEQ display name and bound module separately; `绑定…` can rebind the current instance without changing the library definition.
 - Edit mode hides run actions. Debug mode adds row-level run actions while preserving whole-flow run, step, continue, and safe stop.
 - Top-level instances support drag/drop reorder, library drop insertion, copy, move, disable, delete, and explicit module-version update.
+- The hierarchy right-click menu supports inserting actions/modules above or below, creating and inserting custom modules, copy/paste, delete, move, enable/disable, breakpoint, binding, configuration, and debug run without switching pages.
+- The visible debug columns are `测试值` and `结果`; the former receives the measured/runtime text and the latter receives the debug PASS/FAIL/runtime result. `状态` and `适用产品` are removed from this screen.
 - Module-library management retains new, import, export, copy, delete, right-click operations, and nested module insertion.
 - Standard modules are read-only and provide `复制为自定义`.
 
