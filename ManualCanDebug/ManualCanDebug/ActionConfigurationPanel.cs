@@ -63,6 +63,7 @@ namespace ManualCanDebug
         private bool _loading;
         private bool _debugMode;
         private Button _runButton;
+        private readonly TextBlock _debugDetails = new TextBlock { Foreground = new SolidColorBrush(Color.FromRgb(42, 92, 160)), Margin = new Thickness(8, 4, 8, 0), TextWrapping = TextWrapping.Wrap, Visibility = Visibility.Collapsed };
 
         public event Action<ActionHistoryRow> ExecutionRecorded;
 
@@ -70,6 +71,7 @@ namespace ManualCanDebug
         {
             _debugMode = enabled;
             if (_runButton != null) _runButton.Visibility = enabled ? Visibility.Visible : Visibility.Collapsed;
+            _debugDetails.Visibility = enabled ? Visibility.Visible : Visibility.Collapsed;
         }
 
         public ActionConfigurationPanel(ProductLocatorRepository locatorRepository, Func<SequenceStepDefinition, Task<string>> execute, Action<SequenceStepDefinition, IDictionary<string, string>> save, Action<string> log, Func<string> getProduct, Func<string> getDbcPath = null, Func<LegacyStepExecutionResult> getLastPlatformResult = null)
@@ -136,7 +138,7 @@ namespace ManualCanDebug
             RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto }); RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) }); RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             Border selector = Card(); selector.Padding = new Thickness(12, 8, 12, 8); WrapPanel top = new WrapPanel(); top.Children.Add(Label("动作来源")); top.Children.Add(_source); top.Children.Add(Label("目标设备/协议")); top.Children.Add(_target); top.Children.Add(Label("功能")); top.Children.Add(_operation); top.Children.Add(Label("动作名称")); top.Children.Add(_stepName); selector.Child = top; Children.Add(selector);
             ScrollViewer scroll = new ScrollViewer { Content = _body, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled, Margin = new Thickness(0, 8, 0, 8) }; Grid.SetRow(scroll, 1); Children.Add(scroll);
-            Border footer = Card(); footer.Padding = new Thickness(12, 8, 12, 8); DockPanel footerDock = new DockPanel(); StackPanel buttons = new StackPanel { Orientation = Orientation.Horizontal }; DockPanel.SetDock(buttons, Dock.Right); _runButton = Button("立即试运行", Execute_Click); Button save = PrimaryButton("完成配置", Complete_Click); buttons.Children.Add(_runButton); buttons.Children.Add(save); footerDock.Children.Add(buttons); WrapPanel common = new WrapPanel(); common.Children.Add(Label("运行模式")); _runMode.ItemsSource = new[] { "Normal", "Skip", "Break" }; _runMode.SelectedIndex = 0; common.Children.Add(_runMode); common.Children.Add(_recordLog); common.Children.Add(_status); footerDock.Children.Add(common); footer.Child = footerDock; Grid.SetRow(footer, 2); Children.Add(footer);
+            Border footer = Card(); footer.Padding = new Thickness(12, 8, 12, 8); DockPanel footerDock = new DockPanel(); StackPanel buttons = new StackPanel { Orientation = Orientation.Horizontal }; DockPanel.SetDock(buttons, Dock.Right); _runButton = Button("立即试运行", Execute_Click); Button save = PrimaryButton("完成配置", Complete_Click); buttons.Children.Add(_runButton); buttons.Children.Add(save); footerDock.Children.Add(buttons); StackPanel resultArea = new StackPanel(); WrapPanel common = new WrapPanel(); common.Children.Add(Label("运行模式")); _runMode.ItemsSource = new[] { "Normal", "Skip", "Break" }; _runMode.SelectedIndex = 0; common.Children.Add(_runMode); common.Children.Add(_recordLog); common.Children.Add(_status); resultArea.Children.Add(common); resultArea.Children.Add(_debugDetails); footerDock.Children.Add(resultArea); footer.Child = footerDock; Grid.SetRow(footer, 2); Children.Add(footer);
             _source.SelectionChanged += (s, e) => { if (_loading) return; RefreshTargets(); BuildEditor(); };
             _target.SelectionChanged += (s, e) => { if (_loading) return; RefreshOperations(); BuildEditor(); };
             _operation.SelectionChanged += (s, e) => { if (_loading) return; BuildEditor(); };
@@ -339,16 +341,18 @@ namespace ManualCanDebug
                 _status.Text = "正在执行：" + step.StepName;
                 _status.Foreground = Brushes.DarkOrange;
                 string result = await _execute(step);
-                string displayResult = string.IsNullOrWhiteSpace(result) ? "执行完成（平台未返回文本）" : result;
-                _status.Text = displayResult;
-                _status.Foreground = Brushes.DarkGreen;
                 LegacyStepExecutionResult platformResult = _getLastPlatformResult == null ? null : _getLastPlatformResult();
+                string displayResult = FormatPlatformMeasurements(platformResult, string.IsNullOrWhiteSpace(result) ? "执行完成（平台未返回文本）" : result);
+                _status.Text = displayResult;
+                _debugDetails.Text = "本次调试结果：" + displayResult;
+                _status.Foreground = Brushes.DarkGreen;
                 RecordExecution(new ActionHistoryRow(step, displayResult, true, started, DateTime.Now, ReadDiagnosticDelta(diagnosticPath, diagnosticOffset), platformResult));
                 _log("动作面板试运行完成：" + step.StepName);
             }
             catch (Exception ex)
             {
                 _status.Text = "试运行失败：" + ex.Message;
+                _debugDetails.Text = "本次调试结果：FAILED · " + ex.Message;
                 _status.Foreground = Brushes.DarkRed;
                 SequenceStepDefinition failedStep = step ?? _loadedStep ?? CreateDraft();
                 LegacyStepExecutionResult platformResult = _getLastPlatformResult == null ? null : _getLastPlatformResult();
@@ -359,7 +363,12 @@ namespace ManualCanDebug
         public void ExecuteCurrent() { Execute_Click(this, new RoutedEventArgs()); }
         private async Task<string> ExecuteSpecializedAsync(string stepName)
         {
-            if (!string.IsNullOrWhiteSpace(stepName)) _stepName.Text = stepName.Trim(); SequenceStepDefinition step = BuildStep(); DateTime started = DateTime.Now; string result = await _execute(step); string display = string.IsNullOrWhiteSpace(result) ? "执行完成（平台未返回文本）" : result; LegacyStepExecutionResult platform = _getLastPlatformResult == null ? null : _getLastPlatformResult(); RecordExecution(new ActionHistoryRow(step, display, true, started, DateTime.Now, string.Empty, platform)); _log("动作面板试运行完成：" + step.StepName); return display;
+            if (!string.IsNullOrWhiteSpace(stepName)) _stepName.Text = stepName.Trim(); SequenceStepDefinition step = BuildStep(); DateTime started = DateTime.Now; string result = await _execute(step); LegacyStepExecutionResult platform = _getLastPlatformResult == null ? null : _getLastPlatformResult(); string display = FormatPlatformMeasurements(platform, string.IsNullOrWhiteSpace(result) ? "执行完成（平台未返回文本）" : result); _debugDetails.Text = "本次调试结果：" + display; RecordExecution(new ActionHistoryRow(step, display, true, started, DateTime.Now, string.Empty, platform)); _log("动作面板试运行完成：" + step.StepName); return display;
+        }
+
+        internal static string FormatPlatformMeasurements(LegacyStepExecutionResult platform, string fallback)
+        {
+            if (platform == null || platform.Results == null) return fallback ?? string.Empty; string[] values = platform.Results.Where(value => value != null && !string.IsNullOrWhiteSpace(value.Value)).Select(value => (string.IsNullOrWhiteSpace(value.StepName) ? string.Empty : value.StepName + "=") + value.Value + (string.IsNullOrWhiteSpace(value.Unit) ? string.Empty : " " + value.Unit)).ToArray(); return values.Length == 0 ? fallback ?? string.Empty : string.Join("；", values);
         }
 
         private void RecordExecution(ActionHistoryRow record)

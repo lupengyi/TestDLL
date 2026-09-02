@@ -1848,8 +1848,9 @@ namespace ManualCanDebug
             try
             {
                 string result = await _legacyRuntime.RunLoadedSingleStepAsync(index);
+                string measured = ActionConfigurationPanel.FormatPlatformMeasurements(_legacyRuntime.LastStepExecution, string.Empty);
                 step.Status = IsPassingStatus(result) ? "完成" : "失败";
-                if (_studioFlowEditorPanel != null) _studioFlowEditorPanel.UpdateDebugStep(index, step.Status, string.IsNullOrWhiteSpace(result) ? "完成" : result);
+                if (_studioFlowEditorPanel != null) _studioFlowEditorPanel.UpdateDebugStep(index, step.Status, measured);
                 if (_studioFlowEditorPanel != null) _studioFlowEditorPanel.UpdateRuntimeVariables(_legacyRuntime.GetRuntimeSnapshot());
                 int runtimeIndex = _legacyRuntime.RuntimeCurrentStepIndex;
                 _studioDebugNextIndex = runtimeIndex >= 0 && runtimeIndex < _workflowSteps.Count && runtimeIndex != index ? runtimeIndex : index + 1;
