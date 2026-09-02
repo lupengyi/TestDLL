@@ -121,6 +121,10 @@
       <Link>Config\DefaultSequence.json</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\Sequence\Instrument_Acceptance_All_Safe.json">
+      <Link>Sequence\Instrument_Acceptance_All_Safe.json</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\..\测试资料_20260616(1)\附件六_《测试工序_FCT测试要求A0》\附件六_《测试工序_FCT测试要求A0》\C91\20002331 AS_Fast_PE INV_CV_800V_LOCATOR_C_sample_250120.xlsx">
       <Link>Config\ProductLocators\C91_Locator.xlsx</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

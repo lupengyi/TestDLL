@@ -25,6 +25,7 @@ if (Test-Path -LiteralPath $packageRoot) {
 New-Item -ItemType Directory -Path $debugRoot -Force | Out-Null
 New-Item -ItemType Directory -Path (Join-Path $platformRoot "DLLs") -Force | Out-Null
 New-Item -ItemType Directory -Path (Join-Path $platformRoot "Config") -Force | Out-Null
+New-Item -ItemType Directory -Path (Join-Path $platformRoot "Sequence") -Force | Out-Null
 
 $excludeDirectories = @("Logs", "DebugSequences", "ErrorTrace", "StudioProjects")
 Get-ChildItem -LiteralPath $sourceRoot -Force | Where-Object { $excludeDirectories -notcontains $_.Name } | ForEach-Object {
@@ -36,6 +37,9 @@ Get-ChildItem -LiteralPath (Join-Path $sourceRoot "LegacyRuntime") -Force | ForE
 }
 Get-ChildItem -LiteralPath (Join-Path $sourceRoot "Config") -Force | ForEach-Object {
     Copy-Item -LiteralPath $_.FullName -Destination (Join-Path $platformRoot "Config") -Recurse -Force
+}
+Get-ChildItem -LiteralPath (Join-Path $sourceRoot "Sequence") -File -ErrorAction SilentlyContinue | ForEach-Object {
+    Copy-Item -LiteralPath $_.FullName -Destination (Join-Path $platformRoot "Sequence") -Force
 }
 
 $manifest = Get-ChildItem -LiteralPath $packageRoot -File -Recurse | ForEach-Object {

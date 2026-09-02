@@ -1,0 +1,60 @@
+{
+  "SerialNumberLen": 0,
+  "ProjectName": "FCT机台全部仪器验收",
+  "StationName": "INSTRUMENT_ACCEPTANCE",
+  "SequenceVersion": "INSTRUMENT-ACCEPTANCE-A0",
+  "UIDisplayType": "All",
+  "StepList": [
+    { "StepName": "01-48口继电器全部关闭", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "RELAY_FCT", "Operation": "SetDO", "Channels": "OUT1,OUT2,OUT3,OUT4,OUT5,OUT6,OUT7,OUT8,OUT9,OUT10,OUT11,OUT12,OUT13,OUT14,OUT15,OUT16,OUT17,OUT18,OUT19,OUT20,OUT21,OUT22,OUT23,OUT24,OUT25,OUT26,OUT27,OUT28,OUT29,OUT30,OUT31,OUT32,OUT33,OUT34,OUT35,OUT36,OUT37,OUT38,OUT39,OUT40,OUT41,OUT42,OUT43,OUT44,OUT45,OUT46,OUT47,OUT48", "Values": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0", "Slave": 1, "ResultMode": "Action" },
+    { "StepName": "02-15口高压继电器全部关闭", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "RELAY_HVMUX", "Operation": "SetDO", "Channels": "OUT1,OUT2,OUT3,OUT4,OUT5,OUT6,OUT7,OUT8,OUT9,OUT10,OUT11,OUT12,OUT13,OUT14,OUT15", "Values": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0", "Slave": 1, "ResultMode": "Action" },
+
+    { "StepName": "03-KL30设置0V", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "LVDC", "Operation": "SetVoltage", "Voltage": 0, "ResultMode": "Action" },
+    { "StepName": "04-KL30设置限流0.5A", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "LVDC", "Operation": "SetCurrent", "Current": 0.5, "ResultMode": "Action" },
+    { "StepName": "05-KL30确认输出关闭", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "LVDC", "Operation": "SetOutput", "Output": false, "ResultMode": "Action" },
+    { "StepName": "06-KL30读取电压", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "LVDC", "Operation": "ReadVoltage", "ResultMode": "Information", "Unit": "V" },
+    { "StepName": "07-KL30读取电流", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "LVDC", "Operation": "ReadCurrent", "ResultMode": "Information", "Unit": "A" },
+
+    { "StepName": "08-KL15设置0V", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "LVDC_KL15", "Operation": "SetVoltage", "Voltage": 0, "ResultMode": "Action" },
+    { "StepName": "09-KL15设置限流0.5A", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "LVDC_KL15", "Operation": "SetCurrent", "Current": 0.5, "ResultMode": "Action" },
+    { "StepName": "10-KL15确认输出关闭", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "LVDC_KL15", "Operation": "SetOutput", "Output": false, "ResultMode": "Action" },
+    { "StepName": "11-KL15读取电压", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "LVDC_KL15", "Operation": "ReadVoltage", "ResultMode": "Information", "Unit": "V" },
+    { "StepName": "12-KL15读取电流", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "LVDC_KL15", "Operation": "ReadCurrent", "ResultMode": "Information", "Unit": "A" },
+
+    { "StepName": "13-高压源设置0V", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "HVDC", "Operation": "SetVoltage", "Voltage": 0, "ResultMode": "Action" },
+    { "StepName": "14-高压源确认输出关闭", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "HVDC", "Operation": "SetOutput", "Output": false, "ResultMode": "Action" },
+    { "StepName": "15-高压源读取电压", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "HVDC", "Operation": "ReadVoltage", "ResultMode": "Information", "Unit": "V" },
+    { "StepName": "16-高压源读取电流", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "HVDC", "Operation": "ReadCurrent", "ResultMode": "Information", "Unit": "A" },
+
+    { "StepName": "17-高压万用表配置直流电压", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "DMM_HV", "Operation": "ConfigDCVoltage", "Range": 1000, "Solution": 0.01, "ResultMode": "Action" },
+    { "StepName": "18-高压万用表读取", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "DMM_HV", "Operation": "Read", "ResultMode": "Information", "Unit": "V" },
+    { "StepName": "19-低压万用表配置直流电压", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "DMM_LV", "Operation": "ConfigDCVoltage", "Range": 100, "Solution": 0.001, "ResultMode": "Action" },
+    { "StepName": "20-低压万用表读取", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "DMM_LV", "Operation": "Read", "ResultMode": "Information", "Unit": "V" },
+
+    { "StepName": "21-电阻卡1通道1设置1100欧", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "RES_1", "Operation": "SetResistance", "ResValue": 1100, "Channel": 1, "ResultMode": "Action" },
+    { "StepName": "22-电阻卡2通道1设置1100欧", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "RES_2", "Operation": "SetResistance", "ResValue": 1100, "Channel": 1, "ResultMode": "Action" },
+    { "StepName": "23-电阻卡3通道1设置1100欧", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "RES_3", "Operation": "SetResistance", "ResValue": 1100, "Channel": 1, "ResultMode": "Action" },
+
+    { "StepName": "24-电子负载确认输入关闭", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "DCDC_LOAD", "Operation": "OutputOff", "ResultMode": "Action" },
+    { "StepName": "25-电子负载设置CC模式", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "DCDC_LOAD", "Operation": "SetMode", "Mode": "Ccm", "ResultMode": "Action" },
+    { "StepName": "26-电子负载设置0A", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "DCDC_LOAD", "Operation": "SetCurrent", "Current": 0, "ResultMode": "Action" },
+    { "StepName": "27-电子负载读取保护状态", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "DCDC_LOAD", "Operation": "ReadProtection", "ResultMode": "Information" },
+    { "StepName": "28-电子负载读取电压", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "DCDC_LOAD", "Operation": "ReadVoltage", "ResultMode": "Information", "Unit": "V" },
+    { "StepName": "29-电子负载读取电流", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "DCDC_LOAD", "Operation": "ReadCurrent", "ResultMode": "Information", "Unit": "A" },
+
+    { "StepName": "30-产品CAN接收快照", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "PRODUCTCAN", "Operation": "ReceiveRaw", "FilterId": "0", "ResultMode": "Information" },
+    { "StepName": "31-辅驱CAN接收快照", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "AUXCAN", "Operation": "ReceiveRaw", "ResultMode": "Information" },
+    { "StepName": "32-旋变CAN设置C96极对数4", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "RESOLVER", "Operation": "SetPolePairs", "PolePairs": 4, "ResultMode": "Action" },
+    { "StepName": "33-旋变CAN设置零转速", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "RESOLVER", "Operation": "SetSpeed", "Speed": 0, "PolePairs": 4, "ResultMode": "Action" },
+
+    { "StepName": "90-跳过-KL30零伏输出开测试", "RunMode": "Skip", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "LVDC", "Operation": "SetOutput", "Output": true, "ResultMode": "Action", "Comment": "确认接线安全后改为Normal，下一步会关闭" },
+    { "StepName": "91-KL30输出关闭", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "LVDC", "Operation": "SetOutput", "Output": false, "ResultMode": "Action" },
+    { "StepName": "92-跳过-KL15零伏输出开测试", "RunMode": "Skip", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "LVDC_KL15", "Operation": "SetOutput", "Output": true, "ResultMode": "Action", "Comment": "确认接线安全后改为Normal，下一步会关闭" },
+    { "StepName": "93-KL15输出关闭", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "LVDC_KL15", "Operation": "SetOutput", "Output": false, "ResultMode": "Action" },
+    { "StepName": "94-跳过-48口OUT48吸合测试", "RunMode": "Skip", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "RELAY_FCT", "Operation": "SetDO", "Channels": "OUT48", "Values": "1", "Slave": 1, "ResultMode": "Action", "Comment": "确认OUT48为空闲安全通道后改为Normal" },
+    { "StepName": "95-48口OUT48关闭", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "RELAY_FCT", "Operation": "SetDO", "Channels": "OUT48", "Values": "0", "Slave": 1, "ResultMode": "Action" },
+    { "StepName": "96-跳过-15口OUT15吸合测试", "RunMode": "Skip", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "RELAY_HVMUX", "Operation": "SetDO", "Channels": "OUT15", "Values": "1", "Slave": 1, "ResultMode": "Action", "Comment": "确认OUT15为空闲安全通道后改为Normal" },
+    { "StepName": "97-15口OUT15关闭", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "RELAY_HVMUX", "Operation": "SetDO", "Channels": "OUT15", "Values": "0", "Slave": 1, "ResultMode": "Action" },
+    { "StepName": "98-高压源最终确认0V", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "HVDC", "Operation": "SetVoltage", "Voltage": 0, "ResultMode": "Action" },
+    { "StepName": "99-高压源最终关闭", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "HVDC", "Operation": "SetOutput", "Output": false, "ResultMode": "Action" }
+  ]
+}
