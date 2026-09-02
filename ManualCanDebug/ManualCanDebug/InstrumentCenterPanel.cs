@@ -109,7 +109,7 @@ namespace ManualCanDebug
             page.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             TextBlock note = new TextBlock
             {
-                Text = "通过编辑 InstrumentConfig.json 或下方按钮增删仪器，无需改 MainTest 代码。勾选“本次初始化”决定连接哪些仪器；Name 必须与 InstrumentCatalog.json 中的已支持名称一致。多工位时可为每个工位准备 InstrumentProfiles/*.json 配置方案。CAN 参数格式：DeviceType,Channel,BaudRate,Port。",
+                Text = "通过编辑 InstrumentConfig.json 或下方按钮增删仪器。勾选“本次初始化”决定连接哪些仪器；三张CAN分别使用DUTCAN、RESOLVERCAN、AUXCAN。CAN参数格式：DeviceType,Channel,BaudRate,Port,DeviceIndex。双万用表使用DMM_HV/DMM_LV，三张电阻卡使用RES_1/RES_2/RES_3。",
                 TextWrapping = TextWrapping.Wrap,
                 Padding = new Thickness(10, 8, 10, 8),
                 Background = new SolidColorBrush(Color.FromRgb(255, 247, 226)),

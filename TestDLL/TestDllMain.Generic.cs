@@ -164,7 +164,7 @@ namespace CSP
             if (_fctInitializedInstrumentNames.Contains("LVDC_KL15")) try { LVDC_KL15.SetOutput(false); } catch { }
             if (_fctInitializedInstrumentNames.Contains("DCDC_LOAD") && DcdcLoad != null) try { DcdcLoad.LoadOff(); } catch { }
             if (_fctInitializedInstrumentNames.Contains("RELAY_FCT")) try { RelayFctBoard.WriteDO(string.Join(",", Enumerable.Range(0, 48)), string.Join(",", Enumerable.Repeat("0", 48))); } catch { }
-            if (_fctInitializedInstrumentNames.Contains("RELAY_HVMUX")) try { RelayHvMux.WriteDO(string.Join(",", Enumerable.Range(0, 48)), string.Join(",", Enumerable.Repeat("0", 48))); } catch { }
+            if (_fctInitializedInstrumentNames.Contains("RELAY_HVMUX")) try { RelayHvMux.WriteDO(string.Join(",", Enumerable.Range(1, 15).Select(index => "OUT" + index)), string.Join(",", Enumerable.Repeat("0", 15))); } catch { }
             return 0;
         }
 
@@ -178,7 +178,8 @@ namespace CSP
             if (_fctInitializedInstrumentNames.Contains("LVDC")) try { LVDC.DisconnectDevice(); } catch { }
             if (_fctInitializedInstrumentNames.Contains("LVDC_KL15")) try { LVDC_KL15.DisconnectDevice(); } catch { }
             if (_fctInitializedInstrumentNames.Contains("HVDC")) try { HVDC.DisconnectDevice(); } catch { }
-            if (_fctInitializedInstrumentNames.Contains("DMM")) try { DMM.CloseSession(); } catch { }
+            if (_fctInitializedInstrumentNames.Contains("DMM") || _fctInitializedInstrumentNames.Contains("DMM_HV")) try { DMM.CloseSession(); } catch { }
+            if (_fctInitializedInstrumentNames.Contains("DMM_LV")) try { DMM_LV.CloseSession(); } catch { }
             if (DcdcLoad != null) { try { DcdcLoad.LoadOff(); } catch { } try { DcdcLoad.Disconnect(); } catch { } try { DcdcLoad.Dispose(); } catch { } DcdcLoad = null; }
             try { RelayFctBoard.Disconnect(); } catch { }
             try { RelayHvMux.Disconnect(); } catch { }
@@ -209,11 +210,14 @@ namespace CSP
                 case "AUXCAN":
                     _fctAuxCan = FCT_OpenSelectedCan(assemblyFolder, executableFolder, resource, parameter, 0, "C95C96Auxiliary.dbc");
                     break;
-                case "RES": RES.ConnectDevice(resource, parameter); RES.SetResistance(1100, 1); RES.SetResistance(1100, 2); break;
+                case "RES": case "RES_1": RES.ConnectDevice(resource, parameter); RES.SetResistance(1100, 1); RES.SetResistance(1100, 2); break;
+                case "RES_2": RES_2.ConnectDevice(resource, parameter); RES_2.SetResistance(1100, 1); RES_2.SetResistance(1100, 2); break;
+                case "RES_3": RES_3.ConnectDevice(resource, parameter); RES_3.SetResistance(1100, 1); RES_3.SetResistance(1100, 2); break;
                 case "LVDC": LVDC.ConnectDevice(resource, parameter); LVDC.SetOutput(false); break;
                 case "LVDC_KL15": LVDC_KL15.ConnectDevice(resource, parameter); LVDC_KL15.SetOutput(false); break;
                 case "HVDC": HVDC.ConnectDevice(resource, parameter); HVDC.SetSourceVoltage(0); break;
-                case "DMM": DMM.OpenSession(resource); DMM.InitDMM(); DMM.ConfigDMMforDC(1000, 0.01); break;
+                case "DMM": case "DMM_HV": DMM.OpenSession(resource); DMM.InitDMM(); DMM.ConfigDMMforDC(1000, 0.01); break;
+                case "DMM_LV": DMM_LV.OpenSession(resource); DMM_LV.InitDMM(); DMM_LV.ConfigDMMforDC(100, 0.001); break;
                 case "RELAY": Relay.connect(resource, FCT_SelectedPort(parameter, 502)); break;
                 case "RELAY_FCT": RelayFctBoardSlave = FCT_SelectedSlave(parameter, 1); RelayFctBoard.SlaveAddress = RelayFctBoardSlave; RelayFctBoard.Connect(resource, (ushort)FCT_SelectedPortAt(parameter, 502), "sht"); break;
                 case "RELAY_HVMUX": RelayHvMuxSlave = FCT_SelectedSlave(parameter, 1); RelayHvMux.SlaveAddress = RelayHvMuxSlave; RelayHvMux.Connect(resource, (ushort)FCT_SelectedPortAt(parameter, 502), "sht"); break;
@@ -238,6 +242,7 @@ namespace CSP
             ushort channel = values.Length > 1 ? ushort.Parse(values[1], CultureInfo.InvariantCulture) : fallbackChannel;
             uint baudRate = values.Length > 2 ? uint.Parse(values[2], CultureInfo.InvariantCulture) : 500000;
             int port = values.Length > 3 ? int.Parse(values[3], CultureInfo.InvariantCulture) : 8000;
+            int deviceIndex = values.Length > 4 ? int.Parse(values[4], CultureInfo.InvariantCulture) : 0;
             string wrapperPath = typeof(Instruments.CAN.CANWrapper).Assembly.Location;
             string providerPath = Path.Combine(assemblyFolder, "Instruments.CAN.ZLG_CAN.dll");
             string nativePath = Path.Combine(assemblyFolder, "zlgcan.dll");
@@ -248,13 +253,15 @@ namespace CSP
             FCT_CanDiagnostic("CAN provider: " + FCT_FileIdentity(providerPath));
             FCT_CanDiagnostic("CAN native: " + FCT_FileIdentity(nativePath));
             FCT_CanDiagnostic("CAN kernel: " + FCT_FileIdentity(kernelPath));
-            FCT_CanDiagnostic("CAN open request: DeviceType=" + deviceType + "; Channel=" + channel + "; BaudRate=" + baudRate + "; IP=" + actualIp + "; Port=" + port + "; DBC=" + dbcPath);
+            FCT_CanDiagnostic("CAN open request: DeviceType=" + deviceType + "; DeviceIndex=" + deviceIndex + "; Channel=" + channel + "; BaudRate=" + baudRate + "; IP=" + actualIp + "; Port=" + port + "; DBC=" + dbcPath);
             try
             {
                 Instruments.CAN.CANWrapper wrapper = new Instruments.CAN.CANWrapper(providerPath);
                 wrapper.DBC_ReadDBCTxt(dbcPath);
                 wrapper.SetValue("IP", actualIp);
                 wrapper.SetValue("PORT", port);
+                wrapper.SetValue("DEVICE_INDEX", deviceIndex);
+                wrapper.SetValue("DeviceIndex", deviceIndex);
                 wrapper.OpenCANDevice(deviceType, channel, baudRate);
                 FCT_CanDiagnostic("CAN open succeeded: DeviceType=" + deviceType + "; Channel=" + channel);
                 return wrapper;
@@ -292,8 +299,11 @@ namespace CSP
                     case "LVDC": result = FCT_Lvdc(socketIndex, operation, LVDC); break;
                     case "LVDC_KL15": result = FCT_Lvdc(socketIndex, operation, LVDC_KL15); break;
                     case "HVDC": result = FCT_Hvdc(socketIndex, operation, HVDC); break;
-                    case "DMM": result = FCT_Dmm(socketIndex, operation, DMM); break;
-                    case "RES": FCT_Res(socketIndex, RES); break;
+                    case "DMM": case "DMM_HV": result = FCT_Dmm(socketIndex, operation, DMM); break;
+                    case "DMM_LV": result = FCT_Dmm(socketIndex, operation, DMM_LV); break;
+                    case "RES": case "RES_1": FCT_Res(socketIndex, RES); break;
+                    case "RES_2": FCT_Res(socketIndex, RES_2); break;
+                    case "RES_3": FCT_Res(socketIndex, RES_3); break;
                     case "DAQ": result = FCT_ReadDaq(socketIndex); break;
                     case "DCDC_LOAD": result = FCT_DcdcLoad(socketIndex, operation, DcdcLoad); break;
                     case "MOXA": MOXA_SetDO(socketIndex); break;
@@ -412,6 +422,7 @@ namespace CSP
             string[] channelTexts = FCT_InputString(socketIndex, "Channels", FCT_InputString(socketIndex, "Channel", "0")).Split(new[] { ',', ';', '|' }, StringSplitOptions.RemoveEmptyEntries);
             string[] valueTexts = FCT_InputString(socketIndex, "Values", FCT_InputString(socketIndex, "Value", "0")).Split(new[] { ',', ';', '|' }, StringSplitOptions.RemoveEmptyEntries);
             if (channelTexts.Length == 0 || channelTexts.Length != valueTexts.Length) throw new InvalidOperationException("Relay channels and values must have the same non-zero count.");
+            if (ReferenceEquals(board, RelayHvMux)) foreach (string channelText in channelTexts) { string normalized = channelText.Trim().ToUpperInvariant().Replace("OUT", string.Empty); int channel; if (!int.TryParse(normalized, NumberStyles.Integer, CultureInfo.InvariantCulture, out channel) || channel < 1 || channel > 15) throw new ArgumentOutOfRangeException("Channels", "高压继电器卡只允许OUT1到OUT15。"); }
             board.WriteDO(string.Join(",", channelTexts), string.Join(",", valueTexts));
         }
 

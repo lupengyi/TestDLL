@@ -23,10 +23,13 @@ namespace CSP
         
         //Creat object for all instuments
         private Instruments.DMM.KeySight34461A DMM = new Instruments.DMM.KeySight34461A();
+        private Instruments.DMM.KeySight34461A DMM_LV = new Instruments.DMM.KeySight34461A();
         private Instruments.PowerSupply.IT6xxxC LVDC = new Instruments.PowerSupply.IT6xxxC();
         private Instruments.PowerSupply.IT6xxxC LVDC_KL15 = new Instruments.PowerSupply.IT6xxxC();
         private Instruments.PowerSupply.Kewell_C3000 HVDC = new Instruments.PowerSupply.Kewell_C3000();
         private Instruments.Other.NGI_ProgramResistance RES = new Instruments.Other.NGI_ProgramResistance();
+        private Instruments.Other.NGI_ProgramResistance RES_2 = new Instruments.Other.NGI_ProgramResistance();
+        private Instruments.Other.NGI_ProgramResistance RES_3 = new Instruments.Other.NGI_ProgramResistance();
         private Instruments.CAN.CANWrapper MyCAN = null;
         private Instruments.CAN.CANWrapper Resolver = null;
         // Legacy names are retained for old validated STEP functions; the implementation is now SHT_48SEDO_A.

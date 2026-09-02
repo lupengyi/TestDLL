@@ -1,12 +1,12 @@
 [
   {
     "UniqueIndex": 0,
-    "Name": "RES",
+    "Name": "RES_1",
     "Type": "Other",
     "Mode": "NGI",
     "Resource": "TCPIP0::192.168.0.123::7000::SOCKET",
     "Parameter": "",
-    "Comment": "ProgramResistance",
+    "Comment": "程控电阻卡1；填写独立TCPIP或串口资源",
     "Initialize": false
   },
   {
@@ -14,10 +14,10 @@
     "Name": "DUTCAN",
     "Type": "CAN",
     "Mode": "ZLG",
-    "Resource": "192.166.6.10",
-    "Parameter": "52,2,500000,8000",
-    "Comment": "400U channel 2 main drive/product CAN",
-    "Initialize": true
+    "Resource": "",
+    "Parameter": "0,0,500000,0,0",
+    "Comment": "200U产品CAN；参数=设备类型,通道,波特率,端口,设备索引",
+    "Initialize": false
   },
   {
     "UniqueIndex": 2,
@@ -41,12 +41,12 @@
   },
   {
     "UniqueIndex": 4,
-    "Name": "DMM",
+    "Name": "DMM_HV",
     "Type": "DMM",
     "Mode": "Kewell",
     "Resource": "TCPIP0::A-34461A-00000.local::inst0::INSTR",
     "Parameter": "",
-    "Comment": "",
+    "Comment": "高压万用表",
     "Initialize": false
   },
   {
@@ -66,7 +66,7 @@
     "Mode": "SHT_48SEDO_A",
     "Resource": "192.168.0.125",
     "Parameter": "502,1",
-    "Comment": "HV 15-to-1 SHT relay board; placeholder IP is editable; OUT1 maps to channel 0",
+    "Comment": "15口高压继电器卡；与48口卡共用SHT协议；仅允许OUT1-OUT15",
     "Initialize": false
   },
   {
@@ -84,20 +84,20 @@
     "Name": "AUXCAN",
     "Type": "CAN",
     "Mode": "ZLG",
-    "Resource": "192.166.6.10",
-    "Parameter": "52,0,500000,8000",
-    "Comment": "400U channel 0 auxiliary/DBC CAN",
-    "Initialize": true
+    "Resource": "",
+    "Parameter": "0,0,500000,0,1",
+    "Comment": "200U辅驱/DBC CAN；参数=设备类型,通道,波特率,端口,设备索引",
+    "Initialize": false
   },
   {
     "UniqueIndex": 9,
     "Name": "RESOLVERCAN",
     "Type": "CAN",
     "Mode": "ZLG",
-    "Resource": "192.166.6.10",
-    "Parameter": "52,1,500000,8000",
-    "Comment": "400U channel 1 resolver CAN",
-    "Initialize": true
+    "Resource": "",
+    "Parameter": "0,0,500000,0,2",
+    "Comment": "200U旋变CAN；参数=设备类型,通道,波特率,端口,设备索引",
+    "Initialize": false
   },
   {
     "UniqueIndex": 10,
@@ -127,6 +127,36 @@
     "Resource": "",
     "Parameter": "",
     "Comment": "KL15 independent IT6xxxC low-voltage supply; configure its USB resource",
+    "Initialize": false
+  },
+  {
+    "UniqueIndex": 13,
+    "Name": "DMM_LV",
+    "Type": "DMM",
+    "Mode": "KeySight34461A",
+    "Resource": "",
+    "Parameter": "",
+    "Comment": "低压万用表；填写独立VISA资源",
+    "Initialize": false
+  },
+  {
+    "UniqueIndex": 14,
+    "Name": "RES_2",
+    "Type": "Other",
+    "Mode": "NGI",
+    "Resource": "",
+    "Parameter": "",
+    "Comment": "程控电阻卡2；填写独立TCPIP或串口资源",
+    "Initialize": false
+  },
+  {
+    "UniqueIndex": 15,
+    "Name": "RES_3",
+    "Type": "Other",
+    "Mode": "NGI",
+    "Resource": "",
+    "Parameter": "",
+    "Comment": "程控电阻卡3；填写独立TCPIP或串口资源",
     "Initialize": false
   }
 ]

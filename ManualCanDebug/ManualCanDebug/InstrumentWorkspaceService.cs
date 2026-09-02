@@ -294,9 +294,9 @@ namespace ManualCanDebug
             {
                 case "LVDC": case "LVDC_KL15": case "HVDC": return CategoryPower;
                 case "DUTCAN": case "AUXCAN": case "RESOLVERCAN": case "RESOLVER": case "PRODUCTCAN": return CategoryCommunication;
-                case "DMM": case "DAQ": return CategoryMeasurement;
+                case "DMM": case "DMM_HV": case "DMM_LV": case "DAQ": return CategoryMeasurement;
                 case "RELAY": case "RELAY_FCT": case "RELAY_HVMUX": return CategorySwitching;
-                case "DCDC_LOAD": case "RES": return CategoryLoad;
+                case "DCDC_LOAD": case "RES": case "RES_1": case "RES_2": case "RES_3": return CategoryLoad;
                 case "PLC": return CategoryController;
             }
             return ClassifyDriver(driverName, device);
@@ -545,8 +545,8 @@ namespace ManualCanDebug
                 case "DUTCAN": case "AUXCAN": case "RESOLVERCAN": return "Instruments.CAN.CANWrapper";
                 case "LVDC": case "LVDC_KL15": return "Instruments.PowerSupply.ITECH_IT6XXXC";
                 case "HVDC": return "Instruments.PowerSupply.Kewell_C3000";
-                case "DMM": return "Instruments.DMM.KeySight34461A";
-                case "RES": return "Instruments.Other.NGI_ProgramResistance";
+                case "DMM": case "DMM_HV": case "DMM_LV": return "Instruments.DMM.KeySight34461A";
+                case "RES": case "RES_1": case "RES_2": case "RES_3": return "Instruments.Other.NGI_ProgramResistance";
                 case "DAQ": return "NI-9227";
                 case "RELAY_FCT": case "RELAY_HVMUX": return "SHT_48SEDO_A";
                 case "DCDC_LOAD": return "Instruments.Load.AN23600E";
@@ -578,9 +578,9 @@ namespace ManualCanDebug
             return new List<Tuple<string, string, string>>
             {
                 Tuple.Create("DUTCAN", "DUTCAN", "Instruments.CAN.CANWrapper"), Tuple.Create("HVDC", "HVDC", "Instruments.PowerSupply.Kewell_C3000"),
-                Tuple.Create("DMM", "DMM", "Instruments.DMM.KeySight34461A"), Tuple.Create("DAQ", "DAQ", "NI-9227"),
+                Tuple.Create("DMM_HV", "高压万用表", "Instruments.DMM.KeySight34461A"), Tuple.Create("DMM_LV", "低压万用表", "Instruments.DMM.KeySight34461A"), Tuple.Create("DAQ", "DAQ", "NI-9227"),
                 Tuple.Create("RELAY_FCT", "RELAY_FCT", "SHT_48SEDO_A"), Tuple.Create("RELAY_HVMUX", "RELAY_HVMUX", "SHT_48SEDO_A"),
-                Tuple.Create("DCDC_LOAD", "DCDC_LOAD", "Instruments.Load.AN23600E"), Tuple.Create("RES", "RES", "Instruments.Other.NGI_ProgramResistance")
+                Tuple.Create("DCDC_LOAD", "DCDC_LOAD", "Instruments.Load.AN23600E"), Tuple.Create("RES_1", "程控电阻卡1", "Instruments.Other.NGI_ProgramResistance"), Tuple.Create("RES_2", "程控电阻卡2", "Instruments.Other.NGI_ProgramResistance"), Tuple.Create("RES_3", "程控电阻卡3", "Instruments.Other.NGI_ProgramResistance")
             };
         }
 

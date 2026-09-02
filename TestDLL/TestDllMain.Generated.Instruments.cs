@@ -99,6 +99,66 @@ namespace CSP
             FCT_ExecuteConfiguredAction(socketIndex, "DMM", "ConfigDCVoltage");
         }
 
+        public void UI_DMM_HV_Close(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "DMM_HV", "Close");
+        }
+
+        public void UI_DMM_HV_ConfigACCurrent(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "DMM_HV", "ConfigACCurrent");
+        }
+
+        public void UI_DMM_HV_ConfigACVoltage(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "DMM_HV", "ConfigACVoltage");
+        }
+
+        public void UI_DMM_HV_ConfigDCCurrent(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "DMM_HV", "ConfigDCCurrent");
+        }
+
+        public void UI_DMM_HV_ConfigDCVoltage(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "DMM_HV", "ConfigDCVoltage");
+        }
+
+        public void UI_DMM_HV_Read(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "DMM_HV", "Read");
+        }
+
+        public void UI_DMM_LV_Close(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "DMM_LV", "Close");
+        }
+
+        public void UI_DMM_LV_ConfigACCurrent(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "DMM_LV", "ConfigACCurrent");
+        }
+
+        public void UI_DMM_LV_ConfigACVoltage(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "DMM_LV", "ConfigACVoltage");
+        }
+
+        public void UI_DMM_LV_ConfigDCCurrent(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "DMM_LV", "ConfigDCCurrent");
+        }
+
+        public void UI_DMM_LV_ConfigDCVoltage(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "DMM_LV", "ConfigDCVoltage");
+        }
+
+        public void UI_DMM_LV_Read(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "DMM_LV", "Read");
+        }
+
         public void UI_DMM_Read(int socketIndex)
         {
             FCT_ExecuteConfiguredAction(socketIndex, "DMM", "Read");
@@ -207,6 +267,21 @@ namespace CSP
         public void UI_RELAY_HVMUX_Select15(int socketIndex)
         {
             FCT_ExecuteConfiguredAction(socketIndex, "RELAY_HVMUX", "Select15");
+        }
+
+        public void UI_RES_1_SetResistance(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "RES_1", "SetResistance");
+        }
+
+        public void UI_RES_2_SetResistance(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "RES_2", "SetResistance");
+        }
+
+        public void UI_RES_3_SetResistance(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "RES_3", "SetResistance");
         }
 
         public void UI_RES_SetResistance(int socketIndex)
