@@ -398,14 +398,14 @@ namespace CSP
             }
             if ((operation ?? string.Empty).Equals("Select15", StringComparison.OrdinalIgnoreCase))
             {
-                int selection = (int)FCT_InputDouble(socketIndex, "Selection", 1);
+                string selectionText = FCT_InputString(socketIndex, "Selection", "1"); string numberText = selectionText.Split(new[] { ' ', '-', '/', '：', ':' }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault(); int selection; if (!int.TryParse(numberText, NumberStyles.Integer, CultureInfo.InvariantCulture, out selection)) selection = (int)FCT_InputDouble(socketIndex, "Selection", 1);
                 if (selection < 1 || selection > 15) throw new ArgumentOutOfRangeException("Selection", "高压测量通道必须为1到15。");
                 // 48路板前6点构成锁存式15选1：OUT1..4=A0..A3, OUT5=E, OUT6=LE。
                 // 必须先禁止输出并解除锁存，再改地址，最后使能并锁存，避免切换瞬间误接通。
-                board.WriteDO("OUT5,OUT6", "1,0");
+                board.WriteDO("OUT5,OUT6", "1,1");
                 board.WriteDO("OUT1,OUT2,OUT3,OUT4", string.Join(",", Enumerable.Range(0, 4).Select(bit => (selection & (1 << bit)) != 0 ? "1" : "0")));
                 Thread.Sleep(Math.Max(20, (int)FCT_InputDouble(socketIndex, "SwitchDelayMs", 50)));
-                board.WriteDO("OUT5,OUT6", "0,1");
+                board.WriteDO("OUT5", "0");
                 return;
             }
             if ((operation ?? string.Empty).Equals("Disable15", StringComparison.OrdinalIgnoreCase))
