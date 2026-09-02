@@ -225,7 +225,7 @@ namespace CSP
                 case "DCDC_LOAD":
                     DcdcLoad = new AN23600E.Driver.An23600eDriver(resource, FCT_SelectedPort(parameter, 2101));
                     DcdcLoad.Connect();
-                    DcdcLoad.Session.CheckErrorsAfterCommand = true;
+                    DcdcLoad.Session.CheckErrorsAfterCommand = false;
                     DcdcLoad.ClearStatus();
                     DcdcLoad.LoadOff();
                     FCT_CanDiagnostic("AN23600E connected: " + DcdcLoad.GetIdentity());
@@ -259,8 +259,6 @@ namespace CSP
                 wrapper.DBC_ReadDBCTxt(dbcPath);
                 wrapper.SetValue("IP", actualIp);
                 wrapper.SetValue("PORT", port);
-                wrapper.SetValue("DEVICE_INDEX", deviceIndex);
-                wrapper.SetValue("DeviceIndex", deviceIndex);
                 wrapper.OpenCANDevice(deviceType, channel, baudRate);
                 FCT_CanDiagnostic("CAN open succeeded: DeviceType=" + deviceType + "; Channel=" + channel);
                 return wrapper;
