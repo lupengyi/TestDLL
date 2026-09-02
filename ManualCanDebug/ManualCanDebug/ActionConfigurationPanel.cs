@@ -120,11 +120,11 @@ namespace ManualCanDebug
             configured = null; string source = Convert.ToString(_source.SelectedItem, CultureInfo.InvariantCulture), target = Convert.ToString(_target.SelectedItem, CultureInfo.InvariantCulture), operation = Convert.ToString(_operation.SelectedItem, CultureInfo.InvariantCulture);
             if (source == "产品内部通信" && target == "FT/Locator内存" && _locatorSignals.Count > 0)
             {
-                ProductLocatorTable table = _tableBox == null ? null : _tableBox.SelectedItem as ProductLocatorTable; LocatorSignalConfigurationWindow dialog = new LocatorSignalConfigurationWindow(_locatorSignals, operation, table == null ? string.Empty : table.DisplayName) { Owner = owner }; if (dialog.ShowDialog() == true) configured = BuildStep(); return true;
+                ProductLocatorTable table = _tableBox == null ? null : _tableBox.SelectedItem as ProductLocatorTable; LocatorSignalConfigurationWindow dialog = new LocatorSignalConfigurationWindow(_locatorSignals, operation, table == null ? string.Empty : table.DisplayName, _stepName.Text) { Owner = owner }; if (dialog.ShowDialog() == true) { _stepName.Text = dialog.StepName; configured = BuildStep(); } return true;
             }
             if (source == "产品DBC通信" && _dbcSignals.Count > 0 && operation != "停止周期发送" && operation != "发送原始帧")
             {
-                DbcMessageDefinition message = _dbcMessage == null ? null : _dbcMessage.SelectedItem as DbcMessageDefinition; DbcSignalConfigurationWindow dialog = new DbcSignalConfigurationWindow(_dbcSignals, operation, message == null ? string.Empty : message.Name) { Owner = owner }; if (dialog.ShowDialog() == true) configured = BuildStep(); return true;
+                DbcMessageDefinition message = _dbcMessage == null ? null : _dbcMessage.SelectedItem as DbcMessageDefinition; DbcSignalConfigurationWindow dialog = new DbcSignalConfigurationWindow(_dbcSignals, operation, message == null ? string.Empty : message.Name, _stepName.Text) { Owner = owner }; if (dialog.ShowDialog() == true) { _stepName.Text = dialog.StepName; configured = BuildStep(); } return true;
             }
             return false;
         }
@@ -230,8 +230,8 @@ namespace ManualCanDebug
         private void OpenLocatorSignalConfiguration(object sender, RoutedEventArgs e)
         {
             string operation = Convert.ToString(_locatorOperation == null ? null : _locatorOperation.SelectedItem, CultureInfo.InvariantCulture); ProductLocatorTable table = _tableBox == null ? null : _tableBox.SelectedItem as ProductLocatorTable; if (table == null) { MessageBox.Show("请先选择Locator表。", "信号与判定配置", MessageBoxButton.OK, MessageBoxImage.Information); return; }
-            LocatorSignalConfigurationWindow dialog = new LocatorSignalConfigurationWindow(_locatorSignals, operation, table.DisplayName) { Owner = Window.GetWindow(this) };
-            if (dialog.ShowDialog() == true) { LocatorSignalRow selected = _locatorSignals.FirstOrDefault(value => value.Use) ?? _locatorSignals.FirstOrDefault(); if (_locatorGrid != null) _locatorGrid.SelectedItem = selected; UpdateLocatorSelectionSummary(); _status.Text = "已应用信号配置：" + _locatorSignals.Count(value => value.Use) + " 项"; _status.Foreground = Brushes.DarkGreen; }
+            LocatorSignalConfigurationWindow dialog = new LocatorSignalConfigurationWindow(_locatorSignals, operation, table.DisplayName, _stepName.Text) { Owner = Window.GetWindow(this) };
+            if (dialog.ShowDialog() == true) { _stepName.Text = dialog.StepName; LocatorSignalRow selected = _locatorSignals.FirstOrDefault(value => value.Use) ?? _locatorSignals.FirstOrDefault(); if (_locatorGrid != null) _locatorGrid.SelectedItem = selected; UpdateLocatorSelectionSummary(); _status.Text = "已应用信号配置：" + _locatorSignals.Count(value => value.Use) + " 项"; _status.Foreground = Brushes.DarkGreen; }
         }
         private UIElement BuildDbcPanel()
         {
@@ -246,8 +246,8 @@ namespace ManualCanDebug
         private void OpenDbcSignalConfiguration(object sender, RoutedEventArgs e)
         {
             DbcMessageDefinition message = _dbcMessage == null ? null : _dbcMessage.SelectedItem as DbcMessageDefinition; string mode = Convert.ToString(_dbcMode == null ? null : _dbcMode.SelectedItem, CultureInfo.InvariantCulture); if (message == null) { MessageBox.Show("请先选择DBC报文。", "DBC信号配置", MessageBoxButton.OK, MessageBoxImage.Information); return; }
-            DbcSignalConfigurationWindow dialog = new DbcSignalConfigurationWindow(_dbcSignals, mode, message.Name) { Owner = Window.GetWindow(this) };
-            if (dialog.ShowDialog() == true) { if (mode == "读取DBC信号") { DbcSignalEditRow selected = _dbcSignals.FirstOrDefault(value => value.Use); if (selected != null) _dbcReadSignal.SelectedItem = selected.Name; } UpdateRawDataFromDbcRows(); UpdateDbcSelectionSummary(); _status.Text = "已应用DBC信号配置"; _status.Foreground = Brushes.DarkGreen; }
+            DbcSignalConfigurationWindow dialog = new DbcSignalConfigurationWindow(_dbcSignals, mode, message.Name, _stepName.Text) { Owner = Window.GetWindow(this) };
+            if (dialog.ShowDialog() == true) { _stepName.Text = dialog.StepName; if (mode == "读取DBC信号") { DbcSignalEditRow selected = _dbcSignals.FirstOrDefault(value => value.Use); if (selected != null) _dbcReadSignal.SelectedItem = selected.Name; } UpdateRawDataFromDbcRows(); UpdateDbcSelectionSummary(); _status.Text = "已应用DBC信号配置"; _status.Foreground = Brushes.DarkGreen; }
         }
 
         private UIElement BuildResultPanel()
