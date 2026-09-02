@@ -139,8 +139,8 @@ namespace ManualCanDebug
             foreach (string source in new[] { "仪器", "产品内部通信", "产品DBC通信", "流程逻辑" })
             {
                 MenuItem sourceMenu = new MenuItem { Header = source };
-                IEnumerable<ActionDescriptor> descriptors = ActionCatalog.Descriptors.Where(value => string.Equals(value.Source, source, StringComparison.OrdinalIgnoreCase));
-                foreach (IGrouping<string, ActionDescriptor> group in descriptors.GroupBy(value => value.Target).OrderBy(value => value.Key, StringComparer.CurrentCulture))
+                IEnumerable<ActionDescriptor> descriptors = ActionCatalog.PickerDescriptors(source);
+                foreach (IGrouping<string, ActionDescriptor> group in descriptors.GroupBy(ActionCatalog.PickerTarget).OrderBy(value => value.Key, StringComparer.CurrentCulture))
                 {
                     MenuItem targetMenu = new MenuItem { Header = group.Key };
                     foreach (ActionDescriptor descriptor in group.OrderBy(value => value.DisplayName, StringComparer.CurrentCulture))
