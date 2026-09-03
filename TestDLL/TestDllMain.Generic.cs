@@ -655,6 +655,8 @@ namespace CSP
                 case "CONDITION":
                     FCT_RunCondition(socketIndex);
                     break;
+                case "LABEL":
+                    break;
                 case "SAFESHUTDOWN":
                     FCT_GenericSafeShutdown();
                     break;

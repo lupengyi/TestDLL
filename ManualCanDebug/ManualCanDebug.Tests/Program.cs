@@ -50,6 +50,7 @@ namespace ManualCanDebug.Tests
             Run("Generic STEP catalog covers core instruments", GenericStepCatalogCoversCoreInstruments);
             Run("Studio validator rejects broken loop targets", StudioValidatorRejectsBrokenLoopTargets);
             Run("Allows repeated non-jump STEP names", AllowsRepeatedNonJumpStepNames);
+            Run("Compiles structured IF ELSE ENDIF", CompilesStructuredIfElseEndIf);
             Run("Compiles block parameter expressions", CompilesBlockParameterExpressions);
             Run("Builds DUT communication init frame", BuildsDutCommunicationInitFrame);
             Run("Builds product communication test frame", BuildsProductCommunicationTestFrame);
@@ -269,6 +270,27 @@ namespace ManualCanDebug.Tests
         private static BlockStepDefinition RelayIoStep(string name, string channels, string values)
         {
             return new BlockStepDefinition { StepProperties = new Dictionary<string, object> { { "StepName", name }, { "FunctionName", "FCT_ExecuteAction" }, { "RunMode", "Normal" }, { "RecordingLog", true }, { "Device", "RELAY_FCT" }, { "Operation", "SetDO" }, { "ResultMode", "Action" }, { "Channels", channels }, { "Values", values }, { "Slave", 1 } } };
+        }
+
+        private static void CompilesStructuredIfElseEndIf()
+        {
+            FunctionBlockDefinition block = new FunctionBlockDefinition { Name = "Logic" };
+            block.Steps.Add(LogicStep("IF 母线电压 > 100", "Condition", "IF", new Dictionary<string, object> { { "VariableName", "母线电压" }, { "DataType", "Number" }, { "Compare", "GT" }, { "RightValue", "100" }, { "FalseGoto", "ELSE_BODY" } }));
+            block.Steps.Add(LogicStep("True action", "Delay", string.Empty, new Dictionary<string, object> { { "TimeMs", 1 } }));
+            block.Steps.Add(LogicStep("ELSE", "Goto", "ELSE", new Dictionary<string, object> { { "TargetStepName", "ENDIF" } }));
+            block.Steps.Add(LogicStep("ELSE_BODY", "Label", "ELSE_BODY", null));
+            block.Steps.Add(LogicStep("False action", "Delay", string.Empty, new Dictionary<string, object> { { "TimeMs", 1 } }));
+            block.Steps.Add(LogicStep("ENDIF", "Label", "ENDIF", null));
+            FctStudioProject project = new FctStudioProject(); project.Blocks.Add(block); project.Flow.Add(new FlowBlockInstance { BlockId = block.Id, DisplayName = block.Name, Snapshot = block.Clone() });
+            FctStudioCompileResult compiled = FctStudioCompiler.Compile(project);
+            Assert(compiled.Document.Steps.Count == 6, "structured IF did not preserve executable markers");
+            Assert(compiled.Document.Steps.All(step => !step.Properties.ContainsKey("StructureRole") && !step.Properties.ContainsKey("StructureId")), "structured editor metadata leaked into SEQ");
+            Assert(compiled.Document.Steps.Any(step => Convert.ToString(step.Get("Operation"), CultureInfo.InvariantCulture) == "Label"), "ENDIF label was not compiled");
+        }
+
+        private static BlockStepDefinition LogicStep(string name, string operation, string role, IDictionary<string, object> extras)
+        {
+            Dictionary<string, object> values = new Dictionary<string, object> { { "StepName", name }, { "RunMode", "Normal" }, { "FunctionName", "FCT_ExecuteLogic" }, { "RecordingLog", true }, { "Operation", operation } }; if (!string.IsNullOrWhiteSpace(role)) { values["StructureRole"] = role; values["StructureId"] = "probe"; } foreach (KeyValuePair<string, object> pair in extras ?? new Dictionary<string, object>()) values[pair.Key] = pair.Value; return new BlockStepDefinition { StepProperties = values };
         }
 
         private static void EvaluatesDirectWriteValueFormulas()
