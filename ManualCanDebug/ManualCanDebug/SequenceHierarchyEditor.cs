@@ -450,12 +450,33 @@ namespace ManualCanDebug
         internal static string ActionSummary(SequenceStepDefinition step)
         {
             string device = Convert.ToString(step.Get("Device", string.Empty), CultureInfo.InvariantCulture), operation = Convert.ToString(step.Get("Operation", string.Empty), CultureInfo.InvariantCulture);
-            if ((device == "RELAY_FCT" || device == "RELAY_HVMUX") && operation == "SetDO") { string channels = Convert.ToString(step.Get("Channels", string.Empty), CultureInfo.InvariantCulture); int count = channels.Split(new[] { ',', ';', '|' }, StringSplitOptions.RemoveEmptyEntries).Length; return count > 0 ? "设置继电器IO（已选" + count.ToString(CultureInfo.InvariantCulture) + "路）" : "设置继电器IO"; }
+            if (device == "RELAY_FCT" || device == "RELAY_HVMUX")
+            {
+                if (operation == "SetDO") return RelayIoSummary(Convert.ToString(step.Get("Channels", string.Empty), CultureInfo.InvariantCulture), Convert.ToString(step.Get("Values", string.Empty), CultureInfo.InvariantCulture));
+                if (operation == "SelectFctMux") return "选择FCT测试功能";
+                if (operation == "DisableFctMux") return "关闭FCT测试选择";
+                if (operation == "Select15") return "选择高压测量通道";
+                if (operation == "Disable15") return "关闭高压测量通道";
+            }
             ActionDescriptor descriptor = ActionCatalog.Find("仪器", device, operation, step.FunctionName); if (descriptor != null) return "执行：" + descriptor.DisplayName;
             if (step.FunctionName == "FCT_CANSignal") return operation.Equals("Write", StringComparison.OrdinalIgnoreCase) ? "写入产品信号" : "读取产品信号";
             if (step.FunctionName == "FCT_CANTable") return operation.Equals("Write", StringComparison.OrdinalIgnoreCase) ? "写入产品数据表" : "读取产品数据表";
             if (step.FunctionName == "FCT_ExecuteLogic") return operation == "SafeShutdown" ? "执行安全下电" : operation == "Stop" ? "停止流程" : string.IsNullOrWhiteSpace(operation) ? "执行流程逻辑" : "执行逻辑：" + operation;
             return string.IsNullOrWhiteSpace(operation) ? "执行该动作" : "执行：" + operation;
+        }
+        private static string RelayIoSummary(string channelsText, string valuesText)
+        {
+            string[] channels = (channelsText ?? string.Empty).Split(new[] { ',', ';', '|' }, StringSplitOptions.RemoveEmptyEntries).Select(value => value.Trim()).ToArray(), values = (valuesText ?? string.Empty).Split(new[] { ',', ';', '|' }, StringSplitOptions.RemoveEmptyEntries).Select(value => value.Trim() == "1" ? "1" : "0").ToArray(); int count = Math.Min(channels.Length, values.Length); if (count == 0) return "设置继电器IO";
+            List<Tuple<string, string>> settings = new List<Tuple<string, string>>(); for (int index = 0; index < count; index++) settings.Add(Tuple.Create(ToBoardPort(channels[index]), values[index]));
+            if (count > 6)
+            {
+                int on = settings.Count(value => value.Item2 == "1"), off = count - on; if (on == 0 || off == 0) return "设置" + count.ToString(CultureInfo.InvariantCulture) + "路：全部=" + (on == 0 ? "0" : "1"); return "设置" + count.ToString(CultureInfo.InvariantCulture) + "路：1=" + on.ToString(CultureInfo.InvariantCulture) + "路，0=" + off.ToString(CultureInfo.InvariantCulture) + "路";
+            }
+            return string.Join("；", settings.GroupBy(value => value.Item2).Select(group => string.Join("、", group.Select(value => value.Item1)) + "=" + group.Key));
+        }
+        private static string ToBoardPort(string channel)
+        {
+            string text = (channel ?? string.Empty).Trim().ToUpperInvariant(); int number; if (text.StartsWith("OUT", StringComparison.Ordinal) && int.TryParse(text.Substring(3), NumberStyles.Integer, CultureInfo.InvariantCulture, out number) && number > 0) return "Y" + Convert.ToString(number - 1, 8).PadLeft(2, '0'); return text;
         }
         private static string FriendlyType(SequenceStepDefinition step) { string operation = Convert.ToString(step.Get("Operation", string.Empty), CultureInfo.InvariantCulture); if (operation == "Delay" || step.StepName.IndexOf("等待", StringComparison.OrdinalIgnoreCase) >= 0) return "等待"; if (step.Properties.ContainsKey("LowLimit") || step.Properties.ContainsKey("HighLimit") || step.Properties.ContainsKey("SignalChecksJson")) return "测量"; if (step.FunctionName == "FCT_ExecuteLogic") return "逻辑"; if (step.FunctionName == "FCT_CANTable" || step.FunctionName == "FCT_CANSignal") return "产品"; return "动作"; }
         private static string IconFor(SequenceStepDefinition step) { string type = FriendlyType(step); return type == "等待" ? "\uE916" : type == "测量" ? "\uE9D2" : type == "逻辑" ? "\uE8F2" : type == "产品" ? "\uE968" : "\uE768"; }
