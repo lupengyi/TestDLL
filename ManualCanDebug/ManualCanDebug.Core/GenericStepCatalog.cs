@@ -13,8 +13,9 @@ namespace ManualCanDebug.Core
             AddRead(steps, "LVDC 读取电压", "LVDC", "ReadVoltage", "V"); AddRead(steps, "LVDC 读取电流", "LVDC", "ReadCurrent", "A");
             Add(steps, "HVDC 设置电压", "HVDC", "SetVoltage", new Dictionary<string, object> { { "Voltage", 600.0 } });
             Add(steps, "HVDC 设置电流", "HVDC", "SetCurrent", new Dictionary<string, object> { { "Current", 5.0 } });
+            Add(steps, "HVDC 设置功率", "HVDC", "SetPower", new Dictionary<string, object> { { "Power", 8600.0 } });
             Add(steps, "HVDC 输出开关", "HVDC", "SetOutput", new Dictionary<string, object> { { "Output", true } });
-            AddRead(steps, "HVDC 读取电压", "HVDC", "ReadVoltage", "V"); AddRead(steps, "HVDC 读取电流", "HVDC", "ReadCurrent", "A");
+            AddRead(steps, "HVDC 读取电压", "HVDC", "ReadVoltage", "V"); AddRead(steps, "HVDC 读取电流", "HVDC", "ReadCurrent", "A"); AddRead(steps, "HVDC 读取功率", "HVDC", "ReadPower", "W");
             Add(steps, "DMM 配置直流电压", "DMM", "ConfigDCVoltage", new Dictionary<string, object> { { "Range", 1000.0 }, { "Solution", 0.01 } });
             Add(steps, "DMM 配置直流电流", "DMM", "ConfigDCCurrent", new Dictionary<string, object> { { "Range", 3.0 }, { "Solution", 0.00001 } });
             AddRead(steps, "DMM 读取", "DMM", "Read", string.Empty);

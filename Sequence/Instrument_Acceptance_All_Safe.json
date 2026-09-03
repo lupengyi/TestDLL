@@ -21,9 +21,10 @@
     { "StepName": "12-KL15读取电流", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "LVDC_KL15", "Operation": "ReadCurrent", "ResultMode": "Information", "Unit": "A" },
 
     { "StepName": "13-高压源设置0V", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "HVDC", "Operation": "SetVoltage", "Voltage": 0, "ResultMode": "Action" },
-    { "StepName": "14-高压源确认输出关闭", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "HVDC", "Operation": "SetOutput", "Output": false, "ResultMode": "Action" },
-    { "StepName": "15-高压源读取电压", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "HVDC", "Operation": "ReadVoltage", "ResultMode": "Information", "Unit": "V" },
-    { "StepName": "16-高压源读取电流", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "HVDC", "Operation": "ReadCurrent", "ResultMode": "Information", "Unit": "A" },
+    { "StepName": "14-高压源设置限流5A", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "HVDC", "Operation": "SetCurrent", "Current": 5, "ResultMode": "Action" },
+    { "StepName": "15-高压源确认输出关闭", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "HVDC", "Operation": "SetOutput", "Output": false, "ResultMode": "Action" },
+    { "StepName": "16-高压源读取电压", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "HVDC", "Operation": "ReadVoltage", "ResultMode": "Information", "Unit": "V" },
+    { "StepName": "17-高压源读取电流", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "HVDC", "Operation": "ReadCurrent", "ResultMode": "Information", "Unit": "A" },
 
     { "StepName": "17-高压万用表配置直流电压", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "DMM_HV", "Operation": "ConfigDCVoltage", "Range": 1000, "Solution": 0.01, "ResultMode": "Action" },
     { "StepName": "18-高压万用表读取", "RunMode": "Normal", "FunctionName": "FCT_ExecuteAction", "RecordingLog": true, "Device": "DMM_HV", "Operation": "Read", "ResultMode": "Information", "Unit": "V" },

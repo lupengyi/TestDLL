@@ -214,7 +214,12 @@ namespace CSP
                 case "RES_3": RES_3.ConnectDevice(resource, parameter); RES_3.SetResistance(1100, 1); RES_3.SetResistance(1100, 2); break;
                 case "LVDC": LVDC.ConnectDevice(resource, parameter); LVDC.SetOutput(false); break;
                 case "LVDC_KL15": LVDC_KL15.ConnectDevice(resource, parameter); LVDC_KL15.SetOutput(false); break;
-                case "HVDC": HVDC.ConnectDevice(resource, parameter); HVDC.SetSourceVoltage(0); break;
+                case "HVDC":
+                    HVDC.ConnectDevice(resource, parameter);
+                    FCT_KewellEnsureSourceCvMode(HVDC, null, soft: true);
+                    FCT_KewellSetOutput(HVDC, false, null);
+                    try { HVDC.SetSourceVoltage(0); } catch { }
+                    break;
                 case "DMM": case "DMM_HV": DMM.OpenSession(resource); DMM.InitDMM(); DMM.ConfigDMMforDC(1000, 0.01); break;
                 case "DMM_LV": DMM_LV.OpenSession(resource); DMM_LV.InitDMM(); DMM_LV.ConfigDMMforDC(100, 0.001); break;
                 case "RELAY": Relay.connect(resource, FCT_SelectedPort(parameter, 502)); break;
@@ -355,7 +360,13 @@ namespace CSP
             if (load == null || !load.IsConnected) throw new InvalidOperationException("DCDC_LOAD is not initialized.");
             switch ((operation ?? string.Empty).Trim().ToUpperInvariant())
             {
-                case "SETMODE": load.SetMode((AN23600E.Driver.Enums.LoadMode)Enum.Parse(typeof(AN23600E.Driver.Enums.LoadMode), FCT_InputString(socketIndex, "Mode", "Ccm"), true)); return null;
+                case "SETMODE":
+                {
+                    string modeText = FCT_InputString(socketIndex, "Mode", "Ccm");
+                    string modeCode = ResolveDcdcLoadModeCode(modeText);
+                    load.SetMode((AN23600E.Driver.Enums.LoadMode)Enum.Parse(typeof(AN23600E.Driver.Enums.LoadMode), string.IsNullOrWhiteSpace(modeCode) ? "Ccm" : modeCode, true));
+                    return null;
+                }
                 case "SETCURRENT": load.SetStaticCurrent(FCT_InputDouble(socketIndex, "Current", 0)); return null;
                 case "SETVOLTAGE": load.SetStaticVoltage(FCT_InputDouble(socketIndex, "Voltage", 0)); return null;
                 case "SETRESISTANCE": load.SetStaticResistance(FCT_InputDouble(socketIndex, "Resistance", 1)); return null;
@@ -369,6 +380,33 @@ namespace CSP
                 case "CLEARPROTECTION": load.LoadOff(); load.ClearProtection(); return null;
                 case "RESET": load.LoadOff(); load.Reset(); return null;
                 default: throw new InvalidOperationException("Unsupported DCDC_LOAD operation: " + operation);
+            }
+        }
+
+        private static string ResolveDcdcLoadModeCode(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text)) return "Ccm";
+            string value = text.Trim();
+            int separator = value.IndexOf(" - ", StringComparison.Ordinal);
+            if (separator > 0) value = value.Substring(0, separator).Trim();
+            string key = value.Replace("（", "").Replace("）", "").Replace("(", "").Replace(")", "").Replace("·", " ").Replace("　", " ");
+            while (key.Contains("  ")) key = key.Replace("  ", " ");
+            key = key.Trim().ToUpperInvariant();
+            switch (key)
+            {
+                case "CCL": case "CC L": case "CC低": case "CC 低": case "CC低量程": case "CC 低量程": return "Ccl";
+                case "CCM": case "CC M": case "CC中": case "CC 中": case "CC中量程": case "CC 中量程": return "Ccm";
+                case "CCH": case "CC H": case "CC高": case "CC 高": case "CC高量程": case "CC 高量程": return "Cch";
+                case "CVL": case "CV L": case "CV低": case "CV 低": case "CV低量程": case "CV 低量程": return "Cvl";
+                case "CVM": case "CV M": case "CV中": case "CV 中": case "CV中量程": case "CV 中量程": return "Cvm";
+                case "CVH": case "CV H": case "CV高": case "CV 高": case "CV高量程": case "CV 高量程": return "Cvh";
+                case "CRL": case "CR L": case "CR低": case "CR 低": case "CR低量程": case "CR 低量程": return "Crl";
+                case "CRM": case "CR M": case "CR中": case "CR 中": case "CR中量程": case "CR 中量程": return "Crm";
+                case "CRH": case "CR H": case "CR高": case "CR 高": case "CR高量程": case "CR 高量程": return "Crh";
+                case "CPL": case "CP L": case "CP低": case "CP 低": case "CP低量程": case "CP 低量程": return "Cpl";
+                case "CPM": case "CP M": case "CP中": case "CP 中": case "CP中量程": case "CP 中量程": return "Cpm";
+                case "CPH": case "CP H": case "CP高": case "CP 高": case "CP高量程": case "CP 高量程": return "Cph";
+                default: return value;
             }
         }
 
@@ -660,13 +698,148 @@ namespace CSP
             if (supply == null) throw new InvalidOperationException("高压电源在当前工位没有实例。请在仪器中心为该工位分配并填写连接资源。");
             switch (operation.ToUpperInvariant())
             {
-                case "SETVOLTAGE": supply.SetSourceVoltage(FCT_InputDouble(socketIndex, "Voltage", 0)); return null;
-                case "SETCURRENT": supply.SetSourceCurrent(FCT_InputDouble(socketIndex, "Current", FCT_InputDouble(socketIndex, "SourceCurrent", 0))); return null;
-                case "SETOUTPUT": supply.SetOutput(FCT_InputBool(socketIndex, "Output", false)); return null;
-                case "READVOLTAGE": double voltage; supply.GetActPower(out voltage); return voltage;
-                case "READCURRENT": double current; supply.GetActCurrent(out current); return current;
+                case "SETVOLTAGE":
+                {
+                    // Kewell holding 0x07D0: Source/CV(0) vs Load(20). Prefer Source before voltage write.
+                    FCT_KewellEnsureSourceCvMode(supply, socketIndex, soft: true);
+                    double setVoltage = FCT_InputDouble(socketIndex, "Voltage", FCT_InputDouble(socketIndex, "SourceVoltage", 0));
+                    supply.SetSourceVoltage(setVoltage);
+                    Thread.Sleep(300);
+                    double setting;
+                    bool readOk = false;
+                    try
+                    {
+                        supply.GetSettingVoltage(out setting);
+                        readOk = setting > -900;
+                    }
+                    catch (Exception ex)
+                    {
+                        setting = double.NaN;
+                        FCT_Log(socketIndex, "HVDC GetSettingVoltage failed: " + ex.Message);
+                    }
+                    if (readOk && Math.Abs(setting - setVoltage) > Math.Max(1.0, Math.Abs(setVoltage) * 0.1 + 0.2))
+                    {
+                        FCT_Log(socketIndex, "HVDC voltage mismatch after first write: requested=" + setVoltage.ToString(CultureInfo.InvariantCulture) + "V readback=" + setting.ToString(CultureInfo.InvariantCulture) + "V; retrying");
+                        FCT_KewellEnsureSourceCvMode(supply, socketIndex, soft: true);
+                        supply.SetSourceVoltage(setVoltage);
+                        Thread.Sleep(300);
+                        try
+                        {
+                            supply.GetSettingVoltage(out setting);
+                            readOk = setting > -900;
+                        }
+                        catch (Exception ex)
+                        {
+                            readOk = false;
+                            FCT_Log(socketIndex, "HVDC GetSettingVoltage retry failed: " + ex.Message);
+                        }
+                    }
+                    if (readOk)
+                        FCT_Log(socketIndex, "HVDC setpoint voltage=" + setting.ToString(CultureInfo.InvariantCulture) + "V (requested " + setVoltage.ToString(CultureInfo.InvariantCulture) + "V)");
+                    else
+                        FCT_Log(socketIndex, "HVDC SetSourceVoltage sent " + setVoltage.ToString(CultureInfo.InvariantCulture) + "V (setpoint readback unavailable; check front-panel Remote/CV)");
+                    return null;
+                }
+                case "SETCURRENT":
+                {
+                    FCT_KewellEnsureSourceCvMode(supply, socketIndex, soft: true);
+                    double setCurrent = FCT_InputDouble(socketIndex, "Current", FCT_InputDouble(socketIndex, "SourceCurrent", 0));
+                    supply.SetSourceCurrent(setCurrent);
+                    Thread.Sleep(200);
+                    try
+                    {
+                        double setting;
+                        supply.GetSettingCurrent(out setting);
+                        FCT_Log(socketIndex, "HVDC current limit=" + setting.ToString(CultureInfo.InvariantCulture) + "A (requested " + setCurrent.ToString(CultureInfo.InvariantCulture) + "A)");
+                    }
+                    catch (Exception ex) { FCT_Log(socketIndex, "HVDC GetSettingCurrent failed: " + ex.Message); }
+                    return null;
+                }
+                case "SETPOWER":
+                {
+                    FCT_KewellEnsureSourceCvMode(supply, socketIndex, soft: true);
+                    double setPower = FCT_InputDouble(socketIndex, "Power", FCT_InputDouble(socketIndex, "SourcePower", 0));
+                    supply.SetSourcePower(setPower);
+                    Thread.Sleep(200);
+                    try
+                    {
+                        double setting;
+                        supply.GetSettingPower(out setting);
+                        FCT_Log(socketIndex, "HVDC power limit=" + setting.ToString(CultureInfo.InvariantCulture) + "W (requested " + setPower.ToString(CultureInfo.InvariantCulture) + "W)");
+                    }
+                    catch (Exception ex) { FCT_Log(socketIndex, "HVDC GetSettingPower failed: " + ex.Message); }
+                    return null;
+                }
+                case "SETOUTPUT":
+                {
+                    FCT_KewellEnsureSourceCvMode(supply, socketIndex, soft: true);
+                    bool output = FCT_InputBool(socketIndex, "Output", false);
+                    if (output)
+                    {
+                        try
+                        {
+                            double iLimit;
+                            supply.GetSettingCurrent(out iLimit);
+                            if (iLimit > -900 && iLimit < 0.05)
+                                FCT_Log(socketIndex, "HVDC warning: current limit≈" + iLimit.ToString(CultureInfo.InvariantCulture) + "A before Output ON — set Current first if output stays 0V");
+                        }
+                        catch { }
+                    }
+                    // Output is holding 0x07D1 only. Do not rewrite mode after Output ON —
+                    // some firmwares drop the output latch when 0x07D0 is written again.
+                    supply.SetOutput(output);
+                    if (output) Thread.Sleep(300);
+                    FCT_Log(socketIndex, "HVDC output=" + (output ? "ON" : "OFF"));
+                    return null;
+                }
+                case "READVOLTAGE":
+                    double voltage;
+                    supply.GetActVoltage(out voltage);
+                    return voltage;
+                case "READCURRENT":
+                    double current;
+                    supply.GetActCurrent(out current);
+                    return current;
+                case "READPOWER":
+                    double power;
+                    supply.GetActPower(out power);
+                    return power;
                 default: throw new InvalidOperationException("Unsupported HVDC operation: " + operation);
             }
+        }
+
+        /// <summary>
+        /// Kewell holding 0x07D0: 0=Source/CV, 20=Load. Voltage setpoint only applies in Source/CV.
+        /// </summary>
+        private void FCT_KewellEnsureSourceCvMode(Instruments.PowerSupply.Kewell_C3000 supply, int? socketIndex, bool soft = false)
+        {
+            if (supply == null) throw new InvalidOperationException("HVDC instance is null.");
+            try
+            {
+                supply.SetSourceOrLoadMode(true);
+                Thread.Sleep(250);
+                if (socketIndex.HasValue) FCT_Log(socketIndex.Value, "HVDC SetSourceOrLoadMode(Source/CV)");
+            }
+            catch (Exception ex)
+            {
+                if (soft)
+                {
+                    if (socketIndex.HasValue) FCT_Log(socketIndex.Value, "HVDC SetSourceOrLoadMode soft-fail: " + ex.Message);
+                    return;
+                }
+                throw new InvalidOperationException("高压源切换恒压(Source/CV)模式失败：" + ex.Message, ex);
+            }
+        }
+
+        private void FCT_KewellSetOutput(Instruments.PowerSupply.Kewell_C3000 supply, bool on, int? socketIndex)
+        {
+            if (supply == null) throw new InvalidOperationException("HVDC instance is null.");
+            FCT_KewellEnsureSourceCvMode(supply, socketIndex, soft: true);
+            supply.SetOutput(on);
+            if (on) Thread.Sleep(200);
+            // Do not rewrite Source/CV after Output ON — keeps the output latch stable.
+            if (!on) FCT_KewellEnsureSourceCvMode(supply, socketIndex, soft: true);
+            if (socketIndex.HasValue) FCT_Log(socketIndex.Value, "HVDC output=" + (on ? "ON" : "OFF"));
         }
 
         private object FCT_Dmm(int socketIndex, string operation) { return FCT_Dmm(socketIndex, operation, DMM); }
@@ -1039,7 +1212,26 @@ namespace CSP
             try { return MySequenceManage.GetInputDoubleValue(socketIndex, name); }
             catch { return defaultValue; }
         }
-        private bool FCT_InputBool(int socketIndex, string name, bool defaultValue) { try { return MySequenceManage.GetInputBoolValue(socketIndex, name); } catch { return defaultValue; } }
+        private bool FCT_InputBool(int socketIndex, string name, bool defaultValue)
+        {
+            try { return MySequenceManage.GetInputBoolValue(socketIndex, name); }
+            catch
+            {
+                try
+                {
+                    string text = MySequenceManage.GetInputStringValue(socketIndex, name);
+                    if (string.IsNullOrWhiteSpace(text)) return defaultValue;
+                    bool parsed;
+                    if (bool.TryParse(text, out parsed)) return parsed;
+                    if (text == "1" || text.Equals("ON", StringComparison.OrdinalIgnoreCase) || text.Equals("YES", StringComparison.OrdinalIgnoreCase)) return true;
+                    if (text == "0" || text.Equals("OFF", StringComparison.OrdinalIgnoreCase) || text.Equals("NO", StringComparison.OrdinalIgnoreCase)) return false;
+                    double number;
+                    if (double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out number)) return Math.Abs(number) > double.Epsilon;
+                }
+                catch { }
+                return defaultValue;
+            }
+        }
         private Dictionary<string, object> FCT_Variables(int socketIndex) { Dictionary<string, object> values; if (!_fctVariables.TryGetValue(socketIndex, out values)) _fctVariables[socketIndex] = values = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase); return values; }
         private Dictionary<string, int> FCT_Loops(int socketIndex) { Dictionary<string, int> values; if (!_fctLoopCounters.TryGetValue(socketIndex, out values)) _fctLoopCounters[socketIndex] = values = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase); return values; }
         private void FCT_SetVariable(int socketIndex, string name, object value) { if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("VariableName is required."); FCT_Variables(socketIndex)[name] = value; }
@@ -1048,7 +1240,7 @@ namespace CSP
         private void FCT_GenericSafeShutdown()
         {
             FCT_StopAllAuxPeriodic();
-            try { HVDC.SetSourceVoltage(0); } catch { } try { HVDC.SetOutput(false); } catch { } try { LVDC.SetOutput(false); } catch { } try { LVDC_KL15.SetOutput(false); } catch { }
+            try { HVDC.SetSourceVoltage(0); } catch { } try { FCT_KewellSetOutput(HVDC, false, null); } catch { } try { LVDC.SetOutput(false); } catch { } try { LVDC_KL15.SetOutput(false); } catch { }
             try { Resolver.DBC_SendSignalValue("2505419280_Speed", 0, true); } catch { }
             try { if (_fctAuxCan != null) _fctAuxCan.CloseCANDevice(); } catch { } _fctAuxCan = null;
             try { RelayFctBoard.WriteDO("0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15", "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"); } catch { }

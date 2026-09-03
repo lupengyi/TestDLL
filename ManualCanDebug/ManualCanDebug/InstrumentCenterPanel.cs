@@ -467,12 +467,20 @@ namespace ManualCanDebug
 
         public async Task InitializeSelectedAsync()
         {
-            _configGrid.CommitEdit(DataGridEditingUnit.Cell, true);
-            _configGrid.CommitEdit(DataGridEditingUnit.Row, true);
-            List<InstrumentConfigRow> selected = _configRows.Where(row => row.Initialize).ToList();
-            if (selected.Count == 0) throw new InvalidOperationException("请先在仪器中心勾选至少一个需要初始化的仪器。");
-            JArray payload = new JArray(selected.Select(row => new JObject { ["Name"] = row.Name, ["Type"] = row.Type, ["Mode"] = row.Mode, ["Resource"] = row.Resource, ["Parameter"] = row.Parameter }));
-            await _initializeSelected(payload.ToString(Newtonsoft.Json.Formatting.None));
+            try
+            {
+                _configGrid.CommitEdit(DataGridEditingUnit.Cell, true);
+                _configGrid.CommitEdit(DataGridEditingUnit.Row, true);
+                List<InstrumentConfigRow> selected = _configRows.Where(row => row.Initialize).ToList();
+                if (selected.Count == 0) throw new InvalidOperationException("请先在仪器中心勾选至少一个需要初始化的仪器。");
+                JArray payload = new JArray(selected.Select(row => new JObject { ["Name"] = row.Name, ["Type"] = row.Type, ["Mode"] = row.Mode, ["Resource"] = row.Resource, ["Parameter"] = row.Parameter }));
+                await _initializeSelected(payload.ToString(Newtonsoft.Json.Formatting.None));
+            }
+            catch (Exception ex)
+            {
+                _log("初始化已勾选仪器失败：" + ex.Message);
+                MessageBox.Show("初始化已勾选仪器失败：\n" + ex.Message, "仪器中心", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         public void SetInitializedInstruments(IEnumerable<string> names)

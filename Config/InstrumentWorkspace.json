@@ -75,7 +75,7 @@
       "Device": "HVDC",
       "DisplayName": "HVDC",
       "DriverName": "Instruments.PowerSupply.Kewell_C3000",
-      "Resource": "TCPIP0::192.168.0.122::502::SOCKET",
+      "Resource": "TCPIP0::192.168.1.13::502::SOCKET",
       "Parameter": "",
       "Usage": "Independent",
       "ChannelCount": 1,
@@ -133,6 +133,29 @@
         },
         {
           "Device": "HVDC",
+          "Operation": "SetPower",
+          "DriverMethod": "SetSourcePower",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": false,
+          "Selected": true,
+          "DisplayName": "设置功率",
+          "FunctionName": "UI_HVDC_SetPower",
+          "Fields": [
+            {
+              "Name": "Power",
+              "Label": "功率限制",
+              "Type": "double",
+              "DefaultValue": "8600",
+              "Unit": "W",
+              "Options": ""
+            }
+          ],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "HVDC",
           "Operation": "SetOutput",
           "DriverMethod": "SetOutput",
           "DriverAssemblyPath": null,
@@ -179,6 +202,20 @@
           "Selected": true,
           "DisplayName": "读取电流",
           "FunctionName": "UI_HVDC_ReadCurrent",
+          "Fields": [],
+          "ResultText": "生成成功"
+        },
+        {
+          "Device": "HVDC",
+          "Operation": "ReadPower",
+          "DriverMethod": "GetActPower",
+          "DriverAssemblyPath": null,
+          "DriverTypeName": null,
+          "UseDirectReflection": false,
+          "ReturnsValue": true,
+          "Selected": true,
+          "DisplayName": "读取功率",
+          "FunctionName": "UI_HVDC_ReadPower",
           "Fields": [],
           "ResultText": "生成成功"
         }
@@ -723,7 +760,7 @@
               "Type": "string",
               "DefaultValue": "Ccm",
               "Unit": "",
-              "Options": "Ccl|Ccm|Cch|Cvl|Cvm|Cvh|Crl|Crm|Crh|Cpl|Cpm|Cph"
+              "Options": "CC 低量程 - 恒流：小电流精细加载|CC 中量程 - 恒流：常用恒流加载|CC 高量程 - 恒流：大电流加载|CV 低量程 - 恒压：低压精细控制|CV 中量程 - 恒压：常用恒压加载|CV 高量程 - 恒压：高压加载|CR 低量程 - 恒阻：模拟小电阻负载|CR 中量程 - 恒阻：模拟中等电阻|CR 高量程 - 恒阻：模拟大电阻|CP 低量程 - 恒功率：小功率加载|CP 中量程 - 恒功率：常用恒功率|CP 高量程 - 恒功率：大功率加载"
             }
           ],
           "ResultText": "生成成功"
@@ -1201,7 +1238,7 @@
         {
           "TemplateDevice": "HVDC",
           "InstanceName": "HVDC-01",
-          "Resource": "TCPIP0::192.168.0.122::502::SOCKET",
+          "Resource": "TCPIP0::192.168.1.13::502::SOCKET",
           "Parameter": null,
           "Enabled": true
         },

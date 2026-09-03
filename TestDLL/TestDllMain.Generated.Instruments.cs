@@ -179,6 +179,11 @@ namespace CSP
             FCT_ExecuteConfiguredAction(socketIndex, "HVDC", "SetCurrent");
         }
 
+        public void UI_HVDC_SetPower(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "HVDC", "SetPower");
+        }
+
         public void UI_HVDC_SetOutput(int socketIndex)
         {
             FCT_ExecuteConfiguredAction(socketIndex, "HVDC", "SetOutput");
@@ -187,6 +192,11 @@ namespace CSP
         public void UI_HVDC_SetVoltage(int socketIndex)
         {
             FCT_ExecuteConfiguredAction(socketIndex, "HVDC", "SetVoltage");
+        }
+
+        public void UI_HVDC_ReadPower(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "HVDC", "ReadPower");
         }
 
         public void UI_LVDC_KL15_ReadCurrent(int socketIndex)

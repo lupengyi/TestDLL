@@ -271,17 +271,128 @@ namespace ManualCanDebug
         private void AddFieldEditor(Panel panel, ActionFieldSpec spec)
         {
             Grid row = new Grid { Margin = new Thickness(0, 4, 0, 4), Background = new SolidColorBrush(Color.FromRgb(249, 251, 254)) }; row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(140) }); row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(230) }); row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(70) }); row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(145) }); row.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(200) }); TextBlock label = Label(spec.Label); row.Children.Add(label); Control editor;
-            object loaded = LoadedFieldValue(spec); string[] safeOptions = EffectiveFieldOptions(spec, loaded); if (safeOptions != null) { ComboBox combo = Combo(210); combo.ItemsSource = safeOptions; combo.SelectedItem = Convert.ToString(loaded, CultureInfo.InvariantCulture); if (combo.SelectedItem == null && combo.Items.Count > 0) combo.SelectedIndex = 0; editor = combo; } else if (spec.Type == "bool") editor = new CheckBox { IsChecked = Convert.ToBoolean(loaded, CultureInfo.InvariantCulture), Margin = new Thickness(8, 6, 8, 4) }; else { TextBox text = Box(210); text.Text = Convert.ToString(loaded, CultureInfo.InvariantCulture); editor = text; }
+            object loaded = LoadedFieldValue(spec); string[] safeOptions = EffectiveFieldOptions(spec, loaded); if (safeOptions != null) { ComboBox combo = Combo(Math.Max(210, safeOptions.Max(value => (value ?? string.Empty).Length) * 8 + 24)); combo.ItemsSource = safeOptions; string loadedText = Convert.ToString(loaded, CultureInfo.InvariantCulture); string loadedCode = ActionFieldEditor.NormalizeOptionCode(loadedText); combo.SelectedItem = safeOptions.FirstOrDefault(value => string.Equals(value, loadedText, StringComparison.OrdinalIgnoreCase) || string.Equals(ActionFieldEditor.NormalizeOptionCode(value), loadedCode, StringComparison.OrdinalIgnoreCase) || value.StartsWith(loadedText + " ", StringComparison.OrdinalIgnoreCase) || value.StartsWith(loadedText + " -", StringComparison.OrdinalIgnoreCase) || value.StartsWith(loadedText + "-", StringComparison.OrdinalIgnoreCase)); if (combo.SelectedItem == null && combo.Items.Count > 0) combo.SelectedIndex = 0; editor = combo; } else if (spec.Type == "bool") editor = new CheckBox { IsChecked = Convert.ToBoolean(loaded, CultureInfo.InvariantCulture), Margin = new Thickness(8, 6, 8, 4) }; else { TextBox text = Box(210); text.Text = Convert.ToString(loaded, CultureInfo.InvariantCulture); editor = text; }
             Grid.SetColumn(editor, 1); row.Children.Add(editor); TextBlock unit = new TextBlock { Text = spec.Unit, Foreground = Brushes.DimGray, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(6) }; Grid.SetColumn(unit, 2); row.Children.Add(unit); string binding; bool exposed = _loadedBindings.TryGetValue(spec.Name, out binding); CheckBox expose = new CheckBox { Content = "开放为模块参数", IsChecked = exposed, VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(6, 0, 6, 0), ToolTip = "勾选后，章节引用该模块时可以单独修改此值" }; Grid.SetColumn(expose, 3); row.Children.Add(expose); TextBox parameterName = Box(180); parameterName.Text = exposed ? binding : spec.Label; parameterName.IsEnabled = exposed; parameterName.ToolTip = "模块参数显示名称，例如：目标电流、低压电压、保持时间"; expose.Checked += (s, e) => parameterName.IsEnabled = true; expose.Unchecked += (s, e) => parameterName.IsEnabled = false; Grid.SetColumn(parameterName, 4); row.Children.Add(parameterName); panel.Children.Add(row); _fieldEditors[spec.Name] = new ActionFieldEditor(spec, editor, expose, parameterName); if (IsRelaySetDo() && spec.Name == "Channels") { _relayChannelsBox = editor as TextBox; if (_relayChannelsBox != null) _relayChannelsBox.IsReadOnly = true; row.ColumnDefinitions[2].Width = new GridLength(105); Button chooseIo = Button("选择IO...", OpenRelayIoConfiguration); chooseIo.Margin = new Thickness(4); Grid.SetColumn(chooseIo, 2); row.Children.Add(chooseIo); } if (IsRelaySetDo() && spec.Name == "Values") { _relayValuesBox = editor as TextBox; if (_relayValuesBox != null) _relayValuesBox.IsReadOnly = true; AttachRelayStateOptions(editor as ComboBox); }
+            if (IsDcdcLoadSetMode() && spec.Name == "Mode")
+            {
+                ComboBox modeCombo = editor as ComboBox;
+                if (modeCombo != null)
+                {
+                    modeCombo.SelectionChanged += (s, e) => SyncDcdcModeStepName();
+                    SyncDcdcModeStepName();
+                }
+            }
+        }
+        private bool IsDcdcLoadSetMode() { return _descriptor != null && string.Equals(_descriptor.Device, "DCDC_LOAD", StringComparison.OrdinalIgnoreCase) && string.Equals(_descriptor.Operation, "SetMode", StringComparison.OrdinalIgnoreCase); }
+        private void SyncDcdcModeStepName()
+        {
+            if (!IsDcdcLoadSetMode() || _stepName == null) return;
+            ActionFieldEditor editor;
+            if (!_fieldEditors.TryGetValue("Mode", out editor)) return;
+            string selected = editor.Control is ComboBox ? Convert.ToString(((ComboBox)editor.Control).SelectedItem, CultureInfo.InvariantCulture) : string.Empty;
+            string family = DcdcModeFamily(ActionFieldEditor.NormalizeOptionCode(selected));
+            if (string.IsNullOrWhiteSpace(family)) return;
+            string current = _stepName.Text ?? string.Empty;
+            System.Text.RegularExpressions.Match prefix = System.Text.RegularExpressions.Regex.Match(current, @"^(\d+[-\._]?)");
+            string head = prefix.Success ? prefix.Groups[1].Value : string.Empty;
+            if (System.Text.RegularExpressions.Regex.IsMatch(current, @"(CC|CV|CR|CP)\s*模式") || current.IndexOf("电子负载", StringComparison.Ordinal) >= 0 || current.IndexOf("设置模式", StringComparison.Ordinal) >= 0 || string.IsNullOrWhiteSpace(current))
+                _stepName.Text = head + "电子负载设置" + family + "模式";
+            else
+                _stepName.Text = System.Text.RegularExpressions.Regex.Replace(current, @"\b(CC|CV|CR|CP)\b", family);
+        }
+        internal static string DcdcModeFamily(string modeCode)
+        {
+            string code = ActionFieldEditor.ResolveDcdcLoadModeCode(modeCode) ?? ActionFieldEditor.NormalizeOptionCode(modeCode) ?? string.Empty;
+            if (code.Length < 2) return "CC";
+            switch (char.ToUpperInvariant(code[1]))
+            {
+                case 'V': return "CV";
+                case 'R': return "CR";
+                case 'P': return "CP";
+                default: return "CC";
+            }
+        }
+        internal static string DcdcSetpointOperation(string family)
+        {
+            switch ((family ?? string.Empty).ToUpperInvariant())
+            {
+                case "CV": return "SetVoltage";
+                case "CR": return "SetResistance";
+                case "CP": return "SetPower";
+                default: return "SetCurrent";
+            }
+        }
+        internal static string DcdcSetpointField(string family)
+        {
+            switch ((family ?? string.Empty).ToUpperInvariant())
+            {
+                case "CV": return "Voltage";
+                case "CR": return "Resistance";
+                case "CP": return "Power";
+                default: return "Current";
+            }
+        }
+        internal static string DcdcSetpointUnit(string family)
+        {
+            switch ((family ?? string.Empty).ToUpperInvariant())
+            {
+                case "CV": return "V";
+                case "CR": return "Ω";
+                case "CP": return "W";
+                default: return "A";
+            }
+        }
+        internal static string DcdcSetpointStepName(string currentName, string family)
+        {
+            string unit = DcdcSetpointUnit(family);
+            System.Text.RegularExpressions.Match prefix = System.Text.RegularExpressions.Regex.Match(currentName ?? string.Empty, @"^(\d+[-\._]?)");
+            string head = prefix.Success ? prefix.Groups[1].Value : string.Empty;
+            if ((currentName ?? string.Empty).IndexOf("电子负载", StringComparison.Ordinal) >= 0 || System.Text.RegularExpressions.Regex.IsMatch(currentName ?? string.Empty, @"设置0?[AVWΩohm]|设置恒"))
+                return head + "电子负载设置0" + unit;
+            return head + "电子负载设置0" + unit;
         }
         private bool IsRelaySetDo() { return _descriptor != null && (_descriptor.Device == "RELAY_FCT" || _descriptor.Device == "RELAY_HVMUX") && _descriptor.Operation == "SetDO"; }
-        private string[] EffectiveFieldOptions(ActionFieldSpec spec, object loaded) { string[] options = spec.Options; if (IsRelaySetDo() && (spec.Name == "Channels" || spec.Name == "Values")) options = null; else if (IsRelaySetDo() && spec.Name == "Slave") options = Enumerable.Range(1, 16).Select(index => index.ToString(CultureInfo.InvariantCulture)).ToArray(); string current = Convert.ToString(loaded, CultureInfo.InvariantCulture); if (options != null && !string.IsNullOrWhiteSpace(current) && !options.Contains(current, StringComparer.OrdinalIgnoreCase)) options = options.Concat(new[] { current }).ToArray(); return options; }
+        private string[] EffectiveFieldOptions(ActionFieldSpec spec, object loaded)
+        {
+            string[] options = spec.Options;
+            if (IsRelaySetDo() && (spec.Name == "Channels" || spec.Name == "Values")) options = null;
+            else if (IsRelaySetDo() && spec.Name == "Slave") options = Enumerable.Range(1, 16).Select(index => index.ToString(CultureInfo.InvariantCulture)).ToArray();
+            string current = Convert.ToString(loaded, CultureInfo.InvariantCulture);
+            string currentCode = ActionFieldEditor.NormalizeOptionCode(current);
+            if (options != null && !string.IsNullOrWhiteSpace(current) &&
+                !options.Any(value => string.Equals(value, current, StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(ActionFieldEditor.NormalizeOptionCode(value), currentCode, StringComparison.OrdinalIgnoreCase)
+                    || value.StartsWith(current + " ", StringComparison.OrdinalIgnoreCase)
+                    || value.StartsWith(current + " -", StringComparison.OrdinalIgnoreCase)
+                    || value.StartsWith(current + "-", StringComparison.OrdinalIgnoreCase)))
+                options = options.Concat(new[] { current }).ToArray();
+            return options;
+        }
         private void OpenRelayIoConfiguration(object sender, RoutedEventArgs e) { if (_descriptor == null || _relayChannelsBox == null || _relayValuesBox == null) return; RelayIoConfigurationWindow dialog = new RelayIoConfigurationWindow(_descriptor.Device, _relayChannelsBox.Text, _relayValuesBox.Text) { Owner = Window.GetWindow(this) }; if (dialog.ShowDialog() == true) { _relayChannelsBox.Text = dialog.Channels; _relayValuesBox.Text = dialog.Values; _status.Text = "已选择 " + ChannelCount(dialog.Channels).ToString(CultureInfo.InvariantCulture) + " 个IO"; _status.Foreground = Brushes.DarkGreen; } }
         private void AttachRelayStateOptions(ComboBox values) { ActionFieldEditor channelsEditor; ComboBox channels = _fieldEditors.TryGetValue("Channels", out channelsEditor) ? channelsEditor.Control as ComboBox : null; if (values == null || channels == null) return; Action refresh = () => { string current = Convert.ToString(values.SelectedItem, CultureInfo.InvariantCulture); string[] options = BinaryStateOptions(ChannelCount(Convert.ToString(channels.SelectedItem, CultureInfo.InvariantCulture))); values.ItemsSource = options; values.SelectedItem = options.Contains(current) ? current : options[0]; }; channels.SelectionChanged += (s, e) => refresh(); refresh(); }
         private static int ChannelCount(string text) { return Math.Max(1, (text ?? string.Empty).Split(new[] { ',', '，' }, StringSplitOptions.RemoveEmptyEntries).Length); }
         private static string[] BinaryStateOptions(int count) { count = Math.Max(1, Math.Min(4, count)); List<string> result = new List<string>(); for (int mask = 0; mask < (1 << count); mask++) result.Add(string.Join(",", Enumerable.Range(0, count).Select(bit => ((mask >> (count - bit - 1)) & 1).ToString(CultureInfo.InvariantCulture)))); return result.ToArray(); }
         private static string[] RelayFctChannelOptions() { return new[] { "OUT6", "OUT7", "OUT9", "OUT10", "OUT9,OUT10", "OUT11", "OUT12", "OUT13", "OUT14", "OUT15", "OUT16", "OUT17", "OUT18", "OUT19", "OUT20", "OUT21", "OUT22", "OUT23", "OUT24", "OUT25", "OUT26", "OUT27", "OUT28", "OUT29", "OUT30", "OUT31", "OUT32", "OUT33", "OUT34", "OUT35", "OUT36", "OUT37", "OUT38", "OUT39", "OUT40", "OUT41", "OUT42", "OUT43", "OUT45" }; }
         internal static string[] FctMuxFunctionOptions() { return new[] { "1 - HVDC测量备用（J1）", "2 - 高压测量未用（J2）", "3 - 高压测量未用（J3）", "4 - 高压测量未用（J4）", "5 - CAN0 H-L电阻（J19）", "6 - CAN1 H-L电阻（J20）", "7 - CAN2 H-L电阻（J21）", "8 - CAN0 H-GND电压（J28）", "9 - CAN0 L-GND电压（J29）", "10 - CAN1 H-GND电压（J30）", "11 - CAN1 L-GND电压（J31）", "12 - KL30/KL31电压（J35）", "13 - OBC KL30/KL31电压-未接（J36）" }; }
+        // Display uses instrument panel labels CC/CV/CR/CP; Value() maps back to driver codes Ccl/Ccm/...
+        internal static string[] DcdcLoadModeOptions()
+        {
+            return new[]
+            {
+                "CC 低量程 - 恒流：小电流精细加载",
+                "CC 中量程 - 恒流：常用恒流加载",
+                "CC 高量程 - 恒流：大电流加载",
+                "CV 低量程 - 恒压：低压精细控制",
+                "CV 中量程 - 恒压：常用恒压加载",
+                "CV 高量程 - 恒压：高压加载",
+                "CR 低量程 - 恒阻：模拟小电阻负载",
+                "CR 中量程 - 恒阻：模拟中等电阻",
+                "CR 高量程 - 恒阻：模拟大电阻",
+                "CP 低量程 - 恒功率：小功率加载",
+                "CP 中量程 - 恒功率：常用恒功率",
+                "CP 高量程 - 恒功率：大功率加载"
+            };
+        }
         private object LoadedFieldValue(ActionFieldSpec spec) { if (_loadedStep == null) return spec.DefaultValue; object value = _loadedStep.Get(spec.Name); if (value != null) return value; string alias = spec.Name == "Voltage" ? "SourceVoltage" : spec.Name == "Current" ? "SourceCurrent" : spec.Name; return _loadedStep.Get(alias, spec.DefaultValue); }
 
         private SequenceStepDefinition BuildDescriptorStep(bool logic)
@@ -370,7 +481,14 @@ namespace ManualCanDebug
 
         internal static string FormatPlatformMeasurements(LegacyStepExecutionResult platform, string fallback)
         {
-            if (platform == null || platform.Results == null) return fallback ?? string.Empty; string[] values = platform.Results.Where(value => value != null && !string.IsNullOrWhiteSpace(value.Value)).Select(value => (string.IsNullOrWhiteSpace(value.StepName) ? string.Empty : value.StepName + "=") + value.Value + (string.IsNullOrWhiteSpace(value.Unit) ? string.Empty : " " + value.Unit)).ToArray(); return values.Length == 0 ? fallback ?? string.Empty : string.Join("；", values);
+            if (platform == null || platform.Results == null) return fallback ?? string.Empty;
+            // Hierarchy「测试值」列只显示实测值，不拼接步骤名/描述文字。
+            string[] values = platform.Results
+                .Where(value => value != null && !string.IsNullOrWhiteSpace(value.Value))
+                .Select(value => (value.Value ?? string.Empty).Trim())
+                .Where(value => value.Length > 0)
+                .ToArray();
+            return values.Length == 0 ? fallback ?? string.Empty : string.Join("；", values);
         }
 
         private void RecordExecution(ActionHistoryRow record)
@@ -392,7 +510,7 @@ namespace ManualCanDebug
             }
             catch (Exception ex) { return "读取诊断日志失败：" + ex.Message; }
         }
-        private void Complete_Click(object sender, RoutedEventArgs e) { try { SequenceStepDefinition step = BuildStep(); if (!MainTestMethodCatalog.Contains(step.FunctionName)) throw new MissingMethodException("MainTest中不存在函数：" + step.FunctionName); IDictionary<string, string> bindings = BuildBindings(); _save(step, bindings); LoadStep(step, bindings); _status.Text = "配置完成 · " + MainTestMethodCatalog.BindingSummary(step); _status.Foreground = Brushes.DarkGreen; } catch (Exception ex) { _status.Text = "配置不完整：" + ex.Message; _status.Foreground = Brushes.DarkRed; MessageBox.Show(ex.Message, "完成配置", MessageBoxButton.OK, MessageBoxImage.Information); } }
+        private void Complete_Click(object sender, RoutedEventArgs e) { try { if (IsDcdcLoadSetMode()) SyncDcdcModeStepName(); SequenceStepDefinition step = BuildStep(); if (!MainTestMethodCatalog.Contains(step.FunctionName)) throw new MissingMethodException("MainTest中不存在函数：" + step.FunctionName); IDictionary<string, string> bindings = BuildBindings(); _save(step, bindings); LoadStep(step, bindings); _status.Text = "配置完成 · " + MainTestMethodCatalog.BindingSummary(step); _status.Foreground = Brushes.DarkGreen; } catch (Exception ex) { _status.Text = "配置不完整：" + ex.Message; _status.Foreground = Brushes.DarkRed; MessageBox.Show(ex.Message, "完成配置", MessageBoxButton.OK, MessageBoxImage.Information); } }
 
         private void SelectTargetAndOperation(SequenceStepDefinition step)
         {
@@ -543,7 +661,46 @@ namespace ManualCanDebug
         public ActionFieldSpec Spec { get; private set; } public Control Control { get; private set; } public CheckBox Expose { get; private set; } public TextBox ParameterNameBox { get; private set; }
         public bool IsExposed { get { return Expose != null && Expose.IsChecked == true && !string.IsNullOrWhiteSpace(ParameterName); } }
         public string ParameterName { get { return ParameterNameBox == null ? Spec.Label : (ParameterNameBox.Text ?? string.Empty).Trim(); } }
-        public object Value() { if (Control is CheckBox) return ((CheckBox)Control).IsChecked == true; string text = Control is ComboBox ? Convert.ToString(((ComboBox)Control).SelectedItem, CultureInfo.InvariantCulture) : ((TextBox)Control).Text; if (Spec.Type == "int") return Convert.ToInt32(Parse(text, 0)); if (Spec.Type == "double") return Parse(text, 0); return text ?? string.Empty; }
+        public object Value() { if (Control is CheckBox) return ((CheckBox)Control).IsChecked == true; string text = Control is ComboBox ? Convert.ToString(((ComboBox)Control).SelectedItem, CultureInfo.InvariantCulture) : ((TextBox)Control).Text; text = NormalizeOptionCode(text); if (Spec.Type == "int") return Convert.ToInt32(Parse(text, 0)); if (Spec.Type == "double") return Parse(text, 0); return text ?? string.Empty; }
+        internal static string NormalizeOptionCode(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text)) return string.Empty;
+            string mapped = ResolveDcdcLoadModeCode(text);
+            if (!string.IsNullOrEmpty(mapped)) return mapped;
+            string value = text.Trim();
+            int separator = value.IndexOf(" - ", StringComparison.Ordinal);
+            if (separator < 0) separator = value.IndexOf('-');
+            if (separator < 0) separator = value.IndexOf(' ');
+            if (separator > 0) value = value.Substring(0, separator).Trim();
+            return value;
+        }
+        // Accept instrument labels (CC/CV/CR/CP + 量程) and legacy driver codes (Ccm...).
+        internal static string ResolveDcdcLoadModeCode(string text)
+        {
+            if (string.IsNullOrWhiteSpace(text)) return null;
+            string value = text.Trim();
+            int separator = value.IndexOf(" - ", StringComparison.Ordinal);
+            if (separator > 0) value = value.Substring(0, separator).Trim();
+            string key = value.Replace("（", "").Replace("）", "").Replace("(", "").Replace(")", "").Replace("·", " ").Replace("　", " ");
+            while (key.Contains("  ")) key = key.Replace("  ", " ");
+            key = key.Trim().ToUpperInvariant();
+            switch (key)
+            {
+                case "CCL": case "CC L": case "CC低": case "CC 低": case "CC低量程": case "CC 低量程": return "Ccl";
+                case "CCM": case "CC M": case "CC中": case "CC 中": case "CC中量程": case "CC 中量程": return "Ccm";
+                case "CCH": case "CC H": case "CC高": case "CC 高": case "CC高量程": case "CC 高量程": return "Cch";
+                case "CVL": case "CV L": case "CV低": case "CV 低": case "CV低量程": case "CV 低量程": return "Cvl";
+                case "CVM": case "CV M": case "CV中": case "CV 中": case "CV中量程": case "CV 中量程": return "Cvm";
+                case "CVH": case "CV H": case "CV高": case "CV 高": case "CV高量程": case "CV 高量程": return "Cvh";
+                case "CRL": case "CR L": case "CR低": case "CR 低": case "CR低量程": case "CR 低量程": return "Crl";
+                case "CRM": case "CR M": case "CR中": case "CR 中": case "CR中量程": case "CR 中量程": return "Crm";
+                case "CRH": case "CR H": case "CR高": case "CR 高": case "CR高量程": case "CR 高量程": return "Crh";
+                case "CPL": case "CP L": case "CP低": case "CP 低": case "CP低量程": case "CP 低量程": return "Cpl";
+                case "CPM": case "CP M": case "CP中": case "CP 中": case "CP中量程": case "CP 中量程": return "Cpm";
+                case "CPH": case "CP H": case "CP高": case "CP 高": case "CP高量程": case "CP 高量程": return "Cph";
+                default: return null;
+            }
+        }
         private static double Parse(string text, double fallback) { double value; return double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out value) ? value : fallback; }
     }
 
@@ -610,9 +767,9 @@ namespace ManualCanDebug
         private static List<ActionDescriptor> Build()
         {
             List<ActionDescriptor> list = new List<ActionDescriptor>();
-            foreach (string device in new[] { "LVDC", "HVDC" }) { string target = device == "LVDC" ? "低压电源（KL30）" : "高压电源"; list.Add(new ActionDescriptor("仪器", target, device, "SetVoltage", "设置电压", false, new ActionFieldSpec("Voltage", "设定电压", "double", device == "LVDC" ? 24.0 : 600.0, "V"))); list.Add(new ActionDescriptor("仪器", target, device, "SetCurrent", "设置电流", false, new ActionFieldSpec("Current", "电流限制", "double", 5.0, "A"))); list.Add(new ActionDescriptor("仪器", target, device, "SetOutput", "输出开关", false, new ActionFieldSpec("Output", "输出状态", "bool", true))); list.Add(new ActionDescriptor("仪器", target, device, "ReadVoltage", "读取电压", true)); list.Add(new ActionDescriptor("仪器", target, device, "ReadCurrent", "读取电流", true)); }
+            foreach (string device in new[] { "LVDC", "HVDC" }) { string target = device == "LVDC" ? "低压电源（KL30）" : "高压电源"; list.Add(new ActionDescriptor("仪器", target, device, "SetVoltage", "设置电压", false, new ActionFieldSpec("Voltage", "设定电压", "double", device == "LVDC" ? 24.0 : 600.0, "V"))); list.Add(new ActionDescriptor("仪器", target, device, "SetCurrent", "设置电流", false, new ActionFieldSpec("Current", "电流限制", "double", 5.0, "A"))); if (device == "HVDC") list.Add(new ActionDescriptor("仪器", target, device, "SetPower", "设置功率", false, new ActionFieldSpec("Power", "功率限制", "double", 8600.0, "W"))); list.Add(new ActionDescriptor("仪器", target, device, "SetOutput", "输出开关", false, new ActionFieldSpec("Output", "输出状态", "bool", true))); list.Add(new ActionDescriptor("仪器", target, device, "ReadVoltage", "读取电压", true)); list.Add(new ActionDescriptor("仪器", target, device, "ReadCurrent", "读取电流", true)); if (device == "HVDC") list.Add(new ActionDescriptor("仪器", target, device, "ReadPower", "读取功率", true)); }
             list.Add(new ActionDescriptor("仪器", "低压电源（KL15）", "LVDC_KL15", "SetVoltage", "设置电压", false, new ActionFieldSpec("Voltage", "设定电压", "double", 24.0, "V"))); list.Add(new ActionDescriptor("仪器", "低压电源（KL15）", "LVDC_KL15", "SetCurrent", "设置电流", false, new ActionFieldSpec("Current", "电流限制", "double", 5.0, "A"))); list.Add(new ActionDescriptor("仪器", "低压电源（KL15）", "LVDC_KL15", "SetOutput", "输出开关", false, new ActionFieldSpec("Output", "输出状态", "bool", true))); list.Add(new ActionDescriptor("仪器", "低压电源（KL15）", "LVDC_KL15", "ReadVoltage", "读取电压", true)); list.Add(new ActionDescriptor("仪器", "低压电源（KL15）", "LVDC_KL15", "ReadCurrent", "读取电流", true));
-            list.Add(new ActionDescriptor("仪器", "DCDC电子负载（AN23600E）", "DCDC_LOAD", "SetMode", "设置模式", false, new ActionFieldSpec("Mode", "负载模式", "string", "Ccm", "", new[] { "Ccl", "Ccm", "Cch", "Cvl", "Cvm", "Cvh", "Crl", "Crm", "Crh", "Cpl", "Cpm", "Cph" })));
+            list.Add(new ActionDescriptor("仪器", "DCDC电子负载（AN23600E）", "DCDC_LOAD", "SetMode", "设置模式", false, new ActionFieldSpec("Mode", "负载模式", "string", "Ccm", "", ActionConfigurationPanel.DcdcLoadModeOptions())));
             list.Add(new ActionDescriptor("仪器", "DCDC电子负载（AN23600E）", "DCDC_LOAD", "SetCurrent", "设置恒流值", false, new ActionFieldSpec("Current", "电流", "double", 0.0, "A"))); list.Add(new ActionDescriptor("仪器", "DCDC电子负载（AN23600E）", "DCDC_LOAD", "SetVoltage", "设置恒压值", false, new ActionFieldSpec("Voltage", "电压", "double", 0.0, "V"))); list.Add(new ActionDescriptor("仪器", "DCDC电子负载（AN23600E）", "DCDC_LOAD", "SetResistance", "设置恒阻值", false, new ActionFieldSpec("Resistance", "电阻", "double", 1.0, "Ω"))); list.Add(new ActionDescriptor("仪器", "DCDC电子负载（AN23600E）", "DCDC_LOAD", "SetPower", "设置恒功率值", false, new ActionFieldSpec("Power", "功率", "double", 0.0, "W")));
             list.Add(new ActionDescriptor("仪器", "DCDC电子负载（AN23600E）", "DCDC_LOAD", "OutputOn", "负载输入开", false)); list.Add(new ActionDescriptor("仪器", "DCDC电子负载（AN23600E）", "DCDC_LOAD", "OutputOff", "负载输入关", false)); list.Add(new ActionDescriptor("仪器", "DCDC电子负载（AN23600E）", "DCDC_LOAD", "ReadVoltage", "读取电压", true)); list.Add(new ActionDescriptor("仪器", "DCDC电子负载（AN23600E）", "DCDC_LOAD", "ReadCurrent", "读取电流", true)); list.Add(new ActionDescriptor("仪器", "DCDC电子负载（AN23600E）", "DCDC_LOAD", "ReadPower", "读取功率", true)); list.Add(new ActionDescriptor("仪器", "DCDC电子负载（AN23600E）", "DCDC_LOAD", "ReadProtection", "读取保护状态", true)); list.Add(new ActionDescriptor("仪器", "DCDC电子负载（AN23600E）", "DCDC_LOAD", "ClearProtection", "清除保护", false)); list.Add(new ActionDescriptor("仪器", "DCDC电子负载（AN23600E）", "DCDC_LOAD", "Reset", "复位", false));
             list.Add(new ActionDescriptor("仪器", "DMM", "DMM", "ConfigDCVoltage", "配置直流电压", false, new ActionFieldSpec("Range", "量程", "double", 1000.0, "V"), new ActionFieldSpec("Solution", "分辨率", "double", 0.01, "V"))); list.Add(new ActionDescriptor("仪器", "DMM", "DMM", "ConfigDCCurrent", "配置直流电流", false, new ActionFieldSpec("Range", "量程", "double", 3.0, "A"), new ActionFieldSpec("Solution", "分辨率", "double", 0.00001, "A"))); list.Add(new ActionDescriptor("仪器", "DMM", "DMM", "ConfigACVoltage", "配置交流电压", false, new ActionFieldSpec("Range", "量程", "double", 1000.0, "V"), new ActionFieldSpec("Solution", "分辨率", "double", 0.01, "V"))); list.Add(new ActionDescriptor("仪器", "DMM", "DMM", "ConfigACCurrent", "配置交流电流", false, new ActionFieldSpec("Range", "量程", "double", 3.0, "A"), new ActionFieldSpec("Solution", "分辨率", "double", 0.00001, "A"))); list.Add(new ActionDescriptor("仪器", "DMM", "DMM", "Read", "读取测量值", true)); list.Add(new ActionDescriptor("仪器", "DMM", "DMM", "Close", "关闭会话", false));

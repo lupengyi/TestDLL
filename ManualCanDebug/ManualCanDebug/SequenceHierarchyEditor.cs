@@ -181,7 +181,89 @@ namespace ManualCanDebug
 
         private DataGridTemplateColumn ValueColumn()
         {
-            FrameworkElementFactory panel = new FrameworkElementFactory(typeof(StackPanel)); panel.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal); panel.SetValue(StackPanel.HorizontalAlignmentProperty, HorizontalAlignment.Center); panel.SetValue(StackPanel.VerticalAlignmentProperty, VerticalAlignment.Center); FrameworkElementFactory fields = new FrameworkElementFactory(typeof(ItemsControl)); fields.SetBinding(ItemsControl.ItemsSourceProperty, new Binding("ValueFields")); FrameworkElementFactory wrap = new FrameworkElementFactory(typeof(WrapPanel)); wrap.SetValue(WrapPanel.OrientationProperty, Orientation.Horizontal); fields.SetValue(ItemsControl.ItemsPanelProperty, new ItemsPanelTemplate(wrap)); FrameworkElementFactory fieldBorder = new FrameworkElementFactory(typeof(Border)); fieldBorder.SetValue(Border.MarginProperty, new Thickness(2, 0, 2, 0)); FrameworkElementFactory fieldPanel = new FrameworkElementFactory(typeof(StackPanel)); fieldPanel.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal); fieldPanel.SetValue(StackPanel.VerticalAlignmentProperty, VerticalAlignment.Center); FrameworkElementFactory fieldBox = new FrameworkElementFactory(typeof(TextBox)); fieldBox.SetBinding(TextBox.TextProperty, new Binding("ValueText") { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged }); fieldBox.SetBinding(TextBox.IsReadOnlyProperty, new Binding("IsReadOnly")); fieldBox.SetBinding(TextBox.ToolTipProperty, new Binding("DisplayName")); fieldBox.SetValue(TextBox.WidthProperty, 58d); fieldBox.SetValue(TextBox.HeightProperty, 26d); fieldBox.SetValue(TextBox.VerticalContentAlignmentProperty, VerticalAlignment.Center); fieldBox.SetValue(TextBox.StyleProperty, InlineValueEditorStyle()); fieldPanel.AppendChild(fieldBox); FrameworkElementFactory unit = new FrameworkElementFactory(typeof(TextBlock)); unit.SetBinding(TextBlock.TextProperty, new Binding("Unit")); unit.SetValue(TextBlock.MarginProperty, new Thickness(4, 0, 0, 0)); unit.SetValue(TextBlock.VerticalAlignmentProperty, VerticalAlignment.Center); fieldPanel.AppendChild(unit); fieldBorder.AppendChild(fieldPanel); fields.SetValue(ItemsControl.ItemTemplateProperty, new DataTemplate { VisualTree = fieldBorder }); panel.AppendChild(fields); FrameworkElementFactory summary = new FrameworkElementFactory(typeof(TextBlock)); summary.SetBinding(TextBlock.TextProperty, new Binding("ValueSummary")); summary.SetBinding(TextBlock.VisibilityProperty, new Binding("SummaryVisibility")); summary.SetValue(TextBlock.ForegroundProperty, Brush(74, 102, 143)); summary.SetValue(TextBlock.VerticalAlignmentProperty, VerticalAlignment.Center); panel.AppendChild(summary); return new DataGridTemplateColumn { Header = "当前SEQ值", Width = new DataGridLength(1.6, DataGridLengthUnitType.Star), MinWidth = 280, CellTemplate = new DataTemplate { VisualTree = panel }, IsReadOnly = true };
+            FrameworkElementFactory panel = new FrameworkElementFactory(typeof(StackPanel));
+            panel.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal);
+            panel.SetValue(StackPanel.HorizontalAlignmentProperty, HorizontalAlignment.Center);
+            panel.SetValue(StackPanel.VerticalAlignmentProperty, VerticalAlignment.Center);
+
+            FrameworkElementFactory fields = new FrameworkElementFactory(typeof(ItemsControl));
+            fields.SetBinding(ItemsControl.ItemsSourceProperty, new Binding("ValueFields"));
+            FrameworkElementFactory wrap = new FrameworkElementFactory(typeof(WrapPanel));
+            wrap.SetValue(WrapPanel.OrientationProperty, Orientation.Horizontal);
+            fields.SetValue(ItemsControl.ItemsPanelProperty, new ItemsPanelTemplate(wrap));
+
+            FrameworkElementFactory fieldBorder = new FrameworkElementFactory(typeof(Border));
+            fieldBorder.SetValue(Border.MarginProperty, new Thickness(2, 0, 2, 0));
+            FrameworkElementFactory fieldPanel = new FrameworkElementFactory(typeof(StackPanel));
+            fieldPanel.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal);
+            fieldPanel.SetValue(StackPanel.VerticalAlignmentProperty, VerticalAlignment.Center);
+
+            FrameworkElementFactory fieldBox = new FrameworkElementFactory(typeof(TextBox));
+            fieldBox.SetBinding(TextBox.TextProperty, new Binding("ValueText") { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
+            fieldBox.SetBinding(TextBox.IsReadOnlyProperty, new Binding("IsReadOnly"));
+            fieldBox.SetBinding(TextBox.ToolTipProperty, new Binding("DisplayName"));
+            fieldBox.SetValue(TextBox.WidthProperty, 58d);
+            fieldBox.SetValue(TextBox.HeightProperty, 26d);
+            fieldBox.SetValue(TextBox.VerticalContentAlignmentProperty, VerticalAlignment.Center);
+            fieldBox.SetValue(TextBox.StyleProperty, InlineValueEditorStyle());
+            Style textVisibility = new Style(typeof(TextBox), InlineValueEditorStyle());
+            DataTrigger hideText = new DataTrigger { Binding = new Binding("IsOnOff"), Value = true };
+            hideText.Setters.Add(new Setter(UIElement.VisibilityProperty, Visibility.Collapsed));
+            textVisibility.Triggers.Add(hideText);
+            fieldBox.SetValue(FrameworkElement.StyleProperty, textVisibility);
+            fieldPanel.AppendChild(fieldBox);
+
+            FrameworkElementFactory onOff = new FrameworkElementFactory(typeof(ComboBox));
+            onOff.SetValue(ComboBox.ItemsSourceProperty, new[] { "OFF", "ON" });
+            onOff.SetBinding(ComboBox.SelectedItemProperty, new Binding("ValueText") { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
+            onOff.SetBinding(ComboBox.ToolTipProperty, new Binding("DisplayName"));
+            onOff.SetValue(ComboBox.WidthProperty, 72d);
+            onOff.SetValue(ComboBox.HeightProperty, 26d);
+            onOff.SetValue(ComboBox.HorizontalContentAlignmentProperty, HorizontalAlignment.Center);
+            onOff.SetValue(ComboBox.VerticalContentAlignmentProperty, VerticalAlignment.Center);
+            onOff.SetValue(FrameworkElement.MarginProperty, new Thickness(0));
+            Style onOffStyle = new Style(typeof(ComboBox));
+            onOffStyle.Setters.Add(new Setter(UIElement.VisibilityProperty, Visibility.Collapsed));
+            onOffStyle.Setters.Add(new Setter(Control.PaddingProperty, new Thickness(4, 2, 4, 2)));
+            onOffStyle.Setters.Add(new Setter(Control.BackgroundProperty, Brushes.White));
+            onOffStyle.Setters.Add(new Setter(Control.BorderBrushProperty, Brush(205, 216, 231)));
+            onOffStyle.Setters.Add(new Setter(Control.BorderThicknessProperty, new Thickness(1)));
+            DataTrigger showOnOff = new DataTrigger { Binding = new Binding("IsOnOff"), Value = true };
+            showOnOff.Setters.Add(new Setter(UIElement.VisibilityProperty, Visibility.Visible));
+            onOffStyle.Triggers.Add(showOnOff);
+            DataTrigger onColor = new DataTrigger { Binding = new Binding("ValueText"), Value = "ON" };
+            onColor.Setters.Add(new Setter(Control.ForegroundProperty, Brush(24, 128, 72)));
+            onColor.Setters.Add(new Setter(Control.FontWeightProperty, FontWeights.SemiBold));
+            onOffStyle.Triggers.Add(onColor);
+            DataTrigger offColor = new DataTrigger { Binding = new Binding("ValueText"), Value = "OFF" };
+            offColor.Setters.Add(new Setter(Control.ForegroundProperty, Brush(140, 90, 40)));
+            onOffStyle.Triggers.Add(offColor);
+            onOff.SetValue(FrameworkElement.StyleProperty, onOffStyle);
+            fieldPanel.AppendChild(onOff);
+
+            FrameworkElementFactory unit = new FrameworkElementFactory(typeof(TextBlock));
+            unit.SetBinding(TextBlock.TextProperty, new Binding("Unit"));
+            unit.SetValue(TextBlock.MarginProperty, new Thickness(4, 0, 0, 0));
+            unit.SetValue(TextBlock.VerticalAlignmentProperty, VerticalAlignment.Center);
+            Style unitStyle = new Style(typeof(TextBlock));
+            DataTrigger hideUnit = new DataTrigger { Binding = new Binding("IsOnOff"), Value = true };
+            hideUnit.Setters.Add(new Setter(UIElement.VisibilityProperty, Visibility.Collapsed));
+            unitStyle.Triggers.Add(hideUnit);
+            unit.SetValue(FrameworkElement.StyleProperty, unitStyle);
+            fieldPanel.AppendChild(unit);
+
+            fieldBorder.AppendChild(fieldPanel);
+            fields.SetValue(ItemsControl.ItemTemplateProperty, new DataTemplate { VisualTree = fieldBorder });
+            panel.AppendChild(fields);
+
+            FrameworkElementFactory summary = new FrameworkElementFactory(typeof(TextBlock));
+            summary.SetBinding(TextBlock.TextProperty, new Binding("ValueSummary"));
+            summary.SetBinding(TextBlock.VisibilityProperty, new Binding("SummaryVisibility"));
+            summary.SetValue(TextBlock.ForegroundProperty, Brush(74, 102, 143));
+            summary.SetValue(TextBlock.VerticalAlignmentProperty, VerticalAlignment.Center);
+            panel.AppendChild(summary);
+
+            return new DataGridTemplateColumn { Header = "当前SEQ值", Width = new DataGridLength(1.6, DataGridLengthUnitType.Star), MinWidth = 280, CellTemplate = new DataTemplate { VisualTree = panel }, IsReadOnly = true };
         }
 
         private DataGridTemplateColumn BreakpointColumn()
@@ -221,7 +303,34 @@ namespace ManualCanDebug
             SequenceHierarchyRow row = new SequenceHierarchyRow(project, instance, block, step, number, path, key, depth, changed); row._parameterValues = parameterValues; SequenceStepDefinition definition = step.ToStep(); row.TypeText = FriendlyType(definition); row.IconGlyph = IconFor(definition); row.IconBrush = IconBrushFor(definition); row.BuildFields(definition); row.Status = row.Enabled ? "已启用" : "已停用"; return row;
         }
         public FctStudioProject Project { get { return _project; } } public FlowBlockInstance Instance { get; private set; } public FunctionBlockDefinition Block { get; private set; } public FunctionBlockDefinition ReferencedBlock { get; private set; } public BlockStepDefinition Step { get; private set; } public string Number { get; private set; } public string Path { get; private set; } public string Key { get; private set; } public int Depth { get; private set; } public Thickness Indent { get { return new Thickness(Depth * 22, 0, 0, 0); } } public bool IsModule { get; private set; } public bool HasChildren { get; private set; } public bool IsExpanded { get; private set; } public string Chevron { get { return IsExpanded ? "⌄" : "›"; } } public Visibility ExpandVisibility { get { return HasChildren ? Visibility.Visible : Visibility.Hidden; } } public string TypeText { get; private set; } public string IconGlyph { get; private set; } public Brush IconBrush { get; private set; } public string BindingText { get; private set; } public Visibility BindingVisibility { get { return string.IsNullOrWhiteSpace(BindingText) ? Visibility.Collapsed : Visibility.Visible; } } public string BadgeText { get; private set; } public Visibility BadgeVisibility { get { return string.IsNullOrWhiteSpace(BadgeText) ? Visibility.Collapsed : Visibility.Visible; } } public ObservableCollection<HierarchyValueField> ValueFields { get; private set; } public string ValueSummary { get; private set; } public Visibility SummaryVisibility { get { return ValueFields.Count == 0 && !string.IsNullOrWhiteSpace(ValueSummary) ? Visibility.Visible : Visibility.Collapsed; } }
-        public string NameText { get { if (Depth == 0) return Instance == null ? string.Empty : Instance.DisplayName; if (Step == null) return string.Empty; return Step.IsModuleReference ? Step.ReferencedBlockName : Step.ToStep().StepName; } set { string text = (value ?? string.Empty).Trim(); if (string.IsNullOrWhiteSpace(text)) return; if (Depth == 0 && Instance != null) Instance.DisplayName = text; else if (Step != null && Step.IsModuleReference) Step.ReferencedBlockName = text; else if (Step != null) SetProperty("StepName", text); Raise("NameText"); Changed(); } }
+        public string NameText
+        {
+            get
+            {
+                if (Depth == 0) return Instance == null ? string.Empty : Instance.DisplayName;
+                if (Step == null) return string.Empty;
+                if (Step.IsModuleReference) return Step.ReferencedBlockName;
+                Dictionary<string, object> overrides = StepValues(false);
+                object overrideName;
+                if (overrides != null && overrides.TryGetValue("StepName", out overrideName) && overrideName != null && !string.IsNullOrWhiteSpace(Convert.ToString(overrideName, CultureInfo.InvariantCulture)))
+                    return Convert.ToString(overrideName, CultureInfo.InvariantCulture);
+                return Step.ToStep().StepName;
+            }
+            set
+            {
+                string text = (value ?? string.Empty).Trim();
+                if (string.IsNullOrWhiteSpace(text)) return;
+                if (Depth == 0 && Instance != null) Instance.DisplayName = text;
+                else if (Step != null && Step.IsModuleReference) Step.ReferencedBlockName = text;
+                else if (Step != null)
+                {
+                    SetProperty("StepName", text);
+                    if (Step.StepProperties != null) Step.StepProperties["StepName"] = text;
+                }
+                Raise("NameText");
+                Changed();
+            }
+        }
         public bool NameReadOnly { get { return false; } }
         public bool Enabled { get { if (Depth == 0) return Instance != null && Instance.Enabled; if (Step == null) return true; Dictionary<string, object> values = StepValues(false); object value; return values != null && values.TryGetValue("__Enabled", out value) ? Convert.ToBoolean(value, CultureInfo.InvariantCulture) : Step.Enabled; } set { if (Depth == 0 && Instance != null) Instance.Enabled = value; else { Dictionary<string, object> values = StepValues(true); values["__Enabled"] = value; } Status = value ? "已启用" : "已停用"; Raise("Enabled"); Changed(); } }
         public string LowLimitText { get { return GetText("LowLimit"); } set { SetNumericOrText("LowLimit", value); } } public string HighLimitText { get { return GetText("HighLimit"); } set { SetNumericOrText("HighLimit", value); } } public string CompareText { get { return GetText("Comtype"); } set { SetProperty("Comtype", value ?? string.Empty); } } public string UnitText { get { return GetText("Unit"); } set { SetProperty("Unit", value ?? string.Empty); } }
@@ -239,15 +348,76 @@ namespace ManualCanDebug
         }
         public void ApplyConfiguredStep(SequenceStepDefinition configured)
         {
-            if (configured == null || Step == null || Step.IsModuleReference) return; Dictionary<string, object> values = StepValues(true); foreach (KeyValuePair<string, object> pair in configured.Properties) values[pair.Key] = pair.Value; BuildFields(configured); Raise("NameText"); Raise("ValueFields"); Raise("ValueSummary"); Raise("SummaryVisibility"); Raise("LowLimitText"); Raise("HighLimitText"); Raise("CompareText"); Raise("UnitText"); Changed();
+            if (configured == null || Step == null || Step.IsModuleReference) return;
+            Dictionary<string, object> values = StepValues(true);
+            foreach (KeyValuePair<string, object> pair in configured.Properties)
+            {
+                values[pair.Key] = pair.Value;
+                if (Step.StepProperties != null) Step.StepProperties[pair.Key] = pair.Value;
+            }
+            BuildFields(configured);
+            Raise("NameText"); Raise("ValueFields"); Raise("ValueSummary"); Raise("SummaryVisibility"); Raise("LowLimitText"); Raise("HighLimitText"); Raise("CompareText"); Raise("UnitText");
+            Changed();
+        }
+
+        /// <summary>
+        /// After DCDC_LOAD SetMode changes (CC/CV/CR/CP), retarget the next setpoint step (0A/0V/...).
+        /// </summary>
+        public bool SyncDcdcLoadFollowOnSetpoint(SequenceStepDefinition modeStep)
+        {
+            if (modeStep == null || Block == null || Step == null) return false;
+            string device = Convert.ToString(modeStep.Get("Device"), CultureInfo.InvariantCulture);
+            string operation = Convert.ToString(modeStep.Get("Operation"), CultureInfo.InvariantCulture);
+            if (!string.Equals(device, "DCDC_LOAD", StringComparison.OrdinalIgnoreCase) || !string.Equals(operation, "SetMode", StringComparison.OrdinalIgnoreCase)) return false;
+            string family = ActionConfigurationPanel.DcdcModeFamily(Convert.ToString(modeStep.Get("Mode"), CultureInfo.InvariantCulture));
+            string targetOperation = ActionConfigurationPanel.DcdcSetpointOperation(family);
+            string field = ActionConfigurationPanel.DcdcSetpointField(family);
+            int index = Block.Steps.IndexOf(Step);
+            if (index < 0) return false;
+            for (int i = index + 1; i < Block.Steps.Count && i <= index + 3; i++)
+            {
+                BlockStepDefinition next = Block.Steps[i];
+                if (next == null || next.IsModuleReference) continue;
+                SequenceStepDefinition def = next.ToStep();
+                if (!string.Equals(Convert.ToString(def.Get("Device"), CultureInfo.InvariantCulture), "DCDC_LOAD", StringComparison.OrdinalIgnoreCase)) continue;
+                string nextOp = Convert.ToString(def.Get("Operation"), CultureInfo.InvariantCulture);
+                if (!string.Equals(nextOp, "SetCurrent", StringComparison.OrdinalIgnoreCase)
+                    && !string.Equals(nextOp, "SetVoltage", StringComparison.OrdinalIgnoreCase)
+                    && !string.Equals(nextOp, "SetResistance", StringComparison.OrdinalIgnoreCase)
+                    && !string.Equals(nextOp, "SetPower", StringComparison.OrdinalIgnoreCase)) continue;
+                if (next.StepProperties == null) next.StepProperties = new Dictionary<string, object>(StringComparer.Ordinal);
+                foreach (string remove in new[] { "Current", "Voltage", "Resistance", "Power" }) next.StepProperties.Remove(remove);
+                next.StepProperties["Device"] = "DCDC_LOAD";
+                next.StepProperties["Operation"] = targetOperation;
+                next.StepProperties[field] = 0.0;
+                next.StepProperties["ResultMode"] = "Action";
+                string oldName = Convert.ToString(next.StepProperties.ContainsKey("StepName") ? next.StepProperties["StepName"] : def.StepName, CultureInfo.InvariantCulture);
+                next.StepProperties["StepName"] = ActionConfigurationPanel.DcdcSetpointStepName(oldName, family);
+                if (Instance != null && Instance.StepOverrides != null)
+                {
+                    string nextPath = string.IsNullOrWhiteSpace(Path) ? next.Id : Path.Substring(0, Path.LastIndexOf('/') >= 0 ? Path.LastIndexOf('/') + 1 : 0) + next.Id;
+                    // Prefer match by adjacent hierarchy row refresh; also write override under known sibling paths ending with next.Id
+                    foreach (string key in Instance.StepOverrides.Keys.Where(value => value.EndsWith("/" + next.Id, StringComparison.Ordinal) || value == next.Id).ToList())
+                    {
+                        Dictionary<string, object> ov = Instance.StepOverrides[key];
+                        foreach (string remove in new[] { "Current", "Voltage", "Resistance", "Power" }) ov.Remove(remove);
+                        ov["Device"] = "DCDC_LOAD";
+                        ov["Operation"] = targetOperation;
+                        ov[field] = 0.0;
+                        ov["StepName"] = next.StepProperties["StepName"];
+                    }
+                }
+                return true;
+            }
+            return false;
         }
         private void BuildFields(SequenceStepDefinition definition)
         {
             ValueFields.Clear(); ValueSummary = string.Empty;
-            Dictionary<string, BlockParameterDefinition> parameters = (Block.Parameters ?? new List<BlockParameterDefinition>()).Where(value => !string.IsNullOrWhiteSpace(value.Name)).GroupBy(value => value.Name, StringComparer.Ordinal).ToDictionary(group => group.Key, group => group.First(), StringComparer.Ordinal); foreach (KeyValuePair<string, string> binding in Step.ParameterBindings ?? new Dictionary<string, string>()) { if (IsLimitKey(binding.Key)) continue; BlockParameterDefinition parameter; parameters.TryGetValue(binding.Value, out parameter); object value = ResolveParameter(binding.Value, parameter == null ? null : parameter.DefaultValue); ValueFields.Add(HierarchyValueField.ForParameter(parameter == null ? binding.Value : parameter.DisplayName, value, parameter == null ? string.Empty : parameter.Unit, false, next => { if (_parameterValues != null) _parameterValues[binding.Value] = next; Changed(); })); }
+            Dictionary<string, BlockParameterDefinition> parameters = (Block.Parameters ?? new List<BlockParameterDefinition>()).Where(value => !string.IsNullOrWhiteSpace(value.Name)).GroupBy(value => value.Name, StringComparer.Ordinal).ToDictionary(group => group.Key, group => group.First(), StringComparer.Ordinal); foreach (KeyValuePair<string, string> binding in Step.ParameterBindings ?? new Dictionary<string, string>()) { if (IsLimitKey(binding.Key)) continue; BlockParameterDefinition parameter; parameters.TryGetValue(binding.Value, out parameter); object value = ResolveParameter(binding.Value, parameter == null ? null : parameter.DefaultValue); bool onOff = IsOnOffField(binding.Key, parameter == null ? null : parameter.Type, parameter == null ? null : parameter.Unit); if (onOff) value = Convert.ToBoolean(NormalizeBool(value), CultureInfo.InvariantCulture) ? "ON" : "OFF"; ValueFields.Add(HierarchyValueField.ForParameter(parameter == null ? binding.Value : parameter.DisplayName, value, onOff ? string.Empty : (parameter == null ? string.Empty : parameter.Unit), false, next => { if (_parameterValues != null) _parameterValues[binding.Value] = onOff ? NormalizeBool(next) : next; Changed(); }, onOff)); }
             if (ValueFields.Count == 0)
             {
-                string[] keys = { "Voltage", "Current", "TargetCurrent", "StepCurrent", "Frequency", "HoldTime", "TimeMs", "Speed", "Position", "Resistance", "ResValue", "Power", "Value", "Count", "TimeoutMs", "PeriodMs" }; foreach (string key in keys) { object value; if (!definition.Properties.TryGetValue(key, out value) || value == null) continue; ValueFields.Add(HierarchyValueField.ForParameter(key, EffectiveValue(key, value), UnitFor(key, definition), false, next => { SetProperty(key, next); })); if (ValueFields.Count >= 4) break; }
+                string[] keys = { "Voltage", "Current", "Output", "TargetCurrent", "StepCurrent", "Frequency", "HoldTime", "TimeMs", "Speed", "Position", "Resistance", "ResValue", "Power", "Value", "Count", "TimeoutMs", "PeriodMs" }; foreach (string key in keys) { object value; if (!definition.Properties.TryGetValue(key, out value) || value == null) continue; object effective = EffectiveValue(key, value); bool onOff = IsOnOffField(key, null, UnitFor(key, definition)); if (onOff) effective = Convert.ToBoolean(NormalizeBool(effective), CultureInfo.InvariantCulture) ? "ON" : "OFF"; ValueFields.Add(HierarchyValueField.ForParameter(key, effective, onOff ? string.Empty : UnitFor(key, definition), false, next => { SetProperty(key, onOff ? NormalizeBool(next) : next); }, onOff)); if (ValueFields.Count >= 4) break; }
             }
             bool batchConfiguration = definition.Properties.Keys.Any(key => key == "ChangesJson" || key == "SignalChecksJson" || key == "SignalsJson" || key == "ParametersJson" || key == "DataHex"); bool hasInlineJudgment = definition.Properties.ContainsKey("LowLimit") || definition.Properties.ContainsKey("HighLimit") || definition.Properties.ContainsKey("Comtype") || definition.Properties.ContainsKey("Limit"); HasComplexConfiguration = batchConfiguration || ValueFields.Count > 4 || ValueFields.Count == 0 && !hasInlineJudgment; if (HasComplexConfiguration && ValueFields.Count == 0) ValueSummary = batchConfiguration ? ComplexSummary(definition) : string.Empty;
         }
@@ -258,7 +428,24 @@ namespace ManualCanDebug
         private void SetProperty(string key, object value) { if (Step == null) return; string parameter; if (Step.ParameterBindings != null && Step.ParameterBindings.TryGetValue(key, out parameter) && _parameterValues != null) _parameterValues[parameter] = value; else StepValues(true)[key] = value; Raise(key + "Text"); Changed(); }
         private void SetNumericOrText(string key, string text) { if (string.IsNullOrWhiteSpace(text)) { SetProperty(key, string.Empty); return; } double number; SetProperty(key, double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out number) ? (object)number : text); }
         private static bool IsLimitKey(string key) { return key == "LowLimit" || key == "HighLimit" || key == "Comtype" || key == "Unit" || key == "Limit"; }
-        private static string UnitFor(string key, SequenceStepDefinition step) { string unit = Convert.ToString(step.Get("Unit", string.Empty), CultureInfo.InvariantCulture); if (!string.IsNullOrWhiteSpace(unit)) return unit; if (key.IndexOf("Voltage", StringComparison.OrdinalIgnoreCase) >= 0) return "V"; if (key.IndexOf("Current", StringComparison.OrdinalIgnoreCase) >= 0) return "A"; if (key.IndexOf("Frequency", StringComparison.OrdinalIgnoreCase) >= 0) return "Hz"; if (key.IndexOf("Time", StringComparison.OrdinalIgnoreCase) >= 0 || key.IndexOf("Period", StringComparison.OrdinalIgnoreCase) >= 0 || key.IndexOf("Timeout", StringComparison.OrdinalIgnoreCase) >= 0) return "ms"; return string.Empty; }
+        private static bool IsOnOffField(string key, string type, string unit)
+        {
+            if (string.Equals(key, "Output", StringComparison.OrdinalIgnoreCase) || string.Equals(key, "OutputEnabled", StringComparison.OrdinalIgnoreCase)) return true;
+            if (string.Equals(type, "bool", StringComparison.OrdinalIgnoreCase) || string.Equals(type, "boolean", StringComparison.OrdinalIgnoreCase)) return true;
+            if (string.Equals(unit, "ON/OFF", StringComparison.OrdinalIgnoreCase)) return true;
+            return false;
+        }
+        private static object NormalizeBool(object value)
+        {
+            if (value is bool) return value;
+            string text = Convert.ToString(value, CultureInfo.InvariantCulture);
+            bool parsed;
+            if (bool.TryParse(text, out parsed)) return parsed;
+            if (text == "1" || string.Equals(text, "ON", StringComparison.OrdinalIgnoreCase) || string.Equals(text, "YES", StringComparison.OrdinalIgnoreCase) || text == "开") return true;
+            if (text == "0" || string.Equals(text, "OFF", StringComparison.OrdinalIgnoreCase) || string.Equals(text, "NO", StringComparison.OrdinalIgnoreCase) || text == "关") return false;
+            return false;
+        }
+        private static string UnitFor(string key, SequenceStepDefinition step) { string unit = Convert.ToString(step.Get("Unit", string.Empty), CultureInfo.InvariantCulture); if (!string.IsNullOrWhiteSpace(unit)) return unit; if (string.Equals(key, "Output", StringComparison.OrdinalIgnoreCase)) return "ON/OFF"; if (key.IndexOf("Voltage", StringComparison.OrdinalIgnoreCase) >= 0) return "V"; if (key.IndexOf("Current", StringComparison.OrdinalIgnoreCase) >= 0) return "A"; if (key.IndexOf("Frequency", StringComparison.OrdinalIgnoreCase) >= 0) return "Hz"; if (key.IndexOf("Time", StringComparison.OrdinalIgnoreCase) >= 0 || key.IndexOf("Period", StringComparison.OrdinalIgnoreCase) >= 0 || key.IndexOf("Timeout", StringComparison.OrdinalIgnoreCase) >= 0) return "ms"; return string.Empty; }
         private static string ComplexSummary(SequenceStepDefinition step) { string json = Convert.ToString(step.Get("SignalChecksJson", step.Get("SignalsJson", string.Empty)), CultureInfo.InvariantCulture); if (!string.IsNullOrWhiteSpace(json)) { try { Newtonsoft.Json.Linq.JToken token = Newtonsoft.Json.Linq.JToken.Parse(json); return "已选 " + (token.Type == Newtonsoft.Json.Linq.JTokenType.Array ? token.Count() : token.Children<Newtonsoft.Json.Linq.JProperty>().Count()) + " 项"; } catch { } } return "复杂配置"; }
         private static string FriendlyType(SequenceStepDefinition step) { string operation = Convert.ToString(step.Get("Operation", string.Empty), CultureInfo.InvariantCulture); if (operation == "Delay" || step.StepName.IndexOf("等待", StringComparison.OrdinalIgnoreCase) >= 0) return "等待"; if (step.Properties.ContainsKey("LowLimit") || step.Properties.ContainsKey("HighLimit") || step.Properties.ContainsKey("SignalChecksJson")) return "测量"; if (step.FunctionName == "FCT_ExecuteLogic") return "逻辑"; if (step.FunctionName == "FCT_CANTable" || step.FunctionName == "FCT_CANSignal") return "产品"; return "动作"; }
         private static string IconFor(SequenceStepDefinition step) { string type = FriendlyType(step); return type == "等待" ? "\uE916" : type == "测量" ? "\uE9D2" : type == "逻辑" ? "\uE8F2" : type == "产品" ? "\uE968" : "\uE768"; }
@@ -271,11 +458,64 @@ namespace ManualCanDebug
     internal sealed class HierarchyValueField : INotifyPropertyChanged
     {
         private readonly Action<object> _set; private readonly Type _type; private string _text; private bool _isValid = true;
-        private HierarchyValueField(string name, object value, string unit, bool readOnly, Action<object> set) { DisplayName = string.IsNullOrWhiteSpace(name) ? "参数" : name; _type = value == null ? typeof(string) : value.GetType(); _text = value == null ? string.Empty : Convert.ToString(value, CultureInfo.InvariantCulture); Unit = unit ?? string.Empty; IsReadOnly = readOnly; _set = set; }
-        public static HierarchyValueField ForParameter(string name, object value, string unit, bool readOnly, Action<object> set) { return new HierarchyValueField(name, value, unit, readOnly, set); }
-        public string DisplayName { get; private set; } public string Unit { get; private set; } public bool IsReadOnly { get; private set; } public bool IsValid { get { return _isValid; } private set { if (_isValid == value) return; _isValid = value; Raise("IsValid"); } } public string ValueText { get { return _text; } set { _text = value ?? string.Empty; object converted; if (!TryConvert(_text, out converted)) { IsValid = false; Raise("ValueText"); return; } IsValid = true; if (!IsReadOnly && _set != null) _set(converted); Raise("ValueText"); } }
-        private bool TryConvert(string text, out object value) { value = text; if (_type == typeof(bool)) { bool parsed; if (!bool.TryParse(text, out parsed)) return false; value = parsed; return true; } if (_type == typeof(int) || _type == typeof(short) || _type == typeof(long)) { int parsed; if (!int.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out parsed)) return false; value = parsed; return true; } if (_type == typeof(double) || _type == typeof(float) || _type == typeof(decimal)) { double parsed; if (!double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out parsed)) return false; value = parsed; return true; } return true; }
-        private void Raise(string name) { PropertyChangedEventHandler handler = PropertyChanged; if (handler != null) handler(this, new PropertyChangedEventArgs(name)); } public event PropertyChangedEventHandler PropertyChanged;
+        private HierarchyValueField(string name, object value, string unit, bool readOnly, Action<object> set, bool isOnOff)
+        {
+            DisplayName = string.IsNullOrWhiteSpace(name) ? "参数" : name;
+            IsOnOff = isOnOff;
+            _type = isOnOff ? typeof(string) : (value == null ? typeof(string) : value.GetType());
+            if (isOnOff)
+            {
+                bool on = value is bool && (bool)value
+                    || string.Equals(Convert.ToString(value, CultureInfo.InvariantCulture), "ON", StringComparison.OrdinalIgnoreCase)
+                    || string.Equals(Convert.ToString(value, CultureInfo.InvariantCulture), "True", StringComparison.OrdinalIgnoreCase)
+                    || Convert.ToString(value, CultureInfo.InvariantCulture) == "1";
+                _text = on ? "ON" : "OFF";
+                Unit = string.Empty;
+            }
+            else
+            {
+                _text = value == null ? string.Empty : Convert.ToString(value, CultureInfo.InvariantCulture);
+                Unit = unit ?? string.Empty;
+            }
+            IsReadOnly = readOnly;
+            _set = set;
+        }
+        public static HierarchyValueField ForParameter(string name, object value, string unit, bool readOnly, Action<object> set, bool isOnOff = false) { return new HierarchyValueField(name, value, unit, readOnly, set, isOnOff); }
+        public string DisplayName { get; private set; }
+        public string Unit { get; private set; }
+        public bool IsReadOnly { get; private set; }
+        public bool IsOnOff { get; private set; }
+        public bool IsValid { get { return _isValid; } private set { if (_isValid == value) return; _isValid = value; Raise("IsValid"); } }
+        public string ValueText
+        {
+            get { return _text; }
+            set
+            {
+                string next = value ?? string.Empty;
+                if (IsOnOff)
+                {
+                    bool on = string.Equals(next, "ON", StringComparison.OrdinalIgnoreCase) || string.Equals(next, "True", StringComparison.OrdinalIgnoreCase) || next == "1";
+                    next = on ? "ON" : "OFF";
+                }
+                _text = next;
+                object converted;
+                if (!TryConvert(_text, out converted)) { IsValid = false; Raise("ValueText"); return; }
+                IsValid = true;
+                if (!IsReadOnly && _set != null) _set(IsOnOff ? (object)string.Equals(_text, "ON", StringComparison.OrdinalIgnoreCase) : converted);
+                Raise("ValueText");
+            }
+        }
+        private bool TryConvert(string text, out object value)
+        {
+            value = text;
+            if (IsOnOff) { value = string.Equals(text, "ON", StringComparison.OrdinalIgnoreCase); return true; }
+            if (_type == typeof(bool)) { bool parsed; if (bool.TryParse(text, out parsed)) { value = parsed; return true; } if (text == "1" || string.Equals(text, "ON", StringComparison.OrdinalIgnoreCase) || string.Equals(text, "YES", StringComparison.OrdinalIgnoreCase)) { value = true; return true; } if (text == "0" || string.Equals(text, "OFF", StringComparison.OrdinalIgnoreCase) || string.Equals(text, "NO", StringComparison.OrdinalIgnoreCase)) { value = false; return true; } return false; }
+            if (_type == typeof(int) || _type == typeof(short) || _type == typeof(long)) { int parsed; if (!int.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out parsed)) return false; value = parsed; return true; }
+            if (_type == typeof(double) || _type == typeof(float) || _type == typeof(decimal)) { double parsed; if (!double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out parsed)) return false; value = parsed; return true; }
+            return true;
+        }
+        private void Raise(string name) { PropertyChangedEventHandler handler = PropertyChanged; if (handler != null) handler(this, new PropertyChangedEventArgs(name)); }
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 
     internal sealed class SequenceHierarchyCommand

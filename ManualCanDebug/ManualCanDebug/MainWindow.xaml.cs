@@ -779,10 +779,26 @@ namespace ManualCanDebug
         private async Task InitializeSelectedInstrumentsAsync(string instrumentsJson)
         {
             if (_legacyRuntime == null) throw new InvalidOperationException("原平台MainTest执行引擎没有加载成功。");
-            if (_legacyRuntime.InstrumentsInitialized) throw new InvalidOperationException("仪器已经初始化。请先安全下电，再改变仪器中心的勾选。");
             JArray selected = JArray.Parse(instrumentsJson ?? "[]");
             string[] names = selected.OfType<JObject>().Select(item => ((string)item["Name"] ?? string.Empty).ToUpperInvariant()).Where(name => name.Length > 0).ToArray();
             if (names.Length == 0) throw new InvalidOperationException("请先在仪器中心勾选至少一个需要初始化的仪器。");
+            if (_legacyRuntime.InstrumentsInitialized)
+            {
+                MessageBoxResult confirm = MessageBox.Show(this,
+                    "仪器已经初始化。\n\n是否先安全下电，再按当前勾选重新初始化？\n\n将初始化：" + string.Join(" / ", names),
+                    "重新初始化仪器",
+                    MessageBoxButton.YesNo,
+                    MessageBoxImage.Question);
+                if (confirm != MessageBoxResult.Yes) return;
+                UpdateLegacyRuntimeStatus("正在安全下电以便重新初始化...", Brushes.DarkOrange);
+                await _legacyRuntime.SafeShutdownAsync();
+                _productStatusText.Text = "未连接";
+                _resolverStatusText.Text = "未连接";
+                _auxiliaryStatusText.Text = "未连接";
+                if (_instrumentCenterPanel != null) _instrumentCenterPanel.SetInitializedInstruments(new string[0]);
+                SetAdvancedDiagnosticAvailability(true);
+                Service_Log("已安全下电，开始按新勾选重新初始化：" + string.Join(", ", names));
+            }
             _initializeAllInstrumentsButton.IsEnabled = false;
             UpdateLegacyRuntimeStatus("MainTest正在初始化：" + string.Join(" / ", names), Brushes.DarkOrange);
             try
@@ -1696,11 +1712,60 @@ namespace ManualCanDebug
         }
         private void OpenHierarchyStepConfiguration(SequenceHierarchyRow row)
         {
-            if (row == null || row.Step == null) return; if (row.Step.IsModuleReference) { OpenHierarchyModuleBinding(row); return; } SequenceStepDefinition effective = row.BuildEffectiveStep(); if (effective == null) return; Window dialog = null; ActionConfigurationPanel panel = new ActionConfigurationPanel(_productLocatorRepository, ExecuteInstrumentStepAsync, delegate(SequenceStepDefinition configured, IDictionary<string, string> bindings) { row.ApplyConfiguredStep(configured); StudioFlowChanged(); if (dialog != null) dialog.DialogResult = true; }, Service_Log, () => _studioProject == null ? string.Empty : _studioProject.Product, () => _studioProject == null ? string.Empty : _studioProject.AuxiliaryDbcPath, () => _legacyRuntime == null ? null : _legacyRuntime.LastStepExecution); panel.LoadStep(effective, row.Step.ParameterBindings); panel.SetDebugMode(_workModeComboBox != null && _workModeComboBox.SelectedIndex == 1); SequenceStepDefinition batchConfigured; if (panel.TryShowDirectBatchConfiguration(this, out batchConfigured)) { if (batchConfigured != null) { row.ApplyConfiguredStep(batchConfigured); StudioFlowChanged(); } if (_studioFlowEditorPanel != null) _studioFlowEditorPanel.RefreshProject(); return; } dialog = new Window { Title = "配置当前SEQ执行项 - " + row.NameText, Width = 1320, Height = 820, MinWidth = 980, MinHeight = 660, Owner = this, WindowStartupLocation = WindowStartupLocation.CenterOwner, Background = Brushes.White, Content = panel }; dialog.ShowDialog(); if (_studioFlowEditorPanel != null) _studioFlowEditorPanel.RefreshProject();
+            if (row == null || row.Step == null) return; if (row.Step.IsModuleReference) { OpenHierarchyModuleBinding(row); return; } SequenceStepDefinition effective = row.BuildEffectiveStep(); if (effective == null) return; Window dialog = null; ActionConfigurationPanel panel = new ActionConfigurationPanel(_productLocatorRepository, ExecuteInstrumentStepAsync, delegate(SequenceStepDefinition configured, IDictionary<string, string> bindings) { row.ApplyConfiguredStep(configured); if (row.SyncDcdcLoadFollowOnSetpoint(configured)) Service_Log("电子负载模式已切换，已同步后续设定值STEP为对应 0" + ActionConfigurationPanel.DcdcSetpointUnit(ActionConfigurationPanel.DcdcModeFamily(Convert.ToString(configured.Get("Mode"), CultureInfo.InvariantCulture)))); StudioFlowChanged(); if (dialog != null) dialog.DialogResult = true; }, Service_Log, () => _studioProject == null ? string.Empty : _studioProject.Product, () => _studioProject == null ? string.Empty : _studioProject.AuxiliaryDbcPath, () => _legacyRuntime == null ? null : _legacyRuntime.LastStepExecution); panel.LoadStep(effective, row.Step.ParameterBindings); panel.SetDebugMode(_workModeComboBox != null && _workModeComboBox.SelectedIndex == 1); SequenceStepDefinition batchConfigured; if (panel.TryShowDirectBatchConfiguration(this, out batchConfigured)) { if (batchConfigured != null) { row.ApplyConfiguredStep(batchConfigured); StudioFlowChanged(); } if (_studioFlowEditorPanel != null) _studioFlowEditorPanel.RefreshProject(); return; } dialog = new Window { Title = "配置当前SEQ执行项 - " + row.NameText, Width = 1320, Height = 820, MinWidth = 980, MinHeight = 660, Owner = this, WindowStartupLocation = WindowStartupLocation.CenterOwner, Background = Brushes.White, Content = panel }; dialog.ShowDialog(); if (_studioFlowEditorPanel != null) _studioFlowEditorPanel.RefreshProject();
         }
         private async Task RunHierarchyRowAsync(SequenceHierarchyRow row)
         {
-            if (row == null || row.Instance == null) return; FctStudioCompileResult compiled = FctStudioCompiler.Compile(_studioProject); List<CompiledStepTrace> traces = HierarchyExecutionTraces(compiled, row); if (traces.Count == 0) throw new InvalidOperationException("当前行没有可执行的STEP，可能已被停用或配置不完整。"); if (_studioFlowEditorPanel != null) _studioFlowEditorPanel.PrepareHierarchyDebug(compiled); row.Status = "运行中"; row.Result = string.Empty; try { bool executed = await StartStudioDebugAsync(compiled, traces[0].SequenceIndex, traces[traces.Count - 1].SequenceIndex); if (!executed) { row.Status = "待运行"; return; } if (_studioDebugActive) { row.Status = "断点暂停"; row.Result = "等待继续执行"; return; } if (row.IsModule) { row.Status = "完成"; row.Result = "已执行 " + traces.Count.ToString(CultureInfo.InvariantCulture) + " 个STEP"; } } catch { row.Status = "失败"; if (row.IsModule) row.Result = "模块执行失败"; throw; }
+            if (row == null || row.Instance == null) return;
+
+            // Single STEP live run must NOT use StartStudioDebugAsync → EndDebugSession → PostUUT.
+            // PostUUT forces HVDC/LVDC output OFF, so Output=ON from the SEQ list looked like it
+            // auto-closed after ~1s. Match 配置→立即试运行: ExecuteInstrumentStepAsync only.
+            if (!row.IsModule && row.Step != null && !row.Step.IsModuleReference)
+            {
+                SequenceStepDefinition step = row.BuildEffectiveStep();
+                if (step == null) throw new InvalidOperationException("当前行没有可执行的STEP，可能已被停用或配置不完整。");
+                bool highVoltage = step.FunctionName.StartsWith("HVDC_", StringComparison.Ordinal)
+                    || (step.FunctionName == "FCT_ExecuteAction" && string.Equals(Convert.ToString(step.Get("Device")), "HVDC", StringComparison.OrdinalIgnoreCase));
+                if (highVoltage && MessageBox.Show(this, "该调试动作会操作高压电源。\n\n请确认接线、负载、急停、水冷和人员安全条件已经满足。是否继续？", "高压调试确认", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes)
+                    return;
+                row.Status = "运行中";
+                row.Result = string.Empty;
+                try
+                {
+                    string result = await ExecuteInstrumentStepAsync(step);
+                    string measured = ActionConfigurationPanel.FormatPlatformMeasurements(_legacyRuntime == null ? null : _legacyRuntime.LastStepExecution, string.Empty);
+                    row.Status = IsPassingStatus(result) ? "完成" : "失败";
+                    row.Result = string.IsNullOrWhiteSpace(measured) ? (string.IsNullOrWhiteSpace(result) ? "完成" : result) : measured;
+                    Service_Log("层级单步实时执行完成：" + step.StepName + "（不调用PostUUT，输出状态保持）");
+                }
+                catch
+                {
+                    row.Status = "失败";
+                    throw;
+                }
+                return;
+            }
+
+            FctStudioCompileResult compiled = FctStudioCompiler.Compile(_studioProject);
+            List<CompiledStepTrace> traces = HierarchyExecutionTraces(compiled, row);
+            if (traces.Count == 0) throw new InvalidOperationException("当前行没有可执行的STEP，可能已被停用或配置不完整。");
+            if (_studioFlowEditorPanel != null) _studioFlowEditorPanel.PrepareHierarchyDebug(compiled);
+            row.Status = "运行中";
+            row.Result = string.Empty;
+            try
+            {
+                bool executed = await StartStudioDebugAsync(compiled, traces[0].SequenceIndex, traces[traces.Count - 1].SequenceIndex);
+                if (!executed) { row.Status = "待运行"; return; }
+                if (_studioDebugActive) { row.Status = "断点暂停"; row.Result = "等待继续执行"; return; }
+                if (row.IsModule) { row.Status = "完成"; row.Result = "已执行 " + traces.Count.ToString(CultureInfo.InvariantCulture) + " 个STEP"; }
+            }
+            catch
+            {
+                row.Status = "失败";
+                if (row.IsModule) row.Result = "模块执行失败";
+                throw;
+            }
         }
         internal static List<CompiledStepTrace> HierarchyExecutionTraces(FctStudioCompileResult compiled, SequenceHierarchyRow row) { if (compiled == null || row == null || row.Instance == null) return new List<CompiledStepTrace>(); IEnumerable<CompiledStepTrace> instanceTraces = compiled.Trace.Where(value => value.FlowInstanceId == row.Instance.Id); if (row.Depth == 0) return instanceTraces.OrderBy(value => value.SequenceIndex).ToList(); if (row.IsModule) { string prefix = (row.Path ?? string.Empty) + "/"; return instanceTraces.Where(value => (value.HierarchyPath ?? string.Empty).StartsWith(prefix, StringComparison.Ordinal)).OrderBy(value => value.SequenceIndex).ToList(); } return instanceTraces.Where(value => value.HierarchyPath == row.Path || value.BlockStepId == (row.Step == null ? string.Empty : row.Step.Id)).OrderBy(value => value.SequenceIndex).Take(1).ToList(); }
         private void HandleHierarchyCommand(SequenceHierarchyCommand request)
