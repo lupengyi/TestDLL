@@ -848,10 +848,23 @@ namespace CSP
             if (meter == null) throw new InvalidOperationException("万用表在当前工位没有实例。请在仪器中心为该工位分配并填写连接资源。");
             switch (operation.ToUpperInvariant())
             {
+                case "INIT": meter.InitDMM(); return null;
+                case "RESET": meter.RST(); return null;
+                case "IDENTIFY": string identity; meter.IDN(out identity); return identity;
+                case "CONFIGMEASURE":
+                {
+                    string typeText = FCT_InputString(socketIndex, "MeasureType", "DCVoltage");
+                    int separator = typeText.IndexOf(" - ", StringComparison.Ordinal); if (separator > 0) typeText = typeText.Substring(0, separator).Trim();
+                    Instruments.DMM.MeasureTypes measureType; if (!Enum.TryParse(typeText, true, out measureType)) throw new InvalidOperationException("Unsupported DMM measure type: " + typeText);
+                    meter.ConfigDMMforMeasure(measureType); return null;
+                }
                 case "CONFIGDCVOLTAGE": meter.ConfigDMMforDC(FCT_InputDouble(socketIndex, "Range", 1000), FCT_InputDouble(socketIndex, "Solution", 0.01)); return null;
                 case "CONFIGDCCURRENT": meter.ConfigDMMforDCCurrent(FCT_InputDouble(socketIndex, "Range", 3), FCT_InputDouble(socketIndex, "Solution", 0.00001)); return null;
                 case "CONFIGACVOLTAGE": meter.ConfigDMMforAC(FCT_InputDouble(socketIndex, "Range", 1000), FCT_InputDouble(socketIndex, "Solution", 0.01)); return null;
                 case "CONFIGACCURRENT": meter.ConfigDMMforACCurrent(FCT_InputDouble(socketIndex, "Range", 3), FCT_InputDouble(socketIndex, "Solution", 0.00001)); return null;
+                case "CONFIGRESISTANCE": meter.ConfigDMMForRES(FCT_InputDouble(socketIndex, "Range", -1), FCT_InputDouble(socketIndex, "Solution", -1)); return null;
+                case "CONFIGFREQUENCY": meter.ConfigDMMforFREQ(FCT_InputDouble(socketIndex, "Range", -1), FCT_InputDouble(socketIndex, "Solution", -1)); return null;
+                case "CONFIGCALCULATEMAXIMUM": meter.ConfigDMMforCALulate(); return null;
                 case "READ": return meter.GetMeasureValue();
                 case "CLOSE": meter.CloseSession(); return null;
                 default: throw new InvalidOperationException("Unsupported DMM operation: " + operation);
