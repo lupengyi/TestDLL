@@ -228,9 +228,9 @@ namespace ManualCanDebug
                     string baseDirectory = AppDomain.CurrentDomain.BaseDirectory;
                     using (LegacySequenceRuntime runtime = new LegacySequenceRuntime(baseDirectory, Path.Combine(baseDirectory, "Config", "DefaultSequence.json")))
                     {
-                        const string payload = "[{\"Name\":\"DUTCAN\",\"Type\":\"CAN\",\"Mode\":\"ZLG\",\"Resource\":\"192.166.6.10\",\"Parameter\":\"52,2,500000,8000\"},{\"Name\":\"AUXCAN\",\"Type\":\"CAN\",\"Mode\":\"ZLG\",\"Resource\":\"192.166.6.10\",\"Parameter\":\"52,0,500000,8000\"},{\"Name\":\"RESOLVERCAN\",\"Type\":\"CAN\",\"Mode\":\"ZLG\",\"Resource\":\"192.166.6.10\",\"Parameter\":\"52,1,500000,8000\"}]";
+                        const string payload = "[{\"Name\":\"DUTCAN\",\"Type\":\"CAN\",\"Mode\":\"ZLG\",\"Resource\":\"192.168.1.17\",\"Parameter\":\"48,0,500000,8000,0\"},{\"Name\":\"MAINCAN\",\"Type\":\"CAN\",\"Mode\":\"ZLG\",\"Resource\":\"192.168.1.17\",\"Parameter\":\"48,1,500000,8000,0\"},{\"Name\":\"AUXCAN\",\"Type\":\"CAN\",\"Mode\":\"ZLG\",\"Resource\":\"192.168.1.18\",\"Parameter\":\"48,0,500000,8000,0\"},{\"Name\":\"CALIBRATIONCAN\",\"Type\":\"CAN\",\"Mode\":\"ZLG\",\"Resource\":\"192.168.1.18\",\"Parameter\":\"48,1,500000,8000,0\"},{\"Name\":\"RESOLVERCAN\",\"Type\":\"CAN\",\"Mode\":\"ZLG\",\"Resource\":\"192.168.1.19\",\"Parameter\":\"48,0,500000,8000,0\"},{\"Name\":\"RESOLVERCAN2\",\"Type\":\"CAN\",\"Mode\":\"ZLG\",\"Resource\":\"192.168.1.19\",\"Parameter\":\"48,1,500000,8000,0\"}]";
                         runtime.InitializeInstrumentsAsync(payload).GetAwaiter().GetResult();
-                        if (!runtime.InstrumentsInitialized) throw new InvalidOperationException("Three selected CAN channels were not initialized.");
+                        string[] expected = { "DUTCAN", "MAINCAN", "AUXCAN", "CALIBRATIONCAN", "RESOLVERCAN", "RESOLVERCAN2" }; if (!runtime.InstrumentsInitialized || expected.Any(name => !runtime.InitializedInstrumentNames.Contains(name))) throw new InvalidOperationException("Six selected CAN channels were not initialized: " + string.Join(",", runtime.InitializedInstrumentNames));
                         runtime.SafeShutdownAsync().GetAwaiter().GetResult();
                     }
                     Environment.ExitCode = 0;

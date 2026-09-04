@@ -17,7 +17,7 @@
     "Resource": "192.168.1.17",
     "Parameter": "48,0,500000,8000,0",
     "Comment": "200U产品CAN；参数=设备类型,通道,波特率,端口,设备索引",
-    "Initialize": false
+    "Initialize": true
   },
   {
     "UniqueIndex": 2,
@@ -87,7 +87,7 @@
     "Resource": "192.168.1.18",
     "Parameter": "48,0,500000,8000,0",
     "Comment": "200U辅驱/DBC CAN；参数=设备类型,通道,波特率,端口,设备索引",
-    "Initialize": false
+    "Initialize": true
   },
   {
     "UniqueIndex": 9,
@@ -97,7 +97,7 @@
     "Resource": "192.168.1.19",
     "Parameter": "48,0,500000,8000,0",
     "Comment": "200U旋变CAN；参数=设备类型,通道,波特率,端口,设备索引",
-    "Initialize": false
+    "Initialize": true
   },
   {
     "UniqueIndex": 10,
@@ -167,7 +167,7 @@
     "Resource": "192.168.1.17",
     "Parameter": "48,1,500000,8000,0",
     "Comment": "主驱CAN（第一张200U CAN1）",
-    "Initialize": false
+    "Initialize": true
   },
   {
     "UniqueIndex": 17,
@@ -177,7 +177,7 @@
     "Resource": "192.168.1.18",
     "Parameter": "48,1,500000,8000,0",
     "Comment": "校准CAN（第二张200U CAN1）",
-    "Initialize": false
+    "Initialize": true
   },
   {
     "UniqueIndex": 18,
@@ -187,6 +187,6 @@
     "Resource": "192.168.1.19",
     "Parameter": "48,1,500000,8000,0",
     "Comment": "旋变2CAN（第三张200U CAN1）",
-    "Initialize": false
+    "Initialize": true
   }
 ]

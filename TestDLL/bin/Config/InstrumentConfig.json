@@ -1,132 +1,192 @@
 [
-	{
-		"UniqueIndex": 0,
-		"Name": "RES",
-		"Type": "Other",
-		"Mode": "NGI",
-		"Resource": "TCPIP0::192.168.0.123::7000::SOCKET",
-		"Parameter": "",
-		"Comment": "ProgramResistance",
-		"Initialize": false
-	},
-	{
-		"UniqueIndex": 1,
-		"Name": "DUTCAN",
-		"Type": "CAN",
-		"Mode": "ZLG",
-		"Resource": "192.166.6.10",
-		"Parameter": "52,2,500000,8000",
-		"Comment": "400U channel 2 main drive/product CAN",
-		"Initialize": true
-	},
-	{
-		"UniqueIndex": 2,
-		"Name": "HVDC",
-		"Type": "PowerSupply",
-		"Mode": "Kewell",
-		"Resource": "TCPIP0::192.168.0.122::502::SOCKET",
-		"Parameter": "",
-		"Comment": "",
-		"Initialize": false
-	},
-	{
-		"UniqueIndex": 3,
-		"Name": "LVDC",
-		"Type": "PowerSupply",
-		"Mode": "IT",
-		"Resource": "USB0::0x2EC7::0x6700::802259073797370075::INSTR",
-		"Parameter": "",
-		"Comment": "KL30 independent low-voltage supply",
-		"Initialize": false
-	},
-	{
-		"UniqueIndex": 4,
-		"Name": "DMM",
-		"Type": "DMM",
-		"Mode": "Kewell",
-		"Resource": "TCPIP0::A-34461A-00000.local::inst0::INSTR",
-		"Parameter": "",
-		"Comment": "",
-		"Initialize": false
-	},
-	{
-		"UniqueIndex": 5,
-		"Name": "RELAY_FCT",
-		"Type": "DIO",
-		"Mode": "SHT_48SEDO_A",
-		"Resource": "192.168.0.124",
-		"Parameter": "502,1",
-		"Comment": "FCT function SHT relay board; placeholder IP is editable; OUT1 maps to channel 0",
-		"Initialize": false
-	},
-	{
-		"UniqueIndex": 6,
-		"Name": "RELAY_HVMUX",
-		"Type": "DIO",
-		"Mode": "SHT_48SEDO_A",
-		"Resource": "192.168.0.125",
-		"Parameter": "502,1",
-		"Comment": "HV 15-to-1 SHT relay board; placeholder IP is editable; OUT1 maps to channel 0",
-		"Initialize": false
-	},
-	{
-		"UniqueIndex": 7,
-		"Name": "DCDC_LOAD",
-		"Type": "ElectronicLoad",
-		"Mode": "AN23600E",
-		"Resource": "",
-		"Parameter": "2101",
-		"Comment": "DCDC electronic load; configure LAN IP before enabling",
-		"Initialize": false
-	},
-	{
-		"UniqueIndex": 8,
-		"Name": "AUXCAN",
-		"Type": "CAN",
-		"Mode": "ZLG",
-		"Resource": "192.166.6.10",
-		"Parameter": "52,0,500000,8000",
-		"Comment": "400U channel 0 auxiliary/DBC CAN",
-		"Initialize": true
-	},
-	{
-		"UniqueIndex": 9,
-		"Name": "RESOLVERCAN",
-		"Type": "CAN",
-		"Mode": "ZLG",
-		"Resource": "192.166.6.10",
-		"Parameter": "52,1,500000,8000",
-		"Comment": "400U channel 1 resolver CAN",
-		"Initialize": true
-	},
-	{
-		"UniqueIndex": 10,
-		"Name": "DAQ",
-		"Type": "DAQ",
-		"Mode": "NI",
-		"Resource": "NI-9227",
-		"Parameter": "cDAQ1Mod1/ai0,cDAQ1Mod1/ai1,cDAQ1Mod1/ai2;cDAQ1Mod2/ai0,cDAQ1Mod2/ai1,cDAQ1Mod2/ai2;cDAQ1Mod3/ai0,cDAQ1Mod3/ai1,cDAQ1Mod3/ai2;cDAQ1Mod4/ai0,cDAQ1Mod4/ai1,cDAQ1Mod4/ai2",
-		"Comment": "NI-9227 native current input; STEP PhysicalChannel and CT Ratio perform primary-current scaling",
-		"Initialize": false
-	},
-	{
-		"UniqueIndex": 11,
-		"Name": "PLC",
-		"Type": "PLC",
-		"Mode": "S7",
-		"Resource": "10.231.138.100",
-		"Parameter": "30",
-		"Comment": "S7 slot/address parameter",
-		"Initialize": false
-	},
-	{
-		"UniqueIndex": 12,
-		"Name": "LVDC_KL15",
-		"Type": "PowerSupply",
-		"Mode": "IT",
-		"Resource": "",
-		"Parameter": "",
-		"Comment": "KL15 independent IT6xxxC low-voltage supply; configure its USB resource",
-		"Initialize": false
-	}
+  {
+    "UniqueIndex": 0,
+    "Name": "RES_1",
+    "Type": "Other",
+    "Mode": "NGI",
+    "Resource": "TCPIP0::192.168.1.20::7000::SOCKET",
+    "Parameter": "",
+    "Comment": "程控电阻卡1；填写独立TCPIP或串口资源",
+    "Initialize": false
+  },
+  {
+    "UniqueIndex": 1,
+    "Name": "DUTCAN",
+    "Type": "CAN",
+    "Mode": "ZLG",
+    "Resource": "192.168.1.17",
+    "Parameter": "48,0,500000,8000,0",
+    "Comment": "200U产品CAN；参数=设备类型,通道,波特率,端口,设备索引",
+    "Initialize": true
+  },
+  {
+    "UniqueIndex": 2,
+    "Name": "HVDC",
+    "Type": "PowerSupply",
+    "Mode": "Kewell",
+    "Resource": "TCPIP0::192.168.1.13::502::SOCKET",
+    "Parameter": "",
+    "Comment": "",
+    "Initialize": false
+  },
+  {
+    "UniqueIndex": 3,
+    "Name": "LVDC",
+    "Type": "PowerSupply",
+    "Mode": "IT",
+    "Resource": "ASRL11::INSTR",
+    "Parameter": "",
+    "Comment": "KL30低压电源；串口服务器192.168.1.11映射COM11",
+    "Initialize": false
+  },
+  {
+    "UniqueIndex": 4,
+    "Name": "DMM_HV",
+    "Type": "DMM",
+    "Mode": "Keysight34410A",
+    "Resource": "TCPIP0::192.168.1.15::inst0::INSTR",
+    "Parameter": "",
+    "Comment": "高压万用表",
+    "Initialize": false
+  },
+  {
+    "UniqueIndex": 5,
+    "Name": "RELAY_FCT",
+    "Type": "DIO",
+    "Mode": "SHT_48SEDO_A",
+    "Resource": "192.168.1.31",
+    "Parameter": "502,1",
+    "Comment": "FCT function SHT relay board; placeholder IP is editable; OUT1 maps to channel 0",
+    "Initialize": false
+  },
+  {
+    "UniqueIndex": 6,
+    "Name": "RELAY_HVMUX",
+    "Type": "DIO",
+    "Mode": "SHT_48SEDO_A",
+    "Resource": "192.168.1.32",
+    "Parameter": "502,1",
+    "Comment": "15口高压继电器卡；与48口卡共用SHT协议；仅允许OUT1-OUT15",
+    "Initialize": false
+  },
+  {
+    "UniqueIndex": 7,
+    "Name": "DCDC_LOAD",
+    "Type": "ElectronicLoad",
+    "Mode": "AN23600E",
+    "Resource": "192.168.1.14",
+    "Parameter": "2101",
+    "Comment": "DCDC electronic load; configure LAN IP before enabling",
+    "Initialize": false
+  },
+  {
+    "UniqueIndex": 8,
+    "Name": "AUXCAN",
+    "Type": "CAN",
+    "Mode": "ZLG",
+    "Resource": "192.168.1.18",
+    "Parameter": "48,0,500000,8000,0",
+    "Comment": "200U辅驱/DBC CAN；参数=设备类型,通道,波特率,端口,设备索引",
+    "Initialize": true
+  },
+  {
+    "UniqueIndex": 9,
+    "Name": "RESOLVERCAN",
+    "Type": "CAN",
+    "Mode": "ZLG",
+    "Resource": "192.168.1.19",
+    "Parameter": "48,0,500000,8000,0",
+    "Comment": "200U旋变CAN；参数=设备类型,通道,波特率,端口,设备索引",
+    "Initialize": true
+  },
+  {
+    "UniqueIndex": 10,
+    "Name": "DAQ",
+    "Type": "DAQ",
+    "Mode": "NI",
+    "Resource": "NI-9227",
+    "Parameter": "cDAQ1Mod1/ai0,cDAQ1Mod1/ai1,cDAQ1Mod1/ai2;cDAQ1Mod2/ai0,cDAQ1Mod2/ai1,cDAQ1Mod2/ai2;cDAQ1Mod3/ai0,cDAQ1Mod3/ai1,cDAQ1Mod3/ai2;cDAQ1Mod4/ai0,cDAQ1Mod4/ai1,cDAQ1Mod4/ai2",
+    "Comment": "NI-9227 native current input; STEP PhysicalChannel and CT Ratio perform primary-current scaling",
+    "Initialize": false
+  },
+  {
+    "UniqueIndex": 11,
+    "Name": "PLC",
+    "Type": "PLC",
+    "Mode": "S7",
+    "Resource": "10.231.138.100",
+    "Parameter": "30",
+    "Comment": "S7 slot/address parameter",
+    "Initialize": false
+  },
+  {
+    "UniqueIndex": 12,
+    "Name": "LVDC_KL15",
+    "Type": "PowerSupply",
+    "Mode": "IT",
+    "Resource": "ASRL12::INSTR",
+    "Parameter": "",
+    "Comment": "KL15低压电源；串口服务器192.168.1.12映射COM12",
+    "Initialize": false
+  },
+  {
+    "UniqueIndex": 13,
+    "Name": "DMM_LV",
+    "Type": "DMM",
+    "Mode": "KeySight34461A",
+    "Resource": "TCPIP0::192.168.1.16::inst0::INSTR",
+    "Parameter": "",
+    "Comment": "低压万用表；填写独立VISA资源",
+    "Initialize": false
+  },
+  {
+    "UniqueIndex": 14,
+    "Name": "RES_2",
+    "Type": "Other",
+    "Mode": "NGI",
+    "Resource": "TCPIP0::192.168.1.21::7000::SOCKET",
+    "Parameter": "",
+    "Comment": "程控电阻卡2；填写独立TCPIP或串口资源",
+    "Initialize": false
+  },
+  {
+    "UniqueIndex": 15,
+    "Name": "RES_3",
+    "Type": "Other",
+    "Mode": "NGI",
+    "Resource": "TCPIP0::192.168.1.22::7000::SOCKET",
+    "Parameter": "",
+    "Comment": "程控电阻卡3；填写独立TCPIP或串口资源",
+    "Initialize": false
+  },
+  {
+    "UniqueIndex": 16,
+    "Name": "MAINCAN",
+    "Type": "CAN",
+    "Mode": "ZLG",
+    "Resource": "192.168.1.17",
+    "Parameter": "48,1,500000,8000,0",
+    "Comment": "主驱CAN（第一张200U CAN1）",
+    "Initialize": true
+  },
+  {
+    "UniqueIndex": 17,
+    "Name": "CALIBRATIONCAN",
+    "Type": "CAN",
+    "Mode": "ZLG",
+    "Resource": "192.168.1.18",
+    "Parameter": "48,1,500000,8000,0",
+    "Comment": "校准CAN（第二张200U CAN1）",
+    "Initialize": true
+  },
+  {
+    "UniqueIndex": 18,
+    "Name": "RESOLVERCAN2",
+    "Type": "CAN",
+    "Mode": "ZLG",
+    "Resource": "192.168.1.19",
+    "Parameter": "48,1,500000,8000,0",
+    "Comment": "旋变2CAN（第三张200U CAN1）",
+    "Initialize": true
+  }
 ]
