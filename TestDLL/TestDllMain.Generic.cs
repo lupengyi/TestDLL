@@ -960,10 +960,21 @@ namespace CSP
                 case "SETPOSITION": Resolver.DBC_SendSignalValue("2505419280_Polarpair", FCT_InputDouble(socketIndex, "PolePairs", 1), true); Thread.Sleep(50); Resolver.DBC_SendSignalValue("2147483649_mode_switch", 1, false); Resolver.DBC_SendSignalValue("2147483649_Position", FCT_InputDouble(socketIndex, "Position", 0), true); Thread.Sleep(500); break;
                 case "SETPOLEPAIRS": Resolver.DBC_SendSignalValue("2505419280_Polarpair", FCT_InputDouble(socketIndex, "PolePairs", 6), true); break;
                 case "SENDDBCSIGNAL": Resolver.DBC_SendSignalValue(FCT_InputString(socketIndex, "SignalName", string.Empty), FCT_InputDouble(socketIndex, "Value", 0), FCT_InputBool(socketIndex, "SendFlag", true)); break;
+                case "SENDDBCSIGNALS": FCT_SendResolverSignals(JObject.Parse(FCT_InputString(socketIndex, "SignalsJson", "{}"))); break;
+                case "STARTPERIODICDBC":
+                    {
+                        string key = "RESOLVER:" + FCT_InputString(socketIndex, "PeriodicKey", FCT_InputString(socketIndex, "MessageName", "RESOLVER")); int period = Math.Max(20, (int)FCT_InputDouble(socketIndex, "PeriodMs", 100)); JObject signals = JObject.Parse(FCT_InputString(socketIndex, "SignalsJson", "{}")); if (!signals.Properties().Any()) throw new InvalidOperationException("SignalsJson must contain at least one resolver DBC signal."); FCT_StopAuxPeriodic(key); int failures = 0; Timer timer = null; timer = new Timer(_ => { try { FCT_SendResolverSignals(signals); failures = 0; } catch (Exception ex) { if (Interlocked.Increment(ref failures) >= 3) { FCT_StopAuxPeriodic(key); FCT_CanDiagnostic("RESOLVER DBC PERIODIC AUTO STOP key=" + key, ex); } } }, null, 0, period); _fctAuxPeriodicSenders[key] = timer; FCT_Log(socketIndex, "RESOLVER DBC PERIODIC START key=" + key + " period=" + period); break;
+                    }
+                case "STOPPERIODICDBC": { string key = "RESOLVER:" + FCT_InputString(socketIndex, "PeriodicKey", FCT_InputString(socketIndex, "MessageName", "RESOLVER")); FCT_StopAuxPeriodic(key); FCT_Log(socketIndex, "RESOLVER DBC PERIODIC STOP key=" + key); break; }
                 case "STOP": Resolver_Stop(socketIndex); break;
                 default: throw new InvalidOperationException("Unsupported resolver operation: " + operation);
             }
             return null;
+        }
+
+        private void FCT_SendResolverSignals(JObject signals)
+        {
+            if (Resolver == null) throw new InvalidOperationException("旋变模拟器未初始化。"); List<JProperty> values = (signals ?? new JObject()).Properties().ToList(); if (values.Count == 0) throw new InvalidOperationException("请至少选择一个旋变DBC信号。"); for (int index = 0; index < values.Count; index++) Resolver.DBC_SendSignalValue(values[index].Name, Convert.ToDouble(values[index].Value, CultureInfo.InvariantCulture), index == values.Count - 1);
         }
 
         private object FCT_ProductCan(int socketIndex, string operation)
