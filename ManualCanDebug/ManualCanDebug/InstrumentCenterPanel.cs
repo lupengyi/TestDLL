@@ -21,6 +21,7 @@ namespace ManualCanDebug
         private readonly string _configPath;
         private readonly string _catalogPath;
         private readonly string _profilesDirectory;
+        private readonly string _canonicalConfigPath;
         private readonly Func<SequenceStepDefinition, Task<string>> _executeStep;
         private readonly Action<string> _log;
         private readonly Action _configSaved;
@@ -45,6 +46,7 @@ namespace ManualCanDebug
             _configPath = Path.Combine(_configDirectory, "InstrumentConfig.json");
             _catalogPath = Path.Combine(_configDirectory, "InstrumentCatalog.json");
             _profilesDirectory = Path.Combine(_configDirectory, "InstrumentProfiles");
+            _canonicalConfigPath = Path.Combine(new InstrumentWorkspaceService(baseDirectory).WorkspaceRoot, "Config", "InstrumentConfig.json");
             _executeStep = executeStep ?? throw new ArgumentNullException(nameof(executeStep));
             _log = log ?? delegate { };
             _configSaved = configSaved ?? delegate { };
@@ -277,7 +279,7 @@ namespace ManualCanDebug
                 foreach (JObject item in array.OfType<JObject>())
                     _configRows.Add(InstrumentConfigRow.FromJson(item));
             }
-            EnsureSixCanRows();
+            if (EnsureSixCanRows()) PersistConfigurationRows();
             ApplyEffectiveScopeNotes();
             _log("仪器配置已读取：" + _configPath);
         }
@@ -489,8 +491,7 @@ namespace ManualCanDebug
             {
                 _configGrid.CommitEdit(DataGridEditingUnit.Cell, true);
                 _configGrid.CommitEdit(DataGridEditingUnit.Row, true);
-                JArray array = new JArray(_configRows.Where(row => row.Persisted).OrderBy(row => row.UniqueIndex).Select(row => row.ToJson()));
-                File.WriteAllText(_configPath, array.ToString());
+                PersistConfigurationRows();
                 _log("仪器配置已保存：" + _configPath);
                 _configSaved();
                 MessageBox.Show("配置已保存。若仪器已经初始化，请先安全下电，再重新初始化。", "仪器中心", MessageBoxButton.OK, MessageBoxImage.Information);
@@ -526,19 +527,19 @@ namespace ManualCanDebug
             if (_workspaceDesigner != null) _workspaceDesigner.SetInitializedInstruments(initialized);
         }
 
-        private void EnsureSixCanRows()
+        private bool EnsureSixCanRows()
         {
-            AddMissingCan("DUTCAN", "调试CAN（第一张200U CAN0）", "192.168.1.17", "48,0,500000,8000,0");
-            AddMissingCan("MAINCAN", "主驱CAN（第一张200U CAN1）", "192.168.1.17", "48,1,500000,8000,0");
-            AddMissingCan("AUXCAN", "辅驱CAN（第二张200U CAN0）", "192.168.1.18", "48,0,500000,8000,0");
-            AddMissingCan("CALIBRATIONCAN", "校准CAN（第二张200U CAN1）", "192.168.1.18", "48,1,500000,8000,0");
-            AddMissingCan("RESOLVERCAN", "旋变1CAN（第三张200U CAN0）", "192.168.1.19", "48,0,500000,8000,0");
-            AddMissingCan("RESOLVERCAN2", "旋变2CAN（第三张200U CAN1）", "192.168.1.19", "48,1,500000,8000,0");
+            bool changed = false; changed |= AddMissingCan("DUTCAN", "调试CAN（第一张200U CAN0）", "192.168.1.17", "48,0,500000,8000,0"); changed |= AddMissingCan("MAINCAN", "主驱CAN（第一张200U CAN1）", "192.168.1.17", "48,1,500000,8000,0"); changed |= AddMissingCan("AUXCAN", "辅驱CAN（第二张200U CAN0）", "192.168.1.18", "48,0,500000,8000,0"); changed |= AddMissingCan("CALIBRATIONCAN", "校准CAN（第二张200U CAN1）", "192.168.1.18", "48,1,500000,8000,0"); changed |= AddMissingCan("RESOLVERCAN", "旋变1CAN（第三张200U CAN0）", "192.168.1.19", "48,0,500000,8000,0"); changed |= AddMissingCan("RESOLVERCAN2", "旋变2CAN（第三张200U CAN1）", "192.168.1.19", "48,1,500000,8000,0"); return changed;
         }
 
-        private void AddMissingCan(string name, string comment, string resource, string parameter)
+        private bool AddMissingCan(string name, string comment, string resource, string parameter)
         {
-            if (_configRows.Any(row => string.Equals(row.Name, name, StringComparison.OrdinalIgnoreCase))) return; _configRows.Add(new InstrumentConfigRow(NextUniqueIndex(), name, "CAN", "ZLG", resource, parameter, comment, true, false));
+            if (_configRows.Any(row => string.Equals(row.Name, name, StringComparison.OrdinalIgnoreCase))) return false; _configRows.Add(new InstrumentConfigRow(NextUniqueIndex(), name, "CAN", "ZLG", resource, parameter, comment, true, false)); return true;
+        }
+
+        private void PersistConfigurationRows()
+        {
+            JArray array = new JArray(_configRows.Where(row => row.Persisted).OrderBy(row => row.UniqueIndex).Select(row => row.ToJson())); string json = array.ToString(); foreach (string path in new[] { _configPath, _canonicalConfigPath, Path.Combine(Path.GetDirectoryName(_canonicalConfigPath), "..", "TestDLL", "bin", "Config", "InstrumentConfig.json") }.Select(Path.GetFullPath).Distinct(StringComparer.OrdinalIgnoreCase)) { try { Directory.CreateDirectory(Path.GetDirectoryName(path)); File.WriteAllText(path, json); } catch (Exception ex) { _log("仪器配置同步失败：" + path + "；" + ex.Message); } }
         }
 
         public string GetInstrumentResource(string name)

@@ -158,5 +158,35 @@
     "Parameter": "",
     "Comment": "程控电阻卡3；填写独立TCPIP或串口资源",
     "Initialize": false
+  },
+  {
+    "UniqueIndex": 16,
+    "Name": "MAINCAN",
+    "Type": "CAN",
+    "Mode": "ZLG",
+    "Resource": "192.168.1.17",
+    "Parameter": "48,1,500000,8000,0",
+    "Comment": "主驱CAN（第一张200U CAN1）",
+    "Initialize": false
+  },
+  {
+    "UniqueIndex": 17,
+    "Name": "CALIBRATIONCAN",
+    "Type": "CAN",
+    "Mode": "ZLG",
+    "Resource": "192.168.1.18",
+    "Parameter": "48,1,500000,8000,0",
+    "Comment": "校准CAN（第二张200U CAN1）",
+    "Initialize": false
+  },
+  {
+    "UniqueIndex": 18,
+    "Name": "RESOLVERCAN2",
+    "Type": "CAN",
+    "Mode": "ZLG",
+    "Resource": "192.168.1.19",
+    "Parameter": "48,1,500000,8000,0",
+    "Comment": "旋变2CAN（第三张200U CAN1）",
+    "Initialize": false
   }
 ]
