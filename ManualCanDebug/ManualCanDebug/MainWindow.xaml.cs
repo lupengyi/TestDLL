@@ -32,7 +32,6 @@ namespace ManualCanDebug
         private Button _initializeAllInstrumentsButton;
         private Button _safeShutdownButton;
         private TextBlock _productStatusText;
-        private ComboBox _productCanInstrumentComboBox;
         private TextBlock _productCanResourceText;
         private bool _refreshingProductCanBinding;
         private TextBlock _resolverStatusText;
@@ -558,11 +557,9 @@ namespace ManualCanDebug
         private UIElement BuildProductPanel()
         {
             StackPanel stack = new StackPanel();
-            _productCanInstrumentComboBox = new ComboBox { Width = 150, Margin = new Thickness(6, 3, 12, 3) };
-            _productCanInstrumentComboBox.SelectionChanged += (s, e) => RefreshProductCanBinding();
             _productCanResourceText = MakeLabel("尚未初始化产品CAN", Brushes.DarkOrange);
             stack.Children.Add(MakeGroup("当前产品 CAN 资源（复用仪器中心连接）", MakeRow(
-                MakeLabel("逻辑CAN："), _productCanInstrumentComboBox,
+                MakeLabel("主驱产品CAN："),
                 _productCanResourceText,
                 MakeButton("检查/切换仪器中心", ConnectProduct_Click, 145))));
             stack.Children.Add(MakeGroup("产品通信基础动作", MakeRow(
@@ -734,8 +731,6 @@ namespace ManualCanDebug
 
         private string CurrentProductCanInstrument()
         {
-            string selected = Convert.ToString(_productCanInstrumentComboBox == null ? null : _productCanInstrumentComboBox.SelectedItem, CultureInfo.InvariantCulture);
-            if (IsInitializedInstrument(selected)) return selected.ToUpperInvariant();
             if (IsInitializedInstrument("MAINCAN")) return "MAINCAN";
             if (IsInitializedInstrument("DUTCAN")) return "DUTCAN";
             return string.Empty;
@@ -748,14 +743,10 @@ namespace ManualCanDebug
 
         private void RefreshProductCanBinding()
         {
-            if (_productCanInstrumentComboBox == null || _refreshingProductCanBinding) return;
+            if (_refreshingProductCanBinding) return;
             _refreshingProductCanBinding = true;
             try
             {
-            string previous = Convert.ToString(_productCanInstrumentComboBox.SelectedItem, CultureInfo.InvariantCulture);
-            List<string> available = new[] { "MAINCAN", "DUTCAN" }.Where(IsInitializedInstrument).ToList();
-            _productCanInstrumentComboBox.ItemsSource = available;
-            _productCanInstrumentComboBox.SelectedItem = available.Contains(previous) ? previous : available.FirstOrDefault();
             string selected = CurrentProductCanInstrument();
             string resource = string.IsNullOrWhiteSpace(selected) || _instrumentCenterPanel == null ? string.Empty : _instrumentCenterPanel.GetInstrumentResource(selected);
             if (_productCanResourceText != null)
