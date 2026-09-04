@@ -1947,7 +1947,8 @@ namespace ManualCanDebug
             await _legacyRuntime.PrepareDebugSessionAsync(path);
             _studioDebugActive = true;
             Service_Log("功能块调试已通过MainTest启动；执行范围=" + (_studioDebugNextIndex + 1) + "-" + (_studioDebugEndIndex + 1) + "，断点=" + _studioBreakpointIndexes.Count + "。可单步或继续到断点。");
-            await ContinueStudioDebugInternalAsync(true);
+            // 首次启动必须尊重起始STEP上的断点；只有用户在已暂停状态点击“继续”时才越过当前断点。
+            await ContinueStudioDebugInternalAsync(false);
             return true;
         }
 
@@ -1962,9 +1963,10 @@ namespace ManualCanDebug
             bool first = true;
             while (_studioDebugNextIndex < _workflowSteps.Count && _studioDebugNextIndex <= _studioDebugEndIndex)
             {
-                if (_studioBreakpointIndexes.Contains(_studioDebugNextIndex) && !(first && ignoreBreakpointAtCurrent))
+                if (ShouldPauseAtBreakpoint(_studioDebugNextIndex, _studioBreakpointIndexes, first, ignoreBreakpointAtCurrent))
                 {
                     Service_Log("命中断点：" + (_studioDebugNextIndex + 1) + " " + _workflowSteps[_studioDebugNextIndex].Name);
+                    if (_studioFlowEditorPanel != null) _studioFlowEditorPanel.UpdateDebugStep(_studioDebugNextIndex, "断点暂停", "等待单步或继续");
                     SetApplicationStatus("断点暂停：" + _workflowSteps[_studioDebugNextIndex].Name);
                     return;
                 }
@@ -1974,6 +1976,8 @@ namespace ManualCanDebug
             await EndStudioDebugSessionAsync();
             Service_Log("功能块流程调试完成。");
         }
+
+        internal static bool ShouldPauseAtBreakpoint(int index, ISet<int> breakpoints, bool firstIteration, bool ignoreBreakpointAtCurrent) { return breakpoints != null && breakpoints.Contains(index) && !(firstIteration && ignoreBreakpointAtCurrent); }
 
         private async Task StepStudioDebugAsync()
         {

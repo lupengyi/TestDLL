@@ -171,10 +171,10 @@ namespace ManualCanDebug.Core
             {
                 DbcSignalDefinition signal = message.Signals.FirstOrDefault(item => string.Equals(item.Name, pair.Key, StringComparison.Ordinal));
                 if (signal == null) throw new KeyNotFoundException("DBC signal was not found in " + messageName + ": " + pair.Key);
-                if (!signal.LittleEndian) throw new NotSupportedException("Motorola DBC signals are not supported by this debug panel: " + signal.Name);
                 long raw = checked((long)Math.Round((pair.Value - signal.Offset) / signal.Factor, MidpointRounding.AwayFromZero));
                 ulong encoded = signal.Signed ? unchecked((ulong)raw) : checked((ulong)raw);
-                WriteIntelBits(data, signal.StartBit, signal.BitLength, encoded);
+                if (signal.BitLength < 64) encoded &= (1UL << signal.BitLength) - 1;
+                if (signal.LittleEndian) WriteIntelBits(data, signal.StartBit, signal.BitLength, encoded); else WriteMotorolaBits(data, signal.StartBit, signal.BitLength, encoded);
             }
             return new CanFrame(message.Id, data);
         }
@@ -187,8 +187,7 @@ namespace ManualCanDebug.Core
             List<DbcDecodedSignal> signals = new List<DbcDecodedSignal>();
             foreach (DbcSignalDefinition signal in message.Signals)
             {
-                if (!signal.LittleEndian) continue;
-                ulong unsignedRaw = ReadIntelBits(frame.Data, signal.StartBit, signal.BitLength);
+                ulong unsignedRaw = signal.LittleEndian ? ReadIntelBits(frame.Data, signal.StartBit, signal.BitLength) : ReadMotorolaBits(frame.Data, signal.StartBit, signal.BitLength);
                 long raw = signal.Signed ? SignExtend(unsignedRaw, signal.BitLength) : checked((long)unsignedRaw);
                 signals.Add(new DbcDecodedSignal(signal, raw, raw * signal.Factor + signal.Offset));
             }
@@ -220,6 +219,26 @@ namespace ManualCanDebug.Core
             }
             return result;
         }
+
+        private static void WriteMotorolaBits(byte[] data, int startBit, int bitLength, ulong raw)
+        {
+            ValidateMotorolaRange(data, startBit, bitLength); int destination = startBit;
+            for (int sourceBit = bitLength - 1; sourceBit >= 0; sourceBit--)
+            {
+                byte mask = (byte)(1 << (destination % 8)); if ((raw & (1UL << sourceBit)) != 0) data[destination / 8] |= mask; else data[destination / 8] &= (byte)~mask; destination = NextMotorolaBit(destination);
+            }
+        }
+
+        private static ulong ReadMotorolaBits(byte[] data, int startBit, int bitLength)
+        {
+            if (!IsMotorolaRangeValid(data, startBit, bitLength)) return 0; ulong result = 0; int source = startBit;
+            for (int bit = 0; bit < bitLength; bit++) { result <<= 1; if ((data[source / 8] & (1 << (source % 8))) != 0) result |= 1; source = NextMotorolaBit(source); }
+            return result;
+        }
+
+        private static int NextMotorolaBit(int bit) { return bit % 8 == 0 ? bit + 15 : bit - 1; }
+        private static void ValidateMotorolaRange(byte[] data, int startBit, int bitLength) { if (!IsMotorolaRangeValid(data, startBit, bitLength)) throw new ArgumentOutOfRangeException(nameof(bitLength), "Motorola DBC signal exceeds the message payload."); }
+        private static bool IsMotorolaRangeValid(byte[] data, int startBit, int bitLength) { if (data == null || startBit < 0 || bitLength <= 0 || bitLength > 64) return false; int position = startBit; for (int bit = 0; bit < bitLength; bit++) { if (position < 0 || position >= data.Length * 8) return false; position = NextMotorolaBit(position); } return true; }
 
         private static long SignExtend(ulong value, int bitLength)
         {

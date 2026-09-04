@@ -338,7 +338,7 @@ namespace CSP
                     case "PRODUCTCAN": result = FCT_ProductCan(socketIndex, operation); break;
                     case "AUXCAN": result = FCT_AuxCan(socketIndex, operation); break;
                     case "CALIBRATIONCAN": result = FCT_GenericCanChannel(socketIndex, operation, _fctCalibrationCan, "校准CAN"); break;
-                    case "RESOLVERCAN2": result = FCT_GenericCanChannel(socketIndex, operation, _fctResolver2Can, "旋变2CAN"); break;
+                    case "RESOLVERCAN2": result = FCT_ResolverChannel(socketIndex, operation, _fctResolver2Can, "旋变2"); break;
                     case "FLOW": result = FCT_FlowAction(socketIndex, operation); break;
                     default: result = FCT_InvokeActionPlugin(socketIndex, device, operation); break;
                 }
@@ -950,31 +950,34 @@ namespace CSP
             finally { IDisposable disposable = task as IDisposable; if (disposable != null) disposable.Dispose(); }
         }
 
-        private object FCT_Resolver(int socketIndex, string operation)
+        private object FCT_Resolver(int socketIndex, string operation) { return FCT_ResolverChannel(socketIndex, operation, Resolver, "旋变1"); }
+
+        private object FCT_ResolverChannel(int socketIndex, string operation, Instruments.CAN.CANWrapper resolver, string displayName)
         {
-            if (Resolver == null) throw new InvalidOperationException("旋变模拟器未初始化。请在仪器中心勾选 RESOLVERCAN 并执行初始化。");
+            if (resolver == null) throw new InvalidOperationException(displayName + "模拟器未初始化。请先在工位配置中初始化对应CAN通道。");
             switch (operation.ToUpperInvariant())
             {
-                case "INIT": Resolver_Init(socketIndex); break;
-                case "SETSPEED": Resolver.DBC_SendSignalValue("2147483649_mode_switch", 0, true); Thread.Sleep(50); Resolver.DBC_SendSignalValue("2505419280_Polarpair", FCT_InputDouble(socketIndex, "PolePairs", 6), false); Resolver.DBC_SendSignalValue("2505419280_Speed", FCT_InputDouble(socketIndex, "Speed", 0), true); Thread.Sleep(500); break;
-                case "SETPOSITION": Resolver.DBC_SendSignalValue("2505419280_Polarpair", FCT_InputDouble(socketIndex, "PolePairs", 1), true); Thread.Sleep(50); Resolver.DBC_SendSignalValue("2147483649_mode_switch", 1, false); Resolver.DBC_SendSignalValue("2147483649_Position", FCT_InputDouble(socketIndex, "Position", 0), true); Thread.Sleep(500); break;
-                case "SETPOLEPAIRS": Resolver.DBC_SendSignalValue("2505419280_Polarpair", FCT_InputDouble(socketIndex, "PolePairs", 6), true); break;
-                case "SENDDBCSIGNAL": Resolver.DBC_SendSignalValue(FCT_InputString(socketIndex, "SignalName", string.Empty), FCT_InputDouble(socketIndex, "Value", 0), FCT_InputBool(socketIndex, "SendFlag", true)); break;
-                case "SENDDBCSIGNALS": FCT_SendResolverSignals(JObject.Parse(FCT_InputString(socketIndex, "SignalsJson", "{}"))); break;
+                case "INIT": resolver.SendMessage(0x80000001, new byte[8]); Thread.Sleep(100); break;
+                case "SETSPEED": resolver.DBC_SendSignalValue("2147483649_mode_switch", 0, true); Thread.Sleep(50); resolver.DBC_SendSignalValue("2505419280_Polarpair", FCT_InputDouble(socketIndex, "PolePairs", 6), false); resolver.DBC_SendSignalValue("2505419280_Speed", FCT_InputDouble(socketIndex, "Speed", 0), true); Thread.Sleep(500); break;
+                case "SETPOSITION": resolver.DBC_SendSignalValue("2505419280_Polarpair", FCT_InputDouble(socketIndex, "PolePairs", 1), true); Thread.Sleep(50); resolver.DBC_SendSignalValue("2147483649_mode_switch", 1, false); resolver.DBC_SendSignalValue("2147483649_Position", FCT_InputDouble(socketIndex, "Position", 0), true); Thread.Sleep(500); break;
+                case "SETPOLEPAIRS": resolver.DBC_SendSignalValue("2505419280_Polarpair", FCT_InputDouble(socketIndex, "PolePairs", 6), true); break;
+                case "SENDDBCSIGNAL": resolver.DBC_SendSignalValue(FCT_InputString(socketIndex, "SignalName", string.Empty), FCT_InputDouble(socketIndex, "Value", 0), FCT_InputBool(socketIndex, "SendFlag", true)); break;
+                case "SENDDBCSIGNALS": FCT_SendResolverSignals(resolver, JObject.Parse(FCT_InputString(socketIndex, "SignalsJson", "{}"))); break;
                 case "STARTPERIODICDBC":
                     {
-                        string key = "RESOLVER:" + FCT_InputString(socketIndex, "PeriodicKey", FCT_InputString(socketIndex, "MessageName", "RESOLVER")); int period = Math.Max(20, (int)FCT_InputDouble(socketIndex, "PeriodMs", 100)); JObject signals = JObject.Parse(FCT_InputString(socketIndex, "SignalsJson", "{}")); if (!signals.Properties().Any()) throw new InvalidOperationException("SignalsJson must contain at least one resolver DBC signal."); FCT_StopAuxPeriodic(key); int failures = 0; Timer timer = null; timer = new Timer(_ => { try { FCT_SendResolverSignals(signals); failures = 0; } catch (Exception ex) { if (Interlocked.Increment(ref failures) >= 3) { FCT_StopAuxPeriodic(key); FCT_CanDiagnostic("RESOLVER DBC PERIODIC AUTO STOP key=" + key, ex); } } }, null, 0, period); _fctAuxPeriodicSenders[key] = timer; FCT_Log(socketIndex, "RESOLVER DBC PERIODIC START key=" + key + " period=" + period); break;
+                        string key = displayName + ":" + FCT_InputString(socketIndex, "PeriodicKey", FCT_InputString(socketIndex, "MessageName", "RESOLVER")); int period = Math.Max(20, (int)FCT_InputDouble(socketIndex, "PeriodMs", 100)); JObject signals = JObject.Parse(FCT_InputString(socketIndex, "SignalsJson", "{}")); if (!signals.Properties().Any()) throw new InvalidOperationException("SignalsJson must contain at least one resolver DBC signal."); FCT_StopAuxPeriodic(key); int failures = 0; Timer timer = null; timer = new Timer(_ => { try { FCT_SendResolverSignals(resolver, signals); failures = 0; } catch (Exception ex) { if (Interlocked.Increment(ref failures) >= 3) { FCT_StopAuxPeriodic(key); FCT_CanDiagnostic(displayName + " DBC PERIODIC AUTO STOP key=" + key, ex); } } }, null, 0, period); _fctAuxPeriodicSenders[key] = timer; FCT_Log(socketIndex, displayName + " DBC PERIODIC START key=" + key + " period=" + period); break;
                     }
-                case "STOPPERIODICDBC": { string key = "RESOLVER:" + FCT_InputString(socketIndex, "PeriodicKey", FCT_InputString(socketIndex, "MessageName", "RESOLVER")); FCT_StopAuxPeriodic(key); FCT_Log(socketIndex, "RESOLVER DBC PERIODIC STOP key=" + key); break; }
-                case "STOP": Resolver_Stop(socketIndex); break;
+                case "STOPPERIODICDBC": { string key = displayName + ":" + FCT_InputString(socketIndex, "PeriodicKey", FCT_InputString(socketIndex, "MessageName", "RESOLVER")); FCT_StopAuxPeriodic(key); FCT_Log(socketIndex, displayName + " DBC PERIODIC STOP key=" + key); break; }
+                case "SENDRAW": case "RECEIVERAW": return FCT_GenericCanChannel(socketIndex, operation, resolver, displayName + "CAN");
+                case "STOP": resolver.DBC_SendSignalValue("2505419280_Speed", 0, true); Thread.Sleep(100); break;
                 default: throw new InvalidOperationException("Unsupported resolver operation: " + operation);
             }
             return null;
         }
 
-        private void FCT_SendResolverSignals(JObject signals)
+        private void FCT_SendResolverSignals(Instruments.CAN.CANWrapper resolver, JObject signals)
         {
-            if (Resolver == null) throw new InvalidOperationException("旋变模拟器未初始化。"); List<JProperty> values = (signals ?? new JObject()).Properties().ToList(); if (values.Count == 0) throw new InvalidOperationException("请至少选择一个旋变DBC信号。"); for (int index = 0; index < values.Count; index++) Resolver.DBC_SendSignalValue(values[index].Name, Convert.ToDouble(values[index].Value, CultureInfo.InvariantCulture), index == values.Count - 1);
+            if (resolver == null) throw new InvalidOperationException("旋变模拟器未初始化。"); List<JProperty> values = (signals ?? new JObject()).Properties().ToList(); if (values.Count == 0) throw new InvalidOperationException("请至少选择一个旋变DBC信号。"); for (int index = 0; index < values.Count; index++) resolver.DBC_SendSignalValue(values[index].Name, Convert.ToDouble(values[index].Value, CultureInfo.InvariantCulture), index == values.Count - 1);
         }
 
         private object FCT_ProductCan(int socketIndex, string operation)

@@ -404,6 +404,16 @@ namespace CSP
             FCT_ExecuteConfiguredAction(socketIndex, "RELAY_HVMUX", "SetDO");
         }
 
+        public void UI_RESOLVERCAN2_ConfigureDbc(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "RESOLVERCAN2", "ConfigureDbc");
+        }
+
+        public void UI_RESOLVERCAN2_Init(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "RESOLVERCAN2", "Init");
+        }
+
         public void UI_RESOLVERCAN2_ReceiveRaw(int socketIndex)
         {
             FCT_ExecuteConfiguredAction(socketIndex, "RESOLVERCAN2", "ReceiveRaw");
@@ -417,6 +427,26 @@ namespace CSP
         public void UI_RESOLVERCAN2_SendRaw(int socketIndex)
         {
             FCT_ExecuteConfiguredAction(socketIndex, "RESOLVERCAN2", "SendRaw");
+        }
+
+        public void UI_RESOLVERCAN2_SetPolePairs(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "RESOLVERCAN2", "SetPolePairs");
+        }
+
+        public void UI_RESOLVERCAN2_SetPosition(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "RESOLVERCAN2", "SetPosition");
+        }
+
+        public void UI_RESOLVERCAN2_SetSpeed(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "RESOLVERCAN2", "SetSpeed");
+        }
+
+        public void UI_RESOLVERCAN2_Stop(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "RESOLVERCAN2", "Stop");
         }
 
         public void UI_RES_1_SetResistance(int socketIndex)

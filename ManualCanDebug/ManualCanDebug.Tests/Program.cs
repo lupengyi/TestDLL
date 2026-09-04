@@ -86,6 +86,7 @@ namespace ManualCanDebug.Tests
             Run("Validates resolver pole-pair setting", ValidatesResolverPolePairSetting);
             Run("Parses and decodes auxiliary DBC frames", ParsesAndDecodesAuxiliaryDbcFrames);
             Run("Packs auxiliary DBC control signals", PacksAuxiliaryDbcControlSignals);
+            Run("Packs and decodes Motorola resolver signals", PacksAndDecodesMotorolaResolverSignals);
             Run("Packs PDU relay command frame", PacksPduRelayCommandFrame);
             Run("C95 and C96 share auxiliary functions", C95AndC96ShareAuxiliaryFunctions);
 
@@ -377,6 +378,14 @@ namespace ManualCanDebug.Tests
             CanFrame frame = database.Encode("VCU_PDU", new Dictionary<string, double> { { "VCU_ShrRlyCtl", 1 }, { "VCU_HghVtgCnt", 1 }, { "VCU_HrtBt", 0x0E } });
             Assert(frame.Id == 0x0CF2503B, "PDU command extended ID is incorrect");
             Assert(frame.Data.SequenceEqual(new byte[] { 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x0E }), "PDU shared/main relay command payload is incorrect");
+        }
+
+        private static void PacksAndDecodesMotorolaResolverSignals()
+        {
+            DbcDatabase database = DbcDatabase.Parse("BO_ 2505419280 Resolver_Set_EM1: 8 PC\n SG_ Func : 4|4@1+ (1,0) [0|15] \"\" X\n SG_ Speed : 15|24@0- (0.619947436,0) [0|0] \"r/min\" X\n SG_ Polarpair : 0|4@1+ (1,0) [0|15] \"\" X\n");
+            CanFrame frame = database.Encode("Resolver_Set_EM1", new Dictionary<string, double> { { "Func", 0 }, { "Polarpair", 4 }, { "Speed", 700 } });
+            Assert(frame.Data[0] == 0x04 && frame.Data[1] == 0x00 && frame.Data[2] == 0x04 && frame.Data[3] == 0x69, "Motorola resolver Speed payload is incorrect");
+            DbcDecodedFrame decoded = database.Decode(frame); DbcDecodedSignal speed = decoded.Signals.First(value => value.Name == "Speed"); Assert(Math.Abs(speed.Value - 700) < 0.4, "Motorola resolver Speed did not round-trip");
         }
 
         private static void C95AndC96ShareAuxiliaryFunctions()
