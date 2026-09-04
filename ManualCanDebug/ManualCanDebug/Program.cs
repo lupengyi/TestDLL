@@ -239,6 +239,19 @@ namespace ManualCanDebug
                 return;
             }
 
+            if (args != null && args.Length == 2 && args[0] == "--verify-platform-config-initialize")
+            {
+                string errorPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "platform-config-initialize.error.txt");
+                try
+                {
+                    string baseDirectory = AppDomain.CurrentDomain.BaseDirectory, configPath = Path.GetFullPath(args[1]); JArray source = JArray.Parse(File.ReadAllText(configPath)); JArray selected = new JArray(source.OfType<JObject>().Where(item => (bool?)item["Initialize"] == true).Select(item => item.DeepClone())); if (selected.Count == 0) throw new InvalidOperationException("Platform config selects no instruments.");
+                    using (LegacySequenceRuntime runtime = new LegacySequenceRuntime(baseDirectory, Path.Combine(baseDirectory, "Config", "DefaultSequence.json"))) { runtime.InitializeInstrumentsAsync(selected.ToString(Newtonsoft.Json.Formatting.None)).GetAwaiter().GetResult(); string[] expected = selected.OfType<JObject>().Select(item => ((string)item["Name"] ?? string.Empty).ToUpperInvariant()).ToArray(); string[] missing = expected.Where(name => !runtime.InitializedInstrumentNames.Contains(name)).ToArray(); if (missing.Length > 0) throw new InvalidOperationException("Platform config instruments were not initialized: " + string.Join(",", missing)); runtime.SafeShutdownAsync().GetAwaiter().GetResult(); }
+                    if (File.Exists(errorPath)) File.Delete(errorPath); Environment.ExitCode = 0;
+                }
+                catch (Exception ex) { try { File.WriteAllText(errorPath, ex.ToString()); } catch { } Environment.ExitCode = 1; }
+                return;
+            }
+
             if (args != null && args.Length == 1 && args[0] == "--verify-main-test-dut-init")
             {
                 string temporarySequence = null;

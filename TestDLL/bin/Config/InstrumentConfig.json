@@ -7,7 +7,7 @@
     "Resource": "TCPIP0::192.168.1.20::7000::SOCKET",
     "Parameter": "",
     "Comment": "程控电阻卡1；填写独立TCPIP或串口资源",
-    "Initialize": false
+    "Initialize": true
   },
   {
     "UniqueIndex": 1,
@@ -27,7 +27,7 @@
     "Resource": "TCPIP0::192.168.1.13::502::SOCKET",
     "Parameter": "",
     "Comment": "",
-    "Initialize": false
+    "Initialize": true
   },
   {
     "UniqueIndex": 3,
@@ -37,7 +37,7 @@
     "Resource": "ASRL11::INSTR",
     "Parameter": "",
     "Comment": "KL30低压电源；串口服务器192.168.1.11映射COM11",
-    "Initialize": false
+    "Initialize": true
   },
   {
     "UniqueIndex": 4,
@@ -47,7 +47,7 @@
     "Resource": "TCPIP0::192.168.1.15::inst0::INSTR",
     "Parameter": "",
     "Comment": "高压万用表",
-    "Initialize": false
+    "Initialize": true
   },
   {
     "UniqueIndex": 5,
@@ -57,7 +57,7 @@
     "Resource": "192.168.1.31",
     "Parameter": "502,1",
     "Comment": "FCT function SHT relay board; placeholder IP is editable; OUT1 maps to channel 0",
-    "Initialize": false
+    "Initialize": true
   },
   {
     "UniqueIndex": 6,
@@ -67,7 +67,7 @@
     "Resource": "192.168.1.32",
     "Parameter": "502,1",
     "Comment": "15口高压继电器卡；与48口卡共用SHT协议；仅允许OUT1-OUT15",
-    "Initialize": false
+    "Initialize": true
   },
   {
     "UniqueIndex": 7,
@@ -77,7 +77,7 @@
     "Resource": "192.168.1.14",
     "Parameter": "2101",
     "Comment": "DCDC electronic load; configure LAN IP before enabling",
-    "Initialize": false
+    "Initialize": true
   },
   {
     "UniqueIndex": 8,
@@ -127,7 +127,7 @@
     "Resource": "ASRL12::INSTR",
     "Parameter": "",
     "Comment": "KL15低压电源；串口服务器192.168.1.12映射COM12",
-    "Initialize": false
+    "Initialize": true
   },
   {
     "UniqueIndex": 13,
@@ -137,7 +137,7 @@
     "Resource": "TCPIP0::192.168.1.16::inst0::INSTR",
     "Parameter": "",
     "Comment": "低压万用表；填写独立VISA资源",
-    "Initialize": false
+    "Initialize": true
   },
   {
     "UniqueIndex": 14,
@@ -147,7 +147,7 @@
     "Resource": "TCPIP0::192.168.1.21::7000::SOCKET",
     "Parameter": "",
     "Comment": "程控电阻卡2；填写独立TCPIP或串口资源",
-    "Initialize": false
+    "Initialize": true
   },
   {
     "UniqueIndex": 15,
@@ -157,7 +157,7 @@
     "Resource": "TCPIP0::192.168.1.22::7000::SOCKET",
     "Parameter": "",
     "Comment": "程控电阻卡3；填写独立TCPIP或串口资源",
-    "Initialize": false
+    "Initialize": true
   },
   {
     "UniqueIndex": 16,
