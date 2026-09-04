@@ -32,6 +32,9 @@ namespace ManualCanDebug
         private Button _initializeAllInstrumentsButton;
         private Button _safeShutdownButton;
         private TextBlock _productStatusText;
+        private ComboBox _productCanInstrumentComboBox;
+        private TextBlock _productCanResourceText;
+        private bool _refreshingProductCanBinding;
         private TextBlock _resolverStatusText;
         private TextBlock _auxiliaryStatusText;
         private ComboBox _productModelComboBox;
@@ -178,6 +181,7 @@ namespace ManualCanDebug
                 () => _legacyRuntime == null ? null : _legacyRuntime.LastStepExecution,
                 () => _service.ProductProfile,
                 name => _legacyRuntime != null && _legacyRuntime.InstrumentsInitialized && _legacyRuntime.InitializedInstrumentNames.Contains(name),
+                CurrentProductCanInstrument,
                 Path.Combine(baseDirectory, "Config", "C95C96Auxiliary.dbc"),
                 Service_Log);
 
@@ -554,6 +558,13 @@ namespace ManualCanDebug
         private UIElement BuildProductPanel()
         {
             StackPanel stack = new StackPanel();
+            _productCanInstrumentComboBox = new ComboBox { Width = 150, Margin = new Thickness(6, 3, 12, 3) };
+            _productCanInstrumentComboBox.SelectionChanged += (s, e) => RefreshProductCanBinding();
+            _productCanResourceText = MakeLabel("尚未初始化产品CAN", Brushes.DarkOrange);
+            stack.Children.Add(MakeGroup("当前产品 CAN 资源（复用仪器中心连接）", MakeRow(
+                MakeLabel("逻辑CAN："), _productCanInstrumentComboBox,
+                _productCanResourceText,
+                MakeButton("检查/切换仪器中心", ConnectProduct_Click, 145))));
             stack.Children.Add(MakeGroup("产品通信基础动作", MakeRow(
                 MakeButton("进入 FT 模式", EnterFtMode_Click),
                 MakeButton("退出 FT 模式", ExitFtMode_Click),
@@ -711,7 +722,55 @@ namespace ManualCanDebug
             });
         }
 
-        private void ConnectProduct_Click(object sender, RoutedEventArgs e) { ShowMainTestConnectionState("DUTCAN", _productStatusText); }
+        private void ConnectProduct_Click(object sender, RoutedEventArgs e)
+        {
+            RefreshProductCanBinding();
+            if (string.IsNullOrWhiteSpace(CurrentProductCanInstrument()))
+            {
+                _advancedTabs.SelectedItem = _instrumentCenterTab;
+                MessageBox.Show(this, "请在仪器中心勾选并初始化 MAINCAN 或 DUTCAN。产品CAN页不会重复建立连接。", "产品CAN资源", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private string CurrentProductCanInstrument()
+        {
+            string selected = Convert.ToString(_productCanInstrumentComboBox == null ? null : _productCanInstrumentComboBox.SelectedItem, CultureInfo.InvariantCulture);
+            if (IsInitializedInstrument(selected)) return selected.ToUpperInvariant();
+            if (IsInitializedInstrument("MAINCAN")) return "MAINCAN";
+            if (IsInitializedInstrument("DUTCAN")) return "DUTCAN";
+            return string.Empty;
+        }
+
+        private bool IsInitializedInstrument(string name)
+        {
+            return !string.IsNullOrWhiteSpace(name) && _legacyRuntime != null && _legacyRuntime.InstrumentsInitialized && _legacyRuntime.InitializedInstrumentNames.Contains(name);
+        }
+
+        private void RefreshProductCanBinding()
+        {
+            if (_productCanInstrumentComboBox == null || _refreshingProductCanBinding) return;
+            _refreshingProductCanBinding = true;
+            try
+            {
+            string previous = Convert.ToString(_productCanInstrumentComboBox.SelectedItem, CultureInfo.InvariantCulture);
+            List<string> available = new[] { "MAINCAN", "DUTCAN" }.Where(IsInitializedInstrument).ToList();
+            _productCanInstrumentComboBox.ItemsSource = available;
+            _productCanInstrumentComboBox.SelectedItem = available.Contains(previous) ? previous : available.FirstOrDefault();
+            string selected = CurrentProductCanInstrument();
+            string resource = string.IsNullOrWhiteSpace(selected) || _instrumentCenterPanel == null ? string.Empty : _instrumentCenterPanel.GetInstrumentResource(selected);
+            if (_productCanResourceText != null)
+            {
+                _productCanResourceText.Text = string.IsNullOrWhiteSpace(selected) ? "尚未初始化产品CAN" : selected + "  ·  " + (string.IsNullOrWhiteSpace(resource) ? "Resource未配置" : resource) + "  ·  已复用MainTest连接";
+                _productCanResourceText.Foreground = string.IsNullOrWhiteSpace(selected) ? Brushes.DarkOrange : Brushes.DarkGreen;
+            }
+            if (_productStatusText != null)
+            {
+                _productStatusText.Text = string.IsNullOrWhiteSpace(selected) ? "未选择" : selected + "已连接";
+                _productStatusText.Foreground = string.IsNullOrWhiteSpace(selected) ? Brushes.DimGray : Brushes.DarkGreen;
+            }
+            }
+            finally { _refreshingProductCanBinding = false; }
+        }
         private void ConnectResolver_Click(object sender, RoutedEventArgs e) { ShowMainTestConnectionState("RESOLVERCAN", _resolverStatusText); }
         private void ConnectAuxiliary_Click(object sender, RoutedEventArgs e) { ShowMainTestConnectionState("AUXCAN", _auxiliaryStatusText); }
 
@@ -766,6 +825,7 @@ namespace ManualCanDebug
         {
             if (_functionBlockStudioPanel != null) _functionBlockStudioPanel.ReloadActionCatalog();
             if (_instrumentCenterPanel != null && _atomicCatalogSteps != null) _instrumentCenterPanel.RefreshTemplates(_atomicCatalogSteps);
+            RefreshProductCanBinding();
             if (_legacyRuntime == null) { Service_Log("仪器配置已保存，但MainTest执行引擎当前不可用；请关闭并重新启动工具。 "); return; }
             if (_legacyRuntime.InstrumentsInitialized) Service_Log("仪器配置已保存；当前已连接仪器不热切换，请安全下电后重新初始化。 ");
             else Service_Log("仪器配置与初始化选择已保存；MainTest实例保持不变，初始化时将直接使用最新Resource/Parameter。 ");
@@ -797,6 +857,7 @@ namespace ManualCanDebug
                 _resolverStatusText.Text = "未连接";
                 _auxiliaryStatusText.Text = "未连接";
                 if (_instrumentCenterPanel != null) _instrumentCenterPanel.SetInitializedInstruments(new string[0]);
+                RefreshProductCanBinding();
                 SetAdvancedDiagnosticAvailability(true);
                 Service_Log("已安全下电，开始按新勾选重新初始化：" + string.Join(", ", names));
             }
@@ -808,10 +869,11 @@ namespace ManualCanDebug
                 await _legacyRuntime.InitializeInstrumentsAsync(instrumentsJson);
                 names = _legacyRuntime.InitializedInstrumentNames.ToArray();
                 _instrumentCenterPanel.SetInitializedInstruments(names);
-                bool dut = names.Contains("DUTCAN"), resolver = names.Contains("RESOLVERCAN"), auxiliary = names.Contains("AUXCAN");
-                _productStatusText.Text = dut ? "MainTest已连接" : "未选择"; _productStatusText.Foreground = dut ? Brushes.DarkGreen : Brushes.DimGray;
+                bool productCan = names.Contains("MAINCAN") || names.Contains("DUTCAN"), resolver = names.Contains("RESOLVERCAN"), auxiliary = names.Contains("AUXCAN");
+                _productStatusText.Text = productCan ? "MainTest已连接" : "未选择"; _productStatusText.Foreground = productCan ? Brushes.DarkGreen : Brushes.DimGray;
                 _resolverStatusText.Text = resolver ? "MainTest已连接" : "未选择"; _resolverStatusText.Foreground = resolver ? Brushes.DarkGreen : Brushes.DimGray;
                 _auxiliaryStatusText.Text = auxiliary ? "MainTest已连接" : "未选择"; _auxiliaryStatusText.Foreground = auxiliary ? Brushes.DarkGreen : Brushes.DimGray;
+                RefreshProductCanBinding();
                 UpdateLegacyRuntimeStatus("MainTest已初始化：" + string.Join(" / ", names), Brushes.DarkGreen);
                 SetAdvancedDiagnosticAvailability(false);
                 Service_Log("仪器中心选择性初始化完成，后续立即执行和流程调试均使用同一个MainTest实例：" + string.Join(", ", names));
@@ -836,6 +898,7 @@ namespace ManualCanDebug
                 _resolverStatusText.Text = "未连接";
                 _auxiliaryStatusText.Text = "未连接";
                 if (_instrumentCenterPanel != null) _instrumentCenterPanel.SetInitializedInstruments(new string[0]);
+                RefreshProductCanBinding();
                 UpdateLegacyRuntimeStatus("未初始化", Brushes.DarkOrange);
                 SetAdvancedDiagnosticAvailability(true);
                 Service_Log("当前工作区已安全下电，所有CAN已断开。");
@@ -1975,14 +2038,14 @@ namespace ManualCanDebug
             ExportStudioSequence_Click(sender, e);
         }
 
-        private async void EnterFtMode_Click(object sender, RoutedEventArgs e) { await RunMainTestAdvancedAsync("进入 FT 模式", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "EnterFT" }, { "CanInstrument", "MAINCAN" }, { "ResultMode", "Action" } }); }
-        private async void ExitFtMode_Click(object sender, RoutedEventArgs e) { await RunMainTestAdvancedAsync("退出 FT 模式", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "ExitFT" }, { "CanInstrument", "MAINCAN" }, { "ResultMode", "Action" } }); }
+        private async void EnterFtMode_Click(object sender, RoutedEventArgs e) { await RunMainTestAdvancedAsync("进入 FT 模式", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "EnterFT" }, { "CanInstrument", CurrentProductCanInstrument() }, { "ResultMode", "Action" } }); }
+        private async void ExitFtMode_Click(object sender, RoutedEventArgs e) { await RunMainTestAdvancedAsync("退出 FT 模式", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "ExitFT" }, { "CanInstrument", CurrentProductCanInstrument() }, { "ResultMode", "Action" } }); }
         private async void InitializeDut_Click(object sender, RoutedEventArgs e)
         {
-            await RunMainTestAdvancedAsync("DUT 通信初始化", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "CommunicationInit" }, { "TxID", "7EE" }, { "RxID", "7EF" }, { "CanInstrument", "DUTCAN" }, { "ResultMode", "Action" } });
+            await RunMainTestAdvancedAsync("DUT 通信初始化", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "CommunicationInit" }, { "TxID", "7EE" }, { "RxID", "7EF" }, { "CanInstrument", CurrentProductCanInstrument() }, { "ResultMode", "Action" } });
         }
-        private async void TestProductCommunication_Click(object sender, RoutedEventArgs e) { await RunMainTestAdvancedAsync("CAN 通信测试", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "CommunicationTest" }, { "CanInstrument", "MAINCAN" }, { "ResultMode", "Information" } }); }
-        private async void SendWakeup_Click(object sender, RoutedEventArgs e) { await RunMainTestAdvancedAsync("发送唤醒帧", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "Wakeup" }, { "CanInstrument", "MAINCAN" }, { "ResultMode", "Action" } }); }
+        private async void TestProductCommunication_Click(object sender, RoutedEventArgs e) { await RunMainTestAdvancedAsync("CAN 通信测试", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "CommunicationTest" }, { "CanInstrument", CurrentProductCanInstrument() }, { "ResultMode", "Information" } }); }
+        private async void SendWakeup_Click(object sender, RoutedEventArgs e) { await RunMainTestAdvancedAsync("发送唤醒帧", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "Wakeup" }, { "CanInstrument", CurrentProductCanInstrument() }, { "ResultMode", "Action" } }); }
         private void ReadProductCurrent_Click(object sender, RoutedEventArgs e) { ShowProductCurrentWindow(_service.LastRequestedCurrentRms); }
         private void ReadAllC95Inputs_Click(object sender, RoutedEventArgs e)
         {
@@ -2035,18 +2098,18 @@ namespace ManualCanDebug
             string signalName = _productSignalNameTextBox.Text.Trim();
             string signalValueText = _productSignalValueTextBox.Text;
             bool sendFlag = _productSignalSendFlagCheckBox.IsChecked == true;
-            await RunMainTestAdvancedAsync("发送产品 DBC 信号", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "SendDbcSignal" }, { "SignalName", signalName }, { "Value", ParseDouble(signalValueText, "产品信号值") }, { "SendFlag", sendFlag }, { "CanInstrument", "MAINCAN" }, { "ResultMode", "Action" } });
+            await RunMainTestAdvancedAsync("发送产品 DBC 信号", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "SendDbcSignal" }, { "SignalName", signalName }, { "Value", ParseDouble(signalValueText, "产品信号值") }, { "SendFlag", sendFlag }, { "CanInstrument", CurrentProductCanInstrument() }, { "ResultMode", "Action" } });
         }
         private async void SendProductRaw_Click(object sender, RoutedEventArgs e)
         {
             string idText = _productRawIdTextBox.Text;
             string dataText = _productRawDataTextBox.Text;
-            await RunMainTestAdvancedAsync("发送产品原始帧", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "SendRaw" }, { "CanId", ParseCanId(idText).ToString("X", CultureInfo.InvariantCulture) }, { "DataHex", dataText }, { "CanInstrument", "MAINCAN" }, { "ResultMode", "Information" } });
+            await RunMainTestAdvancedAsync("发送产品原始帧", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "SendRaw" }, { "CanId", ParseCanId(idText).ToString("X", CultureInfo.InvariantCulture) }, { "DataHex", dataText }, { "CanInstrument", CurrentProductCanInstrument() }, { "ResultMode", "Information" } });
         }
         private async void ReceiveProductRaw_Click(object sender, RoutedEventArgs e)
         {
             string idText = _productReceiveIdTextBox.Text;
-            await RunMainTestAdvancedAsync("读取产品接收帧", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "ReceiveRaw" }, { "FilterId", ParseCanId(idText).ToString("X", CultureInfo.InvariantCulture) }, { "CanInstrument", "MAINCAN" }, { "ResultMode", "Information" } });
+            await RunMainTestAdvancedAsync("读取产品接收帧", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "ReceiveRaw" }, { "FilterId", ParseCanId(idText).ToString("X", CultureInfo.InvariantCulture) }, { "CanInstrument", CurrentProductCanInstrument() }, { "ResultMode", "Information" } });
         }
         private async void InitializeResolver_Click(object sender, RoutedEventArgs e) { await RunMainTestAdvancedAsync("旋变初始化", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "RESOLVER" }, { "Operation", "Init" }, { "ResultMode", "Action" } }); }
         private async void SetResolverPolePairs_Click(object sender, RoutedEventArgs e)

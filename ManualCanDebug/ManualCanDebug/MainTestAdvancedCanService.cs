@@ -45,12 +45,13 @@ namespace ManualCanDebug
         private readonly Func<LegacyStepExecutionResult> _lastResult;
         private readonly Func<ProductCanProfile> _profile;
         private readonly Func<string, bool> _instrumentReady;
+        private readonly Func<string> _productCanInstrument;
         private readonly Action<string> _log;
         private readonly DbcDatabase _auxiliaryDbc;
 
-        public MainTestAdvancedCanService(Func<SequenceStepDefinition, Task<string>> execute, Func<LegacyStepExecutionResult> lastResult, Func<ProductCanProfile> profile, Func<string, bool> instrumentReady, string auxiliaryDbcPath, Action<string> log)
+        public MainTestAdvancedCanService(Func<SequenceStepDefinition, Task<string>> execute, Func<LegacyStepExecutionResult> lastResult, Func<ProductCanProfile> profile, Func<string, bool> instrumentReady, Func<string> productCanInstrument, string auxiliaryDbcPath, Action<string> log)
         {
-            _execute = execute; _lastResult = lastResult; _profile = profile; _instrumentReady = instrumentReady; _log = log;
+            _execute = execute; _lastResult = lastResult; _profile = profile; _instrumentReady = instrumentReady; _productCanInstrument = productCanInstrument; _log = log;
             _auxiliaryDbc = DbcDatabase.Load(auxiliaryDbcPath);
         }
 
@@ -129,18 +130,19 @@ namespace ManualCanDebug
 
         private byte[] ReadTable(uint addressOffset, int length, string name, int pointerDepth = 1)
         {
-            LegacyStepExecutionResult result = Execute(Step(name, "FCT_CANTable", new Dictionary<string, object> { { "Operation", "Read" }, { "AddrOffset", addressOffset }, { "TableLength", length }, { "PointerDepth", pointerDepth }, { "SignalChecksJson", "[]" }, { "ResultMode", "Information" } })); byte[] bytes = HexDataParser.ParseBuffer(ResultValue(result)); if (bytes.Length < length) throw new InvalidOperationException(name + " returned " + bytes.Length + "/" + length + " bytes."); return bytes.Take(length).ToArray();
+            LegacyStepExecutionResult result = Execute(Step(name, "FCT_CANTable", new Dictionary<string, object> { { "Operation", "Read" }, { "CanInstrument", RequireProductCan() }, { "AddrOffset", addressOffset }, { "TableLength", length }, { "PointerDepth", pointerDepth }, { "SignalChecksJson", "[]" }, { "ResultMode", "Information" } })); byte[] bytes = HexDataParser.ParseBuffer(ResultValue(result)); if (bytes.Length < length) throw new InvalidOperationException(name + " returned " + bytes.Length + "/" + length + " bytes."); return bytes.Take(length).ToArray();
         }
         private void WriteTable(uint addressOffset, byte[] data, int writeLastIndex, string name)
         {
-            JArray changes = new JArray(); for (int index = 0; index < data.Length; index++) changes.Add(new JObject { ["Offset"] = index, ["DataSize"] = 1, ["DataType"] = "uint8", ["Endian"] = "Little", ["Value"] = data[index], ["WriteLast"] = index == writeLastIndex }); Execute(Step(name, "FCT_CANTable", new Dictionary<string, object> { { "Operation", "Write" }, { "AddrOffset", addressOffset }, { "TableLength", data.Length }, { "ChangesJson", changes.ToString(Formatting.None) }, { "VerifyAfterWrite", true }, { "ResultMode", "Action" } }));
+            JArray changes = new JArray(); for (int index = 0; index < data.Length; index++) changes.Add(new JObject { ["Offset"] = index, ["DataSize"] = 1, ["DataType"] = "uint8", ["Endian"] = "Little", ["Value"] = data[index], ["WriteLast"] = index == writeLastIndex }); Execute(Step(name, "FCT_CANTable", new Dictionary<string, object> { { "Operation", "Write" }, { "CanInstrument", RequireProductCan() }, { "AddrOffset", addressOffset }, { "TableLength", data.Length }, { "ChangesJson", changes.ToString(Formatting.None) }, { "VerifyAfterWrite", true }, { "ResultMode", "Action" } }));
         }
         private void Pulse(uint offset, int index, byte[] high, string name) { byte[] highTable = new byte[index + high.Length]; Array.Copy(high, 0, highTable, index, high.Length); WritePartial(offset, index, high, name + " High"); Thread.Sleep(100); WritePartial(offset, index, new byte[high.Length], name + " Low"); }
-        private void WritePartial(uint offset, int index, byte[] data, string name) { JArray changes = new JArray(); for (int i = 0; i < data.Length; i++) changes.Add(new JObject { ["Offset"] = index + i, ["DataSize"] = 1, ["DataType"] = "uint8", ["Endian"] = "Little", ["Value"] = data[i] }); Execute(Step(name, "FCT_CANTable", new Dictionary<string, object> { { "Operation", "Write" }, { "AddrOffset", offset }, { "TableLength", index + data.Length }, { "ChangesJson", changes.ToString(Formatting.None) }, { "VerifyAfterWrite", true }, { "ResultMode", "Action" } })); }
+        private void WritePartial(uint offset, int index, byte[] data, string name) { JArray changes = new JArray(); for (int i = 0; i < data.Length; i++) changes.Add(new JObject { ["Offset"] = index + i, ["DataSize"] = 1, ["DataType"] = "uint8", ["Endian"] = "Little", ["Value"] = data[i] }); Execute(Step(name, "FCT_CANTable", new Dictionary<string, object> { { "Operation", "Write" }, { "CanInstrument", RequireProductCan() }, { "AddrOffset", offset }, { "TableLength", index + data.Length }, { "ChangesJson", changes.ToString(Formatting.None) }, { "VerifyAfterWrite", true }, { "ResultMode", "Action" } })); }
         private LegacyStepExecutionResult Execute(SequenceStepDefinition step) { lock (_executionLock) { Task.Run(() => _execute(step)).GetAwaiter().GetResult(); LegacyStepExecutionResult result = _lastResult(); if (result == null) throw new InvalidOperationException("MainTest did not return a STEP result snapshot."); return result; } }
         private static SequenceStepDefinition Step(string name, string function, IDictionary<string, object> values) { Dictionary<string, object> properties = new Dictionary<string, object> { { "StepName", name }, { "RunMode", "Normal" }, { "FunctionName", function }, { "RecordingLog", true } }; foreach (KeyValuePair<string, object> pair in values) properties[pair.Key] = pair.Value; return new SequenceStepDefinition(properties); }
         private static string ResultValue(LegacyStepExecutionResult result) { LegacyPlatformResultRow row = result.Results.LastOrDefault(); if (row == null) throw new InvalidOperationException("MainTest STEP did not publish a platform result."); return row.Value ?? string.Empty; }
-        private void RequireDualDrive() { if (!ProductProfile.IsDualDrive) throw new InvalidOperationException("当前产品不是C92/C96双驱产品。"); RequireInstrument("DUTCAN"); }
+        private void RequireDualDrive() { if (!ProductProfile.IsDualDrive) throw new InvalidOperationException("当前产品不是C92/C96双驱产品。"); RequireProductCan(); }
+        private string RequireProductCan() { string name = (_productCanInstrument == null ? string.Empty : _productCanInstrument()) ?? string.Empty; name = name.Trim().ToUpperInvariant(); if (name != "MAINCAN" && name != "DUTCAN") throw new InvalidOperationException("请先在仪器中心初始化 MAINCAN 或 DUTCAN，并在产品CAN页选择当前通道。"); RequireInstrument(name); return name; }
         private void RequireInstrument(string name) { if (!_instrumentReady(name)) throw new InvalidOperationException("请先在仪器中心勾选并初始化 " + name + "。"); }
     }
 }

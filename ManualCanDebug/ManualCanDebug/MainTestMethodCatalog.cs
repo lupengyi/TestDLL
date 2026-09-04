@@ -54,9 +54,9 @@ namespace ManualCanDebug
             string device = Convert.ToString(step.Get("Device"), System.Globalization.CultureInfo.InvariantCulture).Trim().ToUpperInvariant();
             if (function == "FCTEXECUTEACTION")
             {
-                switch (device) { case "AUXCAN": return "AUXCAN"; case "MAINCAN": return "MAINCAN"; case "RESOLVER": return "RESOLVERCAN"; case "PRODUCTCAN": return "MAINCAN/DUTCAN"; case "LVDC": return "LVDC"; case "LVDC_KL15": return "LVDC_KL15"; case "HVDC": return "HVDC"; case "DMM": return "DMM_HV"; case "DMM_HV": return "DMM_HV"; case "DMM_LV": return "DMM_LV"; case "RES": return "RES_1"; case "RES_1": return "RES_1"; case "RES_2": return "RES_2"; case "RES_3": return "RES_3"; case "DAQ": return "DAQ"; case "DCDC_LOAD": return "DCDC_LOAD"; case "MOXA": return "RELAY_FCT/RELAY_HVMUX"; case "RELAY": return "RELAY_FCT"; case "RELAY_FCT": return "RELAY_FCT"; case "RELAY_HVMUX": return "RELAY_HVMUX"; case "PLC": return "PLC"; default: return string.Empty; }
+                switch (device) { case "AUXCAN": return "AUXCAN"; case "MAINCAN": return "MAINCAN"; case "RESOLVER": return "RESOLVERCAN"; case "PRODUCTCAN": return ProductCanInstrument(step); case "LVDC": return "LVDC"; case "LVDC_KL15": return "LVDC_KL15"; case "HVDC": return "HVDC"; case "DMM": return "DMM_HV"; case "DMM_HV": return "DMM_HV"; case "DMM_LV": return "DMM_LV"; case "RES": return "RES_1"; case "RES_1": return "RES_1"; case "RES_2": return "RES_2"; case "RES_3": return "RES_3"; case "DAQ": return "DAQ"; case "DCDC_LOAD": return "DCDC_LOAD"; case "MOXA": return "RELAY_FCT/RELAY_HVMUX"; case "RELAY": return "RELAY_FCT"; case "RELAY_FCT": return "RELAY_FCT"; case "RELAY_HVMUX": return "RELAY_HVMUX"; case "PLC": return "PLC"; default: return string.Empty; }
             }
-            if (function == "FCTCANSIGNAL" || function == "FCTCANTABLE" || function.Contains("DUT") || function.Contains("CANCOMMUNICATION") || function.Contains("CANAPP2FT") || function.Contains("CANFT2APP") || function.Contains("CANSENDWAKEUP")) return "DUTCAN";
+            if (function == "FCTCANSIGNAL" || function == "FCTCANTABLE" || function.Contains("DUT") || function.Contains("CANCOMMUNICATION") || function.Contains("CANAPP2FT") || function.Contains("CANFT2APP") || function.Contains("CANSENDWAKEUP")) return ProductCanInstrument(step);
             if (function.Contains("RESOLVER")) return "RESOLVERCAN";
             if (function.StartsWith("LVDCKL15", StringComparison.Ordinal)) return "LVDC_KL15";
             if (function.StartsWith("LVDC", StringComparison.Ordinal)) return "LVDC";
@@ -104,5 +104,11 @@ namespace ManualCanDebug
         }
 
         private static string Normalize(string value) { return (value ?? string.Empty).Replace("_", string.Empty).Replace(" ", string.Empty).ToUpperInvariant(); }
+
+        private static string ProductCanInstrument(ManualCanDebug.Core.SequenceStepDefinition step)
+        {
+            string selected = Convert.ToString(step.Get("CanInstrument"), System.Globalization.CultureInfo.InvariantCulture).Trim().ToUpperInvariant();
+            return selected == "MAINCAN" || selected == "DUTCAN" ? selected : "MAINCAN/DUTCAN";
+        }
     }
 }

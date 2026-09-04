@@ -524,6 +524,12 @@ namespace ManualCanDebug
             foreach (InstrumentConfigRow row in _configRows) row.ConnectionStatus = initialized.Contains(row.Name) ? "已初始化" : "未初始化";
         }
 
+        public string GetInstrumentResource(string name)
+        {
+            InstrumentConfigRow row = _configRows.FirstOrDefault(value => string.Equals(value.Name, name, StringComparison.OrdinalIgnoreCase));
+            return row == null ? string.Empty : row.Resource;
+        }
+
         /// <summary>
         /// DataGridCheckBoxColumn needs a row-select click first. Template CheckBox toggles on one click.
         /// Header hosts a master checkbox for select-all / clear-all.
