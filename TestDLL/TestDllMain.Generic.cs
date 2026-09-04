@@ -19,6 +19,8 @@ namespace CSP
         private readonly Dictionary<int, Dictionary<string, int>> _fctLoopCounters = new Dictionary<int, Dictionary<string, int>>();
         private Instruments.CAN.CANWrapper _fctAuxCan;
         private Instruments.CAN.CANWrapper _fctMainCan;
+        private Instruments.CAN.CANWrapper _fctCalibrationCan;
+        private Instruments.CAN.CANWrapper _fctResolver2Can;
         private readonly Dictionary<string, object> _fctActionPlugins = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
         // Stations register their periodic senders under station-prefixed keys, so this map is written
         // from several test threads at once and must not be a bare Dictionary.
@@ -176,7 +178,9 @@ namespace CSP
             if (_fctInitializedInstrumentNames.Contains("DUTCAN") && MyCAN != null) try { MyCAN.CloseCANDevice(); } catch { }
             if (_fctInitializedInstrumentNames.Contains("MAINCAN") && _fctMainCan != null) try { _fctMainCan.CloseCANDevice(); } catch { }
             if (_fctInitializedInstrumentNames.Contains("RESOLVERCAN") && Resolver != null) try { Resolver.CloseCANDevice(); } catch { }
+            if (_fctInitializedInstrumentNames.Contains("RESOLVERCAN2") && _fctResolver2Can != null) try { _fctResolver2Can.CloseCANDevice(); } catch { }
             if (_fctInitializedInstrumentNames.Contains("AUXCAN") && _fctAuxCan != null) try { _fctAuxCan.CloseCANDevice(); } catch { }
+            if (_fctInitializedInstrumentNames.Contains("CALIBRATIONCAN") && _fctCalibrationCan != null) try { _fctCalibrationCan.CloseCANDevice(); } catch { }
             if (_fctInitializedInstrumentNames.Contains("LVDC")) try { LVDC.DisconnectDevice(); } catch { }
             if (_fctInitializedInstrumentNames.Contains("LVDC_KL15")) try { LVDC_KL15.DisconnectDevice(); } catch { }
             if (_fctInitializedInstrumentNames.Contains("HVDC")) try { HVDC.DisconnectDevice(); } catch { }
@@ -185,7 +189,7 @@ namespace CSP
             if (DcdcLoad != null) { try { DcdcLoad.LoadOff(); } catch { } try { DcdcLoad.Disconnect(); } catch { } try { DcdcLoad.Dispose(); } catch { } DcdcLoad = null; }
             try { RelayFctBoard.Disconnect(); } catch { }
             try { RelayHvMux.Disconnect(); } catch { }
-            MyCAN = null; Resolver = null; _fctAuxCan = null; _fctMainCan = null; _fctInitializedInstrumentNames.Clear(); _fctInstrumentSelectionJson = string.Empty;
+            MyCAN = null; Resolver = null; _fctAuxCan = null; _fctMainCan = null; _fctCalibrationCan = null; _fctResolver2Can = null; _fctInitializedInstrumentNames.Clear(); _fctInstrumentSelectionJson = string.Empty;
             return 0;
         }
 
@@ -217,6 +221,14 @@ namespace CSP
                 case "AUXCAN":
                     // 辅驱：U2 192.168.1.18 CAN0
                     _fctAuxCan = FCT_OpenSelectedCan(assemblyFolder, executableFolder, resource, parameter, 0, "C95C96Auxiliary.dbc");
+                    break;
+                case "CALIBRATIONCAN":
+                    // 校准：U2 192.168.1.18 CAN1
+                    _fctCalibrationCan = FCT_OpenSelectedCan(assemblyFolder, executableFolder, resource, parameter, 1, "Flywheel_900A_Z405.dbc");
+                    break;
+                case "RESOLVERCAN2":
+                    // 旋变2：U3 192.168.1.19 CAN1
+                    _fctResolver2Can = FCT_OpenSelectedCan(assemblyFolder, executableFolder, resource, parameter, 1, "Resolver.dbc");
                     break;
                 case "RES": case "RES_1": RES.ConnectDevice(resource, parameter); RES.SetResistance(1100, 1); RES.SetResistance(1100, 2); break;
                 case "RES_2": RES_2.ConnectDevice(resource, parameter); RES_2.SetResistance(1100, 1); RES_2.SetResistance(1100, 2); break;
@@ -325,6 +337,8 @@ namespace CSP
                     case "RESOLVER": result = FCT_Resolver(socketIndex, operation); break;
                     case "PRODUCTCAN": result = FCT_ProductCan(socketIndex, operation); break;
                     case "AUXCAN": result = FCT_AuxCan(socketIndex, operation); break;
+                    case "CALIBRATIONCAN": result = FCT_GenericCanChannel(socketIndex, operation, _fctCalibrationCan, "校准CAN"); break;
+                    case "RESOLVERCAN2": result = FCT_GenericCanChannel(socketIndex, operation, _fctResolver2Can, "旋变2CAN"); break;
                     case "FLOW": result = FCT_FlowAction(socketIndex, operation); break;
                     default: result = FCT_InvokeActionPlugin(socketIndex, device, operation); break;
                 }
@@ -1041,6 +1055,15 @@ namespace CSP
             return execute.Invoke(plugin, new object[] { operation, FCT_InputString(socketIndex, "ParametersJson", "{}") });
         }
 
+        private object FCT_GenericCanChannel(int socketIndex, string operation, Instruments.CAN.CANWrapper channel, string displayName)
+        {
+            if (channel == null) throw new InvalidOperationException(displayName + "尚未初始化。");
+            if (operation.Equals("SendRaw", StringComparison.OrdinalIgnoreCase)) { uint id = FCT_ParseCanId(FCT_InputString(socketIndex, "CanId", "0")); byte[] data = FCT_ParseHexBytes(FCT_InputString(socketIndex, "DataHex", string.Empty)); channel.SendMessage(id, data); return BitConverter.ToString(data).Replace("-", " "); }
+            if (operation.Equals("ReceiveRaw", StringComparison.OrdinalIgnoreCase)) { uint filter = FCT_ParseCanId(FCT_InputString(socketIndex, "FilterId", "0")); List<Instruments.CAN.CANMessage> messages = new List<Instruments.CAN.CANMessage>(); channel.ReceiveMessage(out messages); JArray frames = new JArray(); foreach (Instruments.CAN.CANMessage message in messages.Where(value => filter == 0 || (value.ID & 0x1FFFFFFF) == (filter & 0x1FFFFFFF))) frames.Add(new JObject { ["Id"] = (message.ID & 0x1FFFFFFF).ToString("X", CultureInfo.InvariantCulture), ["Data"] = BitConverter.ToString(message.DATA ?? new byte[0]).Replace("-", " ") }); return frames.ToString(Formatting.None); }
+            if (operation.Equals("SendDbcSignal", StringComparison.OrdinalIgnoreCase)) { channel.DBC_SendSignalValue(FCT_InputString(socketIndex, "SignalName", string.Empty), FCT_InputDouble(socketIndex, "Value", 0), FCT_InputBool(socketIndex, "SendFlag", true)); return true; }
+            throw new InvalidOperationException("Unsupported " + displayName + " operation: " + operation);
+        }
+
         private object FCT_AuxCan(int socketIndex, string operation)
         {
             if (operation.Equals("Disconnect", StringComparison.OrdinalIgnoreCase)) { FCT_StopAllAuxPeriodic(); if (_fctAuxCan != null) { try { _fctAuxCan.CloseCANDevice(); } catch { } } _fctAuxCan = null; return null; }
@@ -1319,6 +1342,8 @@ namespace CSP
             try { HVDC.SetSourceVoltage(0); } catch { } try { FCT_KewellSetOutput(HVDC, false, null); } catch { } try { LVDC.SetOutput(false); } catch { } try { LVDC_KL15.SetOutput(false); } catch { }
             try { Resolver.DBC_SendSignalValue("2505419280_Speed", 0, true); } catch { }
             try { if (_fctAuxCan != null) _fctAuxCan.CloseCANDevice(); } catch { } _fctAuxCan = null;
+            try { if (_fctCalibrationCan != null) _fctCalibrationCan.CloseCANDevice(); } catch { } _fctCalibrationCan = null;
+            try { if (_fctResolver2Can != null) _fctResolver2Can.CloseCANDevice(); } catch { } _fctResolver2Can = null;
             try { RelayFctBoard.WriteDO("0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15", "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"); } catch { }
             try { RelayHvMux.WriteDO("0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15", "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"); } catch { }
             foreach (ushort channel in new ushort[] { 0, 4, 8, 12 }) try { Relay.WriteSingleCoil(1, channel, false); } catch { }

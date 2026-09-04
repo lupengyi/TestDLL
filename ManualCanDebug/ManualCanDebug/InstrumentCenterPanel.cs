@@ -85,10 +85,10 @@ namespace ManualCanDebug
             _workspaceTabs = tabs;
             InstrumentWorkspaceDesigner workspace = new InstrumentWorkspaceDesigner(AppDomain.CurrentDomain.BaseDirectory, _log, delegate { _configSaved(); }, _initializeSelected);
             _workspaceDesigner = workspace;
-            tabs.Items.Add(new TabItem { Header = "仪器中心", Content = workspace.BuildProjectInstrumentPage() });
-            tabs.Items.Add(new TabItem { Header = "工位仪器配置", Content = workspace.BuildStationConfigurationPage() });
-            tabs.Items.Add(new TabItem { Header = "兼容配置", Content = BuildConfigurationPage() });
+            tabs.Items.Add(new TabItem { Header = "仪器定义", Content = workspace.BuildProjectInstrumentPage() });
+            tabs.Items.Add(new TabItem { Header = "工位配置", Content = workspace.BuildStationConfigurationPage() });
             tabs.Items.Add(new TabItem { Header = "实时设置 / 单步执行", Content = BuildLiveControlPage() });
+            tabs.Items.Add(new TabItem { Header = "高级兼容设置", Content = BuildConfigurationPage() });
             Grid.SetRow(tabs, 1);
             Children.Add(tabs);
         }
@@ -522,6 +522,7 @@ namespace ManualCanDebug
         {
             HashSet<string> initialized = new HashSet<string>(names ?? Enumerable.Empty<string>(), StringComparer.OrdinalIgnoreCase);
             foreach (InstrumentConfigRow row in _configRows) row.ConnectionStatus = initialized.Contains(row.Name) ? "已初始化" : "未初始化";
+            if (_workspaceDesigner != null) _workspaceDesigner.SetInitializedInstruments(initialized);
         }
 
         public string GetInstrumentResource(string name)

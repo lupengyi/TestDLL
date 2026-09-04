@@ -158,7 +158,7 @@ namespace ManualCanDebug
     {
         /// <summary>Version 5 introduced instrument categories, driver binding paths, per-instrument
         /// concurrency policy and generic shared-instrument station bindings.</summary>
-        public const int SchemaVersion = 5;
+        public const int SchemaVersion = 6;
 
         private readonly string _baseDirectory;
         private readonly string _workspaceRoot;
@@ -182,9 +182,11 @@ namespace ManualCanDebug
             InstrumentWorkspaceDocument document = null;
             try { if (File.Exists(_configPath)) document = JsonConvert.DeserializeObject<InstrumentWorkspaceDocument>(File.ReadAllText(_configPath)); } catch { }
             if (document == null || document.Version < 4) document = CreateDefault();
+            bool migrateCanTopology = document.Version < 6;
             if (document.Version < SchemaVersion) { MigrateToVersion5(document); document.Version = SchemaVersion; }
             Normalize(document);
             ReconcileWithCurrentProject(document);
+            if (migrateCanTopology) EnsureDefaultCanAssignments(document);
             return document;
         }
 
@@ -324,16 +326,26 @@ namespace ManualCanDebug
                     conflicts.Add(new WorkspaceConflict { Resource = station.StationName, Message = "独立仪器重复：" + duplicate });
                 foreach (StationInstrumentInstance instance in station.IndependentDevices.Where(v => v.Enabled && string.IsNullOrWhiteSpace(v.Resource)))
                     conflicts.Add(new WorkspaceConflict { Resource = station.StationName + " / " + instance.TemplateDevice, Message = "独立仪器没有填写连接资源，该工位无法初始化这台仪器。" });
-            }
-
-            // Every independent template should exist on every station, otherwise a SEQ written for one
-            // station silently fails on another.
-            foreach (ProjectInstrumentDefinition template in document.Instruments.Where(v => !v.IsShared))
-            {
-                List<string> missing = document.Stations.Where(s => !s.IndependentDevices.Any(v => string.Equals(v.TemplateDevice, template.Device, StringComparison.OrdinalIgnoreCase))).Select(s => s.StationName).ToList();
-                if (missing.Count > 0 && missing.Count < document.Stations.Count) conflicts.Add(new WorkspaceConflict { Resource = template.DisplayName, Message = "以下工位尚未分配该独立仪器：" + string.Join("、", missing) });
+                foreach (var duplicate in station.IndependentDevices.Where(value => value.Enabled).GroupBy(value => PhysicalResourceKey(value.Resource, value.Parameter), StringComparer.OrdinalIgnoreCase).Where(group => !string.IsNullOrWhiteSpace(group.Key) && group.Count() > 1)) conflicts.Add(new WorkspaceConflict { Resource = station.StationName + " / " + duplicate.Key, Message = "同一物理资源或CAN通道被重复添加。" });
             }
             return conflicts;
+        }
+
+        private static void EnsureDefaultCanAssignments(InstrumentWorkspaceDocument document)
+        {
+            StationInstrumentDefinition station = document.Stations.OrderBy(value => value.StationNumber).FirstOrDefault(); if (station == null) return;
+            Dictionary<string, string> names = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase) { { "DUTCAN", "调试CAN" }, { "MAINCAN", "主驱CAN" }, { "AUXCAN", "辅驱CAN" }, { "CALIBRATIONCAN", "校准CAN" }, { "RESOLVERCAN", "旋变1CAN" }, { "RESOLVERCAN2", "旋变2CAN" } };
+            foreach (KeyValuePair<string, string> pair in names)
+            {
+                ProjectInstrumentDefinition template = document.Instruments.FirstOrDefault(value => string.Equals(value.Device, pair.Key, StringComparison.OrdinalIgnoreCase)); if (template == null || template.IsShared) continue; StationInstrumentInstance instance = station.IndependentDevices.FirstOrDefault(value => string.Equals(value.TemplateDevice, pair.Key, StringComparison.OrdinalIgnoreCase));
+                if (instance == null) { instance = new StationInstrumentInstance { TemplateDevice = pair.Key, Resource = template.Resource, Parameter = template.Parameter }; station.IndependentDevices.Add(instance); }
+                if (string.IsNullOrWhiteSpace(instance.InstanceName) || instance.InstanceName.StartsWith(pair.Key, StringComparison.OrdinalIgnoreCase)) instance.InstanceName = pair.Value;
+            }
+        }
+
+        private static string PhysicalResourceKey(string resource, string parameter)
+        {
+            if (string.IsNullOrWhiteSpace(resource)) return string.Empty; string[] parts = (parameter ?? string.Empty).Split(','); return parts.Length > 1 && (parts[0].Trim() == "48" || parts[0].Trim() == "52") ? resource.Trim() + "|CAN" + parts[1].Trim() : string.Empty;
         }
 
         private static string DescribeBinding(Dictionary<string, ProjectInstrumentDefinition> byId, StationSharedBinding binding)
@@ -529,20 +541,33 @@ namespace ManualCanDebug
                 unified.Add(existing);
             }
             foreach (ProjectInstrumentDefinition extra in document.Instruments.Where(value => !unified.Any(item => string.Equals(item.Device, value.Device, StringComparison.OrdinalIgnoreCase)))) unified.Add(extra);
+            EnsureCanChannel(unified, "DUTCAN", "调试CAN", "192.168.1.17", "48,0,500000,8000,0");
+            EnsureCanChannel(unified, "MAINCAN", "主驱CAN", "192.168.1.17", "48,1,500000,8000,0");
+            EnsureCanChannel(unified, "AUXCAN", "辅驱CAN", "192.168.1.18", "48,0,500000,8000,0");
+            EnsureCanChannel(unified, "CALIBRATIONCAN", "校准CAN", "192.168.1.18", "48,1,500000,8000,0");
+            EnsureCanChannel(unified, "RESOLVERCAN", "旋变1CAN", "192.168.1.19", "48,0,500000,8000,0");
+            EnsureCanChannel(unified, "RESOLVERCAN2", "旋变2CAN", "192.168.1.19", "48,1,500000,8000,0");
+            unified = unified.Where(value => !string.IsNullOrWhiteSpace(value.Device)).GroupBy(value => value.Device, StringComparer.OrdinalIgnoreCase).Select(group => group.First()).ToList();
             document.Instruments = unified;
             HashSet<string> independent = new HashSet<string>(unified.Where(value => !value.IsShared).Select(value => value.Device), StringComparer.OrdinalIgnoreCase);
             foreach (StationInstrumentDefinition station in document.Stations)
             {
                 station.IndependentDevices = station.IndependentDevices.Where(value => independent.Contains(value.TemplateDevice)).GroupBy(value => value.TemplateDevice, StringComparer.OrdinalIgnoreCase).Select(group => group.First()).ToList();
-                foreach (ProjectInstrumentDefinition template in unified.Where(value => !value.IsShared && !station.IndependentDevices.Any(item => string.Equals(item.TemplateDevice, value.Device, StringComparison.OrdinalIgnoreCase)))) station.IndependentDevices.Add(new StationInstrumentInstance { TemplateDevice = template.Device, InstanceName = template.DisplayName + "-" + station.StationNumber.ToString("00", CultureInfo.InvariantCulture), Resource = template.Resource, Parameter = template.Parameter });
             }
+        }
+
+        private void EnsureCanChannel(List<ProjectInstrumentDefinition> instruments, string device, string displayName, string resource, string parameter)
+        {
+            ProjectInstrumentDefinition existing = instruments.FirstOrDefault(value => string.Equals(value.Device, device, StringComparison.OrdinalIgnoreCase));
+            if (existing != null) { if (string.IsNullOrWhiteSpace(existing.DisplayName) || string.Equals(existing.DisplayName, device, StringComparison.OrdinalIgnoreCase)) existing.DisplayName = displayName; return; }
+            instruments.Add(NewInstrument(device, displayName, "Instruments.CAN.CANWrapper", resource, parameter, "Independent", 1));
         }
 
         private static string ResolveDriverName(string device, string mode)
         {
             switch (device)
             {
-                case "DUTCAN": case "MAINCAN": case "AUXCAN": case "RESOLVERCAN": return "Instruments.CAN.CANWrapper";
+                case "DUTCAN": case "MAINCAN": case "AUXCAN": case "CALIBRATIONCAN": case "RESOLVERCAN": case "RESOLVERCAN2": return "Instruments.CAN.CANWrapper";
                 case "LVDC": case "LVDC_KL15": return "Instruments.PowerSupply.ITECH_IT6XXXC";
                 case "HVDC": return "Instruments.PowerSupply.Kewell_C3000";
                 case "DMM": case "DMM_HV": case "DMM_LV": return "Instruments.DMM.KeySight34461A";

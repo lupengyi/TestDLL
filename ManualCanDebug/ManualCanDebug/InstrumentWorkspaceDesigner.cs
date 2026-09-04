@@ -27,10 +27,15 @@ namespace ManualCanDebug
         private Grid _projectEditor;
         private ContentControl _generatedMethodHost;
         private Grid _projectPageRoot;
-        private ContentControl _resourcePaletteHost;
-        private Grid _stationEditor;
-        private Grid _stationCards;
-        private Canvas _wiringCanvas;
+        private ContentControl _resourcePaletteHost = null;
+        private Grid _stationEditor = null;
+        private Grid _unifiedStationRoot;
+        private ContentControl _stationNavigationHost;
+        private ContentControl _stationInspectorHost;
+        private StationInstrumentInstance _selectedStationInstance;
+        private ProjectInstrumentDefinition _selectedSharedInstrument;
+        private Grid _stationCards = null;
+        private Canvas _wiringCanvas = null;
         private TextBlock _driverCount;
         private TextBlock _methodCount;
         private readonly Dictionary<string, FrameworkElement> _resourceEndpoints = new Dictionary<string, FrameworkElement>(StringComparer.OrdinalIgnoreCase);
@@ -38,6 +43,7 @@ namespace ManualCanDebug
         private readonly Dictionary<string, FrameworkElement> _stationPlcEndpoints = new Dictionary<string, FrameworkElement>(StringComparer.OrdinalIgnoreCase);
         private readonly Dictionary<string, FrameworkElement> _stationCardEndpoints = new Dictionary<string, FrameworkElement>(StringComparer.OrdinalIgnoreCase);
         private readonly Dictionary<ProjectInstrumentDefinition, Border> _instrumentRows = new Dictionary<ProjectInstrumentDefinition, Border>();
+        private readonly HashSet<string> _initializedDevices = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
         public InstrumentWorkspaceDesigner(string baseDirectory, Action<string> log, Action configurationChanged, Func<string, System.Threading.Tasks.Task> testConnection)
         {
@@ -57,6 +63,8 @@ namespace ManualCanDebug
             PopulateProjectInstrumentPage();
             return _projectPageRoot;
         }
+
+        internal void SetInitializedInstruments(IEnumerable<string> names) { _initializedDevices.Clear(); foreach (string name in names ?? Enumerable.Empty<string>()) if (!string.IsNullOrWhiteSpace(name)) _initializedDevices.Add(name); RefreshUnifiedStationPage(); }
 
         private void PopulateProjectInstrumentPage()
         {
@@ -90,29 +98,77 @@ namespace ManualCanDebug
 
         public UIElement BuildStationConfigurationPage()
         {
-            Grid root = new Grid { Background = Brushes.White, Margin = new Thickness(8) };
-            root.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
-            root.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
-            root.RowDefinitions.Add(new RowDefinition { Height = new GridLength(220) });
-            root.Children.Add(BuildStationCommandBar());
+            _unifiedStationRoot = new Grid { Background = Brushes.White, Margin = new Thickness(8) };
+            _unifiedStationRoot.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(390) });
+            _unifiedStationRoot.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1) });
+            _unifiedStationRoot.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+            _stationNavigationHost = new ContentControl(); _unifiedStationRoot.Children.Add(_stationNavigationHost);
+            Border divider = new Border { Background = BorderBrush() }; Grid.SetColumn(divider, 1); _unifiedStationRoot.Children.Add(divider);
+            _stationInspectorHost = new ContentControl(); Grid.SetColumn(_stationInspectorHost, 2); _unifiedStationRoot.Children.Add(_stationInspectorHost);
+            if (_selectedStation == null) _selectedStation = _document.Stations.OrderBy(value => value.StationNumber).FirstOrDefault();
+            _selectedStationInstance = PreferredStationInstance(_selectedStation);
+            RefreshUnifiedStationPage();
+            return _unifiedStationRoot;
+        }
 
-            Grid main = new Grid { Margin = new Thickness(0, 8, 0, 8) };
-            main.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(270) });
-            main.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(18) });
-            main.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            _resourcePaletteHost = new ContentControl { Content = BuildResourcePalette() }; main.Children.Add(_resourcePaletteHost);
-            _stationCards = new Grid();
-            _stationCards.ColumnDefinitions.Add(new ColumnDefinition()); _stationCards.ColumnDefinitions.Add(new ColumnDefinition());
-            ScrollViewer stationScroll = new ScrollViewer { Content = _stationCards, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled };
-            stationScroll.ScrollChanged += delegate { ScheduleWiring(); }; Grid.SetColumn(stationScroll, 2); main.Children.Add(stationScroll);
-            _wiringCanvas = new Canvas { IsHitTestVisible = false, ClipToBounds = true };
-            Grid.SetColumnSpan(_wiringCanvas, 3); Panel.SetZIndex(_wiringCanvas, 5); main.Children.Add(_wiringCanvas);
-            Grid.SetRow(main, 1); root.Children.Add(main);
+        private void RefreshUnifiedStationPage()
+        {
+            if (_stationNavigationHost != null) _stationNavigationHost.Content = BuildUnifiedStationNavigation();
+            if (_stationInspectorHost != null) _stationInspectorHost.Content = BuildUnifiedInstrumentInspector();
+        }
 
-            _stationEditor = new Grid(); Grid.SetRow(_stationEditor, 2); root.Children.Add(_stationEditor);
-            RefreshStationCards(); RefreshStationEditor();
-            main.Loaded += delegate { ScheduleWiring(); }; main.SizeChanged += delegate { ScheduleWiring(); };
-            return root;
+        private UIElement BuildUnifiedStationNavigation()
+        {
+            Grid root = new Grid { Background = Bg(249, 251, 254) }; root.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto }); root.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) });
+            Grid commands = new Grid { Margin = new Thickness(14, 12, 14, 10) }; commands.ColumnDefinitions.Add(new ColumnDefinition()); commands.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
+            commands.Children.Add(new TextBlock { Text = "工位与仪器", FontSize = 16, FontWeight = FontWeights.SemiBold, Foreground = Ink(), VerticalAlignment = VerticalAlignment.Center });
+            StackPanel commandButtons = new StackPanel { Orientation = Orientation.Horizontal }; Button addStation = Secondary("＋ 新建工位"); addStation.MinWidth = 96; addStation.Click += delegate { ChangeStationCount(Math.Min(12, _document.StationCount + 1)); SaveWorkspace(false); RefreshUnifiedStationPage(); }; Button addInstrument = Primary("＋ 添加仪器"); addInstrument.MinWidth = 96; addInstrument.Click += AddStationInstrument_Click; commandButtons.Children.Add(addStation); commandButtons.Children.Add(addInstrument); Grid.SetColumn(commandButtons, 1); commands.Children.Add(commandButtons); root.Children.Add(commands);
+            StackPanel stations = new StackPanel { Margin = new Thickness(10, 0, 10, 12) };
+            foreach (StationInstrumentDefinition station in _document.Stations.OrderBy(value => value.StationNumber))
+            {
+                bool selectedStation = ReferenceEquals(station, _selectedStation); Border stationHeader = new Border { Background = selectedStation ? Bg(235, 244, 255) : Brushes.White, BorderBrush = selectedStation ? Accent() : BorderBrush(), BorderThickness = new Thickness(selectedStation ? 2 : 1), Padding = new Thickness(12, 8, 10, 8), Margin = new Thickness(0, 0, 0, 3), Cursor = Cursors.Hand };
+                DockPanel header = new DockPanel(); header.Children.Add(new TextBlock { Text = station.StationName, FontWeight = FontWeights.SemiBold, Foreground = selectedStation ? Accent() : Ink() }); TextBlock count = new TextBlock { Text = station.IndependentDevices.Count + _document.Instruments.Count(value => value.IsShared) + " 台仪器 · " + _document.Instruments.Count(value => value.IsShared) + " 台共用", Foreground = new SolidColorBrush(Color.FromRgb(103, 116, 134)), HorizontalAlignment = HorizontalAlignment.Right }; DockPanel.SetDock(count, Dock.Right); header.Children.Add(count); stationHeader.Child = header; stationHeader.MouseLeftButtonDown += delegate { _selectedStation = station; _selectedStationInstance = PreferredStationInstance(station); _selectedSharedInstrument = null; RefreshUnifiedStationPage(); }; stations.Children.Add(stationHeader);
+                if (!selectedStation) continue;
+                foreach (StationInstrumentInstance instance in station.IndependentDevices.Where(value => value.Enabled)) stations.Children.Add(BuildUnifiedInstrumentRow(instance, null));
+                if (_document.Instruments.Any(value => value.IsShared)) stations.Children.Add(new TextBlock { Text = "全部工位共用", Foreground = Accent(), FontWeight = FontWeights.SemiBold, Margin = new Thickness(14, 8, 0, 5) });
+                foreach (ProjectInstrumentDefinition shared in _document.Instruments.Where(value => value.IsShared).OrderBy(value => value.DisplayName)) stations.Children.Add(BuildUnifiedInstrumentRow(null, shared));
+            }
+            ScrollViewer scroll = new ScrollViewer { Content = stations, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled }; Grid.SetRow(scroll, 1); root.Children.Add(scroll); return root;
+        }
+
+        private Border BuildUnifiedInstrumentRow(StationInstrumentInstance instance, ProjectInstrumentDefinition shared)
+        {
+            ProjectInstrumentDefinition template = shared ?? _document.Instruments.FirstOrDefault(value => string.Equals(value.Device, instance == null ? string.Empty : instance.TemplateDevice, StringComparison.OrdinalIgnoreCase)); bool selected = instance != null ? ReferenceEquals(instance, _selectedStationInstance) : ReferenceEquals(shared, _selectedSharedInstrument); string name = shared == null ? (string.IsNullOrWhiteSpace(instance.InstanceName) ? template == null ? instance.TemplateDevice : template.DisplayName : instance.InstanceName) : shared.DisplayName;
+            Border row = new Border { Background = selected ? Bg(229, 241, 255) : Brushes.White, BorderBrush = selected ? new SolidColorBrush(Color.FromRgb(159, 196, 241)) : BorderBrush(), BorderThickness = new Thickness(1), Padding = new Thickness(28, 7, 10, 7), Margin = new Thickness(0, 0, 0, 2), Cursor = Cursors.Hand };
+            bool initialized = template != null && _initializedDevices.Contains(template.Device); DockPanel content = new DockPanel(); TextBlock state = new TextBlock { Text = "●", Foreground = initialized ? new SolidColorBrush(Color.FromRgb(53, 175, 105)) : new SolidColorBrush(Color.FromRgb(170, 181, 195)), FontSize = 10, VerticalAlignment = VerticalAlignment.Center, ToolTip = initialized ? "已初始化" : "未初始化" }; DockPanel.SetDock(state, Dock.Right); content.Children.Add(state); content.Children.Add(new TextBlock { Text = name + (shared == null ? string.Empty : "  ·  全工位"), Foreground = selected ? Accent() : Ink(), FontWeight = selected ? FontWeights.SemiBold : FontWeights.Normal }); row.Child = content;
+            row.MouseLeftButtonDown += delegate { _selectedStationInstance = instance; _selectedSharedInstrument = shared; RefreshUnifiedStationPage(); }; return row;
+        }
+
+        private static StationInstrumentInstance PreferredStationInstance(StationInstrumentDefinition station) { return station == null ? null : (station.IndependentDevices.FirstOrDefault(value => string.Equals(value.TemplateDevice, "MAINCAN", StringComparison.OrdinalIgnoreCase)) ?? station.IndependentDevices.FirstOrDefault(value => string.Equals(value.TemplateDevice, "DUTCAN", StringComparison.OrdinalIgnoreCase)) ?? station.IndependentDevices.FirstOrDefault()); }
+
+        private UIElement BuildUnifiedInstrumentInspector()
+        {
+            ProjectInstrumentDefinition template = _selectedSharedInstrument ?? (_selectedStationInstance == null ? null : _document.Instruments.FirstOrDefault(value => string.Equals(value.Device, _selectedStationInstance.TemplateDevice, StringComparison.OrdinalIgnoreCase)));
+            if (template == null) return new TextBlock { Text = "请从左侧选择仪器，或点击“添加仪器”。", Foreground = new SolidColorBrush(Color.FromRgb(105, 118, 136)), Margin = new Thickness(28), FontSize = 15 };
+            bool shared = _selectedSharedInstrument != null; string currentName = shared ? template.DisplayName : _selectedStationInstance.InstanceName; string currentResource = shared ? template.Resource : _selectedStationInstance.Resource; string currentParameter = shared ? template.Parameter : _selectedStationInstance.Parameter;
+            Grid root = new Grid { Margin = new Thickness(20, 12, 18, 14) }; root.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto }); root.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) }); root.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            DockPanel title = new DockPanel(); title.Children.Add(new TextBlock { Text = "配置仪器 · " + currentName, FontSize = 16, FontWeight = FontWeights.SemiBold, Foreground = Ink() }); TextBlock summary = new TextBlock { Text = (_selectedStation == null ? string.Empty : _selectedStation.StationName + " · ") + (_selectedStation == null ? 0 : _selectedStation.IndependentDevices.Count) + " 台专用 · " + _document.Instruments.Count(value => value.IsShared) + " 台共用", Foreground = new SolidColorBrush(Color.FromRgb(103, 116, 134)), HorizontalAlignment = HorizontalAlignment.Right }; DockPanel.SetDock(summary, Dock.Right); title.Children.Add(summary); root.Children.Add(title);
+            Grid form = new Grid { Margin = new Thickness(0, 18, 0, 0) }; form.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(150) }); form.ColumnDefinitions.Add(new ColumnDefinition()); for (int i = 0; i < 9; i++) form.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            AddLabel(form, "仪器名称", 0, 0); TextBox name = FlatText(currentName); name.TextChanged += delegate { if (shared) template.DisplayName = name.Text; else _selectedStationInstance.InstanceName = name.Text; }; AddControl(form, name, 0, 1);
+            AddLabel(form, "仪器类型", 1, 0); TextBox type = FlatText(template.DisplayName + "  /  " + template.DriverName); type.IsReadOnly = true; type.Background = Bg(246, 248, 251); AddControl(form, type, 1, 1);
+            AddLabel(form, "所属范围", 2, 0); StackPanel scope = new StackPanel { Orientation = Orientation.Horizontal }; ToggleButton local = SegmentButton("当前工位（" + (_selectedStation == null ? "" : _selectedStation.StationName) + "）", !shared); ToggleButton all = SegmentButton("全部工位共用", shared); local.Click += delegate { if (shared) ConvertSharedToStation(template); }; all.Click += delegate { if (!shared) ConvertStationToShared(template, _selectedStationInstance); }; scope.Children.Add(local); scope.Children.Add(all); AddControl(form, scope, 2, 1);
+            bool can = string.Equals(template.DriverName, "Instruments.CAN.CANWrapper", StringComparison.OrdinalIgnoreCase) || template.Device.EndsWith("CAN", StringComparison.OrdinalIgnoreCase) || template.Device.Contains("CAN"); string[] canParts = (currentParameter ?? string.Empty).Split(',');
+            AddLabel(form, can ? "IP地址" : "Resource", 3, 0); TextBox resource = FlatText(currentResource); resource.TextChanged += delegate { SetSelectedConnection(resource.Text, null); }; AddControl(form, resource, 3, 1);
+            if (can)
+            {
+                AddLabel(form, "通道", 4, 0); ComboBox channel = FlatCombo(new[] { "CAN0", "CAN1" }); channel.SelectedItem = canParts.Length > 1 && canParts[1].Trim() == "1" ? "CAN1" : "CAN0"; channel.SelectionChanged += delegate { SetCanParameterPart(1, Convert.ToString(channel.SelectedItem) == "CAN1" ? "1" : "0"); }; AddControl(form, channel, 4, 1);
+                AddLabel(form, "通信模式", 5, 0); ComboBox mode = FlatCombo(new[] { "经典CAN" }); mode.SelectedIndex = 0; mode.IsEnabled = false; mode.ToolTip = "当前200U工位配置使用经典CAN 500 kbit/s；CAN FD需单独配置数据波特率后开放。"; AddControl(form, mode, 5, 1);
+                AddLabel(form, "仲裁波特率", 6, 0); TextBox baud = FlatText(canParts.Length > 2 ? canParts[2] : "500000"); baud.TextChanged += delegate { SetCanParameterPart(2, baud.Text); }; AddControl(form, baud, 6, 1);
+                AddLabel(form, "端口", 7, 0); TextBox port = FlatText(canParts.Length > 3 ? canParts[3] : "8000"); port.TextChanged += delegate { SetCanParameterPart(3, port.Text); }; AddControl(form, port, 7, 1);
+            }
+            else { AddLabel(form, "连接参数", 4, 0); TextBox parameter = FlatText(currentParameter); parameter.TextChanged += delegate { SetSelectedConnection(null, parameter.Text); }; AddControl(form, parameter, 4, 1); }
+            ScrollViewer formScroll = new ScrollViewer { Content = form, VerticalScrollBarVisibility = ScrollBarVisibility.Auto }; Grid.SetRow(formScroll, 1); root.Children.Add(formScroll);
+            DockPanel footer = new DockPanel { Margin = new Thickness(0, 12, 0, 0) }; Button remove = Danger(shared ? "从全部工位删除" : "从当前工位删除"); remove.Click += RemoveSelectedStationInstrument_Click; footer.Children.Add(remove); StackPanel actions = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right }; Button save = Primary("保存配置"); save.Click += delegate { SaveWorkspace(true); RefreshUnifiedStationPage(); }; Button test = Secondary("测试连接"); test.Click += async delegate { await TestSelectedConnectionAsync(template, test); }; Button initialize = Primary("初始化本工位"); initialize.Click += async delegate { await InitializeCurrentStationAsync(initialize); }; actions.Children.Add(save); actions.Children.Add(test); actions.Children.Add(initialize); DockPanel.SetDock(actions, Dock.Right); footer.Children.Add(actions); Grid.SetRow(footer, 2); root.Children.Add(footer); return root;
         }
 
         private UIElement BuildDiscoveryBar()
@@ -283,8 +339,8 @@ namespace ManualCanDebug
             ScrollViewer scroll = new ScrollViewer { Content = table, VerticalScrollBarVisibility = ScrollBarVisibility.Auto };
             Grid.SetRow(scroll, 2); root.Children.Add(scroll);
 
-            Button generate = Primary("生成方法"); generate.HorizontalAlignment = HorizontalAlignment.Right; generate.Margin = new Thickness(0, 10, 0, 0); generate.Click += GenerateMethods_Click;
-            Grid.SetRow(generate, 3); root.Children.Add(generate);
+            StackPanel methodActions = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right, Margin = new Thickness(0, 10, 0, 0) }; Button editActions = Secondary("编辑SEQ名称与参数"); editActions.Click += delegate { InstrumentActionManagerWindow dialog = new InstrumentActionManagerWindow { Owner = Application.Current == null ? null : Application.Current.MainWindow }; if (dialog.ShowDialog() == true) { ActionCatalog.Reload(); _configurationChanged(); RefreshProjectEditor(); RefreshGeneratedMethodPanel(); } }; Button generate = Primary("生成方法"); generate.Click += GenerateMethods_Click; methodActions.Children.Add(editActions); methodActions.Children.Add(generate);
+            Grid.SetRow(methodActions, 3); root.Children.Add(methodActions);
             return root;
         }
 
@@ -371,6 +427,56 @@ namespace ManualCanDebug
             StackPanel saveArea = new StackPanel { VerticalAlignment = VerticalAlignment.Center, Margin = new Thickness(20, 0, 0, 0) }; Button save = Primary("保存" + _selectedStation.StationName + "设置"); save.Click += delegate { SaveWorkspace(true); }; saveArea.Children.Add(save); saveArea.Children.Add(new TextBlock { Text = "驱动和方法已在项目仪器页自动发现并生成；这里仅分配实例和共享资源。", Foreground = Accent(), TextWrapping = TextWrapping.Wrap, Margin = new Thickness(0, 16, 0, 0) }); Grid.SetColumn(saveArea, 3); root.Children.Add(saveArea);
             outer.Child = new ScrollViewer { Content = root, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled, PanningMode = PanningMode.VerticalOnly }; _stationEditor.Children.Add(outer);
         }
+
+        private void AddStationInstrument_Click(object sender, RoutedEventArgs e)
+        {
+            if (_selectedStation == null) return; List<ProjectInstrumentDefinition> available = _document.Instruments.Where(value => !value.IsShared && !_selectedStation.IndependentDevices.Any(item => string.Equals(item.TemplateDevice, value.Device, StringComparison.OrdinalIgnoreCase))).OrderBy(value => value.DisplayName).ToList();
+            if (available.Count == 0) { MessageBox.Show("当前仪器定义都已添加到本工位。请先在“仪器定义”中增加新的仪器类型。", "添加仪器", MessageBoxButton.OK, MessageBoxImage.Information); return; }
+            Window dialog = new Window { Title = "添加仪器到" + _selectedStation.StationName, Width = 470, Height = 250, Owner = Window.GetWindow((DependencyObject)sender), WindowStartupLocation = WindowStartupLocation.CenterOwner, ResizeMode = ResizeMode.NoResize };
+            Grid form = new Grid { Margin = new Thickness(20) }; form.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(105) }); form.ColumnDefinitions.Add(new ColumnDefinition()); form.RowDefinitions.Add(new RowDefinition()); form.RowDefinitions.Add(new RowDefinition()); form.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto }); ComboBox type = new ComboBox { ItemsSource = available, DisplayMemberPath = "DisplayName", SelectedIndex = 0, Height = 32 }; TextBox name = FlatText(available[0].DisplayName); AddLabel(form, "仪器类型", 0, 0); AddControl(form, type, 0, 1); AddLabel(form, "仪器名称", 1, 0); AddControl(form, name, 1, 1); type.SelectionChanged += delegate { ProjectInstrumentDefinition selected = type.SelectedItem as ProjectInstrumentDefinition; if (selected != null) name.Text = selected.DisplayName; }; StackPanel buttons = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right }; Button cancel = Secondary("取消"); cancel.Click += delegate { dialog.Close(); }; Button add = Primary("添加并配置"); add.Click += delegate { ProjectInstrumentDefinition selected = type.SelectedItem as ProjectInstrumentDefinition; if (selected == null) return; StationInstrumentInstance instance = new StationInstrumentInstance { TemplateDevice = selected.Device, InstanceName = string.IsNullOrWhiteSpace(name.Text) ? selected.DisplayName : name.Text.Trim(), Resource = selected.Resource, Parameter = selected.Parameter }; _selectedStation.IndependentDevices.Add(instance); _selectedStationInstance = instance; _selectedSharedInstrument = null; dialog.DialogResult = true; }; buttons.Children.Add(cancel); buttons.Children.Add(add); Grid.SetRow(buttons, 2); Grid.SetColumnSpan(buttons, 2); form.Children.Add(buttons); dialog.Content = form; if (dialog.ShowDialog() == true) { SaveWorkspace(false); RefreshUnifiedStationPage(); }
+        }
+
+        private void SetSelectedConnection(string resource, string parameter)
+        {
+            if (_selectedSharedInstrument != null) { if (resource != null) _selectedSharedInstrument.Resource = resource; if (parameter != null) _selectedSharedInstrument.Parameter = parameter; }
+            else if (_selectedStationInstance != null) { if (resource != null) _selectedStationInstance.Resource = resource; if (parameter != null) _selectedStationInstance.Parameter = parameter; }
+        }
+
+        private void SetCanParameterPart(int index, string value)
+        {
+            string current = _selectedSharedInstrument != null ? _selectedSharedInstrument.Parameter : _selectedStationInstance == null ? string.Empty : _selectedStationInstance.Parameter; List<string> parts = (current ?? string.Empty).Split(',').ToList(); while (parts.Count < 5) parts.Add(parts.Count == 0 ? "48" : parts.Count == 1 ? "0" : parts.Count == 2 ? "500000" : parts.Count == 3 ? "8000" : "0"); parts[index] = value ?? string.Empty; SetSelectedConnection(null, string.Join(",", parts));
+        }
+
+        private void ConvertStationToShared(ProjectInstrumentDefinition template, StationInstrumentInstance instance)
+        {
+            if (template == null || instance == null) return; if (MessageBox.Show("转换为共用仪器后，所有工位都会使用同一台真实仪器和同一份连接配置。是否继续？", "全部工位共用", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes) return; template.Usage = "Shared"; template.DisplayName = instance.InstanceName; template.Resource = instance.Resource; template.Parameter = instance.Parameter; foreach (StationInstrumentDefinition station in _document.Stations) station.IndependentDevices.RemoveAll(value => string.Equals(value.TemplateDevice, template.Device, StringComparison.OrdinalIgnoreCase)); _selectedStationInstance = null; _selectedSharedInstrument = template; SaveWorkspace(false); RefreshUnifiedStationPage();
+        }
+
+        private void ConvertSharedToStation(ProjectInstrumentDefinition template)
+        {
+            if (template == null || _selectedStation == null) return; if (MessageBox.Show("转换后该仪器只保留在" + _selectedStation.StationName + "，其他工位将不再拥有它。是否继续？", "转为当前工位专用", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes) return; template.Usage = "Independent"; StationInstrumentInstance instance = new StationInstrumentInstance { TemplateDevice = template.Device, InstanceName = template.DisplayName, Resource = template.Resource, Parameter = template.Parameter }; _selectedStation.IndependentDevices.Add(instance); _selectedSharedInstrument = null; _selectedStationInstance = instance; SaveWorkspace(false); RefreshUnifiedStationPage();
+        }
+
+        private void RemoveSelectedStationInstrument_Click(object sender, RoutedEventArgs e)
+        {
+            if (_selectedSharedInstrument != null) { if (MessageBox.Show("删除后该共用仪器将从全部工位移除。是否继续？", "删除共用仪器", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return; _document.Instruments.Remove(_selectedSharedInstrument); _selectedSharedInstrument = null; }
+            else if (_selectedStation != null && _selectedStationInstance != null) { if (MessageBox.Show("确定从" + _selectedStation.StationName + "移除“" + _selectedStationInstance.InstanceName + "”？", "移除仪器", MessageBoxButton.YesNo, MessageBoxImage.Question) != MessageBoxResult.Yes) return; _selectedStation.IndependentDevices.Remove(_selectedStationInstance); _selectedStationInstance = null; }
+            SaveWorkspace(false); RefreshUnifiedStationPage();
+        }
+
+        private async System.Threading.Tasks.Task InitializeCurrentStationAsync(Button button)
+        {
+            if (_selectedStation == null || _testConnection == null) return; List<WorkspaceConflict> conflicts = _service.Validate(_document); if (conflicts.Count > 0) { MessageBox.Show(string.Join(Environment.NewLine, conflicts), "工位资源冲突", MessageBoxButton.OK, MessageBoxImage.Warning); return; }
+            JArray payload = new JArray(); foreach (StationInstrumentInstance instance in _selectedStation.IndependentDevices.Where(value => value.Enabled)) { ProjectInstrumentDefinition template = _document.Instruments.FirstOrDefault(value => string.Equals(value.Device, instance.TemplateDevice, StringComparison.OrdinalIgnoreCase)); if (template != null) payload.Add(InitializationRow(template, instance.Resource, instance.Parameter)); } foreach (ProjectInstrumentDefinition shared in _document.Instruments.Where(value => value.IsShared)) payload.Add(InitializationRow(shared, shared.Resource, shared.Parameter));
+            try { button.IsEnabled = false; button.Content = "正在初始化..."; await _testConnection(payload.ToString(Newtonsoft.Json.Formatting.None)); MessageBox.Show(_selectedStation.StationName + "已初始化。旧产品调试页、实时单步和SEQ调试将复用同一个MainTest实例。", "初始化本工位", MessageBoxButton.OK, MessageBoxImage.Information); } catch (Exception ex) { MessageBox.Show("初始化失败：\n" + ex.Message, "初始化本工位", MessageBoxButton.OK, MessageBoxImage.Error); } finally { button.IsEnabled = true; button.Content = "初始化本工位"; }
+        }
+
+        private async System.Threading.Tasks.Task TestSelectedConnectionAsync(ProjectInstrumentDefinition template, Button button)
+        {
+            if (_testConnection == null || template == null) return; string resource = _selectedSharedInstrument != null ? _selectedSharedInstrument.Resource : _selectedStationInstance == null ? template.Resource : _selectedStationInstance.Resource; string parameter = _selectedSharedInstrument != null ? _selectedSharedInstrument.Parameter : _selectedStationInstance == null ? template.Parameter : _selectedStationInstance.Parameter; try { button.IsEnabled = false; button.Content = "连接中..."; await _testConnection(new JArray(InitializationRow(template, resource, parameter)).ToString(Newtonsoft.Json.Formatting.None)); MessageBox.Show("测试连接成功。该连接与正式初始化使用同一套MainTest驱动。", "测试连接", MessageBoxButton.OK, MessageBoxImage.Information); } catch (Exception ex) { MessageBox.Show("测试连接失败：\n" + ex.Message, "测试连接", MessageBoxButton.OK, MessageBoxImage.Error); } finally { button.IsEnabled = true; button.Content = "测试连接"; }
+        }
+
+        private static JObject InitializationRow(ProjectInstrumentDefinition template, string resource, string parameter) { return new JObject { ["Name"] = template.Device, ["Type"] = template.Device, ["Mode"] = template.DriverName, ["Resource"] = string.IsNullOrWhiteSpace(resource) ? template.Resource : resource, ["Parameter"] = string.IsNullOrWhiteSpace(parameter) ? template.Parameter : parameter }; }
 
         private void Resource_PreviewMouseMove(object sender, MouseEventArgs e)
         {
