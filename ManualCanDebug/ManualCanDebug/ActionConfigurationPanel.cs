@@ -112,7 +112,7 @@ namespace ManualCanDebug
             else if (source == "产品内部通信") step = BuildDescriptorStep(false);
             else if (source == "产品DBC通信") step = BuildDbcStep();
             else step = BuildDescriptorStep(source == "流程逻辑");
-            step.StepName = string.IsNullOrWhiteSpace(_stepName.Text) ? BuildAutomaticName() : _stepName.Text.Trim(); step.RunMode = Convert.ToString(_runMode.SelectedItem, CultureInfo.InvariantCulture) ?? "Normal"; step.RecordingLog = _recordLog.IsChecked == true; ApplyResult(step); return step;
+            step.StepName = string.IsNullOrWhiteSpace(_stepName.Text) ? BuildAutomaticName() : _stepName.Text.Trim(); step.RunMode = Convert.ToString(_runMode.SelectedItem, CultureInfo.InvariantCulture) ?? "Normal"; step.RecordingLog = _recordLog.IsChecked == true; ApplyResult(step); foreach (string editorKey in new[] { "StructureRole", "StructureId" }) if (_loadedStep != null && _loadedStep.Properties.ContainsKey(editorKey)) step.Properties[editorKey] = _loadedStep.Properties[editorKey]; return step;
         }
 
         public IDictionary<string, string> BuildBindings()
