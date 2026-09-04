@@ -530,7 +530,7 @@ namespace ManualCanDebug
 
         private void ReconcileWithCurrentProject(InstrumentWorkspaceDocument document)
         {
-            List<ProjectInstrumentDefinition> actual = LoadCurrentProjectInstruments(); if (actual.Count == 0) return;
+            List<ProjectInstrumentDefinition> actual = LoadCurrentProjectInstruments(); if (actual.Count == 0) actual = document.Instruments.ToList();
             List<ProjectInstrumentDefinition> unified = new List<ProjectInstrumentDefinition>();
             foreach (ProjectInstrumentDefinition source in actual)
             {
@@ -560,7 +560,7 @@ namespace ManualCanDebug
         {
             ProjectInstrumentDefinition existing = instruments.FirstOrDefault(value => string.Equals(value.Device, device, StringComparison.OrdinalIgnoreCase));
             if (existing != null) { if (string.IsNullOrWhiteSpace(existing.DisplayName) || string.Equals(existing.DisplayName, device, StringComparison.OrdinalIgnoreCase)) existing.DisplayName = displayName; return; }
-            instruments.Add(NewInstrument(device, displayName, "Instruments.CAN.CANWrapper", resource, parameter, "Independent", 1));
+            instruments.Add(NewInstrument(displayName, device, "Instruments.CAN.CANWrapper", resource, parameter, "Independent", 1));
         }
 
         private static string ResolveDriverName(string device, string mode)

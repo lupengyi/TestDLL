@@ -4,6 +4,21 @@ namespace CSP
 {
     public partial class TestDllMain
     {
+        public void UI_CALIBRATIONCAN_ReceiveRaw(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "CALIBRATIONCAN", "ReceiveRaw");
+        }
+
+        public void UI_CALIBRATIONCAN_SendDbcSignal(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "CALIBRATIONCAN", "SendDbcSignal");
+        }
+
+        public void UI_CALIBRATIONCAN_SendRaw(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "CALIBRATIONCAN", "SendRaw");
+        }
+
         public void UI_DAQ_Read(int socketIndex)
         {
             FCT_ExecuteConfiguredAction(socketIndex, "DAQ", "Read");
@@ -387,6 +402,21 @@ namespace CSP
         public void UI_RELAY_HVMUX_SetDO(int socketIndex)
         {
             FCT_ExecuteConfiguredAction(socketIndex, "RELAY_HVMUX", "SetDO");
+        }
+
+        public void UI_RESOLVERCAN2_ReceiveRaw(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "RESOLVERCAN2", "ReceiveRaw");
+        }
+
+        public void UI_RESOLVERCAN2_SendDbcSignal(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "RESOLVERCAN2", "SendDbcSignal");
+        }
+
+        public void UI_RESOLVERCAN2_SendRaw(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "RESOLVERCAN2", "SendRaw");
         }
 
         public void UI_RES_1_SetResistance(int socketIndex)

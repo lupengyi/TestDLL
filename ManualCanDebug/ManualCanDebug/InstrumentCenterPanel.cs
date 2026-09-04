@@ -111,7 +111,7 @@ namespace ManualCanDebug
             page.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             TextBlock note = new TextBlock
             {
-                Text = "通过编辑 InstrumentConfig.json 或下方按钮增删仪器。勾选“本次初始化”决定连接哪些仪器。FST006 四路CAN：DUTCAN=调试(.17 CAN0)、MAINCAN=主驱(.17 CAN1)、AUXCAN=辅驱(.18 CAN0)、RESOLVERCAN=旋变(.19 CAN0)。参数格式：DeviceType,Channel,BaudRate,Port,DeviceIndex。",
+                Text = "高级兼容配置会与工位配置合并。FST006 六路CAN：调试(.17 CAN0)、主驱(.17 CAN1)、辅驱(.18 CAN0)、校准(.18 CAN1)、旋变1(.19 CAN0)、旋变2(.19 CAN1)。参数格式：DeviceType,Channel,BaudRate,Port,DeviceIndex。正式使用建议在“工位配置”初始化本工位。",
                 TextWrapping = TextWrapping.Wrap,
                 Padding = new Thickness(10, 8, 10, 8),
                 Background = new SolidColorBrush(Color.FromRgb(255, 247, 226)),
@@ -277,6 +277,7 @@ namespace ManualCanDebug
                 foreach (JObject item in array.OfType<JObject>())
                     _configRows.Add(InstrumentConfigRow.FromJson(item));
             }
+            EnsureSixCanRows();
             ApplyEffectiveScopeNotes();
             _log("仪器配置已读取：" + _configPath);
         }
@@ -523,6 +524,21 @@ namespace ManualCanDebug
             HashSet<string> initialized = new HashSet<string>(names ?? Enumerable.Empty<string>(), StringComparer.OrdinalIgnoreCase);
             foreach (InstrumentConfigRow row in _configRows) row.ConnectionStatus = initialized.Contains(row.Name) ? "已初始化" : "未初始化";
             if (_workspaceDesigner != null) _workspaceDesigner.SetInitializedInstruments(initialized);
+        }
+
+        private void EnsureSixCanRows()
+        {
+            AddMissingCan("DUTCAN", "调试CAN（第一张200U CAN0）", "192.168.1.17", "48,0,500000,8000,0");
+            AddMissingCan("MAINCAN", "主驱CAN（第一张200U CAN1）", "192.168.1.17", "48,1,500000,8000,0");
+            AddMissingCan("AUXCAN", "辅驱CAN（第二张200U CAN0）", "192.168.1.18", "48,0,500000,8000,0");
+            AddMissingCan("CALIBRATIONCAN", "校准CAN（第二张200U CAN1）", "192.168.1.18", "48,1,500000,8000,0");
+            AddMissingCan("RESOLVERCAN", "旋变1CAN（第三张200U CAN0）", "192.168.1.19", "48,0,500000,8000,0");
+            AddMissingCan("RESOLVERCAN2", "旋变2CAN（第三张200U CAN1）", "192.168.1.19", "48,1,500000,8000,0");
+        }
+
+        private void AddMissingCan(string name, string comment, string resource, string parameter)
+        {
+            if (_configRows.Any(row => string.Equals(row.Name, name, StringComparison.OrdinalIgnoreCase))) return; _configRows.Add(new InstrumentConfigRow(NextUniqueIndex(), name, "CAN", "ZLG", resource, parameter, comment, true, false));
         }
 
         public string GetInstrumentResource(string name)
