@@ -196,8 +196,8 @@ namespace ManualCanDebug
             DockPanel moduleLine = new DockPanel { Margin = new Thickness(10, 4, 9, 1) }; StackPanel moduleCommands = new StackPanel { Orientation = Orientation.Horizontal }; DockPanel.SetDock(moduleCommands, Dock.Right); moduleCommands.Children.Add(ToolbarButton("\uE8C8", "复制为自定义", DuplicateAsCustom_Click, false)); moduleCommands.Children.Add(ToolbarButton("\uE713", "模块属性", BlockProperties_Click, false)); moduleCommands.Children.Add(ToolbarButton("\uE8B5", "导入", ImportSteps_Click, false)); moduleCommands.Children.Add(ToolbarButton("\uEDE1", "导出", Apply_Click, false)); moduleLine.Children.Add(moduleCommands); _blockSummary = new TextBlock { FontSize = 14, FontWeight = FontWeights.SemiBold, Foreground = TextPrimary(), VerticalAlignment = VerticalAlignment.Center, TextWrapping = TextWrapping.Wrap }; moduleLine.Children.Add(_blockSummary); moduleHeader.Children.Add(moduleLine);
             DockPanel toolLine = new DockPanel { Margin = new Thickness(7, 0, 7, 3) }; _moduleDebugToolbar = new StackPanel { Orientation = Orientation.Horizontal, Visibility = Visibility.Collapsed }; _runModuleButton = ToolbarButton("\uE768", "运行模块", RunModule_Click, true); _runModuleButton.ToolTip = "按顺序执行当前模块内全部已启用动作；遇到断点时暂停"; _moduleDebugToolbar.Children.Add(_runModuleButton); Button singleStep = ToolbarButton("\uE7C5", "单步", StepModule_Click, false); singleStep.ToolTip = "只执行当前选中的一个动作"; _moduleDebugToolbar.Children.Add(singleStep); toolLine.Children.Add(_moduleDebugToolbar); Grid.SetRow(toolLine, 1); moduleHeader.Children.Add(toolLine); moduleHeaderShell.Child = moduleHeader; workspace.Children.Add(moduleHeaderShell);
 
-            Border actionShell = Surface(); actionShell.BorderThickness = new Thickness(1, 0, 1, 1); _stepList = new DataGrid { ItemsSource = _steps, AutoGenerateColumns = false, CanUserAddRows = false, CanUserDeleteRows = false, HeadersVisibility = DataGridHeadersVisibility.Column, GridLinesVisibility = DataGridGridLinesVisibility.Horizontal, RowHeight = 50, ColumnHeaderHeight = 42, BorderThickness = new Thickness(0), Background = new SolidColorBrush(Color.FromRgb(251, 252, 254)), HorizontalGridLinesBrush = BorderColor(), VerticalGridLinesBrush = Brushes.Transparent, SelectionUnit = DataGridSelectionUnit.FullRow, FontSize = 13, RowStyle = StudioRowStyle(), ColumnHeaderStyle = StudioHeaderStyle(), AllowDrop = true, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled, VerticalScrollBarVisibility = ScrollBarVisibility.Auto };
-            _stepList.Columns.Add(BreakpointTemplateColumn()); _stepList.Columns.Add(StepTemplateColumn()); _stepList.Columns.Add(ActionNameTemplateColumn()); _stepList.Columns.Add(ModuleTagTemplateColumn()); _stepList.Columns.Add(StatusTemplateColumn()); Style enableStyle = new Style(typeof(CheckBox)); enableStyle.Setters.Add(new Setter(CheckBox.HorizontalAlignmentProperty, HorizontalAlignment.Center)); enableStyle.Setters.Add(new Setter(CheckBox.VerticalAlignmentProperty, VerticalAlignment.Center)); enableStyle.Setters.Add(new Setter(CheckBox.ForegroundProperty, Accent())); _stepList.Columns.Add(new DataGridCheckBoxColumn { Header = "启用", Binding = new Binding("Enabled") { Mode = BindingMode.TwoWay }, Width = 65, ElementStyle = enableStyle, EditingElementStyle = enableStyle }); _stepList.Columns.Add(PlatformDisplayTemplateColumn()); _stepList.Columns.Add(new DataGridTextColumn { Header = "当前值", Binding = new Binding("CurrentValue"), Width = 105, IsReadOnly = true }); _stepList.Columns.Add(new DataGridTextColumn { Header = "结果", Binding = new Binding("ExecutionResult"), Width = 80, IsReadOnly = true }); _stepList.SelectionChanged += StepList_SelectionChanged; _stepList.CellEditEnding += (s, e) => Dispatcher.BeginInvoke(new Action(_changed)); _stepList.MouseDoubleClick += StepList_MouseDoubleClick; _stepList.PreviewMouseLeftButtonDown += StepList_LeftButtonDown; _stepList.PreviewMouseLeftButtonUp += StepList_LeftButtonUp; _stepList.PreviewMouseMove += StepList_MouseMove; _stepList.DragOver += StepList_DragOver; _stepList.DragLeave += StepList_DragLeave; _stepList.Drop += StepList_Drop; _stepList.PreviewMouseRightButtonDown += StepList_RightButtonDown; _stepList.ContextMenu = BuildStepContextMenu(); actionShell.Child = _stepList; Grid.SetRow(actionShell, 1); workspace.Children.Add(actionShell);
+            Border actionShell = Surface(); actionShell.BorderThickness = new Thickness(1, 0, 1, 1);             _stepList = new DataGrid { ItemsSource = _steps, AutoGenerateColumns = false, CanUserAddRows = false, CanUserDeleteRows = false, CanUserReorderColumns = false, IsReadOnly = true, HeadersVisibility = DataGridHeadersVisibility.Column, GridLinesVisibility = DataGridGridLinesVisibility.Horizontal, RowHeight = 50, ColumnHeaderHeight = 42, BorderThickness = new Thickness(0), Background = new SolidColorBrush(Color.FromRgb(251, 252, 254)), HorizontalGridLinesBrush = BorderColor(), VerticalGridLinesBrush = Brushes.Transparent, SelectionUnit = DataGridSelectionUnit.FullRow, FontSize = 13, RowStyle = StudioRowStyle(), ColumnHeaderStyle = StudioHeaderStyle(), AllowDrop = true, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled, VerticalScrollBarVisibility = ScrollBarVisibility.Auto };
+            _stepList.Columns.Add(BreakpointTemplateColumn()); _stepList.Columns.Add(StepTemplateColumn()); _stepList.Columns.Add(ActionNameTemplateColumn()); _stepList.Columns.Add(ModuleTagTemplateColumn()); _stepList.Columns.Add(StatusTemplateColumn()); Style enableStyle = new Style(typeof(CheckBox)); enableStyle.Setters.Add(new Setter(CheckBox.HorizontalAlignmentProperty, HorizontalAlignment.Center)); enableStyle.Setters.Add(new Setter(CheckBox.VerticalAlignmentProperty, VerticalAlignment.Center)); enableStyle.Setters.Add(new Setter(CheckBox.ForegroundProperty, Accent())); _stepList.Columns.Add(DataGridCheckHelpers.BoundCheckColumn("启用", "Enabled", 65, enableStyle)); _stepList.Columns.Add(PlatformDisplayTemplateColumn()); _stepList.Columns.Add(new DataGridTextColumn { Header = "当前值", Binding = new Binding("CurrentValue"), Width = 105, IsReadOnly = true }); _stepList.Columns.Add(new DataGridTextColumn { Header = "结果", Binding = new Binding("ExecutionResult"), Width = 80, IsReadOnly = true }); _stepList.SelectionChanged += StepList_SelectionChanged; _stepList.CellEditEnding += (s, e) => Dispatcher.BeginInvoke(new Action(_changed)); _stepList.MouseDoubleClick += StepList_MouseDoubleClick; _stepList.PreviewMouseLeftButtonDown += StepList_LeftButtonDown; _stepList.PreviewMouseLeftButtonUp += StepList_LeftButtonUp; _stepList.PreviewMouseMove += StepList_MouseMove; _stepList.DragOver += StepList_DragOver; _stepList.DragLeave += StepList_DragLeave; _stepList.Drop += StepList_Drop; _stepList.GiveFeedback += StepList_GiveFeedback; _stepList.PreviewMouseRightButtonDown += StepList_RightButtonDown; _stepList.ContextMenu = BuildStepContextMenu(); actionShell.Child = _stepList; Grid.SetRow(actionShell, 1); workspace.Children.Add(actionShell);
             GridSplitter editorSplitter = StudioGridSplitterFactory.Create(GridResizeDirection.Rows, "拖动调整动作表与动作配置区高度；双击恢复舒适配置高度"); editorSplitter.MouseDoubleClick += (s, e) => { EnsureEditorComfortableHeight(true); e.Handled = true; }; Grid.SetRow(editorSplitter, 2); workspace.Children.Add(editorSplitter);
 
             Border editorShell = Surface(); Grid editor = new Grid(); editor.RowDefinitions.Add(new RowDefinition { Height = new GridLength(44) }); _editorContentRow = new RowDefinition { Height = new GridLength(1, GridUnitType.Star) }; editor.RowDefinitions.Add(_editorContentRow); DockPanel stepHeader = new DockPanel { Margin = new Thickness(12, 6, 7, 3) }; _toggleEditorButton = IconButton("\uE70D", "收起动作编辑区", ToggleEditor_Click); _toggleEditorButton.Width = 32; DockPanel.SetDock(_toggleEditorButton, Dock.Right); stepHeader.Children.Add(_toggleEditorButton); _functionNameText = new TextBlock { Visibility = Visibility.Collapsed }; _stepTitle = new TextBlock { Text = "当前动作：  请选择动作", FontSize = 13, FontWeight = FontWeights.SemiBold, Foreground = TextPrimary(), VerticalAlignment = VerticalAlignment.Center }; stepHeader.Children.Add(_stepTitle); editor.Children.Add(stepHeader);
@@ -320,12 +320,102 @@ namespace ManualCanDebug
         private void StepList_LeftButtonUp(object sender, MouseButtonEventArgs e) { _stepDragArmed = false; _stepDragItem = null; }
         private void StepList_MouseDoubleClick(object sender, MouseButtonEventArgs e) { BlockStepListItem row = _stepList.SelectedItem as BlockStepListItem; if (row == null || !row.Step.IsModuleReference) return; FunctionBlockDefinition block = _getProject().Blocks.FirstOrDefault(value => value.Id == row.Step.ReferencedBlockId); if (block != null && _openBlockEditor != null) _openBlockEditor(block); else SelectBlock(row.Step.ReferencedBlockId); e.Handled = true; }
         private void StepList_MouseMove(object sender, MouseEventArgs e) { if (!_stepDragArmed || _stepDragItem == null || e.LeftButton != MouseButtonState.Pressed) return; Point point = e.GetPosition(_stepList); if (!StudioDragDropGuard.HasMovedEnough(_stepDragStart, point)) return; BlockStepListItem item = _stepDragItem; _stepDragArmed = false; _stepDragItem = null; DragDrop.DoDragDrop(_stepList, new DataObject(typeof(BlockStepListItem), item), DragDropEffects.Move); }
+        private void StepList_GiveFeedback(object sender, GiveFeedbackEventArgs e) { if (e.Effects.HasFlag(DragDropEffects.Move)) { Mouse.SetCursor(Cursors.SizeNS); e.UseDefaultCursors = false; e.Handled = true; } }
+        private void EnableCheck_Click(object sender, RoutedEventArgs e)
+        {
+            CheckBox box = sender as CheckBox;
+            BlockStepListItem row = box == null ? null : box.DataContext as BlockStepListItem;
+            if (row == null) return;
+            if (!EnsureEditableBlock())
+            {
+                row.Enabled = !(box.IsChecked == true);
+                return;
+            }
+            _changed();
+        }
         private DataGridTemplateColumn BreakpointTemplateColumn() { FrameworkElementFactory button = new FrameworkElementFactory(typeof(System.Windows.Controls.Button)); button.SetValue(System.Windows.Controls.Button.WidthProperty, 42d); button.SetValue(System.Windows.Controls.Button.HeightProperty, 42d); button.SetValue(System.Windows.Controls.Button.PaddingProperty, new Thickness(0)); button.SetValue(System.Windows.Controls.Button.MarginProperty, new Thickness(2, 0, 2, 0)); button.SetValue(System.Windows.Controls.Button.BackgroundProperty, Brushes.Transparent); button.SetValue(System.Windows.Controls.Button.BorderBrushProperty, Brushes.Transparent); button.SetValue(System.Windows.Controls.Button.ToolTipProperty, "单击添加/取消断点"); button.AddHandler(System.Windows.Controls.Button.ClickEvent, new RoutedEventHandler(BreakpointButton_Click)); FrameworkElementFactory dot = new FrameworkElementFactory(typeof(TextBlock)); dot.SetBinding(TextBlock.TextProperty, new Binding("BreakpointGlyph")); dot.SetBinding(TextBlock.ForegroundProperty, new Binding("BreakpointBrush")); dot.SetValue(TextBlock.FontSizeProperty, 20d); dot.SetValue(TextBlock.FontWeightProperty, FontWeights.Bold); dot.SetValue(TextBlock.HorizontalAlignmentProperty, HorizontalAlignment.Center); dot.SetValue(TextBlock.VerticalAlignmentProperty, VerticalAlignment.Center); button.AppendChild(dot); return new DataGridTemplateColumn { Header = "断点", Width = 54, CellTemplate = new DataTemplate { VisualTree = button }, IsReadOnly = true }; }
         private void StepList_DragOver(object sender, DragEventArgs e) { e.Effects = e.Data.GetDataPresent(typeof(BlockStepListItem)) ? DragDropEffects.Move : e.Data.GetDataPresent(typeof(BlockListItem)) ? DragDropEffects.Copy : DragDropEffects.None; ShowStepDropTarget(FindAncestor<DataGridRow>(e.OriginalSource as DependencyObject)); e.Handled = true; }
         private void StepList_DragLeave(object sender, DragEventArgs e) { ClearStepDropTarget(); }
         private void ShowStepDropTarget(DataGridRow row) { if (_stepDropTargetRow == row) return; ClearStepDropTarget(); _stepDropTargetRow = row; if (row != null) { row.BorderBrush = Accent(); row.BorderThickness = new Thickness(0, 0, 0, 3); } }
         private void ClearStepDropTarget() { if (_stepDropTargetRow != null) { _stepDropTargetRow.ClearValue(DataGridRow.BorderBrushProperty); _stepDropTargetRow.ClearValue(DataGridRow.BorderThicknessProperty); _stepDropTargetRow = null; } }
-        private void StepList_Drop(object sender, DragEventArgs e) { DataGridRow target = FindAncestor<DataGridRow>(e.OriginalSource as DependencyObject); int targetIndex = target == null ? _steps.Count : target.GetIndex(); ClearStepDropTarget(); BlockListItem module = e.Data.GetData(typeof(BlockListItem)) as BlockListItem; if (module != null) { FunctionBlockDefinition targetBlock = _moduleReferenceTargetBlock ?? _selectedBlock; _moduleReferenceTargetBlock = null; AddModuleReference(targetBlock, module.Block, targetIndex); e.Handled = true; return; } BlockStepListItem item = e.Data.GetData(typeof(BlockStepListItem)) as BlockStepListItem; if (item == null || _selectedBlock == null) return; int oldIndex = _steps.IndexOf(item); if (oldIndex < 0) return; if (oldIndex < targetIndex) targetIndex--; targetIndex = Math.Max(0, Math.Min(_steps.Count - 1, targetIndex)); if (targetIndex != oldIndex) { BlockStepDefinition step = _selectedBlock.Steps[oldIndex]; _selectedBlock.Steps.RemoveAt(oldIndex); _selectedBlock.Steps.Insert(targetIndex, step); _steps.Move(oldIndex, targetIndex); RefreshStepOrders(); _stepList.SelectedItem = item; _stepList.ScrollIntoView(item); _changed(); } e.Handled = true; }
+        private void StepList_Drop(object sender, DragEventArgs e)
+        {
+            try
+            {
+                DataGridRow targetRow = FindAncestor<DataGridRow>(e.OriginalSource as DependencyObject);
+                ClearStepDropTarget();
+
+                BlockListItem module = e.Data.GetData(typeof(BlockListItem)) as BlockListItem;
+                if (module != null)
+                {
+                    FunctionBlockDefinition targetBlock = _moduleReferenceTargetBlock ?? _selectedBlock;
+                    _moduleReferenceTargetBlock = null;
+                    int moduleIndex = targetBlock == null ? 0 : targetBlock.Steps.Count;
+                    if (targetRow != null)
+                    {
+                        int rowIndex = targetRow.GetIndex();
+                        if (rowIndex >= 0) moduleIndex = rowIndex;
+                    }
+                    AddModuleReference(targetBlock, module.Block, moduleIndex);
+                    e.Handled = true;
+                    return;
+                }
+
+                BlockStepListItem item = e.Data.GetData(typeof(BlockStepListItem)) as BlockStepListItem;
+                if (item == null || item.Step == null || _selectedBlock == null || _selectedBlock.Steps == null)
+                {
+                    e.Handled = true;
+                    return;
+                }
+                if (!EnsureEditableBlock()) { e.Handled = true; return; }
+
+                int oldIndex = _selectedBlock.Steps.IndexOf(item.Step);
+                int viewOld = _steps.IndexOf(item);
+                if (oldIndex < 0)
+                {
+                    if (viewOld >= 0 && viewOld < _selectedBlock.Steps.Count) oldIndex = viewOld;
+                    else { e.Handled = true; return; }
+                }
+                if (oldIndex < 0 || oldIndex >= _selectedBlock.Steps.Count) { e.Handled = true; return; }
+
+                int targetIndex;
+                if (targetRow == null) targetIndex = _selectedBlock.Steps.Count;
+                else
+                {
+                    targetIndex = targetRow.GetIndex();
+                    if (targetIndex < 0) targetIndex = _selectedBlock.Steps.Count;
+                }
+
+                if (oldIndex < targetIndex) targetIndex--;
+                if (_selectedBlock.Steps.Count == 0) { e.Handled = true; return; }
+                targetIndex = Math.Max(0, Math.Min(_selectedBlock.Steps.Count - 1, targetIndex));
+                if (targetIndex == oldIndex) { e.Handled = true; return; }
+
+                BlockStepDefinition step = _selectedBlock.Steps[oldIndex];
+                _selectedBlock.Steps.RemoveAt(oldIndex);
+                _selectedBlock.Steps.Insert(targetIndex, step);
+
+                _steps.Clear();
+                int order = 0;
+                foreach (BlockStepDefinition modelStep in _selectedBlock.Steps)
+                    _steps.Add(CreateStepItem(modelStep, ++order, IsBlockStepBreakpoint(modelStep)));
+
+                BlockStepListItem selected = _steps.FirstOrDefault(value => value.Step == step);
+                if (selected != null)
+                {
+                    _stepList.SelectedItem = selected;
+                    _stepList.ScrollIntoView(selected);
+                }
+                _selectedStep = step;
+                _changed();
+            }
+            catch (Exception ex)
+            {
+                ClearStepDropTarget();
+                try { if (_log != null) _log("STEP 拖放失败：" + ex.Message); } catch { }
+            }
+            e.Handled = true;
+        }
         private bool IsBlockStepBreakpoint(BlockStepDefinition step) { FctStudioProject project = _getProject(); if (project == null || _selectedBlock == null) return false; if (project.Breakpoints.Contains("LIB:" + _selectedBlock.Id + ":" + step.Id)) return true; return project.Flow.Any(instance => instance.BlockId == _selectedBlock.Id && project.Breakpoints.Contains(instance.Id + ":" + step.Id)); }
         private void BreakpointButton_Click(object sender, RoutedEventArgs e) { Button button = sender as Button; BlockStepListItem row = button == null ? null : button.DataContext as BlockStepListItem; if (row == null || _selectedBlock == null) return; bool enabled = !row.Breakpoint; row.Breakpoint = enabled; FctStudioProject project = _getProject(); string libraryKey = "LIB:" + _selectedBlock.Id + ":" + row.Step.Id; if (enabled && !project.Breakpoints.Contains(libraryKey)) project.Breakpoints.Add(libraryKey); if (!enabled) project.Breakpoints.Remove(libraryKey); foreach (FlowBlockInstance instance in project.Flow.Where(value => value.BlockId == _selectedBlock.Id)) { string key = instance.Id + ":" + row.Step.Id; if (enabled && !project.Breakpoints.Contains(key)) project.Breakpoints.Add(key); if (!enabled) project.Breakpoints.Remove(key); } _changed(); e.Handled = true; }
         private static T FindAncestor<T>(DependencyObject source) where T : DependencyObject { DependencyObject current = source; while (current != null && !(current is T)) current = VisualTreeHelper.GetParent(current); return current as T; }
@@ -347,7 +437,7 @@ namespace ManualCanDebug
         {
             _steps.Clear(); _parameters.Clear(); _selectedStep = null;
             if (_selectedBlock == null) return;
-            bool templateReadOnly = string.Equals(_selectedBlock.ModuleKind, "Standard", StringComparison.OrdinalIgnoreCase); _blockName.Text = _selectedBlock.Name; _blockCategory.Text = _selectedBlock.Category; _blockVersion.Text = _selectedBlock.Version; _blockProducts.Text = string.Join(",", _selectedBlock.SupportedProducts ?? new List<string>()); _blockDescription.Text = _selectedBlock.Description; _blockName.IsReadOnly = templateReadOnly; _blockCategory.IsReadOnly = templateReadOnly; _blockVersion.IsReadOnly = templateReadOnly; _blockProducts.IsReadOnly = templateReadOnly; _blockDescription.IsReadOnly = templateReadOnly; if (_editorTabs != null) _editorTabs.IsEnabled = !templateReadOnly; if (_stepList != null) _stepList.IsReadOnly = templateReadOnly;
+            bool templateReadOnly = string.Equals(_selectedBlock.ModuleKind, "Standard", StringComparison.OrdinalIgnoreCase); _blockName.Text = _selectedBlock.Name; _blockCategory.Text = _selectedBlock.Category; _blockVersion.Text = _selectedBlock.Version; _blockProducts.Text = string.Join(",", _selectedBlock.SupportedProducts ?? new List<string>()); _blockDescription.Text = _selectedBlock.Description; _blockName.IsReadOnly = templateReadOnly; _blockCategory.IsReadOnly = templateReadOnly; _blockVersion.IsReadOnly = templateReadOnly; _blockProducts.IsReadOnly = templateReadOnly; _blockDescription.IsReadOnly = templateReadOnly; if (_editorTabs != null) _editorTabs.IsEnabled = !templateReadOnly; if (_stepList != null) _stepList.IsReadOnly = true;
             _blockSummary.Text = "当前模块：  " + _selectedBlock.Name + "    [" + _selectedBlock.Category + "]    " + _selectedBlock.Steps.Count + " 个动作" + (templateReadOnly ? "    标准模块 · 模板只读" : string.Empty);
             int order = 0; foreach (BlockStepDefinition step in _selectedBlock.Steps) _steps.Add(CreateStepItem(step, ++order, IsBlockStepBreakpoint(step)));
             if (_steps.Count > 0) _stepList.SelectedIndex = 0;

@@ -8,6 +8,7 @@ namespace ManualCanDebug.Core
         private static readonly ReadOnlyCollection<CanSequenceStep> Steps = new List<CanSequenceStep>
         {
             new CanSequenceStep("Enter FT Mode", "CAN_APP2FT"),
+            new CanSequenceStep("Exit FT Mode", "CAN_FT2APP"),
             new CanSequenceStep("DUT Communication Init", "DUT_ComucationInit"),
             new CanSequenceStep("CAN Communication", "Test_CANCommunication"),
             new CanSequenceStep("Set Speed 700 RPM", "Resolver_SetSpeed", 700),

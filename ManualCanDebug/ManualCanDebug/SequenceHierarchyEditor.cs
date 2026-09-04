@@ -32,6 +32,8 @@ namespace ManualCanDebug
         private bool _debugMode;
         private Point _dragStart;
         private SequenceHierarchyRow _dragRow;
+        private bool _dragArmed;
+        private DataGridRow _dropTargetRow;
 
         public event Action<FlowBlockInstance> SelectedInstanceChanged;
 
@@ -106,8 +108,8 @@ namespace ManualCanDebug
 
         private void BuildUi()
         {
-            _grid = new DataGrid { ItemsSource = _rows, AutoGenerateColumns = false, CanUserAddRows = false, CanUserDeleteRows = false, CanUserResizeRows = false, HeadersVisibility = DataGridHeadersVisibility.Column, GridLinesVisibility = DataGridGridLinesVisibility.Horizontal, HorizontalGridLinesBrush = Brush(226, 233, 242), VerticalGridLinesBrush = Brushes.Transparent, Background = Brushes.White, BorderThickness = new Thickness(0), RowHeaderWidth = 0, ColumnHeaderHeight = 40, RowHeight = double.NaN, MinRowHeight = 34, SelectionUnit = DataGridSelectionUnit.FullRow, SelectionMode = DataGridSelectionMode.Extended, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, RowStyle = RowStyle(), ColumnHeaderStyle = HeaderStyle(), CellStyle = CellStyle(), AllowDrop = true };
-            _grid.Columns.Add(new DataGridTextColumn { Header = "序号", Binding = new Binding("Number"), Width = 88, IsReadOnly = true, ElementStyle = CenterText() });
+            _grid = new DataGrid { ItemsSource = _rows, AutoGenerateColumns = false, CanUserAddRows = false, CanUserDeleteRows = false, CanUserResizeRows = false, CanUserReorderColumns = false, HeadersVisibility = DataGridHeadersVisibility.Column, GridLinesVisibility = DataGridGridLinesVisibility.Horizontal, HorizontalGridLinesBrush = Brush(226, 233, 242), VerticalGridLinesBrush = Brushes.Transparent, Background = Brushes.White, BorderThickness = new Thickness(0), RowHeaderWidth = 0, ColumnHeaderHeight = 40, RowHeight = double.NaN, MinRowHeight = 34, SelectionUnit = DataGridSelectionUnit.FullRow, SelectionMode = DataGridSelectionMode.Extended, HorizontalScrollBarVisibility = ScrollBarVisibility.Auto, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, RowStyle = RowStyle(), ColumnHeaderStyle = HeaderStyle(), CellStyle = CellStyle(), AllowDrop = true };
+            _grid.Columns.Add(NumberColumn());
             _grid.Columns.Add(NameColumn());
             _grid.Columns.Add(new DataGridTextColumn { Header = "类型", Binding = new Binding("TypeText"), Width = 95, IsReadOnly = true, ElementStyle = CenterText() });
             _grid.Columns.Add(ValueColumn());
@@ -116,22 +118,107 @@ namespace ManualCanDebug
             _grid.Columns.Add(new DataGridComboBoxColumn { Header = "比较", SelectedItemBinding = new Binding("CompareText") { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged }, ItemsSource = new[] { string.Empty, "GELE", "GE", "GT", "LE", "LT", "EQ", "NE" }, Width = 82, ElementStyle = CenterCombo(), EditingElementStyle = CenterCombo() });
             _grid.Columns.Add(new DataGridTextColumn { Header = "单位", Binding = new Binding("UnitText") { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged }, Width = 64, ElementStyle = CenterText(), EditingElementStyle = EditorStyle() });
             _grid.Columns.Add(BreakpointColumn());
-            _grid.Columns.Add(new DataGridCheckBoxColumn { Header = "启用", Binding = new Binding("Enabled") { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged }, Width = 58, ElementStyle = CenterCheck(), EditingElementStyle = CenterCheck() });
+            _grid.Columns.Add(DataGridCheckHelpers.BoundCheckColumn("启用", "Enabled", 58, CenterCheck(), (s, e) => { if (_changed != null) _changed(); }));
             _grid.Columns.Add(new DataGridTextColumn { Header = "测试值", Binding = new Binding("TestValue"), Width = 105, IsReadOnly = true, ElementStyle = CenterText() });
-            _grid.Columns.Add(new DataGridTextColumn { Header = "结果", Binding = new Binding("DebugResult"), Width = 78, IsReadOnly = true, ElementStyle = CenterText() });
+            _grid.Columns.Add(ResultColumn());
             _grid.Columns.Add(OperationColumn());
             _grid.SelectionChanged += delegate { SequenceHierarchyRow row = _grid.SelectedItem as SequenceHierarchyRow; if (row != null && row.Instance != null) { Action<FlowBlockInstance> handler = SelectedInstanceChanged; if (handler != null) handler(row.Instance); } };
             _grid.MouseDoubleClick += delegate { SequenceHierarchyRow row = _grid.SelectedItem as SequenceHierarchyRow; if (row != null && row.HasChildren) Toggle(row); };
-            _grid.PreviewMouseLeftButtonDown += Grid_MouseLeftButtonDown; _grid.PreviewMouseLeftButtonUp += delegate { _dragRow = null; }; _grid.PreviewMouseMove += Grid_MouseMove; _grid.DragOver += Grid_DragOver; _grid.Drop += Grid_Drop; _grid.PreviewMouseRightButtonDown += Grid_RightButtonDown;
+            _grid.PreviewMouseLeftButtonDown += Grid_MouseLeftButtonDown; _grid.PreviewMouseLeftButtonUp += Grid_MouseLeftButtonUp; _grid.PreviewMouseMove += Grid_MouseMove; _grid.DragOver += Grid_DragOver; _grid.DragLeave += Grid_DragLeave; _grid.Drop += Grid_Drop; _grid.GiveFeedback += Grid_GiveFeedback; _grid.PreviewMouseRightButtonDown += Grid_RightButtonDown;
             Children.Add(_grid);
         }
 
-        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) { _dragStart = e.GetPosition(_grid); DataGridRow row = FindAncestor<DataGridRow>(e.OriginalSource as DependencyObject); _dragRow = row == null ? null : row.Item as SequenceHierarchyRow; }
-        private void Grid_MouseMove(object sender, MouseEventArgs e) { if (_dragRow == null || e.LeftButton != MouseButtonState.Pressed || _dragRow.Depth != 0) return; Point point = e.GetPosition(_grid); if (Math.Abs(point.X - _dragStart.X) < SystemParameters.MinimumHorizontalDragDistance && Math.Abs(point.Y - _dragStart.Y) < SystemParameters.MinimumVerticalDragDistance) return; SequenceHierarchyRow moving = _dragRow; _dragRow = null; DragDrop.DoDragDrop(_grid, new DataObject(typeof(SequenceHierarchyRow), moving), DragDropEffects.Move); }
-        private void Grid_DragOver(object sender, DragEventArgs e) { bool accepted = e.Data.GetDataPresent(typeof(SequenceHierarchyRow)) || e.Data.GetDataPresent(typeof(FlowLibraryRow)); e.Effects = accepted ? (e.Data.GetDataPresent(typeof(SequenceHierarchyRow)) ? DragDropEffects.Move : DragDropEffects.Copy) : DragDropEffects.None; e.Handled = true; }
+        private void Grid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { _dragArmed = false; _dragRow = null; }
+        private void Grid_GiveFeedback(object sender, GiveFeedbackEventArgs e) { if (e.Effects.HasFlag(DragDropEffects.Move) || e.Effects.HasFlag(DragDropEffects.Copy)) { Mouse.SetCursor(Cursors.SizeNS); e.UseDefaultCursors = false; e.Handled = true; } }
+        private void Grid_DragLeave(object sender, DragEventArgs e) { ClearDropTarget(); }
+        private void ShowDropTarget(DataGridRow row) { if (_dropTargetRow == row) return; ClearDropTarget(); _dropTargetRow = row; if (row != null) { row.BorderBrush = Brush(24, 112, 224); row.BorderThickness = new Thickness(0, 0, 0, 3); } }
+        private void ClearDropTarget() { if (_dropTargetRow != null) { _dropTargetRow.ClearValue(DataGridRow.BorderBrushProperty); _dropTargetRow.ClearValue(DataGridRow.BorderThicknessProperty); _dropTargetRow = null; } }
+        private static bool IsInteractiveSource(DependencyObject source) { return FindAncestor<TextBox>(source) != null || FindAncestor<Button>(source) != null || FindAncestor<CheckBox>(source) != null || FindAncestor<ComboBox>(source) != null || FindAncestor<ScrollBar>(source) != null || FindAncestor<Thumb>(source) != null || FindAncestor<DataGridColumnHeader>(source) != null; }
+        private static bool IsDragHandle(DependencyObject source) { DependencyObject current = source; while (current != null) { FrameworkElement element = current as FrameworkElement; if (element != null && string.Equals(Convert.ToString(element.Tag, CultureInfo.InvariantCulture), "DragHandle", StringComparison.Ordinal)) return true; current = VisualTreeHelper.GetParent(current); } return false; }
+        private void Grid_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            _dragArmed = false; _dragRow = null;
+            DependencyObject source = e.OriginalSource as DependencyObject;
+            if (IsInteractiveSource(source) && !IsDragHandle(source)) return;
+            DataGridRow row = FindAncestor<DataGridRow>(source);
+            if (row == null) return;
+            SequenceHierarchyRow item = row.Item as SequenceHierarchyRow;
+            if (item == null) return;
+            row.IsSelected = true; _grid.SelectedItem = item;
+            if (!IsDragHandle(source) || item.Depth != 0 || item.Instance == null) return;
+            _dragRow = item; _dragStart = e.GetPosition(_grid); _dragArmed = true;
+        }
+        private void Grid_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (!_dragArmed || _dragRow == null || e.LeftButton != MouseButtonState.Pressed || _dragRow.Depth != 0) return;
+            Point point = e.GetPosition(_grid);
+            if (!StudioDragDropGuard.HasMovedEnough(_dragStart, point)) return;
+            SequenceHierarchyRow moving = _dragRow; _dragArmed = false; _dragRow = null;
+            try { DragDrop.DoDragDrop(_grid, new DataObject(typeof(SequenceHierarchyRow), moving), DragDropEffects.Move); }
+            catch { }
+            ClearDropTarget();
+        }
+        private void Grid_DragOver(object sender, DragEventArgs e)
+        {
+            bool accepted = e.Data.GetDataPresent(typeof(SequenceHierarchyRow)) || e.Data.GetDataPresent(typeof(FlowLibraryRow));
+            e.Effects = accepted ? (e.Data.GetDataPresent(typeof(SequenceHierarchyRow)) ? DragDropEffects.Move : DragDropEffects.Copy) : DragDropEffects.None;
+            ShowDropTarget(FindAncestor<DataGridRow>(e.OriginalSource as DependencyObject));
+            e.Handled = true;
+        }
         private void Grid_Drop(object sender, DragEventArgs e)
         {
-            FctStudioProject project = _getProject(); if (project == null) return; DataGridRow targetVisual = FindAncestor<DataGridRow>(e.OriginalSource as DependencyObject); SequenceHierarchyRow target = targetVisual == null ? null : targetVisual.Item as SequenceHierarchyRow; int targetIndex = target == null || target.Instance == null ? project.Flow.Count : project.Flow.IndexOf(target.Instance); SequenceHierarchyRow moving = e.Data.GetData(typeof(SequenceHierarchyRow)) as SequenceHierarchyRow; if (moving != null && moving.Depth == 0 && moving.Instance != null) { int old = project.Flow.IndexOf(moving.Instance); if (old >= 0) { if (old < targetIndex) targetIndex--; project.Flow.RemoveAt(old); project.Flow.Insert(Math.Max(0, Math.Min(project.Flow.Count, targetIndex)), moving.Instance); NotifyChanged(); Refresh(); } e.Handled = true; return; } FlowLibraryRow library = e.Data.GetData(typeof(FlowLibraryRow)) as FlowLibraryRow; if (library != null && library.Block != null) { FunctionBlockDefinition snapshot = library.Block.Clone(); FlowBlockInstance instance = new FlowBlockInstance { BlockId = library.Block.Id, DisplayName = library.Block.Name, Snapshot = snapshot, Phase = string.IsNullOrWhiteSpace(library.Block.Category) ? "准备阶段" : library.Block.Category }; foreach (BlockParameterDefinition parameter in snapshot.Parameters ?? new List<BlockParameterDefinition>()) instance.ParameterOverrides[parameter.Name] = parameter.DefaultValue; Dictionary<string, FunctionBlockDefinition> sourceLibrary = project.Blocks.Where(value => value != null).GroupBy(value => value.Id, StringComparer.Ordinal).ToDictionary(group => group.Key, group => group.First(), StringComparer.Ordinal); CaptureModuleSnapshots(instance, snapshot, sourceLibrary, false, new HashSet<string>(StringComparer.Ordinal)); project.Flow.Insert(Math.Max(0, Math.Min(project.Flow.Count, targetIndex)), instance); NotifyChanged(); Refresh(); e.Handled = true; }
+            try
+            {
+                FctStudioProject project = _getProject();
+                if (project == null || project.Flow == null) { e.Handled = true; return; }
+                DataGridRow targetVisual = FindAncestor<DataGridRow>(e.OriginalSource as DependencyObject);
+                ClearDropTarget();
+                SequenceHierarchyRow target = targetVisual == null ? null : targetVisual.Item as SequenceHierarchyRow;
+                int targetIndex = ResolveFlowInsertIndex(project, target);
+                SequenceHierarchyRow moving = e.Data.GetData(typeof(SequenceHierarchyRow)) as SequenceHierarchyRow;
+                if (moving != null && moving.Depth == 0 && moving.Instance != null)
+                {
+                    int old = project.Flow.IndexOf(moving.Instance);
+                    int dest = target == null || target.Instance == null ? project.Flow.Count : project.Flow.IndexOf(target.Instance);
+                    if (old >= 0 && dest >= 0 && dest != old)
+                    {
+                        FlowBlockInstance instance = moving.Instance;
+                        project.Flow.RemoveAt(old);
+                        if (dest > project.Flow.Count) dest = project.Flow.Count;
+                        project.Flow.Insert(dest, instance);
+                        NotifyChanged();
+                        Refresh();
+                        SelectInstance(instance.Id);
+                    }
+                    e.Handled = true;
+                    return;
+                }
+                FlowLibraryRow library = e.Data.GetData(typeof(FlowLibraryRow)) as FlowLibraryRow;
+                if (library != null && library.Block != null)
+                {
+                    FunctionBlockDefinition snapshot = library.Block.Clone();
+                    FlowBlockInstance instance = new FlowBlockInstance { BlockId = library.Block.Id, DisplayName = library.Block.Name, Snapshot = snapshot, Phase = string.IsNullOrWhiteSpace(library.Block.Category) ? "准备阶段" : library.Block.Category };
+                    foreach (BlockParameterDefinition parameter in snapshot.Parameters ?? new List<BlockParameterDefinition>()) instance.ParameterOverrides[parameter.Name] = parameter.DefaultValue;
+                    Dictionary<string, FunctionBlockDefinition> sourceLibrary = project.Blocks.Where(value => value != null).GroupBy(value => value.Id, StringComparer.Ordinal).ToDictionary(group => group.Key, group => group.First(), StringComparer.Ordinal);
+                    CaptureModuleSnapshots(instance, snapshot, sourceLibrary, false, new HashSet<string>(StringComparer.Ordinal));
+                    project.Flow.Insert(Math.Max(0, Math.Min(project.Flow.Count, targetIndex)), instance);
+                    NotifyChanged();
+                    Refresh();
+                    e.Handled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                ClearDropTarget();
+                MessageBox.Show("模块拖放失败：\n" + ex.Message, "当前流程", MessageBoxButton.OK, MessageBoxImage.Warning);
+                e.Handled = true;
+            }
+        }
+        private static int ResolveFlowInsertIndex(FctStudioProject project, SequenceHierarchyRow target)
+        {
+            if (target == null || target.Instance == null) return project.Flow.Count;
+            int index = project.Flow.IndexOf(target.Instance);
+            return index < 0 ? project.Flow.Count : index;
         }
         private void Grid_RightButtonDown(object sender, MouseButtonEventArgs e) { DataGridRow visual = FindAncestor<DataGridRow>(e.OriginalSource as DependencyObject); SequenceHierarchyRow row = visual == null ? null : visual.Item as SequenceHierarchyRow; if (row == null) return; if (!_grid.SelectedItems.Contains(row)) { _grid.SelectedItems.Clear(); _grid.SelectedItem = row; } ContextMenu menu = new ContextMenu(); List<SequenceHierarchyRow> selected = _grid.SelectedItems.Cast<object>().OfType<SequenceHierarchyRow>().ToList(); if (selected.Count > 1) { AddMenu(menu, "启用选中 " + selected.Count + " 项", (s, a) => SetSelectedEnabled(selected, true)); AddMenu(menu, "停用选中 " + selected.Count + " 项", (s, a) => SetSelectedEnabled(selected, false)); AddMenu(menu, "删除选中 " + selected.Count + " 项", (s, a) => DeleteSelected(selected)); _grid.ContextMenu = menu; return; } if (row.IsDebugMode && _runFromRow != null) { AddMenu(menu, row.IsModule ? "执行整个模块" : "执行STEP", async (s, a) => await _runFromRow(row)); menu.Items.Add(new Separator()); } if (row.Depth == 0) { menu.Items.Add(BuildHierarchicalActionMenu("添加STEP到此模块", row, 0, true)); AddCommand(menu, "添加IF / ELSE / ENDIF", "append_if", row, 0); AddCommand(menu, "添加子模块到此模块...", "append_module", row, 0); AddCommand(menu, "新建子模块并添加...", "new_custom_child_module", row, 0); menu.Items.Add(new Separator()); AddCommand(menu, "插入模块到上面...", "insert_flow_module", row, 0); AddCommand(menu, "插入模块到下面...", "insert_flow_module", row, 1); menu.Items.Add(new Separator()); AddMenu(menu, "复制流程实例", (s, a) => DuplicateInstance(row)); AddMenu(menu, "更新到模块库最新版本", (s, a) => UpdateInstanceFromLibrary(row)); AddMenu(menu, "上移", (s, a) => MoveInstance(row, -1)); AddMenu(menu, "下移", (s, a) => MoveInstance(row, 1)); AddMenu(menu, row.Enabled ? "停用" : "启用", (s, a) => row.Enabled = !row.Enabled); AddMenu(menu, "删除流程实例", (s, a) => DeleteInstance(row)); } else { if (row.Step != null && row.Step.IsModuleReference) { menu.Items.Add(BuildHierarchicalActionMenu("添加STEP到此模块", row, 0, true)); AddCommand(menu, "添加IF / ELSE / ENDIF", "append_if", row, 0); AddCommand(menu, "添加子模块到此模块...", "append_module", row, 0); AddCommand(menu, "新建子模块并添加...", "new_custom_child_module", row, 0); menu.Items.Add(new Separator()); } menu.Items.Add(BuildHierarchicalActionMenu("插入动作到上面", row, 0)); menu.Items.Add(BuildHierarchicalActionMenu("插入动作到下面", row, 1)); AddCommand(menu, "插入IF / ELSE / ENDIF到下面", "insert_if", row, 1); AddCommand(menu, "插入模块到上面...", "insert_module", row, 0); AddCommand(menu, "插入模块到下面...", "insert_module", row, 1); menu.Items.Add(new Separator()); AddCommand(menu, "复制动作/模块引用", "copy_step", row, 0); AddCommand(menu, "粘贴到下面", "paste_step", row, 1); AddMenu(menu, "删除动作/模块引用", (s, a) => DeleteStep(row)); AddMenu(menu, "上移", (s, a) => MoveStep(row, -1)); AddMenu(menu, "下移", (s, a) => MoveStep(row, 1)); menu.Items.Add(new Separator()); if (row.Step != null) AddMenu(menu, row.Step.IsModuleReference ? "配置模块绑定" : "配置执行项", (s, a) => { if (_configure != null) _configure(row); }); if (row.BreakpointVisibility == Visibility.Visible) AddMenu(menu, row.Breakpoint ? "取消断点" : "设置断点", (s, a) => row.Breakpoint = !row.Breakpoint); AddMenu(menu, row.Enabled ? "停用" : "启用", (s, a) => row.Enabled = !row.Enabled); } _grid.ContextMenu = menu; }
         private void SetSelectedEnabled(IEnumerable<SequenceHierarchyRow> rows, bool enabled) { foreach (SequenceHierarchyRow row in rows) { if (row.Depth == 0 && row.Instance != null) row.Instance.Enabled = enabled; else if (row.Step != null) row.Step.Enabled = enabled; } NotifyChanged(); Refresh(); }
@@ -173,13 +260,101 @@ namespace ManualCanDebug
         private void NotifyChanged() { if (_changed != null) _changed(); }
         private static T FindAncestor<T>(DependencyObject value) where T : DependencyObject { while (value != null && !(value is T)) value = VisualTreeHelper.GetParent(value); return value as T; }
 
+        private DataGridTemplateColumn NumberColumn()
+        {
+            FrameworkElementFactory host = new FrameworkElementFactory(typeof(StackPanel));
+            host.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal);
+            host.SetValue(StackPanel.HorizontalAlignmentProperty, HorizontalAlignment.Center);
+            host.SetValue(StackPanel.VerticalAlignmentProperty, VerticalAlignment.Center);
+            FrameworkElementFactory handle = new FrameworkElementFactory(typeof(Border));
+            handle.SetValue(FrameworkElement.TagProperty, "DragHandle");
+            handle.SetValue(FrameworkElement.WidthProperty, 18d);
+            handle.SetValue(FrameworkElement.HeightProperty, 28d);
+            handle.SetValue(FrameworkElement.CursorProperty, Cursors.SizeAll);
+            handle.SetValue(FrameworkElement.ToolTipProperty, "拖动调整模块顺序（仅顶层模块）");
+            handle.SetValue(Border.BackgroundProperty, Brushes.Transparent);
+            handle.SetBinding(UIElement.VisibilityProperty, new Binding("DragHandleVisibility"));
+            FrameworkElementFactory grip = new FrameworkElementFactory(typeof(TextBlock));
+            grip.SetValue(FrameworkElement.TagProperty, "DragHandle");
+            grip.SetValue(TextBlock.TextProperty, "\uE700");
+            grip.SetValue(TextBlock.FontFamilyProperty, new FontFamily("Segoe MDL2 Assets"));
+            grip.SetValue(TextBlock.FontSizeProperty, 12d);
+            grip.SetValue(TextBlock.ForegroundProperty, Brush(120, 138, 162));
+            grip.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Center);
+            grip.SetValue(FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Center);
+            grip.SetValue(UIElement.IsHitTestVisibleProperty, false);
+            handle.AppendChild(grip);
+            host.AppendChild(handle);
+            FrameworkElementFactory number = new FrameworkElementFactory(typeof(TextBlock));
+            number.SetBinding(TextBlock.TextProperty, new Binding("Number"));
+            number.SetValue(TextBlock.FontWeightProperty, FontWeights.SemiBold);
+            number.SetValue(TextBlock.ForegroundProperty, Brush(55, 71, 94));
+            number.SetValue(FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Center);
+            number.SetValue(FrameworkElement.MarginProperty, new Thickness(2, 0, 0, 0));
+            host.AppendChild(number);
+            return new DataGridTemplateColumn { Header = "序号", Width = 96, CellTemplate = new DataTemplate { VisualTree = host }, IsReadOnly = true };
+        }
+
         private DataGridTemplateColumn NameColumn()
         {
             FrameworkElementFactory host = new FrameworkElementFactory(typeof(Grid)); host.SetBinding(FrameworkElement.MarginProperty, new Binding("Indent")); host.SetValue(FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Center); FrameworkElementFactory columns = new FrameworkElementFactory(typeof(StackPanel)); columns.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal); columns.SetValue(StackPanel.VerticalAlignmentProperty, VerticalAlignment.Center);
             FrameworkElementFactory toggle = new FrameworkElementFactory(typeof(Button)); toggle.SetValue(Button.WidthProperty, 24d); toggle.SetValue(Button.HeightProperty, 26d); toggle.SetValue(Button.PaddingProperty, new Thickness(0)); toggle.SetValue(Button.MarginProperty, new Thickness(0, 0, 5, 0)); toggle.SetValue(Button.BackgroundProperty, Brushes.Transparent); toggle.SetValue(Button.BorderBrushProperty, Brushes.Transparent); toggle.SetBinding(Button.ContentProperty, new Binding("Chevron")); toggle.SetBinding(Button.VisibilityProperty, new Binding("ExpandVisibility")); toggle.AddHandler(Button.ClickEvent, new RoutedEventHandler(Toggle_Click)); columns.AppendChild(toggle);
             FrameworkElementFactory icon = new FrameworkElementFactory(typeof(TextBlock)); icon.SetBinding(TextBlock.TextProperty, new Binding("IconGlyph")); icon.SetBinding(TextBlock.ForegroundProperty, new Binding("IconBrush")); icon.SetBinding(TextBlock.FontFamilyProperty, new Binding("IconFontFamily")); icon.SetValue(TextBlock.FontSizeProperty, 14d); icon.SetValue(TextBlock.FontWeightProperty, FontWeights.Bold); icon.SetValue(TextBlock.MarginProperty, new Thickness(0, 0, 8, 0)); icon.SetValue(TextBlock.VerticalAlignmentProperty, VerticalAlignment.Center); columns.AppendChild(icon);
-            FrameworkElementFactory textStack = new FrameworkElementFactory(typeof(StackPanel)); textStack.SetValue(StackPanel.OrientationProperty, Orientation.Vertical); textStack.SetValue(StackPanel.VerticalAlignmentProperty, VerticalAlignment.Center); FrameworkElementFactory name = new FrameworkElementFactory(typeof(TextBox)); name.SetBinding(TextBox.TextProperty, new Binding("NameText") { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged }); name.SetBinding(TextBox.IsReadOnlyProperty, new Binding("NameReadOnly")); name.SetValue(TextBox.BackgroundProperty, Brushes.Transparent); name.SetValue(TextBox.BorderThicknessProperty, new Thickness(0)); name.SetValue(TextBox.PaddingProperty, new Thickness(0)); name.SetValue(TextBox.FontSizeProperty, 13d); name.SetValue(TextBox.FontWeightProperty, FontWeights.SemiBold); name.SetValue(TextBox.VerticalContentAlignmentProperty, VerticalAlignment.Center); textStack.AppendChild(name); FrameworkElementFactory detail = new FrameworkElementFactory(typeof(TextBlock)); detail.SetBinding(TextBlock.TextProperty, new Binding("BindingText")); detail.SetBinding(TextBlock.VisibilityProperty, new Binding("BindingVisibility")); detail.SetValue(TextBlock.FontSizeProperty, 10.5d); detail.SetValue(TextBlock.ForegroundProperty, Brush(101, 116, 137)); detail.SetValue(TextBlock.MarginProperty, new Thickness(0, 2, 0, 0)); textStack.AppendChild(detail); columns.AppendChild(textStack);
+            FrameworkElementFactory textStack = new FrameworkElementFactory(typeof(StackPanel)); textStack.SetValue(StackPanel.OrientationProperty, Orientation.Vertical); textStack.SetValue(StackPanel.VerticalAlignmentProperty, VerticalAlignment.Center);
+            FrameworkElementFactory name = new FrameworkElementFactory(typeof(TextBox));
+            name.SetBinding(TextBox.TextProperty, new Binding("NameText") { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.LostFocus });
+            name.SetBinding(TextBox.IsReadOnlyProperty, new Binding("NameReadOnly"));
+            name.SetBinding(FrameworkElement.ToolTipProperty, new Binding("NameEditTip"));
+            name.SetValue(TextBox.BackgroundProperty, Brushes.Transparent);
+            name.SetValue(TextBox.BorderBrushProperty, Brush(151, 184, 232));
+            name.SetValue(TextBox.BorderThicknessProperty, new Thickness(0));
+            name.SetValue(TextBox.PaddingProperty, new Thickness(4, 2, 4, 2));
+            name.SetValue(TextBox.FontSizeProperty, 13d);
+            name.SetValue(TextBox.FontWeightProperty, FontWeights.SemiBold);
+            name.SetValue(TextBox.VerticalContentAlignmentProperty, VerticalAlignment.Center);
+            name.SetValue(TextBox.MinWidthProperty, 160d);
+            name.AddHandler(UIElement.GotKeyboardFocusEvent, new KeyboardFocusChangedEventHandler(NameBox_GotFocus));
+            name.AddHandler(UIElement.LostKeyboardFocusEvent, new KeyboardFocusChangedEventHandler(NameBox_LostFocus));
+            name.AddHandler(UIElement.KeyDownEvent, new KeyEventHandler(NameBox_KeyDown));
+            textStack.AppendChild(name);
+            FrameworkElementFactory detail = new FrameworkElementFactory(typeof(TextBlock)); detail.SetBinding(TextBlock.TextProperty, new Binding("BindingText")); detail.SetBinding(TextBlock.VisibilityProperty, new Binding("BindingVisibility")); detail.SetValue(TextBlock.FontSizeProperty, 10.5d); detail.SetValue(TextBlock.ForegroundProperty, Brush(101, 116, 137)); detail.SetValue(TextBlock.MarginProperty, new Thickness(0, 2, 0, 0)); textStack.AppendChild(detail); columns.AppendChild(textStack);
             FrameworkElementFactory badge = new FrameworkElementFactory(typeof(Border)); badge.SetBinding(Border.VisibilityProperty, new Binding("BadgeVisibility")); badge.SetValue(Border.BackgroundProperty, Brush(239, 243, 248)); badge.SetValue(Border.BorderBrushProperty, Brush(211, 220, 232)); badge.SetValue(Border.BorderThicknessProperty, new Thickness(1)); badge.SetValue(Border.CornerRadiusProperty, new CornerRadius(3)); badge.SetValue(Border.PaddingProperty, new Thickness(6, 2, 6, 2)); badge.SetValue(Border.MarginProperty, new Thickness(8, 0, 0, 0)); FrameworkElementFactory badgeText = new FrameworkElementFactory(typeof(TextBlock)); badgeText.SetBinding(TextBlock.TextProperty, new Binding("BadgeText")); badgeText.SetValue(TextBlock.FontSizeProperty, 10d); badgeText.SetValue(TextBlock.ForegroundProperty, Brush(83, 99, 121)); badge.AppendChild(badgeText); columns.AppendChild(badge); host.AppendChild(columns); return new DataGridTemplateColumn { Header = "功能块与执行项", Width = new DataGridLength(2.3, DataGridLengthUnitType.Star), MinWidth = 340, CellTemplate = new DataTemplate { VisualTree = host }, IsReadOnly = true };
+        }
+
+        private void NameBox_GotFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            TextBox box = sender as TextBox;
+            if (box == null || box.IsReadOnly) return;
+            box.BorderThickness = new Thickness(1);
+            box.Background = Brushes.White;
+            box.SelectAll();
+        }
+        private void NameBox_LostFocus(object sender, KeyboardFocusChangedEventArgs e)
+        {
+            TextBox box = sender as TextBox;
+            if (box == null) return;
+            box.BorderThickness = new Thickness(0);
+            box.Background = Brushes.Transparent;
+            BindingExpression expression = box.GetBindingExpression(TextBox.TextProperty);
+            if (expression != null) expression.UpdateSource();
+        }
+        private void NameBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key != Key.Enter && e.Key != Key.Escape) return;
+            TextBox box = sender as TextBox;
+            if (box == null) return;
+            if (e.Key == Key.Enter)
+            {
+                BindingExpression expression = box.GetBindingExpression(TextBox.TextProperty);
+                if (expression != null) expression.UpdateSource();
+            }
+            else
+            {
+                BindingExpression expression = box.GetBindingExpression(TextBox.TextProperty);
+                if (expression != null) expression.UpdateTarget();
+            }
+            Keyboard.ClearFocus();
+            e.Handled = true;
         }
 
         private DataGridTemplateColumn ValueColumn()
@@ -274,6 +449,33 @@ namespace ManualCanDebug
             FrameworkElementFactory button = new FrameworkElementFactory(typeof(Button)); button.SetValue(Button.WidthProperty, 34d); button.SetValue(Button.HeightProperty, 30d); button.SetValue(Button.BackgroundProperty, Brushes.Transparent); button.SetValue(Button.BorderBrushProperty, Brushes.Transparent); button.SetBinding(Button.ContentProperty, new Binding("BreakpointGlyph")); button.SetBinding(Button.ForegroundProperty, new Binding("BreakpointBrush")); button.SetBinding(Button.VisibilityProperty, new Binding("BreakpointVisibility")); button.AddHandler(Button.ClickEvent, new RoutedEventHandler(Breakpoint_Click)); return new DataGridTemplateColumn { Header = "断点", Width = 56, CellTemplate = new DataTemplate { VisualTree = button }, IsReadOnly = true };
         }
 
+        private DataGridTemplateColumn ResultColumn()
+        {
+            FrameworkElementFactory border = new FrameworkElementFactory(typeof(Border));
+            border.SetBinding(Border.BackgroundProperty, new Binding("ResultBackground"));
+            border.SetValue(Border.CornerRadiusProperty, new CornerRadius(3));
+            border.SetValue(Border.PaddingProperty, new Thickness(6, 3, 6, 3));
+            border.SetValue(Border.MarginProperty, new Thickness(4, 4, 4, 4));
+            border.SetValue(Border.HorizontalAlignmentProperty, HorizontalAlignment.Stretch);
+            border.SetValue(Border.VerticalAlignmentProperty, VerticalAlignment.Center);
+            FrameworkElementFactory text = new FrameworkElementFactory(typeof(TextBlock));
+            text.SetBinding(TextBlock.TextProperty, new Binding("DebugResult"));
+            text.SetBinding(TextBlock.ForegroundProperty, new Binding("ResultForeground"));
+            text.SetValue(TextBlock.FontWeightProperty, FontWeights.SemiBold);
+            text.SetValue(TextBlock.FontSizeProperty, 12d);
+            text.SetValue(TextBlock.HorizontalAlignmentProperty, HorizontalAlignment.Center);
+            text.SetValue(TextBlock.VerticalAlignmentProperty, VerticalAlignment.Center);
+            text.SetValue(TextBlock.TextTrimmingProperty, TextTrimming.CharacterEllipsis);
+            border.AppendChild(text);
+            return new DataGridTemplateColumn
+            {
+                Header = "结果",
+                Width = 88,
+                IsReadOnly = true,
+                CellTemplate = new DataTemplate { VisualTree = border }
+            };
+        }
+
         private DataGridTemplateColumn OperationColumn()
         {
             FrameworkElementFactory button = new FrameworkElementFactory(typeof(Button)); button.SetBinding(Button.ContentProperty, new Binding("OperationText")); button.SetBinding(Button.VisibilityProperty, new Binding("OperationVisibility")); button.SetValue(Button.MinWidthProperty, 62d); button.SetValue(Button.HeightProperty, 28d); button.SetValue(Button.HorizontalAlignmentProperty, HorizontalAlignment.Center); button.SetValue(Button.VerticalAlignmentProperty, VerticalAlignment.Center); button.SetValue(Button.PaddingProperty, new Thickness(8, 3, 8, 3)); button.SetValue(Button.BackgroundProperty, Brushes.White); button.SetValue(Button.ForegroundProperty, Brush(24, 112, 224)); button.SetValue(Button.BorderBrushProperty, Brush(151, 184, 232)); button.SetValue(Button.BorderThicknessProperty, new Thickness(1)); button.AddHandler(Button.ClickEvent, new RoutedEventHandler(Configure_Click)); return new DataGridTemplateColumn { Header = "操作", Width = 78, CellTemplate = new DataTemplate { VisualTree = button }, IsReadOnly = true };
@@ -310,35 +512,86 @@ namespace ManualCanDebug
         {
             get
             {
-                if (Depth == 0) return Instance == null ? string.Empty : Instance.DisplayName;
-                if (Step == null) return string.Empty;
-                if (Step.IsModuleReference) return Step.ReferencedBlockName;
-                Dictionary<string, object> overrides = StepValues(false);
-                object overrideName;
-                if (overrides != null && overrides.TryGetValue("StepName", out overrideName) && overrideName != null && !string.IsNullOrWhiteSpace(Convert.ToString(overrideName, CultureInfo.InvariantCulture)))
-                    return Convert.ToString(overrideName, CultureInfo.InvariantCulture);
-                return Step.ToStep().StepName;
+                try
+                {
+                    if (Depth == 0) return Instance == null ? string.Empty : (Instance.DisplayName ?? string.Empty);
+                    if (Step == null) return string.Empty;
+                    if (Step.IsModuleReference) return Step.ReferencedBlockName ?? string.Empty;
+                    Dictionary<string, object> overrides = StepValues(false);
+                    object overrideName;
+                    if (overrides != null && overrides.TryGetValue("StepName", out overrideName) && overrideName != null && !string.IsNullOrWhiteSpace(Convert.ToString(overrideName, CultureInfo.InvariantCulture)))
+                        return Convert.ToString(overrideName, CultureInfo.InvariantCulture);
+                    SequenceStepDefinition definition = Step.ToStep();
+                    return definition == null ? string.Empty : (definition.StepName ?? string.Empty);
+                }
+                catch
+                {
+                    return string.Empty;
+                }
             }
             set
             {
-                string text = (value ?? string.Empty).Trim();
-                if (string.IsNullOrWhiteSpace(text)) return;
-                if (Depth == 0 && Instance != null) Instance.DisplayName = text;
-                else if (Step != null && Step.IsModuleReference) Step.ReferencedBlockName = text;
-                else if (Step != null)
+                try
                 {
-                    SetProperty("StepName", text);
-                    if (Step.StepProperties != null) Step.StepProperties["StepName"] = text;
+                    string text = (value ?? string.Empty).Trim();
+                    if (string.IsNullOrWhiteSpace(text)) return;
+                    if (string.Equals(NameText, text, StringComparison.Ordinal)) return;
+                    if (Depth == 0 && Instance != null) Instance.DisplayName = text;
+                    else if (Step != null && Step.IsModuleReference) Step.ReferencedBlockName = text;
+                    else if (Step != null)
+                    {
+                        Dictionary<string, object> values = StepValues(true);
+                        if (values != null) values["StepName"] = text;
+                        if (Step.StepProperties != null) Step.StepProperties["StepName"] = text;
+                    }
+                    Raise("NameText");
+                    Changed();
                 }
-                Raise("NameText");
-                Changed();
+                catch
+                {
+                    // Ignore bad rename payloads; keep UI responsive.
+                }
             }
         }
         public bool NameReadOnly { get { string role = Step == null || Step.IsModuleReference ? string.Empty : Convert.ToString(Step.ToStep().Get("StructureRole", string.Empty), CultureInfo.InvariantCulture); return role == "ELSE" || role == "ENDIF"; } }
+        public string NameEditTip { get { return NameReadOnly ? "逻辑结构名称由系统管理" : Depth == 0 ? "单击后编辑模块显示名称，Enter 确认" : "单击后可改动作名称，Enter 确认"; } }
+        public Visibility DragHandleVisibility { get { return Depth == 0 ? Visibility.Visible : Visibility.Hidden; } }
         public bool Enabled { get { if (Depth == 0) return Instance != null && Instance.Enabled; if (Step == null) return true; Dictionary<string, object> values = StepValues(false); object value; return values != null && values.TryGetValue("__Enabled", out value) ? Convert.ToBoolean(value, CultureInfo.InvariantCulture) : Step.Enabled; } set { if (Depth == 0 && Instance != null) Instance.Enabled = value; else { Dictionary<string, object> values = StepValues(true); values["__Enabled"] = value; } Status = value ? "已启用" : "已停用"; Raise("Enabled"); Changed(); } }
         public string LowLimitText { get { return GetText("LowLimit"); } set { SetNumericOrText("LowLimit", value); } } public string HighLimitText { get { return GetText("HighLimit"); } set { SetNumericOrText("HighLimit", value); } } public string CompareText { get { return GetText("Comtype"); } set { SetProperty("Comtype", value ?? string.Empty); } } public string UnitText { get { return GetText("Unit"); } set { SetProperty("Unit", value ?? string.Empty); } }
         public Visibility BreakpointVisibility { get { return Step != null && !Step.IsModuleReference ? Visibility.Visible : Visibility.Collapsed; } } public string BreakpointGlyph { get { return Breakpoint ? "●" : "○"; } } public Brush BreakpointBrush { get { return Breakpoint ? SequenceHierarchyEditor.Brush(220, 42, 42) : SequenceHierarchyEditor.Brush(163, 176, 194); } } public bool Breakpoint { get { return _project != null && Step != null && (_project.Breakpoints.Contains(Instance.Id + ":" + Path) || _project.Breakpoints.Contains(Instance.Id + ":" + Step.Id)); } set { if (_project == null || Step == null) return; string pathKey = Instance.Id + ":" + Path, legacyKey = Instance.Id + ":" + Step.Id; _project.Breakpoints.Remove(pathKey); _project.Breakpoints.Remove(legacyKey); if (value) _project.Breakpoints.Add(pathKey); Raise("Breakpoint"); Raise("BreakpointGlyph"); Raise("BreakpointBrush"); Changed(); } }
-        public string Status { get { return Enabled ? _status : "已停用"; } set { _status = value ?? string.Empty; Raise("Status"); Raise("DebugResult"); } } public string DebugResult { get { string value = Status; return value == "已启用" || value == "待运行" ? string.Empty : value; } } public string Result { get { return _result; } set { _result = value ?? string.Empty; Raise("Result"); Raise("TestValue"); } } public string TestValue { get { return _result; } } public string Products { get { FunctionBlockDefinition source = ReferencedBlock ?? Block; return source == null || source.SupportedProducts == null || source.SupportedProducts.Count == 0 ? (Instance == null ? string.Empty : "全部") : string.Join("/", source.SupportedProducts); } } public bool IsDebugMode { get; set; } public string OperationText { get { if (Step == null) return string.Empty; if (Step.IsModuleReference) return "绑定…"; string role = Convert.ToString(Step.ToStep().Get("StructureRole", string.Empty), CultureInfo.InvariantCulture); return role == "ELSE" || role == "ENDIF" ? string.Empty : "配置…"; } } public Visibility OperationVisibility { get { return string.IsNullOrWhiteSpace(OperationText) ? Visibility.Collapsed : Visibility.Visible; } } public bool HasComplexConfiguration { get; private set; }
+        public string Status { get { return Enabled ? _status : "已停用"; } set { _status = value ?? string.Empty; Raise("Status"); Raise("DebugResult"); Raise("ResultBackground"); Raise("ResultForeground"); } }
+        public string DebugResult
+        {
+            get
+            {
+                string value = Status;
+                if (value == "已启用" || value == "待运行" || value == "已停用") return string.Empty;
+                return value;
+            }
+        }
+        public Brush ResultBackground
+        {
+            get
+            {
+                string value = Status ?? string.Empty;
+                if (value == "运行中") return SequenceHierarchyEditor.Brush(255, 236, 120); // yellow
+                if (value == "完成" || value.IndexOf("pass", StringComparison.OrdinalIgnoreCase) >= 0 || value == "Passed") return SequenceHierarchyEditor.Brush(120, 210, 140); // green
+                if (value == "失败" || value.IndexOf("fail", StringComparison.OrdinalIgnoreCase) >= 0 || value.IndexOf("错误", StringComparison.OrdinalIgnoreCase) >= 0 || value.IndexOf("error", StringComparison.OrdinalIgnoreCase) >= 0) return SequenceHierarchyEditor.Brush(240, 120, 120); // red
+                return Brushes.Transparent;
+            }
+        }
+        public Brush ResultForeground
+        {
+            get
+            {
+                string value = Status ?? string.Empty;
+                if (value == "运行中") return SequenceHierarchyEditor.Brush(120, 80, 0);
+                if (value == "完成" || value.IndexOf("pass", StringComparison.OrdinalIgnoreCase) >= 0 || value == "Passed") return SequenceHierarchyEditor.Brush(20, 100, 40);
+                if (value == "失败" || value.IndexOf("fail", StringComparison.OrdinalIgnoreCase) >= 0 || value.IndexOf("错误", StringComparison.OrdinalIgnoreCase) >= 0 || value.IndexOf("error", StringComparison.OrdinalIgnoreCase) >= 0) return SequenceHierarchyEditor.Brush(120, 20, 20);
+                return SequenceHierarchyEditor.Brush(55, 65, 80);
+            }
+        }
+        public string Result { get { return _result; } set { _result = value ?? string.Empty; Raise("Result"); Raise("TestValue"); } } public string TestValue { get { return _result; } } public string Products { get { FunctionBlockDefinition source = ReferencedBlock ?? Block; return source == null || source.SupportedProducts == null || source.SupportedProducts.Count == 0 ? (Instance == null ? string.Empty : "全部") : string.Join("/", source.SupportedProducts); } } public bool IsDebugMode { get; set; } public string OperationText { get { if (Step == null) return string.Empty; if (Step.IsModuleReference) return "绑定…"; string role = Convert.ToString(Step.ToStep().Get("StructureRole", string.Empty), CultureInfo.InvariantCulture); return role == "ELSE" || role == "ENDIF" ? string.Empty : "配置…"; } } public Visibility OperationVisibility { get { return string.IsNullOrWhiteSpace(OperationText) ? Visibility.Collapsed : Visibility.Visible; } } public bool HasComplexConfiguration { get; private set; }
         public void SetDebugMode(bool enabled) { IsDebugMode = enabled; Raise("IsDebugMode"); Raise("OperationText"); Raise("OperationVisibility"); }
         public void ApplyModuleBinding(FunctionBlockDefinition target)
         {
@@ -417,13 +670,12 @@ namespace ManualCanDebug
         private void BuildFields(SequenceStepDefinition definition)
         {
             ValueFields.Clear(); ValueSummary = string.Empty;
-            SequenceStepDefinition effectiveDefinition = SequenceEditing.Clone(definition); Dictionary<string, object> effectiveOverrides = StepValues(false); if (effectiveOverrides != null) foreach (KeyValuePair<string, object> pair in effectiveOverrides.Where(pair => !pair.Key.StartsWith("__", StringComparison.Ordinal))) effectiveDefinition.Properties[pair.Key] = pair.Value;
             Dictionary<string, BlockParameterDefinition> parameters = (Block.Parameters ?? new List<BlockParameterDefinition>()).Where(value => !string.IsNullOrWhiteSpace(value.Name)).GroupBy(value => value.Name, StringComparer.Ordinal).ToDictionary(group => group.Key, group => group.First(), StringComparer.Ordinal); foreach (KeyValuePair<string, string> binding in Step.ParameterBindings ?? new Dictionary<string, string>()) { if (IsLimitKey(binding.Key)) continue; BlockParameterDefinition parameter; parameters.TryGetValue(binding.Value, out parameter); object value = ResolveParameter(binding.Value, parameter == null ? null : parameter.DefaultValue); bool onOff = IsOnOffField(binding.Key, parameter == null ? null : parameter.Type, parameter == null ? null : parameter.Unit); if (onOff) value = Convert.ToBoolean(NormalizeBool(value), CultureInfo.InvariantCulture) ? "ON" : "OFF"; ValueFields.Add(HierarchyValueField.ForParameter(parameter == null ? binding.Value : parameter.DisplayName, value, onOff ? string.Empty : (parameter == null ? string.Empty : parameter.Unit), false, next => { if (_parameterValues != null) _parameterValues[binding.Value] = onOff ? NormalizeBool(next) : next; Changed(); }, onOff)); }
             if (ValueFields.Count == 0)
             {
                 string[] keys = { "Voltage", "Current", "Output", "TargetCurrent", "StepCurrent", "Frequency", "HoldTime", "TimeMs", "Speed", "Position", "Resistance", "ResValue", "Power", "Value", "Count", "TimeoutMs", "PeriodMs" }; foreach (string key in keys) { object value; if (!definition.Properties.TryGetValue(key, out value) || value == null) continue; object effective = EffectiveValue(key, value); bool onOff = IsOnOffField(key, null, UnitFor(key, definition)); if (onOff) effective = Convert.ToBoolean(NormalizeBool(effective), CultureInfo.InvariantCulture) ? "ON" : "OFF"; ValueFields.Add(HierarchyValueField.ForParameter(key, effective, onOff ? string.Empty : UnitFor(key, definition), false, next => { SetProperty(key, onOff ? NormalizeBool(next) : next); }, onOff)); if (ValueFields.Count >= 4) break; }
             }
-            bool batchConfiguration = effectiveDefinition.Properties.Keys.Any(key => key == "ChangesJson" || key == "SignalChecksJson" || key == "SignalsJson" || key == "ParametersJson" || key == "DataHex"); bool hasInlineJudgment = effectiveDefinition.Properties.ContainsKey("LowLimit") || effectiveDefinition.Properties.ContainsKey("HighLimit") || effectiveDefinition.Properties.ContainsKey("Comtype") || effectiveDefinition.Properties.ContainsKey("Limit"); HasComplexConfiguration = batchConfiguration || ValueFields.Count > 4 || ValueFields.Count == 0 && !hasInlineJudgment; if (ValueFields.Count == 0) ValueSummary = batchConfiguration ? ActionSummary(effectiveDefinition) + "，" + ComplexSummary(effectiveDefinition) : ActionSummary(effectiveDefinition);
+            bool batchConfiguration = definition.Properties.Keys.Any(key => key == "ChangesJson" || key == "SignalChecksJson" || key == "SignalsJson" || key == "ParametersJson" || key == "DataHex"); bool hasInlineJudgment = definition.Properties.ContainsKey("LowLimit") || definition.Properties.ContainsKey("HighLimit") || definition.Properties.ContainsKey("Comtype") || definition.Properties.ContainsKey("Limit"); HasComplexConfiguration = batchConfiguration || ValueFields.Count > 4 || ValueFields.Count == 0 && !hasInlineJudgment; if (ValueFields.Count == 0) ValueSummary = batchConfiguration ? ActionSummary(definition) + " · " + ComplexSummary(definition) : ActionSummary(definition);
         }
         private object ResolveParameter(string name, object defaultValue) { object value; return _parameterValues != null && _parameterValues.TryGetValue(name, out value) ? value : defaultValue; }
         private object EffectiveValue(string key, object fallback) { Dictionary<string, object> values = StepValues(false); object value; return values != null && values.TryGetValue(key, out value) ? value : fallback; }

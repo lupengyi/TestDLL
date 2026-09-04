@@ -891,17 +891,19 @@ namespace CSP
         {
             try
             {
-                //uint addrOffset = (uint)(MySequenceManage.GetInputDoubleValue(socketIndex, "AddrOffset"));
-                //int tableIndex = (int)MySequenceManage.GetInputDoubleValue(socketIndex, "TableIndex");
-                //int dataSize = (int)MySequenceManage.GetInputDoubleValue(socketIndex, "DataSize");
-                //float fValue = (float)MySequenceManage.GetInputDoubleValue(socketIndex, "Value");
-
-                DUT_WriteBytes(0xAC, 0x75, new byte[] { 0xFF, 0xFF, 0xFF, 0xFF });
-                DUT_Execute(0xB0, 0x00);
+                if (MyCAN == null) throw new InvalidOperationException("Product CAN is not initialized. Select MAINCAN/DUTCAN in Instrument Center and execute ProcessSetup first.");
+                // Mirror CAN_APP2FT UDS path; write FF FF FF FF to DID EEEE to unlock / exit FT (ZLG comment: 解锁).
+                string rxString = "";
+                MyCAN.UDS_Request(0x18DAF0FA, 0x18DAFAF0, "10 03", ref rxString, "50 03");
+                MyCAN.UDS_Request(0x18DAF0FA, 0x18DAFAF0, "27 01", ref rxString, "67 01");
+                MyCAN.UDS_Request(0x18DAF0FA, 0x18DAFAF0, "27 02 FF FF FF FF", ref rxString, "67 02");
+                MyCAN.UDS_Request(0x18DAF0FA, 0x18DAFAF0, "2E EE EE FF FF FF FF", ref rxString, "6E EE");
+                MyCAN.UDS_Request(0x18DAF0FA, 0x18DAFAF0, "11 01", ref rxString, "61 01");
+                Thread.Sleep(1000);
             }
             catch (Exception ex)
             {
-                throw new Exception("", ex);
+                throw new InvalidOperationException("CAN_FT2APP failed: " + ex.Message, ex);
             }
         }
         public void CAN_APP2FT(int socketIndex)

@@ -18,6 +18,7 @@ namespace CSP
         private readonly Dictionary<int, Dictionary<string, object>> _fctVariables = new Dictionary<int, Dictionary<string, object>>();
         private readonly Dictionary<int, Dictionary<string, int>> _fctLoopCounters = new Dictionary<int, Dictionary<string, int>>();
         private Instruments.CAN.CANWrapper _fctAuxCan;
+        private Instruments.CAN.CANWrapper _fctMainCan;
         private readonly Dictionary<string, object> _fctActionPlugins = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
         // Stations register their periodic senders under station-prefixed keys, so this map is written
         // from several test threads at once and must not be a bare Dictionary.
@@ -173,6 +174,7 @@ namespace CSP
             FCT_CanDiagnostic("Cleanup selected instruments: " + string.Join(",", _fctInitializedInstrumentNames));
             FCT_StopAllAuxPeriodic();
             if (_fctInitializedInstrumentNames.Contains("DUTCAN") && MyCAN != null) try { MyCAN.CloseCANDevice(); } catch { }
+            if (_fctInitializedInstrumentNames.Contains("MAINCAN") && _fctMainCan != null) try { _fctMainCan.CloseCANDevice(); } catch { }
             if (_fctInitializedInstrumentNames.Contains("RESOLVERCAN") && Resolver != null) try { Resolver.CloseCANDevice(); } catch { }
             if (_fctInitializedInstrumentNames.Contains("AUXCAN") && _fctAuxCan != null) try { _fctAuxCan.CloseCANDevice(); } catch { }
             if (_fctInitializedInstrumentNames.Contains("LVDC")) try { LVDC.DisconnectDevice(); } catch { }
@@ -183,7 +185,7 @@ namespace CSP
             if (DcdcLoad != null) { try { DcdcLoad.LoadOff(); } catch { } try { DcdcLoad.Disconnect(); } catch { } try { DcdcLoad.Dispose(); } catch { } DcdcLoad = null; }
             try { RelayFctBoard.Disconnect(); } catch { }
             try { RelayHvMux.Disconnect(); } catch { }
-            MyCAN = null; Resolver = null; _fctAuxCan = null; _fctInitializedInstrumentNames.Clear(); _fctInstrumentSelectionJson = string.Empty;
+            MyCAN = null; Resolver = null; _fctAuxCan = null; _fctMainCan = null; _fctInitializedInstrumentNames.Clear(); _fctInstrumentSelectionJson = string.Empty;
             return 0;
         }
 
@@ -199,14 +201,21 @@ namespace CSP
             switch (name)
             {
                 case "DUTCAN":
-                    MyCAN = FCT_OpenSelectedCan(assemblyFolder, executableFolder, resource, parameter, 2, "Flywheel_900A_Z405.dbc");
+                    // 调试：U1 192.168.1.17 CAN0 — XCP/可选；内部读写默认已改走 MAINCAN
+                    MyCAN = FCT_OpenSelectedCan(assemblyFolder, executableFolder, resource, parameter, 0, "Flywheel_900A_Z405.dbc");
+                    break;
+                case "MAINCAN":
+                    // 主驱：U1 192.168.1.17 CAN1 — EnterFT / CommunicationInit / 内部表读写默认
+                    _fctMainCan = FCT_OpenSelectedCan(assemblyFolder, executableFolder, resource, parameter, 1, "Flywheel_900A_Z405.dbc");
                     break;
                 case "RESOLVERCAN":
-                    Resolver = FCT_OpenSelectedCan(assemblyFolder, executableFolder, resource, parameter, 1, "Resolver.dbc");
+                    // 旋变：U3 192.168.1.19 CAN0
+                    Resolver = FCT_OpenSelectedCan(assemblyFolder, executableFolder, resource, parameter, 0, "Resolver.dbc");
                     Resolver.SendMessage(0x80000001, new byte[8]);
                     Resolver.DBC_SendSignalValue("2505419280_Speed", 0, true);
                     break;
                 case "AUXCAN":
+                    // 辅驱：U2 192.168.1.18 CAN0
                     _fctAuxCan = FCT_OpenSelectedCan(assemblyFolder, executableFolder, resource, parameter, 0, "C95C96Auxiliary.dbc");
                     break;
                 case "RES": case "RES_1": RES.ConnectDevice(resource, parameter); RES.SetResistance(1100, 1); RES.SetResistance(1100, 2); break;
@@ -475,7 +484,25 @@ namespace CSP
 
         public void FCT_CANSignal(int socketIndex)
         {
-            lock (_fctGenericLocker) { FCT_CANSignalCore(socketIndex); }
+            lock (_fctGenericLocker) { FCT_WithProductCanBus(socketIndex, () => FCT_CANSignalCore(socketIndex)); }
+        }
+
+        private void FCT_WithProductCanBus(int socketIndex, Action action)
+        {
+            string busName;
+            // 内部表/信号读写默认 MAINCAN（U1 CAN1）；SEQ 可设 CanInstrument=DUTCAN 覆盖。
+            Instruments.CAN.CANWrapper bus = FCT_ResolveProductCanBus(socketIndex, out busName, preferDutCanForMemory: false);
+            Instruments.CAN.CANWrapper saved = MyCAN;
+            MyCAN = bus;
+            try
+            {
+                FCT_Log(socketIndex, "PRODUCTCAN memory access 使用 " + busName);
+                action();
+            }
+            finally
+            {
+                MyCAN = saved;
+            }
         }
 
         private void FCT_CANSignalCore(int socketIndex)
@@ -517,7 +544,7 @@ namespace CSP
 
         public void FCT_CANCalculatedResults(int socketIndex)
         {
-            lock (_fctGenericLocker) { FCT_CANCalculatedResultsCore(socketIndex); }
+            lock (_fctGenericLocker) { FCT_WithProductCanBus(socketIndex, () => FCT_CANCalculatedResultsCore(socketIndex)); }
         }
 
         private void FCT_CANCalculatedResultsCore(int socketIndex)
@@ -561,7 +588,7 @@ namespace CSP
 
         public void FCT_CANTable(int socketIndex)
         {
-            lock (_fctGenericLocker) { FCT_CANTableCore(socketIndex); }
+            lock (_fctGenericLocker) { FCT_WithProductCanBus(socketIndex, () => FCT_CANTableCore(socketIndex)); }
         }
 
         private void FCT_CANTableCore(int socketIndex)
@@ -688,7 +715,7 @@ namespace CSP
                 case "SETVOLTAGE": supply.SetSourceVoltage(FCT_InputDouble(socketIndex, "Voltage", 0)); return null;
                 case "SETCURRENT": supply.SetSourceCurrent(FCT_InputDouble(socketIndex, "Current", 0)); return null;
                 case "SETOUTPUT": supply.SetOutput(FCT_InputBool(socketIndex, "Output", false)); return null;
-                case "READVOLTAGE": double voltage; supply.GetActPower(out voltage); return voltage;
+                case "READVOLTAGE": double voltage; supply.GetActVoltage(out voltage); return voltage;
                 case "READCURRENT": double current; supply.GetActCurrent(out current); return current;
                 default: throw new InvalidOperationException("Unsupported LVDC operation: " + operation);
             }
@@ -850,23 +877,10 @@ namespace CSP
             if (meter == null) throw new InvalidOperationException("万用表在当前工位没有实例。请在仪器中心为该工位分配并填写连接资源。");
             switch (operation.ToUpperInvariant())
             {
-                case "INIT": meter.InitDMM(); return null;
-                case "RESET": meter.RST(); return null;
-                case "IDENTIFY": string identity; meter.IDN(out identity); return identity;
-                case "CONFIGMEASURE":
-                {
-                    string typeText = FCT_InputString(socketIndex, "MeasureType", "DCVoltage");
-                    int separator = typeText.IndexOf(" - ", StringComparison.Ordinal); if (separator > 0) typeText = typeText.Substring(0, separator).Trim();
-                    Instruments.DMM.MeasureTypes measureType; if (!Enum.TryParse(typeText, true, out measureType)) throw new InvalidOperationException("Unsupported DMM measure type: " + typeText);
-                    meter.ConfigDMMforMeasure(measureType); return null;
-                }
                 case "CONFIGDCVOLTAGE": meter.ConfigDMMforDC(FCT_InputDouble(socketIndex, "Range", 1000), FCT_InputDouble(socketIndex, "Solution", 0.01)); return null;
                 case "CONFIGDCCURRENT": meter.ConfigDMMforDCCurrent(FCT_InputDouble(socketIndex, "Range", 3), FCT_InputDouble(socketIndex, "Solution", 0.00001)); return null;
                 case "CONFIGACVOLTAGE": meter.ConfigDMMforAC(FCT_InputDouble(socketIndex, "Range", 1000), FCT_InputDouble(socketIndex, "Solution", 0.01)); return null;
                 case "CONFIGACCURRENT": meter.ConfigDMMforACCurrent(FCT_InputDouble(socketIndex, "Range", 3), FCT_InputDouble(socketIndex, "Solution", 0.00001)); return null;
-                case "CONFIGRESISTANCE": meter.ConfigDMMForRES(FCT_InputDouble(socketIndex, "Range", -1), FCT_InputDouble(socketIndex, "Solution", -1)); return null;
-                case "CONFIGFREQUENCY": meter.ConfigDMMforFREQ(FCT_InputDouble(socketIndex, "Range", -1), FCT_InputDouble(socketIndex, "Solution", -1)); return null;
-                case "CONFIGCALCULATEMAXIMUM": meter.ConfigDMMforCALulate(); return null;
                 case "READ": return meter.GetMeasureValue();
                 case "CLOSE": meter.CloseSession(); return null;
                 default: throw new InvalidOperationException("Unsupported DMM operation: " + operation);
@@ -940,18 +954,65 @@ namespace CSP
 
         private object FCT_ProductCan(int socketIndex, string operation)
         {
-            if (MyCAN == null) throw new InvalidOperationException("产品CAN未初始化。请在仪器中心勾选 DUTCAN 并执行初始化。");
-            switch (operation.ToUpperInvariant())
+            string busName;
+            // CommunicationInit / EnterFT / 唤醒等默认 MAINCAN（CAN1）；仅当 SEQ 显式写 CanInstrument=DUTCAN 才走 CAN0。
+            Instruments.CAN.CANWrapper bus = FCT_ResolveProductCanBus(socketIndex, out busName, preferDutCanForMemory: false);
+            FCT_Log(socketIndex, "PRODUCTCAN." + operation + " 使用 " + busName);
+            Instruments.CAN.CANWrapper saved = MyCAN;
+            MyCAN = bus;
+            try
             {
-                case "COMMUNICATIONINIT": DUT_ComucationInit(socketIndex); return null;
-                case "ENTERFT": CAN_APP2FT(socketIndex); return null;
-                case "WAKEUP": CAN_SendWakeUpMessage(socketIndex); return null;
-                case "COMMUNICATIONTEST": Test_CANCommunication(socketIndex); return true;
-                case "SENDDBCSIGNAL": MyCAN.DBC_SendSignalValue(FCT_InputString(socketIndex, "SignalName", string.Empty), FCT_InputDouble(socketIndex, "Value", 0), FCT_InputBool(socketIndex, "SendFlag", true)); return true;
-                case "SENDRAW": { uint id = FCT_ParseCanId(FCT_InputString(socketIndex, "CanId", "0")); byte[] data = FCT_ParseHexBytes(FCT_InputString(socketIndex, "DataHex", string.Empty)); MyCAN.SendMessage(id, data); return BitConverter.ToString(data).Replace("-", " "); }
-                case "RECEIVERAW": { uint filter = FCT_ParseCanId(FCT_InputString(socketIndex, "FilterId", "0")); List<Instruments.CAN.CANMessage> messages = new List<Instruments.CAN.CANMessage>(); MyCAN.ReceiveMessage(out messages); JArray frames = new JArray(); foreach (Instruments.CAN.CANMessage message in messages.Where(value => filter == 0 || (value.ID & 0x1FFFFFFF) == (filter & 0x1FFFFFFF))) frames.Add(new JObject { ["Id"] = (message.ID & 0x1FFFFFFF).ToString("X", CultureInfo.InvariantCulture), ["Data"] = BitConverter.ToString(message.DATA ?? new byte[0]).Replace("-", " ") }); return frames.ToString(Formatting.None); }
-                default: throw new InvalidOperationException("Unsupported ProductCAN operation: " + operation);
+                switch (operation.ToUpperInvariant())
+                {
+                    case "COMMUNICATIONINIT": DUT_ComucationInit(socketIndex); return null;
+                    case "ENTERFT": CAN_APP2FT(socketIndex); return null;
+                    case "EXITFT": CAN_FT2APP(socketIndex); return null;
+                    case "WAKEUP": CAN_SendWakeUpMessage(socketIndex); return null;
+                    case "COMMUNICATIONTEST": Test_CANCommunication(socketIndex); return true;
+                    case "SENDDBCSIGNAL": MyCAN.DBC_SendSignalValue(FCT_InputString(socketIndex, "SignalName", string.Empty), FCT_InputDouble(socketIndex, "Value", 0), FCT_InputBool(socketIndex, "SendFlag", true)); return true;
+                    case "SENDRAW": { uint id = FCT_ParseCanId(FCT_InputString(socketIndex, "CanId", "0")); byte[] data = FCT_ParseHexBytes(FCT_InputString(socketIndex, "DataHex", string.Empty)); MyCAN.SendMessage(id, data); return BitConverter.ToString(data).Replace("-", " "); }
+                    case "RECEIVERAW": { uint filter = FCT_ParseCanId(FCT_InputString(socketIndex, "FilterId", "0")); List<Instruments.CAN.CANMessage> messages = new List<Instruments.CAN.CANMessage>(); MyCAN.ReceiveMessage(out messages); JArray frames = new JArray(); foreach (Instruments.CAN.CANMessage message in messages.Where(value => filter == 0 || (value.ID & 0x1FFFFFFF) == (filter & 0x1FFFFFFF))) frames.Add(new JObject { ["Id"] = (message.ID & 0x1FFFFFFF).ToString("X", CultureInfo.InvariantCulture), ["Data"] = BitConverter.ToString(message.DATA ?? new byte[0]).Replace("-", " ") }); return frames.ToString(Formatting.None); }
+                    default: throw new InvalidOperationException("Unsupported ProductCAN operation: " + operation);
+                }
             }
+            finally { MyCAN = saved; }
+        }
+
+        /// <summary>
+        /// PRODUCTCAN 物理通道：SEQ 可设 CanInstrument=MAINCAN|DUTCAN。
+        /// 默认 MAINCAN（U1 CAN1 主驱）；仅显式 CanInstrument=DUTCAN 或 preferDutCanForMemory 时走 CAN0。
+        /// </summary>
+        private Instruments.CAN.CANWrapper FCT_ResolveProductCanBus(int socketIndex, out string busName, bool preferDutCanForMemory = false)
+        {
+            string prefer = FCT_InputString(socketIndex, "CanInstrument", string.Empty).Trim().ToUpperInvariant();
+            if (prefer == "MAINCAN" || prefer == "MAIN")
+            {
+                if (_fctMainCan == null) throw new InvalidOperationException("PRODUCTCAN 指定 MAINCAN，但 MAINCAN 未初始化。请在仪器中心勾选 MAINCAN（U1 CAN1）并初始化。");
+                busName = "MAINCAN (U1 CAN1 主驱)";
+                return _fctMainCan;
+            }
+            if (prefer == "DUTCAN" || prefer == "DUT" || prefer == "DEBUG")
+            {
+                if (MyCAN == null) throw new InvalidOperationException("PRODUCTCAN 指定 DUTCAN，但 DUTCAN 未初始化。请在仪器中心勾选 DUTCAN（U1 CAN0）并初始化。");
+                busName = "DUTCAN (U1 CAN0 调试)";
+                return MyCAN;
+            }
+            if (preferDutCanForMemory && MyCAN != null)
+            {
+                busName = "DUTCAN (U1 CAN0 调试, 显式内存默认)";
+                return MyCAN;
+            }
+            if (_fctMainCan != null)
+            {
+                busName = "MAINCAN (U1 CAN1 主驱, 默认)";
+                return _fctMainCan;
+            }
+            if (MyCAN != null)
+            {
+                busName = "DUTCAN (U1 CAN0 调试, 默认)";
+                return MyCAN;
+            }
+            throw new InvalidOperationException("产品CAN未初始化。C92请勾选 MAINCAN（主驱 CAN1）与 DUTCAN（调试 CAN0）后初始化。");
         }
 
         private static uint FCT_ParseCanId(string text) { string value = (text ?? string.Empty).Trim(); if (value.StartsWith("0x", StringComparison.OrdinalIgnoreCase)) value = value.Substring(2); return uint.Parse(string.IsNullOrWhiteSpace(value) ? "0" : value, NumberStyles.HexNumber, CultureInfo.InvariantCulture); }

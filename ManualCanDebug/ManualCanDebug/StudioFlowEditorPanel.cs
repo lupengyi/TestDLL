@@ -91,7 +91,9 @@ namespace ManualCanDebug
 
         public void RefreshProject()
         {
-            CommitInstance(); _library.Clear(); _flow.Clear(); FctStudioProject project = _getProject(); if (project == null) return;
+            try { CommitInstance(); }
+            catch (Exception ex) { MessageBox.Show("保存当前模块参数时遇到无效数值，已跳过该字段继续刷新：\n" + ex.Message, "流程参数", MessageBoxButton.OK, MessageBoxImage.Warning); }
+            _library.Clear(); _flow.Clear(); FctStudioProject project = _getProject(); if (project == null) return;
             Dictionary<string, int> libraryOrders = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
             foreach (FunctionBlockDefinition block in project.Blocks)
             {
@@ -186,7 +188,7 @@ namespace ManualCanDebug
             _instanceNameBox = new TextBox { Margin = new Thickness(4), Padding = new Thickness(8, 4, 8, 4), Height = 32, FontSize = 13, ToolTip = "当前流程中的模块名称" };
             _parameterGrid = CreateSettingParameterGrid();
             _limitGrid = CreateLimitGrid();
-            _expandedGrid = new DataGrid { ItemsSource = _expanded, AutoGenerateColumns = false, CanUserAddRows = false, HeadersVisibility = DataGridHeadersVisibility.Column, Margin = new Thickness(8), GridLinesVisibility = DataGridGridLinesVisibility.Horizontal, RowStyle = DebugStepRowStyle() }; _expandedGrid.Columns.Add(new DataGridCheckBoxColumn { Header = "断点", Binding = new Binding("Breakpoint") { UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged }, Width = 60 }); _expandedGrid.Columns.Add(new DataGridTextColumn { Header = "#", Binding = new Binding("Number"), Width = 50, IsReadOnly = true }); _expandedGrid.Columns.Add(new DataGridTextColumn { Header = "具体操作", Binding = new Binding("StepName"), Width = 280, IsReadOnly = true }); _expandedGrid.Columns.Add(new DataGridTextColumn { Header = "关键参数", Binding = new Binding("ParameterSummary"), Width = new DataGridLength(1, DataGridLengthUnitType.Star), IsReadOnly = true }); _expandedGrid.Columns.Add(new DataGridTextColumn { Header = "状态", Binding = new Binding("Status"), Width = 90, IsReadOnly = true }); _expandedGrid.Columns.Add(new DataGridTextColumn { Header = "实际结果", Binding = new Binding("Result"), Width = 180, IsReadOnly = true });
+            _expandedGrid = new DataGrid { ItemsSource = _expanded, AutoGenerateColumns = false, CanUserAddRows = false, HeadersVisibility = DataGridHeadersVisibility.Column, Margin = new Thickness(8), GridLinesVisibility = DataGridGridLinesVisibility.Horizontal, RowStyle = DebugStepRowStyle() }; _expandedGrid.Columns.Add(DataGridCheckHelpers.BoundCheckColumn("断点", "Breakpoint", 60, null, (s, e) => { if (_changed != null) _changed(); })); _expandedGrid.Columns.Add(new DataGridTextColumn { Header = "#", Binding = new Binding("Number"), Width = 50, IsReadOnly = true }); _expandedGrid.Columns.Add(new DataGridTextColumn { Header = "具体操作", Binding = new Binding("StepName"), Width = 280, IsReadOnly = true }); _expandedGrid.Columns.Add(new DataGridTextColumn { Header = "关键参数", Binding = new Binding("ParameterSummary"), Width = new DataGridLength(1, DataGridLengthUnitType.Star), IsReadOnly = true }); _expandedGrid.Columns.Add(new DataGridTextColumn { Header = "状态", Binding = new Binding("Status"), Width = 90, IsReadOnly = true }); _expandedGrid.Columns.Add(new DataGridTextColumn { Header = "实际结果", Binding = new Binding("Result"), Width = 180, IsReadOnly = true });
             _detailTabs = new TabControl { Margin = new Thickness(8, -1, 8, 4), BorderThickness = new Thickness(0), Background = Brushes.White, Padding = new Thickness(0), FontSize = 12, HorizontalContentAlignment = HorizontalAlignment.Stretch, VerticalContentAlignment = VerticalAlignment.Stretch, ItemContainerStyle = StudioTabStyleFactory.Create(12) };
             Grid basic = new Grid { Margin = new Thickness(18, 15, 18, 8) }; basic.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(80) }); basic.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(420) }); basic.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) }); basic.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto }); AddControlField(basic, "实例名称", _instanceNameBox, 0, 0, 1);
             _detailTabs.Items.Add(new TabItem { Header = "基本信息", Content = basic, IsSelected = true, HorizontalContentAlignment = HorizontalAlignment.Stretch, VerticalContentAlignment = VerticalAlignment.Stretch }); _detailTabs.Items.Add(new TabItem { Header = "设置参数", Content = BuildQuickParameterPanel(_parameterGrid, false), HorizontalContentAlignment = HorizontalAlignment.Stretch, VerticalContentAlignment = VerticalAlignment.Stretch }); _detailTabs.Items.Add(new TabItem { Header = "LIMIT判断", Content = BuildQuickParameterPanel(_limitGrid, true), HorizontalContentAlignment = HorizontalAlignment.Stretch, VerticalContentAlignment = VerticalAlignment.Stretch }); _detailTabs.Items.Add(new TabItem { Header = "条件与断点", Content = _expandedGrid, HorizontalContentAlignment = HorizontalAlignment.Stretch, VerticalContentAlignment = VerticalAlignment.Stretch }); Grid.SetRow(_detailTabs, 1); detail.Children.Add(_detailTabs); detailCard.Child = detail; Grid.SetRow(detailCard, 2); workspace.Children.Add(detailCard);
@@ -196,7 +198,17 @@ namespace ManualCanDebug
         }
 
         private void HierarchySearchChanged(object sender, TextChangedEventArgs e) { if (_hierarchyEditor != null) _hierarchyEditor.SetSearch(_hierarchySearch == null ? string.Empty : _hierarchySearch.Text); }
-        private void HierarchySelectedInstanceChanged(FlowBlockInstance instance) { if (instance == null || ReferenceEquals(_selectedInstance, instance)) return; CommitInstance(); _selectedInstance = instance; FlowInstanceRow row = _flow.FirstOrDefault(value => value.Instance == instance); if (row != null) _flowList.SelectedItem = row; LoadInstance(); }
+        private void HierarchySelectedInstanceChanged(FlowBlockInstance instance)
+        {
+            if (instance == null || ReferenceEquals(_selectedInstance, instance)) return;
+            try { CommitInstance(); }
+            catch (Exception ex) { MessageBox.Show("保存当前模块状态失败：\n" + ex.Message, "流程模块", MessageBoxButton.OK, MessageBoxImage.Warning); }
+            _selectedInstance = instance;
+            FlowInstanceRow row = _flow.FirstOrDefault(value => value.Instance == instance);
+            if (row != null && _flowList != null && !ReferenceEquals(_flowList.SelectedItem, row)) _flowList.SelectedItem = row;
+            try { LoadInstance(); }
+            catch (Exception ex) { MessageBox.Show("加载模块“" + (instance.DisplayName ?? string.Empty) + "”失败：\n" + ex.Message, "流程模块", MessageBoxButton.OK, MessageBoxImage.Warning); }
+        }
         private void ConfigureHierarchyRow(SequenceHierarchyRow row) { if (_configureHierarchyStep != null) { _configureHierarchyStep(row); return; } FunctionBlockDefinition block = row == null ? null : row.ReferencedBlock ?? row.Block; if (block != null && _openBlockEditor != null) _openBlockEditor(block); }
 
         private void BuildUi()
@@ -212,7 +224,7 @@ namespace ManualCanDebug
             DockPanel currentHeader = new DockPanel { Margin = new Thickness(12, 7, 12, 5) }; Button apply = Button("应用参数", Apply_Click); DockPanel.SetDock(apply, Dock.Right); currentHeader.Children.Add(apply); currentHeader.Children.Add(Title("当前功能块配置")); Grid.SetRow(currentHeader, 2); workspace.Children.Add(currentHeader);
             _instanceNameBox = new TextBox { Margin = new Thickness(4), Padding = new Thickness(7, 4, 7, 4), ToolTip = "当前流程中的模块名称" }; _phaseBox = new ComboBox { ItemsSource = new[] { "准备阶段", "主驱测试", "辅驱测试", "安全收尾" }, Margin = new Thickness(4) };
             _parameterGrid = new DataGrid { ItemsSource = _parameters, AutoGenerateColumns = false, CanUserAddRows = false, HeadersVisibility = DataGridHeadersVisibility.Column, Margin = new Thickness(8), GridLinesVisibility = DataGridGridLinesVisibility.Horizontal, RowHeight = 34, ColumnHeaderHeight = 31, BorderBrush = BorderColor() }; _parameterGrid.Columns.Add(new DataGridTextColumn { Header = "参数", Binding = new Binding("DisplayName"), Width = 180, IsReadOnly = true }); _parameterGrid.Columns.Add(new DataGridTextColumn { Header = "值", Binding = new Binding("ValueText") { UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged }, Width = 200 }); _parameterGrid.Columns.Add(new DataGridTextColumn { Header = "单位", Binding = new Binding("Unit"), Width = 75, IsReadOnly = true }); _parameterGrid.Columns.Add(new DataGridTextColumn { Header = "说明", Binding = new Binding("Description"), Width = new DataGridLength(1, DataGridLengthUnitType.Star), IsReadOnly = true });
-            _expandedGrid = new DataGrid { ItemsSource = _expanded, AutoGenerateColumns = false, CanUserAddRows = false, HeadersVisibility = DataGridHeadersVisibility.Column, Margin = new Thickness(8), GridLinesVisibility = DataGridGridLinesVisibility.Horizontal, AlternatingRowBackground = new SolidColorBrush(Color.FromRgb(250, 252, 255)) }; _expandedGrid.Columns.Add(new DataGridCheckBoxColumn { Header = "断点", Binding = new Binding("Breakpoint") { UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged }, Width = 55 }); _expandedGrid.Columns.Add(new DataGridTextColumn { Header = "#", Binding = new Binding("Number"), Width = 45, IsReadOnly = true }); _expandedGrid.Columns.Add(new DataGridTextColumn { Header = "具体操作", Binding = new Binding("StepName"), Width = 250, IsReadOnly = true }); _expandedGrid.Columns.Add(new DataGridTextColumn { Header = "关键参数", Binding = new Binding("ParameterSummary"), Width = new DataGridLength(1, DataGridLengthUnitType.Star), IsReadOnly = true }); _expandedGrid.Columns.Add(new DataGridTextColumn { Header = "状态", Binding = new Binding("Status"), Width = 85, IsReadOnly = true }); _expandedGrid.Columns.Add(new DataGridTextColumn { Header = "实际结果", Binding = new Binding("Result"), Width = 180, IsReadOnly = true });
+            _expandedGrid = new DataGrid { ItemsSource = _expanded, AutoGenerateColumns = false, CanUserAddRows = false, HeadersVisibility = DataGridHeadersVisibility.Column, Margin = new Thickness(8), GridLinesVisibility = DataGridGridLinesVisibility.Horizontal, AlternatingRowBackground = new SolidColorBrush(Color.FromRgb(250, 252, 255)) }; _expandedGrid.Columns.Add(DataGridCheckHelpers.BoundCheckColumn("断点", "Breakpoint", 55, null, (s, e) => { if (_changed != null) _changed(); })); _expandedGrid.Columns.Add(new DataGridTextColumn { Header = "#", Binding = new Binding("Number"), Width = 45, IsReadOnly = true }); _expandedGrid.Columns.Add(new DataGridTextColumn { Header = "具体操作", Binding = new Binding("StepName"), Width = 250, IsReadOnly = true }); _expandedGrid.Columns.Add(new DataGridTextColumn { Header = "关键参数", Binding = new Binding("ParameterSummary"), Width = new DataGridLength(1, DataGridLengthUnitType.Star), IsReadOnly = true }); _expandedGrid.Columns.Add(new DataGridTextColumn { Header = "状态", Binding = new Binding("Status"), Width = 85, IsReadOnly = true }); _expandedGrid.Columns.Add(new DataGridTextColumn { Header = "实际结果", Binding = new Binding("Result"), Width = 180, IsReadOnly = true });
             TabControl detailTabs = new TabControl { Margin = new Thickness(10, 0, 10, 6), BorderThickness = new Thickness(0) }; Grid basic = new Grid { Margin = new Thickness(10) }; basic.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(80) }); basic.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(300) }); basic.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(70) }); basic.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(180) }); basic.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto }); AddControlField(basic, "实例名称", _instanceNameBox, 0, 0, 1); AddControlField(basic, "执行阶段", _phaseBox, 0, 2, 3); detailTabs.Items.Add(new TabItem { Header = "基本设置", Content = basic }); detailTabs.Items.Add(new TabItem { Header = "参数设置", Content = _parameterGrid }); detailTabs.Items.Add(new TabItem { Header = "条件与断点", Content = _expandedGrid }); _runtimeVariables = new TextBlock { Text = "运行变量：{}", Margin = new Thickness(16), Foreground = TextSecondary(), TextWrapping = TextWrapping.Wrap }; detailTabs.Items.Add(new TabItem { Header = "运行详情", Content = _runtimeVariables }); Grid.SetRow(detailTabs, 3); workspace.Children.Add(detailTabs);
 
             Border debugBar = new Border { Background = Brushes.White, BorderBrush = BorderColor(), BorderThickness = new Thickness(0, 1, 0, 0), Padding = new Thickness(12, 8, 12, 8) }; DockPanel debugDock = new DockPanel(); TextBlock debugHint = new TextBlock { Text = "调试配置：先检查流程，再从选中功能块运行", Foreground = TextSecondary(), VerticalAlignment = VerticalAlignment.Center }; debugDock.Children.Add(debugHint); StackPanel debugButtons = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right }; debugButtons.Children.Add(Button("检查流程", Compile_Click)); Button debug = PrimaryButton("从选中处运行", Debug_Click); debugButtons.Children.Add(debug); debugButtons.Children.Add(Button("单步", Step_Click)); debugButtons.Children.Add(Button("继续到断点", Continue_Click)); Button stop = Button("停止并安全下电", Stop_Click); stop.Background = new SolidColorBrush(Color.FromRgb(196, 66, 66)); stop.Foreground = Brushes.White; debugButtons.Children.Add(stop); DockPanel.SetDock(debugButtons, Dock.Right); debugDock.Children.Insert(0, debugButtons); debugBar.Child = debugDock; Grid.SetRow(debugBar, 1); Grid.SetColumnSpan(debugBar, 2); Children.Add(debugBar);
@@ -359,7 +371,44 @@ namespace ManualCanDebug
             RefreshExpanded(); if (_quickSearch != null) QuickSearch_TextChanged(this, null);
         }
         private static string ReferenceParameterGroupName(int number, FunctionBlockDefinition module, BlockStepDefinition reference) { List<string> values = new List<string>(); foreach (BlockParameterDefinition parameter in (module.Parameters ?? new List<BlockParameterDefinition>()).Take(3)) { object value; if (!(reference.ReferencedParameterOverrides ?? new Dictionary<string, object>()).TryGetValue(parameter.Name, out value)) value = parameter.DefaultValue; string text = Convert.ToString(value, CultureInfo.InvariantCulture); if (!string.IsNullOrWhiteSpace(text)) values.Add((string.IsNullOrWhiteSpace(parameter.DisplayName) ? parameter.Name : parameter.DisplayName) + "=" + text + (string.IsNullOrWhiteSpace(parameter.Unit) ? string.Empty : parameter.Unit)); } return number.ToString("00", CultureInfo.InvariantCulture) + "  " + module.Name + (values.Count == 0 ? string.Empty : "   ·   " + string.Join("  /  ", values)); }
-        private void CommitInstance() { if (_selectedInstance == null) return; string before = FctStudioProjectService.Serialize(_getProject()); _selectedInstance.DisplayName = string.IsNullOrWhiteSpace(_instanceNameBox.Text) ? _selectedInstance.Snapshot.Name : _instanceNameBox.Text.Trim(); if (string.IsNullOrWhiteSpace(_selectedInstance.Phase)) _selectedInstance.Phase = PhaseFor(_selectedInstance.Snapshot); _parameterGrid.CommitEdit(DataGridEditingUnit.Cell, true); _parameterGrid.CommitEdit(DataGridEditingUnit.Row, true); if (_limitGrid != null) { _limitGrid.CommitEdit(DataGridEditingUnit.Cell, true); _limitGrid.CommitEdit(DataGridEditingUnit.Row, true); } foreach (FlowQuickParameterRow row in _quickParameters) row.Apply(); foreach (FlowParameterRow row in _parameters) _selectedInstance.ParameterOverrides[row.Parameter.Name] = row.ConvertValue(); SyncCustomModuleFromCurrentInstance(); foreach (FlowExpandedStepRow row in _expanded) { string key = row.BreakpointKey; if (row.Breakpoint && !_getProject().Breakpoints.Contains(key)) _getProject().Breakpoints.Add(key); if (!row.Breakpoint) _getProject().Breakpoints.Remove(key); } FlowInstanceRow item = _flow.FirstOrDefault(value => value.Instance == _selectedInstance); if (item != null) item.Refresh(); CollectionViewSource.GetDefaultView(_flowList.ItemsSource).Refresh(); if (!string.Equals(before, FctStudioProjectService.Serialize(_getProject()), StringComparison.Ordinal)) _changed(); }
+        private void CommitInstance()
+        {
+            if (_selectedInstance == null) return;
+            string before = FctStudioProjectService.Serialize(_getProject());
+            // Hierarchy NameText owns DisplayName. Only apply the detail name box when the user is actively editing it;
+            // otherwise a stale box value overwrites renames and can NRE when Snapshot is null.
+            if (_instanceNameBox != null && _instanceNameBox.IsKeyboardFocusWithin)
+            {
+                string fallback = _selectedInstance.Snapshot != null ? _selectedInstance.Snapshot.Name : (_selectedInstance.DisplayName ?? string.Empty);
+                _selectedInstance.DisplayName = string.IsNullOrWhiteSpace(_instanceNameBox.Text) ? fallback : _instanceNameBox.Text.Trim();
+            }
+            if (string.IsNullOrWhiteSpace(_selectedInstance.Phase) && _selectedInstance.Snapshot != null) _selectedInstance.Phase = PhaseFor(_selectedInstance.Snapshot);
+            if (_parameterGrid != null) { _parameterGrid.CommitEdit(DataGridEditingUnit.Cell, true); _parameterGrid.CommitEdit(DataGridEditingUnit.Row, true); }
+            if (_limitGrid != null) { _limitGrid.CommitEdit(DataGridEditingUnit.Cell, true); _limitGrid.CommitEdit(DataGridEditingUnit.Row, true); }
+            foreach (FlowQuickParameterRow row in _quickParameters)
+            {
+                try { row.Apply(); }
+                catch (FormatException) { /* keep previous value; blank/invalid limit text must not crash configure */ }
+                catch (OverflowException) { }
+            }
+            foreach (FlowParameterRow row in _parameters)
+            {
+                try { _selectedInstance.ParameterOverrides[row.Parameter.Name] = row.ConvertValue(); }
+                catch (FormatException) { }
+                catch (OverflowException) { }
+            }
+            SyncCustomModuleFromCurrentInstance();
+            foreach (FlowExpandedStepRow row in _expanded)
+            {
+                string key = row.BreakpointKey;
+                if (row.Breakpoint && !_getProject().Breakpoints.Contains(key)) _getProject().Breakpoints.Add(key);
+                if (!row.Breakpoint) _getProject().Breakpoints.Remove(key);
+            }
+            FlowInstanceRow item = _flow.FirstOrDefault(value => value.Instance == _selectedInstance);
+            if (item != null) item.Refresh();
+            if (_flowList != null && _flowList.ItemsSource != null) CollectionViewSource.GetDefaultView(_flowList.ItemsSource).Refresh();
+            if (!string.Equals(before, FctStudioProjectService.Serialize(_getProject()), StringComparison.Ordinal)) _changed();
+        }
         private void SyncCustomModuleFromCurrentInstance() { if (_selectedInstance == null || _selectedInstance.Snapshot == null) return; FctStudioProject project = _getProject(); FunctionBlockDefinition source = project == null ? null : project.Blocks.FirstOrDefault(block => block.Id == _selectedInstance.BlockId); if (source == null || !string.Equals(source.ModuleKind, "Custom", StringComparison.OrdinalIgnoreCase)) return; source.Name = _selectedInstance.Snapshot.Name; source.Category = _selectedInstance.Snapshot.Category; source.Description = _selectedInstance.Snapshot.Description; source.Version = _selectedInstance.Snapshot.Version; source.Parameters = (_selectedInstance.Snapshot.Parameters ?? new List<BlockParameterDefinition>()).Select(parameter => parameter.Clone()).ToList(); source.Steps = (_selectedInstance.Snapshot.Steps ?? new List<BlockStepDefinition>()).Select(step => step.Clone()).ToList(); source.SupportedProducts = new List<string>(_selectedInstance.Snapshot.SupportedProducts ?? new List<string>()); }
         private void RefreshExpanded() { _expanded.Clear(); if (_selectedInstance == null || _selectedInstance.Snapshot == null) return; int number = 0; AppendExpandedSteps(_selectedInstance.Snapshot, string.Empty, null, new HashSet<string>(StringComparer.Ordinal), ref number); }
         private void AppendExpandedSteps(FunctionBlockDefinition block, string prefix, IDictionary<string, object> referenceValues, ISet<string> stack, ref int number)
@@ -498,11 +547,93 @@ namespace ManualCanDebug
         public string StringLimitText { get { return _stringLimitText ?? string.Empty; } set { _stringLimitText = value ?? string.Empty; Raise("StringLimitText"); } }
         public string SearchText { get { return string.Join(" ", new[] { Scope, StepName, ValueText, LowLimitText, HighLimitText, CompareText, UnitText, StringLimitText, Description }); } }
         public void SetField(string field, string value) { switch (field) { case "下限": LowLimitText = value; break; case "上限": HighLimitText = value; break; case "比较方式": CompareText = value; break; case "单位": UnitText = value; break; case "字符串期望值": StringLimitText = value; break; default: ValueText = value; break; } }
-        public void Apply() { if (_parameter != null || _step == null) return; if (_referencedParameter != null) { _step.ReferencedParameterOverrides[_referencedParameter.Name] = ConvertReferencedValue(ValueText); return; } if (_tableCheckIndex >= 0) { JArray checks = JArray.Parse(Convert.ToString(_step.ToStep().Get("SignalChecksJson", "[]"), CultureInfo.InvariantCulture)); JObject check = _tableCheckIndex < checks.Count ? checks[_tableCheckIndex] as JObject : null; if (check == null) return; if (check["LowLimit"] != null) check["LowLimit"] = double.Parse(LowLimitText, CultureInfo.InvariantCulture); if (check["HighLimit"] != null) check["HighLimit"] = double.Parse(HighLimitText, CultureInfo.InvariantCulture); check["Comtype"] = CompareText; check["Unit"] = UnitText; check["Limit"] = StringLimitText; _step.StepProperties["SignalChecksJson"] = checks.ToString(Formatting.None); return; } Apply("LowLimit", LowLimitText); Apply("HighLimit", HighLimitText); Apply("Comtype", CompareText); Apply("Unit", UnitText); Apply("Limit", StringLimitText); }
-        private object ConvertReferencedValue(string text) { if (_referencedValueType == typeof(bool)) return text == "1" || bool.Parse(text); if (_referencedValueType == typeof(int) || _referencedValueType == typeof(short) || _referencedValueType == typeof(long)) return int.Parse(text, CultureInfo.InvariantCulture); if (_referencedValueType == typeof(double) || _referencedValueType == typeof(float) || _referencedValueType == typeof(decimal)) return double.Parse(text, CultureInfo.InvariantCulture); return text ?? string.Empty; }
+        public void Apply()
+        {
+            if (_parameter != null || _step == null) return;
+            if (_referencedParameter != null)
+            {
+                if (_step.ReferencedParameterOverrides == null) _step.ReferencedParameterOverrides = new Dictionary<string, object>(StringComparer.Ordinal);
+                _step.ReferencedParameterOverrides[_referencedParameter.Name] = ConvertReferencedValue(ValueText);
+                return;
+            }
+            if (_tableCheckIndex >= 0)
+            {
+                JArray checks = new JArray();
+                try { checks = JArray.Parse(Convert.ToString(_step.ToStep().Get("SignalChecksJson", "[]"), CultureInfo.InvariantCulture)); } catch { return; }
+                JObject check = _tableCheckIndex < checks.Count ? checks[_tableCheckIndex] as JObject : null;
+                if (check == null) return;
+                WriteOptionalDouble(check, "LowLimit", LowLimitText);
+                WriteOptionalDouble(check, "HighLimit", HighLimitText);
+                check["Comtype"] = CompareText ?? string.Empty;
+                check["Unit"] = UnitText ?? string.Empty;
+                check["Limit"] = StringLimitText ?? string.Empty;
+                if (_step.StepProperties == null) _step.StepProperties = new Dictionary<string, object>(StringComparer.Ordinal);
+                _step.StepProperties["SignalChecksJson"] = checks.ToString(Formatting.None);
+                return;
+            }
+            Apply("LowLimit", LowLimitText);
+            Apply("HighLimit", HighLimitText);
+            Apply("Comtype", CompareText);
+            Apply("Unit", UnitText);
+            Apply("Limit", StringLimitText);
+        }
+        private object ConvertReferencedValue(string text)
+        {
+            string value = text ?? string.Empty;
+            if (_referencedValueType == typeof(bool))
+            {
+                if (string.IsNullOrWhiteSpace(value)) return false;
+                bool parsed; return value == "1" || (bool.TryParse(value, out parsed) && parsed);
+            }
+            if (_referencedValueType == typeof(int) || _referencedValueType == typeof(short) || _referencedValueType == typeof(long))
+            {
+                int parsed; return int.TryParse(value, NumberStyles.Integer, CultureInfo.InvariantCulture, out parsed) ? parsed : 0;
+            }
+            if (_referencedValueType == typeof(double) || _referencedValueType == typeof(float) || _referencedValueType == typeof(decimal))
+            {
+                double parsed; return double.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out parsed) ? parsed : 0d;
+            }
+            return value;
+        }
         private static bool IsJudgmentParameter(BlockParameterDefinition parameter) { string text = ((parameter == null ? string.Empty : parameter.Name) + " " + (parameter == null ? string.Empty : parameter.DisplayName)).ToLowerInvariant(); return text.Contains("limit") || text.Contains("low") || text.Contains("high") || text.Contains("expected") || text.Contains("imbalance") || text.Contains("compare") || text.Contains("comtype") || text.Contains("下限") || text.Contains("上限") || text.Contains("期望") || text.Contains("允许") || text.Contains("不平衡") || text.Contains("比较"); }
         private string Get(string key) { object value; return _step.StepProperties.TryGetValue(key, out value) ? Convert.ToString(value, CultureInfo.InvariantCulture) ?? string.Empty : string.Empty; }
-        private void Apply(string key, string text) { if (!_step.StepProperties.ContainsKey(key) && string.IsNullOrWhiteSpace(text)) return; object original; if (_step.StepProperties.TryGetValue(key, out original) && (original is double || original is float || original is decimal)) _step.StepProperties[key] = double.Parse(text, CultureInfo.InvariantCulture); else if (original is int) _step.StepProperties[key] = int.Parse(text, CultureInfo.InvariantCulture); else _step.StepProperties[key] = text ?? string.Empty; }
+        private void Apply(string key, string text)
+        {
+            if (_step.StepProperties == null) _step.StepProperties = new Dictionary<string, object>(StringComparer.Ordinal);
+            if (!_step.StepProperties.ContainsKey(key) && string.IsNullOrWhiteSpace(text)) return;
+            object original;
+            _step.StepProperties.TryGetValue(key, out original);
+            if (original is double || original is float || original is decimal)
+            {
+                double parsed;
+                if (double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out parsed)) _step.StepProperties[key] = parsed;
+                return;
+            }
+            if (original is int || original is short || original is long)
+            {
+                int parsed;
+                if (int.TryParse(text, NumberStyles.Integer, CultureInfo.InvariantCulture, out parsed)) _step.StepProperties[key] = parsed;
+                return;
+            }
+            _step.StepProperties[key] = text ?? string.Empty;
+        }
+        private static void WriteOptionalDouble(JObject check, string key, string text)
+        {
+            if (check == null || string.IsNullOrWhiteSpace(key)) return;
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                // Information-only checks often have blank limits; keep blank instead of throwing.
+                if (HasJsonValue(check, key)) check[key] = string.Empty;
+                return;
+            }
+            double parsed;
+            if (double.TryParse(text, NumberStyles.Float, CultureInfo.InvariantCulture, out parsed)) check[key] = parsed;
+        }
+        private static bool HasJsonValue(JObject check, string key)
+        {
+            JToken token;
+            return check.TryGetValue(key, StringComparison.OrdinalIgnoreCase, out token) && token != null && token.Type != JTokenType.Null;
+        }
         public event PropertyChangedEventHandler PropertyChanged; private void Raise(string name) { PropertyChangedEventHandler handler = PropertyChanged; if (handler != null) handler(this, new PropertyChangedEventArgs(name)); }
     }
     internal sealed class FlowExpandedStepRow : INotifyPropertyChanged { private bool _breakpoint; private string _status = "待运行"; private string _result = string.Empty; private readonly string _displayName; private readonly string _parameterSummary; public FlowExpandedStepRow(FlowBlockInstance instance, BlockStepDefinition step, int number, bool breakpoint, string displayName = null, string parameterSummary = null) { Instance = instance; Step = step; Number = number; _breakpoint = breakpoint; _displayName = displayName; _parameterSummary = parameterSummary; } public FlowBlockInstance Instance { get; private set; } public BlockStepDefinition Step { get; private set; } public int Number { get; private set; } public string StepName { get { return string.IsNullOrWhiteSpace(_displayName) ? (Step.IsModuleReference ? Step.ReferencedBlockName : Step.ToStep().StepName) : _displayName; } } public string FunctionName { get { return Step.IsModuleReference ? "模块引用" : Step.ToStep().FunctionName; } } public string ParameterSummary { get { if (!string.IsNullOrWhiteSpace(_parameterSummary)) return _parameterSummary; return Step.IsModuleReference ? string.Join(", ", Step.ReferencedParameterOverrides.Take(6).Select(pair => pair.Key + "=" + Convert.ToString(pair.Value, CultureInfo.InvariantCulture))) : string.Join(", ", Step.ToStep().Parameters.Take(4).Select(pair => pair.Key + "=" + Convert.ToString(pair.Value, CultureInfo.InvariantCulture))); } } public string BreakpointKey { get { return Instance.Id + ":" + Step.Id; } } public bool Breakpoint { get { return _breakpoint; } set { if (_breakpoint == value) return; _breakpoint = value; Raise("Breakpoint"); Raise("BreakpointGlyph"); Raise("BreakpointBrush"); } } public string BreakpointGlyph { get { return _breakpoint ? "●" : "○"; } } public Brush BreakpointBrush { get { return _breakpoint ? new SolidColorBrush(Color.FromRgb(220, 42, 42)) : new SolidColorBrush(Color.FromRgb(188, 198, 212)); } } public string Status { get { return _status; } set { _status = value ?? string.Empty; Raise("Status"); } } public string Result { get { return _result; } set { _result = value ?? string.Empty; Raise("Result"); } } public event PropertyChangedEventHandler PropertyChanged; private void Raise(string name) { PropertyChangedEventHandler handler = PropertyChanged; if (handler != null) handler(this, new PropertyChangedEventArgs(name)); } }

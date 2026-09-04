@@ -36,6 +36,8 @@ namespace ManualCanDebug
         private SequenceStepDefinition _editingAction;
         private TabControl _workspaceTabs;
         private InstrumentWorkspaceDesigner _workspaceDesigner;
+        private CheckBox _initializeSelectAllCheck;
+        private bool _syncingInitializeSelectAll;
 
         public InstrumentCenterPanel(string baseDirectory, Func<SequenceStepDefinition, Task<string>> executeStep, Action<string> log, Action configSaved, Func<string, Task> initializeSelected)
         {
@@ -109,7 +111,7 @@ namespace ManualCanDebug
             page.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             TextBlock note = new TextBlock
             {
-                Text = "通过编辑 InstrumentConfig.json 或下方按钮增删仪器。勾选“本次初始化”决定连接哪些仪器；三张CAN分别使用DUTCAN、RESOLVERCAN、AUXCAN。CAN参数格式：DeviceType,Channel,BaudRate,Port,DeviceIndex。双万用表使用DMM_HV/DMM_LV，三张电阻卡使用RES_1/RES_2/RES_3。",
+                Text = "通过编辑 InstrumentConfig.json 或下方按钮增删仪器。勾选“本次初始化”决定连接哪些仪器。FST006 四路CAN：DUTCAN=调试(.17 CAN0)、MAINCAN=主驱(.17 CAN1)、AUXCAN=辅驱(.18 CAN0)、RESOLVERCAN=旋变(.19 CAN0)。参数格式：DeviceType,Channel,BaudRate,Port,DeviceIndex。",
                 TextWrapping = TextWrapping.Wrap,
                 Padding = new Thickness(10, 8, 10, 8),
                 Background = new SolidColorBrush(Color.FromRgb(255, 247, 226)),
@@ -118,15 +120,30 @@ namespace ManualCanDebug
             };
             page.Children.Add(note);
 
-            _configGrid = new DataGrid { ItemsSource = _configRows, AutoGenerateColumns = false, CanUserAddRows = false, HeadersVisibility = DataGridHeadersVisibility.Column, AlternatingRowBackground = new SolidColorBrush(Color.FromRgb(248, 250, 253)) };
-            _configGrid.Columns.Add(new DataGridCheckBoxColumn { Header = "本次初始化", Binding = new Binding("Initialize") { UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged }, Width = 90 });
+            _configGrid = new DataGrid
+            {
+                ItemsSource = _configRows,
+                AutoGenerateColumns = false,
+                CanUserAddRows = false,
+                HeadersVisibility = DataGridHeadersVisibility.Column,
+                AlternatingRowBackground = new SolidColorBrush(Color.FromRgb(248, 250, 253)),
+                SelectionUnit = DataGridSelectionUnit.FullRow
+            };
+            _configGrid.Columns.Add(CreateInitializeCheckColumn());
             _configGrid.Columns.Add(new DataGridTextColumn { Header = "仪器", Binding = new Binding("Name"), Width = 105, IsReadOnly = true });
+            _configGrid.Columns.Add(new DataGridTextColumn { Header = "仪器说明", Binding = new Binding("Comment") { UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged }, Width = 320 });
             _configGrid.Columns.Add(new DataGridTextColumn { Header = "MainTest状态", Binding = new Binding("ConnectionStatus"), Width = 105, IsReadOnly = true });
             _configGrid.Columns.Add(new DataGridTextColumn { Header = "类型", Binding = new Binding("Type"), Width = 110, IsReadOnly = true });
             _configGrid.Columns.Add(new DataGridTextColumn { Header = "驱动模式", Binding = new Binding("Mode"), Width = 105, IsReadOnly = true });
-            _configGrid.Columns.Add(new DataGridTextColumn { Header = "Resource（可编辑）", Binding = new Binding("Resource") { UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged }, Width = 320 });
-            _configGrid.Columns.Add(new DataGridTextColumn { Header = "Parameter（可编辑）", Binding = new Binding("Parameter") { UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged }, Width = 220 });
-            _configGrid.Columns.Add(new DataGridTextColumn { Header = "生效方式", Binding = new Binding("EffectiveScope"), Width = 280, IsReadOnly = true });
+            _configGrid.Columns.Add(new DataGridTextColumn { Header = "Resource（可编辑）", Binding = new Binding("Resource") { UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged }, Width = 280 });
+            _configGrid.Columns.Add(new DataGridTextColumn { Header = "Parameter（可编辑）", Binding = new Binding("Parameter") { UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged }, Width = 180 });
+            _configGrid.Columns.Add(new DataGridTextColumn { Header = "生效方式", Binding = new Binding("EffectiveScope"), Width = 220, IsReadOnly = true });
+            _configRows.CollectionChanged += (s, e) =>
+            {
+                if (e.NewItems != null) foreach (InstrumentConfigRow row in e.NewItems.OfType<InstrumentConfigRow>()) row.PropertyChanged += ConfigRow_PropertyChanged;
+                if (e.OldItems != null) foreach (InstrumentConfigRow row in e.OldItems.OfType<InstrumentConfigRow>()) row.PropertyChanged -= ConfigRow_PropertyChanged;
+                SyncInitializeSelectAllHeader();
+            };
             Grid.SetRow(_configGrid, 1);
             page.Children.Add(_configGrid);
 
@@ -141,8 +158,8 @@ namespace ManualCanDebug
             reload.Click += (s, e) => LoadConfiguration();
             Button save = new Button { Content = "保存仪器配置", Padding = new Thickness(10, 5, 10, 5), Margin = new Thickness(4), Background = new SolidColorBrush(Color.FromRgb(32, 104, 190)), Foreground = Brushes.White };
             save.Click += SaveConfiguration_Click;
-            Button selectAll = new Button { Content = "全选", Padding = new Thickness(10, 5, 10, 5), Margin = new Thickness(4) }; selectAll.Click += (s, e) => { foreach (InstrumentConfigRow row in _configRows) row.Initialize = true; };
-            Button clear = new Button { Content = "清空选择", Padding = new Thickness(10, 5, 10, 5), Margin = new Thickness(4) }; clear.Click += (s, e) => { foreach (InstrumentConfigRow row in _configRows) row.Initialize = false; };
+            Button selectAll = new Button { Content = "全选", Padding = new Thickness(10, 5, 10, 5), Margin = new Thickness(4) }; selectAll.Click += (s, e) => SetAllInitialize(true);
+            Button clear = new Button { Content = "清空选择", Padding = new Thickness(10, 5, 10, 5), Margin = new Thickness(4) }; clear.Click += (s, e) => SetAllInitialize(false);
             Button initialize = new Button { Content = "初始化已勾选仪器", Padding = new Thickness(14, 6, 14, 6), Margin = new Thickness(4), Background = new SolidColorBrush(Color.FromRgb(37, 145, 91)), Foreground = Brushes.White }; initialize.Click += async (s, e) => await InitializeSelectedAsync();
             buttons.Children.Add(addFromCatalog);
             buttons.Children.Add(removeSelected);
@@ -269,15 +286,33 @@ namespace ManualCanDebug
             foreach (InstrumentConfigRow row in _configRows)
             {
                 if (!row.Persisted) continue;
-                JObject catalog = FindCatalogEntry(row.Name);
+                JObject catalog = FindCatalogEntry(row.Name) ?? FindCatalogEntryByPrefix(row.Name);
                 if (catalog != null)
                 {
                     string comment = (string)catalog["Comment"] ?? string.Empty;
                     string seqDevice = (string)catalog["SeqDevice"] ?? string.Empty;
-                    row.EffectiveScope = string.IsNullOrWhiteSpace(seqDevice) ? comment : "SEQ Device=" + seqDevice + "；" + comment;
+                    if (string.IsNullOrWhiteSpace(row.Comment) && !string.IsNullOrWhiteSpace(comment))
+                        row.Comment = comment;
+                    row.EffectiveScope = string.IsNullOrWhiteSpace(seqDevice) ? "保存后重新初始化生效" : "SEQ Device=" + seqDevice + "；保存后重新初始化生效";
                 }
                 else row.EffectiveScope = "未在 InstrumentCatalog.json 登记；MainTest 可能不支持";
             }
+        }
+
+        private JObject FindCatalogEntryByPrefix(string name)
+        {
+            if (string.IsNullOrWhiteSpace(name)) return null;
+            // RES_1 / DMM_HV 等实例名回落到目录中的基础仪器说明
+            string[] aliases = { "RES", "DMM", "LVDC", "HVDC", "RELAY", "CAN" };
+            foreach (string alias in aliases)
+            {
+                if (name.StartsWith(alias, StringComparison.OrdinalIgnoreCase))
+                {
+                    JObject exact = FindCatalogEntry(alias);
+                    if (exact != null) return exact;
+                }
+            }
+            return null;
         }
 
         private List<JObject> LoadCatalogEntries()
@@ -489,6 +524,66 @@ namespace ManualCanDebug
             foreach (InstrumentConfigRow row in _configRows) row.ConnectionStatus = initialized.Contains(row.Name) ? "已初始化" : "未初始化";
         }
 
+        /// <summary>
+        /// DataGridCheckBoxColumn needs a row-select click first. Template CheckBox toggles on one click.
+        /// Header hosts a master checkbox for select-all / clear-all.
+        /// </summary>
+        private DataGridTemplateColumn CreateInitializeCheckColumn()
+        {
+            _initializeSelectAllCheck = new CheckBox
+            {
+                HorizontalAlignment = HorizontalAlignment.Center,
+                VerticalAlignment = VerticalAlignment.Center,
+                ToolTip = "全选",
+                Focusable = false,
+                IsThreeState = true
+            };
+            _initializeSelectAllCheck.Click += InitializeSelectAll_Click;
+
+            FrameworkElementFactory check = new FrameworkElementFactory(typeof(CheckBox));
+            check.SetBinding(CheckBox.IsCheckedProperty, new Binding("Initialize") { Mode = BindingMode.TwoWay, UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged });
+            check.SetValue(FrameworkElement.HorizontalAlignmentProperty, HorizontalAlignment.Center);
+            check.SetValue(FrameworkElement.VerticalAlignmentProperty, VerticalAlignment.Center);
+            check.SetValue(FrameworkElement.MarginProperty, new Thickness(0, 2, 0, 2));
+            check.SetValue(CheckBox.FocusableProperty, false);
+            return new DataGridTemplateColumn
+            {
+                Header = _initializeSelectAllCheck,
+                Width = 56,
+                CellTemplate = new DataTemplate { VisualTree = check }
+            };
+        }
+
+        private void InitializeSelectAll_Click(object sender, RoutedEventArgs e)
+        {
+            if (_syncingInitializeSelectAll) return;
+            bool allSelected = _configRows.Count > 0 && _configRows.All(row => row.Initialize);
+            SetAllInitialize(!allSelected);
+        }
+
+        private void SetAllInitialize(bool value)
+        {
+            foreach (InstrumentConfigRow row in _configRows) row.Initialize = value;
+            SyncInitializeSelectAllHeader();
+        }
+
+        private void ConfigRow_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Initialize") SyncInitializeSelectAllHeader();
+        }
+
+        private void SyncInitializeSelectAllHeader()
+        {
+            if (_initializeSelectAllCheck == null) return;
+            int total = _configRows.Count;
+            int selected = _configRows.Count(row => row.Initialize);
+            bool? next = total == 0 || selected == 0 ? false : selected == total ? true : (bool?)null;
+            if (_initializeSelectAllCheck.IsChecked == next) return;
+            _syncingInitializeSelectAll = true;
+            _initializeSelectAllCheck.IsChecked = next;
+            _syncingInitializeSelectAll = false;
+        }
+
         private void ActionGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             InstrumentActionRow row = _actionGrid.SelectedItem as InstrumentActionRow;
@@ -530,11 +625,12 @@ namespace ManualCanDebug
     {
         private string _resource;
         private string _parameter;
+        private string _comment;
         private bool _initialize;
         private string _connectionStatus = "未初始化";
         public InstrumentConfigRow(int uniqueIndex, string name, string type, string mode, string resource, string parameter, string comment, bool persisted, bool initialize = false)
         {
-            UniqueIndex = uniqueIndex; Name = name; Type = type; Mode = mode; _resource = resource; _parameter = parameter; Comment = comment; Persisted = persisted; _initialize = initialize;
+            UniqueIndex = uniqueIndex; Name = name; Type = type; Mode = mode; _resource = resource; _parameter = parameter; _comment = comment ?? string.Empty; Persisted = persisted; _initialize = initialize;
             EffectiveScope = persisted ? "保存后重新初始化生效" : comment;
         }
         public int UniqueIndex { get; private set; }
@@ -545,7 +641,7 @@ namespace ManualCanDebug
         public string Parameter { get { return _parameter; } set { _parameter = value ?? string.Empty; Raise("Parameter"); } }
         public bool Initialize { get { return _initialize; } set { _initialize = value; Raise("Initialize"); } }
         public string ConnectionStatus { get { return _connectionStatus; } set { _connectionStatus = value ?? "未初始化"; Raise("ConnectionStatus"); } }
-        public string Comment { get; private set; }
+        public string Comment { get { return _comment; } set { _comment = value ?? string.Empty; Raise("Comment"); } }
         public bool Persisted { get; private set; }
         public string EffectiveScope { get; set; }
         public static InstrumentConfigRow FromJson(JObject item)

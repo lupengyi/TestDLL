@@ -628,8 +628,9 @@ namespace ManualCanDebug.Tests
         {
             var names = CanSequenceCatalog.OrderedSteps.Select(step => step.Name).ToArray();
             Assert(names[0] == "Enter FT Mode", "first step is not Enter FT Mode");
-            Assert(names[1] == "DUT Communication Init", "second step is not DUT Communication Init");
-            Assert(names[2] == "CAN Communication", "third step is not CAN Communication");
+            Assert(names[1] == "Exit FT Mode", "second step is not Exit FT Mode");
+            Assert(names[2] == "DUT Communication Init", "third step is not DUT Communication Init");
+            Assert(names[3] == "CAN Communication", "fourth step is not CAN Communication");
         }
 
         private static void CatalogContainsResolverPresets()

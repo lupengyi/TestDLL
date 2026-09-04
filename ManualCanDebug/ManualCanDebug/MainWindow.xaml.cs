@@ -556,6 +556,7 @@ namespace ManualCanDebug
             StackPanel stack = new StackPanel();
             stack.Children.Add(MakeGroup("产品通信基础动作", MakeRow(
                 MakeButton("进入 FT 模式", EnterFtMode_Click),
+                MakeButton("退出 FT 模式", ExitFtMode_Click),
                 MakeButton("DUT 通信初始化", InitializeDut_Click),
                 MakeButton("CAN 通信测试", TestProductCommunication_Click),
                 MakeButton("发送唤醒帧 0x50F", SendWakeup_Click))));
@@ -1974,13 +1975,14 @@ namespace ManualCanDebug
             ExportStudioSequence_Click(sender, e);
         }
 
-        private async void EnterFtMode_Click(object sender, RoutedEventArgs e) { await RunMainTestAdvancedAsync("进入 FT 模式", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "EnterFT" }, { "ResultMode", "Action" } }); }
+        private async void EnterFtMode_Click(object sender, RoutedEventArgs e) { await RunMainTestAdvancedAsync("进入 FT 模式", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "EnterFT" }, { "CanInstrument", "MAINCAN" }, { "ResultMode", "Action" } }); }
+        private async void ExitFtMode_Click(object sender, RoutedEventArgs e) { await RunMainTestAdvancedAsync("退出 FT 模式", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "ExitFT" }, { "CanInstrument", "MAINCAN" }, { "ResultMode", "Action" } }); }
         private async void InitializeDut_Click(object sender, RoutedEventArgs e)
         {
-            await RunMainTestAdvancedAsync("DUT 通信初始化", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "CommunicationInit" }, { "TxID", "2030" }, { "RxID", "2031" }, { "ResultMode", "Action" } });
+            await RunMainTestAdvancedAsync("DUT 通信初始化", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "CommunicationInit" }, { "TxID", "7EE" }, { "RxID", "7EF" }, { "CanInstrument", "DUTCAN" }, { "ResultMode", "Action" } });
         }
-        private async void TestProductCommunication_Click(object sender, RoutedEventArgs e) { await RunMainTestAdvancedAsync("CAN 通信测试", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "CommunicationTest" }, { "ResultMode", "Information" } }); }
-        private async void SendWakeup_Click(object sender, RoutedEventArgs e) { await RunMainTestAdvancedAsync("发送唤醒帧", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "Wakeup" }, { "ResultMode", "Action" } }); }
+        private async void TestProductCommunication_Click(object sender, RoutedEventArgs e) { await RunMainTestAdvancedAsync("CAN 通信测试", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "CommunicationTest" }, { "CanInstrument", "MAINCAN" }, { "ResultMode", "Information" } }); }
+        private async void SendWakeup_Click(object sender, RoutedEventArgs e) { await RunMainTestAdvancedAsync("发送唤醒帧", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "Wakeup" }, { "CanInstrument", "MAINCAN" }, { "ResultMode", "Action" } }); }
         private void ReadProductCurrent_Click(object sender, RoutedEventArgs e) { ShowProductCurrentWindow(_service.LastRequestedCurrentRms); }
         private void ReadAllC95Inputs_Click(object sender, RoutedEventArgs e)
         {
@@ -2033,18 +2035,18 @@ namespace ManualCanDebug
             string signalName = _productSignalNameTextBox.Text.Trim();
             string signalValueText = _productSignalValueTextBox.Text;
             bool sendFlag = _productSignalSendFlagCheckBox.IsChecked == true;
-            await RunMainTestAdvancedAsync("发送产品 DBC 信号", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "SendDbcSignal" }, { "SignalName", signalName }, { "Value", ParseDouble(signalValueText, "产品信号值") }, { "SendFlag", sendFlag }, { "ResultMode", "Action" } });
+            await RunMainTestAdvancedAsync("发送产品 DBC 信号", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "SendDbcSignal" }, { "SignalName", signalName }, { "Value", ParseDouble(signalValueText, "产品信号值") }, { "SendFlag", sendFlag }, { "CanInstrument", "MAINCAN" }, { "ResultMode", "Action" } });
         }
         private async void SendProductRaw_Click(object sender, RoutedEventArgs e)
         {
             string idText = _productRawIdTextBox.Text;
             string dataText = _productRawDataTextBox.Text;
-            await RunMainTestAdvancedAsync("发送产品原始帧", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "SendRaw" }, { "CanId", ParseCanId(idText).ToString("X", CultureInfo.InvariantCulture) }, { "DataHex", dataText }, { "ResultMode", "Information" } });
+            await RunMainTestAdvancedAsync("发送产品原始帧", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "SendRaw" }, { "CanId", ParseCanId(idText).ToString("X", CultureInfo.InvariantCulture) }, { "DataHex", dataText }, { "CanInstrument", "MAINCAN" }, { "ResultMode", "Information" } });
         }
         private async void ReceiveProductRaw_Click(object sender, RoutedEventArgs e)
         {
             string idText = _productReceiveIdTextBox.Text;
-            await RunMainTestAdvancedAsync("读取产品接收帧", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "ReceiveRaw" }, { "FilterId", ParseCanId(idText).ToString("X", CultureInfo.InvariantCulture) }, { "ResultMode", "Information" } });
+            await RunMainTestAdvancedAsync("读取产品接收帧", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "ReceiveRaw" }, { "FilterId", ParseCanId(idText).ToString("X", CultureInfo.InvariantCulture) }, { "CanInstrument", "MAINCAN" }, { "ResultMode", "Information" } });
         }
         private async void InitializeResolver_Click(object sender, RoutedEventArgs e) { await RunMainTestAdvancedAsync("旋变初始化", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "RESOLVER" }, { "Operation", "Init" }, { "ResultMode", "Action" } }); }
         private async void SetResolverPolePairs_Click(object sender, RoutedEventArgs e)
@@ -2246,6 +2248,9 @@ namespace ManualCanDebug
             tools.Items.Add(MakeMenuItem("连接旋变 CAN", string.Empty, ConnectResolver_Click));
             tools.Items.Add(MakeMenuItem("连接 DCDC / 辅驱 CAN", string.Empty, ConnectAuxiliary_Click));
             tools.Items.Add(MakeMenuItem("断开全部 CAN", string.Empty, DisconnectAll_Click));
+            tools.Items.Add(new Separator());
+            tools.Items.Add(MakeMenuItem("进入 FT 模式", string.Empty, EnterFtMode_Click));
+            tools.Items.Add(MakeMenuItem("退出 FT 模式", string.Empty, ExitFtMode_Click));
             tools.Items.Add(new Separator());
             tools.Items.Add(MakeMenuItem("仪器与动作管理...", string.Empty, OpenInstrumentActionManager_Click));
             tools.Items.Add(MakeMenuItem("仪器中心", string.Empty, (s, e) => OpenAdvancedTool(_instrumentCenterTab)));

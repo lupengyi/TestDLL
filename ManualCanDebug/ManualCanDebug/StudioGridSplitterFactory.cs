@@ -33,7 +33,7 @@ namespace ManualCanDebug
 
     internal static class StudioDragDropGuard
     {
-        private const double IntentionalDistance = 10d;
+        private const double IntentionalDistance = 6d;
 
         public static bool HasMovedEnough(Point start, Point current)
         {

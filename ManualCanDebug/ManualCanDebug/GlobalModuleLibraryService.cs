@@ -19,6 +19,7 @@ namespace ManualCanDebug
             Directory.CreateDirectory(Path.Combine(_root, "Custom"));
             EnsureFaultClearStandardBlock();
             EnsureDriveReadStandardBlocks();
+            EnsureExitFtStandardBlock();
         }
         public static bool IsReusable(FunctionBlockDefinition block) { return block != null && !string.Equals(block.ModuleKind, "Custom", StringComparison.OrdinalIgnoreCase); }
         public static void Save(FunctionBlockDefinition block)
@@ -194,6 +195,39 @@ namespace ManualCanDebug
                 Id = id, Name = name, Category = "主驱", ModuleKind = "Standard", Version = "1.0", Description = description,
                 IsStandard = true, SupportedProducts = new List<string> { "C92", "C96" }
             };
+        }
+
+        private static void EnsureExitFtStandardBlock()
+        {
+            const string id = "c96-std-exit-ft";
+            string path = Path.Combine(_root, "Standard", id + ".json");
+            FunctionBlockDefinition block = new FunctionBlockDefinition
+            {
+                Id = id,
+                Name = "产品退出FT模式",
+                Category = "公共准备",
+                ModuleKind = "Standard",
+                Version = "1.0",
+                Description = "UDS 写 DID EEEE = FF FF FF FF 解锁并退出 FT（与进入 FT 的 AA 55 AA 55 对应）。",
+                IsStandard = true,
+                SupportedProducts = new List<string> { "C92", "C96" }
+            };
+            block.Steps.Add(new BlockStepDefinition
+            {
+                StepProperties = new Dictionary<string, object>(StringComparer.Ordinal)
+                {
+                    { "StepName", "产品基础命令 退出FT模式" },
+                    { "RunMode", "Normal" },
+                    { "FunctionName", "FCT_ExecuteAction" },
+                    { "RecordingLog", false },
+                    { "ResultMode", "Action" },
+                    { "Device", "PRODUCTCAN" },
+                    { "Operation", "ExitFT" },
+                    { "CanInstrument", "MAINCAN" }
+                }
+            });
+            // Always refresh so older placeholder / missing ExitFT modules pick up the confirmed UDS unlock path.
+            Save(block);
         }
     }
 }

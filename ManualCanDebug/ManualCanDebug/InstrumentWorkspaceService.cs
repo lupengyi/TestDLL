@@ -293,7 +293,7 @@ namespace ManualCanDebug
             switch ((device ?? string.Empty).ToUpperInvariant())
             {
                 case "LVDC": case "LVDC_KL15": case "HVDC": return CategoryPower;
-                case "DUTCAN": case "AUXCAN": case "RESOLVERCAN": case "RESOLVER": case "PRODUCTCAN": return CategoryCommunication;
+                case "DUTCAN": case "MAINCAN": case "AUXCAN": case "RESOLVERCAN": case "RESOLVER": case "PRODUCTCAN": return CategoryCommunication;
                 case "DMM": case "DMM_HV": case "DMM_LV": case "DAQ": return CategoryMeasurement;
                 case "RELAY": case "RELAY_FCT": case "RELAY_HVMUX": return CategorySwitching;
                 case "DCDC_LOAD": case "RES": case "RES_1": case "RES_2": case "RES_3": return CategoryLoad;
@@ -542,7 +542,7 @@ namespace ManualCanDebug
         {
             switch (device)
             {
-                case "DUTCAN": case "AUXCAN": case "RESOLVERCAN": return "Instruments.CAN.CANWrapper";
+                case "DUTCAN": case "MAINCAN": case "AUXCAN": case "RESOLVERCAN": return "Instruments.CAN.CANWrapper";
                 case "LVDC": case "LVDC_KL15": return "Instruments.PowerSupply.ITECH_IT6XXXC";
                 case "HVDC": return "Instruments.PowerSupply.Kewell_C3000";
                 case "DMM": case "DMM_HV": case "DMM_LV": return "Instruments.DMM.KeySight34461A";
@@ -594,6 +594,7 @@ namespace ManualCanDebug
                 if (string.IsNullOrWhiteSpace(instrument.Category)) instrument.Category = ClassifyDevice(instrument.Device, instrument.DriverName);
                 if (instrument.LockTimeoutMs <= 0) instrument.LockTimeoutMs = 30000;
                 instrument.GeneratedMethods = instrument.GeneratedMethods ?? CreateMethods(instrument.Device, instrument.DisplayName);
+                foreach (GeneratedInstrumentMethod required in CreateMethods(instrument.Device, instrument.DisplayName)) if (!instrument.GeneratedMethods.Any(value => string.Equals(value.Operation, required.Operation, StringComparison.OrdinalIgnoreCase))) instrument.GeneratedMethods.Add(required);
                 foreach (GeneratedInstrumentMethod method in instrument.GeneratedMethods) method.Fields = method.Fields ?? new List<InstrumentActionFieldDefinition>();
             }
             document.StationCount = Math.Max(1, Math.Min(12, document.StationCount));

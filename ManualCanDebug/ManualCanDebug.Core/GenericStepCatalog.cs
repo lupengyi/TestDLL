@@ -20,9 +20,10 @@ namespace ManualCanDebug.Core
             Add(steps, "DMM 配置直流电流", "DMM", "ConfigDCCurrent", new Dictionary<string, object> { { "Range", 3.0 }, { "Solution", 0.00001 } });
             AddRead(steps, "DMM 读取", "DMM", "Read", string.Empty);
             AddRead(steps, "DAQ 读取", "DAQ", "Read", "A", new Dictionary<string, object> { { "Channel", 0 }, { "Scale", 22.058823529 }, { "Offset", 0.0 } });
-            Add(steps, "产品进入FT", "PRODUCTCAN", "EnterFT", new Dictionary<string, object>());
-            Add(steps, "产品通信初始化", "PRODUCTCAN", "CommunicationInit", new Dictionary<string, object> { { "TxID", "2030" }, { "RxID", "2031" } });
-            Add(steps, "产品唤醒", "PRODUCTCAN", "Wakeup", new Dictionary<string, object>());
+            Add(steps, "产品进入FT", "PRODUCTCAN", "EnterFT", new Dictionary<string, object> { { "CanInstrument", "MAINCAN" } });
+            Add(steps, "产品退出FT", "PRODUCTCAN", "ExitFT", new Dictionary<string, object> { { "CanInstrument", "MAINCAN" } });
+            Add(steps, "产品通信初始化", "PRODUCTCAN", "CommunicationInit", new Dictionary<string, object> { { "TxID", "7EE" }, { "RxID", "7EF" }, { "CanInstrument", "DUTCAN" } });
+            Add(steps, "产品唤醒", "PRODUCTCAN", "Wakeup", new Dictionary<string, object> { { "CanInstrument", "MAINCAN" } });
             Add(steps, "辅助CAN DBC发送", "AUXCAN", "SendDbcSignals", new Dictionary<string, object> { { "MessageName", "VCU1_DCDC_OilPump_Cmd" }, { "SignalsJson", "{}" } });
             Add(steps, "辅助CAN DBC周期发送启动", "AUXCAN", "StartPeriodicDbc", new Dictionary<string, object> { { "MessageName", "VCU1_DCDC_OilPump_Cmd" }, { "PeriodicKey", "VCU1_DCDC_OilPump_Cmd" }, { "PeriodMs", 100 }, { "SignalsJson", "{}" } });
             Add(steps, "辅助CAN DBC周期发送停止", "AUXCAN", "StopPeriodicDbc", new Dictionary<string, object> { { "PeriodicKey", "VCU1_DCDC_OilPump_Cmd" } });

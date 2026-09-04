@@ -233,7 +233,7 @@ namespace ManualCanDebug
             _productSignalGrid.Columns.Add(new DataGridTextColumn { Header = "单位", Binding = new Binding("Unit"), Width = 85, IsReadOnly = true });
             _productSignalGrid.Columns.Add(new DataGridTextColumn { Header = "读写", Binding = new Binding("Access"), Width = 75, IsReadOnly = true });
             _productSignalGrid.Columns.Add(new DataGridTextColumn { Header = "Locator Comment", Binding = new Binding("Comment"), Width = new DataGridLength(2.5, DataGridLengthUnitType.Star), IsReadOnly = true });
-            _tableChangeColumn = new DataGridCheckBoxColumn { Header = "修改", Binding = new Binding("SelectedForWrite") { UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged }, Width = 55, Visibility = Visibility.Collapsed };
+            _tableChangeColumn = DataGridCheckHelpers.BoundCheckColumn("修改", "SelectedForWrite", 55); _tableChangeColumn.Visibility = Visibility.Collapsed;
             _tableValueColumn = new DataGridTextColumn { Header = "整表设定值", Binding = new Binding("ValueText") { UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged }, Width = 110, Visibility = Visibility.Collapsed };
             _productSignalGrid.Columns.Insert(0, _tableChangeColumn);
             _productSignalGrid.Columns.Insert(7, _tableValueColumn);
