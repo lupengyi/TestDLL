@@ -261,21 +261,13 @@ namespace CSP
         public double ProcessCleanup()
         {
             if (_fctInitializedInstrumentNames.Count > 0) return FCT_CleanupConfiguredInstrumentsCore();
-            try
-            {
-                MyCAN.CloseCANDevice();
-                Resolver.CloseCANDevice();
-                LVDC.DisconnectDevice();
-                LVDC_KL15.DisconnectDevice();
-                HVDC.DisconnectDevice();
-                //DMM.CloseSession();
-                //MOXA.DisConnect();
-            }
-            catch (Exception ex)
-            {
-
-            }
-            
+            // ProcessCleanup may be called once by an explicit safe shutdown and again from Dispose.
+            // Keep the legacy path idempotent so already released instruments do not raise first-chance NREs.
+            try { if (MyCAN != null) MyCAN.CloseCANDevice(); } catch { }
+            try { if (Resolver != null) Resolver.CloseCANDevice(); } catch { }
+            try { if (LVDC != null) LVDC.DisconnectDevice(); } catch { }
+            try { if (LVDC_KL15 != null) LVDC_KL15.DisconnectDevice(); } catch { }
+            try { if (HVDC != null) HVDC.DisconnectDevice(); } catch { }
             return 0;
         }
 
