@@ -10,16 +10,24 @@ namespace CSP
         private TcpClient _client;
         private NetworkStream _stream;
         private ushort _transaction;
+        private string _address;
+        private ushort _port;
         public byte SlaveAddress { get; set; } = 1;
 
         public void Connect(string address, ushort port, string ignoredMode)
         {
-            Disconnect(); TcpClient client = new TcpClient(); IAsyncResult pending = client.BeginConnect(address, port, null, null); if (!pending.AsyncWaitHandle.WaitOne(2000)) { client.Close(); throw new TimeoutException("继电器板连接超时：" + address + ":" + port); } client.EndConnect(pending); client.ReceiveTimeout = 2000; client.SendTimeout = 2000; _client = client; _stream = client.GetStream();
+            _address = address; _port = port; OpenConnection();
         }
 
-        public void Disconnect()
+        private void OpenConnection()
         {
-            try { if (_stream != null) _stream.Dispose(); } finally { _stream = null; if (_client != null) _client.Close(); _client = null; }
+            Disconnect(false); TcpClient client = new TcpClient(); IAsyncResult pending = client.BeginConnect(_address, _port, null, null); if (!pending.AsyncWaitHandle.WaitOne(2000)) { client.Close(); throw new TimeoutException("继电器板连接超时：" + _address + ":" + _port); } client.EndConnect(pending); client.ReceiveTimeout = 2000; client.SendTimeout = 2000; _client = client; _stream = client.GetStream();
+        }
+
+        public void Disconnect() { Disconnect(true); }
+        private void Disconnect(bool clearEndpoint)
+        {
+            try { if (_stream != null) _stream.Dispose(); } finally { _stream = null; if (_client != null) _client.Close(); _client = null; if (clearEndpoint) { _address = null; _port = 0; } }
         }
 
         public void WriteDO(string channels, string values)
@@ -38,8 +46,14 @@ namespace CSP
 
         private void WriteSingleCoil(ushort channel, bool enabled)
         {
-            if (_stream == null || _client == null || !_client.Connected) throw new InvalidOperationException("继电器板尚未连接。"); ushort transaction = unchecked(++_transaction); byte[] request = { (byte)(transaction >> 8), (byte)transaction, 0, 0, 0, 6, SlaveAddress, 5, (byte)(channel >> 8), (byte)channel, enabled ? (byte)0xFF : (byte)0, 0 }; _stream.Write(request, 0, request.Length); byte[] response = new byte[12]; int read = 0; while (read < response.Length) { int count = _stream.Read(response, read, response.Length - read); if (count <= 0) throw new InvalidOperationException("继电器板连接已关闭。"); read += count; } if (response[0] != request[0] || response[1] != request[1] || response[7] != 5 || response[8] != request[8] || response[9] != request[9]) throw new InvalidOperationException("继电器板返回了无效的Modbus响应。");
+            try { WriteSingleCoilCore(channel, enabled); }
+            catch (Exception first) when (first is System.IO.IOException || first is SocketException || first is InvalidOperationException)
+            {
+                if (string.IsNullOrWhiteSpace(_address) || _port == 0) throw; try { OpenConnection(); WriteSingleCoilCore(channel, enabled); } catch (Exception retry) { throw new InvalidOperationException("继电器板写入失败，自动重连重试仍未成功。", new AggregateException(first, retry)); }
+            }
         }
+
+        private void WriteSingleCoilCore(ushort channel, bool enabled) { if (_stream == null || _client == null || !_client.Connected) throw new InvalidOperationException("继电器板尚未连接。"); ushort transaction = unchecked(++_transaction); byte[] request = { (byte)(transaction >> 8), (byte)transaction, 0, 0, 0, 6, SlaveAddress, 5, (byte)(channel >> 8), (byte)channel, enabled ? (byte)0xFF : (byte)0, 0 }; _stream.Write(request, 0, request.Length); byte[] response = new byte[12]; int read = 0; while (read < response.Length) { int count = _stream.Read(response, read, response.Length - read); if (count <= 0) throw new InvalidOperationException("继电器板连接已关闭。"); read += count; } if (response[0] != request[0] || response[1] != request[1] || response[7] != 5 || response[8] != request[8] || response[9] != request[9]) throw new InvalidOperationException("继电器板返回了无效的Modbus响应。"); }
 
         private static ushort ParseChannel(string text)
         {

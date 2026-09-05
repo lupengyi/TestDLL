@@ -167,7 +167,7 @@ namespace CSP
             if (_fctInitializedInstrumentNames.Contains("LVDC_KL15")) try { LVDC_KL15.SetOutput(false); } catch { }
             if (_fctInitializedInstrumentNames.Contains("DCDC_LOAD") && DcdcLoad != null) try { DcdcLoad.LoadOff(); } catch { }
             if (_fctInitializedInstrumentNames.Contains("RELAY_FCT")) try { RelayFctBoard.WriteDO(string.Join(",", Enumerable.Range(0, 48)), string.Join(",", Enumerable.Repeat("0", 48))); } catch { }
-            if (_fctInitializedInstrumentNames.Contains("RELAY_HVMUX")) try { RelayHvMux.WriteDO(string.Join(",", Enumerable.Range(1, 15).Select(index => "OUT" + index)), string.Join(",", Enumerable.Repeat("0", 15))); } catch { }
+            if (_fctInitializedInstrumentNames.Contains("RELAY_HVMUX")) try { RelayHvMux.WriteDO(string.Join(",", Enumerable.Range(1, 15).Select(index => "OUT" + index)), string.Join(",", Enumerable.Repeat("1", 15))); } catch { }
             return 0;
         }
 
@@ -481,8 +481,13 @@ namespace CSP
             string[] valueTexts = FCT_InputString(socketIndex, "Values", FCT_InputString(socketIndex, "Value", "0")).Split(new[] { ',', ';', '|' }, StringSplitOptions.RemoveEmptyEntries);
             if (channelTexts.Length == 0 || channelTexts.Length != valueTexts.Length) throw new InvalidOperationException("Relay channels and values must have the same non-zero count.");
             if (ReferenceEquals(board, RelayHvMux)) foreach (string channelText in channelTexts) { string normalized = channelText.Trim().ToUpperInvariant().Replace("OUT", string.Empty); int channel; if (!int.TryParse(normalized, NumberStyles.Integer, CultureInfo.InvariantCulture, out channel) || channel < 1 || channel > 15) throw new ArgumentOutOfRangeException("Channels", "高压继电器卡只允许OUT1到OUT15。"); }
-            board.WriteDO(string.Join(",", channelTexts), string.Join(",", valueTexts));
+            // 两块板协议相同，但高压继电器输出为低有效。SEQ与UI统一保持0=关、1=开，
+            // 仅在物理适配边界反相，避免用户、模块和平台出现两套含义。
+            string[] physicalValues = ReferenceEquals(board, RelayHvMux) ? valueTexts.Select(InvertRelayValue).ToArray() : valueTexts;
+            board.WriteDO(string.Join(",", channelTexts), string.Join(",", physicalValues));
         }
+
+        private static string InvertRelayValue(string value) { string normalized = (value ?? string.Empty).Trim(); bool logicalOn = normalized == "1" || normalized.Equals("true", StringComparison.OrdinalIgnoreCase) || normalized.Equals("on", StringComparison.OrdinalIgnoreCase); return logicalOn ? "0" : "1"; }
 
         private static int FCT_SelectedPortAt(string parameter, int fallback)
         {
@@ -1359,7 +1364,7 @@ namespace CSP
             try { if (_fctCalibrationCan != null) _fctCalibrationCan.CloseCANDevice(); } catch { } _fctCalibrationCan = null;
             try { if (_fctResolver2Can != null) _fctResolver2Can.CloseCANDevice(); } catch { } _fctResolver2Can = null;
             try { RelayFctBoard.WriteDO("0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15", "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"); } catch { }
-            try { RelayHvMux.WriteDO("0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15", "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"); } catch { }
+            try { RelayHvMux.WriteDO("OUT1,OUT2,OUT3,OUT4,OUT5,OUT6,OUT7,OUT8,OUT9,OUT10,OUT11,OUT12,OUT13,OUT14,OUT15", "1,1,1,1,1,1,1,1,1,1,1,1,1,1,1"); } catch { }
             foreach (ushort channel in new ushort[] { 0, 4, 8, 12 }) try { Relay.WriteSingleCoil(1, channel, false); } catch { }
             foreach (object plugin in _fctActionPlugins.Values) { try { MethodInfo shutdown = plugin.GetType().GetMethod("SafeShutdown", Type.EmptyTypes); if (shutdown != null) shutdown.Invoke(plugin, null); } catch { } try { IDisposable disposable = plugin as IDisposable; if (disposable != null) disposable.Dispose(); } catch { } } _fctActionPlugins.Clear();
         }
