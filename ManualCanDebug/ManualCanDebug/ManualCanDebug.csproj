@@ -145,6 +145,10 @@
 
   <ItemGroup>
     <PackageReference Include="NodeNetwork" Version="6.0.0" />
+    <Content Include="..\..\ModuleLibrary\Standard\hvmux15-*.json">
+      <Link>ModuleLibrary\Standard\%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Target Name="CopyLegacyKernelFiles" AfterTargets="Build">
     <Copy SourceFiles="@(LegacyKernelFile)" DestinationFiles="@(LegacyKernelFile->'$(OutDir)LegacyRuntime\kerneldlls\%(RecursiveDir)%(Filename)%(Extension)')" SkipUnchangedFiles="true" />

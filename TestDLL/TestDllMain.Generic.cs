@@ -511,10 +511,8 @@ namespace CSP
             string[] valueTexts = FCT_InputString(socketIndex, "Values", FCT_InputString(socketIndex, "Value", "0")).Split(new[] { ',', ';', '|' }, StringSplitOptions.RemoveEmptyEntries);
             if (channelTexts.Length == 0 || channelTexts.Length != valueTexts.Length) throw new InvalidOperationException("Relay channels and values must have the same non-zero count.");
             if (ReferenceEquals(board, RelayHvMux)) foreach (string channelText in channelTexts) { string normalized = channelText.Trim().ToUpperInvariant().Replace("OUT", string.Empty); int channel; if (!int.TryParse(normalized, NumberStyles.Integer, CultureInfo.InvariantCulture, out channel) || channel < 1 || channel > 15) throw new ArgumentOutOfRangeException("Channels", "高压继电器卡只允许OUT1到OUT15。"); }
-            // 两块板协议相同，但高压继电器输出为低有效。SEQ与UI统一保持0=关、1=开，
-            // 仅在物理适配边界反相，避免用户、模块和平台出现两套含义。
-            string[] physicalValues = ReferenceEquals(board, RelayHvMux) ? valueTexts.Select(InvertRelayValue).ToArray() : valueTexts;
-            board.WriteDO(string.Join(",", channelTexts), string.Join(",", physicalValues));
+            // OUT1..4为地址位，OUT5/6为使能/保持。按原厂电平直写：1=高，0=低。
+            board.WriteDO(string.Join(",", channelTexts), string.Join(",", valueTexts));
         }
 
         private static string InvertRelayValue(string value) { string normalized = (value ?? string.Empty).Trim(); bool logicalOn = normalized == "1" || normalized.Equals("true", StringComparison.OrdinalIgnoreCase) || normalized.Equals("on", StringComparison.OrdinalIgnoreCase); return logicalOn ? "0" : "1"; }

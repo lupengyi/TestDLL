@@ -1,0 +1,61 @@
+{
+  "Id": "hvmux15-15",
+  "Name": "高压15选1 开启HV15 battery2（电池加热2）",
+  "Category": "高压15选1",
+  "ModuleKind": "Standard",
+  "Version": "1.0",
+  "Description": "电平1=高、0=低。OUT1..4=A0..A3；OUT5=E；OUT6=LE。先E/LE置高，再完整写地址，最后E置低。",
+  "IsStandard": true,
+  "SupportedProducts": [],
+  "Parameters": [],
+  "Steps": [
+    {
+      "Id": "hvmux15-15-disable",
+      "Enabled": true,
+      "StepProperties": {
+        "StepName": "禁止输出并允许地址切换",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": false,
+        "Device": "RELAY_HVMUX",
+        "Operation": "SetDO",
+        "Channels": "OUT5,OUT6",
+        "Values": "1,1",
+        "ResultMode": "Action"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "hvmux15-15-address",
+      "Enabled": true,
+      "StepProperties": {
+        "StepName": "选择HV15 battery2（电池加热2）",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": false,
+        "Device": "RELAY_HVMUX",
+        "Operation": "SetDO",
+        "Channels": "OUT1,OUT2,OUT3,OUT4",
+        "Values": "1,1,1,1",
+        "ResultMode": "Action"
+      },
+      "ParameterBindings": {}
+    },
+    {
+      "Id": "hvmux15-15-enable",
+      "Enabled": true,
+      "StepProperties": {
+        "StepName": "使能选定输出",
+        "RunMode": "Normal",
+        "FunctionName": "FCT_ExecuteAction",
+        "RecordingLog": false,
+        "Device": "RELAY_HVMUX",
+        "Operation": "SetDO",
+        "Channels": "OUT5",
+        "Values": "0",
+        "ResultMode": "Action"
+      },
+      "ParameterBindings": {}
+    }
+  ]
+}
