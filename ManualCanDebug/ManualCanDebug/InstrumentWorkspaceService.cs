@@ -64,6 +64,9 @@ namespace ManualCanDebug
         public string FunctionName { get { return _functionName; } set { _functionName = value ?? string.Empty; Raise("FunctionName"); } }
         public List<InstrumentActionFieldDefinition> Fields { get; set; }
         public string ResultText { get { return Selected && !string.IsNullOrWhiteSpace(FunctionName) ? "生成成功" : "未生成"; } }
+        public string OriginalMethodName { get { return string.IsNullOrWhiteSpace(DriverMethod) ? Operation : DriverMethod; } }
+        public string ParameterSummary { get { return Fields == null || Fields.Count == 0 ? "无参数" : Fields.Count + " 个参数"; } }
+        public string ReturnSummary { get { return ReturnsValue ? "有返回值" : "无返回值"; } }
         public event PropertyChangedEventHandler PropertyChanged;
         private void Raise(string name) { PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name)); }
     }
@@ -387,7 +390,7 @@ namespace ManualCanDebug
                     definitions.Add(new InstrumentActionDefinition
                     {
                         Source = "仪器", Target = instrument.DisplayName, Device = method.Device, Operation = method.Operation,
-                        DisplayName = method.DisplayName, ReturnsValue = method.ReturnsValue, BindingMode = "MainTest",
+                        DisplayName = string.IsNullOrWhiteSpace(method.DisplayName) ? method.OriginalMethodName : method.DisplayName.Trim(), ReturnsValue = method.ReturnsValue, BindingMode = "MainTest",
                         FunctionName = SanitizeIdentifier(method.FunctionName), Fields = CloneFields(method.Fields)
                     });
                 }

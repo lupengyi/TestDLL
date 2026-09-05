@@ -46,7 +46,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetResistance",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         }
       ],
       "UsageText": "独立仪器（每工位1台）",
@@ -106,7 +109,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetVoltage",
+          "ParameterSummary": "1 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "HVDC",
@@ -129,7 +135,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetCurrent",
+          "ParameterSummary": "1 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "HVDC",
@@ -152,7 +161,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetOutput",
+          "ParameterSummary": "1 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "HVDC",
@@ -166,7 +178,10 @@
           "DisplayName": "读取电压",
           "FunctionName": "UI_HVDC_ReadVoltage",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ReadVoltage",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "有返回值"
         },
         {
           "Device": "HVDC",
@@ -180,7 +195,10 @@
           "DisplayName": "读取电流",
           "FunctionName": "UI_HVDC_ReadCurrent",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ReadCurrent",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "有返回值"
         },
         {
           "Device": "HVDC",
@@ -203,7 +221,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetPower",
+          "ParameterSummary": "1 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "HVDC",
@@ -217,7 +238,10 @@
           "DisplayName": "读取功率",
           "FunctionName": "UI_HVDC_ReadPower",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ReadPower",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "有返回值"
         }
       ],
       "UsageText": "独立仪器（每工位1台）",
@@ -259,7 +283,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetVoltage",
+          "ParameterSummary": "1 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "LVDC",
@@ -282,7 +309,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetCurrent",
+          "ParameterSummary": "1 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "LVDC",
@@ -305,7 +335,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetOutput",
+          "ParameterSummary": "1 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "LVDC",
@@ -319,7 +352,10 @@
           "DisplayName": "读取电压",
           "FunctionName": "UI_LVDC_ReadVoltage",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ReadVoltage",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "有返回值"
         },
         {
           "Device": "LVDC",
@@ -333,7 +369,10 @@
           "DisplayName": "读取电流",
           "FunctionName": "UI_LVDC_ReadCurrent",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ReadCurrent",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "有返回值"
         }
       ],
       "UsageText": "独立仪器（每工位1台）",
@@ -383,7 +422,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigDCVoltage",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM_HV",
@@ -414,7 +456,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigDCCurrent",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM_HV",
@@ -445,7 +490,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigACVoltage",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM_HV",
@@ -476,7 +524,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigACCurrent",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM_HV",
@@ -490,7 +541,10 @@
           "DisplayName": "读取测量值",
           "FunctionName": "UI_DMM_HV_Read",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "Read",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "有返回值"
         },
         {
           "Device": "DMM_HV",
@@ -504,7 +558,10 @@
           "DisplayName": "关闭会话",
           "FunctionName": "UI_DMM_HV_Close",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "Close",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM_HV",
@@ -518,7 +575,10 @@
           "DisplayName": "初始化万用表",
           "FunctionName": "UI_DMM_HV_Init",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "Init",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM_HV",
@@ -532,7 +592,10 @@
           "DisplayName": "复位万用表",
           "FunctionName": "UI_DMM_HV_Reset",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "Reset",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM_HV",
@@ -546,7 +609,10 @@
           "DisplayName": "读取设备信息",
           "FunctionName": "UI_DMM_HV_Identify",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "Identify",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "有返回值"
         },
         {
           "Device": "DMM_HV",
@@ -569,7 +635,10 @@
               "Options": "DCVoltage - 直流电压|DCCurrent - 直流电流|ACVoltage - 交流电压|ACCurrent - 交流电流|Resistance - 电阻|Frequence - 频率"
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigMeasure",
+          "ParameterSummary": "1 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM_HV",
@@ -600,7 +669,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigResistance",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM_HV",
@@ -631,7 +703,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigFrequency",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM_HV",
@@ -645,7 +720,10 @@
           "DisplayName": "配置最大值计算",
           "FunctionName": "UI_DMM_HV_ConfigCalculateMaximum",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigCalculateMaximum",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "无返回值"
         }
       ],
       "UsageText": "独立仪器（每工位1台）",
@@ -703,7 +781,10 @@
               "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16"
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetDO",
+          "ParameterSummary": "3 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "RELAY_FCT",
@@ -742,7 +823,10 @@
               "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16"
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SelectFctMux",
+          "ParameterSummary": "3 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "RELAY_FCT",
@@ -773,7 +857,10 @@
               "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16"
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "DisableFctMux",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         }
       ],
       "UsageText": "独立仪器（每工位1台）",
@@ -831,7 +918,10 @@
               "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16"
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "Select15",
+          "ParameterSummary": "3 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "RELAY_HVMUX",
@@ -862,7 +952,10 @@
               "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16"
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "Disable15",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "RELAY_HVMUX",
@@ -893,7 +986,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetDO",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         }
       ],
       "UsageText": "独立仪器（每工位1台）",
@@ -935,7 +1031,10 @@
               "Options": "Ccl|Ccm|Cch|Cvl|Cvm|Cvh|Crl|Crm|Crh|Cpl|Cpm|Cph"
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetMode",
+          "ParameterSummary": "1 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DCDC_LOAD",
@@ -958,7 +1057,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetCurrent",
+          "ParameterSummary": "1 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DCDC_LOAD",
@@ -981,7 +1083,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetVoltage",
+          "ParameterSummary": "1 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DCDC_LOAD",
@@ -1004,7 +1109,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetResistance",
+          "ParameterSummary": "1 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DCDC_LOAD",
@@ -1027,7 +1135,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetPower",
+          "ParameterSummary": "1 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DCDC_LOAD",
@@ -1041,7 +1152,10 @@
           "DisplayName": "负载输入开",
           "FunctionName": "UI_DCDC_LOAD_OutputOn",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "OutputOn",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DCDC_LOAD",
@@ -1055,7 +1169,10 @@
           "DisplayName": "负载输入关",
           "FunctionName": "UI_DCDC_LOAD_OutputOff",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "OutputOff",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DCDC_LOAD",
@@ -1069,7 +1186,10 @@
           "DisplayName": "读取电压",
           "FunctionName": "UI_DCDC_LOAD_ReadVoltage",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ReadVoltage",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "有返回值"
         },
         {
           "Device": "DCDC_LOAD",
@@ -1083,7 +1203,10 @@
           "DisplayName": "读取电流",
           "FunctionName": "UI_DCDC_LOAD_ReadCurrent",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ReadCurrent",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "有返回值"
         },
         {
           "Device": "DCDC_LOAD",
@@ -1097,7 +1220,10 @@
           "DisplayName": "读取功率",
           "FunctionName": "UI_DCDC_LOAD_ReadPower",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ReadPower",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "有返回值"
         },
         {
           "Device": "DCDC_LOAD",
@@ -1111,7 +1237,10 @@
           "DisplayName": "读取保护状态",
           "FunctionName": "UI_DCDC_LOAD_ReadProtection",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ReadProtection",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "有返回值"
         },
         {
           "Device": "DCDC_LOAD",
@@ -1125,7 +1254,10 @@
           "DisplayName": "清除保护",
           "FunctionName": "UI_DCDC_LOAD_ClearProtection",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ClearProtection",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DCDC_LOAD",
@@ -1139,7 +1271,10 @@
           "DisplayName": "复位",
           "FunctionName": "UI_DCDC_LOAD_Reset",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "Reset",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "无返回值"
         }
       ],
       "UsageText": "独立仪器（每工位1台）",
@@ -1233,7 +1368,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "Read",
+          "ParameterSummary": "3 个参数",
+          "ReturnSummary": "有返回值"
         }
       ],
       "UsageText": "独立仪器（每工位1台）",
@@ -1266,7 +1404,10 @@
           "DisplayName": "写入完成信号",
           "FunctionName": "UI_PLC_LoadFinished",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "LoadFinished",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "无返回值"
         }
       ],
       "UsageText": "共用仪器",
@@ -1308,7 +1449,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetVoltage",
+          "ParameterSummary": "1 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "LVDC_KL15",
@@ -1331,7 +1475,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetCurrent",
+          "ParameterSummary": "1 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "LVDC_KL15",
@@ -1354,7 +1501,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetOutput",
+          "ParameterSummary": "1 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "LVDC_KL15",
@@ -1368,7 +1518,10 @@
           "DisplayName": "读取电压",
           "FunctionName": "UI_LVDC_KL15_ReadVoltage",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ReadVoltage",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "有返回值"
         },
         {
           "Device": "LVDC_KL15",
@@ -1382,7 +1535,10 @@
           "DisplayName": "读取电流",
           "FunctionName": "UI_LVDC_KL15_ReadCurrent",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ReadCurrent",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "有返回值"
         }
       ],
       "UsageText": "独立仪器（每工位1台）",
@@ -1432,7 +1588,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigDCVoltage",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM_LV",
@@ -1463,7 +1622,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigDCCurrent",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM_LV",
@@ -1494,7 +1656,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigACVoltage",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM_LV",
@@ -1525,7 +1690,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigACCurrent",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM_LV",
@@ -1539,7 +1707,10 @@
           "DisplayName": "读取测量值",
           "FunctionName": "UI_DMM_LV_Read",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "Read",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "有返回值"
         },
         {
           "Device": "DMM_LV",
@@ -1553,7 +1724,10 @@
           "DisplayName": "关闭会话",
           "FunctionName": "UI_DMM_LV_Close",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "Close",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM_LV",
@@ -1567,7 +1741,10 @@
           "DisplayName": "初始化万用表",
           "FunctionName": "UI_DMM_LV_Init",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "Init",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM_LV",
@@ -1581,7 +1758,10 @@
           "DisplayName": "复位万用表",
           "FunctionName": "UI_DMM_LV_Reset",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "Reset",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM_LV",
@@ -1595,7 +1775,10 @@
           "DisplayName": "读取设备信息",
           "FunctionName": "UI_DMM_LV_Identify",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "Identify",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "有返回值"
         },
         {
           "Device": "DMM_LV",
@@ -1618,7 +1801,10 @@
               "Options": "DCVoltage - 直流电压|DCCurrent - 直流电流|ACVoltage - 交流电压|ACCurrent - 交流电流|Resistance - 电阻|Frequence - 频率"
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigMeasure",
+          "ParameterSummary": "1 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM_LV",
@@ -1649,7 +1835,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigResistance",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM_LV",
@@ -1680,7 +1869,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigFrequency",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM_LV",
@@ -1694,7 +1886,10 @@
           "DisplayName": "配置最大值计算",
           "FunctionName": "UI_DMM_LV_ConfigCalculateMaximum",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigCalculateMaximum",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "无返回值"
         }
       ],
       "UsageText": "独立仪器（每工位1台）",
@@ -1744,7 +1939,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetResistance",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         }
       ],
       "UsageText": "独立仪器（每工位1台）",
@@ -1794,7 +1992,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetResistance",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         }
       ],
       "UsageText": "独立仪器（每工位1台）",
@@ -1862,7 +2063,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SendRaw",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "有返回值"
         },
         {
           "Device": "CALIBRATIONCAN",
@@ -1885,7 +2089,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ReceiveRaw",
+          "ParameterSummary": "1 个参数",
+          "ReturnSummary": "有返回值"
         },
         {
           "Device": "CALIBRATIONCAN",
@@ -1924,7 +2131,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SendDbcSignal",
+          "ParameterSummary": "3 个参数",
+          "ReturnSummary": "无返回值"
         }
       ],
       "UsageText": "独立仪器（每工位1台）",
@@ -1974,7 +2184,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SendRaw",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "有返回值"
         },
         {
           "Device": "RESOLVERCAN2",
@@ -1997,7 +2210,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ReceiveRaw",
+          "ParameterSummary": "1 个参数",
+          "ReturnSummary": "有返回值"
         },
         {
           "Device": "RESOLVERCAN2",
@@ -2036,7 +2252,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SendDbcSignal",
+          "ParameterSummary": "3 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "RESOLVERCAN2",
@@ -2050,7 +2269,10 @@
           "DisplayName": "DBC表格配置",
           "FunctionName": "UI_RESOLVERCAN2_ConfigureDbc",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigureDbc",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "RESOLVERCAN2",
@@ -2064,7 +2286,10 @@
           "DisplayName": "初始化",
           "FunctionName": "UI_RESOLVERCAN2_Init",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "Init",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "RESOLVERCAN2",
@@ -2087,7 +2312,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetPolePairs",
+          "ParameterSummary": "1 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "RESOLVERCAN2",
@@ -2118,7 +2346,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetSpeed",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "RESOLVERCAN2",
@@ -2149,7 +2380,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetPosition",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "RESOLVERCAN2",
@@ -2163,7 +2397,10 @@
           "DisplayName": "停止",
           "FunctionName": "UI_RESOLVERCAN2_Stop",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "Stop",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "无返回值"
         }
       ],
       "UsageText": "独立仪器（每工位1台）",
@@ -2213,7 +2450,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "SetResistance",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         }
       ],
       "UsageText": "独立仪器（每工位1台）",
@@ -2263,7 +2503,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigDCVoltage",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM",
@@ -2294,7 +2537,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigDCCurrent",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM",
@@ -2325,7 +2571,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigACVoltage",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM",
@@ -2356,7 +2605,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigACCurrent",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM",
@@ -2370,7 +2622,10 @@
           "DisplayName": "读取测量值",
           "FunctionName": "UI_DMM_Read",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "Read",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "有返回值"
         },
         {
           "Device": "DMM",
@@ -2384,7 +2639,10 @@
           "DisplayName": "关闭会话",
           "FunctionName": "UI_DMM_Close",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "Close",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM",
@@ -2398,7 +2656,10 @@
           "DisplayName": "初始化万用表",
           "FunctionName": "UI_DMM_Init",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "Init",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM",
@@ -2412,7 +2673,10 @@
           "DisplayName": "复位万用表",
           "FunctionName": "UI_DMM_Reset",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "Reset",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM",
@@ -2426,7 +2690,10 @@
           "DisplayName": "读取设备信息",
           "FunctionName": "UI_DMM_Identify",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "Identify",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "有返回值"
         },
         {
           "Device": "DMM",
@@ -2449,7 +2716,10 @@
               "Options": "DCVoltage - 直流电压|DCCurrent - 直流电流|ACVoltage - 交流电压|ACCurrent - 交流电流|Resistance - 电阻|Frequence - 频率"
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigMeasure",
+          "ParameterSummary": "1 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM",
@@ -2480,7 +2750,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigResistance",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM",
@@ -2511,7 +2784,10 @@
               "Options": ""
             }
           ],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigFrequency",
+          "ParameterSummary": "2 个参数",
+          "ReturnSummary": "无返回值"
         },
         {
           "Device": "DMM",
@@ -2525,7 +2801,10 @@
           "DisplayName": "配置最大值计算",
           "FunctionName": "UI_DMM_ConfigCalculateMaximum",
           "Fields": [],
-          "ResultText": "生成成功"
+          "ResultText": "生成成功",
+          "OriginalMethodName": "ConfigCalculateMaximum",
+          "ParameterSummary": "无参数",
+          "ReturnSummary": "无返回值"
         }
       ],
       "UsageText": "独立仪器（每工位1台）",

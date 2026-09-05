@@ -288,18 +288,7 @@ namespace ManualCanDebug
             AddLabel(fields, "驱动类型", 2, 0); TextBox driverType = FlatText(string.IsNullOrWhiteSpace(item.DriverTypeName) ? item.DriverName : item.DriverTypeName); driverType.IsReadOnly = true; driverType.Background = Bg(246, 248, 251); AddControl(fields, driverType, 2, 1);
             Grid.SetRow(fields, 1); root.Children.Add(fields);
 
-            StackPanel methods = new StackPanel { Margin = new Thickness(0, 10, 0, 0) };
-            methods.Children.Add(new TextBlock { Text = "选择要生成的方法", FontWeight = FontWeights.SemiBold, Foreground = Ink(), Margin = new Thickness(0, 0, 0, 6) });
-            foreach (GeneratedInstrumentMethod method in item.GeneratedMethods.OrderBy(m => m.DisplayName, StringComparer.OrdinalIgnoreCase))
-            {
-                GeneratedInstrumentMethod current = method;
-                CheckBox check = new CheckBox { Content = current.DisplayName, IsChecked = current.Selected, Margin = new Thickness(2, 3, 0, 3), Foreground = Ink() };
-                check.Checked += delegate { current.Selected = true; RefreshGeneratedMethodPanel(); };
-                check.Unchecked += delegate { current.Selected = false; RefreshGeneratedMethodPanel(); };
-                methods.Children.Add(check);
-            }
-            ScrollViewer methodScroll = new ScrollViewer { Content = methods, VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled };
-            Grid.SetRow(methodScroll, 2); root.Children.Add(methodScroll);
+            Grid methods = new Grid { Margin = new Thickness(0, 10, 0, 0) }; methods.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto }); methods.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) }); methods.Children.Add(new TextBlock { Text = "选择要生成的方法；原始方法名用于绑定驱动，SEQ显示名称可自定义并用于右键新增STEP。", FontWeight = FontWeights.SemiBold, Foreground = Ink(), Margin = new Thickness(0, 0, 0, 6) }); DataGrid methodGrid = new DataGrid { ItemsSource = item.GeneratedMethods.OrderBy(value => value.OriginalMethodName, StringComparer.OrdinalIgnoreCase).ToList(), AutoGenerateColumns = false, CanUserAddRows = false, CanUserDeleteRows = false, RowHeight = 32, ColumnHeaderHeight = 34, BorderBrush = BorderBrush(), GridLinesVisibility = DataGridGridLinesVisibility.Horizontal, SelectionUnit = DataGridSelectionUnit.FullRow }; methodGrid.Columns.Add(DataGridCheckHelpers.BoundCheckColumn("开放", "Selected", 60, null, (s, e) => RefreshGeneratedMethodPanel())); methodGrid.Columns.Add(new DataGridTextColumn { Header = "原始函数名（只读）", Binding = new System.Windows.Data.Binding("OriginalMethodName"), Width = new DataGridLength(1.4, DataGridLengthUnitType.Star), IsReadOnly = true }); methodGrid.Columns.Add(new DataGridTextColumn { Header = "SEQ右键显示名称（可编辑）", Binding = new System.Windows.Data.Binding("DisplayName") { Mode = System.Windows.Data.BindingMode.TwoWay, UpdateSourceTrigger = System.Windows.Data.UpdateSourceTrigger.PropertyChanged }, Width = new DataGridLength(1.6, DataGridLengthUnitType.Star) }); methodGrid.Columns.Add(new DataGridTextColumn { Header = "参数", Binding = new System.Windows.Data.Binding("ParameterSummary"), Width = 90, IsReadOnly = true }); methodGrid.Columns.Add(new DataGridTextColumn { Header = "返回值", Binding = new System.Windows.Data.Binding("ReturnSummary"), Width = 90, IsReadOnly = true }); Grid.SetRow(methodGrid, 1); methods.Children.Add(methodGrid); Grid.SetRow(methods, 2); root.Children.Add(methods);
 
             StackPanel buttons = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right, Margin = new Thickness(0, 10, 0, 0) };
             Button save = Secondary("保存仪器定义"); save.Click += delegate { SaveWorkspace(false); PopulateProjectInstrumentPage(); };
