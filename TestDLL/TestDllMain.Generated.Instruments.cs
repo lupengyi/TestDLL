@@ -449,6 +449,56 @@ namespace CSP
             FCT_ExecuteConfiguredAction(socketIndex, "RESOLVERCAN2", "Stop");
         }
 
+        public void UI_RESOLVERCAN_ConfigureDbc(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "RESOLVERCAN", "ConfigureDbc");
+        }
+
+        public void UI_RESOLVERCAN_Init(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "RESOLVERCAN", "Init");
+        }
+
+        public void UI_RESOLVERCAN_ReceiveRaw(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "RESOLVERCAN", "ReceiveRaw");
+        }
+
+        public void UI_RESOLVERCAN_SendDbcSignal(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "RESOLVERCAN", "SendDbcSignal");
+        }
+
+        public void UI_RESOLVERCAN_SendMessage_FD(int socketIndex)
+        {
+            FCT_ExecuteGeneratedDriverMethod(socketIndex, "E:\\FST\\TestDLL\\DLLs\\Instruments.CAN.CANWrapper.dll", "Instruments.CAN.CANWrapper", "SendMessage_FD");
+        }
+
+        public void UI_RESOLVERCAN_SendRaw(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "RESOLVERCAN", "SendRaw");
+        }
+
+        public void UI_RESOLVERCAN_SetPolePairs(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "RESOLVERCAN", "SetPolePairs");
+        }
+
+        public void UI_RESOLVERCAN_SetPosition(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "RESOLVERCAN", "SetPosition");
+        }
+
+        public void UI_RESOLVERCAN_SetSpeed(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "RESOLVERCAN", "SetSpeed");
+        }
+
+        public void UI_RESOLVERCAN_Stop(int socketIndex)
+        {
+            FCT_ExecuteConfiguredAction(socketIndex, "RESOLVERCAN", "Stop");
+        }
+
         public void UI_RES_1_SetResistance(int socketIndex)
         {
             FCT_ExecuteConfiguredAction(socketIndex, "RES_1", "SetResistance");

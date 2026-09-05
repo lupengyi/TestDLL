@@ -860,7 +860,7 @@ namespace CSP
                 else
                 {
                     FCT_CanDiagnostic("DUT_ComucationInit FAILED: final response length=" + rxData.Length + "; response=" + BitConverter.ToString(rxData).Replace("-", " "));
-                    throw new InvalidOperationException("DUTCAN channel is open, but DUT communication initialization returned fewer than four bytes. Check the detailed log: " + FCT_CanDiagnosticPath());
+                    throw new InvalidOperationException("当前产品CAN通道已打开，但通信初始化返回不足4字节。请检查实际选择的MAINCAN/DUTCAN及详细日志：" + FCT_CanDiagnosticPath());
                 }
             }
             catch (Exception ex)
@@ -1377,7 +1377,7 @@ namespace CSP
                     {
                         Thread.Sleep(1);
                         List<Instruments.CAN.CANMessage> queue = new List<Instruments.CAN.CANMessage>();
-                        MyCAN.ReceiveMessage(out queue);
+                        queue = FCT_ReceiveCanMessages(MyCAN);
                         if (queue.Count > 0) FCT_CanDiagnostic("RX poll " + (i + 1) + ": queue count=" + queue.Count);
                         foreach (Instruments.CAN.CANMessage item in queue)
                         {
@@ -1717,7 +1717,7 @@ namespace CSP
                 MyCAN.SendMessage(TxID, txData);
                 Thread.Sleep(60);
                 List<Instruments.CAN.CANMessage> rxDataList = new List<Instruments.CAN.CANMessage>();
-                MyCAN.ReceiveMessage(out rxDataList);
+                rxDataList = FCT_ReceiveCanMessages(MyCAN);
                 foreach (Instruments.CAN.CANMessage item in rxDataList)
                 {
                     if ((item.ID & 0x1FFFFFFF) != (RxID & 0x1FFFFFFF)) continue;
@@ -1756,7 +1756,7 @@ namespace CSP
                 for (int i = 0; i < 200; i++)
                 {
                     Thread.Sleep(1);
-                    MyCAN.ReceiveMessage(out rxDataList);
+                    rxDataList = FCT_ReceiveCanMessages(MyCAN);
                     foreach (Instruments.CAN.CANMessage item in rxDataList)
                     {
                         if ((item.ID & 0x1FFFFFFF) != (RxID & 0x1FFFFFFF)) continue;

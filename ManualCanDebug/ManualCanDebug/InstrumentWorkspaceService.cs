@@ -253,7 +253,9 @@ namespace ManualCanDebug
                 List<DriverMethodDiscovery> methods = new List<DriverMethodDiscovery>(); string typeName = string.Empty; string loadError = string.Empty;
                 try
                 {
-                    Assembly assembly = Assembly.LoadFrom(file);
+                    string loadPath = file;
+                    if (name.StartsWith("Instruments.CAN.", StringComparison.OrdinalIgnoreCase)) { string bundled = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, Path.GetFileName(file)); if (File.Exists(bundled)) loadPath = bundled; }
+                    Assembly assembly = AppDomain.CurrentDomain.GetAssemblies().FirstOrDefault(value => string.Equals(value.GetName().Name, name, StringComparison.OrdinalIgnoreCase)) ?? Assembly.LoadFrom(loadPath);
                     string expectedTypeName = Path.GetFileNameWithoutExtension(file); Type driverType = assembly.GetExportedTypes().Where(t => t.IsClass && !t.IsAbstract).OrderByDescending(t => string.Equals(t.FullName, expectedTypeName, StringComparison.OrdinalIgnoreCase)).ThenByDescending(t => string.Equals(t.Name, expectedTypeName.Substring(expectedTypeName.LastIndexOf('.') + 1), StringComparison.OrdinalIgnoreCase)).ThenByDescending(t => (t.Namespace ?? string.Empty).StartsWith("Instruments", StringComparison.OrdinalIgnoreCase)).ThenByDescending(t => t.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly).Count(m => !m.IsSpecialName)).ThenBy(t => t.FullName).FirstOrDefault();
                     if (driverType != null)
                     {
@@ -562,7 +564,7 @@ namespace ManualCanDebug
         private void EnsureCanChannel(List<ProjectInstrumentDefinition> instruments, string device, string displayName, string resource, string parameter)
         {
             ProjectInstrumentDefinition existing = instruments.FirstOrDefault(value => string.Equals(value.Device, device, StringComparison.OrdinalIgnoreCase));
-            if (existing != null) { if (string.IsNullOrWhiteSpace(existing.DisplayName) || string.Equals(existing.DisplayName, device, StringComparison.OrdinalIgnoreCase)) existing.DisplayName = displayName; return; }
+            if (existing != null) { if (string.IsNullOrWhiteSpace(existing.DisplayName) || string.Equals(existing.DisplayName, device, StringComparison.OrdinalIgnoreCase)) existing.DisplayName = displayName; if ((existing.Parameter ?? string.Empty).StartsWith("66,", StringComparison.Ordinal)) existing.Parameter = parameter; return; }
             instruments.Add(NewInstrument(displayName, device, "Instruments.CAN.CANWrapper", resource, parameter, "Independent", 1));
         }
 

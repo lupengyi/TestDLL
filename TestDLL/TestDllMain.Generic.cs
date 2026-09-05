@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
@@ -21,12 +22,14 @@ namespace CSP
         private Instruments.CAN.CANWrapper _fctMainCan;
         private Instruments.CAN.CANWrapper _fctCalibrationCan;
         private Instruments.CAN.CANWrapper _fctResolver2Can;
+        private static readonly Dictionary<string, int> FctNetworkCanSlots = new Dictionary<string, int>(StringComparer.OrdinalIgnoreCase);
         private readonly Dictionary<string, object> _fctActionPlugins = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase);
         // Stations register their periodic senders under station-prefixed keys, so this map is written
         // from several test threads at once and must not be a bare Dictionary.
         private readonly Dictionary<string, Timer> _fctAuxPeriodicSenders = new Dictionary<string, Timer>(StringComparer.OrdinalIgnoreCase);
         private readonly object _fctAuxSendLocker = new object();
         private readonly HashSet<string> _fctInitializedInstrumentNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        private readonly List<string> _fctInstrumentInitializationFailures = new List<string>();
         private string _fctInstrumentSelectionJson = string.Empty;
         private static readonly object _fctCanDiagnosticLocker = new object();
         private static string _fctCanDiagnosticLogPath;
@@ -115,7 +118,6 @@ namespace CSP
 
         private double FCT_InitializeConfiguredInstrumentsCore()
         {
-            string current = string.Empty;
             try
             {
                 string selectionJson = _fctInstrumentSelectionJson;
@@ -123,23 +125,26 @@ namespace CSP
                 _fctInstrumentSelectionJson = selectionJson;
                 JArray instruments = JArray.Parse(string.IsNullOrWhiteSpace(selectionJson) ? "[]" : selectionJson);
                 if (instruments.Count == 0) throw new InvalidOperationException("No instruments were selected.");
+                _fctInstrumentInitializationFailures.Clear();
                 FCT_CanDiagnostic("Initialize selected instruments start. BaseDirectory=" + AppDomain.CurrentDomain.BaseDirectory + "; TestDLL=" + Assembly.GetExecutingAssembly().Location);
                 foreach (JObject item in instruments.OfType<JObject>())
                 {
-                    current = ((string)item["Name"] ?? string.Empty).Trim().ToUpperInvariant();
+                    string current = ((string)item["Name"] ?? string.Empty).Trim().ToUpperInvariant();
                     string resource = (string)item["Resource"] ?? string.Empty;
                     string parameter = (string)item["Parameter"] ?? string.Empty;
-                    _fctInitializedInstrumentNames.Add(current);
                     FCT_CanDiagnostic("Initialize instrument " + current + ": Resource=" + resource + "; Parameter=" + parameter);
-                    FCT_InitializeSelectedInstrument(current, resource, parameter);
+                    try { FCT_InitializeSelectedInstrument(current, resource, parameter); _fctInitializedInstrumentNames.Add(current); }
+                    catch (Exception instrumentEx) { _fctInstrumentInitializationFailures.Add(current + ": " + instrumentEx.Message); FCT_CanDiagnostic("Initialize selected instrument failed but remaining instruments will continue: " + current, instrumentEx); }
                 }
+                if (_fctInitializedInstrumentNames.Count == 0) throw new InvalidOperationException("No selected instrument initialized successfully. " + string.Join(" | ", _fctInstrumentInitializationFailures));
+                if (_fctInstrumentInitializationFailures.Count > 0) FCT_CanDiagnostic("Initialize selected instruments completed partially. Ready=" + string.Join(",", _fctInitializedInstrumentNames) + "; Failed=" + string.Join(" | ", _fctInstrumentInitializationFailures));
                 return 0;
             }
             catch (Exception ex)
             {
-                FCT_CanDiagnostic("Initialize selected instrument failed: " + current, ex);
+                FCT_CanDiagnostic("Initialize selected instruments failed.", ex);
                 try { FCT_CleanupConfiguredInstrumentsCore(); } catch { }
-                throw new InvalidOperationException("Initialize selected instrument failed: " + current + ". " + ex.Message, ex);
+                throw new InvalidOperationException("Initialize selected instruments failed. " + ex.Message, ex);
             }
         }
 
@@ -198,6 +203,8 @@ namespace CSP
             return string.Join(",", _fctInitializedInstrumentNames.OrderBy(value => value, StringComparer.OrdinalIgnoreCase));
         }
 
+        public string FCT_GetInstrumentInitializationFailures() { return string.Join(" | ", _fctInstrumentInitializationFailures); }
+
         private void FCT_InitializeSelectedInstrument(string name, string resource, string parameter)
         {
             string assemblyFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -214,7 +221,8 @@ namespace CSP
                     break;
                 case "RESOLVERCAN":
                     // 旋变：U3 192.168.1.19 CAN0
-                    Resolver = FCT_OpenSelectedCan(assemblyFolder, executableFolder, resource, parameter, 0, "Resolver.dbc");
+                    Resolver = FCT_OpenSelectedCan(assemblyFolder, executableFolder, resource, parameter, 0, "EmuTx.dbc");
+                    Resolver.SetFilter(0, 0x1FFFFFFF);
                     Resolver.SendMessage(0x80000001, new byte[8]);
                     Resolver.DBC_SendSignalValue("2505419280_Speed", 0, true);
                     break;
@@ -228,13 +236,14 @@ namespace CSP
                     break;
                 case "RESOLVERCAN2":
                     // 旋变2：U3 192.168.1.19 CAN1
-                    _fctResolver2Can = FCT_OpenSelectedCan(assemblyFolder, executableFolder, resource, parameter, 1, "Resolver.dbc");
+                    _fctResolver2Can = FCT_OpenSelectedCan(assemblyFolder, executableFolder, resource, parameter, 1, "EmuTx.dbc");
+                    _fctResolver2Can.SetFilter(0, 0x1FFFFFFF);
                     break;
                 case "RES": case "RES_1": RES.ConnectDevice(resource, parameter); RES.SetResistance(1100, 1); RES.SetResistance(1100, 2); break;
                 case "RES_2": RES_2.ConnectDevice(resource, parameter); RES_2.SetResistance(1100, 1); RES_2.SetResistance(1100, 2); break;
                 case "RES_3": RES_3.ConnectDevice(resource, parameter); RES_3.SetResistance(1100, 1); RES_3.SetResistance(1100, 2); break;
-                case "LVDC": LVDC.ConnectDevice(resource, parameter); LVDC.SetOutput(false); break;
-                case "LVDC_KL15": LVDC_KL15.ConnectDevice(resource, parameter); LVDC_KL15.SetOutput(false); break;
+                case "LVDC": FCT_ConnectItSupply(LVDC, resource, parameter, "LVDC"); break;
+                case "LVDC_KL15": FCT_ConnectItSupply(LVDC_KL15, resource, parameter, "LVDC_KL15"); break;
                 case "HVDC":
                     HVDC.ConnectDevice(resource, parameter);
                     FCT_KewellEnsureSourceCvMode(HVDC, null, soft: true);
@@ -260,6 +269,17 @@ namespace CSP
             }
         }
 
+        private void FCT_ConnectItSupply(Instruments.PowerSupply.IT6xxxC supply, string resource, string parameter, string name)
+        {
+            Exception last = null;
+            for (int attempt = 1; attempt <= 3; attempt++)
+            {
+                try { supply.ConnectDevice(resource, parameter); supply.SetOutput(false); if (attempt > 1) FCT_CanDiagnostic(name + " connected after retry " + attempt); return; }
+                catch (Exception ex) { last = ex; FCT_CanDiagnostic(name + " connect attempt " + attempt + " failed; retrying after releasing VISA session.", ex); try { supply.DisconnectDevice(); } catch { } if (attempt < 3) Thread.Sleep(500); }
+            }
+            throw new InvalidOperationException(name + " failed to connect after 3 attempts: " + (last == null ? string.Empty : last.Message), last);
+        }
+
         private Instruments.CAN.CANWrapper FCT_OpenSelectedCan(string assemblyFolder, string executableFolder, string ip, string parameter, ushort fallbackChannel, string dbcFile)
         {
             string[] values = (parameter ?? string.Empty).Split(new[] { ',', ';', '|' }, StringSplitOptions.RemoveEmptyEntries);
@@ -268,8 +288,11 @@ namespace CSP
             uint baudRate = values.Length > 2 ? uint.Parse(values[2], CultureInfo.InvariantCulture) : 500000;
             int port = values.Length > 3 ? int.Parse(values[3], CultureInfo.InvariantCulture) : 8000;
             int deviceIndex = values.Length > 4 ? int.Parse(values[4], CultureInfo.InvariantCulture) : 0;
+            bool canFd = values.Length > 5 && string.Equals(values[5], "FD", StringComparison.OrdinalIgnoreCase); uint dataBaudRate = values.Length > 6 ? uint.Parse(values[6], CultureInfo.InvariantCulture) : 2000000;
             string wrapperPath = typeof(Instruments.CAN.CANWrapper).Assembly.Location;
             string providerPath = Path.Combine(assemblyFolder, "Instruments.CAN.ZLG_CAN.dll");
+            string colocatedProvider = Path.Combine(Path.GetDirectoryName(wrapperPath), "Instruments.CAN.ZLG_CAN.dll");
+            if (File.Exists(colocatedProvider)) providerPath = colocatedProvider;
             string nativePath = Path.Combine(assemblyFolder, "zlgcan.dll");
             string kernelPath = Path.Combine(assemblyFolder, "kerneldlls", "CANFDNET.dll");
             string dbcPath = Path.Combine(executableFolder, "Config", dbcFile);
@@ -285,8 +308,15 @@ namespace CSP
                 wrapper.DBC_ReadDBCTxt(dbcPath);
                 wrapper.SetValue("IP", actualIp);
                 wrapper.SetValue("PORT", port);
-                wrapper.OpenCANDevice(deviceType, channel, baudRate);
-                FCT_CanDiagnostic("CAN open succeeded: DeviceType=" + deviceType + "; Channel=" + channel);
+                ushort driverChannel = channel;
+                if (deviceType == 48 || deviceType == 49 || deviceType == 52 || deviceType == 53 || deviceType == 57 || deviceType == 58)
+                {
+                    string endpoint = deviceType + "|" + actualIp + "|" + port;
+                    lock (FctNetworkCanSlots) { int slot; if (!FctNetworkCanSlots.TryGetValue(endpoint, out slot)) { slot = FctNetworkCanSlots.Count; if (slot >= 16) throw new InvalidOperationException("CAN设备数量超过驱动支持的16台。"); FctNetworkCanSlots.Add(endpoint, slot); } driverChannel = checked((ushort)(slot * 10 + channel)); }
+                }
+                FCT_CanDiagnostic("CAN driver channel=" + driverChannel + "; endpoint=" + actualIp + "; physical channel=" + channel);
+                if (canFd) wrapper.OpenCANDevice_FD(deviceType, driverChannel, baudRate.ToString(CultureInfo.InvariantCulture) + "," + dataBaudRate.ToString(CultureInfo.InvariantCulture)); else wrapper.OpenCANDevice(deviceType, driverChannel, baudRate);
+                FCT_CanDiagnostic("CAN open succeeded: DeviceType=" + deviceType + "; Channel=" + channel + "; Mode=" + (canFd ? "CANFD" : "Classic"));
                 return wrapper;
             }
             catch (Exception ex)
@@ -334,7 +364,7 @@ namespace CSP
                     case "RELAY_FCT": FCT_ShtRelay(socketIndex, operation, RelayFctBoard, RelayFctBoardSlave); break;
                     case "RELAY_HVMUX": FCT_ShtRelay(socketIndex, operation, RelayHvMux, RelayHvMuxSlave); break;
                     case "PLC": PLC_LoadFinished(socketIndex); break;
-                    case "RESOLVER": result = FCT_Resolver(socketIndex, operation); break;
+                    case "RESOLVER": case "RESOLVERCAN": result = FCT_Resolver(socketIndex, operation); break;
                     case "PRODUCTCAN": result = FCT_ProductCan(socketIndex, operation); break;
                     case "AUXCAN": result = FCT_AuxCan(socketIndex, operation); break;
                     case "CALIBRATIONCAN": result = FCT_GenericCanChannel(socketIndex, operation, _fctCalibrationCan, "校准CAN"); break;
@@ -955,7 +985,13 @@ namespace CSP
             finally { IDisposable disposable = task as IDisposable; if (disposable != null) disposable.Dispose(); }
         }
 
-        private object FCT_Resolver(int socketIndex, string operation) { return FCT_ResolverChannel(socketIndex, operation, Resolver, "旋变1"); }
+        private object FCT_Resolver(int socketIndex, string operation)
+        {
+            string selected = FCT_InputString(socketIndex, "CanInstrument", "RESOLVERCAN").Trim().ToUpperInvariant();
+            if (selected == "RESOLVERCAN2" || selected == "RESOLVER2") return FCT_ResolverChannel(socketIndex, operation, _fctResolver2Can, "旋变2");
+            if (selected == "BOTH") { FCT_ResolverChannel(socketIndex, operation, Resolver, "旋变1"); return FCT_ResolverChannel(socketIndex, operation, _fctResolver2Can, "旋变2"); }
+            return FCT_ResolverChannel(socketIndex, operation, Resolver, "旋变1");
+        }
 
         private object FCT_ResolverChannel(int socketIndex, string operation, Instruments.CAN.CANWrapper resolver, string displayName)
         {
@@ -963,9 +999,9 @@ namespace CSP
             switch (operation.ToUpperInvariant())
             {
                 case "INIT": resolver.SendMessage(0x80000001, new byte[8]); Thread.Sleep(100); break;
-                case "SETSPEED": resolver.DBC_SendSignalValue("2147483649_mode_switch", 0, true); Thread.Sleep(50); resolver.DBC_SendSignalValue("2505419280_Polarpair", FCT_InputDouble(socketIndex, "PolePairs", 6), false); resolver.DBC_SendSignalValue("2505419280_Speed", FCT_InputDouble(socketIndex, "Speed", 0), true); Thread.Sleep(500); break;
-                case "SETPOSITION": resolver.DBC_SendSignalValue("2505419280_Polarpair", FCT_InputDouble(socketIndex, "PolePairs", 1), true); Thread.Sleep(50); resolver.DBC_SendSignalValue("2147483649_mode_switch", 1, false); resolver.DBC_SendSignalValue("2147483649_Position", FCT_InputDouble(socketIndex, "Position", 0), true); Thread.Sleep(500); break;
-                case "SETPOLEPAIRS": resolver.DBC_SendSignalValue("2505419280_Polarpair", FCT_InputDouble(socketIndex, "PolePairs", 6), true); break;
+                case "SETSPEED": FCT_StartResolverSpeed(resolver, FCT_InputDouble(socketIndex, "Speed", 0), FCT_InputDouble(socketIndex, "PolePairs", 6), displayName); Thread.Sleep(500); break;
+case "SETPOSITION": resolver.DBC_SendSignalValue("2505419280_Polarpair", FCT_InputDouble(socketIndex, "PolePairs", 1), true); Thread.Sleep(50); resolver.DBC_SendSignalValue("2147483649_mode_switch", 1, false); resolver.DBC_SendSignalValue("2147483649_Position", FCT_InputDouble(socketIndex, "Position", 0) * FCT_InputDouble(socketIndex, "PositionScale", 1), true); Thread.Sleep(500); break;
+                case "SETPOLEPAIRS": FCT_StartResolverSpeed(resolver, 0, FCT_InputDouble(socketIndex, "PolePairs", 6), displayName); break;
                 case "SENDDBCSIGNAL": resolver.DBC_SendSignalValue(FCT_InputString(socketIndex, "SignalName", string.Empty), FCT_InputDouble(socketIndex, "Value", 0), FCT_InputBool(socketIndex, "SendFlag", true)); break;
                 case "SENDDBCSIGNALS": FCT_SendResolverSignals(resolver, JObject.Parse(FCT_InputString(socketIndex, "SignalsJson", "{}"))); break;
                 case "STARTPERIODICDBC":
@@ -974,11 +1010,26 @@ namespace CSP
                     }
                 case "STOPPERIODICDBC": { string key = displayName + ":" + FCT_InputString(socketIndex, "PeriodicKey", FCT_InputString(socketIndex, "MessageName", "RESOLVER")); FCT_StopAuxPeriodic(key); FCT_Log(socketIndex, displayName + " DBC PERIODIC STOP key=" + key); break; }
                 case "SENDRAW": case "RECEIVERAW": return FCT_GenericCanChannel(socketIndex, operation, resolver, displayName + "CAN");
-                case "STOP": resolver.DBC_SendSignalValue("2505419280_Speed", 0, true); Thread.Sleep(100); break;
+                case "READFEEDBACK": return FCT_ReadResolverFeedback(resolver, displayName);
+                case "STOP": FCT_StopResolverControl(resolver, FCT_InputDouble(socketIndex, "PolePairs", 6), displayName); Thread.Sleep(100); break;
                 default: throw new InvalidOperationException("Unsupported resolver operation: " + operation);
             }
             return null;
         }
+
+        private void FCT_StartResolverSpeed(Instruments.CAN.CANWrapper resolver, double speed, double polePairs, string displayName)
+        {
+            FCT_StopAuxPeriodic("ResolverControl:" + displayName);
+            int modeResult = resolver.DBC_SendSignalValue("2147483649_mode_switch", 0, true);
+            Thread.Sleep(50);
+            int poleResult = resolver.DBC_SendSignalValue("2505419280_Polarpair", polePairs, true);
+            Thread.Sleep(50);
+            int speedResult = resolver.DBC_SendSignalValue("2505419280_Speed", speed, true);
+            FCT_CanDiagnostic(displayName + " legacy DBC speed: target=" + speed.ToString(CultureInfo.InvariantCulture) + "; polePairs=" + polePairs + "; returns=" + modeResult + "," + poleResult + "," + speedResult);
+        }
+
+        private void FCT_StopResolverControl(Instruments.CAN.CANWrapper resolver, double polePairs, string displayName) { FCT_StopAuxPeriodic("ResolverControl:" + displayName); byte[] data = new byte[8]; data[0] = (byte)Math.Max(0, Math.Min(15, (int)Math.Round(polePairs))); resolver.SendMessage(0x1555AA10, data); }
+        private string FCT_ReadResolverFeedback(Instruments.CAN.CANWrapper resolver, string displayName) { DateTime deadline = DateTime.UtcNow.AddMilliseconds(800); Instruments.CAN.CANMessage latest = default(Instruments.CAN.CANMessage); bool found = false; while (DateTime.UtcNow < deadline) { List<Instruments.CAN.CANMessage> received = FCT_ReceiveCanMessages(resolver); try { received.AddRange(FCT_ReceiveCanMessages(resolver, true)); } catch { } foreach (Instruments.CAN.CANMessage message in received) if ((message.ID & 0x1FFFFFFF) == 0x11111120 && message.DATA != null && message.DATA.Length >= 4) { latest = message; found = true; } if (found) break; Thread.Sleep(20); } if (!found) return displayName + "未收到反馈帧0x11111120"; byte[] data = latest.DATA; int raw = data[1] << 16 | data[2] << 8 | data[3]; if ((raw & 0x800000) != 0) raw -= 0x1000000; double speed = raw * 0.619947436d; string result = "PolePairs=" + (data[0] & 0x0F) + "; SpeedSet=" + speed.ToString("0.###", CultureInfo.InvariantCulture) + "; RAW=" + BitConverter.ToString(data).Replace("-", " "); FCT_CanDiagnostic(displayName + " feedback: " + result); return result; }
 
         private void FCT_SendResolverSignals(Instruments.CAN.CANWrapper resolver, JObject signals)
         {
@@ -1004,7 +1055,7 @@ namespace CSP
                     case "COMMUNICATIONTEST": Test_CANCommunication(socketIndex); return true;
                     case "SENDDBCSIGNAL": MyCAN.DBC_SendSignalValue(FCT_InputString(socketIndex, "SignalName", string.Empty), FCT_InputDouble(socketIndex, "Value", 0), FCT_InputBool(socketIndex, "SendFlag", true)); return true;
                     case "SENDRAW": { uint id = FCT_ParseCanId(FCT_InputString(socketIndex, "CanId", "0")); byte[] data = FCT_ParseHexBytes(FCT_InputString(socketIndex, "DataHex", string.Empty)); MyCAN.SendMessage(id, data); return BitConverter.ToString(data).Replace("-", " "); }
-                    case "RECEIVERAW": { uint filter = FCT_ParseCanId(FCT_InputString(socketIndex, "FilterId", "0")); List<Instruments.CAN.CANMessage> messages = new List<Instruments.CAN.CANMessage>(); MyCAN.ReceiveMessage(out messages); JArray frames = new JArray(); foreach (Instruments.CAN.CANMessage message in messages.Where(value => filter == 0 || (value.ID & 0x1FFFFFFF) == (filter & 0x1FFFFFFF))) frames.Add(new JObject { ["Id"] = (message.ID & 0x1FFFFFFF).ToString("X", CultureInfo.InvariantCulture), ["Data"] = BitConverter.ToString(message.DATA ?? new byte[0]).Replace("-", " ") }); return frames.ToString(Formatting.None); }
+                    case "RECEIVERAW": { uint filter = FCT_ParseCanId(FCT_InputString(socketIndex, "FilterId", "0")); List<Instruments.CAN.CANMessage> messages = FCT_ReceiveCanMessages(MyCAN); JArray frames = new JArray(); foreach (Instruments.CAN.CANMessage message in messages.Where(value => filter == 0 || (value.ID & 0x1FFFFFFF) == (filter & 0x1FFFFFFF))) frames.Add(new JObject { ["Id"] = (message.ID & 0x1FFFFFFF).ToString("X", CultureInfo.InvariantCulture), ["Data"] = BitConverter.ToString(message.DATA ?? new byte[0]).Replace("-", " ") }); return frames.ToString(Formatting.None); }
                     default: throw new InvalidOperationException("Unsupported ProductCAN operation: " + operation);
                 }
             }
@@ -1078,7 +1129,7 @@ namespace CSP
         {
             if (channel == null) throw new InvalidOperationException(displayName + "尚未初始化。");
             if (operation.Equals("SendRaw", StringComparison.OrdinalIgnoreCase)) { uint id = FCT_ParseCanId(FCT_InputString(socketIndex, "CanId", "0")); byte[] data = FCT_ParseHexBytes(FCT_InputString(socketIndex, "DataHex", string.Empty)); channel.SendMessage(id, data); return BitConverter.ToString(data).Replace("-", " "); }
-            if (operation.Equals("ReceiveRaw", StringComparison.OrdinalIgnoreCase)) { uint filter = FCT_ParseCanId(FCT_InputString(socketIndex, "FilterId", "0")); List<Instruments.CAN.CANMessage> messages = new List<Instruments.CAN.CANMessage>(); channel.ReceiveMessage(out messages); JArray frames = new JArray(); foreach (Instruments.CAN.CANMessage message in messages.Where(value => filter == 0 || (value.ID & 0x1FFFFFFF) == (filter & 0x1FFFFFFF))) frames.Add(new JObject { ["Id"] = (message.ID & 0x1FFFFFFF).ToString("X", CultureInfo.InvariantCulture), ["Data"] = BitConverter.ToString(message.DATA ?? new byte[0]).Replace("-", " ") }); return frames.ToString(Formatting.None); }
+            if (operation.Equals("ReceiveRaw", StringComparison.OrdinalIgnoreCase)) { uint filter = FCT_ParseCanId(FCT_InputString(socketIndex, "FilterId", "0")); List<Instruments.CAN.CANMessage> messages = FCT_ReceiveCanMessages(channel); JArray frames = new JArray(); foreach (Instruments.CAN.CANMessage message in messages.Where(value => filter == 0 || (value.ID & 0x1FFFFFFF) == (filter & 0x1FFFFFFF))) frames.Add(new JObject { ["Id"] = (message.ID & 0x1FFFFFFF).ToString("X", CultureInfo.InvariantCulture), ["Data"] = BitConverter.ToString(message.DATA ?? new byte[0]).Replace("-", " ") }); return frames.ToString(Formatting.None); }
             if (operation.Equals("SendDbcSignal", StringComparison.OrdinalIgnoreCase)) { channel.DBC_SendSignalValue(FCT_InputString(socketIndex, "SignalName", string.Empty), FCT_InputDouble(socketIndex, "Value", 0), FCT_InputBool(socketIndex, "SendFlag", true)); return true; }
             throw new InvalidOperationException("Unsupported " + displayName + " operation: " + operation);
         }
@@ -1127,8 +1178,8 @@ namespace CSP
             }
             if (operation.Equals("ReceiveRaw", StringComparison.OrdinalIgnoreCase))
             {
-                List<Instruments.CAN.CANMessage> messages = new List<Instruments.CAN.CANMessage>();
-                lock (_fctAuxSendLocker) aux.ReceiveMessage(out messages);
+                List<Instruments.CAN.CANMessage> messages;
+                lock (_fctAuxSendLocker) messages = FCT_ReceiveCanMessages(aux);
                 List<Instruments.CAN.CANMessage> latest = messages
                     .GroupBy(message => message.ID & 0x1FFFFFFF)
                     .Select(group => group.Last())
@@ -1145,6 +1196,16 @@ namespace CSP
             }
             if (operation.Equals("Connect", StringComparison.OrdinalIgnoreCase)) return true;
             throw new InvalidOperationException("Unsupported AUXCAN operation: " + operation);
+        }
+
+        private static List<Instruments.CAN.CANMessage> FCT_ReceiveCanMessages(Instruments.CAN.CANWrapper channel, bool canFd = false)
+        {
+            if (channel == null) throw new InvalidOperationException("CAN通道未初始化。");
+            string methodName = canFd ? "ReceiveMessage_FD" : "ReceiveMessage"; MethodInfo receive = channel.GetType().GetMethods(BindingFlags.Public | BindingFlags.Instance).FirstOrDefault(method => method.Name == methodName && method.GetParameters().Length == 1 && method.GetParameters()[0].ParameterType.IsByRef);
+            if (receive == null) throw new MissingMethodException(channel.GetType().FullName, "ReceiveMessage(out List<CANMessage>)");
+            Type listType = receive.GetParameters()[0].ParameterType.GetElementType(); object[] arguments = { Activator.CreateInstance(listType) }; receive.Invoke(channel, arguments);
+            IEnumerable values = arguments[0] as IEnumerable; if (values == null) return new List<Instruments.CAN.CANMessage>();
+            return values.Cast<object>().OfType<Instruments.CAN.CANMessage>().ToList();
         }
 
         private void FCT_EnsureAuxCan(int socketIndex)

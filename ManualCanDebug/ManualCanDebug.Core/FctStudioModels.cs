@@ -16,6 +16,7 @@ namespace ManualCanDebug.Core
             AuxiliaryDbcPath = string.Empty;
             DriveStructure = "SingleMainDrive";
             Capabilities = new List<string>();
+            CanCommunications = new List<ProductCanCommunicationDefinition>();
             Blocks = new List<FunctionBlockDefinition>();
             Flow = new List<FlowBlockInstance>();
             Breakpoints = new List<string>();
@@ -28,10 +29,18 @@ namespace ManualCanDebug.Core
         public string AuxiliaryDbcPath { get; set; }
         public string DriveStructure { get; set; }
         public List<string> Capabilities { get; set; }
+        public List<ProductCanCommunicationDefinition> CanCommunications { get; set; }
         public List<FunctionBlockDefinition> Blocks { get; set; }
         public List<FlowBlockInstance> Flow { get; set; }
         public List<string> Breakpoints { get; set; }
         public Dictionary<string, object> SequenceRoot { get; set; }
+    }
+
+    public sealed class ProductCanCommunicationDefinition
+    {
+        public ProductCanCommunicationDefinition() { Enabled = true; BusMode = "经典CAN"; ArbitrationBaudRate = 500000; DataBaudRate = 2000000; Protocols = "原始CAN"; }
+        public bool Enabled { get; set; } public string Role { get; set; } public string StationCan { get; set; } public string BusMode { get; set; } public int ArbitrationBaudRate { get; set; } public int DataBaudRate { get; set; } public string Protocols { get; set; } public string ResourcePath { get; set; }
+        public ProductCanCommunicationDefinition Clone() { return new ProductCanCommunicationDefinition { Enabled = Enabled, Role = Role, StationCan = StationCan, BusMode = BusMode, ArbitrationBaudRate = ArbitrationBaudRate, DataBaudRate = DataBaudRate, Protocols = Protocols, ResourcePath = ResourcePath }; }
     }
 
     public sealed class FunctionBlockDefinition

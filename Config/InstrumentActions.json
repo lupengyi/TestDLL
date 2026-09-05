@@ -3649,6 +3649,239 @@
   },
   {
     "Source": "仪器",
+    "Target": "旋变1CAN",
+    "Device": "RESOLVERCAN",
+    "Operation": "Init",
+    "DisplayName": "初始化",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RESOLVERCAN_Init",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变1CAN",
+    "Device": "RESOLVERCAN",
+    "Operation": "SetSpeed",
+    "DisplayName": "设置转速",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RESOLVERCAN_SetSpeed",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Speed",
+        "Label": "转速",
+        "Type": "double",
+        "DefaultValue": "700",
+        "Unit": "rpm",
+        "Options": ""
+      },
+      {
+        "Name": "PolePairs",
+        "Label": "极对数",
+        "Type": "int",
+        "DefaultValue": "6",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变1CAN",
+    "Device": "RESOLVERCAN",
+    "Operation": "SetPosition",
+    "DisplayName": "设置角度",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RESOLVERCAN_SetPosition",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Position",
+        "Label": "位置",
+        "Type": "double",
+        "DefaultValue": "225",
+        "Unit": "deg",
+        "Options": ""
+      },
+      {
+        "Name": "PolePairs",
+        "Label": "极对数",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变1CAN",
+    "Device": "RESOLVERCAN",
+    "Operation": "Stop",
+    "DisplayName": "停止",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RESOLVERCAN_Stop",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变1CAN",
+    "Device": "RESOLVERCAN",
+    "Operation": "SetPolePairs",
+    "DisplayName": "设置极对数",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RESOLVERCAN_SetPolePairs",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "PolePairs",
+        "Label": "极对数",
+        "Type": "int",
+        "DefaultValue": "6",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变1CAN",
+    "Device": "RESOLVERCAN",
+    "Operation": "SendDbcSignal",
+    "DisplayName": "发送DBC信号",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RESOLVERCAN_SendDbcSignal",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "SignalName",
+        "Label": "信号名",
+        "Type": "string",
+        "DefaultValue": "2505419280_Speed",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "Value",
+        "Label": "信号值",
+        "Type": "double",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "SendFlag",
+        "Label": "立即发送",
+        "Type": "bool",
+        "DefaultValue": "True",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变1CAN",
+    "Device": "RESOLVERCAN",
+    "Operation": "ConfigureDbc",
+    "DisplayName": "DBC表格配置",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RESOLVERCAN_ConfigureDbc",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变1CAN",
+    "Device": "RESOLVERCAN",
+    "Operation": "SendRaw",
+    "DisplayName": "发送原始帧",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RESOLVERCAN_SendRaw",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "CanId",
+        "Label": "CAN ID",
+        "Type": "string",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "DataHex",
+        "Label": "数据",
+        "Type": "string",
+        "DefaultValue": "00 00 00 00 00 00 00 00",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变1CAN",
+    "Device": "RESOLVERCAN",
+    "Operation": "ReceiveRaw",
+    "DisplayName": "读取原始帧",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RESOLVERCAN_ReceiveRaw",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "FilterId",
+        "Label": "过滤ID",
+        "Type": "string",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变1CAN",
+    "Device": "RESOLVERCAN",
+    "Operation": "SendMessage_FD",
+    "DisplayName": "SendMessage_FD",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RESOLVERCAN_SendMessage_FD",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "txMsg",
+        "Label": "txMsg",
+        "Type": "string",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
     "Target": "DAQ",
     "Device": "DAQ",
     "Operation": "Read",

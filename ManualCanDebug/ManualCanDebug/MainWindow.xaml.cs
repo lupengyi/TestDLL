@@ -86,6 +86,7 @@ namespace ManualCanDebug
         private int _studioDebugNextIndex;
         private int _studioDebugEndIndex = -1;
         private bool _studioDebugActive;
+        private bool _studioDebugRunPostUut = true;
         private IReadOnlyList<SequenceStepDefinition> _atomicCatalogSteps;
         private readonly Stack<string> _studioUndo = new Stack<string>();
         private readonly Stack<string> _studioRedo = new Stack<string>();
@@ -118,6 +119,7 @@ namespace ManualCanDebug
         private TextBox _productRawDataTextBox;
         private TextBox _productReceiveIdTextBox;
         private TextBox _resolverSpeedTextBox;
+        private ComboBox _resolverDeviceComboBox;
         private TextBox _resolverPositionTextBox;
         private TextBox _resolverPolePairsTextBox;
         private TextBox _resolverSignalNameTextBox;
@@ -623,6 +625,7 @@ namespace ManualCanDebug
             StackPanel stack = new StackPanel { Margin = new Thickness(5) };
             StackPanel actions = new StackPanel();
             WrapPanel row = new WrapPanel();
+            row.Children.Add(MakeLabel("旋变模拟器：")); _resolverDeviceComboBox = new ComboBox { ItemsSource = new[] { "旋变1（第三张CAN卡 CAN0）", "旋变2（第三张CAN卡 CAN1）" }, SelectedIndex = 0, Width = 220, Margin = new Thickness(3), Padding = new Thickness(5, 3, 5, 3) }; row.Children.Add(_resolverDeviceComboBox);
             row.Children.Add(MakeButton("旋变初始化", InitializeResolver_Click));
             row.Children.Add(MakeLabel("极对数："));
             _resolverPolePairsTextBox = MakeBox("6", 70);
@@ -910,6 +913,7 @@ namespace ManualCanDebug
         {
             if (_legacyRuntimeStatusText == null) return;
             bool ready = color == Brushes.DarkGreen;
+            if (ready && _legacyRuntime != null && !string.IsNullOrWhiteSpace(_legacyRuntime.InitializationFailures)) { text = "部分初始化失败：" + _legacyRuntime.InitializationFailures; color = Brushes.DarkOrange; ready = false; }
             string display = text ?? string.Empty; if (display.IndexOf("未初始化", StringComparison.OrdinalIgnoreCase) >= 0 || display.IndexOf("加载中", StringComparison.OrdinalIgnoreCase) >= 0) display = "工作区未初始化"; else if (ready) display = "工作区已初始化";
             _legacyRuntimeStatusText.Text = display;
             _legacyRuntimeStatusText.Foreground = color;
@@ -1315,7 +1319,7 @@ namespace ManualCanDebug
             string product = dialog.SelectedProductName;
             _studioProject = FctStudioProjectService.CreateBlank(_sequenceDocument, product); GlobalModuleLibraryService.MergeInto(_studioProject);
             SelectProductContext(product);
-            if (dialog.NewProduct != null) { ProductLocatorDefinition locator = _productLocatorRepository.Import(product, dialog.NewProduct.LocatorPath); _studioProject.ProductLocatorPath = "Config\\ProductLocators\\" + product + "_Locator.xlsx"; _studioProject.AuxiliaryDbcPath = ProductResourceService.ImportDbc(AppDomain.CurrentDomain.BaseDirectory, product, dialog.NewProduct.DbcPath); _studioProject.DriveStructure = dialog.NewProduct.DriveStructure; _studioProject.Capabilities = new List<string>(dialog.NewProduct.Capabilities); Service_Log("新产品资源已导入：" + product + "，Locator信号=" + locator.SignalCount + "，DBC=" + (string.IsNullOrWhiteSpace(_studioProject.AuxiliaryDbcPath) ? "未配置" : _studioProject.AuxiliaryDbcPath)); }
+            if (dialog.NewProduct != null) { ProductLocatorDefinition locator = _productLocatorRepository.Import(product, dialog.NewProduct.LocatorPath); _studioProject.ProductLocatorPath = "Config\\ProductLocators\\" + product + "_Locator.xlsx"; _studioProject.AuxiliaryDbcPath = ProductResourceService.ImportDbc(AppDomain.CurrentDomain.BaseDirectory, product, dialog.NewProduct.DbcPath); _studioProject.DriveStructure = dialog.NewProduct.DriveStructure; _studioProject.Capabilities = new List<string>(dialog.NewProduct.Capabilities); _studioProject.CanCommunications = (dialog.NewProduct.CanCommunications ?? new List<ProductCanCommunicationDefinition>()).Select(value => { ProductCanCommunicationDefinition copy = value.Clone(); if (!string.IsNullOrWhiteSpace(dialog.NewProduct.LocatorPath) && string.Equals(copy.ResourcePath, dialog.NewProduct.LocatorPath, StringComparison.OrdinalIgnoreCase)) copy.ResourcePath = _studioProject.ProductLocatorPath; if (!string.IsNullOrWhiteSpace(dialog.NewProduct.DbcPath) && string.Equals(copy.ResourcePath, dialog.NewProduct.DbcPath, StringComparison.OrdinalIgnoreCase)) copy.ResourcePath = _studioProject.AuxiliaryDbcPath; return copy; }).ToList(); Service_Log("新产品资源已导入：" + product + "，Locator信号=" + locator.SignalCount + "，DBC=" + (string.IsNullOrWhiteSpace(_studioProject.AuxiliaryDbcPath) ? "未配置" : _studioProject.AuxiliaryDbcPath) + "，CAN通信=" + _studioProject.CanCommunications.Count(value => value.Enabled)); }
             string sequenceDirectory = PlatformSequenceDirectory(); _studioProject.ProjectName = dialog.SelectedSequenceName; _studioProjectPath = Path.Combine(sequenceDirectory, SafeFileName(dialog.SelectedSequenceName) + ".json"); _loadedSequencePath = _studioProjectPath;
             _studioProjectDirty = true;
             UpdateCurrentFileDisplay();
@@ -1802,10 +1806,6 @@ namespace ManualCanDebug
             {
                 SequenceStepDefinition step = row.BuildEffectiveStep();
                 if (step == null) throw new InvalidOperationException("当前行没有可执行的STEP，可能已被停用或配置不完整。");
-                bool highVoltage = step.FunctionName.StartsWith("HVDC_", StringComparison.Ordinal)
-                    || (step.FunctionName == "FCT_ExecuteAction" && string.Equals(Convert.ToString(step.Get("Device")), "HVDC", StringComparison.OrdinalIgnoreCase));
-                if (highVoltage && MessageBox.Show(this, "该调试动作会操作高压电源。\n\n请确认接线、负载、急停、水冷和人员安全条件已经满足。是否继续？", "高压调试确认", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes)
-                    return;
                 row.Status = "运行中";
                 row.Result = string.Empty;
                 try
@@ -1832,7 +1832,7 @@ namespace ManualCanDebug
             row.Result = string.Empty;
             try
             {
-                bool executed = await StartStudioDebugAsync(compiled, traces[0].SequenceIndex, traces[traces.Count - 1].SequenceIndex);
+                bool executed = await StartStudioDebugAsync(compiled, traces[0].SequenceIndex, traces[traces.Count - 1].SequenceIndex, false);
                 if (!executed) { row.Status = "待运行"; return; }
                 if (_studioDebugActive) { row.Status = "断点暂停"; row.Result = "等待继续执行"; return; }
                 if (row.IsModule) { row.Status = "完成"; row.Result = "已执行 " + traces.Count.ToString(CultureInfo.InvariantCulture) + " 个STEP"; }
@@ -1927,16 +1927,13 @@ namespace ManualCanDebug
 
         private async Task StartStudioDebugAsync(FctStudioCompileResult compiled, int startIndex)
         {
-            await StartStudioDebugAsync(compiled, startIndex, compiled == null ? -1 : compiled.Document.Steps.Count - 1);
+            await StartStudioDebugAsync(compiled, startIndex, compiled == null ? -1 : compiled.Document.Steps.Count - 1, true);
         }
 
-        private async Task<bool> StartStudioDebugAsync(FctStudioCompileResult compiled, int startIndex, int endIndex)
+        private async Task<bool> StartStudioDebugAsync(FctStudioCompileResult compiled, int startIndex, int endIndex, bool runPostUut)
         {
             if (_legacyRuntime == null || !_legacyRuntime.InstrumentsInitialized) throw new InvalidOperationException("请先在仪器中心勾选并初始化当前项目所需仪器。");
             if (_workflowRunning || _legacyRuntime.IsRunning) throw new InvalidOperationException("已有流程正在运行。");
-            int safeStart = Math.Max(0, Math.Min(startIndex, compiled.Document.Steps.Count)); int safeEnd = Math.Max(safeStart - 1, Math.Min(endIndex, compiled.Document.Steps.Count - 1)); bool highRisk = compiled.Document.Steps.Skip(safeStart).Take(Math.Max(0, safeEnd - safeStart + 1)).Any(step => step.FunctionName.StartsWith("HVDC_", StringComparison.Ordinal) || (step.FunctionName == "FCT_ExecuteAction" && string.Equals(Convert.ToString(step.Get("Device")), "HVDC", StringComparison.OrdinalIgnoreCase)));
-            if (highRisk && MessageBox.Show(this, "该调试流程包含高压电源操作。\n\n请确认接线、负载、急停、水冷和人员安全条件已经满足。是否继续？", "高压调试确认", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return false;
-            if (compiled.Warnings.Any(warning => warning.IndexOf("安全下电", StringComparison.Ordinal) >= 0) && MessageBox.Show(this, "流程检查提示没有显式安全下电功能块。\n\n虽然停止和结束时仍会调用PostUUT，但建议先补充安全下电。是否仍然继续调试？", "安全收尾提醒", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return false;
             if (_studioDebugActive) await EndStudioDebugSessionAsync();
             ApplyCompiledStudioSequence(compiled);
             string path = WriteRuntimeSequence(0, _workflowSteps.Count - 1);
@@ -1946,6 +1943,7 @@ namespace ManualCanDebug
             _studioDebugEndIndex = Math.Max(_studioDebugNextIndex - 1, Math.Min(endIndex, _workflowSteps.Count - 1));
             await _legacyRuntime.PrepareDebugSessionAsync(path);
             _studioDebugActive = true;
+            _studioDebugRunPostUut = runPostUut;
             Service_Log("功能块调试已通过MainTest启动；执行范围=" + (_studioDebugNextIndex + 1) + "-" + (_studioDebugEndIndex + 1) + "，断点=" + _studioBreakpointIndexes.Count + "。可单步或继续到断点。");
             // 首次启动必须尊重起始STEP上的断点；只有用户在已暂停状态点击“继续”时才越过当前断点。
             await ContinueStudioDebugInternalAsync(false);
@@ -2017,15 +2015,15 @@ namespace ManualCanDebug
 
         private async void StopStudioDebug()
         {
-            try { await EndStudioDebugSessionAsync(); Service_Log("功能块调试已停止并由MainTest执行已选仪器安全收尾。"); }
+            try { await EndStudioDebugSessionAsync(true); Service_Log("功能块调试已停止并由MainTest执行已选仪器安全收尾。"); }
             catch (Exception ex) { Service_Log("停止功能块调试失败：" + ex.Message); }
         }
 
-        private async Task EndStudioDebugSessionAsync()
+        private async Task EndStudioDebugSessionAsync(bool forcePostUut = false)
         {
             if (!_studioDebugActive) return;
-            try { await _legacyRuntime.EndDebugSessionAsync(); }
-            finally { _studioDebugActive = false; _studioDebugCompile = null; _studioDebugEndIndex = -1; }
+            try { await _legacyRuntime.EndDebugSessionAsync(forcePostUut || _studioDebugRunPostUut); }
+            finally { _studioDebugActive = false; _studioDebugCompile = null; _studioDebugEndIndex = -1; _studioDebugRunPostUut = true; }
         }
 
         private void GenerateDebugSequence_Click(object sender, RoutedEventArgs e)
@@ -2106,34 +2104,36 @@ namespace ManualCanDebug
             string idText = _productReceiveIdTextBox.Text;
             await RunMainTestAdvancedAsync("读取产品接收帧", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "PRODUCTCAN" }, { "Operation", "ReceiveRaw" }, { "FilterId", ParseCanId(idText).ToString("X", CultureInfo.InvariantCulture) }, { "CanInstrument", CurrentProductCanInstrument() }, { "ResultMode", "Information" } });
         }
-        private async void InitializeResolver_Click(object sender, RoutedEventArgs e) { await RunMainTestAdvancedAsync("旋变初始化", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "RESOLVER" }, { "Operation", "Init" }, { "ResultMode", "Action" } }); }
+        private string SelectedResolverDevice() { return _resolverDeviceComboBox != null && _resolverDeviceComboBox.SelectedIndex == 1 ? "RESOLVERCAN2" : "RESOLVER"; }
+        private string SelectedResolverName() { return SelectedResolverDevice() == "RESOLVERCAN2" ? "旋变2" : "旋变1"; }
+        private async void InitializeResolver_Click(object sender, RoutedEventArgs e) { await RunMainTestAdvancedAsync(SelectedResolverName() + "初始化", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", SelectedResolverDevice() }, { "Operation", "Init" }, { "ResultMode", "Action" } }); }
         private async void SetResolverPolePairs_Click(object sender, RoutedEventArgs e)
         {
             string polePairsText = _resolverPolePairsTextBox.Text;
-            await RunMainTestAdvancedAsync("设置旋变极对数", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "RESOLVER" }, { "Operation", "SetPolePairs" }, { "PolePairs", ParseDouble(polePairsText, "极对数") }, { "ResultMode", "Action" } });
+            await RunMainTestAdvancedAsync(SelectedResolverName() + "设置极对数", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", SelectedResolverDevice() }, { "Operation", "SetPolePairs" }, { "PolePairs", ParseDouble(polePairsText, "极对数") }, { "ResultMode", "Action" } });
         }
         private async void SetResolverSpeed_Click(object sender, RoutedEventArgs e)
         {
             string speedText = _resolverSpeedTextBox.Text;
-            await RunMainTestAdvancedAsync("设置旋变转速", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "RESOLVER" }, { "Operation", "SetSpeed" }, { "Speed", ParseDouble(speedText, "转速") }, { "PolePairs", ParseDouble(_resolverPolePairsTextBox.Text, "极对数") }, { "ResultMode", "Action" } });
+            await RunMainTestAdvancedAsync(SelectedResolverName() + "设置转速", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", SelectedResolverDevice() }, { "Operation", "SetSpeed" }, { "Speed", ParseDouble(speedText, "转速") }, { "PolePairs", ParseDouble(_resolverPolePairsTextBox.Text, "极对数") }, { "ResultMode", "Action" } });
         }
         private async void SetResolverPosition_Click(object sender, RoutedEventArgs e)
         {
             string positionText = _resolverPositionTextBox.Text;
-            await RunMainTestAdvancedAsync("设置旋变位置", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "RESOLVER" }, { "Operation", "SetPosition" }, { "Position", ParseDouble(positionText, "位置") }, { "PolePairs", ParseDouble(_resolverPolePairsTextBox.Text, "极对数") }, { "ResultMode", "Action" } });
+            await RunMainTestAdvancedAsync(SelectedResolverName() + "设置位置", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", SelectedResolverDevice() }, { "Operation", "SetPosition" }, { "Position", ParseDouble(positionText, "位置") }, { "PolePairs", ParseDouble(_resolverPolePairsTextBox.Text, "极对数") }, { "ResultMode", "Action" } });
         }
         private async void Resolver700_Click(object sender, RoutedEventArgs e) { _resolverSpeedTextBox.Text = "700"; SetResolverSpeed_Click(sender, e); await Task.CompletedTask; }
         private async void Resolver3500_Click(object sender, RoutedEventArgs e) { _resolverSpeedTextBox.Text = "3500"; SetResolverSpeed_Click(sender, e); await Task.CompletedTask; }
         private async void Resolver7000_Click(object sender, RoutedEventArgs e) { _resolverSpeedTextBox.Text = "7000"; SetResolverSpeed_Click(sender, e); await Task.CompletedTask; }
         private async void Resolver225_Click(object sender, RoutedEventArgs e) { _resolverPositionTextBox.Text = "225"; SetResolverPosition_Click(sender, e); await Task.CompletedTask; }
         private async void Resolver315_Click(object sender, RoutedEventArgs e) { _resolverPositionTextBox.Text = "315"; SetResolverPosition_Click(sender, e); await Task.CompletedTask; }
-        private async void StopResolver_Click(object sender, RoutedEventArgs e) { await RunMainTestAdvancedAsync("停止旋变", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "RESOLVER" }, { "Operation", "Stop" }, { "ResultMode", "Action" } }); }
+        private async void StopResolver_Click(object sender, RoutedEventArgs e) { await RunMainTestAdvancedAsync("停止" + SelectedResolverName(), "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", SelectedResolverDevice() }, { "Operation", "Stop" }, { "ResultMode", "Action" } }); }
         private async void SendResolverSignal_Click(object sender, RoutedEventArgs e)
         {
             string signalName = _resolverSignalNameTextBox.Text.Trim();
             string signalValueText = _resolverSignalValueTextBox.Text;
             bool sendFlag = _resolverSignalSendFlagCheckBox.IsChecked == true;
-            await RunMainTestAdvancedAsync("发送旋变 DBC 信号", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", "RESOLVER" }, { "Operation", "SendDbcSignal" }, { "SignalName", signalName }, { "Value", ParseDouble(signalValueText, "旋变信号值") }, { "SendFlag", sendFlag }, { "ResultMode", "Action" } });
+            await RunMainTestAdvancedAsync(SelectedResolverName() + "发送DBC信号", "FCT_ExecuteAction", new Dictionary<string, object> { { "Device", SelectedResolverDevice() }, { "Operation", "SendDbcSignal" }, { "SignalName", signalName }, { "Value", ParseDouble(signalValueText, "旋变信号值") }, { "SendFlag", sendFlag }, { "ResultMode", "Action" } });
         }
         private void CopyLog_Click(object sender, RoutedEventArgs e)
         {

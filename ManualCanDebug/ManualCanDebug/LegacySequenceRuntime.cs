@@ -52,6 +52,7 @@ namespace ManualCanDebug
         public event Action<int> CurrentStepChanged;
 
         public bool InstrumentsInitialized { get { return _instrumentsInitialized; } }
+        public string InitializationFailures { get { return SupportsFunction("FCT_GetInstrumentInitializationFailures") ? Convert.ToString(InvokeTestDll("FCT_GetInstrumentInitializationFailures", new object[0])) ?? string.Empty : string.Empty; } }
         public IReadOnlyCollection<string> InitializedInstrumentNames
         {
             get
@@ -128,6 +129,7 @@ namespace ManualCanDebug
                 if (Math.Abs(result) > double.Epsilon) throw new InvalidOperationException("ProcessSetup 返回 " + result + "。期望为 0。");
                 _instrumentsInitialized = true;
                 LogMessage("MainTest已按仪器中心选择完成初始化：" + Convert.ToString(InvokeTestDll("FCT_GetInitializedInstruments", new object[0])));
+                if (SupportsFunction("FCT_GetInstrumentInitializationFailures")) { string failures = Convert.ToString(InvokeTestDll("FCT_GetInstrumentInitializationFailures", new object[0])) ?? string.Empty; if (!string.IsNullOrWhiteSpace(failures)) LogMessage("部分仪器初始化失败（成功仪器仍可调试）：" + failures); }
             }
             catch
             {
@@ -181,11 +183,11 @@ namespace ManualCanDebug
             return rawReturn;
         }
 
-        public async Task EndDebugSessionAsync()
+        public async Task EndDebugSessionAsync(bool runPostUut = true)
         {
             if (!_debugSessionStarted) return;
-            LogMessage("结束功能块调试会话：执行平台原MainTest.PostUUT安全收尾。");
-            try { await Task.Run(() => InvokeDoubleWithSocket("PostUUT", SocketIndex)); }
+            LogMessage(runPostUut ? "结束完整流程调试：执行平台原MainTest.PostUUT安全收尾。" : "结束局部STEP/模块调试：保持当前仪器输出，不执行PostUUT。");
+            try { if (runPostUut) await Task.Run(() => InvokeDoubleWithSocket("PostUUT", SocketIndex)); }
             finally { _debugSessionStarted = false; }
         }
 
@@ -362,6 +364,12 @@ namespace ManualCanDebug
                 }
             }
             return new LegacyStepExecutionResult(rawReturn, result == null ? string.Empty : result.TotalStatus, rows, DateTime.Now);
+        }
+
+        public IReadOnlyList<LegacyPlatformResultRow> CurrentPlatformResults()
+        {
+            SequenceResult result = GetSequenceResult(); List<LegacyPlatformResultRow> rows = new List<LegacyPlatformResultRow>(); if (result == null || result.StepResultList_UI == null) return rows;
+            int count = result.StepResultList_UI.Count; for (int index = 0; index < count && index < result.StepResultList_UI.Count; index++) { StepResult_UI item = result.StepResultList_UI[index]; rows.Add(new LegacyPlatformResultRow { StartTime = item.StartTime, StepType = item.StepType ?? string.Empty, StepName = item.StepName ?? string.Empty, Status = item.Status ?? string.Empty, StringValue = item.StringValue ?? string.Empty, MeasuredValue = item.MeasuredValue ?? string.Empty, LimitsLow = item.LimitsLow ?? string.Empty, LimitsHigh = item.LimitsHigh ?? string.Empty, LimitExpression = item.LimitExpression ?? string.Empty, Unit = item.Unit ?? string.Empty, Comment = item.Comment ?? string.Empty }); } return rows;
         }
 
         private double InvokeDouble(string methodName)

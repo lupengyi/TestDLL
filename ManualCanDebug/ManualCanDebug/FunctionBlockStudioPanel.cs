@@ -580,8 +580,6 @@ namespace ManualCanDebug
             try
             {
                 SequenceStepDefinition step = BuildStepFromEditor();
-                bool highVoltage = step.FunctionName.StartsWith("HVDC_", StringComparison.Ordinal) || (step.FunctionName == "FCT_ExecuteAction" && string.Equals(Convert.ToString(step.Get("Device")), "HVDC", StringComparison.OrdinalIgnoreCase));
-                if (highVoltage && MessageBox.Show("当前动作会操作高压电源。请确认接线、急停、负载和人员安全。是否执行？", "高压动作确认", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return;
                 if (_actionConfigurator != null) { _actionConfigurator.ExecuteCurrent(); return; }
                 _actionResult.Text = "正在执行：" + step.StepName;
                 DateTime started = DateTime.Now;
@@ -599,8 +597,6 @@ namespace ManualCanDebug
             CommitStep();
             List<BlockStepListItem> enabled = _steps.Where(value => value.Step.Enabled).ToList();
             if (enabled.Count == 0) { MessageBox.Show("当前模块没有已启用的动作。", "运行模块", MessageBoxButton.OK, MessageBoxImage.Information); return; }
-            bool highVoltage = enabled.SelectMany(GetExecutableSteps).Any(step => step.FunctionName.StartsWith("HVDC_", StringComparison.Ordinal) || step.FunctionName == "FCT_ExecuteAction" && string.Equals(Convert.ToString(step.Get("Device")), "HVDC", StringComparison.OrdinalIgnoreCase));
-            if (highVoltage && MessageBox.Show("当前模块包含高压操作。请确认接线、急停、负载和人员安全。是否按顺序执行？", "高压模块确认", MessageBoxButton.YesNo, MessageBoxImage.Warning) != MessageBoxResult.Yes) return;
             _moduleRunning = true; SetRunButton("\uE769", "运行中", Color.FromRgb(232, 145, 22));
             foreach (BlockStepListItem row in _steps) { row.SetRuntimeState(string.Empty); row.SetExecutionResult(null, string.Empty, true); }
             try

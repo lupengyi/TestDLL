@@ -124,12 +124,13 @@ namespace ManualCanDebug
             _grid.Columns.Add(ResultColumn());
             _grid.Columns.Add(OperationColumn());
             _grid.SelectionChanged += delegate { SequenceHierarchyRow row = _grid.SelectedItem as SequenceHierarchyRow; if (row != null && row.Instance != null) { Action<FlowBlockInstance> handler = SelectedInstanceChanged; if (handler != null) handler(row.Instance); } };
-            _grid.MouseDoubleClick += delegate { SequenceHierarchyRow row = _grid.SelectedItem as SequenceHierarchyRow; if (row != null && row.HasChildren) Toggle(row); };
+            _grid.MouseDoubleClick += Grid_MouseDoubleClick;
             _grid.PreviewMouseLeftButtonDown += Grid_MouseLeftButtonDown; _grid.PreviewMouseLeftButtonUp += Grid_MouseLeftButtonUp; _grid.PreviewMouseMove += Grid_MouseMove; _grid.DragOver += Grid_DragOver; _grid.DragLeave += Grid_DragLeave; _grid.Drop += Grid_Drop; _grid.GiveFeedback += Grid_GiveFeedback; _grid.PreviewMouseRightButtonDown += Grid_RightButtonDown;
             Children.Add(_grid);
         }
 
         private void Grid_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) { _dragArmed = false; _dragRow = null; }
+        private async void Grid_MouseDoubleClick(object sender, MouseButtonEventArgs e) { if (IsInteractiveSource(e.OriginalSource as DependencyObject)) return; SequenceHierarchyRow row = _grid.SelectedItem as SequenceHierarchyRow; if (row == null) return; if (_debugMode && _runFromRow != null && row.Enabled) { e.Handled = true; await _runFromRow(row); return; } if (row.HasChildren) Toggle(row); }
         private void Grid_GiveFeedback(object sender, GiveFeedbackEventArgs e) { if (e.Effects.HasFlag(DragDropEffects.Move) || e.Effects.HasFlag(DragDropEffects.Copy)) { Mouse.SetCursor(Cursors.SizeNS); e.UseDefaultCursors = false; e.Handled = true; } }
         private void Grid_DragLeave(object sender, DragEventArgs e) { ClearDropTarget(); }
         private void ShowDropTarget(DataGridRow row) { if (_dropTargetRow == row) return; ClearDropTarget(); _dropTargetRow = row; if (row != null) { row.BorderBrush = Brush(24, 112, 224); row.BorderThickness = new Thickness(0, 0, 0, 3); } }

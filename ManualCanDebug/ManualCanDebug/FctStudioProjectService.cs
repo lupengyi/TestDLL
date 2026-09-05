@@ -139,6 +139,7 @@ namespace ManualCanDebug
                 AuxiliaryDbcPath = string.Equals(product, "C95", StringComparison.OrdinalIgnoreCase) || string.Equals(product, "C96", StringComparison.OrdinalIgnoreCase) ? "Config\\C95C96Auxiliary.dbc" : string.Empty,
                 DriveStructure = string.Equals(product, "C92", StringComparison.OrdinalIgnoreCase) || string.Equals(product, "C96", StringComparison.OrdinalIgnoreCase) ? "DualMainDrive" : "SingleMainDrive",
                 Capabilities = DefaultCapabilities(product),
+                CanCommunications = DefaultCanCommunications(string.Equals(product, "C92", StringComparison.OrdinalIgnoreCase) || string.Equals(product, "C96", StringComparison.OrdinalIgnoreCase)),
                 SequenceRoot = new Dictionary<string, object>(sequence.RootProperties, StringComparer.Ordinal)
             };
         }
@@ -307,7 +308,9 @@ namespace ManualCanDebug
         private static void NormalizeProject(FctStudioProject project, bool flattenParameters = false)
         {
             project.Blocks = project.Blocks ?? new List<FunctionBlockDefinition>(); project.Flow = project.Flow ?? new List<FlowBlockInstance>(); project.Breakpoints = project.Breakpoints ?? new List<string>();
-            project.ProductLocatorPath = project.ProductLocatorPath ?? string.Empty; project.AuxiliaryDbcPath = project.AuxiliaryDbcPath ?? string.Empty; project.DriveStructure = string.IsNullOrWhiteSpace(project.DriveStructure) ? "SingleMainDrive" : project.DriveStructure; project.Capabilities = project.Capabilities ?? new List<string>();
+            project.ProductLocatorPath = project.ProductLocatorPath ?? string.Empty; project.AuxiliaryDbcPath = project.AuxiliaryDbcPath ?? string.Empty; project.DriveStructure = string.IsNullOrWhiteSpace(project.DriveStructure) ? "SingleMainDrive" : project.DriveStructure; project.Capabilities = project.Capabilities ?? new List<string>(); project.CanCommunications = project.CanCommunications ?? new List<ProductCanCommunicationDefinition>();
+            if (project.CanCommunications.Count == 0) project.CanCommunications = DefaultCanCommunications(string.Equals(project.DriveStructure, "DualMainDrive", StringComparison.OrdinalIgnoreCase));
+            foreach (ProductCanCommunicationDefinition communication in project.CanCommunications) { communication.Role = communication.Role ?? string.Empty; communication.StationCan = communication.StationCan ?? string.Empty; communication.BusMode = string.IsNullOrWhiteSpace(communication.BusMode) ? "经典CAN" : communication.BusMode; communication.Protocols = communication.Protocols ?? string.Empty; communication.ResourcePath = communication.ResourcePath ?? string.Empty; if (communication.ArbitrationBaudRate <= 0) communication.ArbitrationBaudRate = 500000; if (communication.DataBaudRate <= 0) communication.DataBaudRate = 2000000; }
             project.SequenceRoot = NormalizeDictionary(project.SequenceRoot);
             foreach (FunctionBlockDefinition block in project.Blocks)
             {
@@ -320,6 +323,21 @@ namespace ManualCanDebug
             }
             foreach (FlowBlockInstance instance in project.Flow) { instance.ParameterOverrides = NormalizeDictionary(instance.ParameterOverrides); instance.StepOverrides = NormalizeStepOverrides(instance.StepOverrides); instance.ReferenceParameterOverrides = NormalizeStepOverrides(instance.ReferenceParameterOverrides); instance.ModuleSnapshots = instance.ModuleSnapshots ?? new Dictionary<string, FunctionBlockDefinition>(StringComparer.Ordinal); foreach (FunctionBlockDefinition snapshot in instance.ModuleSnapshots.Values.Where(value => value != null)) { snapshot.Parameters = snapshot.Parameters ?? new List<BlockParameterDefinition>(); snapshot.Steps = snapshot.Steps ?? new List<BlockStepDefinition>(); snapshot.SupportedProducts = snapshot.SupportedProducts ?? new List<string>(); foreach (BlockStepDefinition step in snapshot.Steps) { step.StepProperties = NormalizeDictionary(step.StepProperties); step.ParameterBindings = step.ParameterBindings ?? new Dictionary<string, string>(StringComparer.Ordinal); step.ReferencedParameterOverrides = NormalizeDictionary(step.ReferencedParameterOverrides); } MigrateCurrentTableToDirectValues(snapshot); } if (instance.Snapshot != null) MigrateCurrentTableToDirectValues(instance.Snapshot); }
             if (flattenParameters) FlattenParameters(project);
+        }
+
+        private static List<ProductCanCommunicationDefinition> DefaultCanCommunications(bool dualDrive)
+        {
+            return new List<ProductCanCommunicationDefinition>
+            {
+                ProductCan("调试CAN", "调试CAN", "原始CAN,UDS,XCP", true), ProductCan("主驱CAN", "主驱CAN", "Locator,UDS,DBC", true),
+                ProductCan("辅驱CAN", "辅驱CAN", "DBC", true), ProductCan("校准CAN", "校准CAN", "XCP,A2L", true),
+                ProductCan("旋变1CAN", "旋变1CAN", "DBC", true), ProductCan("旋变2CAN", "旋变2CAN", "DBC", dualDrive)
+            };
+        }
+
+        private static ProductCanCommunicationDefinition ProductCan(string role, string stationCan, string protocols, bool enabled)
+        {
+            return new ProductCanCommunicationDefinition { Role = role, StationCan = stationCan, Protocols = protocols, Enabled = enabled };
         }
 
         private sealed class FctStudioEditorState
