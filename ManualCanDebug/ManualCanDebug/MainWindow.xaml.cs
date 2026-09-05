@@ -1763,7 +1763,7 @@ namespace ManualCanDebug
 
         private void OpenFunctionBlockEditor(FunctionBlockDefinition block)
         {
-            if (block == null || _functionBlockStudioPanel == null || _mainTabs == null) return; if (!_restoringStudioNavigation) PushStudioNavigation(); if (!_studioBlockMode && _studioFlowEditorPanel != null) _studioReturnFlowInstanceId = _studioFlowEditorPanel.SelectedFlowInstanceId; ShowStudioBlockWorkspace(block.Id, null); SetApplicationStatus("正在编辑功能块：" + block.Name); UpdateNavigationBackButton();
+            if (block == null || _functionBlockStudioPanel == null || _mainTabs == null) return; _functionBlockStudioPanel.RefreshProject(); if (!_restoringStudioNavigation) PushStudioNavigation(); if (!_studioBlockMode && _studioFlowEditorPanel != null) _studioReturnFlowInstanceId = _studioFlowEditorPanel.SelectedFlowInstanceId; ShowStudioBlockWorkspace(block.Id, null); SetApplicationStatus("正在编辑功能块：" + block.Name); UpdateNavigationBackButton();
         }
         private void OpenHierarchyStepConfiguration(SequenceHierarchyRow row)
         {
