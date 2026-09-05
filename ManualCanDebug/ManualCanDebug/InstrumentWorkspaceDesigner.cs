@@ -53,6 +53,7 @@ namespace ManualCanDebug
             _testConnection = testConnection;
             _document = _service.Load();
             _drivers = _service.ScanDrivers();
+            foreach (ProjectInstrumentDefinition instrument in _document.Instruments) MergeDiscoveredMethods(instrument);
             _selectedInstrument = _document.Instruments.FirstOrDefault(i => i.Device == "DMM") ?? _document.Instruments.FirstOrDefault();
             _selectedStation = _document.Stations.FirstOrDefault(s => s.StationNumber == 3) ?? _document.Stations.FirstOrDefault();
         }
@@ -78,11 +79,7 @@ namespace ManualCanDebug
             root.Children.Add(BuildDiscoveryBar());
 
             Grid lists = new Grid { Margin = new Thickness(0, 10, 0, 0) };
-            lists.ColumnDefinitions.Add(new ColumnDefinition());
-            lists.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(12) });
-            lists.ColumnDefinitions.Add(new ColumnDefinition());
-            Border shared = BuildInstrumentListPanel(true); Grid.SetColumn(shared, 0); lists.Children.Add(shared);
-            Border independent = BuildInstrumentListPanel(false); Grid.SetColumn(independent, 2); lists.Children.Add(independent);
+            lists.Children.Add(BuildAllInstrumentListPanel());
             Grid.SetRow(lists, 1); root.Children.Add(lists);
 
             Grid editors = new Grid();
@@ -179,10 +176,10 @@ namespace ManualCanDebug
             _driverCount = Fact("自动发现 " + _drivers.Count + " 个驱动", "\uE721");
             _methodCount = Fact(_drivers.Sum(d => d.Methods.Count) + " 个方法", "\uE943");
             facts.Children.Add(_driverCount); facts.Children.Add(Divider()); facts.Children.Add(_methodCount); facts.Children.Add(Divider()); facts.Children.Add(Fact("全部可用", "\uE73E"));
-            Button scan = LinkButton("重新扫描"); scan.Click += delegate { _drivers = _service.ScanDrivers(); PopulateProjectInstrumentPage(); RefreshStationResources(); };
+            Button scan = LinkButton("重新扫描"); scan.Click += delegate { _drivers = _service.ScanDrivers(); foreach (ProjectInstrumentDefinition instrument in _document.Instruments) MergeDiscoveredMethods(instrument); PopulateProjectInstrumentPage(); RefreshStationResources(); };
             facts.Children.Add(Divider()); facts.Children.Add(scan); dock.Children.Add(facts);
             StackPanel actions = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right };
-            Button allocate = Primary("＋ 分配仪器"); allocate.Click += AllocateInstrument_Click;
+            Button allocate = Primary("＋ 新增仪器定义"); allocate.Click += AllocateInstrument_Click;
             Button delete = Danger("删除定义"); delete.Click += DeleteInstrument_Click;
             actions.Children.Add(allocate); actions.Children.Add(delete); DockPanel.SetDock(actions, Dock.Right); dock.Children.Add(actions);
             border.Child = dock; return border;
@@ -203,6 +200,11 @@ namespace ManualCanDebug
                 rows.Children.Add(BuildInstrumentRow(item, shared));
             scroll.Content = rows; Grid.SetRow(scroll, 1); grid.Children.Add(scroll);
             outer.Child = grid; return outer;
+        }
+
+        private Border BuildAllInstrumentListPanel()
+        {
+            Border outer = Box(); Grid grid = new Grid(); grid.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto }); grid.RowDefinitions.Add(new RowDefinition { Height = new GridLength(1, GridUnitType.Star) }); grid.Children.Add(new TextBlock { Text = "仪器定义（" + _document.Instruments.Count + " 项）", FontSize = 14, FontWeight = FontWeights.SemiBold, Foreground = Ink(), Margin = new Thickness(16, 11, 12, 8) }); ScrollViewer scroll = new ScrollViewer { VerticalScrollBarVisibility = ScrollBarVisibility.Auto, HorizontalScrollBarVisibility = ScrollBarVisibility.Disabled }; StackPanel rows = new StackPanel { Margin = new Thickness(10, 0, 10, 10) }; Grid header = InstrumentColumns(); header.Margin = new Thickness(0, 0, 0, 4); AddCell(header, "仪器名称", 0, true); AddCell(header, "驱动DLL", 1, true); AddCell(header, "仪器类型", 2, true); AddCell(header, "可选方法", 3, true); rows.Children.Add(header); foreach (ProjectInstrumentDefinition item in _document.Instruments.OrderBy(value => value.Category).ThenBy(value => value.DisplayName, StringComparer.OrdinalIgnoreCase)) { bool selected = ReferenceEquals(item, _selectedInstrument); Border rowBorder = new Border { Background = selected ? Bg(235, 245, 255) : Brushes.White, BorderBrush = selected ? Accent() : BorderBrush(), BorderThickness = selected ? new Thickness(3, 1, 1, 1) : new Thickness(1), CornerRadius = new CornerRadius(4), Padding = new Thickness(8, 6, 8, 6), Margin = new Thickness(0, 0, 0, 4), Cursor = Cursors.Hand, Tag = item }; _instrumentRows[item] = rowBorder; Grid row = InstrumentColumns(); AddCell(row, item.DisplayName, 0, false); AddCell(row, item.DriverName, 1, false); AddCell(row, item.Category, 2, false); AddCell(row, (item.GeneratedMethods == null ? 0 : item.GeneratedMethods.Count) + " 个 / 已开放 " + (item.GeneratedMethods == null ? 0 : item.GeneratedMethods.Count(value => value.Selected)), 3, false); rowBorder.Child = row; rowBorder.PreviewMouseLeftButtonDown += delegate { SelectInstrument(item); }; rows.Children.Add(rowBorder); } scroll.Content = rows; Grid.SetRow(scroll, 1); grid.Children.Add(scroll); outer.Child = grid; return outer;
         }
 
         private void BuildInstrumentHeader(Grid grid, bool shared)
@@ -254,7 +256,7 @@ namespace ManualCanDebug
             if (_projectEditor == null) return; _projectEditor.Children.Clear(); _projectEditor.ColumnDefinitions.Clear();
             Border box = Box();
             box.Child = _selectedInstrument == null
-                ? (UIElement)new TextBlock { Text = "在上方列表中选择一台项目仪器后，在这里设置它的驱动、连接、独立/共用方式和要生成的方法。", TextWrapping = TextWrapping.Wrap, Margin = new Thickness(18), Foreground = new SolidColorBrush(Color.FromRgb(112, 124, 140)) }
+                ? (UIElement)new TextBlock { Text = "在上方选择仪器定义后，配置驱动DLL和允许出现在SEQ右键中的方法。连接资源与共用范围只在工位配置中设置。", TextWrapping = TextWrapping.Wrap, Margin = new Thickness(18), Foreground = new SolidColorBrush(Color.FromRgb(112, 124, 140)) }
                 : BuildDefinitionEditor(_selectedInstrument);
             _projectEditor.Children.Add(box);
         }
@@ -280,15 +282,10 @@ namespace ManualCanDebug
 
             Grid fields = new Grid { Margin = new Thickness(0, 10, 0, 0) };
             fields.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(92) }); fields.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-            for (int i = 0; i < 5; i++) fields.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
+            for (int i = 0; i < 3; i++) fields.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto });
             AddLabel(fields, "显示名称", 0, 0); TextBox name = FlatText(item.DisplayName); name.TextChanged += delegate { item.DisplayName = name.Text; }; AddControl(fields, name, 0, 1);
             AddLabel(fields, "自动匹配驱动", 1, 0); ComboBox driver = FlatCombo(_drivers.Select(d => d.AssemblyName).Concat(new[] { item.DriverName }).Where(v => !string.IsNullOrWhiteSpace(v)).Distinct().OrderBy(v => v)); driver.SelectedItem = item.DriverName; driver.SelectionChanged += delegate { ApplyDriverSelection(item, Convert.ToString(driver.SelectedItem)); }; AddControl(fields, driver, 1, 1);
-            AddLabel(fields, "连接资源", 2, 0); Grid connection = new Grid(); connection.ColumnDefinitions.Add(new ColumnDefinition()); connection.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto }); TextBox resource = FlatText(item.Resource); resource.TextChanged += delegate { item.Resource = resource.Text; }; connection.Children.Add(resource); Button test = Secondary("测试连接"); test.MinWidth = 88; test.Margin = new Thickness(8, 0, 0, 0); test.Click += async delegate { await TestConnectionAsync(item, test); }; Grid.SetColumn(test, 1); connection.Children.Add(test); AddControl(fields, connection, 2, 1);
-            AddLabel(fields, "使用方式", 3, 0); StackPanel usage = new StackPanel { Orientation = Orientation.Horizontal };
-            ToggleButton sharedToggle = SegmentButton("共用仪器", item.IsShared); ToggleButton independentToggle = SegmentButton("独立仪器", !item.IsShared);
-            sharedToggle.Click += delegate { item.Usage = "Shared"; PopulateProjectInstrumentPage(); RefreshStationResources(); };
-            independentToggle.Click += delegate { item.Usage = "Independent"; PopulateProjectInstrumentPage(); RefreshStationResources(); };
-            usage.Children.Add(sharedToggle); usage.Children.Add(independentToggle); AddControl(fields, usage, 3, 1);
+            AddLabel(fields, "驱动类型", 2, 0); TextBox driverType = FlatText(string.IsNullOrWhiteSpace(item.DriverTypeName) ? item.DriverName : item.DriverTypeName); driverType.IsReadOnly = true; driverType.Background = Bg(246, 248, 251); AddControl(fields, driverType, 2, 1);
             Grid.SetRow(fields, 1); root.Children.Add(fields);
 
             StackPanel methods = new StackPanel { Margin = new Thickness(0, 10, 0, 0) };
@@ -525,25 +522,19 @@ namespace ManualCanDebug
 
         private void AllocateInstrument_Click(object sender, RoutedEventArgs e)
         {
-            Window dialog = new Window { Title = "分配仪器", Width = 470, Height = 330, WindowStartupLocation = WindowStartupLocation.CenterOwner, Owner = Window.GetWindow((DependencyObject)sender), ResizeMode = ResizeMode.NoResize };
-            Grid root = new Grid { Margin = new Thickness(20) }; root.RowDefinitions.Add(new RowDefinition()); root.RowDefinitions.Add(new RowDefinition()); root.RowDefinitions.Add(new RowDefinition()); root.RowDefinitions.Add(new RowDefinition()); root.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto }); root.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(110) }); root.ColumnDefinitions.Add(new ColumnDefinition());
-            ComboBox driver = FlatCombo(_drivers.Select(d => d.AssemblyName)); driver.SelectedIndex = 0; TextBox name = FlatText("新仪器"); ComboBox usage = FlatCombo(new[] { "共用仪器", "独立仪器模板" }); usage.SelectedIndex = 1; TextBox address = FlatText(string.Empty);
-            AddLabel(root, "自动发现驱动", 0, 0); AddControl(root, driver, 0, 1); AddLabel(root, "显示名称", 1, 0); AddControl(root, name, 1, 1); AddLabel(root, "使用方式", 2, 0); AddControl(root, usage, 2, 1); AddLabel(root, "连接参数", 3, 0); AddControl(root, address, 3, 1);
-            StackPanel footer = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right }; Button cancel = Secondary("取消"); cancel.Click += delegate { dialog.Close(); }; Button ok = Primary("分配并设置"); ok.Click += delegate { string driverName = Convert.ToString(driver.SelectedItem); string device = GuessDevice(driverName, name.Text); ProjectInstrumentDefinition item = new ProjectInstrumentDefinition { DisplayName = name.Text, Device = device, DriverName = driverName, Resource = address.Text, Usage = usage.SelectedIndex == 0 ? "Shared" : "Independent", ChannelCount = 1, GeneratedMethods = new ObservableCollection<GeneratedInstrumentMethod>() }; item.GeneratedMethods = CreateMethodSelection(device, driverName); _document.Instruments.Add(item); _selectedInstrument = item; dialog.DialogResult = true; dialog.Close(); }; footer.Children.Add(cancel); footer.Children.Add(ok); Grid.SetRow(footer, 4); Grid.SetColumnSpan(footer, 2); root.Children.Add(footer); dialog.Content = root;
-            if (dialog.ShowDialog() == true) { SaveWorkspace(false); PopulateProjectInstrumentPage(); RefreshStationResources(); MessageBox.Show("仪器定义已保存并立即加入当前页面。", "分配仪器", MessageBoxButton.OK, MessageBoxImage.Information); }
+            Window dialog = new Window { Title = "新增仪器定义", Width = 470, Height = 230, WindowStartupLocation = WindowStartupLocation.CenterOwner, Owner = Window.GetWindow((DependencyObject)sender), ResizeMode = ResizeMode.NoResize }; Grid root = new Grid { Margin = new Thickness(20) }; root.RowDefinitions.Add(new RowDefinition()); root.RowDefinitions.Add(new RowDefinition()); root.RowDefinitions.Add(new RowDefinition { Height = GridLength.Auto }); root.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(110) }); root.ColumnDefinitions.Add(new ColumnDefinition()); ComboBox driver = FlatCombo(_drivers.Select(d => d.AssemblyName)); driver.SelectedIndex = 0; TextBox name = FlatText("新仪器"); AddLabel(root, "驱动DLL", 0, 0); AddControl(root, driver, 0, 1); AddLabel(root, "仪器名称", 1, 0); AddControl(root, name, 1, 1); StackPanel footer = new StackPanel { Orientation = Orientation.Horizontal, HorizontalAlignment = HorizontalAlignment.Right }; Button cancel = Secondary("取消"); cancel.Click += delegate { dialog.Close(); }; Button ok = Primary("创建定义"); ok.Click += delegate { string driverName = Convert.ToString(driver.SelectedItem); string device = GuessDevice(driverName, name.Text); ProjectInstrumentDefinition item = new ProjectInstrumentDefinition { DisplayName = name.Text, Device = device, DriverName = string.Empty, Usage = "Independent", ChannelCount = 1, GeneratedMethods = new ObservableCollection<GeneratedInstrumentMethod>() }; ApplyDriverSelection(item, driverName); if (item.GeneratedMethods == null || item.GeneratedMethods.Count == 0) item.GeneratedMethods = CreateMethodSelection(device, driverName); _document.Instruments.Add(item); _selectedInstrument = item; dialog.DialogResult = true; dialog.Close(); }; footer.Children.Add(cancel); footer.Children.Add(ok); Grid.SetRow(footer, 2); Grid.SetColumnSpan(footer, 2); root.Children.Add(footer); dialog.Content = root; if (dialog.ShowDialog() == true) { SaveWorkspace(false); PopulateProjectInstrumentPage(); RefreshStationResources(); MessageBox.Show("仪器定义已保存。请到工位配置添加实例并设置连接资源。", "新增仪器定义", MessageBoxButton.OK, MessageBoxImage.Information); }
         }
 
         private ObservableCollection<GeneratedInstrumentMethod> CreateMethodSelection(string device, string driverName)
         {
             ObservableCollection<GeneratedInstrumentMethod> result = new ObservableCollection<GeneratedInstrumentMethod>();
-            foreach (ActionDescriptor d in ActionCatalog.AllDescriptors.Where(v => string.Equals(v.Device, device, StringComparison.OrdinalIgnoreCase) && !(string.Equals(v.BindingMode, "MainTest", StringComparison.OrdinalIgnoreCase) && (v.FunctionName ?? string.Empty).StartsWith("UI_", StringComparison.OrdinalIgnoreCase)))) result.Add(new GeneratedInstrumentMethod { Device = device, Operation = d.Operation, DisplayName = d.DisplayName, DriverMethod = d.Operation, FunctionName = "UI_" + InstrumentWorkspaceService.SanitizeIdentifier(device) + "_" + InstrumentWorkspaceService.SanitizeIdentifier(d.Operation), ReturnsValue = d.ReturnsValue, Selected = true, Fields = d.Fields.Select(f => new InstrumentActionFieldDefinition { Name = f.Name, Label = f.Label, Type = f.Type, DefaultValue = Convert.ToString(f.DefaultValue, CultureInfo.InvariantCulture), Unit = f.Unit, Options = f.Options == null ? string.Empty : string.Join("|", f.Options) }).ToList() });
-            if (result.Count == 0)
-            {
-                DriverDiscoveryItem driver = _drivers.FirstOrDefault(v => string.Equals(v.AssemblyName, driverName, StringComparison.OrdinalIgnoreCase));
-                if (driver != null) foreach (DriverMethodDiscovery method in driver.Methods) result.Add(new GeneratedInstrumentMethod { Device = device, Operation = method.Name, DisplayName = method.Name, DriverMethod = method.Name, DriverAssemblyPath = driver.Path, DriverTypeName = driver.TypeName, UseDirectReflection = true, FunctionName = "UI_" + InstrumentWorkspaceService.SanitizeIdentifier(device) + "_" + InstrumentWorkspaceService.SanitizeIdentifier(method.Name), ReturnsValue = !string.Equals(method.ReturnType, typeof(void).FullName, StringComparison.Ordinal), Selected = false, Fields = method.Parameters.Select(p => new InstrumentActionFieldDefinition { Name = p.Name, Label = p.Name, Type = ActionFieldType(p.TypeName), DefaultValue = p.DefaultValue, Unit = string.Empty, Options = string.Empty }).ToList() });
-            }
+            string actionDevice = ActionDeviceForDefinition(device); foreach (ActionDescriptor d in ActionCatalog.AllDescriptors.Where(v => string.Equals(v.Device, actionDevice, StringComparison.OrdinalIgnoreCase) && !(string.Equals(v.BindingMode, "MainTest", StringComparison.OrdinalIgnoreCase) && (v.FunctionName ?? string.Empty).StartsWith("UI_", StringComparison.OrdinalIgnoreCase)))) result.Add(new GeneratedInstrumentMethod { Device = device, Operation = d.Operation, DisplayName = d.DisplayName, DriverMethod = d.Operation, FunctionName = "UI_" + InstrumentWorkspaceService.SanitizeIdentifier(device) + "_" + InstrumentWorkspaceService.SanitizeIdentifier(d.Operation), ReturnsValue = d.ReturnsValue, Selected = true, Fields = d.Fields.Select(f => new InstrumentActionFieldDefinition { Name = f.Name, Label = f.Label, Type = f.Type, DefaultValue = Convert.ToString(f.DefaultValue, CultureInfo.InvariantCulture), Unit = f.Unit, Options = f.Options == null ? string.Empty : string.Join("|", f.Options) }).ToList() });
+            DriverDiscoveryItem driver = _drivers.FirstOrDefault(v => string.Equals(v.AssemblyName, driverName, StringComparison.OrdinalIgnoreCase));
+            if (driver != null) foreach (DriverMethodDiscovery method in driver.Methods.Where(method => !result.Any(existing => string.Equals(existing.DriverMethod, method.Name, StringComparison.OrdinalIgnoreCase)))) result.Add(new GeneratedInstrumentMethod { Device = device, Operation = method.Name, DisplayName = method.Name, DriverMethod = method.Name, DriverAssemblyPath = driver.Path, DriverTypeName = driver.TypeName, UseDirectReflection = true, FunctionName = "UI_" + InstrumentWorkspaceService.SanitizeIdentifier(device) + "_" + InstrumentWorkspaceService.SanitizeIdentifier(method.Name), ReturnsValue = !string.Equals(method.ReturnType, typeof(void).FullName, StringComparison.Ordinal), Selected = false, Fields = method.Parameters.Select(p => new InstrumentActionFieldDefinition { Name = p.Name, Label = p.Name, Type = ActionFieldType(p.TypeName), DefaultValue = p.DefaultValue, Unit = string.Empty, Options = string.Empty }).ToList() });
             return result;
         }
+        private static string ActionDeviceForDefinition(string device) { if (string.Equals(device, "RESOLVERCAN", StringComparison.OrdinalIgnoreCase)) return "RESOLVER"; if (string.Equals(device, "DMM", StringComparison.OrdinalIgnoreCase)) return "DMM_HV"; if (string.Equals(device, "RES", StringComparison.OrdinalIgnoreCase)) return "RES_1"; return device ?? string.Empty; }
+        private void MergeDiscoveredMethods(ProjectInstrumentDefinition item) { if (item == null) return; if (item.GeneratedMethods == null) item.GeneratedMethods = new ObservableCollection<GeneratedInstrumentMethod>(); foreach (GeneratedInstrumentMethod method in CreateMethodSelection(item.Device, item.DriverName)) if (!item.GeneratedMethods.Any(existing => string.Equals(existing.DriverMethod, method.DriverMethod, StringComparison.OrdinalIgnoreCase) && string.Equals(existing.Operation, method.Operation, StringComparison.OrdinalIgnoreCase))) item.GeneratedMethods.Add(method); }
 
         private void ApplyDriverSelection(ProjectInstrumentDefinition item, string driverName)
         {

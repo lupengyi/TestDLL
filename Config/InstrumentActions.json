@@ -139,28 +139,6 @@
     "Source": "仪器",
     "Target": "高压电源",
     "Device": "HVDC",
-    "Operation": "SetPower",
-    "DisplayName": "设置功率",
-    "ReturnsValue": false,
-    "BindingMode": "Generic",
-    "FunctionName": "",
-    "PluginAssembly": "",
-    "PluginType": "",
-    "Fields": [
-      {
-        "Name": "Power",
-        "Label": "功率限制",
-        "Type": "double",
-        "DefaultValue": "8600",
-        "Unit": "W",
-        "Options": ""
-      }
-    ]
-  },
-  {
-    "Source": "仪器",
-    "Target": "高压电源",
-    "Device": "HVDC",
     "Operation": "SetOutput",
     "DisplayName": "输出开关",
     "ReturnsValue": false,
@@ -198,19 +176,6 @@
     "Device": "HVDC",
     "Operation": "ReadCurrent",
     "DisplayName": "读取电流",
-    "ReturnsValue": true,
-    "BindingMode": "Generic",
-    "FunctionName": "",
-    "PluginAssembly": "",
-    "PluginType": "",
-    "Fields": []
-  },
-  {
-    "Source": "仪器",
-    "Target": "高压电源",
-    "Device": "HVDC",
-    "Operation": "ReadPower",
-    "DisplayName": "读取功率",
     "ReturnsValue": true,
     "BindingMode": "Generic",
     "FunctionName": "",
@@ -986,7 +951,7 @@
         "Type": "string",
         "DefaultValue": "Ccm",
         "Unit": "",
-        "Options": "CC 低量程 - 恒流：小电流精细加载|CC 中量程 - 恒流：常用恒流加载|CC 高量程 - 恒流：大电流加载|CV 低量程 - 恒压：低压精细控制|CV 中量程 - 恒压：常用恒压加载|CV 高量程 - 恒压：高压加载|CR 低量程 - 恒阻：模拟小电阻负载|CR 中量程 - 恒阻：模拟中等电阻|CR 高量程 - 恒阻：模拟大电阻|CP 低量程 - 恒功率：小功率加载|CP 中量程 - 恒功率：常用恒功率|CP 高量程 - 恒功率：大功率加载"
+        "Options": "Ccl|Ccm|Cch|Cvl|Cvm|Cvh|Crl|Crm|Crh|Cpl|Cpm|Cph"
       }
     ]
   },
@@ -1187,7 +1152,7 @@
     "Target": "FCT功能继电器板（48路）",
     "Device": "RELAY_FCT",
     "Operation": "SetDO",
-    "DisplayName": "设置直接输出（OUT6以后）",
+    "DisplayName": "设置IO（Y00-Y57）",
     "ReturnsValue": false,
     "BindingMode": "Generic",
     "FunctionName": "",
@@ -1198,34 +1163,26 @@
         "Name": "Channels",
         "Label": "输出端口",
         "Type": "string",
-        "DefaultValue": "OUT6",
+        "DefaultValue": "",
         "Unit": "",
-        "Options": "OUT6|OUT7|OUT9|OUT10|OUT9,OUT10|OUT11|OUT12|OUT13|OUT14|OUT15|OUT16|OUT17|OUT18|OUT19|OUT20|OUT21|OUT22|OUT23|OUT24|OUT25|OUT26|OUT27|OUT28|OUT29|OUT30|OUT31|OUT32|OUT33|OUT34|OUT35|OUT36|OUT37|OUT38|OUT39|OUT40|OUT41|OUT42|OUT43|OUT45"
+        "Options": ""
       },
       {
         "Name": "Values",
         "Label": "状态列表",
         "Type": "string",
-        "DefaultValue": "1",
+        "DefaultValue": "",
         "Unit": "",
-        "Options": "0|1"
-      },
-      {
-        "Name": "Slave",
-        "Label": "从站地址",
-        "Type": "int",
-        "DefaultValue": "1",
-        "Unit": "",
-        "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16"
+        "Options": ""
       }
     ]
   },
   {
     "Source": "仪器",
-    "Target": "高压15选1锁存板（48路）",
+    "Target": "高压15选1锁存板",
     "Device": "RELAY_HVMUX",
     "Operation": "Select15",
-    "DisplayName": "安全选择测量通道",
+    "DisplayName": "选择高压测量位置",
     "ReturnsValue": false,
     "BindingMode": "Generic",
     "FunctionName": "",
@@ -1234,11 +1191,11 @@
     "Fields": [
       {
         "Name": "Selection",
-        "Label": "测量通道",
-        "Type": "int",
-        "DefaultValue": "1",
+        "Label": "测量位置",
+        "Type": "string",
+        "DefaultValue": "1 - HV1 / HVDC",
         "Unit": "",
-        "Options": "1|2|3|4|5|6|7|8|9|10|11|12|13|14|15"
+        "Options": "1 - HV1 / HVDC|2 - HV2 / DCDC|3 - HV3 / G1|4 - HV4 / G2|5 - HV5 / G3|6 - HV6 / G4|7 - HV7 / G5|8 - HV8 / UP1|9 - HV9 / UP3|10 - HV10 / fast1|11 - HV11 / fast2|12 - HV12 / fast3|13 - HV13 / fast4|14 - HV14 / battery1|15 - HV15 / battery2"
       },
       {
         "Name": "SwitchDelayMs",
@@ -1508,13 +1465,1250 @@
   },
   {
     "Source": "仪器",
-    "Target": "RES",
-    "Device": "RES",
+    "Target": "高压万用表",
+    "Device": "DMM_HV",
+    "Operation": "ConfigDCVoltage",
+    "DisplayName": "配置直流电压",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "1000",
+        "Unit": "V",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "0.01",
+        "Unit": "V",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压万用表",
+    "Device": "DMM_LV",
+    "Operation": "ConfigDCVoltage",
+    "DisplayName": "配置直流电压",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "1000",
+        "Unit": "V",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "0.01",
+        "Unit": "V",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压万用表",
+    "Device": "DMM_HV",
+    "Operation": "ConfigDCCurrent",
+    "DisplayName": "配置直流电流",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "3",
+        "Unit": "A",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "1E-05",
+        "Unit": "A",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压万用表",
+    "Device": "DMM_LV",
+    "Operation": "ConfigDCCurrent",
+    "DisplayName": "配置直流电流",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "3",
+        "Unit": "A",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "1E-05",
+        "Unit": "A",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压万用表",
+    "Device": "DMM_HV",
+    "Operation": "ConfigACVoltage",
+    "DisplayName": "配置交流电压",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "1000",
+        "Unit": "V",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "0.01",
+        "Unit": "V",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压万用表",
+    "Device": "DMM_LV",
+    "Operation": "ConfigACVoltage",
+    "DisplayName": "配置交流电压",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "1000",
+        "Unit": "V",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "0.01",
+        "Unit": "V",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压万用表",
+    "Device": "DMM_HV",
+    "Operation": "ConfigACCurrent",
+    "DisplayName": "配置交流电流",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "3",
+        "Unit": "A",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "1E-05",
+        "Unit": "A",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压万用表",
+    "Device": "DMM_LV",
+    "Operation": "ConfigACCurrent",
+    "DisplayName": "配置交流电流",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "3",
+        "Unit": "A",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "1E-05",
+        "Unit": "A",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压万用表",
+    "Device": "DMM_HV",
+    "Operation": "Read",
+    "DisplayName": "读取测量值",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压万用表",
+    "Device": "DMM_LV",
+    "Operation": "Read",
+    "DisplayName": "读取测量值",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压万用表",
+    "Device": "DMM_HV",
+    "Operation": "Close",
+    "DisplayName": "关闭会话",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压万用表",
+    "Device": "DMM_LV",
+    "Operation": "Close",
+    "DisplayName": "关闭会话",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "程控电阻卡 1",
+    "Device": "RES_1",
+    "Operation": "SetResistance",
+    "DisplayName": "设置电阻",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "ResValue",
+        "Label": "电阻值",
+        "Type": "double",
+        "DefaultValue": "1000",
+        "Unit": "Ω",
+        "Options": ""
+      },
+      {
+        "Name": "Channel",
+        "Label": "通道",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "程控电阻卡 2",
+    "Device": "RES_2",
+    "Operation": "SetResistance",
+    "DisplayName": "设置电阻",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "ResValue",
+        "Label": "电阻值",
+        "Type": "double",
+        "DefaultValue": "1000",
+        "Unit": "Ω",
+        "Options": ""
+      },
+      {
+        "Name": "Channel",
+        "Label": "通道",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "程控电阻卡 3",
+    "Device": "RES_3",
+    "Operation": "SetResistance",
+    "DisplayName": "设置电阻",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "ResValue",
+        "Label": "电阻值",
+        "Type": "double",
+        "DefaultValue": "1000",
+        "Unit": "Ω",
+        "Options": ""
+      },
+      {
+        "Name": "Channel",
+        "Label": "通道",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压继电器板（15路）",
+    "Device": "RELAY_HVMUX",
+    "Operation": "SetDO",
+    "DisplayName": "设置IO（Y00-Y16）",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Channels",
+        "Label": "输出端口",
+        "Type": "string",
+        "DefaultValue": "",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "Values",
+        "Label": "状态列表",
+        "Type": "string",
+        "DefaultValue": "",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压电源",
+    "Device": "HVDC",
+    "Operation": "SetPower",
+    "DisplayName": "设置功率",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Power",
+        "Label": "功率限制",
+        "Type": "double",
+        "DefaultValue": "8600",
+        "Unit": "W",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压电源",
+    "Device": "HVDC",
+    "Operation": "ReadPower",
+    "DisplayName": "读取功率",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "Init",
+    "DisplayName": "初始化万用表",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "Reset",
+    "DisplayName": "复位万用表",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "Identify",
+    "DisplayName": "读取设备信息",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "ConfigMeasure",
+    "DisplayName": "选择测量类型",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "MeasureType",
+        "Label": "测量类型",
+        "Type": "string",
+        "DefaultValue": "DCVoltage",
+        "Unit": "",
+        "Options": "DCVoltage - 直流电压|DCCurrent - 直流电流|ACVoltage - 交流电压|ACCurrent - 交流电流|Resistance - 电阻|Frequence - 频率"
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "ConfigResistance",
+    "DisplayName": "配置电阻测量",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Ω",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Ω",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "ConfigFrequency",
+    "DisplayName": "配置频率测量",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Hz",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Hz",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "ConfigCalculateMaximum",
+    "DisplayName": "配置最大值计算",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压万用表",
+    "Device": "DMM_HV",
+    "Operation": "Init",
+    "DisplayName": "初始化万用表",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压万用表",
+    "Device": "DMM_LV",
+    "Operation": "Init",
+    "DisplayName": "初始化万用表",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压万用表",
+    "Device": "DMM_HV",
+    "Operation": "Reset",
+    "DisplayName": "复位万用表",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压万用表",
+    "Device": "DMM_LV",
+    "Operation": "Reset",
+    "DisplayName": "复位万用表",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压万用表",
+    "Device": "DMM_HV",
+    "Operation": "Identify",
+    "DisplayName": "读取设备信息",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压万用表",
+    "Device": "DMM_LV",
+    "Operation": "Identify",
+    "DisplayName": "读取设备信息",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压万用表",
+    "Device": "DMM_HV",
+    "Operation": "ConfigMeasure",
+    "DisplayName": "选择测量类型",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "MeasureType",
+        "Label": "测量类型",
+        "Type": "string",
+        "DefaultValue": "DCVoltage",
+        "Unit": "",
+        "Options": "DCVoltage - 直流电压|DCCurrent - 直流电流|ACVoltage - 交流电压|ACCurrent - 交流电流|Resistance - 电阻|Frequence - 频率"
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压万用表",
+    "Device": "DMM_LV",
+    "Operation": "ConfigMeasure",
+    "DisplayName": "选择测量类型",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "MeasureType",
+        "Label": "测量类型",
+        "Type": "string",
+        "DefaultValue": "DCVoltage",
+        "Unit": "",
+        "Options": "DCVoltage - 直流电压|DCCurrent - 直流电流|ACVoltage - 交流电压|ACCurrent - 交流电流|Resistance - 电阻|Frequence - 频率"
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压万用表",
+    "Device": "DMM_HV",
+    "Operation": "ConfigResistance",
+    "DisplayName": "配置电阻测量",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Ω",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Ω",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压万用表",
+    "Device": "DMM_LV",
+    "Operation": "ConfigResistance",
+    "DisplayName": "配置电阻测量",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Ω",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Ω",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压万用表",
+    "Device": "DMM_HV",
+    "Operation": "ConfigFrequency",
+    "DisplayName": "配置频率测量",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Hz",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Hz",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压万用表",
+    "Device": "DMM_LV",
+    "Operation": "ConfigFrequency",
+    "DisplayName": "配置频率测量",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Hz",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Hz",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "高压万用表",
+    "Device": "DMM_HV",
+    "Operation": "ConfigCalculateMaximum",
+    "DisplayName": "配置最大值计算",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "低压万用表",
+    "Device": "DMM_LV",
+    "Operation": "ConfigCalculateMaximum",
+    "DisplayName": "配置最大值计算",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "产品内部通信",
+    "Target": "产品基础命令",
+    "Device": "PRODUCTCAN",
+    "Operation": "ExitFT",
+    "DisplayName": "退出FT模式",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "CanInstrument",
+        "Label": "CAN通道",
+        "Type": "string",
+        "DefaultValue": "MAINCAN",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "校准CAN",
+    "Device": "CALIBRATIONCAN",
+    "Operation": "SendRaw",
+    "DisplayName": "发送原始帧",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "CanId",
+        "Label": "CAN ID",
+        "Type": "string",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "DataHex",
+        "Label": "数据",
+        "Type": "string",
+        "DefaultValue": "00 00 00 00 00 00 00 00",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "校准CAN",
+    "Device": "CALIBRATIONCAN",
+    "Operation": "ReceiveRaw",
+    "DisplayName": "读取原始帧",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "FilterId",
+        "Label": "过滤ID",
+        "Type": "string",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "校准CAN",
+    "Device": "CALIBRATIONCAN",
+    "Operation": "SendDbcSignal",
+    "DisplayName": "发送DBC信号",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "SignalName",
+        "Label": "信号名",
+        "Type": "string",
+        "DefaultValue": "",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "Value",
+        "Label": "信号值",
+        "Type": "double",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "SendFlag",
+        "Label": "立即发送",
+        "Type": "bool",
+        "DefaultValue": "True",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变2CAN",
+    "Device": "RESOLVERCAN2",
+    "Operation": "SendRaw",
+    "DisplayName": "发送原始帧",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "CanId",
+        "Label": "CAN ID",
+        "Type": "string",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "DataHex",
+        "Label": "数据",
+        "Type": "string",
+        "DefaultValue": "00 00 00 00 00 00 00 00",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变2CAN",
+    "Device": "RESOLVERCAN2",
+    "Operation": "ReceiveRaw",
+    "DisplayName": "读取原始帧",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "FilterId",
+        "Label": "过滤ID",
+        "Type": "string",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变2CAN",
+    "Device": "RESOLVERCAN2",
+    "Operation": "SendDbcSignal",
+    "DisplayName": "发送DBC信号",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "SignalName",
+        "Label": "信号名",
+        "Type": "string",
+        "DefaultValue": "",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "Value",
+        "Label": "信号值",
+        "Type": "double",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "SendFlag",
+        "Label": "立即发送",
+        "Type": "bool",
+        "DefaultValue": "True",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变模拟器",
+    "Device": "RESOLVER",
+    "Operation": "ConfigureDbc",
+    "DisplayName": "DBC表格配置",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变1模拟器",
+    "Device": "RESOLVER",
+    "Operation": "SendRaw",
+    "DisplayName": "发送原始帧",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "CanId",
+        "Label": "CAN ID",
+        "Type": "string",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "DataHex",
+        "Label": "数据",
+        "Type": "string",
+        "DefaultValue": "00 00 00 00 00 00 00 00",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变1模拟器",
+    "Device": "RESOLVER",
+    "Operation": "ReceiveRaw",
+    "DisplayName": "读取原始帧",
+    "ReturnsValue": true,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "FilterId",
+        "Label": "过滤ID",
+        "Type": "string",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变2模拟器",
+    "Device": "RESOLVERCAN2",
+    "Operation": "ConfigureDbc",
+    "DisplayName": "DBC表格配置",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变2模拟器",
+    "Device": "RESOLVERCAN2",
+    "Operation": "Init",
+    "DisplayName": "初始化",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变2模拟器",
+    "Device": "RESOLVERCAN2",
+    "Operation": "SetPolePairs",
+    "DisplayName": "设置极对数",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "PolePairs",
+        "Label": "极对数",
+        "Type": "int",
+        "DefaultValue": "6",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变2模拟器",
+    "Device": "RESOLVERCAN2",
+    "Operation": "SetSpeed",
+    "DisplayName": "设置转速",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Speed",
+        "Label": "转速",
+        "Type": "double",
+        "DefaultValue": "700",
+        "Unit": "rpm",
+        "Options": ""
+      },
+      {
+        "Name": "PolePairs",
+        "Label": "极对数",
+        "Type": "int",
+        "DefaultValue": "6",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变2模拟器",
+    "Device": "RESOLVERCAN2",
+    "Operation": "SetPosition",
+    "DisplayName": "设置角度",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Position",
+        "Label": "位置",
+        "Type": "double",
+        "DefaultValue": "225",
+        "Unit": "deg",
+        "Options": ""
+      },
+      {
+        "Name": "PolePairs",
+        "Label": "极对数",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变2模拟器",
+    "Device": "RESOLVERCAN2",
+    "Operation": "Stop",
+    "DisplayName": "停止",
+    "ReturnsValue": false,
+    "BindingMode": "Generic",
+    "FunctionName": "",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "RES_1",
+    "Device": "RES_1",
     "Operation": "SetResistance",
     "DisplayName": "设置电阻",
     "ReturnsValue": false,
     "BindingMode": "MainTest",
-    "FunctionName": "UI_RES_SetResistance",
+    "FunctionName": "UI_RES_1_SetResistance",
     "PluginAssembly": "",
     "PluginType": "",
     "Fields": [
@@ -1584,28 +2778,6 @@
     "Source": "仪器",
     "Target": "HVDC",
     "Device": "HVDC",
-    "Operation": "SetPower",
-    "DisplayName": "设置功率",
-    "ReturnsValue": false,
-    "BindingMode": "MainTest",
-    "FunctionName": "UI_HVDC_SetPower",
-    "PluginAssembly": "",
-    "PluginType": "",
-    "Fields": [
-      {
-        "Name": "Power",
-        "Label": "功率限制",
-        "Type": "double",
-        "DefaultValue": "8600",
-        "Unit": "W",
-        "Options": ""
-      }
-    ]
-  },
-  {
-    "Source": "仪器",
-    "Target": "HVDC",
-    "Device": "HVDC",
     "Operation": "SetOutput",
     "DisplayName": "输出开关",
     "ReturnsValue": false,
@@ -1649,6 +2821,28 @@
     "PluginAssembly": "",
     "PluginType": "",
     "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "HVDC",
+    "Device": "HVDC",
+    "Operation": "SetPower",
+    "DisplayName": "设置功率",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_HVDC_SetPower",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Power",
+        "Label": "功率限制",
+        "Type": "double",
+        "DefaultValue": "8600",
+        "Unit": "W",
+        "Options": ""
+      }
+    ]
   },
   {
     "Source": "仪器",
@@ -1757,13 +2951,13 @@
   },
   {
     "Source": "仪器",
-    "Target": "DMM",
-    "Device": "DMM",
+    "Target": "DMM_HV",
+    "Device": "DMM_HV",
     "Operation": "ConfigDCVoltage",
     "DisplayName": "配置直流电压",
     "ReturnsValue": false,
     "BindingMode": "MainTest",
-    "FunctionName": "UI_DMM_ConfigDCVoltage",
+    "FunctionName": "UI_DMM_HV_ConfigDCVoltage",
     "PluginAssembly": "",
     "PluginType": "",
     "Fields": [
@@ -1787,13 +2981,13 @@
   },
   {
     "Source": "仪器",
-    "Target": "DMM",
-    "Device": "DMM",
+    "Target": "DMM_HV",
+    "Device": "DMM_HV",
     "Operation": "ConfigDCCurrent",
     "DisplayName": "配置直流电流",
     "ReturnsValue": false,
     "BindingMode": "MainTest",
-    "FunctionName": "UI_DMM_ConfigDCCurrent",
+    "FunctionName": "UI_DMM_HV_ConfigDCCurrent",
     "PluginAssembly": "",
     "PluginType": "",
     "Fields": [
@@ -1817,13 +3011,13 @@
   },
   {
     "Source": "仪器",
-    "Target": "DMM",
-    "Device": "DMM",
+    "Target": "DMM_HV",
+    "Device": "DMM_HV",
     "Operation": "ConfigACVoltage",
     "DisplayName": "配置交流电压",
     "ReturnsValue": false,
     "BindingMode": "MainTest",
-    "FunctionName": "UI_DMM_ConfigACVoltage",
+    "FunctionName": "UI_DMM_HV_ConfigACVoltage",
     "PluginAssembly": "",
     "PluginType": "",
     "Fields": [
@@ -1847,13 +3041,13 @@
   },
   {
     "Source": "仪器",
-    "Target": "DMM",
-    "Device": "DMM",
+    "Target": "DMM_HV",
+    "Device": "DMM_HV",
     "Operation": "ConfigACCurrent",
     "DisplayName": "配置交流电流",
     "ReturnsValue": false,
     "BindingMode": "MainTest",
-    "FunctionName": "UI_DMM_ConfigACCurrent",
+    "FunctionName": "UI_DMM_HV_ConfigACCurrent",
     "PluginAssembly": "",
     "PluginType": "",
     "Fields": [
@@ -1877,26 +3071,160 @@
   },
   {
     "Source": "仪器",
-    "Target": "DMM",
-    "Device": "DMM",
+    "Target": "DMM_HV",
+    "Device": "DMM_HV",
     "Operation": "Read",
     "DisplayName": "读取测量值",
     "ReturnsValue": true,
     "BindingMode": "MainTest",
-    "FunctionName": "UI_DMM_Read",
+    "FunctionName": "UI_DMM_HV_Read",
     "PluginAssembly": "",
     "PluginType": "",
     "Fields": []
   },
   {
     "Source": "仪器",
-    "Target": "DMM",
-    "Device": "DMM",
+    "Target": "DMM_HV",
+    "Device": "DMM_HV",
     "Operation": "Close",
     "DisplayName": "关闭会话",
     "ReturnsValue": false,
     "BindingMode": "MainTest",
-    "FunctionName": "UI_DMM_Close",
+    "FunctionName": "UI_DMM_HV_Close",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM_HV",
+    "Device": "DMM_HV",
+    "Operation": "Init",
+    "DisplayName": "初始化万用表",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_HV_Init",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM_HV",
+    "Device": "DMM_HV",
+    "Operation": "Reset",
+    "DisplayName": "复位万用表",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_HV_Reset",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM_HV",
+    "Device": "DMM_HV",
+    "Operation": "Identify",
+    "DisplayName": "读取设备信息",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_HV_Identify",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM_HV",
+    "Device": "DMM_HV",
+    "Operation": "ConfigMeasure",
+    "DisplayName": "选择测量类型",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_HV_ConfigMeasure",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "MeasureType",
+        "Label": "测量类型",
+        "Type": "string",
+        "DefaultValue": "DCVoltage",
+        "Unit": "",
+        "Options": "DCVoltage - 直流电压|DCCurrent - 直流电流|ACVoltage - 交流电压|ACCurrent - 交流电流|Resistance - 电阻|Frequence - 频率"
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM_HV",
+    "Device": "DMM_HV",
+    "Operation": "ConfigResistance",
+    "DisplayName": "配置电阻测量",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_HV_ConfigResistance",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Ω",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Ω",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM_HV",
+    "Device": "DMM_HV",
+    "Operation": "ConfigFrequency",
+    "DisplayName": "配置频率测量",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_HV_ConfigFrequency",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Hz",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Hz",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM_HV",
+    "Device": "DMM_HV",
+    "Operation": "ConfigCalculateMaximum",
+    "DisplayName": "配置最大值计算",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_HV_ConfigCalculateMaximum",
     "PluginAssembly": "",
     "PluginType": "",
     "Fields": []
@@ -2077,6 +3405,36 @@
   },
   {
     "Source": "仪器",
+    "Target": "RELAY_HVMUX",
+    "Device": "RELAY_HVMUX",
+    "Operation": "SetDO",
+    "DisplayName": "设置IO（Y00-Y16）",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RELAY_HVMUX_SetDO",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Channels",
+        "Label": "输出端口",
+        "Type": "string",
+        "DefaultValue": "",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "Values",
+        "Label": "状态列表",
+        "Type": "string",
+        "DefaultValue": "",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
     "Target": "DCDC_LOAD",
     "Device": "DCDC_LOAD",
     "Operation": "SetMode",
@@ -2093,7 +3451,7 @@
         "Type": "string",
         "DefaultValue": "Ccm",
         "Unit": "",
-        "Options": "CC 低量程 - 恒流：小电流精细加载|CC 中量程 - 恒流：常用恒流加载|CC 高量程 - 恒流：大电流加载|CV 低量程 - 恒压：低压精细控制|CV 中量程 - 恒压：常用恒压加载|CV 高量程 - 恒压：高压加载|CR 低量程 - 恒阻：模拟小电阻负载|CR 中量程 - 恒阻：模拟中等电阻|CR 高量程 - 恒阻：模拟大电阻|CP 低量程 - 恒功率：小功率加载|CP 中量程 - 恒功率：常用恒功率|CP 高量程 - 恒功率：大功率加载"
+        "Options": "Ccl|Ccm|Cch|Cvl|Cvm|Cvh|Crl|Crm|Crh|Cpl|Cpm|Cph"
       }
     ]
   },
@@ -2428,6 +3786,957 @@
     "ReturnsValue": true,
     "BindingMode": "MainTest",
     "FunctionName": "UI_LVDC_KL15_ReadCurrent",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM_LV",
+    "Device": "DMM_LV",
+    "Operation": "ConfigDCVoltage",
+    "DisplayName": "配置直流电压",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_LV_ConfigDCVoltage",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "1000",
+        "Unit": "V",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "0.01",
+        "Unit": "V",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM_LV",
+    "Device": "DMM_LV",
+    "Operation": "ConfigDCCurrent",
+    "DisplayName": "配置直流电流",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_LV_ConfigDCCurrent",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "3",
+        "Unit": "A",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "1E-05",
+        "Unit": "A",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM_LV",
+    "Device": "DMM_LV",
+    "Operation": "ConfigACVoltage",
+    "DisplayName": "配置交流电压",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_LV_ConfigACVoltage",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "1000",
+        "Unit": "V",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "0.01",
+        "Unit": "V",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM_LV",
+    "Device": "DMM_LV",
+    "Operation": "ConfigACCurrent",
+    "DisplayName": "配置交流电流",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_LV_ConfigACCurrent",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "3",
+        "Unit": "A",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "1E-05",
+        "Unit": "A",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM_LV",
+    "Device": "DMM_LV",
+    "Operation": "Read",
+    "DisplayName": "读取测量值",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_LV_Read",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM_LV",
+    "Device": "DMM_LV",
+    "Operation": "Close",
+    "DisplayName": "关闭会话",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_LV_Close",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM_LV",
+    "Device": "DMM_LV",
+    "Operation": "Init",
+    "DisplayName": "初始化万用表",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_LV_Init",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM_LV",
+    "Device": "DMM_LV",
+    "Operation": "Reset",
+    "DisplayName": "复位万用表",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_LV_Reset",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM_LV",
+    "Device": "DMM_LV",
+    "Operation": "Identify",
+    "DisplayName": "读取设备信息",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_LV_Identify",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM_LV",
+    "Device": "DMM_LV",
+    "Operation": "ConfigMeasure",
+    "DisplayName": "选择测量类型",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_LV_ConfigMeasure",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "MeasureType",
+        "Label": "测量类型",
+        "Type": "string",
+        "DefaultValue": "DCVoltage",
+        "Unit": "",
+        "Options": "DCVoltage - 直流电压|DCCurrent - 直流电流|ACVoltage - 交流电压|ACCurrent - 交流电流|Resistance - 电阻|Frequence - 频率"
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM_LV",
+    "Device": "DMM_LV",
+    "Operation": "ConfigResistance",
+    "DisplayName": "配置电阻测量",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_LV_ConfigResistance",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Ω",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Ω",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM_LV",
+    "Device": "DMM_LV",
+    "Operation": "ConfigFrequency",
+    "DisplayName": "配置频率测量",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_LV_ConfigFrequency",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Hz",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Hz",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM_LV",
+    "Device": "DMM_LV",
+    "Operation": "ConfigCalculateMaximum",
+    "DisplayName": "配置最大值计算",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_LV_ConfigCalculateMaximum",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "RES_2",
+    "Device": "RES_2",
+    "Operation": "SetResistance",
+    "DisplayName": "设置电阻",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RES_2_SetResistance",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "ResValue",
+        "Label": "电阻值",
+        "Type": "double",
+        "DefaultValue": "1000",
+        "Unit": "Ω",
+        "Options": ""
+      },
+      {
+        "Name": "Channel",
+        "Label": "通道",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "RES_3",
+    "Device": "RES_3",
+    "Operation": "SetResistance",
+    "DisplayName": "设置电阻",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RES_3_SetResistance",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "ResValue",
+        "Label": "电阻值",
+        "Type": "double",
+        "DefaultValue": "1000",
+        "Unit": "Ω",
+        "Options": ""
+      },
+      {
+        "Name": "Channel",
+        "Label": "通道",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "校准CAN",
+    "Device": "CALIBRATIONCAN",
+    "Operation": "SendRaw",
+    "DisplayName": "发送原始帧",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_CALIBRATIONCAN_SendRaw",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "CanId",
+        "Label": "CAN ID",
+        "Type": "string",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "DataHex",
+        "Label": "数据",
+        "Type": "string",
+        "DefaultValue": "00 00 00 00 00 00 00 00",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "校准CAN",
+    "Device": "CALIBRATIONCAN",
+    "Operation": "ReceiveRaw",
+    "DisplayName": "读取原始帧",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_CALIBRATIONCAN_ReceiveRaw",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "FilterId",
+        "Label": "过滤ID",
+        "Type": "string",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "校准CAN",
+    "Device": "CALIBRATIONCAN",
+    "Operation": "SendDbcSignal",
+    "DisplayName": "发送DBC信号",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_CALIBRATIONCAN_SendDbcSignal",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "SignalName",
+        "Label": "信号名",
+        "Type": "string",
+        "DefaultValue": "",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "Value",
+        "Label": "信号值",
+        "Type": "double",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "SendFlag",
+        "Label": "立即发送",
+        "Type": "bool",
+        "DefaultValue": "True",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变2CAN",
+    "Device": "RESOLVERCAN2",
+    "Operation": "SendRaw",
+    "DisplayName": "发送原始帧",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RESOLVERCAN2_SendRaw",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "CanId",
+        "Label": "CAN ID",
+        "Type": "string",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "DataHex",
+        "Label": "数据",
+        "Type": "string",
+        "DefaultValue": "00 00 00 00 00 00 00 00",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变2CAN",
+    "Device": "RESOLVERCAN2",
+    "Operation": "ReceiveRaw",
+    "DisplayName": "读取原始帧",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RESOLVERCAN2_ReceiveRaw",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "FilterId",
+        "Label": "过滤ID",
+        "Type": "string",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变2CAN",
+    "Device": "RESOLVERCAN2",
+    "Operation": "SendDbcSignal",
+    "DisplayName": "发送DBC信号",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RESOLVERCAN2_SendDbcSignal",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "SignalName",
+        "Label": "信号名",
+        "Type": "string",
+        "DefaultValue": "",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "Value",
+        "Label": "信号值",
+        "Type": "double",
+        "DefaultValue": "0",
+        "Unit": "",
+        "Options": ""
+      },
+      {
+        "Name": "SendFlag",
+        "Label": "立即发送",
+        "Type": "bool",
+        "DefaultValue": "True",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变2CAN",
+    "Device": "RESOLVERCAN2",
+    "Operation": "ConfigureDbc",
+    "DisplayName": "DBC表格配置",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RESOLVERCAN2_ConfigureDbc",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变2CAN",
+    "Device": "RESOLVERCAN2",
+    "Operation": "Init",
+    "DisplayName": "初始化",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RESOLVERCAN2_Init",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变2CAN",
+    "Device": "RESOLVERCAN2",
+    "Operation": "SetPolePairs",
+    "DisplayName": "设置极对数",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RESOLVERCAN2_SetPolePairs",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "PolePairs",
+        "Label": "极对数",
+        "Type": "int",
+        "DefaultValue": "6",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变2CAN",
+    "Device": "RESOLVERCAN2",
+    "Operation": "SetSpeed",
+    "DisplayName": "设置转速",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RESOLVERCAN2_SetSpeed",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Speed",
+        "Label": "转速",
+        "Type": "double",
+        "DefaultValue": "700",
+        "Unit": "rpm",
+        "Options": ""
+      },
+      {
+        "Name": "PolePairs",
+        "Label": "极对数",
+        "Type": "int",
+        "DefaultValue": "6",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变2CAN",
+    "Device": "RESOLVERCAN2",
+    "Operation": "SetPosition",
+    "DisplayName": "设置角度",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RESOLVERCAN2_SetPosition",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Position",
+        "Label": "位置",
+        "Type": "double",
+        "DefaultValue": "225",
+        "Unit": "deg",
+        "Options": ""
+      },
+      {
+        "Name": "PolePairs",
+        "Label": "极对数",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "旋变2CAN",
+    "Device": "RESOLVERCAN2",
+    "Operation": "Stop",
+    "DisplayName": "停止",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RESOLVERCAN2_Stop",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "RES",
+    "Device": "RES",
+    "Operation": "SetResistance",
+    "DisplayName": "设置电阻",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_RES_SetResistance",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "ResValue",
+        "Label": "电阻值",
+        "Type": "double",
+        "DefaultValue": "1000",
+        "Unit": "Ω",
+        "Options": ""
+      },
+      {
+        "Name": "Channel",
+        "Label": "通道",
+        "Type": "int",
+        "DefaultValue": "1",
+        "Unit": "",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "ConfigDCVoltage",
+    "DisplayName": "配置直流电压",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_ConfigDCVoltage",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "1000",
+        "Unit": "V",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "0.01",
+        "Unit": "V",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "ConfigDCCurrent",
+    "DisplayName": "配置直流电流",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_ConfigDCCurrent",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "3",
+        "Unit": "A",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "1E-05",
+        "Unit": "A",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "ConfigACVoltage",
+    "DisplayName": "配置交流电压",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_ConfigACVoltage",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "1000",
+        "Unit": "V",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "0.01",
+        "Unit": "V",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "ConfigACCurrent",
+    "DisplayName": "配置交流电流",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_ConfigACCurrent",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "3",
+        "Unit": "A",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "1E-05",
+        "Unit": "A",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "Read",
+    "DisplayName": "读取测量值",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_Read",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "Close",
+    "DisplayName": "关闭会话",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_Close",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "Init",
+    "DisplayName": "初始化万用表",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_Init",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "Reset",
+    "DisplayName": "复位万用表",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_Reset",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "Identify",
+    "DisplayName": "读取设备信息",
+    "ReturnsValue": true,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_Identify",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": []
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "ConfigMeasure",
+    "DisplayName": "选择测量类型",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_ConfigMeasure",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "MeasureType",
+        "Label": "测量类型",
+        "Type": "string",
+        "DefaultValue": "DCVoltage",
+        "Unit": "",
+        "Options": "DCVoltage - 直流电压|DCCurrent - 直流电流|ACVoltage - 交流电压|ACCurrent - 交流电流|Resistance - 电阻|Frequence - 频率"
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "ConfigResistance",
+    "DisplayName": "配置电阻测量",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_ConfigResistance",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Ω",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Ω",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "ConfigFrequency",
+    "DisplayName": "配置频率测量",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_ConfigFrequency",
+    "PluginAssembly": "",
+    "PluginType": "",
+    "Fields": [
+      {
+        "Name": "Range",
+        "Label": "量程",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Hz",
+        "Options": ""
+      },
+      {
+        "Name": "Solution",
+        "Label": "分辨率",
+        "Type": "double",
+        "DefaultValue": "-1",
+        "Unit": "Hz",
+        "Options": ""
+      }
+    ]
+  },
+  {
+    "Source": "仪器",
+    "Target": "DMM",
+    "Device": "DMM",
+    "Operation": "ConfigCalculateMaximum",
+    "DisplayName": "配置最大值计算",
+    "ReturnsValue": false,
+    "BindingMode": "MainTest",
+    "FunctionName": "UI_DMM_ConfigCalculateMaximum",
     "PluginAssembly": "",
     "PluginType": "",
     "Fields": []

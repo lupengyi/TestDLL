@@ -251,7 +251,7 @@ namespace ManualCanDebug
                 try
                 {
                     Assembly assembly = Assembly.LoadFrom(file);
-                    Type driverType = assembly.GetExportedTypes().Where(t => t.IsClass && !t.IsAbstract).OrderByDescending(t => t.GetConstructor(Type.EmptyTypes) != null).ThenBy(t => t.FullName).FirstOrDefault();
+                    string expectedTypeName = Path.GetFileNameWithoutExtension(file); Type driverType = assembly.GetExportedTypes().Where(t => t.IsClass && !t.IsAbstract).OrderByDescending(t => string.Equals(t.FullName, expectedTypeName, StringComparison.OrdinalIgnoreCase)).ThenByDescending(t => string.Equals(t.Name, expectedTypeName.Substring(expectedTypeName.LastIndexOf('.') + 1), StringComparison.OrdinalIgnoreCase)).ThenByDescending(t => (t.Namespace ?? string.Empty).StartsWith("Instruments", StringComparison.OrdinalIgnoreCase)).ThenByDescending(t => t.GetMethods(BindingFlags.Instance | BindingFlags.Public | BindingFlags.DeclaredOnly).Count(m => !m.IsSpecialName)).ThenBy(t => t.FullName).FirstOrDefault();
                     if (driverType != null)
                     {
                         typeName = driverType.FullName;
